@@ -61,7 +61,7 @@ class Dashboard {
 			'name'           => GUTENVERSE_NAME,
 			'version'        => GUTENVERSE_VERSION,
 			'currentNotice'  => GUTENVERSE_NOTICE_VERSION,
-			'noticeVersions' => array( '1.8.0', '1.7.0', '1.6.0' ),
+			'noticeVersions' => array( '2.0.0', '1.8.0', '1.7.0', '1.6.0' ),
 		);
 
 		return $config;

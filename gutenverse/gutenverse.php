@@ -16,7 +16,7 @@ use Gutenverse\Gutenverse;
 
 defined( 'GUTENVERSE' ) || define( 'GUTENVERSE', 'gutenverse' );
 defined( 'GUTENVERSE_VERSION' ) || define( 'GUTENVERSE_VERSION', '2.0.0' );
-defined( 'GUTENVERSE_NOTICE_VERSION' ) || define( 'GUTENVERSE_NOTICE_VERSION', '1.8.0' );
+defined( 'GUTENVERSE_NOTICE_VERSION' ) || define( 'GUTENVERSE_NOTICE_VERSION', '2.0.0' );
 defined( 'GUTENVERSE_NAME' ) || define( 'GUTENVERSE_NAME', 'Gutenverse' );
 defined( 'GUTENVERSE_URL' ) || define( 'GUTENVERSE_URL', plugins_url( GUTENVERSE ) );
 defined( 'GUTENVERSE_PLUGIN_URL' ) || define( 'GUTENVERSE_PLUGIN_URL', plugins_url( GUTENVERSE ) );
