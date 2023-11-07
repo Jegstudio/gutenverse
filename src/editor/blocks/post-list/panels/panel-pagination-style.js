@@ -176,7 +176,7 @@ export const paginationStylePanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId} .guten-block-pagination .guten-block-loadmore:hover a`,
+                    selector: `.${elementId} .guten-block-pagination .guten-block-loadmore:hover span`,
                     render: value => handleColor(value, 'color')
                 }
             ]
