@@ -7,10 +7,12 @@ class GutenverseGallery extends Default {
         if (elements.length > 0) {
             const promiseShuffle = import(/* webpackChunkName: "chunk-shufflejs" */'shufflejs');
             const promiseSwiper = import(/* webpackChunkName: "chunk-swiper" */'swiper');
-            Promise.all([promiseShuffle, promiseSwiper])
+            const promiseSwiperModule = import(/* webpackChunkName: "chunk-swiper-modules" */'swiper/modules');
+            Promise.all([promiseShuffle, promiseSwiper, promiseSwiperModule])
                 .then((result) => {
                     const { default: Shuffle } = result[0];
-                    const { default: Swiper, Navigation, Pagination, Zoom } = result[1];
+                    const { default: Swiper } = result[1];
+                    const { Navigation, Pagination, Zoom } = result[2];
 
                     Swiper.use([Navigation, Pagination, Zoom]);
                     elements.map(element => {

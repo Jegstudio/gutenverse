@@ -42,7 +42,7 @@ const frontend = {
                         "./gutenverse/assets/js/chunk-shufflejs.js*",
                         "./gutenverse/assets/js/chunk-swiper.js*",
                         "./gutenverse/assets/js/chunk-swiper-modules.js*",
-                        "./gutenverse/assets/js/swiper_dist_shared_utils_mjs.js*",
+                        "./gutenverse/assets/js/vendors-node_modules_swiper_shared_utils_mjs.js*",
                         "./gutenverse/lib/dependencies/frontend.asset.php"
                     ]
                 },
@@ -66,7 +66,7 @@ const frontend = {
                             destination: "./gutenverse/assets/js/",
                         },
                         {
-                            source: process.env.NODE_ENV === 'development' ? "./build/swiper_dist_shared_utils_mjs.js*" : "./build/swiper_dist_shared_utils_mjs.js",
+                            source: process.env.NODE_ENV === 'development' ? "./build/vendors-node_modules_swiper_shared_utils_mjs.js*" : "./build/vendors-node_modules_swiper_shared_utils_mjs.js",
                             destination: "./gutenverse/assets/js/",
                         },
                     ],

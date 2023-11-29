@@ -5,7 +5,12 @@ class GutenverseTestimonials extends Default {
     init() {
         const elements = this._elements;
         if (elements.length > 0) {
-            import(/* webpackChunkName: "chunk-swiper" */ 'swiper').then(({ default: Swiper, Autoplay, Navigation, Pagination }) => {
+            const promiseSwiper = import(/* webpackChunkName: "chunk-swiper" */'swiper');
+            const promiseSwiperModule = import(/* webpackChunkName: "chunk-swiper-modules" */'swiper/modules');
+            Promise.all([promiseSwiper, promiseSwiperModule]).then(result => {
+                const { default: Swiper } = result[0];
+                const { Autoplay, Navigation, Pagination } = result[1];
+
                 Swiper.use([Autoplay, Navigation, Pagination]);
                 elements.map(element => {
                     this._addSliderEffect(element, Swiper);
