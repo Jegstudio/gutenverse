@@ -1,0 +1,17 @@
+{
+    "apiVersion": 2,
+    "name": "gutenverse/advanced-carousel",
+    "title": "Advanced Carousel",
+    "description": "Create beautiful image carousel that fit with many website style",
+    "category": "gutenverse-element",
+    "allowCopyStyle": true,
+    "attributes": {
+        "elementId": {
+            "type": "string"
+        }
+    },
+    "supports": {
+        "className": false
+    },
+    "keywords": []
+}

@@ -1,0 +1,54 @@
+.guten-advanced-heading {
+    display: flex;
+    flex-wrap: wrap;
+
+    h1, h2, h3, h4, h5, h6, p, span {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    & > div,
+    & > span {
+        width: 100%;
+    }
+
+    .heading-section {
+        display: flex;
+        align-items: center;
+    }
+
+    .heading-line {
+        width: 100px;
+        height: 1px;
+        border-top: 4px solid #3B57F7;
+
+        &.before {
+            margin-right: 20px;
+        }
+
+        &.after {
+            margin-left: 20px;
+        }
+
+        &.top {
+            margin-bottom: 10px;
+        }
+
+        &.bottom {
+            margin-top: 10px;
+        }
+
+        &.between {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .heading-focus {
+        color: #ff8399;
+    }
+
+    .heading-subtitle {
+        color: #8181A5;
+    }
+}
