@@ -1,9 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import { advancePanel, animationPanel, backgroundPanel, borderPanel, responsivePanel, positioningPanel, textClipPanel, advanceAnimationPanel, transformPanel, maskPanel } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
+import { itemsPanel } from './panel-items';
 
 export const panelList = () => {
     return [
+        {
+            title: __('Slider Items', 'gutenverse'),
+            panelArray: itemsPanel,
+            tabRole: TabSetting
+        },
         {
             title: __('Main Title Text Clip', 'gutenverse'),
             initialOpen: false,

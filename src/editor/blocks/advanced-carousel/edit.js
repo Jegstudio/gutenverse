@@ -9,6 +9,26 @@ import { withCopyElementToolbar } from 'gutenverse-core/hoc';
 import { withAnimationAdvance } from 'gutenverse-core/hoc';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
+import { Swiper } from '../../components/swiper';
+import { dispatch } from '@wordpress/data';
+
+const swiperSettings = (attributes) => {
+    const {
+        initialSlide,
+        spacing,
+        itemShowed,
+        loop,
+        showNav,
+        showArrow,
+        zoom,
+        zoomRatio,
+        autoplay,
+        autoplayTimeout
+    } = attributes;
+
+    return {
+    };
+};
 
 const AdvancedCarousel = compose(
     withCustomStyle(panelList),
@@ -16,6 +36,11 @@ const AdvancedCarousel = compose(
     withCopyElementToolbar()
 )((props) => {
     const {
+        selectBlock
+    } = dispatch('core/block-editor');
+
+    const {
+        clientId,
         attributes,
         setElementRef
     } = props;
@@ -45,9 +70,23 @@ const AdvancedCarousel = compose(
         }
     }, [advCarouselRef]);
 
+    const focusBlock = () => {
+        selectBlock(clientId);
+    };
+
     return <>
         <PanelController panelList={panelList} {...props} />
         <div  {...blockProps}>
+            <div className="advanced-carousel" onClick={focusBlock}>
+                <Swiper
+                    {...swiperSettings(attributes)}
+                    shouldSwiperUpdate={true}
+                    rebuildOnUpdate={true}>
+                    <div>Swiper Slider</div>
+                    <div>Swiper Slider</div>
+                    <div>Swiper Slider</div>
+                </Swiper>
+            </div>
         </div>
     </>;
 });

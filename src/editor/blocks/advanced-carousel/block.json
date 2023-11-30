@@ -8,6 +8,13 @@
     "attributes": {
         "elementId": {
             "type": "string"
+        },
+        "sliderType": {
+            "type": "string",
+            "default": "image"
+        },
+        "items": {
+            "type": "object"
         }
     },
     "supports": {
