@@ -14,20 +14,51 @@ import { dispatch } from '@wordpress/data';
 
 const swiperSettings = (attributes) => {
     const {
-        initialSlide,
-        spacing,
-        itemShowed,
-        loop,
-        showNav,
-        showArrow,
-        zoom,
-        zoomRatio,
-        autoplay,
-        autoplayTimeout
+        sliderEffect
     } = attributes;
 
-    return {
-    };
+    let settings = {};
+
+    if ('card' === sliderEffect) {
+        settings.effect = 'cards';
+        settings.grabCursor = true;
+    }
+
+    if ('cube' === sliderEffect) {
+        settings.effect = 'cube';
+        settings.grabCursor = true;
+        settings.cubeEffect = {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+        };
+        settings.pagination = true;
+    }
+
+    if ('coverflow' === sliderEffect) {
+        settings.effect = 'coverflow';
+        settings.grabCursor = true;
+        settings.slidesPerView = 'auto';
+        settings.coverflowEffect = {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        };
+        settings.pagination = true;
+    }
+
+    if ('flip' === sliderEffect) {
+        settings.effect = 'flip';
+        settings.grabCursor = true;
+        settings.pagination = true;
+    }
+
+    if ('normal' === sliderEffect) { }
+
+    return settings;
 };
 
 const AdvancedCarousel = compose(
@@ -47,6 +78,9 @@ const AdvancedCarousel = compose(
 
     const {
         elementId,
+        items,
+        sliderType,
+        overflowHideContainer
     } = attributes;
 
     const advCarouselRef = useRef();
@@ -74,17 +108,38 @@ const AdvancedCarousel = compose(
         selectBlock(clientId);
     };
 
+    const carouselItems = (items) => {
+        const carouselImage = (item, index) => {
+            return <div className={classnames('carousel-content', 'carousel-image', `carousel-slide-${index}`)}>
+                {item.text}
+            </div>;
+        };
+
+        const carouselText = (item, index) => {
+            return <div className={classnames('carousel-content', 'carousel-text', `carousel-slide-${index}`)}>
+                {item.text}
+            </div>;
+        };
+
+        return items.map((item, index) => {
+            return <div className="carousel-item" key={index}>
+                {sliderType === 'text' && carouselText(item, index)}
+                {sliderType === 'image' && carouselImage(item, index)}
+            </div>;
+        });
+    };
+
     return <>
         <PanelController panelList={panelList} {...props} />
         <div  {...blockProps}>
-            <div className="advanced-carousel" onClick={focusBlock}>
+            <div className={classnames('advanced-carousel', {
+                'container-overflow-hidden': overflowHideContainer,
+            })} onClick={focusBlock}>
                 <Swiper
                     {...swiperSettings(attributes)}
                     shouldSwiperUpdate={true}
                     rebuildOnUpdate={true}>
-                    <div>Swiper Slider</div>
-                    <div>Swiper Slider</div>
-                    <div>Swiper Slider</div>
+                    {carouselItems(items)}
                 </Swiper>
             </div>
         </div>

@@ -13,8 +13,16 @@
             "type": "string",
             "default": "image"
         },
+        "sliderEffect": {
+            "type": "string",
+            "default": "normal"
+        },
+        "overflowHideContainer": {
+            "type": "boolean",
+            "default": true
+        },
         "items": {
-            "type": "object"
+            "type": "array"
         }
     },
     "supports": {

@@ -1,9 +1,9 @@
 import { cloneElement, isValidElement, Children, useRef, useMemo, forwardRef, useEffect, useCallback, createElement } from '@wordpress/element';
 import Swiper from 'swiper';
-import { Autoplay, Navigation, Pagination, Zoom } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination, Zoom, EffectCards, EffectCube, EffectCoverflow, EffectFlip } from 'swiper/modules';
 import objectAssign from 'object-assign';
 
-Swiper.use([Autoplay, Navigation, Pagination, Zoom]);
+Swiper.use([Autoplay, Navigation, Pagination, Zoom, EffectCards, EffectCube, EffectCoverflow, EffectFlip]);
 
 const WpSwiper = forwardRef((props, externalRef) => {
     const {
