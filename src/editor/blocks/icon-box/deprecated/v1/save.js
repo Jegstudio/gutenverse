@@ -62,7 +62,6 @@ const save = compose(
         animationClass,
         displayClass,
         'guten-icon-box',
-        `icon-position-${iconPosition}`
     );
 
     const iconContent = () => {
@@ -89,7 +88,7 @@ const save = compose(
     };
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+        <div {...useBlockProps.save({ className, ...advanceAnimationData })} >
             <div className={`guten-icon-box-wrapper hover-from-${iconBoxOverlayDirection}`}>
                 {iconContent()}
                 <div className="icon-box icon-box-body">

@@ -3,13 +3,16 @@ import { __ } from '@wordpress/i18n';
 import { CheckboxControl, IconControl, IconRadioControl, SelectControl } from 'gutenverse-core/controls';
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
 import { handleAlign } from 'gutenverse-core/styling';
+import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 export const panelGeneral = (props) => {
     const {
         elementId,
         watermarkShow,
-        badgeShow
+        badgeShow,
     } = props;
+
+    const deviceType = getDeviceType();
 
     return [
         {
@@ -32,7 +35,9 @@ export const panelGeneral = (props) => {
         {
             id: 'iconPosition',
             label: __('Icon Position', 'gutenverse'),
+            show: deviceType === 'Desktop',
             component: SelectControl,
+            showDeviceControlOnly: true,
             options: [
                 {
                     value: 'top',
@@ -49,6 +54,59 @@ export const panelGeneral = (props) => {
             ]
         },
         {
+            id: 'iconPositionResponsive',
+            label: __('Icon Position', 'gutenverse'),
+            show: deviceType !== 'Desktop',
+            component: SelectControl,
+            allowDeviceControl: true,
+            options: [
+                {
+                    value: 'top',
+                    label: 'Top'
+                },
+                {
+                    value: 'left',
+                    label: 'Left'
+                },
+                {
+                    value: 'right',
+                    label: 'Right'
+                },
+            ],
+            style: [
+                {
+                    selector: `.${elementId} .guten-icon-box-wrapper`,
+                    allowRender: (value) => (deviceType !== 'Desktop') && (value && value[deviceType] === 'left'),
+                    render: () => 'display: flex !important; align-items: flex-start; flex-direction: unset !important;'
+                },
+                {
+                    selector: `.${elementId} .guten-icon-box-wrapper`,
+                    allowRender: (value) => (deviceType !== 'Desktop') && (value && value[deviceType] === 'right'),
+                    render: () => 'display: flex !important; flex-direction: row-reverse; align-items: unset !important;'
+                },
+                {
+                    selector: `.${elementId} .guten-icon-box-wrapper`,
+                    allowRender: (value) => (deviceType !== 'Desktop') && (value && value[deviceType] === 'top'),
+                    render: () => 'display: block !important; flex-direction: unset !important; align-items: unset !important;'
+                },
+                {
+                    selector: `.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
+                    allowRender: (value) => (deviceType !== 'Desktop') && (value && value[deviceType] === 'left'),
+                    render: () => 'margin-right: 15px; margin-right: unset !important;'
+                },
+                {
+                    selector: `.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
+                    allowRender: (value) => (deviceType !== 'Desktop') && (value && value[deviceType] === 'right'),
+                    render: () => 'margin-left: 15px; margin-right: unset !important;'
+                },
+                {
+                    selector: `.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
+                    allowRender: (value) => (deviceType !== 'Desktop') && (value && value[deviceType] === 'top'),
+                    render: () => 'margin-left: unset !important; margin-right: unset !important;'
+                },
+            ]
+        },
+        {
             id: 'align',
             label: __('Alignment', 'gutenverse'),
             component: IconRadioControl,
@@ -57,17 +115,17 @@ export const panelGeneral = (props) => {
                 {
                     label: __('Align Left', 'gutenverse'),
                     value: 'flex-start',
-                    icon: <AlignLeft/>,
+                    icon: <AlignLeft />,
                 },
                 {
                     label: __('Align Center', 'gutenverse'),
                     value: 'center',
-                    icon: <AlignCenter/>,
+                    icon: <AlignCenter />,
                 },
                 {
                     label: __('Align Right', 'gutenverse'),
                     value: 'flex-end',
-                    icon: <AlignRight/>,
+                    icon: <AlignRight />,
                 },
             ],
             style: [

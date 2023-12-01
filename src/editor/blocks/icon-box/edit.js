@@ -46,7 +46,8 @@ const IconBoxBlock = compose(
         isSelected,
         attributes,
         setAttributes,
-        setElementRef
+        setElementRef,
+        deviceType,
     } = props;
 
     const {
@@ -142,6 +143,12 @@ const IconBoxBlock = compose(
         }
     }, [iconBoxRef]);
 
+    useEffect(()=>{
+        setAttributes({
+            deviceType: deviceType,
+        });
+    },[deviceType]);
+
     useEffect(() => {
         !separateButtonLink && getBlocks(clientId).map(block => {
             updateBlockAttributes(block.clientId, { url, rel, linkTarget });
@@ -149,7 +156,7 @@ const IconBoxBlock = compose(
     }, [url, rel, linkTarget, separateButtonLink]);
 
     return <>
-        <PanelController panelList={panelList} {...props} />
+        <PanelController panelList={panelList} {...props}  deviceType = {deviceType} />
         <BlockControls>
             <ToolbarGroup>
                 <URLToolbar

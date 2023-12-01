@@ -58,7 +58,7 @@ class Icon_List extends Style_Abstract {
 		if ( isset( $this->attrs['spaceBetween'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}:not(.inline-icon-list) .guten-icon-list-item:not(:first-child)",
+					'selector'       => ".{$this->element_id}:not(.inline-icon-list) div.guten-icon-list-item:not(div:first-of-type) > a",
 					'property'       => function ( $value ) {
 						return "margin-top: calc({$value}px/2);";
 					},
@@ -83,6 +83,16 @@ class Icon_List extends Style_Abstract {
 					'selector'       => ".{$this->element_id}.inline-icon-list .guten-icon-list-item:not(:last-child)",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
+					},
+					'value'          => $this->attrs['spaceBetween'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.inline-icon-list div.guten-icon-list-item:not(div:first-of-type) > a",
+					'property'       => function ( $value ) {
+						return "margin-left: {$value}px;";
 					},
 					'value'          => $this->attrs['spaceBetween'],
 					'device_control' => true,

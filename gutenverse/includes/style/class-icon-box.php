@@ -126,6 +126,40 @@ class Icon_Box extends Style_Abstract {
 				)
 			);
 		}
+		if ( isset( $this->attrs['iconPositionResponsive'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-icon-box-wrapper",
+					'property'       => function ( $value ) {
+						if ( 'left' === $value ) {
+							return 'display: flex; align-items: flex-start;';
+						} elseif ( 'right' === $value ) {
+							return 'display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: reverse; -ms-flex-direction: row-reverse; flex-direction: row-reverse;';
+						} elseif ( 'top' === $value ) {
+							return 'display: block !important';
+						}
+					},
+					'value'          => $this->attrs['iconPositionResponsive'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-icon-box-wrapper .icon-box.icon-box-header",
+					'property'       => function ( $value ) {
+						if ( 'left' === $value ) {
+							return 'margin-right: 15px;';
+						} elseif ( 'right' === $value ) {
+							return 'margin-left: 15px;';
+						} elseif ( 'top' === $value ) {
+							return 'position: relative; z-index: 2; line-height: 0;';
+						}
+					},
+					'value'          => $this->attrs['iconPositionResponsive'],
+					'device_control' => true,
+				)
+			);
+		}
 	}
 
 	/**
