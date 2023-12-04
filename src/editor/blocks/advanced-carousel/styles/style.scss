@@ -1,27 +1,56 @@
 .guten-advanced-carousel {
+
+    &.guten-style- {
+
+        &2 {
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    .swiper-slide {
+        .carousel-popup {
+            position: absolute;
+            background: #000;
+            opacity: 0;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            top: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &:hover {
+            .carousel-popup {
+                opacity: 0.3;
+            }
+        }
+    }
+
+    .carousel-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+
+    }
+
     .container-overflow-hidden {
         .swiper-container {
             overflow: hidden;
         }
     }
 
-    .carousel-content {
-        display: flex;
-        height: 100px;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-    }
+
 
     .swiper-wrapper {
-        .swiper-slide:nth-child(1) {
-            background: blue;
-        }
-        .swiper-slide:nth-child(2) {
-            background: red;
-        }
-        .swiper-slide:nth-child(3) {
-            background: green;
+        >.swiper-cube-shadow {
+            display: none;
         }
     }
 }

@@ -1,12 +1,18 @@
 import { __ } from '@wordpress/i18n';
-import { ImageControl, RepeaterControl, TextControl, SelectControl, TextareaControl, CheckboxControl, BackgroundControl, ColorControl } from 'gutenverse-core/controls';
-import { handleBackground, handleColor } from 'gutenverse-core/styling';
+import { ImageControl, RepeaterControl, TextControl, SelectControl, TextareaControl, CheckboxControl, BackgroundControl, ColorControl, DimensionControl, SizeControl, ImageSizeControl } from 'gutenverse-core/controls';
+import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { handleBackground, handleColor, handleUnitPoint } from 'gutenverse-core/styling';
 
 export const itemsPanel = (props) => {
     const {
         elementId,
-        sliderType
+        sliderStyle,
+        customSliderHeight,
+        addStyle,
+        removeStyle,
     } = props;
+
+    const deviceType = getDeviceType();
 
     return [
         {
@@ -15,19 +21,79 @@ export const itemsPanel = (props) => {
             component: CheckboxControl,
         },
         {
-            id: 'sliderType',
+            id: 'sliderStyle',
             label: __('Slider Type', 'gutenverse'),
             component: SelectControl,
             options: [
                 {
-                    label: __('Text'),
-                    value: 'text'
+                    label: __('Style 1'),
+                    value: '1'
                 },
                 {
-                    label: __('Image'),
-                    value: 'image'
+                    label: __('Style 2'),
+                    value: '2'
                 },
             ],
+        },
+        {
+            id: 'allowPopup',
+            label: __('Allow Popup', 'gutenverse'),
+            show: sliderStyle === '2',
+            component: CheckboxControl,
+        },
+        {
+            id: 'customSliderHeight',
+            label: __('Custom Slider Height', 'gutenverse'),
+            component: CheckboxControl,
+            onChange: (value) => {
+                const { customSliderHeight, sliderHeight } = value;
+                if (customSliderHeight) {
+                    const point = handleUnitPoint(sliderHeight[deviceType], 'height', false);
+                    addStyle(
+                        'sliderHeight-style-0',
+                        `.${elementId}.guten-advanced-carousel .carousel-content { ${point} }`
+                    );
+                } else {
+                    removeStyle('sliderHeight-style-0');
+                }
+            }
+        },
+        {
+            id: 'sliderHeight',
+            label: __('Slider Height', 'gutenverse'),
+            show: customSliderHeight,
+            component: SizeControl,
+            allowDeviceControl: true,
+            units: {
+                px: {
+                    text: 'px',
+                    min: 1,
+                    max: 1000,
+                    step: 1,
+                    unit: 'px',
+                },
+                ['%']: {
+                    text: '%',
+                    min: 1,
+                    max: 100,
+                    step: 1,
+                    unit: '%',
+                },
+                vw: {
+                    text: 'vh',
+                    min: 1,
+                    max: 100,
+                    step: 1,
+                    unit: 'vh',
+                },
+            },
+            style: [
+                {
+                    selector: `.${elementId}.guten-advanced-carousel .carousel-content`,
+                    allowRender: () => customSliderHeight,
+                    render: value => handleUnitPoint(value, 'height', false)
+                }
+            ]
         },
         {
             id: 'sliderEffect',
@@ -69,31 +135,31 @@ export const itemsPanel = (props) => {
                 },
                 {
                     id: 'image',
-                    show: () => sliderType === 'image',
+                    show: () => sliderStyle === '2',
                     label: __('Image', 'gutenverse'),
-                    component: ImageControl,
+                    component: ImageSizeControl,
                 },
                 {
                     id: 'imagePopup',
-                    show: () => sliderType === 'image',
+                    show: () => sliderStyle === '2',
                     label: __('Popup Image', 'gutenverse'),
                     component: ImageControl,
                 },
                 {
                     id: 'imageDescription',
-                    show: () => sliderType === 'image',
+                    show: () => sliderStyle === '2',
                     label: __('Image Description', 'gutenverse'),
                     component: TextControl,
                 },
                 {
                     id: 'text',
-                    show: () => sliderType === 'text',
+                    show: () => sliderStyle === '1',
                     label: __('Text', 'gutenverse'),
                     component: TextareaControl,
                 },
                 {
                     id: 'textColor',
-                    show: () => sliderType === 'text',
+                    show: () => sliderStyle === '1',
                     label: __('Text Color', 'gutenverse'),
                     component: ColorControl,
                     style: [
@@ -107,7 +173,7 @@ export const itemsPanel = (props) => {
                 },
                 {
                     id: 'textBackground',
-                    show: () => sliderType === 'text',
+                    show: () => sliderStyle === '1',
                     label: __('Background', 'gutenverse'),
                     component: BackgroundControl,
                     options: ['default', 'gradient'],

@@ -1,32 +1,43 @@
 {
-    "apiVersion": 2,
-    "name": "gutenverse/advanced-carousel",
-    "title": "Advanced Carousel",
-    "description": "Create beautiful image carousel that fit with many website style",
-    "category": "gutenverse-element",
-    "allowCopyStyle": true,
-    "attributes": {
-        "elementId": {
-            "type": "string"
-        },
-        "sliderType": {
-            "type": "string",
-            "default": "image"
-        },
-        "sliderEffect": {
-            "type": "string",
-            "default": "normal"
-        },
-        "overflowHideContainer": {
-            "type": "boolean",
-            "default": true
-        },
-        "items": {
-            "type": "array"
-        }
-    },
-    "supports": {
-        "className": false
-    },
-    "keywords": []
+	"apiVersion": 2,
+	"name": "gutenverse/advanced-carousel",
+	"title": "Advanced Carousel",
+	"description": "Create beautiful image carousel that fit with many website style",
+	"category": "gutenverse-element",
+	"allowCopyStyle": true,
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"sliderStyle": {
+			"type": "string",
+			"default": "1"
+		},
+		"customSliderHeight": {
+			"type": "boolean",
+			"default": false
+		},
+		"allowPopup": {
+			"type": "boolean",
+			"default": false
+		},
+		"sliderHeight": {
+			"type": "object"
+		},
+		"sliderEffect": {
+			"type": "string",
+			"default": "normal"
+		},
+		"overflowHideContainer": {
+			"type": "boolean",
+			"default": true
+		},
+		"items": {
+			"type": "array"
+		}
+	},
+	"supports": {
+		"className": false
+	},
+	"keywords": []
 }
