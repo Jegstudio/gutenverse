@@ -45,7 +45,7 @@ export const panelList = () => {
             panelArray: (props) => {
                 return positioningPanel({
                     ...props,
-                    inFlex : props.orientation !== 'vertical',
+                    inBlock : props.orientation !== 'vertical',
                     options: [
                         {
                             value: 'default',

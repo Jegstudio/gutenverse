@@ -38,7 +38,7 @@ class Animated_Text extends Style_Abstract {
 	 */
 	public function __construct( $attrs ) {
 		parent::__construct( $attrs );
-		$this->in_flex = false;
+		$this->in_block = false;
 		$this->set_feature(
 			array(
 				'background'  => null,

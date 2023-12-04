@@ -62,6 +62,7 @@ const save = compose(
         animationClass,
         displayClass,
         'guten-icon-box',
+        `icon-position-${iconPosition}`
     );
 
     const iconContent = () => {
