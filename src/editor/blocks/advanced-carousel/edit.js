@@ -9,14 +9,15 @@ import { withCopyElementToolbar } from 'gutenverse-core/hoc';
 import { withAnimationAdvance } from 'gutenverse-core/hoc';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
-import { Swiper } from '../../components/swiper';
+import { Swiper as WPSwiper } from '../../components/swiper';
 import { dispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { imagePlaceholder } from 'gutenverse-core/config';
-import { getImageSrc } from 'gutenverse-core/editor-helper';
+import { getDeviceType, getImageSrc } from 'gutenverse-core/editor-helper';
 import { gutenverseRoot } from 'gutenverse-core/helper';
 import { createPortal } from 'react-dom';
 import GalleryPopup from '../gallery/components/gallery-popup';
+import isInteger from 'lodash/isInteger';
 
 const slideCard = () => {
     let settings = {};
@@ -138,14 +139,22 @@ const AdvancedCarousel = compose(
     const {
         elementId,
         items,
+        sliderNumber,
         sliderStyle,
         overflowHideContainer,
-        allowPopup
+        loop,
+        centeredSlides,
+        allowPopup,
+        spaceBetween,
+        autoplay,
+        delay
     } = attributes;
 
+    const deviceType = getDeviceType();
     const advCarouselRef = useRef();
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
+    const swiperRef = useRef(null);
     const [showPopup, setShowPop] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [popupImage, setPopupImage] = useState([]);
@@ -164,8 +173,8 @@ const AdvancedCarousel = compose(
 
     useEffect(() => {
         let data = [];
-        items.map(item => {
-            const { image, imagePopup, imageDescription } = item;
+        items && items.map(item => {
+            const { imagePopup, imageDescription } = item;
             const src = getImageSrc(imagePopup);
 
             data = [
@@ -215,7 +224,7 @@ const AdvancedCarousel = compose(
     };
 
     const carouselItems = (items) => {
-        return items ? items.map((item, index) => {
+        return items !== undefined && items.length > 0 ? items.map((item, index) => {
             return <div className="carousel-item" key={index}>
                 {sliderStyle === '1' && style1(item, index)}
                 {sliderStyle === '2' && style2(item, index)}
@@ -223,6 +232,17 @@ const AdvancedCarousel = compose(
         }) : <div className="empty-carousel">
             {__('Empty Carousel', 'gutenverse')}
         </div>;
+    };
+
+    const slidesNumber = () => {
+        switch (deviceType) {
+            case 'Mobile':
+                return 1;
+            case 'Tablet':
+                return 2;
+            default:
+                return 3;
+        }
     };
 
     return <>
@@ -237,12 +257,30 @@ const AdvancedCarousel = compose(
             <div className={classnames('advanced-carousel', {
                 'container-overflow-hidden': overflowHideContainer,
             })} onClick={focusBlock}>
-                <Swiper
+                <WPSwiper
                     {...swiperSettings(attributes)}
+                    slidesPerView={sliderNumber && sliderNumber[deviceType] ? parseInt(sliderNumber[deviceType]) : isInteger(sliderNumber) ? sliderNumber : slidesNumber()}
+                    loop={loop ? loop : false}
+                    centeredSlides={centeredSlides && centeredSlides[deviceType] ? centeredSlides[deviceType] : false}
+                    spaceBetween={spaceBetween && spaceBetween[deviceType] ? spaceBetween[deviceType] : false}
+                    parallax={true}
+                    autoplay={autoplay ? { delay: delay } : false}
+                    autoHeight={true}
+                    navigation={{
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    }}
+                    pagination={{
+                        el: '.swiper-pagination',
+                        type: 'bullets',
+                        clickable: true
+                    }}
                     shouldSwiperUpdate={true}
-                    rebuildOnUpdate={true}>
+                    rebuildOnUpdate={true}
+                    ref={swiperRef}
+                >
                     {carouselItems(items)}
-                </Swiper>
+                </WPSwiper>
             </div>
         </div>
     </>;

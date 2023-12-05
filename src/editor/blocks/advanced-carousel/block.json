@@ -21,6 +21,18 @@
 			"type": "boolean",
 			"default": false
 		},
+		"loop": {
+			"type": "boolean",
+			"default": false
+		},
+		"autoplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"delay": {
+			"type": "string",
+			"default": 3000
+		},
 		"sliderHeight": {
 			"type": "object"
 		},
@@ -34,6 +46,20 @@
 		},
 		"items": {
 			"type": "array"
+		},
+		"sliderNumber": {
+			"type": "object",
+			"default": {
+				"Desktop": 1,
+				"Tablet": 1,
+				"Mobile": 1
+			}
+		},
+		"centeredSlides": {
+			"type": "object"
+		},
+		"spaceBetween": {
+			"type": "object"
 		}
 	},
 	"supports": {

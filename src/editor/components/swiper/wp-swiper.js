@@ -46,7 +46,6 @@ const WpSwiper = forwardRef((props, externalRef) => {
     const ref = useForkRef(swiperNodeRef, externalRef);
 
     const getActiveSlideIndexFromProps = useCallback(() => {
-
         if (!activeSlideKey) {
             return null;
         }
@@ -127,15 +126,22 @@ const WpSwiper = forwardRef((props, externalRef) => {
         return null;
     }
 
-    return (
-        createElement(ContainerEl, { className: containerClass, dir: rtl && 'rtl', ref: ref },
-            parallax && parallaxEl && renderParallax && renderParallax(props),
-            createElement(WrapperEl, { className: wrapperClass }, Children.map(children, renderContent)),
-            pagination && pagination.el && renderPagination && renderPagination(props),
-            scrollbar && scrollbar.el && renderScrollbar && renderScrollbar(props),
-            navigation && navigation.nextEl && renderNextButton && renderNextButton(props),
-            navigation && navigation.prevEl && renderPrevButton && renderPrevButton(props))
-    );
+    return <ContainerEl className={containerClass} ref={ref} dir={rtl && 'rtl'}>
+        {parallax && parallaxEl && renderParallax && renderParallax(props)}
+        <WrapperEl className={wrapperClass}>
+            {Children.map(children, renderContent)}
+        </WrapperEl>
+        {pagination && <div className="swiper-pagination-wrapper">
+            {pagination.el && renderPagination && renderPagination(props)}
+        </div>}
+        {scrollbar && <div className="swiper-scrollbar-wrapper">
+            {scrollbar.el && renderScrollbar && renderScrollbar(props)}
+        </div>}
+        {navigation && <div className="swiper-navigation-wrapper">
+            {navigation.nextEl && renderNextButton && renderNextButton(props)}
+            {navigation.prevEl && renderPrevButton && renderPrevButton(props)}
+        </div>}
+    </ContainerEl>;
 });
 
 const useForkRef = (refA, refB) => {
