@@ -17,36 +17,6 @@ export const panelList = () => {
             tabRole: TabSetting
         },
         {
-            title: __('Main Title Text Clip', 'gutenverse'),
-            initialOpen: false,
-            panelAdvance: true,
-            panelArray: (props) => {
-                const { elementId } = props;
-                return textClipPanel({
-                    ...props,
-                    textClipSelector: `.editor-styles-wrapper .${elementId} .heading-title`,
-                    textClipId: 'mainTextClip'
-                });
-            },
-            pro: true,
-            tabRole: TabStyle
-        },
-        {
-            title: __('Focus Title Text Clip', 'gutenverse'),
-            initialOpen: false,
-            panelAdvance: true,
-            panelArray: (props) => {
-                const { elementId } = props;
-                return textClipPanel({
-                    ...props,
-                    textClipSelector: `.editor-styles-wrapper .${elementId} .heading-focus`,
-                    textClipId: 'focusTextClip'
-                });
-            },
-            pro: true,
-            tabRole: TabStyle
-        },
-        {
             title: __('Background', 'gutenverse'),
             initialOpen: false,
             panelArray: (props) => backgroundPanel({
