@@ -181,6 +181,15 @@
 		"mask": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"overflow" : {
+			"type": "string",
+			"default": "hidden",
+			"copyStyle": true
+		},
+		"clipMargin" : {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"supports": {

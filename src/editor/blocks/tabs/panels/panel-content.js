@@ -1,4 +1,4 @@
-import { SelectControl } from 'gutenverse-core/controls';
+import { SelectControl, SizeControl } from 'gutenverse-core/controls';
 import { __ } from '@wordpress/i18n';
 import { select } from '@wordpress/data';
 import isEmpty from 'lodash/isEmpty';
@@ -8,6 +8,7 @@ export const contentPanel = (props) => {
         clientId,
         elementId,
         selector,
+        overflow
     } = props;
     const blockName = select('core/block-editor').getBlockName(clientId);
     const checkSelector = !isEmpty(selector) ? selector : `.${elementId}.guten-element`;
@@ -62,6 +63,75 @@ export const contentPanel = (props) => {
                             return 'justify-content: end;';
                         }
                     }
+                }
+            ]
+        },
+        {
+            id: 'overflow',
+            label: __('Overflow', 'gutenverse'),
+            description: overflow === 'clip'? __('"overflow:clip" May not work on safari', 'gutenverse') : false,
+            component: SelectControl,
+            options: [
+                {
+                    label: __('Default'),
+                    value: 'visible'
+                },
+                {
+                    label: __('Hidden'),
+                    value: 'hidden'
+                },
+                {
+                    label: __('Auto'),
+                    value: 'Auto'
+                },
+                {
+                    label: __('Clip'),
+                    value: 'clip'
+                },
+
+            ],
+            style: [
+                {
+                    selector: `${checkSelector} .tab-body`,
+                    allowRender: value => value,
+                    render: value => {
+                        return `overflow: ${value};`;
+                    }
+                },
+                {
+                    selector: `${checkSelector}.guten-tabs`,
+                    allowRender: value => value,
+                    render: value => {
+                        return `overflow: ${value};`;
+                    }
+                }
+            ]
+        },
+        {
+            id: 'clipMargin',
+            label: __('Overflow Clip Margin', 'gutenverse'),
+            show: overflow === 'clip',
+            component: SizeControl,
+            description: __('The "clip margin" sets the boundaries where the overflow is hidden.', '--gctd--'),
+            units: {
+                px: {
+                    text: 'px',
+                    min: 0,
+                    max: 100,
+                    step: 1
+                }
+            },
+            allowDeviceControl: true,
+            style: [
+                {
+                    selector: `${checkSelector} .tab-body`,
+                    allowRender: () => overflow === 'clip',
+                    render: value => `overflow-clip-margin: ${value['point']}px;`
+                },
+                {
+                    selector: `${checkSelector}.guten-tabs`,
+                    allowRender: () => overflow === 'clip',
+                    render: value => `overflow-clip-margin: ${value['point']}px;`
                 }
             ]
         },
