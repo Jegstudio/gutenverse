@@ -60,6 +60,11 @@ const PostListBlock = compose(
         paginationScrollLimit,
         paginationIcon,
         paginationIconPosition,
+        paginationPrevNextText,
+        paginationPrevText,
+        paginationNextText,
+        paginationPrevIcon,
+        paginationNextIcon,
     } = attributes;
 
     const animationClass = useAnimationEditor(attributes);
@@ -67,6 +72,7 @@ const PostListBlock = compose(
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [postLoaded, setPostLoaded] = useState(0);
+    const [page, setPage] = useState(1);
     const postListRef = useRef();
 
     useEffect(() => {
@@ -84,6 +90,26 @@ const PostListBlock = compose(
             u(postListRef.current).find('.guten-block-loadmore').on('click', () => {
                 setPostLoaded(postLoaded + parseInt(paginationNumberPost));
             });
+            u(postListRef.current)
+                .find('.btn-pagination.next:not(.disabled)')
+                .on('click', () => {
+                    setPage(page + 1);
+                });
+            u(postListRef.current)
+                .find('.btn-pagination.prev:not(.disabled)')
+                .on('click', () => {
+                    setPage(page - 1);
+                });
+            u(postListRef.current)
+                .find('.btn-pagination')
+                .each((el) => {
+                    const page = el.getAttribute('data-page');
+                    if (page) {
+                        u(el).on('click', () => {
+                            setPage(parseInt(page, 10));
+                        });
+                    }
+                });
         }
     }, [response]);
 
@@ -98,7 +124,10 @@ const PostListBlock = compose(
                     inheritQuery,
                     postType,
                     postOffset,
-                    numberPost: parseInt(postLoaded) === parseInt(numberPost) ? numberPost : postLoaded,
+                    numberPost: ('prevnext' === paginationMode || 'number' === paginationMode) ? numberPost :
+                        parseInt(postLoaded) === parseInt(numberPost)
+                            ? numberPost
+                            : postLoaded,
                     includePost,
                     excludePost,
                     includeCategory,
@@ -124,10 +153,19 @@ const PostListBlock = compose(
                     paginationMode,
                     paginationLoadmoreText,
                     paginationLoadingText,
-                    paginationNumberPost,
+                    paginationNumberPost: ('prevnext' === paginationMode || 'number' === paginationMode) ? numberPost : paginationNumberPost,
                     paginationScrollLimit,
                     paginationIcon,
-                    paginationIconPosition,                },
+                    paginationIconPosition,
+                    paginationPrevNextText,
+                    paginationPrevText,
+                    paginationNextText,
+                    paginationPrevIcon,
+                    paginationNextIcon,
+                    editParam: {
+                        page
+                    }
+                },
             }),
         }).then((data) => {
             setResponse(data.rendered);
@@ -168,6 +206,12 @@ const PostListBlock = compose(
         paginationScrollLimit,
         paginationIcon,
         paginationIconPosition,
+        paginationPrevNextText,
+        paginationPrevText,
+        paginationNextText,
+        paginationPrevIcon,
+        paginationNextIcon,
+        page
     ]);
 
     const blockProps = useBlockProps({

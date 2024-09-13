@@ -592,10 +592,8 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationTypography'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore span",
-					'property'       => function ( $value ) {},
-					'value'          => $this->attrs['paginationTypography'],
-					'device_control' => false,
+					'selector' => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore span, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination",
+					'value'    => $this->attrs['paginationTypography'],
 				)
 			);
 		}
@@ -603,7 +601,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationMargin'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'margin' );
 					},
@@ -616,7 +614,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationPadding'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'padding' );
 					},
@@ -629,7 +627,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationWidth'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination",
 					'property'       => function ( $value ) {
 						return "width: {$value}%;";
 					},
@@ -642,7 +640,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationIconSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore.icon-position-before i",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore.icon-position-before i, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.prev i",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
 					},
@@ -653,7 +651,7 @@ class Post_List extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore.icon-position-after i",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore.icon-position-after i, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.next i",
 					'property'       => function ( $value ) {
 						return "margin-left: {$value}px;";
 					},
@@ -663,10 +661,34 @@ class Post_List extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['paginationIconSize'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore.icon-position-before i, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.prev i",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'font-size' );
+					},
+					'value'          => $this->attrs['paginationIconSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore.icon-position-after i, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.next i",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'font-size' );
+					},
+					'value'          => $this->attrs['paginationIconSize'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['paginationAlign'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination, .{$this->element_id} .guten-postlist .guten_block_nav",
 					'property'       => function ( $value ) {
 						return "text-align: {$value};";
 					},
@@ -679,7 +701,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore span",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -689,10 +711,36 @@ class Post_List extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['paginationCurrentColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.current",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['paginationCurrentColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['paginationDisabledColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.disabled",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['paginationDisabledColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['paginationHoverColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore:hover a",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore:hover, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination:not(.disabled):not(.current):hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -703,21 +751,29 @@ class Post_List extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['paginationBackground'] ) ) {
-			$this->handle_background( ".{$this->element_id} .guten-block-pagination .guten-block-loadmore", $this->attrs['paginationBackground'] );
+			$this->handle_background( ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination", $this->attrs['paginationBackground'] );
+		}
+
+		if ( isset( $this->attrs['paginationCurrentBackground'] ) ) {
+			$this->handle_background( ".{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.current", $this->attrs['paginationCurrentBackground'] );
+		}
+
+		if ( isset( $this->attrs['paginationDisabledBackground'] ) ) {
+			$this->handle_background( ".{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination.disabled", $this->attrs['paginationDisabledBackground'] );
 		}
 
 		if ( isset( $this->attrs['paginationHoverBackground'] ) ) {
-			$this->handle_background( ".{$this->element_id} .guten-block-pagination .guten-block-loadmore:hover", $this->attrs['paginationHoverBackground'] );
+			$this->handle_background( ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore:hover, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination:not(.disabled):not(.current):hover", $this->attrs['paginationHoverBackground'] );
 		}
 
 		if ( isset( $this->attrs['paginationBorder'] ) ) {
-			$this->handle_border( 'paginationBorder', ".{$this->element_id} .guten-block-pagination .guten-block-loadmore" );
+			$this->handle_border( 'paginationBorder', ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination" );
 		}
 
 		if ( isset( $this->attrs['paginationBorderResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},
@@ -731,13 +787,13 @@ class Post_List extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['paginationHoverBorder'] ) ) {
-			$this->handle_border( 'paginationHoverBorder', ".{$this->element_id} .guten-block-pagination .guten-block-loadmore:hover" );
+			$this->handle_border( 'paginationHoverBorder', ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore:hover, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination:hover" );
 		}
 
 		if ( isset( $this->attrs['paginationHoverBorderResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore:hover",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore:hover, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},
@@ -753,7 +809,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationShadow'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination",
 					'property'       => function ( $value ) {
 						return $this->handle_box_shadow( $value );
 					},
@@ -766,7 +822,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['paginationHoverShadow'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-block-pagination .guten-block-loadmore:hover",
+					'selector'       => ".{$this->element_id} .guten-postlist .guten-block-pagination .guten-block-loadmore:hover, .{$this->element_id} .guten-postlist .guten_block_nav .btn-pagination:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_box_shadow( $value );
 					},

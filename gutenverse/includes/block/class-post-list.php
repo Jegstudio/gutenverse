@@ -63,6 +63,7 @@ class Post_List extends Post_Abstract {
 	public function get_ajax_param() {
 		return array(
 			'inheritQuery',
+			'elementId',
 			'postType',
 			'numberPost',
 			'postOffset',
@@ -97,6 +98,13 @@ class Post_List extends Post_Abstract {
 			'paginationScrollLimit',
 			'paginationIcon',
 			'paginationIconPosition',
+			'paginationIcon',
+			'paginationIconPosition',
+			'paginationPrevNextText',
+			'paginationPrevText',
+			'paginationNextText',
+			'paginationPrevIcon',
+			'paginationNextIcon',
 		);
 	}
 

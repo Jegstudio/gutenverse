@@ -546,11 +546,27 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"paginationCurrentColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"paginationDisabledColor": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"paginationHoverColor": {
 			"type": "object",
 			"copyStyle": true
 		},
 		"paginationBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"paginationCurrentBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"paginationDisabledBackground": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -702,6 +718,30 @@
 			"copyStyle": true
 		},
 		"condition": {
+			"type": "object",
+			"default": {}
+		},
+		"paginationPrevNextText": {
+			"type": "boolean",
+			"default": true
+		},
+		"paginationPrevText": {
+			"type": "string",
+			"default": "Prev"
+		},
+		"paginationNextText": {
+			"type": "string",
+			"default": "Next"
+		},
+		"paginationPrevIcon": {
+			"type": "string",
+			"default": "fas fa-chevron-left"
+		},
+		"paginationNextIcon": {
+			"type": "string",
+			"default": "fas fa-chevron-right"
+		},
+		"editParam": {
 			"type": "object",
 			"default": {}
 		}

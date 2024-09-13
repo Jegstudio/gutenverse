@@ -59,7 +59,7 @@ class Archive_Title extends Block_Abstract {
 		$title           = 'Archive Title';
 		$category_url    = '#';
 
-		if ( is_category() ) {
+		if ( is_category() || is_tag() ) {
 			$title            = single_term_title( '', false );
 			$current_category = get_queried_object();
 			$category_url     = get_term_link( $current_category );

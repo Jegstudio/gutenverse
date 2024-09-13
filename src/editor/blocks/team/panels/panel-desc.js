@@ -31,7 +31,8 @@ export const descPanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId} .profile-desc, #${elementId} .profile-desc, #${elementId} .profile-phone, #${elementId} .profile-email, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc`,
+                    selector: `.${elementId} .profile-desc, #${elementId} .profile-desc, #${elementId} .profile-phone, #${elementId} .profile-email, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+                            .${elementId} .profile-desc> a, #${elementId} .profile-desc> a, #${elementId} .profile-phone> a, #${elementId} .profile-email> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc> a`,
                     render: value => handleColor(value, 'color')
                 }
             ]
@@ -42,7 +43,8 @@ export const descPanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId}:hover .profile-desc, #${elementId}:hover .profile-desc, #${elementId}:hover .profile-phone, #${elementId}:hover .profile-email, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-desc`,
+                    selector: `.${elementId}:hover .profile-desc, #${elementId}:hover .profile-desc, #${elementId}:hover .profile-phone, #${elementId}:hover .profile-email, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+                            .${elementId}:hover .profile-desc> a, #${elementId}:hover .profile-desc> a, #${elementId}:hover .profile-phone> a, #${elementId}:hover .profile-email> a, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-desc> a`,
                     render: value => handleColor(value, 'color')
                 }
             ]
@@ -53,7 +55,8 @@ export const descPanel = (props) => {
             component: TypographyControl,
             style: [
                 {
-                    selector: `.${elementId} .profile-desc, #${elementId} .profile-desc, #${elementId} .profile-phone, #${elementId} .profile-email, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc`,
+                    selector: `.${elementId} .profile-desc, #${elementId} .profile-desc, #${elementId} .profile-phone, #${elementId} .profile-email, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+                            .${elementId} .profile-desc> a, #${elementId} .profile-desc> a, #${elementId} .profile-phone> a, #${elementId} .profile-email> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc> a`,
                     hasChild: true,
                     render: (value,id) => handleTypography(value, props, id)
                 }
@@ -65,7 +68,8 @@ export const descPanel = (props) => {
             component: TextShadowControl,
             style: [
                 {
-                    selector: `.${elementId} .profile-desc, #${elementId} .profile-desc, #${elementId} .profile-phone, #${elementId} .profile-email, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc`,
+                    selector: `.${elementId} .profile-desc, #${elementId} .profile-desc, #${elementId} .profile-phone, #${elementId} .profile-email, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+                            .${elementId} .profile-desc> a, #${elementId} .profile-desc> a, #${elementId} .profile-phone> a, #${elementId} .profile-email> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-desc> a`,
                     allowRender: (value) => allowRenderTextShadow(value),
                     render: value => handleTextShadow(value)
                 }

@@ -126,6 +126,11 @@ class Post_Block extends Post_Abstract {
 			'paginationScrollLimit',
 			'paginationIcon',
 			'paginationIconPosition',
+			'paginationPrevNextText',
+			'paginationPrevText',
+			'paginationNextText',
+			'paginationPrevIcon',
+			'paginationNextIcon',
 		);
 	}
 

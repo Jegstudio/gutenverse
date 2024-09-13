@@ -313,7 +313,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['descColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .profile-desc, #{$this->element_id} .profile-desc, #{$this->element_id} .profile-phone, #{$this->element_id} .profile-email, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc",
+					'selector'       => ".{$this->element_id} .profile-desc, #{$this->element_id} .profile-desc, #{$this->element_id} .profile-phone, #{$this->element_id} .profile-email, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+									    .{$this->element_id} .profile-desc> a, #{$this->element_id} .profile-desc> a, #{$this->element_id} .profile-phone> a, #{$this->element_id} .profile-email> a, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc> a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -326,7 +327,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['descColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}:hover .profile-desc, #{$this->element_id}:hover .profile-desc, #{$this->element_id}:hover .profile-phone, #{$this->element_id}:hover .profile-email, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-desc",
+					'selector'       => ".{$this->element_id}:hover .profile-desc, #{$this->element_id}:hover .profile-desc, #{$this->element_id}:hover .profile-phone, #{$this->element_id}:hover .profile-email, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+					                    .{$this->element_id}:hover .profile-desc> a, #{$this->element_id}:hover .profile-desc> a, #{$this->element_id}:hover .profile-phone> a, #{$this->element_id}:hover .profile-email> a, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-desc> a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -339,7 +341,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['descTypography'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector'       => ".{$this->element_id} .profile-desc, #{$this->element_id} .profile-desc, #{$this->element_id} .profile-phone, #{$this->element_id} .profile-email, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc",
+					'selector'       => ".{$this->element_id} .profile-desc, #{$this->element_id} .profile-desc, #{$this->element_id} .profile-phone, #{$this->element_id} .profile-email, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+					                    .{$this->element_id} .profile-desc> a, #{$this->element_id} .profile-desc> a, #{$this->element_id} .profile-phone> a, #{$this->element_id} .profile-email> a, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc> a",
 					'property'       => function ( $value ) {},
 					'value'          => $this->attrs['descTypography'],
 					'device_control' => false,
@@ -350,7 +353,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['descTextShadow'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .profile-desc, #{$this->element_id} .profile-desc, #{$this->element_id} .profile-phone, #{$this->element_id} .profile-email, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc",
+					'selector'       => ".{$this->element_id} .profile-desc, #{$this->element_id} .profile-desc, #{$this->element_id} .profile-phone, #{$this->element_id} .profile-email, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc,
+									    .{$this->element_id} .profile-desc> a, #{$this->element_id} .profile-desc> a, #{$this->element_id} .profile-phone> a, #{$this->element_id} .profile-email> a, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-desc> a",
 					'property'       => function ( $value ) {
 						return $this->handle_text_shadow( $value );
 					},

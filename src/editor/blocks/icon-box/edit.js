@@ -24,6 +24,7 @@ import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { dispatch, useSelect } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import isEmpty from 'lodash/isEmpty';
+import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 const NEW_TAB_REL = 'noreferrer noopener';
 
@@ -50,7 +51,6 @@ const IconBoxBlock = compose(
         attributes,
         setAttributes,
         setElementRef,
-        deviceType,
         setPanelState
     } = props;
 
@@ -74,7 +74,8 @@ const IconBoxBlock = compose(
         iconBoxOverlayDirection = 'left',
         separateButtonLink,
         lazyLoad,
-        hoverWithParent
+        hoverWithParent,
+        parentSelector
     } = attributes;
     const imageAltText = imageAlt || null;
     const animationClass = useAnimationEditor(attributes);
@@ -84,8 +85,10 @@ const IconBoxBlock = compose(
     const titleRef = useRef();
     const descRef = useRef();
     const badgeRef = useRef();
+    const prevHoverWithParent = useRef();
     const [dynamicHref, setDynamicHref] = useState();
     const isGlobalLinkSet = url !== undefined && url !== '';
+    const deviceType = getDeviceType();
 
     const hasInnerBlocks = useSelect(select => {
         const block = select('core/block-editor').getBlock(props.clientId);
@@ -143,9 +146,8 @@ const IconBoxBlock = compose(
             allowedBlocks: ['gutenverse/button']
         }
     );
-    useEffect(() => {
-        setAttributes({ parentSelector: `.${elementId}:hover .guten-icon-box-wrapper` });
-    }, [hoverWithParent]);
+
+    prevHoverWithParent.current = hoverWithParent;
     const onToggleOpenInNewTab = useCallback(
         (value) => {
             const newLinkTarget = value ? '_blank' : undefined;
@@ -172,12 +174,6 @@ const IconBoxBlock = compose(
     }, [iconBoxRef]);
 
     useEffect(() => {
-        setAttributes({
-            deviceType: deviceType,
-        });
-    }, [deviceType]);
-
-    useEffect(() => {
         !separateButtonLink && getBlocks(clientId).map(block => {
             updateBlockAttributes(block.clientId, { url, rel, linkTarget });
         });
@@ -185,9 +181,10 @@ const IconBoxBlock = compose(
 
     useEffect(() => {
         getBlocks(clientId).map(block => {
-            updateBlockAttributes(block.clientId, { hoverWithParent });
+            updateBlockAttributes(block.clientId, { hoverWithParent, parentSelector });
         });
-    }, [hoverWithParent]);
+        setAttributes({ parentSelector: `.${elementId}:hover .guten-icon-box-wrapper` });
+    }, [hoverWithParent, parentSelector]);
 
     const panelState = {
         panel: 'setting',

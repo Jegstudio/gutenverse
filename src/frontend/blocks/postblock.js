@@ -75,11 +75,11 @@ class GutenversePostblock extends Default {
         } = settings;
 
         let query = null;
-        let qApi  = false;
+        let qApi = false;
 
         if (window['GutenverseData'] && !isEmpty(window['GutenverseData']['query'])) {
             query = window['GutenverseData']['query'];
-            qApi  = true;
+            qApi = true;
         }
 
         element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`);
@@ -172,7 +172,7 @@ class GutenversePostblock extends Default {
         const { numberPost, paginationScrollLimit } = settings;
         const button = element.find('.guten-block-loadmore');
 
-        if(element.hasClass('hide-desktop') || element.hasClass('hide-tablet') || element.hasClass('hide-mobile')){
+        if (element.hasClass('hide-desktop') || element.hasClass('hide-tablet') || element.hasClass('hide-mobile')) {
             return false;
         }
 
@@ -187,6 +187,52 @@ class GutenversePostblock extends Default {
         }
 
         return false;
+    }
+
+    _paginatePosts(element, settings, direction) {
+        const elementId = element.find('.guten-postblock').data('id');
+        let currentPage = parseInt(element.find('.guten_block_nav').data('page') || 1);
+        const postsPerPage = parseInt(settings.numberPost, 10);
+
+        if (isNaN(direction)) {
+            if (direction === 'next') {
+                currentPage += 1;
+            } else if (direction === 'prev') {
+                if (currentPage > 1) {
+                    currentPage -= 1;
+                }
+            }
+        } else {
+            currentPage = direction;
+        }
+
+        let query = null;
+        let qApi = false;
+
+        if (window['GutenverseData'] && !isEmpty(window['GutenverseData']['query'])) {
+            query = window['GutenverseData']['query'];
+            qApi = true;
+        }
+
+        apiFetch({
+            path: addQueryArgs('/gutenverse-client/v1/postblock/data', {
+                attributes: {
+                    ...settings,
+                    paged: currentPage,
+                    numberPost: postsPerPage,
+                    paginationNumberPost: postsPerPage,
+                    qApi,
+                    qSearch: query && query['q_search'],
+                    qCategory: query && query['q_category_name'],
+                    qTag: query && query['q_tag'],
+                    qAuthor: query && query['q_author'],
+                },
+            }),
+        }).then((data) => {
+            element.html(data.rendered);
+            this._tabItems(`.${elementId}.guten-post-block`);
+        }).catch(() => {
+        });
     }
 
     _tabItems(element) {
@@ -206,6 +252,42 @@ class GutenversePostblock extends Default {
             window.removeEventListener('scroll', scrolling);
             window.addEventListener('scroll', scrolling);
         }
+
+        if (paginationMode === 'prevnext' || paginationMode === 'number') {
+            const prevButton = blockElement.find('.guten_block_nav .prev');
+            const nextButton = blockElement.find('.guten_block_nav .next');
+
+            prevButton.on('click', (event) => {
+                event.preventDefault();
+                if (!prevButton.hasClass('disabled')) {
+                    this._paginatePosts(blockElement, settings, 'prev');
+                }
+            });
+
+            nextButton.on('click', (event) => {
+                event.preventDefault();
+                if (!nextButton.hasClass('disabled')) {
+                    this._paginatePosts(blockElement, settings, 'next');
+                }
+            });
+
+            if (paginationMode === 'number') {
+                if (paginationMode === 'number') {
+                    const numberedButtons = document.querySelectorAll('.guten_block_nav .btn-pagination');
+                    numberedButtons.forEach(button => {
+                        const page = button.getAttribute('data-page');
+                        if (page && !isNaN(page)) {
+                            button.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                this._paginatePosts(blockElement, settings, page);
+                            });
+                        }
+                    });
+                }
+            }
+
+        }
+
 
         blockElement.find('.guten-block-loadmore').on('click', () => {
             this._loadMore(blockElement, settings);

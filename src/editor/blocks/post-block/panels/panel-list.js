@@ -85,7 +85,7 @@ export const panelList = () => {
             tabRole: TabStyle
         },
         {
-            title: __('Readmore', 'gutenverse'),
+            title: __('Read More', 'gutenverse'),
             initialOpen: false,
             panelArray: readmorePanel,
             tabRole: TabStyle

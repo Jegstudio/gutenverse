@@ -36,11 +36,17 @@ const ButtonBlock = compose(
         setPanelState,
     } = props;
 
+    const prevHoverWithParent = useRef();
     useEffect(() => {
-        const newHoverStatus = hoverWithParent;
-        setAttributes({ hoverWithParent: newHoverStatus, parentSelector: parentSelector });
-        refreshStyle();
-    }, [hoverWithParent]);
+        if (attributes.hoverWithParent !== hoverWithParent && prevHoverWithParent.current !== hoverWithParent) {
+            setAttributes({
+                hoverWithParent: hoverWithParent,
+                parentSelector: parentSelector
+            });
+            refreshStyle();
+        }
+        prevHoverWithParent.current = hoverWithParent;
+    }, [attributes.hoverWithParent, hoverWithParent, parentSelector]);
 
     const {
         elementId,
