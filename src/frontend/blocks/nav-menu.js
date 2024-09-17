@@ -56,26 +56,25 @@ class GutenverseNavMenu extends Default {
 
         if (item.wrapper.hasClass('submenu-click-title')) {
             item.menuDropdown.on('click', function (e) {
-                e.preventDefault();
-                const submenu = u(this).siblings('.sub-menu');
+                const screenWidth = window.innerWidth;
+                if (item.wrapper.hasClass('break-point-mobile') && screenWidth <= 425) {
+                    e.preventDefault();
+                } else if (item.wrapper.hasClass('break-point-tablet') && screenWidth <= 780) {
+                    e.preventDefault();
+                }
+                toggleSubmenu(u(this).siblings('.sub-menu'));
+            });
+        }
 
-                if (submenu.hasClass('dropdown-open')) {
-                    submenu.removeClass('dropdown-open');
-                } else {
-                    submenu.addClass('dropdown-open');
-                }
-            });
-        } else {
-            const dropdownToggle = item.wrapper.find('li.menu-item-has-children > a i');
-            dropdownToggle.on('click', function (e) {
-                e.preventDefault();
-                const submenu = u(this).parent('a').siblings('.sub-menu');
-                if (submenu.hasClass('dropdown-open')) {
-                    submenu.removeClass('dropdown-open');
-                } else {
-                    submenu.addClass('dropdown-open');
-                }
-            });
+        const dropdownToggle = item.wrapper.find('li.menu-item-has-children > a i');
+        dropdownToggle.on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSubmenu(u(this).parent('a').siblings('.sub-menu'));
+        });
+
+        function toggleSubmenu(submenu) {
+            submenu.toggleClass('dropdown-open');
         }
 
         if ( parseInt( item.wrapper.data('close-on-click') ) === 1 ) {

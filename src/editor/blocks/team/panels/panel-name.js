@@ -31,7 +31,8 @@ export const namePanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId} .profile-title, #${elementId} .profile-title, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title`,
+                    selector: `.${elementId} .profile-title, #${elementId} .profile-title, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title,
+                            .${elementId} .profile-title> a, #${elementId} .profile-title> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title> a`,
                     render: value => handleColor(value, 'color')
                 }
             ]
@@ -42,7 +43,8 @@ export const namePanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId}:hover .profile-title, #${elementId}:hover .profile-title, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title`,
+                    selector: `.${elementId}:hover .profile-title, #${elementId}:hover .profile-title, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title,
+                            .${elementId}:hover .profile-title> a, #${elementId}:hover .profile-title> a, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title> a`,
                     render: value => handleColor(value, 'color')
                 }
             ]
@@ -53,7 +55,8 @@ export const namePanel = (props) => {
             component: TypographyControl,
             style: [
                 {
-                    selector: `.${elementId} .profile-title, #${elementId} .profile-title, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title`,
+                    selector: `.${elementId} .profile-title, #${elementId} .profile-title, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title,
+                            .${elementId} .profile-title> a, #${elementId} .profile-title> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title> a`,
                     hasChild: true,
                     render: (value,id) => handleTypography(value, props, id)
                 }

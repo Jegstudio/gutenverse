@@ -126,16 +126,17 @@ export const panelGeneral = (props) => {
             min: 1,
             max: 100,
             step: 1,
+            unit: 'px',
             style: [
                 {
-                    selector: `.${elementId}:not(.inline-icon-list) li.guten-icon-list-item:not(li:first-of-type) > a,
-                    .block-editor-block-list__layout .wp-block.${elementId}:not(.inline-icon-list) li.guten-icon-list-item:not(li:first-of-type) > a`,
+                    selector: `.${elementId}:not(.inline-icon-list) li.guten-icon-list-item:not(:first-of-type) > a,
+                    .block-editor-block-list__layout .wp-block.${elementId}:not(.inline-icon-list) li.guten-icon-list-item:not(:first-of-type) > a`,
                     render: value => `margin-top: calc(${value}px/2);`
                 },
                 {
                     selector: `.${elementId}:not(.inline-icon-list) .guten-icon-list-item:not(:last-child),
                     .block-editor-block-list__layout .wp-block.${elementId}:not(.inline-icon-list) .guten-icon-list-item:not(:last-child)`,
-                    render: value => `margin-bottom: calc(${value}px/2);`
+                    render: value => `padding-bottom: calc(${value}px/2);`
                 },
                 {
                     selector: `.${elementId}.inline-icon-list .guten-icon-list-item:not(:last-child),

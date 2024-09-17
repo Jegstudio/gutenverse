@@ -333,6 +333,19 @@ class Post_List extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['imageBorder'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-post a img",
+					'property'       => function ( $value ) {
+						return $this->handle_border_responsive( $value );
+					},
+					'value'          => $this->attrs['imageBorder'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['iconWidth'] ) ) {
 			$this->inject_style(
 				array(

@@ -265,6 +265,10 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"imageBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"iconWidth": {
 			"type": "object",
 			"copyStyle": true

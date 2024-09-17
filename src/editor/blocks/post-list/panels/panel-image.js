@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, DimensionControl, RangeControl, SelectControl } from 'gutenverse-core/controls';
-import { handleDimension } from 'gutenverse-core/styling';
+import { DimensionControl, RangeControl, SelectControl, BorderResponsiveControl } from 'gutenverse-core/controls';
+import { handleDimension, handleBorderResponsive } from 'gutenverse-core/styling';
 
 export const imagePanel = (props) => {
     const {
@@ -94,6 +94,18 @@ export const imagePanel = (props) => {
                 {
                     selector: `.${elementId} .guten-postlist .guten-post a img`,
                     render: value => handleDimension(value, 'margin')
+                }
+            ]
+        },
+        {
+            id: 'imageBorder',
+            label: __('Border', 'gutenverse'),
+            component: BorderResponsiveControl,
+            allowDeviceControl: true,
+            style: [
+                {
+                    selector: `.${elementId} .guten-postlist .guten-post a img`,
+                    render: value => handleBorderResponsive(value)
                 }
             ]
         },

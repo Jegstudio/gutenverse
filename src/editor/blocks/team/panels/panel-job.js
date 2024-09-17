@@ -31,7 +31,8 @@ export const jobPanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId} .profile-sub, #${elementId} .profile-sub, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-sub`,
+                    selector: `.${elementId} .profile-sub, #${elementId} .profile-sub, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-sub,
+                            .${elementId} .profile-sub> a, #${elementId} .profile-sub> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-sub> a`,
                     render: value => handleColor(value, 'color')
                 }
             ]
@@ -42,7 +43,8 @@ export const jobPanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId}:hover .profile-sub, #${elementId}:hover .profile-sub, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-sub`,
+                    selector: `.${elementId}:hover .profile-sub, #${elementId}:hover .profile-sub, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-sub,
+                            .${elementId}:hover .profile-sub> a, #${elementId}:hover .profile-sub> a, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-sub> a`,
                     render: value => handleColor(value, 'color')
                 }
             ]
@@ -53,7 +55,8 @@ export const jobPanel = (props) => {
             component: TypographyControl,
             style: [
                 {
-                    selector: `.${elementId} .profile-sub, #${elementId} .profile-sub, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-sub`,
+                    selector: `.${elementId} .profile-sub, #${elementId} .profile-sub, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-sub,
+                            .${elementId} .profile-sub> a, #${elementId} .profile-sub> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-sub> a`,
                     hasChild: true,
                     render: (value,id) => handleTypography(value, props, id)
                 }

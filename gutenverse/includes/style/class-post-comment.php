@@ -93,7 +93,7 @@ class Post_Comment extends Style_Abstract {
 		if ( isset( $this->attrs['typographyText'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector'       => ".{$this->element_id} span, .{$this->element_id} p",
+					'selector'       => ".{$this->element_id} p",
 					'value'          => $this->attrs['typographyText'],
 					'device_control' => false,
 				)
@@ -103,7 +103,7 @@ class Post_Comment extends Style_Abstract {
 		if ( isset( $this->attrs['colorText'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} span, .{$this->element_id} p",
+					'selector'       => ".{$this->element_id} p",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -116,7 +116,7 @@ class Post_Comment extends Style_Abstract {
 		if ( isset( $this->attrs['marginText'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} span, .{$this->element_id} p",
+					'selector'       => ".{$this->element_id} p",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'margin' );
 					},
@@ -180,6 +180,19 @@ class Post_Comment extends Style_Abstract {
 						return $this->handle_color( $value, 'color' );
 					},
 					'value'          => $this->attrs['colorLabel'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['colorRequired'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} label span",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['colorRequired'],
 					'device_control' => false,
 				)
 			);

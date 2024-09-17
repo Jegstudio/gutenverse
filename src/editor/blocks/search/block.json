@@ -16,6 +16,12 @@
 			"type": "boolean",
 			"default": true
 		},
+		"formStyle": {
+			"type": "string",
+			"default": {
+				"Desktop": "fit-content"
+			}
+		},
 		"position": {
 			"type": "string",
 			"default": "top"

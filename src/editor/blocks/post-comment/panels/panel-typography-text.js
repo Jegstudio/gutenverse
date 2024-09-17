@@ -14,7 +14,7 @@ export const textTypographyPanel = (props) => {
             component: TypographyControl,
             style: [
                 {
-                    selector: `.${elementId} span, .${elementId} p`,
+                    selector: `.${elementId} p`,
                     hasChild: true,
                     render: (value,id) => handleTypography(value, props, id)
                 }
@@ -26,7 +26,7 @@ export const textTypographyPanel = (props) => {
             component: ColorControl,
             style: [
                 {
-                    selector: `.${elementId} span, .${elementId} p`,
+                    selector: `.${elementId} p`,
                     render: value => handleColor(value, 'color')
                 }
             ]
@@ -57,7 +57,7 @@ export const textTypographyPanel = (props) => {
             },
             style: [
                 {
-                    selector: `.${elementId} span, .${elementId} p`,
+                    selector: `.${elementId} p`,
                     render: value => handleDimension(value, 'margin')
                 }
             ]

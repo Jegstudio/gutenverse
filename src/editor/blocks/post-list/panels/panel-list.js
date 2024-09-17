@@ -52,7 +52,7 @@ export const panelList = () => {
             title: __('Featured Image', 'gutenverse'),
             initialOpen: false,
             panelArray: imagePanel,
-            tabRole: TabSetting
+            tabRole: TabStyle
         },
         {
             title: __('Meta', 'gutenverse'),

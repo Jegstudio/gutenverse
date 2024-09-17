@@ -51,6 +51,9 @@ const SearchBlock = compose(
                         a: 1
                     },
                     type: 'default'
+                },
+                buttonWidth: {
+                    Desktop: '100'
                 }
             }]],
             allowedBlocks: ['gutenverse/button'],

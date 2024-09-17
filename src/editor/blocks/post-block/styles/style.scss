@@ -99,6 +99,7 @@
         justify-content: space-between;
         position: relative;
         margin-top: 0 !important;
+        width: 100%;
 
         >* {
             margin-top: 1.5rem;
@@ -428,6 +429,12 @@
 
     .guten_block_nav {
         text-align: center;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        gap: 5px;
+        height: fit-content;
+        align-items: center;
 
         .btn-pagination {
             color: #212121;
@@ -440,6 +447,11 @@
             font-size: 13px;
             font-weight: 700;
             transition: .2s ease;
+            height: fit-content;
+
+            i {
+                transition: none;
+            }
 
             i {
                 transition: none;
@@ -456,6 +468,19 @@
                 color: var(--guten-btn-txt-color, #fff);
                 cursor: auto;
             }
+
+            &.next, &.prev {
+                align-items: center;
+                display: inline-flex;
+                gap: 5px;
+                justify-content: center;
+            }
+        }
+
+        span {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
     }
 }

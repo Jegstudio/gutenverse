@@ -213,7 +213,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['nameColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .profile-title, #{$this->element_id} .profile-title, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-title",
+					'selector'       => ".{$this->element_id} .profile-title, #{$this->element_id} .profile-title, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-title,
+						.{$this->element_id} .profile-title> a, #{$this->element_id} .profile-title> a, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-title> a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -226,7 +227,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['nameColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}:hover .profile-title, #{$this->element_id}:hover .profile-title, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title",
+					'selector'       => ".{$this->element_id}:hover .profile-title, #{$this->element_id}:hover .profile-title, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title,
+						.{$this->element_id}:hover .profile-title> a, #{$this->element_id}:hover .profile-title> a, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title> a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -263,7 +265,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['jobColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .profile-sub, #{$this->element_id} .profile-sub, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-sub",
+					'selector'       => ".{$this->element_id} .profile-sub, #{$this->element_id} .profile-sub, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-sub,
+						.{$this->element_id} .profile-sub> a, #{$this->element_id} .profile-sub> a, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-sub> a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -276,7 +279,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['jobColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}:hover .profile-sub, #{$this->element_id}:hover .profile-sub, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-sub",
+					'selector'       => ".{$this->element_id}:hover .profile-sub, #{$this->element_id}:hover .profile-sub, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-sub,
+						.{$this->element_id}:hover .profile-sub> a, #{$this->element_id}:hover .profile-sub> a, .{$this->element_id}:hover .profile-box .profile-card.card-overlay .profile-body .profile-sub> a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -289,7 +293,8 @@ class Team extends Style_Abstract {
 		if ( isset( $this->attrs['jobTypography'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector'       => ".{$this->element_id} .profile-sub, #{$this->element_id} .profile-sub, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-sub",
+					'selector'       => ".{$this->element_id} .profile-sub, #{$this->element_id} .profile-sub, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-sub,
+						.{$this->element_id} .profile-sub> a, #{$this->element_id} .profile-sub> a, .{$this->element_id} .profile-box .profile-card.card-overlay .profile-body .profile-sub> a",
 					'property'       => function ( $value ) {},
 					'value'          => $this->attrs['jobTypography'],
 					'device_control' => false,

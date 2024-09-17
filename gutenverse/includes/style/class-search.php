@@ -265,6 +265,19 @@ class Search extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['formStyle'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .guten-button-wrapper ",
+					'property'       => function ( $value ) {
+						return "width: {$value};";
+					},
+					'value'          => $this->attrs['formStyle'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['inputWidth'] ) ) {
 			$this->inject_style(
 				array(

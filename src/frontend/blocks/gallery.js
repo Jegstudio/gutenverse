@@ -36,11 +36,11 @@ class GutenverseGallery extends Default {
                         if (img.complete && img.naturalHeight !== 0) {
                             resolve(img);
                         } else {
-                            reject(new Error("Image is not completely loaded or has a height of zero."));
+                            reject(new Error('Image is not completely loaded or has a height of zero.'));
                         }
                     };
                     img.onerror = () => {
-                        reject(new Error("Failed to load image."));
+                        reject(new Error('Failed to load image.'));
                     };
                     if (img.src) {
                         const src = img.src;

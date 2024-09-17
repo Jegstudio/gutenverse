@@ -32,6 +32,17 @@ export const labelTypographyPanel = (props) => {
             ]
         },
         {
+            id: 'colorRequired',
+            label: __('Required Indicator Color', 'gutenverse'),
+            component: ColorControl,
+            style: [
+                {
+                    selector: `.${elementId} label span`,
+                    render: value => handleColor(value, 'color')
+                }
+            ]
+        },
+        {
             id: 'marginLabel',
             label: __('Margin', 'gutenverse'),
             component: DimensionControl,
