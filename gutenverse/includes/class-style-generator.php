@@ -53,7 +53,6 @@ use Gutenverse\Style\Team;
 use Gutenverse\Style\Testimonials;
 use Gutenverse\Style\Text_Editor;
 use Gutenverse\Style\Video;
-use Gutenverse\Style\Popup_Builder;
 use Gutenverse\Style\Search;
 use Gutenverse\Style\Text;
 
@@ -199,9 +198,6 @@ class Style_Generator {
 				break;
 			case 'gutenverse/progress-bar':
 				$instance = new Progress_Bar( $attrs );
-				break;
-			case 'gutenverse/popup-builder':
-				$instance = new Popup_Builder( $attrs );
 				break;
 			case 'gutenverse/social-icon':
 				$instance = new Social_Icon( $attrs );

@@ -1,0 +1,227 @@
+{
+	"apiVersion": 2,
+	"name": "gutenverse/popup-builder",
+	"title": "Popup Builder",
+	"description": "Build Popup using gutenverse popup builder.",
+	"category": "gutenverse-structure",
+	"allowCopyStyle": true,
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"mouseMoveEffect": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"width": {
+			"type": "object",
+			"default": {
+				"Desktop": {
+					"point": "450",
+					"unit": "px"
+				},
+				"Tablet": {
+					"point": "450",
+					"unit": "px"
+				},
+				"Mobile": {
+					"point": "100",
+					"unit": "%"
+				}
+			},
+			"copyStyle": true
+		},
+		"maxHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"containerPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"containerBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"containerBorderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "containerBorder",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"containerBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"backgroundColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"animation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"position": {
+			"type": "string",
+			"default": "center",
+			"copyStyle": true
+		},
+		"contentPosition": {
+			"type": "string",
+			"default": "center",
+			"copyStyle": true
+		},
+		"sideMode": {
+			"type": "string",
+			"default": "space",
+			"copyStyle": true
+		},
+		"overlayColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"showCloseButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"hideAfterClosed": {
+			"type": "boolean",
+			"default": false
+		},
+		"closePopupOverlay": {
+			"type": "boolean",
+			"default": true
+		},
+		"closeIcon": {
+			"type": "string",
+			"default": "gtn gtn-x-line"
+		},
+		"closePosition": {
+			"type": "string",
+			"default": "container",
+			"copyStyle": true
+		},
+		"closeButtonColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeButtonBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeButtonSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closePositioningLeft": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closePositioningRight": {
+			"type": "object",
+			"default": {
+				"Desktop": {
+					"point": 10,
+					"unit": "px"
+				}
+			},
+			"copyStyle": true
+		},
+		"closePositioningTop": {
+			"type": "object",
+			"default": {
+				"Desktop": {
+					"point": 10,
+					"unit": "px"
+				}
+			},
+			"copyStyle": true
+		},
+		"closePositioningBottom": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closePadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeBorderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "closeBorder",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"closeBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeButtonColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeButtonBgColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"closeBorderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "closeBorderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"closeBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"openTrigger": {
+			"type": "string",
+			"default": "load"
+		},
+		"openWaitTime": {
+			"type": "integer"
+		},
+		"openScrollDistance": {
+			"type": "integer"
+		},
+		"openAnchor": {
+			"type": "string"
+		},
+		"openMaxClick": {
+			"type": "integer"
+		},
+		"transform": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
+			"type": "object",
+			"default": {}
+		}
+	},
+	"supports": {
+		"className": false
+	},
+	"keywords": [
+		"popup",
+		"builder"
+	]
+}

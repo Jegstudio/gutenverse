@@ -1,0 +1,38 @@
+@import "gutenverse-core/src/assets/controls/input";
+@import "gutenverse-core/src/assets/controls/wrapper";
+@import "gutenverse-core/src/assets/drawer";
+@import "gutenverse-core/src/assets/skeleton";
+@import "gutenverse-core/src/assets/pro";
+
+.gutenverse-popup-container {
+    position: absolute;
+    background: #fff;
+    width: 300px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    border-radius: 3px;
+    overflow: hidden;
+    z-index: 99999;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  
+  .gutenverse-popup-image {
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .gutenverse-popup-detail {
+    padding: 20px 30px;
+    text-align: center;
+  
+    h3 {
+      font-size: 17px;
+      margin-top: 0;
+    }
+  
+    p {
+      font-size: 14px;
+    }
+  }  

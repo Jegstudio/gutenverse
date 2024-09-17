@@ -10,6 +10,7 @@
 namespace Gutenverse;
 
 use Gutenverse\Form_Fallback\Form_Fallback_Init;
+use Gutenverse\Popup_Fallback\Popup_Fallback_Init;
 
 /**
  * Class Gutenverse
@@ -149,6 +150,13 @@ class Gutenverse {
 	 * @var Form_Fallback
 	 */
 	public $form_fallback;
+
+	/**
+	 * Popup Fallback
+	 *
+	 * @var Popup_Fallback
+	 */
+	public $popup_fallback;
 
 	/**
 	 * Singleton page for Gutenverse Class
@@ -387,6 +395,9 @@ class Gutenverse {
 		}
 		if ( ! in_array( 'gutenverse-form/gutenverse-form.php', $active_plugins ) ) {
 			$this->form_fallback = new Form_Fallback_Init();
+		}
+		if ( ! in_array( 'gutenverse-popup/gutenverse-popup.php', $active_plugins ) ) {
+			$this->popup_fallback = new Popup_Fallback_Init();
 		}
 	}
 

@@ -7,7 +7,7 @@
  * @package gutenverse
  */
 
-namespace Gutenverse\Style;
+namespace Gutenverse\Popup_Fallback\Style;
 
 use Gutenverse\Framework\Style_Abstract;
 
@@ -22,7 +22,7 @@ class Popup_Builder extends Style_Abstract {
 	 *
 	 * @var string
 	 */
-	protected $block_dir = GUTENVERSE_DIR . '/block/';
+	protected $block_dir = GUTENVERSE_DIR . 'includes/popup_fallback/block/';
 
 	/**
 	 * Block Name

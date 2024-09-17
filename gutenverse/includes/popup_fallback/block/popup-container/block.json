@@ -1,0 +1,24 @@
+{
+  "apiVersion": 2,
+  "name": "gutenverse/popup-container",
+  "title": "Popup Container",
+  "description": "Build Popup using gutenverse popup container.",
+  "category": "gutenverse-structure",
+  "parent": ["gutenverse/popup-builder"],
+  "attributes": {
+    "elementId": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "condition": {
+        "type": "object",
+        "default": {}
+    }
+  },
+  "supports": {
+    "className": false
+  },
+  "keywords": ["popup", "builder"]
+}

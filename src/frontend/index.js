@@ -49,10 +49,10 @@ if( !activePlugins.includes('gutenverse-form/gutenverse-form.php' )){
 
 //gutenverse-popup functionality
 if( !activePlugins.includes('gutenverse-popup/gutenverse-popup.php' )){
-    let formGutenClass = {
+    let popupGutenClass = {
         ['popup-builder']: GutenversePopupBuilder,
     };
-    gutenClasses = {...gutenClasses, ...formGutenClass};
+    gutenClasses = {...gutenClasses, ...popupGutenClass};
 }
 
 Object.keys(gutenClasses).map((index) => {

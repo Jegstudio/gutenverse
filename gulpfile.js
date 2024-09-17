@@ -87,7 +87,17 @@ gulp.task('form', function () {
         .pipe(gulp.dest('gutenverse/assets/css/'));
 });
 
-gulp.task('build-process', gulp.parallel('blocks', 'frontend', 'wizard', 'update-notice', 'form-default-style', 'form'));
+gulp.task('popup', function () {
+    return gulp
+        .src([path.resolve(__dirname, './src/assets/popup_fallback/popup.scss')])
+        .pipe(sass({ includePaths: ['node_modules'] }))
+        .pipe(sass(sassOptions).on('error', sass.logError))
+        .pipe(concat('popup.css'))
+        .pipe(postcss(postCSSOptions))
+        .pipe(gulp.dest('gutenverse/assets/css/'));
+});
+
+gulp.task('build-process', gulp.parallel('blocks', 'frontend', 'wizard', 'update-notice', 'form-default-style', 'form', 'popup'));
 
 gulp.task('build', gulp.series('build-process'));
 
@@ -145,7 +155,7 @@ gulp.task('release', gulp.series(
 async function getZip() {
     const zip = await import('gulp-zip');
     return zip.default;
-};
+}
 
 gulp.task('zip', async function () {
     const zip = await getZip();
