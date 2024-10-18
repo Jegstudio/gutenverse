@@ -289,8 +289,7 @@
 		},
 		"hoverWithParent":{
 			"type":"boolean",
-			"default": false,
-			"copyStyle": true
+			"default": false
 		},
 		"parentSelector":{
 			"type":"string",
@@ -298,7 +297,8 @@
 		},
 		"iconLineHeight": {
 			"type": "boolean",
-			"default": false
+			"default": false,
+			"copyStyle": true
 		}
 	},
 	"supports": {
