@@ -34,6 +34,14 @@ const metadata = {
             type: 'string',
             default: __('Share on Twitter', 'gutenverse')
         },
+        type: {
+            type: 'string',
+            default: __('twitter', 'gutenverse')
+        },
+        selectedIcon: {
+            type: 'string',
+            default: __('twitter', 'gutenverse')
+        },
     },
     keywords: [
         ...jsondata.keywords,

@@ -167,6 +167,61 @@ export const itemHoverPanel = (props) => {
                 }
             ],
         },
+
+        {
+            id: 'itemHoverTitleMargin',
+            label: __('Margin', 'gutenverse'),
+            component: DimensionControl,
+            position: ['top', 'right', 'bottom', 'left'],
+            allowDeviceControl: true,
+            units: {
+                px: {
+                    text: 'px',
+                    unit: 'px'
+                },
+                em: {
+                    text: 'em',
+                    unit: 'em'
+                },
+                ['%']: {
+                    text: '%',
+                    unit: '%'
+                },
+            },
+            style: [
+                {
+                    selector: `.${elementId} .gallery-items .gallery-item-wrap .thumbnail-wrap .caption-wrap.style-overlay .item-caption-over .item-title`,
+                    render: value => handleDimension(value, 'margin')
+                }
+            ]
+        },
+        {
+            id: 'itemHoverTitlePadding',
+            label: __('Padding', 'gutenverse'),
+            component: DimensionControl,
+            position: ['top', 'right', 'bottom', 'left'],
+            allowDeviceControl: true,
+            units: {
+                px: {
+                    text: 'px',
+                    unit: 'px'
+                },
+                em: {
+                    text: 'em',
+                    unit: 'em'
+                },
+                ['%']: {
+                    text: '%',
+                    unit: '%'
+                },
+            },
+            style: [
+                {
+                    selector: `.${elementId} .gallery-items .gallery-item-wrap .thumbnail-wrap .caption-wrap.style-overlay .item-caption-over .item-title`,
+                    render: value => handleDimension(value, 'padding')
+                }
+            ]
+        },
         {
             id: 'submenuContentSplitter',
             component: HeadingControl,

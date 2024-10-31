@@ -40,6 +40,18 @@ export const contentStyle = (props) => {
                     selector: `.editor-styles-wrapper .${elementId}, .editor-styles-wrapper .${elementId}.vertical > div`,
                     render: value => `align-items: ${value};`
                 },
+                {
+                    selector: `.editor-styles-wrapper .${elementId}.horizontal`,
+                    render: (value) => {
+                        if ('flex-start' === value) {
+                            return 'text-align: left;';
+                        } else if ('center' === value) {
+                            return 'text-align: center;';
+                        } else if ('center' === value) {
+                            return 'text-align: right;';
+                        }
+                    }
+                },
             ]
         },
         {

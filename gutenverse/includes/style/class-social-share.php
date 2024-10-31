@@ -43,7 +43,7 @@ class Social_Share extends Style_Abstract {
 			array(
 				'background'  => null,
 				'border'      => null,
-				'positioning' => ".{$this->element_id}.guten-element, .{$this->element_id}.guten-element.horizontal > div",
+				'positioning' => ".{$this->element_id}.guten-element",
 				'animation'   => null,
 				'advance'     => null,
 				'mask'        => null,
@@ -73,6 +73,50 @@ class Social_Share extends Style_Abstract {
 						return "align-items: {$value};";
 					},
 					'value'          => $this->attrs['alignment'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.horizontal",
+					'property'       => function ( $value ) {
+						if ( 'flex-start' === $value ) {
+							return 'text-align: left;';
+						} elseif ( 'center' === $value ) {
+							return 'text-align: center;';
+						} elseif ( 'flex-end' === $value ) {
+							return 'text-align: right;';
+						}
+					},
+					'value'          => $this->attrs['alignment'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['positioningType'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-element",
+					'property'       => function ( $value ) {
+						if ( 'inline' === $value ) {
+							return 'display: inline-flex !important;';
+						}
+					},
+					'value'          => $this->attrs['positioningType'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-element.horizontal > div",
+					'property'       => function ( $value ) {
+						if ( 'custom' === $value ) {
+							return 'display: inline-flex !important;';
+						}
+					},
+					'value'          => $this->attrs['positioningType'],
 					'device_control' => true,
 				)
 			);

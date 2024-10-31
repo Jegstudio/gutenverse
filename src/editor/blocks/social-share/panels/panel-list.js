@@ -73,7 +73,7 @@ export const panelList = () => {
             initialOpen: false,
             panelArray: (props) => positioningPanel({
                 ...props,
-                selector: `.${props.elementId}.guten-element, .${props.elementId}.guten-element > div, .${props.elementId}.guten-element.horizontal `
+                selector: `.${props.elementId}.guten-element, .${props.elementId}.guten-element.horizontal `
             }),
             tabRole: TabSetting
         },

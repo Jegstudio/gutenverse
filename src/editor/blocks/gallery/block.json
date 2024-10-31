@@ -25,9 +25,16 @@
 			"type": "string",
 			"default": "fas fa-search-plus"
 		},
+		"zoomText": {
+			"type": "string"
+		},
 		"linkIcon": {
 			"type": "string",
 			"default": "fas fa-link"
+		},
+
+		"linkText": {
+			"type": "string"
 		},
 		"filter": {
 			"type": "boolean",
@@ -218,6 +225,14 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"itemHoverTitleMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"itemHoverTitlePadding": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"itemCardBackground": {
 			"type": "object",
 			"copyStyle": true
@@ -263,6 +278,14 @@
 			"copyStyle": true
 		},
 		"itemCardContentTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"itemCardTitleMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"itemCardTitlePadding": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -786,7 +809,69 @@
 		"iconWrapperMargin":{
 			"type": "object",
 			"copyStyle": true
+		},
+		"textZoomTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textZoomColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textZoomBackground": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"textZoomBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textZoomMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textZoomPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textLinkTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textLinkColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textLinkBackground": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"textLinkBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textLinkMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textLinkPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconTextGap": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconTextPosition": {
+			"type": "object",
+			"default": {
+				"Desktop": "column"
+			},
+			"copyStyle": true
 		}
+
 	},
 	"supports": {
 		"className": false

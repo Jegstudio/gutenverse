@@ -9,6 +9,10 @@
         "elementId": {
             "type": "string"
         },
+        "selectedIcon": {
+            "type": "string",
+            "copyStyle": true
+        },
         "iconPading": {
             "type": "object",
             "copyStyle": true

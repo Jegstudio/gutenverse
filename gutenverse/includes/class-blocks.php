@@ -160,6 +160,10 @@ class Blocks {
 								'type'    => 'string',
 								'default' => 'Share on ' . ucfirst( $social ),
 							),
+							'type' => array(
+								'type'    => 'string',
+								'default' => '' . ucfirst( $social ),
+							),
 						)
 					),
 					'keywords'        => array_merge(

@@ -525,6 +525,17 @@
                         }
                     }
                 }
+
+                .gallery-link.with-text {
+                    display: inline-flex !important;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+
+                    .item-icon-text {
+                        color: white;
+                    }
+                }
             }
         }
     }

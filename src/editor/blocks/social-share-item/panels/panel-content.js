@@ -1,9 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, TextControl, SelectControl } from 'gutenverse-core/controls';
 
 export const panelContent = (props) => {
     const {
         showText,
+        type
     } = props;
 
     return [
@@ -18,6 +19,22 @@ export const panelContent = (props) => {
             show: showText,
             label: __('Share Text', 'gutenverse'),
             component: TextControl,
+        },
+        {
+            id: 'selectedIcon',
+            show: 'twitter' === type,
+            label: __('Version', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: __('Twitter Bird', 'gutenverse'),
+                    value: 'twitter'
+                },
+                {
+                    label: __('Twitter X', 'gutenverse'),
+                    value: 'x-twitter'
+                },
+            ],
         },
     ];
 };

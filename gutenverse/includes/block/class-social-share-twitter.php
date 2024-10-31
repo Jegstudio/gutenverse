@@ -24,11 +24,10 @@ class Social_Share_Twitter extends Block_Abstract {
 	 *
 	 * @return string
 	 */
-	public function render_content( $text ) {
+	public function render_content( $text, $selected ) {
 		$share_text = $this->attributes['showText'] ? "<div class='gutenverse-share-text'>{$text}</div>" : '';
-
 		return "<div class='gutenverse-share-icon'>
-				<i class='fab fa-twitter'></i>
+				<i class='fab fa-{$selected}'></i>
 			</div>{$share_text}";
 	}
 
@@ -36,10 +35,11 @@ class Social_Share_Twitter extends Block_Abstract {
 	 * Render view in editor
 	 */
 	public function render_gutenberg() {
-		$text    = esc_html( $this->attributes['text'] );
-		$content = $this->render_content( $text );
+		$text     = esc_html( $this->attributes['text'] );
+		$selected = isset( $this->attributes['selectedIcon'] ) ? esc_html( $this->attributes['selectedIcon'] ) : 'twitter';
+		$content  = $this->render_content( $text, $selected );
 
-		return "<div class='gutenverse-share-twitter gutenverse-share-item' id='{$this->get_element_id()}'>
+		return "<div class='gutenverse-share-twitter gutenverse-share-item {$selected}' id='{$this->get_element_id()}'>
 			<a href='#' aria-label='{$text}'>
 				{$content}
 			</a>
@@ -55,9 +55,10 @@ class Social_Share_Twitter extends Block_Abstract {
 		$encoded_post_url = gutenverse_encode_url( $post_id );
 		$share_url        = esc_url( 'https://twitter.com/intent/tweet?text=' . $title . '&url=' . $encoded_post_url );
 		$text             = esc_html( $this->attributes['text'] );
-		$content          = $this->render_content( $text );
+		$selected         = isset( $this->attributes['selectedIcon'] ) ? esc_html( $this->attributes['selectedIcon'] ) : 'twitter';
+		$content          = $this->render_content( $text, $selected );
 
-		return "<div class='gutenverse-share-twitter gutenverse-share-item' id='{$this->get_element_id()}'>
+		return "<div class='gutenverse-share-twitter gutenverse-share-item {$selected}' id='{$this->get_element_id()}'>
 			<a target='_blank' href='{$share_url}' aria-label='{$text}'>
 				{$content}
 			</a>

@@ -20,6 +20,8 @@ const SingleSocialShare = (props) => {
         elementId,
         showText,
         text,
+        type,
+        selectedIcon
     } = attributes;
 
     const socialShareItemRef = useRef();
@@ -27,6 +29,7 @@ const SingleSocialShare = (props) => {
     const blockProps = useBlockProps({
         className: classnames(
             'guten-social-share-item-wrapper',
+            selectedIcon
         ),
         ref: socialShareItemRef
     });
@@ -50,7 +53,9 @@ const SingleSocialShare = (props) => {
                 attributes={{
                     elementId,
                     showText,
-                    text
+                    text,
+                    type,
+                    selectedIcon
                 }}
                 EmptyResponsePlaceholder={EmptySocialShare}
             /> : <div className={`gutenverse-share-${shareType} gutenverse-share-item`} id={elementId}>

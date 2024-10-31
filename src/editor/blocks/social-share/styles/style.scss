@@ -15,6 +15,9 @@
 
   &.horizontal {
     flex-direction: row;
+    &> div {
+      display: inline-flex;
+    }
   }
 
   &.vertical {

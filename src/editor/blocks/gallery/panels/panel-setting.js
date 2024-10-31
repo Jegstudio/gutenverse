@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { IconControl, RangeControl, SelectControl } from 'gutenverse-core/controls';
+import { IconControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 
 export const settingPanel = ({elementId, grid}) => {
     return [
@@ -133,9 +133,19 @@ export const settingPanel = ({elementId, grid}) => {
             component: IconControl,
         },
         {
+            id: 'zoomText',
+            label: __('Zoom Text', 'gutenverse'),
+            component: TextControl,
+        },
+        {
             id: 'linkIcon',
             label: __('Link Icon', 'gutenverse'),
             component: IconControl,
+        },
+        {
+            id: 'linkText',
+            label: __('Link Text', 'gutenverse'),
+            component: TextControl,
         },
     ];
 };

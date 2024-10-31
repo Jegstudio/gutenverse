@@ -135,7 +135,7 @@ class Icon_Box extends Style_Abstract {
 							return 'display: flex; align-items: flex-start; flex-direction: row !important;';
 						} elseif ( 'right' === $value ) {
 							return 'display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: reverse; -ms-flex-direction: row-reverse; flex-direction: row-reverse;';
-						} elseif ( 'bottom' === $value ) {
+						} elseif ( 'top' === $value ) {
 							return 'display: block!important;';
 						} else {
 							return 'display: flex !important; flex-direction: column-reverse !important; align-items: unset !important;';
@@ -154,7 +154,9 @@ class Icon_Box extends Style_Abstract {
 						} elseif ( 'right' === $value ) {
 							return 'margin-left: 15px;';
 						} elseif ( 'top' === $value ) {
-							return 'position: relative; z-index: 2; line-height: 0;';
+							return 'position: relative; z-index: 2; line-height: 0; margin: 0 !important;';
+						} elseif ( 'bottom' === $value ) {
+							return 'position: relative; z-index: 2; line-height: 0; margin: 0 !important;';
 						}
 					},
 					'value'          => $this->attrs['iconPositionResponsive'],

@@ -846,6 +846,32 @@ class Gallery extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['itemHoverTitlePadding'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gallery-items .gallery-item-wrap .thumbnail-wrap .caption-wrap.style-overlay .item-caption-over .item-content",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'padding' );
+					},
+					'value'          => $this->attrs['itemHoverTitlePadding'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['itemHoverTitleMargin'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gallery-items .gallery-item-wrap .thumbnail-wrap .caption-wrap.style-overlay .item-caption-over .item-content",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'margin' );
+					},
+					'value'          => $this->attrs['itemHoverTitleMargin'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['itemCardBackground'] ) ) {
 			$this->handle_background( ".{$this->element_id} .gallery-items .gallery-item-wrap .grid-item .caption-wrap.style-card", $this->attrs['itemCardBackground'] );
 		}
@@ -962,6 +988,32 @@ class Gallery extends Style_Abstract {
 				array(
 					'selector' => ".{$this->element_id} .gallery-items .gallery-item-wrap .grid-item .caption-wrap.style-card .item-caption-over .item-content",
 					'value'    => $this->attrs['itemCardContentTypography'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['itemCardTitlePadding'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gallery-items .gallery-item-wrap .grid-item .caption-wrap.style-card .item-caption-over .item-content",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'padding' );
+					},
+					'value'          => $this->attrs['itemCardTitlePadding'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['itemCardTitleMargin'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gallery-items .gallery-item-wrap .grid-item .caption-wrap.style-card .item-caption-over .item-content",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'margin' );
+					},
+					'value'          => $this->attrs['itemCardTitleMargin'],
+					'device_control' => true,
 				)
 			);
 		}
@@ -1427,6 +1479,164 @@ class Gallery extends Style_Abstract {
 					)
 				);
 			}
+		}
+
+		if ( isset( $this->attrs['textZoomTypography'] ) ) {
+			$this->inject_typography(
+				array(
+					'selector' => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.zoom .item-icon-text",
+					'value'    => $this->attrs['textZoomTypography'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textZoomColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.zoom .item-icon-text",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['textZoomColor'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textZoomBackground'] ) ) {
+			$this->handle_background( ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.zoom .item-icon-text", $this->attrs['textZoomBackground'] );
+		}
+
+		if ( isset( $this->attrs['textZoomBorder'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.zoom .item-icon-text",
+					'property'       => function ( $value ) {
+						return $this->handle_border_responsive( $value );
+					},
+					'value'          => $this->attrs['textZoomBorder'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textZoomMargin'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.zoom .item-icon-text",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'margin' );
+					},
+					'value'          => $this->attrs['textZoomMargin'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textZoomPadding'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.zoom .item-icon-text",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'padding' );
+					},
+					'value'          => $this->attrs['textZoomPadding'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textLinkTypography'] ) ) {
+			$this->inject_typography(
+				array(
+					'selector' => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.link .item-icon-text",
+					'value'    => $this->attrs['textLinkTypography'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textLinkColor'] ) ) {
+			gutenverse_jlog( 'masuk' );
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.link .item-icon-text",
+					'property'       => function ( $value ) {
+						gutenverse_jlog( 'kesini' );
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['textLinkColor'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textLinkBackground'] ) ) {
+			$this->handle_background( ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.link .item-icon-text", $this->attrs['textLinkBackground'] );
+		}
+
+		if ( isset( $this->attrs['textLinkBorder'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.link .item-icon-text",
+					'property'       => function ( $value ) {
+						return $this->handle_border_responsive( $value );
+					},
+					'value'          => $this->attrs['textLinkBorder'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textLinkMargin'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.link .item-icon-text",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'margin' );
+					},
+					'value'          => $this->attrs['textLinkMargin'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['textLinkPadding'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text.link .item-icon-text",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'padding' );
+					},
+					'value'          => $this->attrs['textLinkPadding'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['iconTextGap'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text",
+					'property'       => function ( $value ) {
+						return "gap: {$value}px;";
+					},
+					'value'          => $this->attrs['iconTextGap'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['iconTextPosition'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .gallery-link.with-text",
+					'property'       => function ( $value ) {
+						return "flex-direction: {$value};";
+					},
+					'value'          => $this->attrs['iconTextPosition'],
+					'device_control' => true,
+				)
+			);
 		}
 	}
 }

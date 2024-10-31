@@ -8,6 +8,8 @@ const GalleryItem = (attributes) => {
         hover,
         zoomIcon,
         linkIcon,
+        zoomText,
+        linkText,
         onZoom = () => {},
         zoomOptions = 'item'
     } = attributes;
@@ -55,15 +57,21 @@ const GalleryItem = (attributes) => {
                         <h5 className="item-title">{galleryItem.title}</h5>
                         <div className="item-content">{galleryItem.content}</div>
                         <div className="item-buttons">
-                            {(zoomOptions !== 'disable' && zoomIcon) && <div className="gallery-link zoom">
-                                <span className="item-icon-inner" onClick={onZoom}>
+                            {(zoomOptions !== 'disable' && (zoomIcon || undefined !== zoomText)) && <div className={`gallery-link zoom ${'none' !== zoomText && 'with-text'}`}>
+                                {undefined !== zoomText && <p className="item-icon-text zoom-text">
+                                        {zoomText}
+                                </p>}
+                                {zoomIcon && <span className="item-icon-inner" onClick={onZoom}>
                                     <i className={zoomIcon} aria-hidden="true"></i>
-                                </span>
+                                </span>}
                             </div>}
-                            {(!galleryItem.disableLink && linkIcon) && <a href={galleryItem.link ? galleryItem.link : ''} className="gallery-link link" onClick={e => e.preventDefault()}>
-                                <span className="item-icon-inner">
+                            {(!galleryItem.disableLink && (linkIcon || undefined !== linkText)) && <a href={galleryItem.link ? galleryItem.link : ''} className={`gallery-link link ${'none' !== zoomText && 'with-text'}`} onClick={e => e.preventDefault()}>
+                                {undefined !== linkText && <p className="item-icon-text link-text">
+                                        {linkText}
+                                </p>}
+                                {linkIcon && <span className="item-icon-inner">
                                     <i className={linkIcon} aria-hidden="true"></i>
-                                </span>
+                                </span>}
                             </a>}
                         </div>
                     </div>
@@ -95,12 +103,18 @@ const GalleryItem = (attributes) => {
                     </div>
                     <div className="caption-button">
                         <div className="item-buttons">
-                            {(zoomOptions !== 'disable' && zoomIcon ) && <div className="gallery-link zoom">
+                            {(zoomOptions !== 'disable' && zoomIcon ) && <div className={`gallery-link zoom ${'none' !== zoomText && 'with-text'}`}>
+                                {undefined !== zoomText && <p className="item-icon-text zoom-text">
+                                        {zoomText}
+                                </p>}
                                 <span className="item-icon-inner" onClick={onZoom}>
                                     <i className={zoomIcon} aria-hidden="true"></i>
                                 </span>
                             </div>}
-                            {(!galleryItem.disableLink && linkIcon ) && <a href={galleryItem.link ? galleryItem.link : ''} className="gallery-link link">
+                            {(!galleryItem.disableLink && linkIcon ) && <a href={galleryItem.link ? galleryItem.link : ''} className={`gallery-link link ${'none' !== zoomText && 'with-text'}`}>
+                                {undefined !== linkText && <p className="item-icon-text link-text">
+                                        {linkText}
+                                </p>}
                                 <span className="item-icon-inner">
                                     <i className={linkIcon} aria-hidden="true"></i>
                                 </span>

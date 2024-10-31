@@ -55,6 +55,16 @@
     .gutenverse-share-text {
       background: #156a9f;
     }
+
+    &.x-twitter {
+      .gutenverse-share-icon {
+        background: #14171A;
+      }
+  
+      .gutenverse-share-text {
+        background: #2d2d2d;
+      }
+    } 
   }
 
   &.gutenverse-share-pinterest {
