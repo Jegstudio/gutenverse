@@ -6,6 +6,7 @@ import { classnames } from 'gutenverse-core/components';
 import { PanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { useEntityProp } from '@wordpress/core-data';
+import { useSelect } from '@wordpress/data';
 import { useRef } from '@wordpress/element';
 import { withCopyElementToolbar } from 'gutenverse-core/hoc';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
@@ -36,7 +37,13 @@ const ArchiveTitleBlock = compose(
     const archiveTitleRef = useRef();
     const linkTarget = archiveLinkTarget ? '_blank' : '_self';
 
-    const [ archiveTitle = 'Archive Title' ] = useEntityProp('postType', archiveType, 'title', archiveId);
+    const archiveTitles = useSelect((select) => {
+        const term = select('core').getEntityRecord('taxonomy', archiveType, archiveId);
+        return term ? term.name : 'Archive Title';
+    }, []);
+
+    const [ archiveTitle = archiveTitles ] = useEntityProp('postType', archiveType, 'title', archiveId);
+
     const [ link ] = useEntityProp( 'postType', archiveType, 'link', archiveId );
     useEffect(() => {
         archiveTitleRef.current && setElementRef(archiveTitleRef.current);

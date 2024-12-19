@@ -63,6 +63,10 @@ class Archive_Title extends Block_Abstract {
 			$title            = single_term_title( '', false );
 			$current_category = get_queried_object();
 			$category_url     = get_term_link( $current_category );
+		} elseif ( isset( $this->context ) && isset( $this->context['term'] ) && $this->context['term'] ) {
+			$term         = $this->context['term'];
+			$title        = $term->name;
+			$category_url = get_term_link( $term->term_id );
 		}
 
 		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-archive-title guten-element">' . $this->render_content( $title, $category_url ) . '</div>';
