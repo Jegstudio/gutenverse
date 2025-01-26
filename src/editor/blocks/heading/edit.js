@@ -17,7 +17,6 @@ import { PanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import HeadingTypeToolbar from './components/heading-type-toolbar';
 import { HighLightToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
-import blockStyle from './styles/block';
 
 const HeadingBlockControl = (props) => {
     const {
@@ -57,7 +56,7 @@ const HeadingInspection = (props) => {
     />;
 };
 
-const cssDeviceString = (elementId, attribute, prefix) => {
+const cssDeviceMediaString = (elementId, attribute, prefix) => {
     let css = [];
 
     if (attribute['Desktop']) {
@@ -67,63 +66,18 @@ const cssDeviceString = (elementId, attribute, prefix) => {
     }
 
     if (attribute['Tablet']) {
-        css.push(`.${elementId} { ${prefix}: ${attribute['Tablet']}; }`);
+        css.push(`@media only screen and (max-width: 781px) { .${elementId} { ${prefix}: ${attribute['Tablet']}; }}`);
     } else {
         css.push(null);
     }
 
     if (attribute['Mobile']) {
-        css.push(`.${elementId} { ${prefix}: ${attribute['Mobile']}; }`);
+        css.push(`@media only screen and (max-width: 361px) { .${elementId} { ${prefix}: ${attribute['Mobile']}; }}`);
     } else {
         css.push(null);
     }
 
-    return css;
-};
-
-const generateCSSString = (Desktop, Tablet, Mobile) => {
-    let css = [];
-
-    if (Desktop.length) {
-        css.push(Desktop.join(' '));
-    }
-
-    if (Tablet.length) {
-        css.push('@media only screen and (max-width: 781px) {' + Tablet.join(' ') + '}');
-    }
-
-    if (Mobile.length) {
-        css.push('@media only screen and (max-width: 361px) {' + Mobile.join(' ') + '}');
-    }
-
-    return css.join(' ');
-};
-
-const useDynamicStyle = (elementId, attributes, blockStyle) => {
-    const { generatedCSS, fontUsed } = useMemo(() => {
-        const deviceTypeDesktop = [];
-        const deviceTypeTablet = [];
-        const deviceTypeMobile = [];
-        const fontUsed = [];
-
-        blockStyle.forEach((style) => {
-            const { id, prefix, responsive } = style;
-            if (attributes[id]) {
-                const css = cssDeviceString(elementId, attributes[id], prefix);
-                if (responsive) {
-                    css[0] && deviceTypeDesktop.push(css[0]);
-                    css[1] && deviceTypeTablet.push(css[1]);
-                    css[2] && deviceTypeMobile.push(css[2]);
-                }
-            }
-        });
-
-        const generatedCSS = generateCSSString(deviceTypeDesktop, deviceTypeTablet, deviceTypeMobile);
-
-        return { generatedCSS, fontUsed };
-    }, [elementId, attributes]);
-
-    return [generatedCSS, fontUsed];
+    return css.join(css, ' ');
 };
 
 const HeadingBlock = compose(
@@ -144,7 +98,15 @@ const HeadingBlock = compose(
         type,
     } = attributes;
 
-    const [generatedCSS, fontUsed] = useDynamicStyle(elementId, attributes, blockStyle);
+    const [generatedCSS, setGeneratedCSS] = useState('');
+    useEffect(() => {
+        const { textAlign } = attributes;
+
+        if (textAlign) {
+            const cssDevice = cssDeviceMediaString(elementId, attributes.textAlign, 'text-align');
+            setGeneratedCSS(cssDevice);
+        }
+    }, [elementId, attributes]);
 
     const tagName = 'h' + type;
     const headingRef = useRef();
