@@ -85,6 +85,18 @@ const registerBlocks = () => {
     });
 };
 
+addFilter(
+    'editor.postContentBlockTypes',
+    'gutenverse/content/blockType',
+    (list) => {
+
+        return [
+            'gutenverse/post-content',
+            ...list,
+        ];
+    }
+);
+
 
 (() => {
     registerBlocks();
