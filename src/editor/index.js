@@ -92,6 +92,8 @@ addFilter(
 
         return [
             'gutenverse/post-content',
+            'gutenverse/post-title',
+            'gutenverse/column',
             ...list,
         ];
     }

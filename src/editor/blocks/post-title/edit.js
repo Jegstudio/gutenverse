@@ -12,6 +12,8 @@ import { useAnimationEditor } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { PanelTutorial } from 'gutenverse-core/controls';
 import { __ } from '@wordpress/i18n';
+import { RichText } from '@wordpress/block-editor';
+import { dispatch } from '@wordpress/data';
 
 const PostTitleBlock = compose(
     withPartialRender,
@@ -21,7 +23,7 @@ const PostTitleBlock = compose(
     const {
         attributes,
         setElementRef,
-        context: { postId, postType }
+        context: { postId, postType },
     } = props;
 
     const {
@@ -37,8 +39,8 @@ const PostTitleBlock = compose(
     const postTitleRef = useRef();
     const linkTarget = postLinkTarget ? '_blank' : '_self';
 
-    const [ postTitle = 'Post Title' ] = useEntityProp('postType', postType, 'title', postId);
-    const [ link ] = useEntityProp( 'postType', postType, 'link', postId );
+    const [postTitle = 'Post Title'] = useEntityProp('postType', postType, 'title', postId);
+    const [link] = useEntityProp('postType', postType, 'link', postId);
 
     useEffect(() => {
         postTitleRef.current && setElementRef(postTitleRef.current);
@@ -73,7 +75,29 @@ const PostTitleBlock = compose(
         </InspectorControls>
         <PanelController panelList={panelList} {...props} />
         <div  {...blockProps}>
-            <HtmlTag>{postLink ? <a href={link} target={linkTarget} rel={postLinkRel} onClick={e => e.preventDefault()}>{postTitle}</a> : postTitle}</HtmlTag>
+            <HtmlTag>{postLink ? <a href={link} target={linkTarget} rel={postLinkRel} onClick={e => e.preventDefault()}>
+                <RichText
+                    tagName={'span'}
+                    value={postTitle}
+                    placeholder={'Add Title'}
+                    onChange={(text) => dispatch('core/editor').editPost({ title: text })}
+                    multiline={false}
+                    withoutInteractiveFormatting
+                    identifier="text"
+                    allowedFormats={['core/link']}
+                />
+            </a> :
+                <RichText
+                    tagName={'span'}
+                    value={postTitle}
+                    placeholder={'Add Title'}
+                    onChange={(text) => dispatch('core/editor').editPost({ title: text })}
+                    multiline={false}
+                    withoutInteractiveFormatting
+                    identifier="text"
+                    allowedFormats={['core/link']}
+                />
+            }</HtmlTag>
         </div>
     </>;
 });
