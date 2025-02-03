@@ -101,7 +101,7 @@ const HeadingBlock = compose(
     },[]);
     return <>
         <div ref={elementRef} id={elementId} style={{display:'none'}}></div>
-        {fontUsed[0] && headStyleSheet(fontUsed, elementRef)}
+        {/* {fontUsed[0] && headStyleSheet(fontUsed, elementRef)} */}
         <HeadingInspection {...props} />
         <HeadingBlockControl {...props} />
         <RichTextComponent

@@ -100,10 +100,7 @@ export const panelList = () => {
         {
             title: __('Animation Effects', 'gutenverse'),
             initialOpen: false,
-            panelArray: (props) => animationPanel({
-                ...props,
-                styleId: 'heading-animation'
-            }),
+            panelArray: animationPanel,
             tabRole: TabSetting
         },
         // {
