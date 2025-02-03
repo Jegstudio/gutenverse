@@ -19,6 +19,7 @@ import HeadingTypeToolbar from './components/heading-type-toolbar';
 import { HighLightToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
 import getBlockStyle from './styles/block';
 import { useDynamicStyle, useGenerateElementId, headStyleSheet } from 'gutenverse-core/styling';
+import { select } from '@wordpress/data';
 
 const HeadingBlockControl = (props) => {
     const {
@@ -74,13 +75,13 @@ const HeadingBlock = compose(
         elementId,
         type,
     } = attributes;
+    const elementRef = useRef(null);
 
     useGenerateElementId(clientId, elementId, elementRef);
     const tagName = 'h' + type;
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const [generatedCSS, fontUsed] = useDynamicStyle(elementId, attributes, getBlockStyle);
-    const elementRef = useRef(null);
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -90,9 +91,9 @@ const HeadingBlock = compose(
             displayClass,
         )
     });
-
+    console.log(select('gutenverse/blockstyle').getStyle());
     return <>
-        {generatedCSS && <style ref={elementRef} id={elementId}>{generatedCSS}</style>}
+        {generatedCSS && <div ref={elementRef} style={{display: 'none'}} id={elementId}>{generatedCSS}</div>}
         {fontUsed[0] && headStyleSheet(fontUsed, elementRef)}
         <HeadingInspection {...props} />
         <HeadingBlockControl {...props} />
