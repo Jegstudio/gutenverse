@@ -91,8 +91,8 @@ const HeadingBlock = compose(
     });
 
     return <>
-        {generatedCSS && <style ref={elementRef} id={elementId}>{generatedCSS}</style>}
-        {fontUsed[0] && headStyleSheet(fontUsed, elementRef)}
+        {generatedCSS && <div ref={elementRef} id={elementId} className="gutenverse-custom-styles" style={{display:'none'}}>{generatedCSS}</div>}
+        {/* {fontUsed[0] && headStyleSheet(fontUsed, elementRef)} */}
         <HeadingInspection {...props} />
         <HeadingBlockControl {...props} />
         <RichTextComponent

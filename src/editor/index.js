@@ -89,3 +89,36 @@ const registerBlocks = () => {
 (() => {
     registerBlocks();
 })();
+
+/**
+ * Improve this:
+ * 1. There is no iframe in page editor
+ * 2. Don't use set timeout
+ */
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const iframeElements = document.getElementsByName('editor-canvas');
+
+        if (iframeElements.length > 0) {
+            const iframeElement = iframeElements[0];
+            const iframeDoc = iframeElement.contentDocument || iframeElement.contentWindow.document;
+            const divElements = iframeDoc.querySelectorAll('.gutenverse-custom-styles');
+
+            if (divElements.length > 0) {
+                let styleContent = '';
+
+                divElements.forEach(divElement => {
+                    styleContent += divElement.innerHTML + ' ';
+                });
+
+                const styleTag = iframeDoc.createElement('style');
+                styleTag.innerHTML = styleContent;
+
+                const head = iframeDoc.head || iframeDoc.getElementsByTagName('head')[0];
+                head.appendChild(styleTag);
+
+                console.log('Injected styles into iframe:', styleContent);
+            }
+        }
+    }, 3000);
+});
