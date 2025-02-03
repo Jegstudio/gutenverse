@@ -95,6 +95,11 @@ const HeadingBlock = compose(
     useEffect(() => {
         updateIframeStyles(elementId, generatedCSS, isFirstRun.current);
         isFirstRun.current = false;
+        return () => {
+            console.log('deleted ' + elementId);
+            
+            updateIframeStyles(elementId, '', false);
+        };
     }, [elementId, generatedCSS]);
 
     return <>
