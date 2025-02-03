@@ -1,5 +1,5 @@
 /* External dependencies */
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import { RichTextComponent, classnames } from 'gutenverse-core/components';
 
 /* WordPress dependencies */
@@ -19,6 +19,7 @@ import HeadingTypeToolbar from './components/heading-type-toolbar';
 import { HighLightToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
 import getBlockStyle from './styles/block';
 import { useDynamicStyle, useGenerateElementId, headStyleSheet } from 'gutenverse-core/styling';
+import { updateIframeStyles } from '../../index';
 
 const HeadingBlockControl = (props) => {
     const {
@@ -89,6 +90,12 @@ const HeadingBlock = compose(
             displayClass,
         )
     });
+
+    const isFirstRun = useRef(true);
+    useEffect(() => {
+        updateIframeStyles(elementId, generatedCSS, isFirstRun.current);
+        isFirstRun.current = false;
+    }, [elementId, generatedCSS]);
 
     return <>
         {generatedCSS && <div ref={elementRef} id={elementId} className="gutenverse-custom-styles" style={{display:'none'}}>{generatedCSS}</div>}

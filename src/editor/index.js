@@ -90,35 +90,45 @@ const registerBlocks = () => {
     registerBlocks();
 })();
 
-/**
- * Improve this:
- * 1. There is no iframe in page editor
- * 2. Don't use set timeout
- */
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        const iframeElements = document.getElementsByName('editor-canvas');
+const storedStyles = {};
+let debounceTimeout = null;
 
-        if (iframeElements.length > 0) {
-            const iframeElement = iframeElements[0];
-            const iframeDoc = iframeElement.contentDocument || iframeElement.contentWindow.document;
-            const divElements = iframeDoc.querySelectorAll('.gutenverse-custom-styles');
+export const updateIframeStyles = (id, cssText, isFirstRun) => {
+    if (!id) return;
+    if (cssText) {
+        storedStyles[id] = cssText;
+    } else {
+        delete storedStyles[id];
+    }
+    if (isFirstRun) {
+        console.log('Initial Style Load');
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+            injectEditorStyle();
+        }, 300);
+    } else {
+        injectEditorStyle();
+    }
 
-            if (divElements.length > 0) {
-                let styleContent = '';
+};
 
-                divElements.forEach(divElement => {
-                    styleContent += divElement.innerHTML + ' ';
-                });
+const injectEditorStyle = () => {
+    const iframeElements = document.getElementsByName('editor-canvas');
+    if (iframeElements.length === 0) return;
 
-                const styleTag = iframeDoc.createElement('style');
-                styleTag.innerHTML = styleContent;
+    const iframeElement = iframeElements[0];
+    const iframeDoc = iframeElement.contentDocument || iframeElement.contentWindow.document;
+    if (!iframeDoc) return;
 
-                const head = iframeDoc.head || iframeDoc.getElementsByTagName('head')[0];
-                head.appendChild(styleTag);
+    let styleTag = iframeDoc.getElementById('gutenverse-dynamic-style');
+    if (!styleTag) {
+        styleTag = iframeDoc.createElement('style');
+        styleTag.id = 'gutenverse-dynamic-style';
+        iframeDoc.head.appendChild(styleTag);
+    }
+    styleTag.innerHTML = Object.entries(storedStyles)
+        .map(([id, css]) => `/* ${id} */\n${css}`)
+        .join('\n');
 
-                console.log('Injected styles into iframe:', styleContent);
-            }
-        }
-    }, 3000);
-});
+    console.log('Updated iframe styles');
+}
