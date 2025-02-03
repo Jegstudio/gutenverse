@@ -3,8 +3,8 @@ import { isBlockActive } from 'gutenverse-core/helper';
 import { updateBlockList } from 'gutenverse-core/editor-helper';
 import { addFilter } from '@wordpress/hooks';
 import { IconLottieSVG, IconMegaMenuSVG } from '../assets/icon';
-import { select } from '@wordpress/data';
-
+import { select, dispatch, subscribe } from '@wordpress/data';
+import { useEffect, useState } from '@wordpress/element';
 
 addFilter(
     'gutenverse.blocklist.locked',
@@ -91,31 +91,4 @@ const registerBlocks = () => {
     registerBlocks();
 })();
 
-/**
- * Improve this:
- * 1. There is no iframe in page editor
- * 2. Don't use set timeout
- */
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        const blockStyles = select('gutenverse/blockstyle').getStyle();
-        const iframeElements = document.getElementsByName('editor-canvas');   
-        if (iframeElements.length > 0) {
-            const iframeElement = iframeElements[0];
-            const iframeDoc = iframeElement.contentDocument || iframeElement.contentWindow.document;
-            if(blockStyles.length > 0){
-                let styleContent = '';
 
-                blockStyles.forEach(block => {
-                    styleContent += block.style + ' ';
-                });
-
-                const styleTag = iframeDoc.createElement('style');
-                styleTag.innerHTML = styleContent;
-
-                const head = iframeDoc.head || iframeDoc.getElementsByTagName('head')[0];
-                head.appendChild(styleTag);
-            }
-        }
-    }, 500);
-});

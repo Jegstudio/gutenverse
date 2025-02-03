@@ -1,5 +1,5 @@
 /* External dependencies */
-import { useRef } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import { RichTextComponent, classnames } from 'gutenverse-core/components';
 
 /* WordPress dependencies */
@@ -19,7 +19,8 @@ import HeadingTypeToolbar from './components/heading-type-toolbar';
 import { HighLightToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
 import getBlockStyle from './styles/block';
 import { useDynamicStyle, useGenerateElementId, headStyleSheet } from 'gutenverse-core/styling';
-import { select } from '@wordpress/data';
+import { dispatch, select } from '@wordpress/data';
+import { renderStyle } from 'gutenverse-core/helper';
 
 const HeadingBlockControl = (props) => {
     const {
@@ -75,7 +76,7 @@ const HeadingBlock = compose(
         type,
     } = attributes;
 
-    const elementRef = useRef({});
+    const elementRef = useRef(null);
     useGenerateElementId(clientId, elementId, elementRef);
     const tagName = 'h' + type;
     const animationClass = useAnimationEditor(attributes);
@@ -90,13 +91,21 @@ const HeadingBlock = compose(
             displayClass,
         )
     });
+
+    useEffect(() => {
+        renderStyle();
+    },[generatedCSS])
+
+    useEffect(() => {
+        return () => dispatch('gutenverse/blockstyle').deleteStyle(elementId);
+    },[]);
     return <>
-        {generatedCSS && <div ref={elementRef} id={elementId} className="gutenverse-custom-styles" style={{display:'none'}}>{generatedCSS}</div>}
-        {/* {fontUsed[0] && headStyleSheet(fontUsed, elementRef)} */}
+        <div ref={elementRef} id={elementId} style={{display:'none'}}></div>
+        {fontUsed[0] && headStyleSheet(fontUsed, elementRef)}
         <HeadingInspection {...props} />
         <HeadingBlockControl {...props} />
         <RichTextComponent
-            ref={elementRef}
+            // ref={elementRef}
             isBlockProps={true}
             blockProps={blockProps}
             tagName={tagName}
