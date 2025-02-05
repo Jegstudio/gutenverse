@@ -9,7 +9,7 @@ import { ToolbarGroup } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
 
 /* Gutenverse dependencies */
-import { withCustomStyle, withCopyElementToolbar, withMouseMoveEffect, withPartialRender } from 'gutenverse-core/hoc';
+import { withCustomStyle, withCopyElementToolbar, withMouseMoveEffect, withPartialRender, withAnimationAdvance } from 'gutenverse-core/hoc';
 import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { PanelController } from 'gutenverse-core/controls';
 
@@ -63,8 +63,10 @@ const HeadingInspection = (props) => {
 
 const HeadingBlock = compose(
     withCopyElementToolbar(),
+    withPartialRender,
+    withAnimationAdvance('heading'),
+    withMouseMoveEffect
 )(props => {
-
     const {
         attributes,
         setAttributes,
@@ -78,10 +80,10 @@ const HeadingBlock = compose(
 
     const elementRef = useRef(null);
     useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     const tagName = 'h' + type;
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
-    const [generatedCSS, fontUsed] = useDynamicStyle(elementId, attributes, getBlockStyle);
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -100,10 +102,9 @@ const HeadingBlock = compose(
         return () => dispatch('gutenverse/blockstyle').deleteStyle(elementId);
     },[]);
     return <>
-        <div ref={elementRef} id={elementId} style={{display:'none'}}></div>
-        {/* {fontUsed[0] && headStyleSheet(fontUsed, elementRef)} */}
         <HeadingInspection {...props} />
         <HeadingBlockControl {...props} />
+        <span ref={elementRef} style={{ display: 'none' }}></span>
         <RichTextComponent
             // ref={elementRef}
             isBlockProps={true}
