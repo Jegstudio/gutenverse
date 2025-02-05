@@ -24,6 +24,21 @@ export const panelList = () => {
             panelArray: responsivePanel,
             tabRole: TabSetting
         },
+        {
+            title: __('Positioning', 'gutenverse'),
+            initialOpen: false,
+            panelArray: positioningPanel,
+            tabRole: TabSetting
+        },
+        {
+            title: __('Animation Effects', 'gutenverse'),
+            initialOpen: false,
+            panelArray: (props) => animationPanel({
+                ...props,
+                styleId: 'heading-animation'
+            }),
+            tabRole: TabSetting
+        },
         // Stylings Tab
         {
             title: __('Style', 'gutenverse'),
@@ -97,12 +112,6 @@ export const panelList = () => {
         //     panelArray: positioningPanel,
         //     tabRole: TabSetting
         // },
-        {
-            title: __('Animation Effects', 'gutenverse'),
-            initialOpen: false,
-            panelArray: animationPanel,
-            tabRole: TabSetting
-        },
         // {
         //     title: __('Transform', 'gutenverse'),
         //     initialOpen: false,

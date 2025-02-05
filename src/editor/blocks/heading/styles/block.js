@@ -139,6 +139,102 @@ const getBlockStyle = (elementId, attributes) => {
             }
         }
     });
+    //Positioning Panel
+    !isEmpty(attributes['positioningType']) && data.push(
+        {
+            'type': 'positioning',
+            'id' : 'positioningType',
+            'selector': `.wp-block-gutenverse-heading.${elementId}`,
+            'skipDeviceType': 'first',
+            'attributeType': 'type',
+            'requestAttributes': {
+                'isRequested': true,
+                'attributeList': [
+                    'inBlock'
+                ]
+            }
+        },
+        {
+            'type': 'positioning',
+            'id' : 'positioningType',
+            'selector': `.wp-block-gutenverse-heading.${elementId}`,
+            'skipDeviceType' : 'second',
+            'attributeType': 'type',
+            'requestAttributes': {
+                'isRequested': true,
+                'attributeList': [
+                    'positioningWidth',
+                    'inBlock'
+                ]
+            }
+        }
+    );
+    !isEmpty(attributes['positioningWidth']) && data.push({
+        'type': 'positioning',
+        'id' : 'positioningWidth',
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+        'skipDeviceType' : 'first',
+        'attributeType': 'width',
+        'requestAttributes': {
+            'isRequested': true,
+            'attributeList': [
+                'positioningType',
+                'inBlock'
+            ]
+        }
+    });
+    !isEmpty(attributes['positioningAlign']) && data.push({
+        'type': 'plain',
+        'id' : 'positioningAlign',
+        'responsive': true,
+        'property': ['align-self'],
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+    },
+    {
+        'type': 'positioning',
+        'id' : 'positioningAlign',
+        'property': ['vertical-align'],
+        'attributeType': 'align',
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+    });
+    !isEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
+        'type': 'plain',
+        'id' : 'positioningLocation',
+        'property': ['position'],
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+    });
+    !isEmpty(attributes['positioningLeft']) && !isEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
+        'type': 'positioning',
+        'id' : 'positioningLeft',
+        'property': ['left'],
+        'responsive': true,
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+        'attributeType': 'custom',
+    });
+    !isEmpty(attributes['positioningRight']) && !isEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
+        'type': 'positioning',
+        'id' : 'positioningRight',
+        'property': ['right'],
+        'responsive': true,
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+        'attributeType': 'custom',
+    });
+    !isEmpty(attributes['positioningTop']) && !isEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
+        'type': 'positioning',
+        'id' : 'positioningTop',
+        'property': ['top'],
+        'responsive': true,
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+        'attributeType': 'custom',
+    });
+    !isEmpty(attributes['positioningBottom']) && !isEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
+        'type': 'positioning',
+        'id' : 'positioningBottom',
+        'property': ['bottom'],
+        'responsive': true,
+        'selector': `.wp-block-gutenverse-heading.${elementId}`,
+        'attributeType': 'custom',
+    });
 
     return data;
 };
