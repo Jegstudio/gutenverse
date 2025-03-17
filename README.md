@@ -11,7 +11,7 @@
 <h2><a>Important Notes</a></h2>
 </section>
 
-<h3><a>Environments</a></h3>
+<h3><a>Environments </a></h3>
 
 Please install and use this version of node and npm
 - node version : `20.10.0`
