@@ -106,7 +106,7 @@ const Accordions = compose(
         <CopyElementToolbar {...props} />
         <InspectorControls>
             <div className={'parent-button'}>
-                <Button primary={true} onClick={() => addChild()}>
+                <Button variant="primary" onClick={() => addChild()}>
                     {__('Add Accordion Child', 'gutenverse')}
                 </Button>
             </div>
