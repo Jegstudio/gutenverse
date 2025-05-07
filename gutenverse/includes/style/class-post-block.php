@@ -426,17 +426,25 @@ class Post_Block extends Style_Abstract {
 			);
 		}
 
-		if ( isset( $this->attrs['categoryBackground'] ) ) {
-			$this->inject_style(
-				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-post-category",
-					'property'       => function ( $value ) {
-						return $this->handle_color( $value, 'background' );
-					},
-					'value'          => $this->attrs['categoryBackground'],
-					'device_control' => false,
-				)
-			);
+		if ( isset( $this->attrs['backgroundCategorySelector'] ) && 'color' === $this->attrs['backgroundCategorySelector'] ) {
+			if ( isset( $this->attrs['categoryBackground'] ) ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .guten-postblock .guten-post-category",
+						'property'       => function ( $value ) {
+							return $this->handle_color( $value, 'background' );
+						},
+						'value'          => $this->attrs['categoryBackground'],
+						'device_control' => false,
+					)
+				);
+			}
+		}
+
+		if ( isset( $this->attrs['backgroundCategorySelector'] ) && 'gradient' === $this->attrs['backgroundCategorySelector'] ) {
+			if ( isset( $this->attrs['categoryGradientBackground'] ) ) {
+				$this->handle_background( ".{$this->element_id} .guten-postblock .guten-post-category", $this->attrs['categoryGradientBackground'] );
+			}
 		}
 
 		if ( isset( $this->attrs['categoryMargin'] ) ) {

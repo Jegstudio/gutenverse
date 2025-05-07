@@ -1,11 +1,13 @@
 import { __ } from '@wordpress/i18n';
-import { BorderControl, BorderResponsiveControl, BoxShadowControl, ColorControl, DimensionControl, TypographyControl, SelectControl } from 'gutenverse-core/controls';
+import { BorderControl, BorderResponsiveControl, BoxShadowControl, ColorControl, DimensionControl, TypographyControl, SelectControl, BackgroundControl, SwitchControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 export const categoryPanel = (props) => {
     const {
         elementId,
         postblockType,
+        setAttributes,
+        switcher
     } = props;
 
     const device = getDeviceType();
@@ -56,8 +58,25 @@ export const categoryPanel = (props) => {
             component: TypographyControl,
         },
         {
+            id: 'backgroundCategorySelector',
+            label: __('Background Category', 'gutenverse'),
+            component: SwitchControl,
+            options: [
+                {
+                    label: 'Color',
+                    value: 'color'
+                },
+                {
+                    label: 'Gradient',
+                    value: 'gradient'
+                },
+            ],
+            onChange: (value) => setAttributes({ backgroundCategorySelector : value.backgroundCategorySelector }),
+        },
+        {
             id: 'categoryBackground',
             label: __('Background', 'gutenverse'),
+            show: !switcher.backgroundCategorySelector || switcher.backgroundCategorySelector === 'color',
             component: ColorControl,
             liveStyle: [
                 {
@@ -66,10 +85,23 @@ export const categoryPanel = (props) => {
                     'selector': `.${elementId} .guten-postblock .guten-post-category`,
                     'properties': [
                         {
-                            'name' : 'background-color',
-                            'valueType' : 'direct'
+                            'name': 'background-color',
+                            'valueType': 'direct'
                         }
                     ]
+                }
+            ]
+        },
+        {
+            id: 'categoryGradientBackground',
+            show: switcher.backgroundCategorySelector === 'gradient',
+            component: BackgroundControl,
+            options: ['gradient'],
+            liveStyle: [
+                {
+                    'type': 'background',
+                    'id': 'categoryGradientBackground',
+                    'selector': `.${elementId} .guten-postblock .guten-post-category`,
                 }
             ]
         },

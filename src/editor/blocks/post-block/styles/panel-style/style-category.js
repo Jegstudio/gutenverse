@@ -53,7 +53,7 @@ const panelCategoryStyle = (elementId, attributes, data) => {
         'selector': `.${elementId} .guten-postblock .guten-post-category a`,
     });
 
-    isNotEmpty(attributes['categoryBackground']) && data.push({
+    isNotEmpty(attributes['categoryBackground']) && isNotEmpty(attributes['backgroundCategorySelector']) && attributes['backgroundCategorySelector'] === 'color' && data.push({
         'type': 'color',
         'id': 'categoryBackground',
         'selector': `.${elementId} .guten-postblock .guten-post-category`,
@@ -63,6 +63,12 @@ const panelCategoryStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ]
+    });
+
+    isNotEmpty(attributes['categoryGradientBackground']) && isNotEmpty(attributes['backgroundCategorySelector']) && attributes['backgroundCategorySelector'] === 'gradient' && data.push({
+        'type': 'background',
+        'id': 'categoryGradientBackground',
+        'selector': `.${elementId} .guten-postblock .guten-post-category`,
     });
 
     isNotEmpty(attributes['categoryMargin']) && data.push({

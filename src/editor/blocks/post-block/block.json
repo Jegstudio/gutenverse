@@ -341,7 +341,16 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"backgroundCategorySelector":{
+			"type": "string",
+			"default": "color",
+			"copyStyle": true
+		},
 		"categoryBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"categoryGradientBackground": {
 			"type": "object",
 			"copyStyle": true
 		},
