@@ -57,7 +57,10 @@ const SocialIcons = compose(
 
     const innerBlocksProps = useInnerBlocksProps(blockProps, {
         template: [['gutenverse/social-icon']],
-        allowedBlocks: ['gutenverse/social-icon'],
+        allowedBlocks: [
+            'gutenverse/social-icon',
+            'gutenverse/news-social-author-icon'
+        ],
         orientation,
         __experimentalAppenderTagName: 'div',
     });
