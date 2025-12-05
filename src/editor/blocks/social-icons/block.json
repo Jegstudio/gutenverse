@@ -264,7 +264,6 @@
 		},
 		{
 			"name": "social-icons-vertical",
-			"isDefault": true,
 			"title": "Vertical",
 			"description": "Social icons shown in a column.",
 			"attributes": {

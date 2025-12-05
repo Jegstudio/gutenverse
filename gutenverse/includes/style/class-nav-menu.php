@@ -833,6 +833,233 @@ class Nav_Menu extends Style_Abstract {
 				)
 			);
 		}
+		$tablet_breakpoint = gutenverse_breakpoint( 'Tablet' );
+		$mobile_breakpoint = gutenverse_breakpoint( 'Mobile' );
+		$md_min = $tablet_breakpoint;
+		$sm_max = $tablet_breakpoint + 1;
+		$sm_min = $mobile_breakpoint;
+		$xs_max = $mobile_breakpoint + 1;
+
+		$custom_css = "
+			@media screen and (max-width: {$md_min}px) {
+				.guten-nav-menu.break-point-tablet .gutenverse-hamburger-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper {
+					width: 100%;
+					max-width: 360px;
+					border-radius: 0px 0px 0px 0px;
+					background-color: #f7f7f7;
+					width: 100%;
+					position: fixed;
+					top: 0;
+					left: -110%;
+					height: 100%;
+					overflow-y: auto;
+					overflow-x: hidden;
+					display: flex;
+					flex-direction: column-reverse;
+					justify-content: flex-end;
+					-webkit-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-moz-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-o-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper.active {
+					left: 0;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu-container {
+					overflow-y: scroll;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-nav-identity-panel {
+					padding: 10px 0px 10px 0px;
+					display: block;
+					position: relative;
+					z-index: 5;
+					width: 100%;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-nav-site-title {
+					display: inline-block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu, 
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu > ul {
+					display: block;
+					overflow-y: auto;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i {
+					margin-left: auto;
+					padding: 4px 15px;
+					border: 1px solid var(--guten-border-color);
+					border-radius: 3px;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children .sub-menu {
+					position: inherit;
+					box-shadow: none!important;
+					background: none;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li {
+					display: block;
+					width: 100%;
+					position: inherit;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu {
+					display: none;
+					max-height: 2500px;
+					opacity: 0;
+					visibility: hidden;
+					transition: max-height 5s ease-out;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu.dropdown-open {
+					display: block;
+					opacity: 1;
+					visibility: visible;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li a {
+					display: block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li a i {
+					float: right;
+				}
+				.guten-nav-menu.break-point-tablet .guten-nav-overlay {
+					position: fixed;
+					background-color: rgba(0, 0, 0, 0.2);
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					z-index: 999;
+					transform: translateX(-100%);
+					transition: transform 0s ease-in-out;
+				}
+				.guten-nav-menu.break-point-tablet .guten-nav-overlay.active {
+					animation: slideLeftToRight .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+				.guten-nav-menu.break-point-tablet .guten-nav-overlay.exiting {
+					animation: slideRightToLeft .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+			}
+
+			@media screen and (min-width: {$sm_max}px) {
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu-container {
+					height: auto;
+				}
+			}
+
+			@media screen and (max-width: {$sm_min}px) {
+				.guten-nav-menu.break-point-mobile .gutenverse-hamburger-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper {
+					width: 100%;
+					max-width: 360px;
+					border-radius: 0px 0px 0px 0px;
+					background-color: #f7f7f7;
+					position: fixed;
+					top: 0;
+					left: -110%;
+					height: 100% !important;
+					overflow-y: auto;
+					overflow-x: hidden;
+					display: flex;
+					flex-direction: column-reverse;
+					justify-content: flex-end;
+					-webkit-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-moz-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-o-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper.active {
+					left: 0;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu-container {
+					overflow-y: scroll;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-nav-identity-panel {
+					padding: 10px 0px 10px 0px;
+					display: block;
+					position: relative;
+					z-index: 5;
+					width: 100%;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-nav-site-title {
+					display: inline-block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu, 
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu > ul {
+					display: block;
+					overflow-y: auto;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i {
+					margin-left: auto;
+					padding: 4px 15px;
+					border: 1px solid var(--guten-border-color);
+					border-radius: 3px;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children .sub-menu {
+					position: inherit;
+					box-shadow: none;
+					background: none;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li {
+					display: block;
+					width: 100%;
+					position: inherit;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu {
+					display: none;
+					max-height: 2500px;
+					opacity: 0;
+					visibility: hidden;
+					transition: max-height 5s ease-out;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu.dropdown-open {
+					display: block;
+					opacity: 1;
+					visibility: visible;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li a {
+					display: block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li a i {
+					float: right;
+				}
+				.guten-nav-menu.break-point-mobile .guten-nav-overlay {
+					position: fixed;
+					background-color: rgba(0, 0, 0, 0.2);
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					z-index: 999;
+					transform: translateX(-100%);
+					transition: transform 0s ease-in-out;
+				}
+				.guten-nav-menu.break-point-mobile .guten-nav-overlay.active {
+					animation: slideLeftToRight .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+				.guten-nav-menu.break-point-mobile .guten-nav-overlay.exiting {
+					animation: slideRightToLeft .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+			}
+
+			@media screen and (min-width: {$xs_max}px) {
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu-container {
+					height: auto;
+				}
+			}
+		";
+
+		$this->push_additional_style( $custom_css );
 
 		if ( isset( $this->attrs['closeWidth'] ) ) {
 			$this->inject_style(

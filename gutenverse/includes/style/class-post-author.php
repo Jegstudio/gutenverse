@@ -68,6 +68,18 @@ class Post_Author extends Style_Abstract {
 				)
 			);
 		}
+		if ( isset( $this->attrs['verticalAlignment'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}",
+					'property'       => function ( $value ) {
+						return "align-items: {$value};";
+					},
+					'value'          => $this->attrs['verticalAlignment'],
+					'device_control' => true,
+				)
+			);
+		}
 
 		$this->name_style();
 		$this->avatar_style();

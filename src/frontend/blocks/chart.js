@@ -340,7 +340,8 @@ class GutenverseChart extends Default {
             )
             .style('stroke', d => this._theColor(d.data.borderColor))
             .style('stroke-width', d => d.data.borderWidth || 0)
-            .style('stroke-linejoin', 'round');
+            .style('stroke-linejoin', 'round')
+            .style('transition', 'none');
 
         arcs.transition()
             .ease(easeCubic)

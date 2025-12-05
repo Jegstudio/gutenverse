@@ -304,7 +304,16 @@
 	"supports": {
 		"className": false
 	},
-	"keywords": ["popup", "builder"],
-	"viewScript": ["gutenverse-frontend-popup-builder-script"],
-	"style": ["gutenverse-frontend-popup-builder-style"]
+	"keywords": [
+		"popup",
+		"builder"
+	],
+	"viewScript": [
+		"gutenverse-frontend-popup-builder-script",
+		"gutenverse-frontend-video-script"
+	],
+	"style": [
+		"gutenverse-frontend-popup-builder-style",
+		"gutenverse-frontend-video-style"
+	]
 }

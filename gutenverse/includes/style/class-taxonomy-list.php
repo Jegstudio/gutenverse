@@ -59,6 +59,9 @@ class Taxonomy_List extends Style_Abstract {
 	 * Generate style base on attribute.
 	 */
 	public function generate() {
+
+		$this->divider_style();
+
 		if ( isset( $this->attrs['iconColor'] ) ) {
 			$this->inject_style(
 				array(
@@ -139,12 +142,12 @@ class Taxonomy_List extends Style_Abstract {
 			if ( isset( $this->attrs['layout'] ) && 'column' !== $this->attrs['layout'] ) {
 				$this->inject_style(
 					array(
-						'selector' => ".{$this->element_id} .taxonomy-list-wrapper",
-						'property' => function ( $value ) {
-							$unit  = $value['unit']  ?? '';
+						'selector'       => ".{$this->element_id} .taxonomy-list-wrapper",
+						'property'       => function ( $value ) {
+							$unit  = $value['unit'] ?? '';
 							$point = $value['point'] ?? '';
 
-							if ($point === '' || !is_numeric($point)) {
+							if ( '' === $point || ! is_numeric( $point ) ) {
 								return '';
 							}
 
@@ -157,12 +160,12 @@ class Taxonomy_List extends Style_Abstract {
 			} else {
 				$this->inject_style(
 					array(
-						'selector' => ".{$this->element_id} .taxonomy-list-wrapper",
-						'property' => function ( $value ) {
-							$unit  = $value['unit']  ?? '';
+						'selector'       => ".{$this->element_id} .taxonomy-list-wrapper",
+						'property'       => function ( $value ) {
+							$unit  = $value['unit'] ?? '';
 							$point = $value['point'] ?? '';
 
-							if ($point === '' || !is_numeric($point)) {
+							if ( '' === $point || ! is_numeric( $point ) ) {
 								return '';
 							}
 
@@ -174,12 +177,12 @@ class Taxonomy_List extends Style_Abstract {
 				);
 				$this->inject_style(
 					array(
-						'selector' => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-						'property' => function ( $value ) {
-							$unit1  = $value['unit']  ?? '';
+						'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
+						'property'       => function ( $value ) {
+							$unit1  = $value['unit'] ?? '';
 							$point1 = $value['point'] ?? '';
 
-							if ($point1 === '' || !is_numeric( $point1 )) {
+							if ( '' === $point1 || ! is_numeric( $point1 ) ) {
 								return '';
 							}
 
@@ -248,7 +251,7 @@ class Taxonomy_List extends Style_Abstract {
 					array(
 						'selector'       => ".{$this->element_id} .taxonomy-list-wrapper .taxonomy-list-item",
 						'property'       => function ( $value, $device ) {
-							if ( 'custom' === $this->attrs['itemWidth'][$device] ) {
+							if ( 'custom' === $this->attrs['itemWidth'][ $device ] ) {
 								return $this->handle_unit_point( $value, 'width' );
 							}
 						},
@@ -269,7 +272,7 @@ class Taxonomy_List extends Style_Abstract {
 				)
 			);
 		}
-	
+
 		if ( isset( $this->attrs['contentColor'] ) ) {
 			$this->inject_style(
 				array(
@@ -292,6 +295,98 @@ class Taxonomy_List extends Style_Abstract {
 					},
 					'value'          => $this->attrs['contentColorHover'],
 					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentBgColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item a",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'background-color' );
+					},
+					'value'          => $this->attrs['contentBgColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentBgColorHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item a:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'background-color' );
+					},
+					'value'          => $this->attrs['contentBgColorHover'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentBorder'] ) ) {
+			$this->handle_border( 'contentBorder', ".{$this->element_id} .taxonomy-list-item a" );
+		}
+
+		if ( isset( $this->attrs['contentBorderResponsive'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item a",
+					'property'       => function ( $value ) {
+						return $this->handle_border_responsive( $value );
+					},
+					'value'          => $this->attrs['contentBorderResponsive'],
+					'device_control' => true,
+					'skip_device'    => array(
+						'Desktop',
+					),
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentBorderHover'] ) ) {
+			$this->handle_border( 'contentBorderHover', ".{$this->element_id} .taxonomy-list-item a:hover" );
+		}
+
+		if ( isset( $this->attrs['contentBorderHoverResponsive'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item a:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_border_responsive( $value );
+					},
+					'value'          => $this->attrs['contentBorderHoverResponsive'],
+					'device_control' => true,
+					'skip_device'    => array(
+						'Desktop',
+					),
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentMargin'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item a",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'margin' );
+					},
+					'value'          => $this->attrs['contentMargin'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentPadding'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item a",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'padding' );
+					},
+					'value'          => $this->attrs['contentPadding'],
+					'device_control' => true,
 				)
 			);
 		}
@@ -340,7 +435,7 @@ class Taxonomy_List extends Style_Abstract {
 				array(
 					'selector'       => ".{$this->element_id} .taxonomy-list-item",
 					'property'       => function ( $value, $device ) {
-						if ( 'custom' === $this->attrs['countJustify'][$device] ) {
+						if ( 'custom' === $this->attrs['countJustify'][ $device ] ) {
 							return $this->handle_unit_point( $value, 'gap' );
 						}
 					},
@@ -349,107 +444,117 @@ class Taxonomy_List extends Style_Abstract {
 				)
 			);
 		}
+	}
 
-		if ( isset( $this->attrs['showDivider'] ) ) {
-			if ( $this->attrs['showDivider'] ) {
-				if ( 'column' === $this->attrs['layout'] ) {
-					$this->inject_style(
-						array(
-							'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-							'property'       => function ( $value ) {
-								return 'border-top-style : solid;';
-							},
-							'value'          => $this->attrs['showDivider'],
-							'device_control' => false,
-						)
-					);
-				} elseif ( 'row' === $this->attrs['layout'] ) {
-					$this->inject_style(
-						array(
-							'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-							'property'       => function ( $value ) {
-								return 'border-left-style : solid;';
-							},
-							'value'          => $this->attrs['showDivider'],
-							'device_control' => false,
-						)
-					);
-				}
-				if ( isset( $this->attrs['colorDivider'] ) ) {
-					$this->inject_style(
-						array(
-							'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-							'property'       => function ( $value ) {
-								return $this->handle_color( $value, 'border-color' );
-							},
-							'value'          => $this->attrs['colorDivider'],
-							'device_control' => false,
-						)
-					);
-				}
-				if ( isset( $this->attrs['typeDivider'] ) ) {
-					if ( 'column' === $this->attrs['layout'] ) {
-						$this->inject_style(
-							array(
-								'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-								'property'       => function ( $value ) {
-									return "border-top-style : {$value};";
-								},
-								'value'          => $this->attrs['typeDivider'],
-								'device_control' => false,
-							)
-						);
-					} elseif ( 'row' === $this->attrs['layout'] ) {
-						$this->inject_style(
-							array(
-								'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-								'property'       => function ( $value ) {
-									return "border-left-style : {$value};";
-								},
-								'value'          => $this->attrs['typeDivider'],
-								'device_control' => false,
-							)
-						);
-					}
-				}
-				if ( isset( $this->attrs['widthDivider'] ) ) {
-					if ( 'column' === $this->attrs['layout'] ) {
-						$this->inject_style(
-							array(
-								'selector'       => ".{$this->element_id} .taxonomy-list-item",
-								'property'       => function ( $value ) {
-									return $this->handle_unit_point( $value, 'width' );
-								},
-								'value'          => $this->attrs['widthDivider'],
-								'device_control' => false,
-							)
-						);
-					} elseif ( 'row' === $this->attrs['layout'] ) {
-						$this->inject_style(
-							array(
-								'selector'       => ".{$this->element_id} .taxonomy-list-item",
-								'property'       => function ( $value ) {
-									return $this->handle_unit_point( $value, 'height' );
-								},
-								'value'          => $this->attrs['widthDivider'],
-								'device_control' => false,
-							)
-						);
-					}
-				}
-				if ( isset( $this->attrs['sizeDivider'] ) ) {
-					$this->inject_style(
-						array(
-							'selector'       => ".{$this->element_id} .taxonomy-list-item",
-							'property'       => function ( $value ) {
-								return $this->handle_unit_point( $value, 'border-width' );
-							},
-							'value'          => $this->attrs['sizeDivider'],
-							'device_control' => false,
-						)
-					);
-				}
+	/**
+	 * Divider style
+	 */
+	private function divider_style() {
+		if ( ! isset( $this->attrs['showDivider'] ) ) {
+			return;
+		}
+
+		if ( ! $this->attrs['showDivider'] ) {
+			return;
+		}
+
+		if ( 'column' === $this->attrs['layout'] ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
+					'property'       => function ( $value ) {
+						return 'border-top-style : solid;';
+					},
+					'value'          => $this->attrs['showDivider'],
+					'device_control' => false,
+				)
+			);
+		} elseif ( 'row' === $this->attrs['layout'] ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
+					'property'       => function ( $value ) {
+						return 'border-left-style : solid;';
+					},
+					'value'          => $this->attrs['showDivider'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['colorDivider'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'border-color' );
+					},
+					'value'          => $this->attrs['colorDivider'],
+					'device_control' => false,
+				)
+			);
+		}
+		if ( isset( $this->attrs['typeDivider'] ) ) {
+			if ( 'column' === $this->attrs['layout'] ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
+						'property'       => function ( $value ) {
+							return "border-top-style : {$value};";
+						},
+						'value'          => $this->attrs['typeDivider'],
+						'device_control' => false,
+					)
+				);
+			} elseif ( 'row' === $this->attrs['layout'] ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
+						'property'       => function ( $value ) {
+							return "border-left-style : {$value};";
+						},
+						'value'          => $this->attrs['typeDivider'],
+						'device_control' => false,
+					)
+				);
 			}
+		}
+		if ( isset( $this->attrs['widthDivider'] ) ) {
+			if ( 'column' === $this->attrs['layout'] ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .taxonomy-list-item",
+						'property'       => function ( $value ) {
+							return $this->handle_unit_point( $value, 'width' );
+						},
+						'value'          => $this->attrs['widthDivider'],
+						'device_control' => false,
+					)
+				);
+			} elseif ( 'row' === $this->attrs['layout'] ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .taxonomy-list-item",
+						'property'       => function ( $value ) {
+							return $this->handle_unit_point( $value, 'height' );
+						},
+						'value'          => $this->attrs['widthDivider'],
+						'device_control' => false,
+					)
+				);
+			}
+		}
+		if ( isset( $this->attrs['sizeDivider'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-item",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'border-width' );
+					},
+					'value'          => $this->attrs['sizeDivider'],
+					'device_control' => false,
+				)
+			);
 		}
 	}
 }

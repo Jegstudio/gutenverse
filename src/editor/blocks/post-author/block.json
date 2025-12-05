@@ -56,6 +56,10 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"verticalAlignment": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"typography": {
 			"type": "object",
 			"copyStyle": true
@@ -79,27 +83,27 @@
 			"copyStyle": true
 		},
 		"biographyTypography": {
-			"type":"object",
-			"copyStyle":true
+			"type": "object",
+			"copyStyle": true
 		},
-		"biographyMargintop":{
-			"type":"object"
+		"biographyMargintop": {
+			"type": "object"
 		},
 		"biographyColor": {
 			"type": "object",
-			"copyStyle":true
+			"copyStyle": true
 		},
 		"biographyTextShadow": {
-			"type":"object",
-			"copyStyle":true
+			"type": "object",
+			"copyStyle": true
 		},
 		"biographyColorHover": {
-			"type":"object",
-			"copyStyle":true
+			"type": "object",
+			"copyStyle": true
 		},
 		"biographyTextShadowHover": {
-			"type":"object",
-			"copyStyle":true
+			"type": "object",
+			"copyStyle": true
 		},
 		"size": {
 			"type": "object",
@@ -251,11 +255,21 @@
 			"default": {}
 		}
 	},
-	"usesContext": ["postId", "postType", "queryId"],
+	"usesContext": [
+		"postId",
+		"postType",
+		"queryId"
+	],
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["single", "post", "author"],
-	"style": ["gutenverse-frontend-post-author-style"]
+	"keywords": [
+		"single",
+		"post",
+		"author"
+	],
+	"style": [
+		"gutenverse-frontend-post-author-style"
+	]
 }

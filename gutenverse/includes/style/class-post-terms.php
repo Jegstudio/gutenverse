@@ -116,12 +116,7 @@ class Post_Terms extends Style_Abstract {
 			);
 		}
 
-		$text_hover_selector = ".{$this->element_id}:hover h1, .{$this->element_id}:hover h2, .{$this->element_id}:hover h3, .{$this->element_id}:hover h4, .{$this->element_id}:hover h5, .{$this->element_id}:hover h6, .{$this->element_id}:hover span, .{$this->element_id}:hover a";
-		if ( isset( $this->attrs['contentType'] ) ) {
-			if ( 'block' === $this->attrs['contentType'] ) {
-				$text_hover_selector = ".{$this->element_id} .post-term-block a:hover";
-			}
-		}
+		$text_hover_selector = ".{$this->element_id}:hover h1, .{$this->element_id}:hover h2, .{$this->element_id}:hover h3, .{$this->element_id}:hover h4, .{$this->element_id}:hover h5, .{$this->element_id}:hover h6, .{$this->element_id}:hover span, .{$this->element_id}:hover p, .{$this->element_id}:hover a";
 
 		if ( isset( $this->attrs['colorHover'] ) ) {
 			$this->inject_style(
@@ -131,6 +126,19 @@ class Post_Terms extends Style_Abstract {
 						return $this->handle_color( $value, 'color' );
 					},
 					'value'          => $this->attrs['colorHover'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['colorItemHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} h1.term-item:hover, .{$this->element_id} h2.term-item:hover, .{$this->element_id} h3.term-item:hover, .{$this->element_id} h4.term-item:hover, .{$this->element_id} h5.term-item:hover, .{$this->element_id} h6.term-item:hover, .{$this->element_id} span.term-item:hover, .{$this->element_id} p.term-item:hover, .{$this->element_id} a.term-item:hover, .{$this->element_id} .term-list:hover, .{$this->element_id} .term-list:hover *",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['colorItemHover'],
 					'device_control' => false,
 				)
 			);

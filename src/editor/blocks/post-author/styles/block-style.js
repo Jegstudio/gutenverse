@@ -25,6 +25,18 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
     });
+    isNotEmpty(attributes['verticalAlignment']) && data.push({
+        'type': 'plain',
+        'id': 'verticalAlignment',
+        'responsive': true,
+        'selector': `.${elementId}`,
+        'properties': [
+            {
+                'name': 'align-items',
+                'valueType': 'direct',
+            }
+        ],
+    });
 
     /**Panel List */
 

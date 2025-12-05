@@ -78,7 +78,6 @@ const VideoBlock = compose(
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef(null);
-    const videoRef = useRef(null);
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -111,6 +110,10 @@ const VideoBlock = compose(
         }
     };
 
+    const wrapperStyles = [
+        '.guten-video-background{margin: 0 auto;}'
+    ];
+
     const videoRender = () => {
         const deviceType = getDeviceType();
         switch (videoType) {
@@ -122,7 +125,7 @@ const VideoBlock = compose(
                 const resolvedHeight = height?.[deviceType]
                     ? `${height[deviceType]}px`
                     : '500px';
-                return <VideoPreviewer {...attributes} width={resolvedWidth} height={resolvedHeight} classNames={'guten-video-background'} />;
+                return <VideoPreviewer {...attributes} wrapperStyles={wrapperStyles} width={resolvedWidth} height={resolvedHeight} classNames={'guten-video-background'} />;
             default:
                 return <video controls={!hideControls} src={videoSrc} autoPlay={playing} muted={muted} loop={loop} />;
         }
@@ -137,7 +140,7 @@ const VideoBlock = compose(
     }, [elementRef]);
 
     useEffect(() => {
-        if (!videoRef.current) return;
+        if (!elementRef.current) return;
 
         const applyReferrerPolicy = () => {
             const iframes = document.querySelectorAll('iframe');
@@ -156,7 +159,7 @@ const VideoBlock = compose(
             applyReferrerPolicy();
         });
 
-        observer.observe(videoRef.current, {
+        observer.observe(elementRef.current, {
             childList: true,
             subtree: true,
         });
@@ -214,7 +217,7 @@ const VideoBlock = compose(
             </div>
         </InspectorControls>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
-        <figure {...blockProps} ref={videoRef}>
+        <figure {...blockProps}>
             {!isEmpty(videoSrc) ? videoRender() : selectType()}
             {!isEmpty(videoSrc) ? caption() : null}
         </figure>

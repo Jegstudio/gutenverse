@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, SelectControl, TextControl, IconRadioControl   } from 'gutenverse-core/controls';
+import { CheckboxControl, SelectControl, TextControl, IconRadioControl } from 'gutenverse-core/controls';
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'gutenverse-core/components';
 
 export const settingPanel = (props) => {
@@ -107,6 +107,26 @@ export const settingPanel = (props) => {
                     label: __('Align Right', 'gutenverse'),
                     value: 'space-between',
                     icon: <AlignJustify />,
+                },
+            ],
+        },
+        {
+            id: 'verticalAlignment',
+            label: __('Vertical Alignment', 'gutenverse'),
+            component: SelectControl,
+            allowDeviceControl: true,
+            options: [
+                {
+                    label: __('Top', 'gutenverse'),
+                    value: 'start',
+                },
+                {
+                    label: __('Middle', 'gutenverse'),
+                    value: 'center',
+                },
+                {
+                    label: __('Bottom', 'gutenverse'),
+                    value: 'end',
                 },
             ],
         },

@@ -1,6 +1,17 @@
 
 import { __ } from '@wordpress/i18n';
-import { ColorControl, IconRadioControl, SizeControl, SelectControl, SwitchControl, TypographyControl, HeadingControl, TextControl } from 'gutenverse-core/controls';
+import {
+    ColorControl,
+    IconRadioControl,
+    SizeControl,
+    SelectControl,
+    SwitchControl,
+    TypographyControl,
+    HeadingControl,
+    DimensionControl,
+    BorderControl,
+    BorderResponsiveControl
+} from 'gutenverse-core/controls';
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'gutenverse-core/components';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
@@ -289,6 +300,7 @@ export const contentStylePanel = (props) => {
             ],
             onChange: ({ __contentSwitch }) => setSwitcher({ ...switcher, contentSwitch: __contentSwitch })
         },
+        // Normal
         {
             id: 'contentColor',
             label: __('Content Color', 'gutenverse'),
@@ -309,6 +321,38 @@ export const contentStylePanel = (props) => {
             ]
         },
         {
+            id: 'contentBgColor',
+            label: __('Content Background Color', 'gutenverse'),
+            component: ColorControl,
+            show: !switcher.contentSwitch || switcher.contentSwitch === 'normal',
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'contentBgColor',
+                    'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a`,
+                    'properties': [
+                        {
+                            'name': 'background-color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'contentBorder',
+            label: __('Content Border', 'gutenverse'),
+            component: BorderControl,
+            show: !switcher.contentSwitch || switcher.contentSwitch === 'normal' && deviceType === 'Desktop',
+        },
+        {
+            id: 'contentBorderResponsive',
+            label: __('Content Border', 'gutenverse'),
+            component: BorderResponsiveControl,
+            show: !switcher.contentSwitch || switcher.contentSwitch === 'normal' && deviceType !== 'Desktop',
+        },
+        // Hover
+        {
             id: 'contentColorHover',
             label: __('Content Color', 'gutenverse'),
             component: ColorControl,
@@ -326,6 +370,93 @@ export const contentStylePanel = (props) => {
                     ]
                 }
             ]
+        },
+        {
+            id: 'contentBgColorHover',
+            label: __('Content Background Color', 'gutenverse'),
+            component: ColorControl,
+            show: switcher.contentSwitch === 'hover',
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'contentBgColorHover',
+                    'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a:hover`,
+                    'properties': [
+                        {
+                            'name': 'background-color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'contentBorderHover',
+            label: __('Content Border', 'gutenverse'),
+            component: BorderControl,
+            show: switcher.contentSwitch === 'hover' && deviceType !== 'Desktop',
+        },
+        {
+            id: 'contentBorderHoverResponsive',
+            label: __('Content Border', 'gutenverse'),
+            component: BorderResponsiveControl,
+            show: switcher.contentSwitch === 'hover' && deviceType !== 'Desktop',
+        },
+        // End normal-hover
+        {
+            id: '__marginPadding',
+            component: HeadingControl,
+            label: __('Margin and Padding', 'gutenverse'),
+        },
+        {
+            id: 'contentMargin',
+            label: __('Content Margin', 'gutenverse'),
+            component: DimensionControl,
+            allowDeviceControl: true,
+            position: ['top', 'right', 'bottom', 'left'],
+            units: {
+                px: {
+                    text: 'px',
+                    unit: 'px'
+                },
+                em: {
+                    text: 'em',
+                    unit: 'em'
+                },
+                ['%']: {
+                    text: '%',
+                    unit: '%'
+                },
+                rem: {
+                    text: 'rem',
+                    unit: 'rem'
+                },
+            },
+        },
+        {
+            id: 'contentPadding',
+            label: __('Content Padding', 'gutenverse'),
+            component: DimensionControl,
+            allowDeviceControl: true,
+            position: ['top', 'right', 'bottom', 'left'],
+            units: {
+                px: {
+                    text: 'px',
+                    unit: 'px'
+                },
+                em: {
+                    text: 'em',
+                    unit: 'em'
+                },
+                ['%']: {
+                    text: '%',
+                    unit: '%'
+                },
+                rem: {
+                    text: 'rem',
+                    unit: 'rem'
+                },
+            },
         },
         {
             id: 'countSplitter',

@@ -288,7 +288,8 @@ const drawDonutChart = (props) => {
         )
         .style('stroke', d => theColor(d.data.borderColor))
         .style('stroke-width', d => d.data.borderWidth || 0)
-        .style('stroke-linejoin', 'round');
+        .style('stroke-linejoin', 'round')
+        .style('transition', 'none');
 
     arcs.transition()
         .ease(easeCubic)

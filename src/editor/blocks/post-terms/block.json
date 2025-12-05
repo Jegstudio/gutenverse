@@ -106,6 +106,10 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"colorItemHover": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"textShadowHover": {
 			"type": "object",
 			"default": {},
@@ -232,11 +236,24 @@
 			"default": {}
 		}
 	},
-	"usesContext": ["postId", "postType", "queryId"],
+	"usesContext": [
+		"postId",
+		"postType",
+		"queryId"
+	],
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["single", "post", "term", "category", "tag", "taxonomy"],
-	"style": ["gutenverse-frontend-post-terms-style"]
+	"keywords": [
+		"single",
+		"post",
+		"term",
+		"category",
+		"tag",
+		"taxonomy"
+	],
+	"style": [
+		"gutenverse-frontend-post-terms-style"
+	]
 }

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { BorderControl, BorderResponsiveControl, BoxShadowControl, RangeControl, SizeControl } from 'gutenverse-core/controls';
+import { AlertControl, BorderControl, BorderResponsiveControl, BoxShadowControl, RangeControl, SizeControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 export const avatarStylePanel = (props) => {
@@ -9,6 +9,17 @@ export const avatarStylePanel = (props) => {
     } = props;
 
     const device = getDeviceType();
+    if (!authorAvatar) {
+        return [
+            {
+                id: 'sticky-notice',
+                component: AlertControl,
+                children: <>
+                    <span>{__('Avatar disabled. The Avatar panel will be hidden.')}</span>
+                </>
+            },
+        ];
+    }
     return [
         {
             id: 'size',

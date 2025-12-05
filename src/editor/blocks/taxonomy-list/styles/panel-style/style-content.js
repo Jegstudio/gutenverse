@@ -159,6 +159,18 @@ const contentStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['contentBgColor']) && data.push({
+        'type': 'color',
+        'id': 'contentBgColor',
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a`,
+        'properties': [
+            {
+                'name': 'background-color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['contentColorHover']) && data.push({
         'type': 'color',
         'id': 'contentColorHover',
@@ -170,6 +182,68 @@ const contentStyle = (elementId, attributes, data) => {
             }
         ]
     });
+
+    isNotEmpty(attributes['contentBgColorHover']) && data.push({
+        'type': 'color',
+        'id': 'contentBgColorHover',
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a:hover`,
+        'properties': [
+            {
+                'name': 'background-color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['contentBorder']) && data.push({
+        'type': 'border',
+        'id': 'contentBorder',
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a`,
+    });
+
+    isNotEmpty(attributes['contentBorderHover']) && data.push({
+        'type': 'border',
+        'id': 'contentBorderHover',
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a:hover`,
+    });
+
+    isNotEmpty(attributes['contentBorderResponsive']) && data.push({
+        'type': 'borderResponsive',
+        'id': 'contentBorderResponsive',
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a`,
+    });
+
+    isNotEmpty(attributes['contentBorderHoverResponsive']) && data.push({
+        'type': 'borderResponsive',
+        'id': 'contentBorderHoverResponsive',
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a:hover`,
+    });
+
+    isNotEmpty(attributes['contentMargin']) && data.push({
+        'type': 'dimension',
+        'id': 'contentMargin',
+        'responsive': true,
+        'properties': [
+            {
+                'name': 'margin',
+                'valueType': 'direct'
+            }
+        ],
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a`
+    });
+
+    isNotEmpty(attributes['contentPadding']) && data.push({
+        'type': 'dimension',
+        'id': 'contentPadding',
+        'responsive': true,
+        'properties': [
+            {
+                'name': 'padding',
+                'valueType': 'direct'
+            }
+        ],
+        'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a`
+    }); 
 
     isNotEmpty(attributes['countTypography']) && data.push({
         'type': 'typography',

@@ -69,6 +69,38 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"contentBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBgColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorderResponsive": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorderHoverResponsive": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"contentTypography": {
 			"type": "object",
 			"copyStyle": true

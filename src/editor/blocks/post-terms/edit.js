@@ -98,19 +98,19 @@ const PostTermsBlock = compose(
                 }
             case 'string':
             default:
-                return <HtmlTag>
+                return <span>
                     {!isEmpty(terms) ? terms.map((term, index) => {
                         const name = term?.name;
                         const after = index < terms.length - 1 ? separator : '';
 
-                        return linkTo && linkTo !== 'none' ? <a href="#" onClick={e => e.preventDefault()}>{name + after}</a> : name + after;
+                        return linkTo && linkTo !== 'none' ? <><HtmlTag className="term-list"><a href="#" onClick={e => e.preventDefault()}>{name}</a></HtmlTag>{after}</> : <><HtmlTag className="term-list">{name}</HtmlTag>{after}</>;
                     }) : linkTo && linkTo !== 'none' ? <a href="#" onClick={e => e.preventDefault()}>{'Post Terms'}</a> : 'Post Terms'}
-                </HtmlTag>;
+                </span>;
         }
     };
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <InspectorControls>
             <PanelTutorial
                 title={__('How Post Terms works?', 'gutenverse')}

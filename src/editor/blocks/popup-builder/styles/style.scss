@@ -11,10 +11,18 @@
     .guten-popup-video-container {
         overflow-y: auto;
         display: flex;
+
         .guten-video {
             margin: 0;
             width: 100%;
             height: 500px;
+
+            .guten-video-background,
+            .guten-video-background iframe {
+                width: 100%;
+                height: 100%;
+
+            }
 
             .guten-video-wrapper {
                 height: 100%;
@@ -36,6 +44,7 @@
     }
 
     &-builder[data-close-overlay="true"] {
+
         .guten-popup-overlay,
         .guten-popup-wrapper {
             cursor: pointer;

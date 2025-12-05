@@ -152,7 +152,19 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['colorHover']) && data.push({
         'type': 'color',
         'id': 'colorHover',
-        'selector': `.${elementId}:hover h1, .${elementId}:hover h2, .${elementId}:hover h3, .${elementId}:hover h4, .${elementId}:hover h5, .${elementId}:hover h6, .${elementId}:hover span, .${elementId}:hover a`,
+        'selector': `.${elementId}:hover h1, .${elementId}:hover h2, .${elementId}:hover h3, .${elementId}:hover h4, .${elementId}:hover h5, .${elementId}:hover h6, .${elementId}:hover span, .${elementId}:hover p, .${elementId}:hover a`,
+        'properties': [
+            {
+                'name': 'color',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['colorItemHover']) && data.push({
+        'type': 'color',
+        'id': 'colorItemHover',
+        'selector': `.${elementId} h1.term-item:hover, .${elementId} h2.term-item:hover, .${elementId} h3.term-item:hover, .${elementId} h4.term-item:hover, .${elementId} h5.term-item:hover, .${elementId} h6.term-item:hover, .${elementId} span.term-item:hover, .${elementId} p.term-item:hover, .${elementId} a.term-item:hover, .${elementId} .term-list:hover, .${elementId} .term-list:hover *`,
         'properties': [
             {
                 'name': 'color',

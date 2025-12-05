@@ -1,23 +1,21 @@
 import { VideoPreviewer } from 'gutenverse-core/components';
-import { getDeviceType } from 'gutenverse-core/editor-helper';
 import { isEmpty } from 'gutenverse-core/helper';
 
-const VideoContainer = ({ popupVideoSrc, popupVideoStart, popupVideoEnd, popupVideoHideControls, popupVideoLoop, popupVideoMuted, popupVideoWidth, popupVideoHeight, videoRef, playing, elementId }) => {
-    const deviceType = getDeviceType();
-
+const VideoContainer = ({ popupVideoSrc, popupVideoStart, popupVideoEnd, popupVideoHideControls, popupVideoLoop, popupVideoMuted, videoRef, playing, elementId }) => {
     return popupVideoSrc ? (
         <VideoPreviewer
             videoRef={videoRef}
             classNames={`guten-video-background popup-video-${elementId}`}
             videoSrc={popupVideoSrc}
             hideControls={popupVideoHideControls}
-            width={popupVideoWidth && popupVideoWidth[deviceType] ? `${popupVideoWidth[deviceType]}%` : '100%'}
-            height={popupVideoHeight && popupVideoHeight[deviceType] ? `${popupVideoHeight[deviceType]}px` : '500px'}
+            width={'100%'}
+            height={'100%'}
             playing={playing}
             muted={popupVideoMuted}
             loop={popupVideoLoop}
             start={popupVideoStart}
             end={popupVideoEnd}
+            wrapperStyles={['body{height: 100%;}', 'body > div:first-child, body > div:first-child > div:first-child{height: 100%;}']}
         />
     ) : null;
 };
