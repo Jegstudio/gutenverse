@@ -11,13 +11,13 @@ const contentStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.guten-social-icon.guten-social-icon-item #${elementId} i`,
+        'selector': `.guten-social-icon #${elementId} i`,
     });
 
     isNotEmpty(attributes['typography']) && data.push({
         'type': 'typography',
         'id': 'typography',
-        'selector': `.guten-social-icon.guten-social-icon-item #${elementId} span`,
+        'selector': `.guten-social-icon #${elementId} span`,
     });
 
     isNotEmpty(attributes['borderRadius']) && data.push({
@@ -30,7 +30,7 @@ const contentStyle = (elementId, attributes, data) => {
                 'multiDimension' : false
             }
         ],
-        'selector': `.guten-social-icons .guten-social-icon.guten-social-icon-item a#${elementId}`,
+        'selector': `.guten-social-icons .guten-social-icon a#${elementId}`,
     });
     return data;
 };

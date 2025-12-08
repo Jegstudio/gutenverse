@@ -4,7 +4,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['iconColor']) && data.push({
         'type': 'color',
         'id': 'iconColor',
-        'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId} i, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId} i, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId} i`,
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId} i, .guten-social-icons.border .guten-social-icon #${elementId} i, .guten-social-icons.custom .guten-social-icon #${elementId} i`,
         'properties' : [
             {
                 'name' : 'color',
@@ -15,7 +15,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['iconColor']) && data.push({
         'type': 'color',
         'id': 'iconColor',
-        'selector': `.guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}`,
+        'selector': `.guten-social-icons.border .guten-social-icon #${elementId}`,
         'properties' : [
             {
                 'name' : 'border-color',
@@ -27,7 +27,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['textColor']) && data.push({
         'type': 'color',
         'id': 'textColor',
-        'selector': `.guten-social-icons .guten-social-icon.guten-social-icon-item #${elementId} span`,
+        'selector': `.guten-social-icons .guten-social-icon #${elementId} span`,
         'properties' : [
             {
                 'name' : 'color',
@@ -39,7 +39,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['hoverIconColor']) && data.push({
         'type': 'color',
         'id': 'hoverIconColor',
-        'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}:hover i, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover i, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}:hover i`,
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover i, .guten-social-icons.border .guten-social-icon #${elementId}:hover i, .guten-social-icons.custom .guten-social-icon #${elementId}:hover i`,
         'properties' : [
             {
                 'name' : 'color',
@@ -50,7 +50,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['hoverIconColor']) && data.push({
         'type': 'color',
         'id': 'hoverIconColor',
-        'selector': `.guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover`,
+        'selector': `.guten-social-icons.border .guten-social-icon #${elementId}:hover`,
         'properties' : [
             {
                 'name' : 'border-color',
@@ -62,7 +62,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['hoverTextColor']) && data.push({
         'type': 'color',
         'id': 'hoverTextColor',
-        'selector': `.guten-social-icons .guten-social-icon.guten-social-icon-item #${elementId}:hover span`,
+        'selector': `.guten-social-icons .guten-social-icon #${elementId}:hover span`,
         'properties' : [
             {
                 'name' : 'color',
@@ -75,7 +75,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['bgColor']) && data.push({
         'type': 'color',
         'id': 'bgColor',
-        'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}`,
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}, .guten-social-icons.border .guten-social-icon #${elementId}, .guten-social-icons.custom .guten-social-icon #${elementId}`,
         'properties' : [
             {
                 'name' : 'background-color',
@@ -87,7 +87,7 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['hoverBgColor']) && data.push({
         'type': 'color',
         'id': 'hoverBgColor',
-        'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}:hover`,
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover, .guten-social-icons.border .guten-social-icon #${elementId}:hover, .guten-social-icons.custom .guten-social-icon #${elementId}:hover`,
         'properties' : [
             {
                 'name' : 'background-color',
@@ -100,13 +100,13 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['bgGradient']) && data.push({
         'type': 'background',
         'id': 'bgGradient',
-        'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}`,
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}, .guten-social-icons.border .guten-social-icon #${elementId}, .guten-social-icons.custom .guten-social-icon #${elementId}`,
     });
 
     isNotEmpty(attributes['hoverBgGradient']) && data.push({
         'type': 'background',
         'id': 'hoverBgGradient',
-        'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}:hover`,
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover, .guten-social-icons.border .guten-social-icon #${elementId}:hover, .guten-social-icons.custom .guten-social-icon #${elementId}:hover`,
     });
 
     return data;

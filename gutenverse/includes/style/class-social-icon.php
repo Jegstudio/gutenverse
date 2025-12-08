@@ -58,7 +58,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['iconSize'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icon.guten-social-icon-item #{$this->element_id} i",
+					'selector'       => ".guten-social-icon #{$this->element_id} i",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'font-size' );
 					},
@@ -71,7 +71,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['typography'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector'       => ".guten-social-icon.guten-social-icon-item #{$this->element_id} span",
+					'selector'       => ".guten-social-icon #{$this->element_id} span",
 					'property'       => function ( $value ) {},
 					'value'          => $this->attrs['typography'],
 					'device_control' => false,
@@ -82,7 +82,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['iconColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons.fill .guten-social-icon.guten-social-icon-item #{$this->element_id} i, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id} i, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #{$this->element_id} i",
+					'selector'       => ".guten-social-icons.fill .guten-social-icon #{$this->element_id} i, .guten-social-icons.border .guten-social-icon #{$this->element_id} i, .guten-social-icons.custom .guten-social-icon #{$this->element_id} i",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -93,7 +93,7 @@ class Social_Icon extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id}",
+					'selector'       => ".guten-social-icons.border .guten-social-icon #{$this->element_id}",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'border-color' );
 					},
@@ -106,7 +106,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['textColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons .guten-social-icon.guten-social-icon-item #{$this->element_id} span",
+					'selector'       => ".guten-social-icons .guten-social-icon #{$this->element_id} span",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -119,7 +119,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['hoverIconColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons.fill .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover i, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover i, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover i",
+					'selector'       => ".guten-social-icons.fill .guten-social-icon #{$this->element_id}:hover i, .guten-social-icons.border .guten-social-icon #{$this->element_id}:hover i, .guten-social-icons.custom .guten-social-icon #{$this->element_id}:hover i",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -130,7 +130,7 @@ class Social_Icon extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover",
+					'selector'       => ".guten-social-icons.border .guten-social-icon #{$this->element_id}:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'border-color' );
 					},
@@ -143,7 +143,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['bgColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons.fill .guten-social-icon.guten-social-icon-item #{$this->element_id}, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id}, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #{$this->element_id}",
+					'selector'       => ".guten-social-icons.fill .guten-social-icon #{$this->element_id}, .guten-social-icons.border .guten-social-icon #{$this->element_id}, .guten-social-icons.custom .guten-social-icon #{$this->element_id}",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -156,7 +156,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['hoverBgColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons.fill .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover",
+					'selector'       => ".guten-social-icons.fill .guten-social-icon #{$this->element_id}:hover, .guten-social-icons.border .guten-social-icon #{$this->element_id}:hover, .guten-social-icons.custom .guten-social-icon #{$this->element_id}:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -168,14 +168,14 @@ class Social_Icon extends Style_Abstract {
 
 		if ( isset( $this->attrs['bgGradient'] ) ) {
 			$this->handle_background(
-				".guten-social-icons.fill .guten-social-icon.guten-social-icon-item #{$this->element_id}, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id}, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #{$this->element_id}",
+				".guten-social-icons.fill .guten-social-icon #{$this->element_id}, .guten-social-icons.border .guten-social-icon #{$this->element_id}, .guten-social-icons.custom .guten-social-icon #{$this->element_id}",
 				$this->attrs['bgGradient']
 			);
 		}
 
 		if ( isset( $this->attrs['hoverBgGradient'] ) ) {
 			$this->handle_background(
-				".guten-social-icons.fill .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover",
+				".guten-social-icons.fill .guten-social-icon #{$this->element_id}:hover, .guten-social-icons.border .guten-social-icon #{$this->element_id}:hover, .guten-social-icons.custom .guten-social-icon #{$this->element_id}:hover",
 				$this->attrs['hoverBgGradient']
 			);
 		}
@@ -183,7 +183,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['hoverTextColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icons .guten-social-icon.guten-social-icon-item #{$this->element_id}:hover span",
+					'selector'       => ".guten-social-icons .guten-social-icon #{$this->element_id}:hover span",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -196,7 +196,7 @@ class Social_Icon extends Style_Abstract {
 		if ( isset( $this->attrs['forceHideText'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-social-icon.guten-social-icon-item #{$this->element_id} span",
+					'selector'       => ".guten-social-icon #{$this->element_id} span",
 					'property'       => function ( $value ) {
 						if ( $value ) {
 							return 'display: none;';

@@ -17,7 +17,7 @@ const contentStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'alignment',
         'responsive': true,
-        'selector': `.${elementId} .guten-social-icon-item`,
+        'selector': `.${elementId} .guten-social-icon`,
         'properties': [
             {
                 'name': 'text-align',
@@ -36,13 +36,13 @@ const contentStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-social-icon-item i`,
+        'selector': `.${elementId} .guten-social-icon i`,
     });
 
     isNotEmpty(attributes['typography']) && data.push({
         'type': 'typography',
         'id': 'typography',
-        'selector': `.${elementId} .guten-social-icon-item span`,
+        'selector': `.${elementId} .guten-social-icon span`,
     });
 
     return data;

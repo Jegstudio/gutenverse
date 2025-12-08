@@ -49,7 +49,7 @@ const spaceStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.guten-social-icons.${elementId} .guten-social-icon-item a`,
+        'selector': `.guten-social-icons.${elementId} .guten-social-icon a`,
     });
     return data;
 };
