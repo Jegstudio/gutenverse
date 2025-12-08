@@ -4,25 +4,25 @@ const iconBorderStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['iconBorder']) && data.push({
         'type': 'border',
         'id': 'iconBorder',
-        'selector': `.${elementId} .guten-social-icon a`,
+        'selector': `.${elementId} .guten-social-icon-item a`,
     });
 
     isNotEmpty(attributes['iconBorderResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'iconBorderResponsive',
-        'selector': `.${elementId} .guten-social-icon a`,
+        'selector': `.${elementId} .guten-social-icon-item a`,
     });
 
     isNotEmpty(attributes['iconBorderHover']) && data.push({
         'type': 'border',
         'id': 'iconBorderHover',
-        'selector': `.${elementId} .guten-social-icon:hover a`,
+        'selector': `.${elementId} .guten-social-icon-item:hover a`,
     });
 
     isNotEmpty(attributes['iconBorderHoverResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'iconBorderHoverResponsive',
-        'selector': `.${elementId} .guten-social-icon:hover a`,
+        'selector': `.${elementId} .guten-social-icon-item:hover a`,
     });
 
     isNotEmpty(attributes['iconBoxShadow']) && data.push({
@@ -34,7 +34,7 @@ const iconBorderStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector':  `.${elementId} .guten-social-icon a`,
+        'selector':  `.${elementId} .guten-social-icon-item a`,
     });
 
     isNotEmpty(attributes['iconBoxShadowHover']) && data.push({
@@ -46,7 +46,7 @@ const iconBorderStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-social-icon:hover a`,
+        'selector': `.${elementId} .guten-social-icon-item:hover a`,
     });
     return data;
 };

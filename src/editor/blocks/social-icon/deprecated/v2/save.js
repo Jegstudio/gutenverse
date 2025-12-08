@@ -33,7 +33,6 @@ const save = compose(
 
     const className = classnames(
         'guten-element',
-        'guten-social-icon-item',
         'guten-social-icon',
         elementId,
         socialType,

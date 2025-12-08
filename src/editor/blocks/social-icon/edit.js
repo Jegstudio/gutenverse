@@ -68,6 +68,7 @@ const SocialIcon = compose(
     const blockProps = useBlockProps({
         className: classnames(
             'guten-element',
+            'guten-social-icon-item',
             'guten-social-icon',
             'no-margin',
             elementId,

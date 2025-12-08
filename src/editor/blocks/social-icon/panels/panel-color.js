@@ -33,7 +33,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
-                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId} i, .guten-social-icons.border .guten-social-icon #${elementId} i, .guten-social-icons.custom .guten-social-icon #${elementId} i`,
+                    'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId} i, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId} i, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId} i`,
                     'properties': [
                         {
                             'name': 'color',
@@ -44,7 +44,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
-                    'selector': `.guten-social-icons.border .guten-social-icon #${elementId}`,
+                    'selector': `.guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}`,
                     'properties': [
                         {
                             'name': 'border-color',
@@ -63,7 +63,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'textColor',
-                    'selector': `.guten-social-icons .guten-social-icon #${elementId} span`,
+                    'selector': `.guten-social-icons .guten-social-icon.guten-social-icon-item #${elementId} span`,
                     'properties': [
                         {
                             'name': 'color',
@@ -82,7 +82,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'hoverIconColor',
-                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover i, .guten-social-icons.border .guten-social-icon #${elementId}:hover i, .guten-social-icons.custom .guten-social-icon #${elementId}:hover i`,
+                    'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}:hover i, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover i, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}:hover i`,
                     'properties': [
                         {
                             'name': 'color',
@@ -93,7 +93,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'hoverIconColor',
-                    'selector': `.guten-social-icons.border .guten-social-icon #${elementId}:hover`,
+                    'selector': `.guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover`,
                     'properties': [
                         {
                             'name': 'border-color',
@@ -112,7 +112,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'hoverTextColor',
-                    'selector': `.guten-social-icons .guten-social-icon #${elementId}:hover span`,
+                    'selector': `.guten-social-icons .guten-social-icon.guten-social-icon-item #${elementId}:hover span`,
                     'properties': [
                         {
                             'name': 'color',
@@ -148,7 +148,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'bgColor',
-                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}, .guten-social-icons.border .guten-social-icon #${elementId}, .guten-social-icons.custom .guten-social-icon #${elementId}`,
+                    'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}`,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -167,7 +167,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'hoverBgColor',
-                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover, .guten-social-icons.border .guten-social-icon #${elementId}:hover, .guten-social-icons.custom .guten-social-icon #${elementId}:hover`,
+                    'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}:hover`,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -188,7 +188,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'background',
                     'id': 'bgGradient',
-                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}, .guten-social-icons.border .guten-social-icon #${elementId}, .guten-social-icons.custom .guten-social-icon #${elementId}`,
+                    'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}`,
                 }
             ]
         },
@@ -202,7 +202,7 @@ export const contentColor = (props) => {
                 {
                     'type': 'background',
                     'id': 'hoverBgGradient',
-                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover, .guten-social-icons.border .guten-social-icon #${elementId}:hover, .guten-social-icons.custom .guten-social-icon #${elementId}:hover`,
+                    'selector': `.guten-social-icons.fill .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.border .guten-social-icon.guten-social-icon-item #${elementId}:hover, .guten-social-icons.custom .guten-social-icon.guten-social-icon-item #${elementId}:hover`,
                 }
             ]
         },
