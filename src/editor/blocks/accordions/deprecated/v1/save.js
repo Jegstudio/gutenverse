@@ -18,22 +18,16 @@ export const save = compose(
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
 
-    const wrapperClassName = classnames(
-        'guten-element',
-        'guten-accordions-wrapper',
-        animationClass,
-        displayClass
-    );
-
     const className = classnames(
+        'guten-element',
         'guten-accordions',
         elementId,
+        animationClass,
+        displayClass,
     );
 
-    return <div className={wrapperClassName} {...advanceAnimationData}>
-        <div className={className}>
-            <InnerBlocks.Content />
-        </div>
+    return <div className={className} {...advanceAnimationData}>
+        <InnerBlocks.Content />
     </div>;
 });
 

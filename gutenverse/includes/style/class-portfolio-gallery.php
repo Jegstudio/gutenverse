@@ -46,6 +46,10 @@ class Portfolio_Gallery extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .portfolio-gallery-container",
+					'hover'  => ".{$this->element_id}:hover .portfolio-gallery-container",
+				),
 				'mask'        => null,
 			)
 		);

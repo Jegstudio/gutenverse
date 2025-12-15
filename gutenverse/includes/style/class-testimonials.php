@@ -47,6 +47,10 @@ class Testimonials extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .testimonials-list",
+					'hover'  => ".{$this->element_id}:hover .testimonials-list",
+				),
 				'mask'        => null,
 			)
 		);

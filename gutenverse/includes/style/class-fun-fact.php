@@ -46,6 +46,10 @@ class Fun_Fact extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .fun-fact-inner",
+					'hover'  => ".{$this->element_id}:hover .fun-fact-inner",
+				),
 				'mask'        => null,
 			)
 		);

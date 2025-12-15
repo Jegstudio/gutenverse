@@ -24,13 +24,20 @@ const save = compose(
         'guten-buttons',
         `${orientation}`,
         elementId,
+    );
+
+    const wrapperClassName = classnames(
+        'guten-element',
+        'guten-buttons-wrapper',
         animationClass,
         displayClass,
     );
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
-            <InnerBlocks.Content />
+        <div className={wrapperClassName}>
+            <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+                <InnerBlocks.Content />
+            </div>
         </div>
     );
 });

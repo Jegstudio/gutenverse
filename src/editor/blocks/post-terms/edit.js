@@ -104,7 +104,7 @@ const PostTermsBlock = compose(
                         const after = index < terms.length - 1 ? separator : '';
 
                         return linkTo && linkTo !== 'none' ? <><HtmlTag className="term-list"><a href="#" onClick={e => e.preventDefault()}>{name}</a></HtmlTag>{after}</> : <><HtmlTag className="term-list">{name}</HtmlTag>{after}</>;
-                    }) : linkTo && linkTo !== 'none' ? <a href="#" onClick={e => e.preventDefault()}>{'Post Terms'}</a> : 'Post Terms'}
+                    }) : linkTo && linkTo !== 'none' ? <a href="#" onClick={e => e.preventDefault()}>{'Post Terms'}</a> : <span className="term-item">Post Terms</span>}
                 </span>;
         }
     };

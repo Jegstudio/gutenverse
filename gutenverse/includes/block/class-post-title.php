@@ -32,7 +32,7 @@ class Post_Title extends Block_Abstract {
 		$post_title  = $post_id ? get_the_title( $post_id ) : esc_html__( 'Post Title', 'gutenverse' );
 
 		if ( $post_link ) {
-			$post_url   = get_post_permalink( $post_id );
+			$post_url   = get_permalink( $post_id );
 			$post_title = "<a href='{$post_url}' target='{$link_target}' rel='{$link_rel}'>{$post_title}</a>";
 		}
 

@@ -33,7 +33,7 @@ class Post_Excerpt extends Block_Abstract {
 			if ( ! empty( $post_excerpt ) ) {
 
 				if ( isset( $this->attributes['showReadmore'] ) ) {
-					$post_url      = get_post_permalink( $post_id );
+					$post_url      = get_permalink( $post_id );
 					$readmore_text = esc_html( $this->attributes['readmoreText'] );
 					$post_excerpt  = $post_excerpt . "<a href='{$post_url}'>{$readmore_text}</a>";
 				}

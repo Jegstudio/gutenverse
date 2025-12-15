@@ -46,6 +46,10 @@ class Icon_List extends Style_Abstract {
 				'positioning' => ".{$this->element_id}.guten-element",
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .list-wrapper",
+					'hover'  => ".{$this->element_id}:hover .list-wrapper",
+				),
 				'mask'        => null,
 			)
 		);

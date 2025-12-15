@@ -46,6 +46,10 @@ class Logo_Slider extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .client-list",
+					'hover'  => ".{$this->element_id}:hover .client-list",
+				),
 				'mask'        => null,
 			)
 		);

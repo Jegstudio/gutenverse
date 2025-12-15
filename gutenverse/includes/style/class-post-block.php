@@ -53,8 +53,8 @@ class Post_Block extends Style_Abstract {
 				'animation'   => ".{$this->element_id}.guten-element",
 				'advance'     => ".{$this->element_id}.guten-element",
 				'transform'   => array(
-					'normal' => ".{$this->element_id}.guten-element",
-					'hover'  => ".{$this->element_id}.guten-element:hover",
+					'normal' => ".{$this->element_id}.guten-element > *",
+					'hover'  => ".{$this->element_id}.guten-element:hover > *",
 				),
 				'mask'        => null,
 			)

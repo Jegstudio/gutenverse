@@ -314,7 +314,7 @@ class Entries {
 		if ( 'post_parent' === $column ) {
 			$ref_id   = get_post_meta( $post_id, 'post-id', true );
 			$title    = get_the_title( $ref_id );
-			$link     = get_post_permalink( $ref_id );
+			$link     = get_permalink( $ref_id );
 			$form_ref = 0 !== (int) $ref_id ? '<a href="' . $link . '">' . $title . '</a>' : __( 'no-referral', 'gutenverse-form' );
 
 			gutenverse_print_html( $form_ref );

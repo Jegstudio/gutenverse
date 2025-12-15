@@ -47,6 +47,10 @@ class Progress_Bar extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .progress-group",
+					'hover'  => ".{$this->element_id}:hover .progress-group",
+				),
 				'mask'        => null,
 			)
 		);

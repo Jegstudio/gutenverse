@@ -35,11 +35,11 @@ const save = compose(
         'guten-button-wrapper',
         elementId,
         displayClass,
-        animationClass,
     );
 
     const buttonClass = classnames(
         'guten-button',
+        animationClass,
         {
             [`guten-button-${buttonType}`]: buttonType && buttonType !== 'default',
             [`guten-button-${buttonSize}`]: buttonSize,

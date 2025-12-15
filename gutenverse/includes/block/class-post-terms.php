@@ -81,7 +81,7 @@ class Post_Terms extends Block_Abstract {
 
 					return $content;
 				}
-				return "<span class='guten-post-terms'>example, category, and, terms</span>";
+				return "<span class='guten-post-terms'><span class=\"term-item\">example</span>, <span class=\"term-item\">category</span>, <span class=\"term-item\">and</span>, <span class=\"term-item\">terms</span></span>";
 
 			}
 		}

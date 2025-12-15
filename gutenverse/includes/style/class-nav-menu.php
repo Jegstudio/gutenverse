@@ -54,6 +54,10 @@ class Nav_Menu extends Style_Abstract {
 				'positioning' => "#{$this->element_id}",
 				'animation'   => "#{$this->element_id}",
 				'advance'     => "#{$this->element_id}",
+				'transform'   => array(
+					'normal' => "#{$this->element_id} > *",
+					'hover'  => "#{$this->element_id}:hover > *",
+				),
 				'mask'        => "#{$this->element_id}",
 			)
 		);

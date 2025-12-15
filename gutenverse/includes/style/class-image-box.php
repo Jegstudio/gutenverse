@@ -46,6 +46,10 @@ class Image_Box extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .inner-container",
+					'hover'  => ".{$this->element_id}:hover .inner-container",
+				),
 				'mask'        => null,
 			)
 		);

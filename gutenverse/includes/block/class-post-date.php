@@ -48,7 +48,7 @@ class Post_Date extends Block_Abstract {
 						$date     = "<a href='{$home_url}'>{$date}</a>";
 						break;
 					case 'post':
-						$post_url = get_post_permalink( $post_id );
+						$post_url = get_permalink( $post_id );
 						$date     = "<a href='{$post_url}'>{$date}</a>";
 						break;
 					case 'custom':

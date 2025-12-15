@@ -45,6 +45,10 @@ class Search extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .gutenverse-search-form",
+					'hover'  => ".{$this->element_id}:hover .gutenverse-search-form",
+				),
 				'mask'        => null,
 			)
 		);

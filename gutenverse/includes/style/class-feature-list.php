@@ -46,6 +46,10 @@ class Feature_List extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
+				'transform'   => array(
+					'normal' => ".{$this->element_id} .feature-list-wrapper",
+					'hover'  => ".{$this->element_id}:hover .feature-list-wrapper",
+				),
 				'mask'        => null,
 			)
 		);

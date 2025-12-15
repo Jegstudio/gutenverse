@@ -6,6 +6,12 @@ const getBlockStyle = (elementId, attributes) => {
     let data = [];
     data = backgroundStyle({ attributes, data, elementId });
 
+    //tooltip
+    isNotEmpty(attributes['tooltip']) && attributes['tooltip']['enable'] && data.push({
+        'type': 'tooltip',
+        'id': 'tooltip',
+        'selector': `.guten-tooltip-${elementId}.guten-tooltip`,
+    });
     //panel icon
     isNotEmpty(attributes['iconAlign']) && data.push({
         'type': 'plain',

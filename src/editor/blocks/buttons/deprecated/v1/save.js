@@ -1,40 +1,38 @@
 
-import { InnerBlocks } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
-import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
+import { compose } from '@wordpress/compose';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { useAnimationAdvanceData, useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
-import { compose } from '@wordpress/compose';
+import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 
-export const save = compose(
-    withAnimationAdvanceScript('accordions'),
+const save = compose(
+    withAnimationAdvanceScript('buttons'),
     withMouseMoveEffectScript
 )(({ attributes }) => {
     const {
         elementId,
+        orientation,
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
 
-    const wrapperClassName = classnames(
-        'guten-element',
-        'guten-accordions-wrapper',
-        animationClass,
-        displayClass
-    );
-
     const className = classnames(
-        'guten-accordions',
+        'guten-element',
+        'guten-buttons',
+        `${orientation}`,
         elementId,
+        animationClass,
+        displayClass,
     );
 
-    return <div className={wrapperClassName} {...advanceAnimationData}>
-        <div className={className}>
+    return (
+        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
             <InnerBlocks.Content />
         </div>
-    </div>;
+    );
 });
 
 export default save;

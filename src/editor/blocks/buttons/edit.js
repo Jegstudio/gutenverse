@@ -39,13 +39,18 @@ const ButtonsBlock = compose(
             elementId,
             'guten-element',
             'guten-buttons',
-            'no-margin',
             `${orientation}`,
-            animationClass,
-            displayClass,
         ),
         ref: elementRef
     });
+
+    const wrapperClassName = classnames(
+        'guten-element',
+        'guten-buttons-wrapper',
+        'no-margin',
+        animationClass,
+        displayClass,
+    );
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef, localAttr);
@@ -68,9 +73,11 @@ const ButtonsBlock = compose(
     );
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} setLocalAttr={setLocalAttr} />
-        <div {...innerBlockProps} />
+        <div className={wrapperClassName}>
+            <div {...innerBlockProps} />
+        </div>
     </>;
 });
 
