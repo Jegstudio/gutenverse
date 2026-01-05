@@ -25,25 +25,10 @@ class Upgrade_Wizard {
 	public static $action = 'gutenverse-upgrade-wizard';
 
 	/**
-	 * Hold API Variable Instance.
-	 *
-	 * @var Api
-	 */
-	public $api;
-
-	/**
-	 * Onboard Action Slug
-	 *
-	 * @var string
-	 */
-	public static $onboard = 'gutenverse-onboarding-wizard';
-
-	/**
 	 * Upgrade_Wizard constructor.
 	 */
 	public function __construct() {
 		add_action( 'admin_action_' . self::$action, array( $this, 'wizard_page' ) );
-		add_action( 'admin_action_' . self::$onboard, array( $this, 'onboard_wizard_page' ) );
 	}
 
 	/**
@@ -259,52 +244,6 @@ class Upgrade_Wizard {
 			array(),
 			GUTENVERSE_VERSION
 		);
-	}
-
-	/**
-	 * Wizard Page.
-	 *
-	 * @throws \Exception Throw exception.
-	 */
-	public function onboard_wizard_page() {
-		try {
-
-			if ( ! current_user_can( 'install_plugins' ) ) {
-				throw new \Exception( 'Access denied', 403 );
-			}
-
-			header( 'Content-Type: ' . get_option( 'html_type' ) . '; charset=' . get_option( 'blog_charset' ) );
-			$this->set_hook();
-			$this->render_onboard_wizard();
-			exit();
-		} catch ( \Exception $e ) {
-			echo wp_kses( $e->getMessage(), wp_kses_allowed_html() );
-		}
-	}
-
-	/**
-	 * Render Onboard Wizard.
-	 */
-	public function render_onboard_wizard() {
-		?>
-			<!DOCTYPE html>
-			<html <?php language_attributes(); ?>>
-			<head>
-				<meta charset="utf-8"/>
-				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				<title><?php esc_html_e( 'Welcome to Gutenverse', 'gutenverse' ); ?></title>
-					<?php wp_head(); ?>
-			</head>
-			<body>
-			<div id="gutenverse-onboard-wizard"></div>
-					<?php
-					wp_footer();
-					/** This action is documented in wp-admin/admin-footer.php */
-					do_action( 'admin_print_footer_scripts' );
-					?>
-			</body>
-			</html>
-		<?php
 	}
 
 	/**
