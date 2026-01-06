@@ -5,12 +5,18 @@ import { settingPanel } from './panel-setting';
 import { stylePanel } from './panel-style';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 import { dataPanel } from './panel-data';
+import { gallerySettingPanel } from "./panel-gallery-setting";
 
 export const panelList = () => {
     return [
         {
             title: __('Setting', 'gutenverse'),
             panelArray: settingPanel,
+            tabRole: TabSetting
+        },
+        {
+            title: __('Gallery Setting', 'gutenverse'),
+            panelArray: gallerySettingPanel,
             tabRole: TabSetting
         },
         {
@@ -30,8 +36,8 @@ export const panelList = () => {
             panelArray: (props) => backgroundPanel({
                 ...props,
                 styleId: 'post-featured-image-background',
-                normalOptions: [ 'default', 'gradient' ],
-                hoverOptions: [ 'default', 'gradient' ],
+                normalOptions: ['default', 'gradient'],
+                hoverOptions: ['default', 'gradient'],
             }),
             tabRole: TabStyle
         },
