@@ -5,7 +5,7 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect, useState } from '@wordpress/element';
 import { withPartialRender } from 'gutenverse-core/hoc';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
@@ -15,6 +15,8 @@ import { PanelTutorial } from 'gutenverse-core/controls';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+
+const { gvnewsEssentials = false } = window['GutenverseConfig'] || {};
 
 const PostFeaturedImageBlock = compose(
     withPartialRender
@@ -27,33 +29,28 @@ const PostFeaturedImageBlock = compose(
 
     const {
         elementId,
-        postLink,
-        placeholderImg,
-        imageSize
+        gutenversePreviewBlock = '',
     } = attributes;
+
+    useEffect(() => {
+        /* Only change the block preview if gvnewsEssentials is true and not on Post Loop */
+        if (!gvnewsEssentials || postId) {
+            return;
+        }
+        if (gutenversePreviewBlock === 'featuredGallery') {
+            setBlock(<GalleryContent attributes={attributes} />);
+        } else {
+            setBlock(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
+        }
+
+    }, [gutenversePreviewBlock]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
 
-    const [featuredImage] = useEntityProp('postType', postType, 'featured_media', postId);
-    const [link] = useEntityProp('postType', postType, 'link', postId);
 
-    const { media } = useSelect(
-        (select) => {
-            const { getMedia, getPostType } = select(coreStore);
-            return {
-                media:
-                    featuredImage &&
-                    getMedia(featuredImage, {
-                        context: 'view',
-                    }),
-                postType: postType && getPostType(postType),
-            };
-        },
-        [featuredImage, postType]
-    );
-    const mediaUrl = media?.media_details?.sizes?.[imageSize.value]?.source_url;
+    const [block, setBlock] = useState(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -67,9 +64,7 @@ const PostFeaturedImageBlock = compose(
         ref: elementRef
     });
 
-    let content = mediaUrl ? <img src={mediaUrl} /> : placeholderImg ? <img src={imagePlaceholder} /> : __('Post Featured Image', 'gutenverse');
 
-    content = postLink && link ? <a href={link} onClick={e => e.preventDefault()}>{content}</a> : content;
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -93,9 +88,68 @@ const PostFeaturedImageBlock = compose(
         </InspectorControls>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div  {...blockProps}>
-            {content}
+            {block}
         </div>
     </>;
 });
+
+const StandardFormat = ({ attributes, postId, postType }) => {
+
+    const {
+        postLink,
+        placeholderImg,
+        imageSize,
+    } = attributes;
+
+    const [featuredImage] = useEntityProp('postType', postType, 'featured_media', postId);
+    const [link] = useEntityProp('postType', postType, 'link', postId);
+
+    const { media } = useSelect(
+        (select) => {
+            const { getMedia, getPostType } = select(coreStore);
+            return {
+                media:
+                    featuredImage &&
+                    getMedia(featuredImage, {
+                        context: 'view',
+                    }),
+                postType: postType && getPostType(postType),
+            };
+        },
+        [featuredImage, postType]
+    );
+    const mediaUrl = media?.media_details?.sizes?.[imageSize.value]?.source_url;
+
+    let content = mediaUrl ? <img src={mediaUrl} /> : placeholderImg ? <img src={imagePlaceholder} /> : __('Post Featured Image', 'gutenverse');
+
+    content = postLink && link ? <a href={link} onClick={e => e.preventDefault()}>{content}</a> : content;
+
+    return <>{content}</>;
+}
+
+const GalleryContent = ({ attributes }) => {
+    const galleryRef = useRef();
+
+    useEffect(() => {
+        if (window.gvnewsFeaturedGallery) {
+            window.gvnewsFeaturedGallery(galleryRef.current);
+        }
+    }, []);
+
+    return (
+        <div className="gvnews_featured featured-gallery gvnews_owlslider">
+            <div className="featured_gallery" ref={galleryRef}>
+                {[...Array(5)].map((_, i) => (
+                    <a key={i}>
+                        <div className="gallery-item">
+                            <img src={imagePlaceholder} />
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 
 export default PostFeaturedImageBlock;

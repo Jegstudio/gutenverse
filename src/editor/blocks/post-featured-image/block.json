@@ -216,6 +216,14 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"galleryImageFit": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryImageRatio": {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"usesContext": ["postId", "postType", "queryId"],
