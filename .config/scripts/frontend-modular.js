@@ -67,8 +67,7 @@ const frontendModular = {
                         "./gutenverse/assets/js/frontend/chunk-shufflejs.js*",
                         "./gutenverse/assets/js/frontend/chunk-swiper.js*",
                         "./gutenverse/assets/js/frontend/chunk-swiper-modules.js*",
-                        "./gutenverse/assets/js/frontend/vendors-node_modules_pnpm_swiper_*.js*",
-                        "./gutenverse/assets/js/frontend/vendors-node_modules_swiper_shared_utils_mjs.js*"
+                        "./gutenverse/assets/js/frontend/vendors-node_modules_pnpm_swiper_*.js*"
                     ]
                 },
                 onEnd: {

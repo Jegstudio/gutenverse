@@ -10,4 +10,12 @@ module.exports = [
     wizard,
     frontendModular,
     formFallback
-];
+].map((config) => ({
+    ...config,
+    cache: {
+        type: 'filesystem',
+        buildDependencies: {
+            config: [__filename],
+        },
+    },
+}));
