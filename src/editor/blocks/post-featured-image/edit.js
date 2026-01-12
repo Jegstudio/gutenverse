@@ -38,7 +38,9 @@ const PostFeaturedImageBlock = compose(
             return;
         }
         if (gutenversePreviewBlock === 'featuredGallery') {
-            setBlock(<GalleryContent attributes={attributes} />);
+            setBlock(<GalleryContent />);
+        } else if (gutenversePreviewBlock === 'featuredVideo') {
+            setBlock(<VideoContent />);
         } else {
             setBlock(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
         }
@@ -127,7 +129,7 @@ const StandardFormat = ({ attributes, postId, postType }) => {
     return <>{content}</>;
 }
 
-const GalleryContent = ({ attributes }) => {
+const GalleryContent = () => {
     const galleryRef = useRef();
 
     useEffect(() => {
@@ -150,6 +152,18 @@ const GalleryContent = ({ attributes }) => {
         </div>
     );
 }
+
+
+const VideoContent = () => {
+    return (
+        <div className="gvnews_featured featured_video top_right ">
+            <div className="gvnews_featured_video_preview">
+                <img src={imagePlaceholder} />
+            </div>
+        </div>
+    );
+}
+
 
 
 export default PostFeaturedImageBlock;

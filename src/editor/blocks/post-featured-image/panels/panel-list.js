@@ -5,7 +5,8 @@ import { settingPanel } from './panel-setting';
 import { stylePanel } from './panel-style';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 import { dataPanel } from './panel-data';
-import { gallerySettingPanel } from "./panel-gallery-setting";
+import { gallerySettingPanel } from './panel-gallery-setting';
+import { videoSettingPanel } from './panel-video-setting';
 
 export const panelList = () => {
     return [
@@ -15,14 +16,21 @@ export const panelList = () => {
             tabRole: TabSetting
         },
         {
-            title: __('Gallery Setting', 'gutenverse'),
-            panelArray: gallerySettingPanel,
-            tabRole: TabSetting
-        },
-        {
             title: __('Image Data', 'gutenverse'),
             panelArray: dataPanel,
             tabRole: TabSetting
+        },
+        {
+            title: __('Gallery Setting', 'gutenverse'),
+            panelArray: gallerySettingPanel,
+            tabRole: TabSetting,
+            pro: true
+        },
+        {
+            title: __('Video Setting', 'gutenverse'),
+            panelArray: videoSettingPanel,
+            tabRole: TabSetting,
+            pro: true
         },
         {
             title: __('Style', 'gutenverse'),

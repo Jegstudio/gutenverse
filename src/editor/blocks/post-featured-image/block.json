@@ -224,6 +224,22 @@
 		"galleryImageRatio": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"galleryOverride": {
+			"type": "boolean",
+			"default": false
+		},
+		"videoOverride": {
+			"type": "boolean",
+			"default": false
+		},
+		"videoWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"videoHeight": {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"usesContext": ["postId", "postType", "queryId"],
