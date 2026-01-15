@@ -103,8 +103,6 @@ class Archive_Title extends Style_Abstract {
 			);
 		}
 
-		
-
 		if ( isset( $this->attrs['colorHover'] ) ) {
 			$this->inject_style(
 				array(

@@ -129,6 +129,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
@@ -136,6 +166,13 @@
 		"reusable": false,
 		"html": false
 	},
-	"keywords": ["container", "column", "space", "blank"],
-	"style": ["gutenverse-frontend-spacer-style"]
+	"keywords": [
+		"container",
+		"column",
+		"space",
+		"blank"
+	],
+	"style": [
+		"gutenverse-frontend-spacer-style"
+	]
 }

@@ -146,6 +146,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"variations": [
@@ -157,7 +187,9 @@
 			"attributes": {
 				"orientation": "horizontal"
 			},
-			"scope": ["transform"]
+			"scope": [
+				"transform"
+			]
 		},
 		{
 			"name": "buttons-vertical",
@@ -166,13 +198,24 @@
 			"attributes": {
 				"orientation": "vertical"
 			},
-			"scope": ["transform"]
+			"scope": [
+				"transform"
+			]
 		}
 	],
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["multiple", "buttons", "url", "action", "click", "link"],
-	"style": ["gutenverse-frontend-buttons-style"]
+	"keywords": [
+		"multiple",
+		"buttons",
+		"url",
+		"action",
+		"click",
+		"link"
+	],
+	"style": [
+		"gutenverse-frontend-buttons-style"
+	]
 }

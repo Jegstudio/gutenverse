@@ -69,7 +69,7 @@
 		},
 		"description": {
 			"type": "string",
-			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.​"
+			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.\u200b"
 		},
 		"descriptionChilds": {
 			"type": "array",
@@ -81,7 +81,10 @@
 		},
 		"dynamicAttributes": {
 			"type": "array",
-			"default": ["titleDynamicList", "descriptionDynamicList"]
+			"default": [
+				"titleDynamicList",
+				"descriptionDynamicList"
+			]
 		},
 		"hasGlobalLink": {
 			"type": "boolean",
@@ -431,12 +434,49 @@
 		"buttonUrl": {
 			"type": "string",
 			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["image", "box", "symbol", "logo"],
-	"style": ["gutenverse-frontend-image-box-style"]
+	"keywords": [
+		"image",
+		"box",
+		"symbol",
+		"logo"
+	],
+	"style": [
+		"gutenverse-frontend-image-box-style"
+	]
 }

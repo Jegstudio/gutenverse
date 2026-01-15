@@ -186,11 +186,47 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false
 	},
-	"keywords": ["star", "rating", "review"],
-	"style": ["gutenverse-frontend-star-rating-style"]
+	"keywords": [
+		"star",
+		"rating",
+		"review"
+	],
+	"style": [
+		"gutenverse-frontend-star-rating-style"
+	]
 }

@@ -360,13 +360,56 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["fun", "fact", "count", "number", "stats", "statistic", "data", "info"],
-	"viewScript": ["gutenverse-frontend-fun-fact-script"],
-	"style": ["gutenverse-frontend-fun-fact-style"]
+	"keywords": [
+		"fun",
+		"fact",
+		"count",
+		"number",
+		"stats",
+		"statistic",
+		"data",
+		"info"
+	],
+	"viewScript": [
+		"gutenverse-frontend-fun-fact-script"
+	],
+	"style": [
+		"gutenverse-frontend-fun-fact-style"
+	]
 }

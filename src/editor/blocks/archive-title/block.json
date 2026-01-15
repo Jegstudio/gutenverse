@@ -134,7 +134,6 @@
 			"type": "object",
 			"copyStyle": true
 		},
-
 		"animation": {
 			"type": "object",
 			"default": {},
@@ -195,13 +194,56 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
-	"usesContext": ["archiveId", "archiveType", "queryId"],
+	"usesContext": [
+		"archiveId",
+		"archiveType",
+		"queryId"
+	],
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["single", "category", "term", "archive", "title", "texts"],
-	"style": ["gutenverse-frontend-archive-title-style"]
+	"keywords": [
+		"single",
+		"category",
+		"term",
+		"archive",
+		"title",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-archive-title-style"
+	]
 }

@@ -40,14 +40,15 @@ class Breadcrumb extends Style_Abstract {
 		parent::__construct( $attrs );
 		$this->set_feature(
 			array(
-				'background' => array(
+				'background'  => array(
 					'normal' => ".guten-element.{$this->element_id}.guten-breadcrumb",
 					'hover'  => ".guten-element.{$this->element_id}.guten-breadcrumb:hover",
 				),
-				'border'     => array(
+				'border'      => array(
 					'normal' => ".guten-element.{$this->element_id}.guten-breadcrumb",
 					'hover'  => ".guten-element.{$this->element_id}.guten-breadcrumb:hover",
 				),
+				'positioning' => null,
 			)
 		);
 	}

@@ -111,13 +111,13 @@
 			"type": "object",
 			"default": {
 				"Desktop": {
-					"point" : 1
+					"point": 1
 				},
 				"Tablet": {
-					"point" : 1
+					"point": 1
 				},
 				"Mobile": {
-					"point" : 1
+					"point": 1
 				}
 			},
 			"copyStyle": true
@@ -227,12 +227,51 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["icon", "list", "image", "symbol", "logo", "texts"],
-	"style": ["gutenverse-frontend-icon-list-style"]
+	"keywords": [
+		"icon",
+		"list",
+		"image",
+		"symbol",
+		"logo",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-icon-list-style"
+	]
 }

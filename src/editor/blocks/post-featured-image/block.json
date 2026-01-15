@@ -92,7 +92,6 @@
 			},
 			"copyStyle": true
 		},
-
 		"imageBoxShadow": {
 			"type": "object",
 			"copyStyle": true
@@ -216,13 +215,54 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
-	"usesContext": ["postId", "postType", "queryId"],
+	"usesContext": [
+		"postId",
+		"postType",
+		"queryId"
+	],
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["single", "post", "featured", "image"],
-	"style": ["gutenverse-frontend-post-featured-image-style"]
+	"keywords": [
+		"single",
+		"post",
+		"featured",
+		"image"
+	],
+	"style": [
+		"gutenverse-frontend-post-featured-image-style"
+	]
 }

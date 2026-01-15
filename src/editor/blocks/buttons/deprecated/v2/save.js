@@ -1,7 +1,7 @@
 
 import { classnames } from 'gutenverse-core/components';
 import { compose } from '@wordpress/compose';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { useAnimationAdvanceData, useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -23,10 +23,10 @@ const save = compose(
         'guten-element',
         'guten-buttons',
         `${orientation}`,
+        elementId,
     );
 
     const wrapperClassName = classnames(
-        elementId,
         'guten-element',
         'guten-buttons-wrapper',
         animationClass,
@@ -35,7 +35,7 @@ const save = compose(
 
     return (
         <div className={wrapperClassName}>
-            <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+            <div className={className} {...advanceAnimationData}>
                 <InnerBlocks.Content />
             </div>
         </div>

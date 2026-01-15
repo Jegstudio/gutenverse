@@ -250,6 +250,36 @@
 		"hoverBgGradient": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"variations": [
@@ -260,7 +290,9 @@
 			"attributes": {
 				"orientation": "horizontal"
 			},
-			"scope": ["transform"]
+			"scope": [
+				"transform"
+			]
 		},
 		{
 			"name": "social-icons-vertical",
@@ -269,12 +301,19 @@
 			"attributes": {
 				"orientation": "vertical"
 			},
-			"scope": ["transform"]
+			"scope": [
+				"transform"
+			]
 		}
 	],
 	"supports": {
 		"className": false
 	},
-	"keywords": ["social", "icon"],
-	"style": ["gutenverse-frontend-social-icons-style"]
+	"keywords": [
+		"social",
+		"icon"
+	],
+	"style": [
+		"gutenverse-frontend-social-icons-style"
+	]
 }

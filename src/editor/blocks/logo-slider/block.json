@@ -398,13 +398,51 @@
 		"logoBackgroundHover": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["logo", "slider", "image"],
-	"viewScript": ["gutenverse-frontend-client-logo-script"],
-	"style": ["gutenverse-frontend-logo-slider-style"]
+	"keywords": [
+		"logo",
+		"slider",
+		"image"
+	],
+	"viewScript": [
+		"gutenverse-frontend-client-logo-script"
+	],
+	"style": [
+		"gutenverse-frontend-logo-slider-style"
+	]
 }
