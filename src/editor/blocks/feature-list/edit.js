@@ -11,6 +11,7 @@ import { getDeviceType } from 'gutenverse-core/editor-helper';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
 
 const FeatureListBlock = compose(
     withPartialRender,
@@ -22,6 +23,7 @@ const FeatureListBlock = compose(
         attributes,
         clientId,
         setBlockRef,
+        setAttributes
     } = props;
 
     const {
@@ -51,6 +53,27 @@ const FeatureListBlock = compose(
         ),
         ref: elementRef
     });
+
+    /* set image load attribute from calculating the lazyload attribute and dashboard image load attribut on first load block on editor */
+    useEffect(() => {
+        let newLists = [];
+        let changes = 0;
+        featureList.forEach((feature) => {
+            const { lazyLoad = false, imageLoad = '', type } = feature;
+            if ('image' === type && '' === imageLoad) {
+                changes++;
+                newLists.push({
+                    ...feature,
+                    imageLoad: getImageLoadValue('', lazyLoad)
+                });
+            } else {
+                newLists.push(feature);
+            }
+        });
+        if (changes > 0) {
+            setAttributes({ featureList: newLists });
+        }
+    }, [featureList]);
 
     const iconContent = (item, index) => {
         switch (item.type) {

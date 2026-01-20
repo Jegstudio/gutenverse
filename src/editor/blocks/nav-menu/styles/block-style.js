@@ -252,7 +252,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'SubmenuIndicatorSize',
         'responsive': true,
-        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > li > a svg, .${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > ul > li > a svg`,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > li > a .gutenverse-icon-svg, .${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > ul > li > a .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'font-size',
@@ -278,20 +278,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a > i`,
-    });
-
-    isNotEmpty(attributes['submenuIndicatorPadding']) && data.push({
-        'type': 'dimension',
-        'id': 'submenuIndicatorPadding',
-        'responsive': true,
-        'properties': [
-            {
-                'name': 'padding',
-                'valueType': 'direct'
-            }
-        ],
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a svg`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
     isNotEmpty(attributes['submenuIndicatorMargin']) && data.push({
@@ -304,44 +291,19 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i`,
-    });
-
-    isNotEmpty(attributes['submenuIndicatorMargin']) && data.push({
-        'type': 'dimension',
-        'id': 'submenuIndicatorMargin',
-        'responsive': true,
-        'properties': [
-            {
-                'name': 'margin',
-                'valueType': 'direct'
-            }
-        ],
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a svg`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
     isNotEmpty(attributes['submenuIndicatorBorder']) && data.push({
         'type': 'border',
         'id': 'submenuIndicatorBorder',
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
-    isNotEmpty(attributes['submenuIndicatorBorder']) && data.push({
-        'type': 'border',
-        'id': 'submenuIndicatorBorder',
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a svg`,
-    });
-
-    isNotEmpty(attributes['submenuIndicatorBorderResponsive']) && device !== 'Desktop' && data.push({
+    isNotEmpty(attributes['submenuIndicatorBorderResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'submenuIndicatorBorderResponsive',
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i`,
-    });
-
-    isNotEmpty(attributes['submenuIndicatorBorderResponsive']) && device !== 'Desktop' && data.push({
-        'type': 'borderResponsive',
-        'id': 'submenuIndicatorBorderResponsive',
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a svg`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
     isNotEmpty(attributes['submenuTypography']) && data.push({
@@ -406,7 +368,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'color',
         'id': 'submenuIndicatorColor',
         'responsive': true,
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a svg`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'fill',
@@ -451,7 +413,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'color',
         'id': 'submenuIndicatorHoverColor',
         'responsive': true,
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children:hover > a svg`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children:hover > a .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'fill',
@@ -496,7 +458,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'color',
         'id': 'submenuIndicatorActiveColor',
         'responsive': true,
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children.current-menu-parent > a svg`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children.current-menu-parent > a .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'fill',

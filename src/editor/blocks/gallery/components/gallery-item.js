@@ -20,6 +20,8 @@ const GalleryItem = (attributes) => {
         titleHeadingType: HtmlTag = 'h5'
     } = attributes;
 
+    const { imageLoad = '' } = galleryItem;
+
     const hoverClass = () => {
         switch (hover) {
             case 'slide-up':
@@ -50,7 +52,7 @@ const GalleryItem = (attributes) => {
         const height = galleryItem.src?.height;
         const width = galleryItem.src?.width;
 
-        return <img src={getImageSrc(galleryItem.src)} alt={galleryItem.title} {...(galleryItem.lazyLoad ? { loading: 'lazy' } : {})} {...(height && { height })} {...(width && { width })} />;
+        return <img src={getImageSrc(galleryItem.src)} alt={galleryItem.title} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(height && { height })} {...(width && { width })} />;
     };
 
     return layout === 'overlay' ? <div className="grid-item">

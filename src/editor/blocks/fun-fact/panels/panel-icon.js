@@ -1,10 +1,12 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, IconSVGControl, ImageControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { IconSVGControl, ImageControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { isNotEmpty } from 'gutenverse-core/helper';
+import { getDefaultImageLoad } from "../../../helper";
 
-export const iconPanel = ({ elementId, iconType, imageSize, imageSizeResponsive }) => {
+export const iconPanel = ({ elementId, iconType, imageLoad, lazyLoad }) => {
     const device = getDeviceType();
+
+    const defaultImageLoad = getDefaultImageLoad(imageLoad, lazyLoad);
     return [
         {
             id: 'iconType',
@@ -48,10 +50,21 @@ export const iconPanel = ({ elementId, iconType, imageSize, imageSizeResponsive 
             component: TextControl,
         },
         {
-            id: 'lazyLoad',
+            id: 'imageLoad',
+            label: __('Image Load', 'gutenverse'),
             show: iconType === 'image',
-            label: __('Set Lazy Load', 'gutenverse'),
-            component: CheckboxControl,
+            component: SelectControl,
+            defaultValue: defaultImageLoad,
+            options: [
+                {
+                    label: __('Normal Load', 'gutenverse'),
+                    value: 'eager'
+                },
+                {
+                    label: __('Lazy Load', 'gutenverse'),
+                    value: 'lazy'
+                },
+            ],
         },
         {
             id: 'imageSize',

@@ -65,11 +65,11 @@ const save = compose(
         badge,
         badgePosition,
         iconBoxOverlayDirection = 'left',
-        lazyLoad,
         showTitle,
         showDesc,
         iconGradient,
-        iconGradientHover
+        iconGradientHover,
+        imageLoad = ''
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
@@ -99,7 +99,7 @@ const save = compose(
         const height = image?.height;
         const width = image?.width;
 
-        return <img src={getImageSrc(image)} alt={imageAltText} {...(lazyLoad && { loading: 'lazy' })} {...(height && { height })} {...(width && { width })} />;
+        return <img src={getImageSrc(image)} alt={imageAltText} {...('lazy' === imageLoad && { loading: 'lazy' })} {...(height && { height })} {...(width && { width })} />;
     };
 
     const iconContent = () => {

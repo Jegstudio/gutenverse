@@ -318,6 +318,10 @@
 			"type": "string",
 			"copyStyle": true
 		},
+		"mobileLogoAriaLabel": {
+			"type": "string",
+			"copyStyle": true
+		},
 		"hamburgerAlignment": {
 			"type": "object",
 			"default": {
@@ -572,6 +576,10 @@
 		},
 		"submenuPanelMargin": {
 			"type": "object",
+			"copyStyle": true
+		},
+		"mobileMenuLogoLazyLoad": {
+			"type": "boolean",
 			"copyStyle": true
 		},
 		"condition": {

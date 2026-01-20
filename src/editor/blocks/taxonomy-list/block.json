@@ -2,7 +2,7 @@
 	"apiVersion": 3,
 	"name": "gutenverse/taxonomy-list",
 	"title": "Taxonomy List",
-	"description": "Create a list of categories",
+	"description": "Create a list choosen taxonomy",
 	"class_callback": "\\Gutenverse\\Block\\Taxonomy_List",
 	"category": "gutenverse-post",
 	"allowCopyStyle": true,

@@ -357,6 +357,22 @@
 			"type": "boolean",
 			"copyStyle": true
 		},
+		"prefixColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"suffixColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"prefixTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"suffixTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"condition": {
 			"type": "object",
 			"default": {}
@@ -390,6 +406,10 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

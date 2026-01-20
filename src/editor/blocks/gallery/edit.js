@@ -16,6 +16,7 @@ import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenve
 import getBlockStyle from './styles/block-style';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
 
 const GalleryBlock = compose(
     withPartialRender,
@@ -27,6 +28,7 @@ const GalleryBlock = compose(
         attributes,
         clientId,
         setBlockRef,
+        setAttributes
     } = props;
 
     const {
@@ -49,10 +51,33 @@ const GalleryBlock = compose(
         enableLoadIconSVG,
         enableLoadIconPosition,
         filterSearchIcon,
+        filterSearchIconType,
+        filterSearchIconSVG,
         filterSearchIconPosition,
         filterSearchFormText,
         titleHeadingType = 'h5'
     } = attributes;
+
+    /* set image load attribute from calculating the lazyload attribute and dashboard image load attribut on first load block on editor */
+    useEffect(() => {
+        let newImages = [];
+        let changes = 0;
+        images.forEach((image) => {
+            const { lazyLoad = false, imageLoad = '' } = image;
+            if ('' === imageLoad) {
+                changes++;
+                newImages.push({
+                    ...image,
+                    imageLoad: getImageLoadValue('', lazyLoad)
+                });
+            } else {
+                newImages.push(image);
+            }
+        });
+        if (changes > 0) {
+            setAttributes({ images: newImages });
+        }
+    }, [images]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
@@ -227,9 +252,9 @@ const GalleryBlock = compose(
                 </div> : <div className="search-filters-wrap">
                     <div className="filter-wrap">
                         <button id="search-filter-trigger" data-flag-all={currentFilter === 'All'} className={`search-filter-trigger icon-position-${filterSearchIconPosition}`} onClick={() => setShowFilter(!showFilter)}>
-                            {filterSearchIconPosition === 'before' && <i aria-hidden="true" className={filterSearchIcon}></i>}
+                            {filterSearchIconPosition === 'before' && renderIcon(filterSearchIcon, filterSearchIconType, filterSearchIconSVG)}
                             <span>{currentFilter === 'All' ? filterAll : currentFilter}</span>
-                            {filterSearchIconPosition === 'after' && <i aria-hidden="true" className={filterSearchIcon}></i>}
+                            {filterSearchIconPosition === 'after' && renderIcon(filterSearchIcon, filterSearchIconType, filterSearchIconSVG)}
                         </button>
                         <ul className={`search-filter-controls ${showFilter ? 'open-controls' : ''}`}>
                             <li className={`guten-gallery-control ${'All' === currentFilter ? 'active' : ''}`} data-flag-all={true} data-filter={filterAll} onClick={() => changeFilter('All')}>{filterAll}</li>

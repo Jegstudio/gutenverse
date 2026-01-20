@@ -1,8 +1,7 @@
 import { Fragment } from '@wordpress/element';
-import { dummyText } from 'gutenverse-core/helper';
-import { renderIcon } from 'gutenverse-core/helper';
 import { useSelect } from '@wordpress/data';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { parseUnicode, renderIcon, dummyText } from 'gutenverse-core/helper';
 
 const PostBlockContent = (props) => {
     const {
@@ -87,7 +86,7 @@ const PostBlockContent = (props) => {
     const renderExcerpt = (post) => {
         if (!excerptEnabled) return null;
 
-        const fullExcerpt = post?.excerpt || dummyText(10, 20);
+        const fullExcerpt = parseUnicode(post?.excerpt) || dummyText(10, 20);
         const trimmedExcerpt = excerptLength > 0 ? trimWords(fullExcerpt, excerptLength) : fullExcerpt;
         const more = excerptMore || '...';
 
@@ -105,7 +104,7 @@ const PostBlockContent = (props) => {
             <div className="guten-post-meta-bottom">
                 {readmoreEnabled && (
                     <div className={`guten-meta-readmore icon-position-${readmoreIconPosition}`}>
-                        <a href="#" aria-label={`Read more about ${post?.title}`} className="guten-readmore">
+                        <a href="#" aria-label={`Read more about ${parseUnicode(post?.title)}`} className="guten-readmore">
                             {readmoreIconPosition === 'before' && renderIcon(readmoreIcon, readmoreIconType, readmoreIconSVG)}
                             {readmoreText}
                             {readmoreIconPosition === 'after' && renderIcon(readmoreIcon, readmoreIconType, readmoreIconSVG)}
@@ -159,8 +158,8 @@ const PostBlockContent = (props) => {
                 const HtmlTag = htmlTag;
                 content.push(
                     <HtmlTag key={`title-${index}`} className="guten-post-title">
-                        <a aria-label={post?.title} href="#">
-                            {post?.title || dummyText(5, 10)}
+                        <a aria-label={parseUnicode(post?.title)} href="#">
+                            {parseUnicode(post?.title) || dummyText(5, 10)}
                         </a>
                     </HtmlTag>
                 );
@@ -221,7 +220,7 @@ const PostBlockContent = (props) => {
         return (
             <article key={post?.id || index} className={postClasses}>
                 <div className="guten-thumb">
-                    <a aria-label={post?.title || ''} href="javascript:void(0);">
+                    <a aria-label={parseUnicode(post?.title) || ''} href="javascript:void(0);">
                         <div className="thumbnail-container">
                             <img
                                 loading="eager"
@@ -229,7 +228,7 @@ const PostBlockContent = (props) => {
                                 height={post?.thumbnail?.height || 400}
                                 src={mediaUrl}
                                 className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                alt={post?.title || ''}
+                                alt={parseUnicode(post?.title) || ''}
                                 decoding="async"
                                 sizes={`(max-width: ${post?.thumbnail?.width || 400}px) 100vw, ${post?.thumbnail?.width || 400}px`}
                             />

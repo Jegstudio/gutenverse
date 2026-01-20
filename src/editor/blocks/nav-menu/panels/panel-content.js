@@ -59,5 +59,10 @@ export const contentPanel = () => {
             label: __('Close Button Aria Label', 'gutenverse'),
             component: TextControl,
         },
+        {
+            id: 'mobileLogoAriaLabel',
+            label: __('Mobile Logo Aria Label', 'gutenverse'),
+            component: TextControl,
+        },
     ];
 };

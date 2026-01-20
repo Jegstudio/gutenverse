@@ -20,6 +20,7 @@ import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenve
 import getBlockStyle from './styles/block-style';
 import { useRichTextParameter } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
 
 const NEW_TAB_REL = 'noreferrer noopener';
 
@@ -77,8 +78,15 @@ const IconBoxBlock = compose(
         showTitle,
         showDesc,
         iconGradient,
-        iconGradientHover
+        iconGradientHover,
+        imageLoad
     } = attributes;
+
+    useEffect(() => {
+        if ('' === imageLoad) {
+            setAttributes({ imageLoad: getImageLoadValue('', lazyLoad) });
+        }
+    }, []);
 
     const {
         panelState,

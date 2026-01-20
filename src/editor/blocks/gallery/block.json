@@ -608,7 +608,15 @@
 		},
 		"filterSearchIcon": {
 			"type": "string",
-			"default": "fas fa-angle-down"
+			"default": "fas fa-angle-down",
+			"copyStyle": true
+		},
+		"filterSearchIconSVG": {
+			"type": "string"
+		},
+		"filterSearchIconType": {
+			"type": "string",
+			"default": "icon"
 		},
 		"filterSearchIconPosition": {
 			"type": "string",

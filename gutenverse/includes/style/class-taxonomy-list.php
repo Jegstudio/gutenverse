@@ -168,60 +168,23 @@ class Taxonomy_List extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['contentSpacing'] ) ) {
-			if ( isset( $this->attrs['layout'] ) && 'column' !== $this->attrs['layout'] ) {
-				$this->inject_style(
-					array(
-						'selector'       => ".{$this->element_id} .taxonomy-list-wrapper",
-						'property'       => function ( $value ) {
-							$unit  = $value['unit'] ?? '';
-							$point = $value['point'] ?? '';
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-wrapper",
+					'property'       => function ( $value ) {
+						$unit  = $value['unit'] ?? '';
+						$point = $value['point'] ?? '';
 
-							if ( '' === $point || ! is_numeric( $point ) ) {
-								return '';
-							}
+						if ( '' === $point || ! is_numeric( $point ) ) {
+							return '';
+						}
 
-							return "row-gap: {$point}{$unit};";
-						},
-						'value'          => $this->attrs['contentSpacing'],
-						'device_control' => true,
-					)
-				);
-			} else {
-				$this->inject_style(
-					array(
-						'selector'       => ".{$this->element_id} .taxonomy-list-wrapper",
-						'property'       => function ( $value ) {
-							$unit  = $value['unit'] ?? '';
-							$point = $value['point'] ?? '';
-
-							if ( '' === $point || ! is_numeric( $point ) ) {
-								return '';
-							}
-
-							return "row-gap: calc({$point}{$unit}/2);";
-						},
-						'value'          => $this->attrs['contentSpacing'],
-						'device_control' => true,
-					)
-				);
-				$this->inject_style(
-					array(
-						'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-						'property'       => function ( $value ) {
-							$unit1  = $value['unit'] ?? '';
-							$point1 = $value['point'] ?? '';
-
-							if ( '' === $point1 || ! is_numeric( $point1 ) ) {
-								return '';
-							}
-
-							return "padding-top: calc({$point1}{$unit1}/2);";
-						},
-						'value'          => $this->attrs['contentSpacing'],
-						'device_control' => true,
-					)
-				);
-			}
+						return "row-gap: {$point}{$unit};";
+					},
+					'value'          => $this->attrs['contentSpacing'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['contentSpacingHorizontal'] ) && 'column' !== $this->attrs['layout'] ) {
@@ -234,22 +197,7 @@ class Taxonomy_List extends Style_Abstract {
 							return '';
 						}
 						$value = $value['point'];
-						return "column-gap: calc({$value}{$unit}/2);";
-					},
-					'value'          => $this->attrs['contentSpacingHorizontal'],
-					'device_control' => true,
-				)
-			);
-			$this->inject_style(
-				array(
-					'selector'       => ".{$this->element_id} .taxonomy-list-item:not(:first-child)",
-					'property'       => function ( $value ) {
-						$unit  = $value['unit'];
-						if ( ! isset( $value['point'] ) ) {
-							return '';
-						}
-						$value = $value['point'];
-						return "padding-left: calc({$value}{$unit}/2);";
+						return "column-gap: {$value}{$unit};";
 					},
 					'value'          => $this->attrs['contentSpacingHorizontal'],
 					'device_control' => true,
