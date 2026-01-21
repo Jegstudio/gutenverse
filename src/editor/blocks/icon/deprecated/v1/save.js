@@ -1,5 +1,4 @@
 import { compose } from '@wordpress/compose';
-import { useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { applyFilters } from '@wordpress/hooks';
 import { isEmpty } from 'gutenverse-core/helper';
@@ -63,7 +62,7 @@ const save = compose(
 
         return iconElement;
     };
-    return <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+    return <div className={className} {...advanceAnimationData}>
         <IconELement />
     </div>;
 });

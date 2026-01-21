@@ -1,6 +1,5 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps } from '@wordpress/block-editor';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -49,7 +48,7 @@ const save = compose(
     };
 
     return (
-        <div {...useBlockProps.save({ className })} data-animation={style} data-loop={loop}>
+        <div className={className} data-animation={style} data-loop={loop}>
             {loadAnimatedText()}
         </div>
     );

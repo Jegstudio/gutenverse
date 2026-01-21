@@ -1,6 +1,6 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks, RichText } from '@wordpress/block-editor';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -27,7 +27,7 @@ const save = compose(
         displayClass,
     );
 
-    return tabs && <div {...useBlockProps.save({ className })}>
+    return tabs && <div className={className}>
         <div className={'tab-heading'}>
             {tabs.map((tab, index) => {
                 return <div className={classnames('tab-heading-item', {

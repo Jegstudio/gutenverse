@@ -1,6 +1,4 @@
 import { compose } from '@wordpress/compose';
-
-import { useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { ImageBoxFigure } from './component/image-box-figure';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -31,7 +29,7 @@ const save = compose(
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
 
-    const blockProps = useBlockProps.save({
+    const blockProps = {
         ...advanceAnimationData,
         className: classnames(
             'guten-element',
@@ -40,7 +38,15 @@ const save = compose(
             animationClass,
             displayClass,
         ),
-    });
+    };
+
+    const className = classnames(
+        'guten-element',
+        'guten-image',
+        elementId,
+        animationClass,
+        displayClass,
+    );
 
     const caption = () => {
         switch (captionType) {
@@ -53,7 +59,7 @@ const save = compose(
         }
     };
 
-    return <div {...blockProps}>
+    return <div className={className} {...advanceAnimationData}>
         <a className="guten-image-wrapper" href={url} target={linkTarget} rel={rel} aria-label={ariaLabel}>
             <ImageBoxFigure {...attributes}/>
         </a>

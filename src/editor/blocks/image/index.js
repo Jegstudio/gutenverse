@@ -19,6 +19,10 @@ export const settings = {
     deprecated: [
         {
             attributes,
+            save: saveV1
+        },
+        {
+            attributes,
             save: saveV2
         }
     ]

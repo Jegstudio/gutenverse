@@ -1,6 +1,5 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps } from '@wordpress/block-editor';
 import { swiperData } from 'gutenverse-core/helper';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
@@ -44,7 +43,7 @@ const save = compose(
         }
     );
     return (
-        <div {...useBlockProps.save({ className })}>
+        <div className={className}>
             <div className="client-list">
                 <div id={elementId} className="swiper-container" {...swiperData(attributes)}>
                     <div className="swiper-wrapper">
