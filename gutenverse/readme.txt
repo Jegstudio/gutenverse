@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.4.3
+Stable tag: 3.4.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,6 +298,27 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+= 3.4.4 =
+##### New & Improvements
+* add image width & height for gallery block
+* add aria label options in some blocks for SEO & accessibility
+* add loading state when converting icon to svg for better ux
+* add lazy loading for nav menu mobile logo
+* add show notice on gutenverse dashboard setting
+* update tabs dropdown icon to svg
+
+##### Bug Fixes
+* fix gallery search filter dropdown svg conversion
+* fix issue with background featured image
+* fix link issue in image block
+* fix nav menu svg on frontend
+* fix issue with post comment reply
+* fix reactplayer dependency
+* fix issue with post list icon
+* fix issue with elementId when duplicating block inside post content or template part
+* fix post block error when `number of post initially showed` changed
+* fix gallery item bug in editor
+
 = 3.4.3 =
 ##### New & Improvements
 * add aria label to icon box image, post block image, advanced button, and nav menu

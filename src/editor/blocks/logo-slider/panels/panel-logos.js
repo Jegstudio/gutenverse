@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, ImageControl, RepeaterControl, TextControl } from 'gutenverse-core/controls';
+import { ImageControl, RepeaterControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoadRepeater } from "../../../helper";
 
 export const logosPanel = () => {
     return [
@@ -26,9 +27,20 @@ export const logosPanel = () => {
                     description: __('If the Hover Logo is empty, the Client Logo will be used as a placeholder. Hovering options will still apply.', 'gutenverse'),
                 },
                 {
-                    id: 'lazyLoad',
-                    label: __('Set Lazy Load', 'gutenverse'),
-                    component: CheckboxControl
+                    id: 'imageLoad',
+                    label: __('Image Load', 'gutenverse'),
+                    component: SelectControl,
+                    defaultValue: getDefaultImageLoadRepeater,
+                    options: [
+                        {
+                            label: __('Normal Load', 'gutenverse'),
+                            value: 'eager'
+                        },
+                        {
+                            label: __('Lazy Load', 'gutenverse'),
+                            value: 'lazy'
+                        },
+                    ],
                 },
                 {
                     id: 'link',

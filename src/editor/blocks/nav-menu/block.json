@@ -318,6 +318,10 @@
 			"type": "string",
 			"copyStyle": true
 		},
+		"mobileLogoAriaLabel": {
+			"type": "string",
+			"copyStyle": true
+		},
 		"hamburgerAlignment": {
 			"type": "object",
 			"default": {
@@ -574,6 +578,10 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"mobileMenuLogoLazyLoad": {
+			"type": "boolean",
+			"copyStyle": true
+		},
 		"condition": {
 			"type": "object",
 			"default": {}
@@ -583,7 +591,14 @@
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["navigation", "menu"],
-	"viewScript": ["gutenverse-frontend-nav-menu-script"],
-	"style": ["gutenverse-frontend-nav-menu-style"]
+	"keywords": [
+		"navigation",
+		"menu"
+	],
+	"viewScript": [
+		"gutenverse-frontend-nav-menu-script"
+	],
+	"style": [
+		"gutenverse-frontend-nav-menu-style"
+	]
 }

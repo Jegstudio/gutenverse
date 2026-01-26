@@ -261,6 +261,10 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

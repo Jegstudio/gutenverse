@@ -125,7 +125,6 @@ export const filterSearchPanel = (props) => {
         },
         {
             id: 'submenuSplitter1',
-            first: true,
             component: HeadingControl,
             label: __('Control Tab')
         },
@@ -178,7 +177,7 @@ export const filterSearchPanel = (props) => {
                     'type': 'unitPoint',
                     'id': 'fitlerSearchIconSpacing',
                     'responsive': true,
-                    'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-after i, .${elementId}.guten-gallery .search-filter-trigger.icon-position-after svg`,
+                    'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-after i, .${elementId}.guten-gallery .search-filter-trigger.icon-position-after .gutenverse-icon-svg`,
                     'properties': [
                         {
                             'name': 'margin-left',
@@ -190,7 +189,7 @@ export const filterSearchPanel = (props) => {
                     'type': 'unitPoint',
                     'id': 'fitlerSearchIconSpacing',
                     'responsive': true,
-                    'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-before i, .${elementId}.guten-gallery .search-filter-trigger.icon-position-before svg`,
+                    'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-before i, .${elementId}.guten-gallery .search-filter-trigger.icon-position-before .gutenverse-icon-svg`,
                     'properties': [
                         {
                             'name': 'margin-right',

@@ -31,7 +31,8 @@ class Nav_Menu extends Block_Abstract {
 		$mobile_close_icon    = esc_attr( $this->attributes['mobileCloseIcon'] );
 		$enable_overlay       = esc_attr( $this->attributes['mobileEnableOverlay'] );
 		$mobile_logo          = isset( $this->attributes['mobileMenuLogo'] ) ? $this->attributes['mobileMenuLogo'] : null;
-		$mobile_logo_image    = $this->render_image( $mobile_logo );
+		$mobile_logo_load     = isset( $this->attributes['mobileMenuLogoLazyLoad'] ) ? $this->attributes['mobileMenuLogoLazyLoad'] : false;
+		$mobile_logo_image    = $this->render_image( $mobile_logo, $mobile_logo_load );
 		$submenu_click        = $this->attributes['mobileSubmenuClick'] ? 'submenu-click-title' : 'submenu-click-icon';
 		$closeon_click        = $this->attributes['mobileCloseOnClick'];
 		$item_indicator       = esc_attr( $this->attributes['submenuItemIndicator'] );
@@ -44,6 +45,7 @@ class Nav_Menu extends Block_Abstract {
 		$menu                 = gutenverse_get_menu( $this->attributes['menuId'] );
 		$close_aria_label     = isset( $this->attributes['closeAriaLabel'] ) ? esc_attr( $this->attributes['closeAriaLabel'] ) : false;
 		$hamburger_aria_label = isset( $this->attributes['hamburgerAriaLabel'] ) ? esc_attr( $this->attributes['hamburgerAriaLabel'] ) : false;
+		$logo_aria_label      = isset( $this->attributes['mobileLogoAriaLabel'] ) ? esc_attr( $this->attributes['mobileLogoAriaLabel'] ) : false;
 
 		$mobile_icon_type       = isset( $this->attributes['mobileIconType'] ) ? $this->attributes['mobileIconType'] : 'icon';
 		$mobile_icon_svg        = isset( $this->attributes['mobileIconSVG'] ) ? $this->attributes['mobileIconSVG'] : array();
@@ -68,7 +70,7 @@ class Nav_Menu extends Block_Abstract {
 
 		return '<div id="' . $element_id . '" class="guten-element guten-nav-menu nav-menu break-point-' . $menu_breakpoint . ' ' . $submenu_click . $display_classes . $animation_class . $custom_classes . '" data-item-indicator="' . $item_indicator . '" data-item-indicator-type="' . esc_attr( $submenu_indicator_type ) . '" data-item-indicator-svg="' . esc_attr( $submenu_indicator_svg_encoded ) . '" data-close-on-click="' . $closeon_click . '">
 			<div class="gutenverse-hamburger-wrapper">
-				<button class="gutenverse-hamburger-menu" aria-label=' . $hamburger_aria_label . '>
+				<button class="gutenverse-hamburger-menu" aria-label="' . $hamburger_aria_label . '">
 				' . $hamburger_icon_html . '
 				</button>
 			</div>
@@ -77,9 +79,9 @@ class Nav_Menu extends Block_Abstract {
 				<div>
 					<div class="gutenverse-nav-identity-panel">
 						<div class="gutenverse-nav-site-title">
-							<a href="' . $menu_url . '" class="gutenverse-nav-logo">' . $mobile_logo_image . '</a>
+							<a aria-label="' . $logo_aria_label . '" href="' . $menu_url . '" class="gutenverse-nav-logo">' . $mobile_logo_image . '</a>
 						</div>
-						<button class="gutenverse-close-menu" aria-label=' . $close_aria_label . '>' . $close_icon_html . '</button>
+						<button class="gutenverse-close-menu" aria-label="' . $close_aria_label . '">' . $close_icon_html . '</button>
 					</div>
 				</div>
 			</div>
@@ -93,7 +95,7 @@ class Nav_Menu extends Block_Abstract {
 	 *
 	 * @return string
 	 */
-	public function render_image( $image ) {
+	public function render_image( $image, $lazy = false ) {
 		if ( $image ) {
 			$media    = $image['media'];
 			$size     = $image['size'];
@@ -104,6 +106,7 @@ class Nav_Menu extends Block_Abstract {
 			$src        = '';
 			$width      = '';
 			$height     = '';
+			$loading    = $lazy ? 'lazy' : 'eager';
 
 			if ( ! empty( $media['sizes'][ $size ]['url'] ) ) {
 				$src = $media['sizes'][ $size ]['url'];
@@ -121,7 +124,7 @@ class Nav_Menu extends Block_Abstract {
 				$height = $attachment[2];
 			}
 
-			return '<img src="' . esc_url( $src ) . '" alt="' . $alt . '" width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '">';
+			return '<img loading="' . $loading . '" src="' . esc_url( $src ) . '" alt="' . $alt . '" width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '">';
 		} else {
 			return null;
 		}

@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl, IconControl, ImageControl, NumberControl, RangeControl, RepeaterControl, SelectControl, SVGControl, TextareaControl, TextControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoadRepeater } from "../../../helper";
 
 export const settingsPanel = (props) => {
     const {
@@ -59,10 +60,21 @@ export const settingsPanel = (props) => {
                     component: ImageControl,
                 },
                 {
-                    id: 'lazyLoad',
-                    label: __('Set Lazy Load', 'gutenverse'),
+                    id: 'imageLoad',
+                    label: __('Image Load', 'gutenverse'),
                     show: value => value.type === 'image',
-                    component: CheckboxControl,
+                    component: SelectControl,
+                    defaultValue: getDefaultImageLoadRepeater,
+                    options: [
+                        {
+                            label: __('Normal Load', 'gutenverse'),
+                            value: 'eager'
+                        },
+                        {
+                            label: __('Lazy Load', 'gutenverse'),
+                            value: 'lazy'
+                        },
+                    ],
                 },
                 {
                     id: 'icon',

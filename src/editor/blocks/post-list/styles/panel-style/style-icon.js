@@ -126,7 +126,7 @@ const iconStyle = (elementId, attributes, data) => {
                 'valueType': 'direct',
             }
         ],
-        'selector': `.${elementId} .guten-postlist .guten-post a .icon-list i`,
+        'selector': `.${elementId} .guten-postlist .guten-post a .icon-list i, .${elementId} .guten-postlist .guten-post a .icon-list .gutenverse-icon-svg`,
     });
 
     isNotEmpty(attributes['iconHoverColor']) && data.push({

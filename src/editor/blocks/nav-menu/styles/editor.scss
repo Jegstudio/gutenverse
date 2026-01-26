@@ -60,7 +60,9 @@
 				overflow-y: auto;
 
 				li.menu-item-has-children {
-					>a i {
+
+					>a i,
+					>a .gutenverse-icon-svg {
 						margin-left: auto;
 						padding: 4px 15px;
 						border: 1px solid var(--guten-border-color);
@@ -97,7 +99,8 @@
 					a {
 						display: block;
 
-						i {
+						i,
+						.gutenverse-icon-svg {
 							float: right;
 						}
 					}
@@ -197,7 +200,9 @@
 					overflow-y: auto;
 
 					li.menu-item-has-children {
-						>a i {
+
+						>a i,
+						>a .gutenverse-icon-svg {
 							margin-left: auto;
 							padding: 4px 15px;
 							border: 1px solid var(--guten-border-color);
@@ -233,7 +238,8 @@
 						a {
 							display: block;
 
-							i {
+							i,
+							.gutenverse-icon-svg {
 								float: right;
 							}
 						}
@@ -326,7 +332,9 @@
 					overflow-y: auto;
 
 					li.menu-item-has-children {
-						>a i {
+
+						>a i,
+						>a .gutenverse-icon-svg {
 							margin-left: auto;
 							padding: 4px 15px;
 							border: 1px solid var(--guten-border-color);
@@ -362,7 +370,8 @@
 						a {
 							display: block;
 
-							i {
+							i,
+							.gutenverse-icon-svg {
 								float: right;
 							}
 						}

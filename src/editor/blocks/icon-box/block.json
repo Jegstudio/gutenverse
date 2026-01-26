@@ -572,6 +572,10 @@
 		"anchorAriaLabel": {
 			"type": "string",
 			"default": ""
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

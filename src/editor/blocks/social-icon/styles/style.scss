@@ -46,3 +46,13 @@
     }
   }
 }
+
+@supports (background: -webkit-named-image(i)) {
+  .guten-social-icon {
+    .gutenverse-icon-svg {
+      svg {
+        width: unset;
+      }
+    }
+  }
+}

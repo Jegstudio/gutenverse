@@ -8,6 +8,46 @@ export const contentStylePanel = (props) => {
 
     return [
         {
+            id: 'prefixColor',
+            label: __('Prefix Color', 'gutenverse'),
+            component: ColorControl,
+            allowDeviceControl: true,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'prefixColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .prefix`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct',
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'suffixColor',
+            label: __('Suffix Color', 'gutenverse'),
+            component: ColorControl,
+            allowDeviceControl: true,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'suffixColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .suffix`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct',
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'numberColor',
             label: __('Number Color', 'gutenverse'),
             component: ColorControl,
@@ -46,6 +86,16 @@ export const contentStylePanel = (props) => {
                     ]
                 }
             ]
+        },
+        {
+            id: 'prefixTypography',
+            label: __('Prefix Typography', 'gutenverse'),
+            component: TypographyControl,
+        },
+        {
+            id: 'suffixTypography',
+            label: __('Suffix Typography', 'gutenverse'),
+            component: TypographyControl,
         },
         {
             id: 'numberTypography',

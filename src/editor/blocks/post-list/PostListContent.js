@@ -1,5 +1,5 @@
 
-import { renderIcon, dummyText } from 'gutenverse-core/helper';
+import { renderIcon, dummyText, parseUnicode } from 'gutenverse-core/helper';
 
 const PostListContent = (props) => {
     const {
@@ -91,7 +91,7 @@ const PostListContent = (props) => {
                     {thumbnail}
                     <div className="guten-postlist-content">
                         {metaPosition === 'top' && renderMeta(post)}
-                        <span className="guten-postlist-title">{post?.title || dummyText(5, 10)}</span>
+                        <span className="guten-postlist-title">{parseUnicode(post?.title) || dummyText(5, 10)}</span>
                         {metaPosition === 'bottom' && renderMeta(post)}
                     </div>
                 </a>
