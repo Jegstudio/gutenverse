@@ -1,3 +1,4 @@
+import { applyFilters } from '@wordpress/hooks';
 import { compose } from '@wordpress/compose';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
@@ -30,7 +31,17 @@ const PostFeaturedImageBlock = compose(
     const {
         elementId,
         gutenversePreviewBlock = '',
+        galleryHideNav,
+        galleryNextButtonIcon,
+        galleryNextButtonIconType,
+        galleryNextButtonIconSVG,
+        galleryPrevButtonIcon,
+        galleryPrevButtonIconType,
+        galleryPrevButtonIconSVG,
+        galleryHideDots,
     } = attributes;
+
+    const [block, setBlock] = useState(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
 
     useEffect(() => {
         /* Only change the block preview if gvnewsEssentials is true and not on Post Loop */
@@ -38,21 +49,30 @@ const PostFeaturedImageBlock = compose(
             return;
         }
         if (gutenversePreviewBlock === 'featuredGallery') {
-            setBlock(<GalleryContent />);
+            setBlock(<GalleryContent attributes={attributes} block={block} />);
         } else if (gutenversePreviewBlock === 'featuredVideo') {
             setBlock(<VideoContent />);
         } else {
             setBlock(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
         }
 
-    }, [gutenversePreviewBlock]);
+    }, [
+        gutenversePreviewBlock,
+        galleryHideNav,
+        galleryNextButtonIcon,
+        galleryNextButtonIconType,
+        galleryNextButtonIconSVG,
+        galleryPrevButtonIcon,
+        galleryPrevButtonIconType,
+        galleryPrevButtonIconSVG,
+        galleryHideDots,
+    ]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
 
 
-    const [block, setBlock] = useState(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -129,28 +149,10 @@ const StandardFormat = ({ attributes, postId, postType }) => {
     return <>{content}</>;
 }
 
-const GalleryContent = () => {
-    const galleryRef = useRef();
-
-    useEffect(() => {
-        if (window.gvnewsFeaturedGallery) {
-            window.gvnewsFeaturedGallery(galleryRef.current);
-        }
-    }, []);
-
-    return (
-        <div className="gvnews_featured featured-gallery gvnews_owlslider">
-            <div className="featured_gallery" ref={galleryRef}>
-                {[...Array(5)].map((_, i) => (
-                    <a key={i}>
-                        <div className="gallery-item">
-                            <img src={imagePlaceholder} />
-                        </div>
-                    </a>
-                ))}
-            </div>
-        </div>
-    );
+const GalleryContent = ({ attributes, block }) => {
+    return applyFilters('gutenverse.post-featured-image.galleryContent',
+        <></>
+        , attributes, block);
 }
 
 

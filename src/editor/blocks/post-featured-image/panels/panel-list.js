@@ -1,15 +1,14 @@
 /* WordPress dependencies */
 import { __ } from '@wordpress/i18n';
-import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel } from 'gutenverse-core/controls';
+import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel, LockedProPanel, LockedGalleryPostFormat, LockedVideoPostFormat } from 'gutenverse-core/controls';
 import { settingPanel } from './panel-setting';
 import { stylePanel } from './panel-style';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 import { dataPanel } from './panel-data';
-import { gallerySettingPanel } from './panel-gallery-setting';
-import { videoSettingPanel } from './panel-video-setting';
+import { applyFilters } from '@wordpress/hooks';
 
 export const panelList = () => {
-    return [
+    return applyFilters('gutenverse.post-featured-image.panels', [
         {
             title: __('Setting', 'gutenverse'),
             panelArray: settingPanel,
@@ -21,22 +20,54 @@ export const panelList = () => {
             tabRole: TabSetting
         },
         {
+            id: 'gallery-setting',
             title: __('Gallery Setting', 'gutenverse'),
-            panelArray: gallerySettingPanel,
             tabRole: TabSetting,
-            pro: true
+            pro: true,
+            panelArray: () => {
+                return [{
+                    component: LockedGalleryPostFormat,
+                }];
+            },
         },
         {
+            id: 'video-setting',
             title: __('Video Setting', 'gutenverse'),
-            panelArray: videoSettingPanel,
             tabRole: TabSetting,
-            pro: true
+            pro: true,
+            panelArray: () => {
+                return [{
+                    component: LockedVideoPostFormat,
+                }];
+            },
         },
         {
             title: __('Style', 'gutenverse'),
             initialOpen: false,
             panelArray: stylePanel,
             tabRole: TabStyle
+        },
+        {
+            id: 'gallery-nav-style',
+            title: __('Gallery Navigation Style', 'gutenverse'),
+            tabRole: TabStyle,
+            pro: true,
+            panelArray: () => {
+                return [{
+                    component: LockedGalleryPostFormat,
+                }];
+            },
+        },
+        {
+            id: 'gallery-dots-style',
+            title: __('Gallery Dots Style', 'gutenverse'),
+            tabRole: TabStyle,
+            pro: true,
+            panelArray: () => {
+                return [{
+                    component: LockedGalleryPostFormat,
+                }];
+            },
         },
         {
             title: __('Background', 'gutenverse'),
@@ -110,5 +141,5 @@ export const panelList = () => {
             initialOpen: false,
             pro: true
         },
-    ];
+    ]);
 };

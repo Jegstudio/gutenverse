@@ -8,3 +8,11 @@
         object-fit: cover;
     }
 }
+
+.featured-gallery.gvnews_owlslider .tns-nav {
+    align-items: end;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}

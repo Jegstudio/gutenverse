@@ -244,6 +244,117 @@
 		"videoHeight": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"galleryHideNav": {
+			"type": "boolean"
+		},
+		"galleryNavAlwaysShow": {
+			"type": "boolean"
+		},
+		"galleryHideDots": {
+			"type": "boolean"
+		},
+		"galleryNextButtonIcon": {
+			"type": "string",
+			"default": "fas fa-chevron-right"
+		},
+		"galleryNextButtonIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"galleryNextButtonIconSVG": {
+			"type": "string"
+		},
+		"galleryPrevButtonIcon": {
+			"type": "string",
+			"default": "fas fa-chevron-left"
+		},
+		"galleryPrevButtonIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"galleryPrevButtonIconSVG": {
+			"type": "string"
+		},
+		"buttonHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonIconSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonPosition": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonIconColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonIconColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBgColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotGap": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotNormalColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotBorderNormalColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotNormalSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotHoverColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotBorderHoverColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotHoverSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotActiveColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotBorderActiveColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotActiveSize": {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"usesContext": ["postId", "postType", "queryId"],
