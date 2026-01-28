@@ -8,7 +8,7 @@ import { dataPanel } from './panel-data';
 import { applyFilters } from '@wordpress/hooks';
 
 export const panelList = () => {
-    return applyFilters('gutenverse.post-featured-image.panels', [
+    return [
         {
             title: __('Setting', 'gutenverse'),
             panelArray: settingPanel,
@@ -24,10 +24,14 @@ export const panelList = () => {
             title: __('Gallery Setting', 'gutenverse'),
             tabRole: TabSetting,
             pro: true,
-            panelArray: () => {
-                return [{
-                    component: LockedGalleryPostFormat,
-                }];
+            panelArray: (props) => {
+                return applyFilters(
+                    'gutenverse.post-featured-image.gallery-setting',
+                    [{
+                        component: LockedGalleryPostFormat,
+                    }],
+                    props
+                );
             },
         },
         {
@@ -35,10 +39,14 @@ export const panelList = () => {
             title: __('Video Setting', 'gutenverse'),
             tabRole: TabSetting,
             pro: true,
-            panelArray: () => {
-                return [{
-                    component: LockedVideoPostFormat,
-                }];
+            panelArray: (props) => {
+                return applyFilters(
+                    'gutenverse.post-featured-image.video-setting',
+                    [{
+                        component: LockedVideoPostFormat,
+                    }],
+                    props
+                );
             },
         },
         {
@@ -52,10 +60,14 @@ export const panelList = () => {
             title: __('Gallery Navigation Style', 'gutenverse'),
             tabRole: TabStyle,
             pro: true,
-            panelArray: () => {
-                return [{
-                    component: LockedGalleryPostFormat,
-                }];
+            panelArray: (props) => {
+                return applyFilters(
+                    'gutenverse.post-featured-image.gallery-nav-style',
+                    [{
+                        component: LockedGalleryPostFormat,
+                    }],
+                    props
+                );
             },
         },
         {
@@ -63,10 +75,14 @@ export const panelList = () => {
             title: __('Gallery Dots Style', 'gutenverse'),
             tabRole: TabStyle,
             pro: true,
-            panelArray: () => {
-                return [{
-                    component: LockedGalleryPostFormat,
-                }];
+            panelArray: (props) => {
+                return applyFilters(
+                    'gutenverse.post-featured-image.gallery-dots-style',
+                    [{
+                        component: LockedGalleryPostFormat,
+                    }],
+                    props
+                );
             },
         },
         {
@@ -141,5 +157,5 @@ export const panelList = () => {
             initialOpen: false,
             pro: true
         },
-    ]);
+    ];
 };

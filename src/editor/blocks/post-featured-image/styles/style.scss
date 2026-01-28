@@ -9,10 +9,26 @@
     }
 }
 
-.featured-gallery.gvnews_owlslider .tns-nav {
-    align-items: end;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
+.featured-gallery.gvnews_owlslider {
+
+    .tns-nav {
+        align-items: end;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        transition: all 0.3s ease;
+
+        button {
+            margin: 0;
+        }
+
+    }
+
+    .tns-controls button {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

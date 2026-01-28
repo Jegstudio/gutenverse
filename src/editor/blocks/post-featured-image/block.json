@@ -316,6 +316,10 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"galleryButtonBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"galleryDotGap": {
 			"type": "object",
 			"copyStyle": true
@@ -353,6 +357,14 @@
 			"copyStyle": true
 		},
 		"galleryDotActiveSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBoxShadowHover": {
 			"type": "object",
 			"copyStyle": true
 		}
