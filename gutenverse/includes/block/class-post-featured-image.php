@@ -44,7 +44,7 @@ class Post_Featured_Image extends Block_Abstract {
 		if ( ! empty( $post_featured ) ) {
 			$content = get_the_post_thumbnail( $post_id, $image_size['value'], array( 'loading' => $image_load ) );
 		} elseif ( ! empty( $placeholder_img ) ) {
-			$content = '<img loading="' . $image_load . '" alt="post thumbnail placeholder" src="' . esc_url( GUTENVERSE_URL . '/assets/img/img-placeholder.jpg' ) . '"/>';
+			$content = '<img loading="' . $image_load . '" alt="post thumbnail placeholder" src="' . esc_url( GUTENVERSE_URL . '/assets/img/img-placeholder.jpg' ) . '" height="497" width="900" />';
 		}
 
 		if ( ! empty( $post_link ) && ! empty( $post_url ) ) {
