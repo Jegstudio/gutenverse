@@ -39,7 +39,8 @@ class Post_Featured_Image extends Block_Abstract {
 		$post_featured   = get_the_post_thumbnail_url( $post_id, $image_size['value'] );
 		$custom_classes  = $this->get_custom_classes();
 		$content         = '';
-		$image_load      = Options::get_instance()->get_image_load( 'lazy', $this->attributes['lazyLoad'], $this->attributes['imageLoad'] );
+		$lazy_load       = isset( $this->attributes['lazyLoad'] ) ? $this->attributes['lazyLoad'] : false;
+		$image_load      = Options::get_instance()->get_image_load( 'lazy', $lazy_load, $this->attributes['imageLoad'] );
 
 		if ( ! empty( $post_featured ) ) {
 			$content = get_the_post_thumbnail( $post_id, $image_size['value'], array( 'loading' => $image_load ) );
