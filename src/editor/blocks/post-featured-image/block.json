@@ -237,12 +237,8 @@
 			"type": "boolean",
 			"default": false
 		},
-		"videoWidth": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"videoHeight": {
-			"type": "object",
+		"videoRatio": {
+			"type": "string",
 			"copyStyle": true
 		},
 		"galleryHideNav": {
