@@ -287,7 +287,7 @@ class Post_Block extends Post_Abstract {
 
 			$readmore =
 			'<div class="guten-meta-readmore icon-position-' . $icon_position . '">
-				<a href="' . esc_url( get_the_permalink( $post ) ) . '" class="guten-readmore">' . $readmore . '<span class="screen-reader-text">' . esc_html__( ' about ', 'gutenverse' ) . $post_title . '</span></a>
+				<a aria-label="Read more about ' . $post_title . '" href="' . esc_url( get_the_permalink( $post ) ) . '" class="guten-readmore">' . $readmore . '<span class="screen-reader-text">' . esc_html__( ' about ', 'gutenverse' ) . $post_title . '</span></a>
 			</div>';
 		}
 

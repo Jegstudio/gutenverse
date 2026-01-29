@@ -1,6 +1,5 @@
 import { compose } from '@wordpress/compose';
 import { imagePlaceholder } from 'gutenverse-core/config';
-import { useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
@@ -32,16 +31,13 @@ const save = compose(
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
 
-    const blockProps = useBlockProps.save({
-        ...advanceAnimationData,
-        className: classnames(
-            'guten-element',
-            'guten-image',
-            elementId,
-            animationClass,
-            displayClass,
-        ),
-    });
+    const className = classnames(
+        'guten-element',
+        'guten-image',
+        elementId,
+        animationClass,
+        displayClass,
+    );
 
     const caption = () => {
         switch (captionType) {
@@ -70,7 +66,7 @@ const save = compose(
             <ImageBoxFigure {...attributes}/>
         </div>;
 
-    return <div {...blockProps}>
+    return <div className={className} {...advanceAnimationData}>
         {imageWrapper}
         {caption()}
     </div>;
@@ -93,7 +89,7 @@ export const ImageBoxFigure = attributes => {
     }
     const imageLazyLoad = () => <img className="gutenverse-image-box-empty" src={imagePlaceholder} alt={imageAltText} {...(lazyLoad && { loading: 'lazy' })} />;
 
-    // Handle if empty, pick the 'full' size. If 'full' size also not exist, return placeholder image.
+    // Handle if empty, pick the "full' size. If 'full' size also not exist, return placeholder image.
 
     if (isEmpty(sizes)) {
         return imageLazyLoad();
