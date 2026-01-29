@@ -142,7 +142,7 @@ const LogoSlider = compose(
                     {logos.map((logo, index) => {
                         return <div className="image-list" key={index}>
                             {
-                                logo.link ? <a href={logo.link} className="content-image">
+                                logo.link ? <a aria-label={logo.title} href={logo.link} className="content-image">
                                     {logo && logoNormalLazyLoad(logo)}
                                     {logo && logoHoverLazyLoad(logo)}
                                 </a> : <div className="content-image">
