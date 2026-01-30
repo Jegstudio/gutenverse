@@ -613,7 +613,8 @@
 		},
 		"flexSizeShrink": {
 			"type": "object",
-			"default": {},
+			"default": {}
+		},
 		"menuAriaLabel": {
 			"type": "string",
 			"copyStyle": true
