@@ -143,7 +143,7 @@ const PostBlockContent = (props) => {
             <div className={`guten-post-category ${position}`}>
                 <span>
                     <a href="#" className={`category-${category.slug}`}>
-                        {category.name}
+                        {parseUnicode(category.name)}
                     </a>
                 </span>
             </div>
