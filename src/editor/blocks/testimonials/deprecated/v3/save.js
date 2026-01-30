@@ -1,6 +1,5 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps } from '@wordpress/block-editor';
 import ContentItem from './components/content-item';
 import { swiperData } from 'gutenverse-core/helper';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
@@ -47,9 +46,9 @@ const save = compose(
         `style-${contentType}`,
         'quote-override',
     );
-    
+
     return (
-        <div {...useBlockProps.save({ className })}>
+        <div className={className}>
             <div className="testimonials-list">
                 <div id={elementId} className="swiper-container" {...swiperData(attributes)}>
                     <div className="swiper-wrapper">

@@ -1,6 +1,6 @@
 import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { store as coreStore } from '@wordpress/core-data';
 import { parseUnicode, renderIcon, dummyText } from 'gutenverse-core/helper';
 
 const PostBlockContent = (props) => {
@@ -193,28 +193,31 @@ const PostBlockContent = (props) => {
         return content;
     };
 
+    // Fetch all media data at once using a single hook
+    const postsMedia = useSelect((select) => {
+        if (!postData || postData.length === 0) return {};
+        const { getMedia, getEntityRecord } = select(coreStore);
+        const mediaMap = {};
+
+        postData.forEach(post => {
+            if (!post?.id) return;
+            const freshPost = getEntityRecord('postType', postType, post.id);
+            const mediaId = freshPost?.featured_media || post?.featured_media;
+
+            if (mediaId) {
+                mediaMap[post.id] = getMedia(mediaId, { context: 'view' });
+            }
+        });
+
+        return mediaMap;
+    }, [postData, postType]);
+
 
     const renderPost = (post, index) => {
         const postClasses = post?.classes || `guten-post post-${index} post type-post status-publish format-standard has-post-thumbnail hentry category-category tag-tag`;
         const category = renderCategory(post);
 
-        const [featuredImage] = useEntityProp('postType', postType, 'featured_media', post?.id);
-
-        const { media } = useSelect(
-            (select) => {
-                const { getMedia, getPostType } = select(coreStore);
-                return {
-                    media:
-                        featuredImage &&
-                        getMedia(featuredImage, {
-                            context: 'view',
-                        }),
-                    postType: postType && getPostType(postType),
-                };
-            },
-            [featuredImage, postType]
-        );
-
+        const media = postsMedia[post?.id];
         const mediaUrl = media?.media_details?.sizes?.[thumbnailSize.value]?.source_url;
 
         return (

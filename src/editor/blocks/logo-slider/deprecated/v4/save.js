@@ -8,15 +8,6 @@ import { compose } from '@wordpress/compose';
 import { getImageSrc } from 'gutenverse-core/editor-helper';
 import { isEmpty } from 'gutenverse-core/helper';
 
-export const logoNormalLazyLoad = (logo) => {
-    return <img className="main-image" src={getImageSrc(logo.src)} alt={logo.title} {...(logo.lazyLoad && { loading: 'lazy' })} />;
-};
-
-export const logoHoverLazyLoad = (logo) => {
-    const hoverSrc = !isEmpty(logo.hoverSrc) ? getImageSrc(logo.hoverSrc) : getImageSrc(logo.src);
-    return <img className="hover-image" src={hoverSrc} alt={logo.title} {...(logo.lazyLoad && { loading: 'lazy' })} />;
-};
-
 const save = compose(
     withMouseMoveEffectScript
 )(({ attributes }) => {
@@ -42,6 +33,20 @@ const save = compose(
             [`arrow-${arrowPosition}`]: arrowPosition
         }
     );
+
+    const logoNormalLazyLoad = (logo) => {
+        const { imageLoad = '' } = logo;
+        return <img className="main-image" src={getImageSrc(logo.src)} alt={logo.title} {...('lazy' === imageLoad && { loading: 'lazy' })} width={logo.src?.width} height={logo.src?.height} />;
+    };
+
+    const logoHoverLazyLoad = (logo) => {
+        const { imageLoad = '' } = logo;
+        const hoverSrc = !isEmpty(logo.hoverSrc) ? getImageSrc(logo.hoverSrc) : getImageSrc(logo.src);
+        const width = !isEmpty(logo.hoverSrc) ? logo.hoverSrc?.width : logo.src?.width;
+        const height = !isEmpty(logo.hoverSrc) ? logo.hoverSrc?.height : logo.src?.height;
+        return <img className="hover-image" src={hoverSrc} alt={logo.title} {...('lazy' === imageLoad && { loading: 'lazy' })} width={width} height={height} />;
+    };
+
     return (
         <div className={className}>
             <div className="client-list">

@@ -99,7 +99,8 @@ const GalleryBlock = compose(
         grid,
         height,
         column,
-        layout
+        layout,
+        images,
     });
 
     useGenerateElementId(clientId, elementId, elementRef);
@@ -212,9 +213,10 @@ const GalleryBlock = compose(
     useEffect(() => {
         setLiveAttr({
             ...liveAttr,
-            showedItems
+            showedItems,
+            images
         });
-    }, [showedItems]);
+    }, [showedItems, images]);
 
     useEffect(() => {
         if (elementRef.current && elementId) {

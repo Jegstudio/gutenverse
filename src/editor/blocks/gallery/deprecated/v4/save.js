@@ -1,6 +1,5 @@
 import { compose } from '@wordpress/compose';
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps } from '@wordpress/block-editor';
 import GalleryItem from './components/gallery-item';
 import { Maximize, Minimize, X, ZoomIn } from 'gutenverse-core/components';
 import { imagePlaceholder } from 'gutenverse-core/config';
@@ -59,7 +58,7 @@ const save = compose(
     const imageCondition = (image) => <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...(image.lazyLoad ? { loading: 'lazy' } : {})} />;
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-grid={grid}>
+        <div className={className} {...advanceAnimationData} data-grid={grid}>
             <div className="gutenverse-popup-gallery hidden">
                 <div className="gallery-header">
                     <div className="left-header">
