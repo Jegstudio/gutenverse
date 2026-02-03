@@ -32,8 +32,6 @@ const PopupBuilder = (props) => {
         closeIconSVG,
         closePosition,
         exitAnimation,
-        exitAnimationDuration,
-        exitAnimationDelay,
         popupType,
         popupVideoPlayOn,
         popupVideoStart,
@@ -120,21 +118,24 @@ const PopupBuilder = (props) => {
             }
         }
     };
+    const hideContainer = () => {
+        setShow(false);
+        setExit(false);
+        if (popupVideoPauseOnClose) {
+            setPlaying(false);
+            const message = JSON.stringify({
+                event: 'command',
+                func: 'pauseVideo',
+                args: []
+            });
+            sendToPlayer(message);
+        }
+    };
     const hidePopup = () => {
         setExit(true);
-        setTimeout(() => {
-            setExit(false);
-            setShow(false);
-            if (popupVideoPauseOnClose) {
-                setPlaying(false);
-                const message = JSON.stringify({
-                    event: 'command',
-                    func: 'pauseVideo',
-                    args: []
-                });
-                sendToPlayer(message);
-            }
-        }, exitAnimation ? (parseInt(exitAnimationDuration) || 0) + (parseInt(exitAnimationDelay) || 0) || 1000 : 0);
+        if (!exitAnimation) {
+            hideContainer();
+        }
     };
 
     const overlayClicked = () => { closePopupOverlay ? hidePopup() : null; };
@@ -174,6 +175,13 @@ const PopupBuilder = (props) => {
         }
     };
 
+    const animationEndHandler = (e) => {
+        e.stopPropagation();
+        if (exit) {
+            hideContainer();
+        }
+    };
+
     return <>
         <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
@@ -198,7 +206,7 @@ const PopupBuilder = (props) => {
                     'guten-popup-wrapper',
                     `guten-popup-wrapper-${contentPosition}`,
                 )}>
-                    <div ref={containerRef} className={classnames(
+                    <div ref={containerRef} onAnimationEnd={animationEndHandler} className={classnames(
                         'guten-popup-content',
                         animationClass,
                         exit ? 'exit' : '',

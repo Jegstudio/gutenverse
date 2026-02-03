@@ -21,7 +21,7 @@ export const exitAnimationPanel = () => {
                     value: 'fadeInLeft'
                 },
                 {
-                    label: 'Fade Out Down',
+                    label: 'Fade Out Up',
                     value: 'fadeInDown'
                 },
                 {
@@ -29,7 +29,7 @@ export const exitAnimationPanel = () => {
                     value: 'fadeInRight'
                 },
                 {
-                    label: 'Fade Out Up',
+                    label: 'Fade Out Down',
                     value: 'fadeInUp'
                 },
                 {
@@ -37,7 +37,7 @@ export const exitAnimationPanel = () => {
                     value: 'slideInLeft'
                 },
                 {
-                    label: 'Slide Out Down',
+                    label: 'Slide Out Up',
                     value: 'slideInDown'
                 },
                 {
@@ -45,7 +45,7 @@ export const exitAnimationPanel = () => {
                     value: 'slideInRight'
                 },
                 {
-                    label: 'Slide Out Up',
+                    label: 'Slide Out Down',
                     value: 'slideInUp'
                 },
             ],
@@ -73,7 +73,7 @@ export const exitAnimationPanel = () => {
             id: 'exitAnimationDelay',
             label: __('Delay (ms)', 'gutenverse'),
             component: NumberControl,
-            description: __('Input in miliseconds (ms). Later will be converted into second (s)','gutenverse'),
+            description: __('Input in miliseconds (ms). Later will be converted into second (s)', 'gutenverse'),
             min: 0,
             step: 100
         }

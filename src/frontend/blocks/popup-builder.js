@@ -37,7 +37,7 @@ class GutenversePopupElement {
         this.videoContainer = this.element.find('.guten-popup-video-container');
         this._addCloseClick();
         this._addLoadEvent();
-        if ( this.dontRepeatPopup === null || this.dontRepeatPopup === undefined ){
+        if (this.dontRepeatPopup === null || this.dontRepeatPopup === undefined) {
             localStorage.removeItem(localStorage.getItem('data-hide'));
         }
         if (this.videoContainer) {
@@ -86,11 +86,30 @@ class GutenversePopupElement {
                 },
             });
         }
+        this.content.first().addEventListener('animationend', (e) => {
+            e.stopPropagation();
+            if (!this.content.hasClass('exit')) {
+                // play animation and remove the animation class so it can be played again
+                this.content.attr('class', this.contentClass.replaceAll('guten-element-hide', ''));
+            } else if (this.hasExitAnimation) {
+                this.__hideContainer();
+            }
+        });
+    }
+
+    __hideContainer() {
+        this.popup.removeClass('show');
+        this.content.removeClass('exit');
+        this.popup.addClass('load');
+        this.content.attr('class', this.contentClass);
+        if (this.videoPauseOnClose === 'true') {
+            this.player()?.pauseVideo();
+        }
     }
 
     /* private */
     _showPopup() {
-        if (this.dontRepeatPopup !== null ){
+        if (this.dontRepeatPopup !== null) {
             localStorage.setItem('data-hide', this.dontRepeatPopup);
             if (this.shownOnce !== null) return;
         }
@@ -114,17 +133,12 @@ class GutenversePopupElement {
     }
 
     _closePopup() {
-        if (this.dontRepeatPopup !== null ) localStorage.setItem(this.dontRepeatPopup,true);
+        if (this.dontRepeatPopup !== null) localStorage.setItem(this.dontRepeatPopup, true);
         this.content.addClass('exit');
-        setTimeout(() => {
-            this.popup.removeClass('show');
-            this.content.removeClass('exit');
-            this.popup.addClass('load');
-            this.content.attr('class', this.contentClass);
-            if (this.videoPauseOnClose === 'true') {
-                this.player()?.pauseVideo();
-            }
-        }, (this.hasExitAnimation && (this.exitAnimationDuration || this.exitAnimationDelay)) ? (parseInt(this.exitAnimationDuration) || 0) + (parseInt(this.exitAnimationDelay) || 0) : 0);
+        if (!this.hasExitAnimation) {
+            this.__hideContainer();
+            return;
+        }
     }
 
     _addCloseClick() {
