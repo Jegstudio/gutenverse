@@ -24,9 +24,52 @@ class Upgrader {
 	public function __construct() {
 		add_action( 'init', array( $this, 'set_upgrader_page_content' ), 99 );
 		add_action( 'init', array( $this, 'set_upgrader_plugin_split' ), 99 );
+		add_action( 'admin_init', array( $this, 'set_upgrader_theme_select' ), 99 );
 		add_action( 'wp_ajax_gutenverse_upgrader_page_content_close', array( $this, 'upgrader_page_content_close' ) );
 		add_action( 'wp_ajax_gutenverse_upgrader_page_upgrade_close', array( $this, 'upgrader_page_upgrade_close' ) );
 		add_action( 'gutenverse_plugin_upgrade', array( $this, 'upgrade_like' ), 20 );
+		add_action( 'after_switch_theme', array( $this, 'on_lite_theme_activated' ) );
+	}
+
+	/**
+	 * On Lite Theme Activated.
+	 */
+	public function on_lite_theme_activated() {
+		// Only trigger for Lite theme.
+		if ( ! apply_filters( 'gutenverse_wporg_plus_mechanism', false ) ) {
+			return;
+		}
+
+		// Mark onboarding as needed.
+		set_transient( 'gutenverse_wizard_redirect', true, MINUTE_IN_SECONDS );
+	}
+
+	/**
+	 * Set form split option meta
+	 */
+	public function set_upgrader_theme_select() {
+		if ( ! apply_filters( 'gutenverse_wporg_plus_mechanism', false ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$needs_redirect = get_transient( 'gutenverse_wizard_redirect' );
+		$option_key    = 'gutenverse-onboard-lite-theme-' . get_stylesheet();
+
+		if ( ! $needs_redirect || get_option( $option_key ) ) {
+			return;
+		}
+
+		delete_transient( 'gutenverse_wizard_redirect' );
+		update_option( $option_key, true );
+
+		wp_safe_redirect(
+			admin_url( 'admin.php?page=gutenverse-onboarding-wizard' )
+		);
+		exit;
 	}
 
 	/**
