@@ -50,6 +50,7 @@ const SocialIcon = compose(
         linkTarget,
         rel,
         dynamicUrl,
+        ariaLabel,
     } = attributes;
 
     const {
@@ -163,7 +164,7 @@ const SocialIcon = compose(
             </ToolbarGroup>
         </BlockControls>
         <div {...blockProps}>
-            <a id={elementId}>
+            <a id={elementId} aria-label={ariaLabel}>
                 {renderIcon(icon, iconType, iconSVG)}
                 <RichText
                     tagName="span"
