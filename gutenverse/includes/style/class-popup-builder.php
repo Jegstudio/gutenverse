@@ -382,7 +382,7 @@ class Popup_Builder extends Style_Abstract {
 				array(
 					'selector'       => ".{$this->element_id}.guten-element .guten-popup .guten-popup-content.exit",
 					'property'       => function ( $value ) {
-						return "animation-name: {$value}; animation-direction: reverse; animation-delay: 0s;";
+						return "animation-name: {$value} !important; animation-direction: reverse; animation-delay: 0s;";
 					},
 					'value'          => $this->attrs['exitAnimation'],
 					'device_control' => false,

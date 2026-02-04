@@ -50,7 +50,7 @@ const panelFilterSearchStyle = (elementId, attributes, data) => {
         'type': 'unitPoint',
         'id': 'fitlerSearchIconSpacing',
         'responsive': true,
-        'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-after i`,
+        'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-after i, .${elementId}.guten-gallery .search-filter-trigger.icon-position-after .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'margin-left',
@@ -63,7 +63,7 @@ const panelFilterSearchStyle = (elementId, attributes, data) => {
         'type': 'unitPoint',
         'id': 'fitlerSearchIconSpacing',
         'responsive': true,
-        'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-before i`,
+        'selector': `.${elementId}.guten-gallery .search-filter-trigger.icon-position-before i, .${elementId}.guten-gallery .search-filter-trigger.icon-position-after .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'margin-right',
@@ -170,7 +170,7 @@ const panelFilterSearchStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['filterSearchSeparatorColor']) && data.push({
         'type': 'color',
         'id': 'filterSearchSeparatorColor',
-        'responsive' : true,
+        'responsive': true,
         'selector': `.${elementId}.guten-gallery .search-filters-wrap .filter-wrap button.search-filter-trigger`,
         'properties': [
             {

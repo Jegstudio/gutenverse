@@ -48,6 +48,10 @@ const NavMenuBlock = compose(
         submenuItemIndicatorSVG,
         transform,
         mobileEnableOverlay,
+        hamburgerAriaLabel,
+        mobileLogoAriaLabel,
+        closeAriaLabel,
+        mobileMenuLogoLazyLoad,
     } = attributes;
 
     const animationClass = useAnimationEditor(attributes);
@@ -100,6 +104,10 @@ const NavMenuBlock = compose(
                         submenuItemIndicatorSVG,
                         transform,
                         mobileEnableOverlay,
+                        hamburgerAriaLabel,
+                        mobileLogoAriaLabel,
+                        closeAriaLabel,
+                        mobileMenuLogoLazyLoad,
                     },
                 }),
             }).then((data) => {
@@ -111,7 +119,7 @@ const NavMenuBlock = compose(
         } else {
             setResponse(`<div id="${elementId}" class="guten-element guten-nav-menu nav-menu break-point-tablet submenu-click-title " data-item-indicator="gtn gtn-angle-down-solid" data-close-on-click="1">
                 <div class="gutenverse-hamburger-wrapper">
-                    <button class="gutenverse-hamburger-menu">
+                    <button class="gutenverse-hamburger-menu" aria-label="${hamburgerAriaLabel ? hamburgerAriaLabel : 'Open Navigation Menu'}">
                         <i aria-hidden="true" class="gtn gtn-burger-menu-light"></i>
                     </button>
                 </div>
@@ -146,7 +154,8 @@ const NavMenuBlock = compose(
         submenuItemIndicatorType,
         submenuItemIndicatorSVG,
         transform,
-        mobileEnableOverlay
+        mobileEnableOverlay,
+        mobileMenuLogoLazyLoad,
     ]);
 
     useEffect(() => {

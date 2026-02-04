@@ -35,12 +35,12 @@ const save = compose(
         hoverBottomDirection,
         image,
         imageAlt,
-        lazyLoad,
         contentDisplay,
         topIconContent,
         bottomIconContent,
         numberFormat,
-        numberRightSpace
+        numberRightSpace,
+        imageLoad = '',
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
@@ -67,7 +67,7 @@ const save = compose(
                 </div>;
             case 'image':
                 return <div className="icon-box">
-                    <div className="icon"><img src={getImageSrc(image)} alt={imageAltText} {...(lazyLoad && { loading: 'lazy' })} /></div>
+                    <div className="icon"><img src={getImageSrc(image)} alt={imageAltText} {...('lazy' === imageLoad && { loading: 'lazy' })} /></div>
                 </div>;
             default:
                 return null;

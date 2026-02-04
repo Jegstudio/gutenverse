@@ -102,9 +102,20 @@ class Post_Comment extends Block_Abstract {
 	}
 
 	/**
+	 * Enqueue comment reply script
+	 */
+	private function enqueue_comment_reply_script() {
+		if ( ! empty( $this->attributes['showForm'] ) && is_singular() && comments_open() ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
+	}
+
+	/**
 	 * Render view in frontend
 	 */
 	public function render_frontend() {
+		$this->enqueue_comment_reply_script();
+
 		$post_id         = ! empty( $this->context['postId'] ) ? esc_html( $this->context['postId'] ) : get_the_ID();
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();

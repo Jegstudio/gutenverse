@@ -1,6 +1,6 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
@@ -36,7 +36,7 @@ const save = compose(
     );
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+        <div className={className} {...advanceAnimationData}>
             <InnerBlocks.Content />
         </div>
     );

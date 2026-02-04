@@ -357,16 +357,49 @@
 			"type": "boolean",
 			"copyStyle": true
 		},
+		"prefixColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"suffixColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"prefixTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"suffixTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["fun", "fact", "count", "number", "stats", "statistic", "data", "info"],
-	"viewScript": ["gutenverse-frontend-fun-fact-script"],
-	"style": ["gutenverse-frontend-fun-fact-style"]
+	"keywords": [
+		"fun",
+		"fact",
+		"count",
+		"number",
+		"stats",
+		"statistic",
+		"data",
+		"info"
+	],
+	"viewScript": [
+		"gutenverse-frontend-fun-fact-script"
+	],
+	"style": [
+		"gutenverse-frontend-fun-fact-style"
+	]
 }

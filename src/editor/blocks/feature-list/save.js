@@ -6,6 +6,7 @@ import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenvers
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { useAnimationAdvanceData } from 'gutenverse-core/hooks';
+import { getImageLoadValue } from '../../helper';
 
 const save = compose(
     withAnimationAdvanceScript('icon-box'),
@@ -35,6 +36,7 @@ const save = compose(
     );
 
     const iconContent = (item, index) => {
+        const { imageLoad = '', lazyLoad = false } = item;
         switch (item.type) {
             case 'icon':
                 return <div className="icon-wrapper">
@@ -48,7 +50,7 @@ const save = compose(
                         <img
                             src={getImageSrc(item.image)}
                             alt={item.title}
-                            {...(item.lazyLoad && { loading: 'lazy' })}
+                            loading={getImageLoadValue(imageLoad, lazyLoad)}
                             width={item.image?.width}
                             height={item.image?.height}
                         />

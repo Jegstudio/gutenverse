@@ -13,6 +13,7 @@ import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
 
 const FunFactBlock = compose(
     withPartialRender,
@@ -50,11 +51,15 @@ const FunFactBlock = compose(
         contentDisplay,
         numberFormat = '',
         numberRightSpace,
+        imageLoad = ''
     } = attributes;
 
     useEffect(() => {
         if (number && !safeNumber) {
-            setAttributes({safeNumber: number});
+            setAttributes({ safeNumber: number });
+        }
+        if ('' === imageLoad) {
+            setAttributes({ imageLoad: getImageLoadValue('', lazyLoad) });
         }
     }, []);
 

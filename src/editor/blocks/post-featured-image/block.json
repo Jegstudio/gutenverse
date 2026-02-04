@@ -80,6 +80,10 @@
 			"default": false,
 			"copyStyle": true
 		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
+		},
 		"imageBorder": {
 			"type": "object",
 			"copyStyle": true

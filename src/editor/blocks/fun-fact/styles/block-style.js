@@ -6,6 +6,32 @@ const getBlockStyle = (elementId, attributes) => {
     data = backgroundStyle({ attributes, data, elementId });
 
     /**Panel Content Style */
+    isNotEmpty(attributes['prefixColor']) && data.push({
+        'type': 'color',
+        'id': 'prefixColor',
+        'responsive': true,
+        'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .prefix`,
+        'properties': [
+            {
+                'name': 'color',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['suffixColor']) && data.push({
+        'type': 'color',
+        'id': 'suffixColor',
+        'responsive': true,
+        'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .suffix`,
+        'properties': [
+            {
+                'name': 'color',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
     isNotEmpty(attributes['numberColor']) && data.push({
         'type': 'color',
         'id': 'numberColor',
@@ -80,6 +106,18 @@ const getBlockStyle = (elementId, attributes) => {
                 }
             }
         ]
+    });
+
+    isNotEmpty(attributes['prefixTypography']) && data.push({
+        'type': 'typography',
+        'id': 'prefixTypography',
+        'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .prefix`,
+    });
+
+    isNotEmpty(attributes['suffixTypography']) && data.push({
+        'type': 'typography',
+        'id': 'suffixTypography',
+        'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .suffix`,
     });
 
     isNotEmpty(attributes['numberRightSpace']) && data.push({
@@ -346,7 +384,7 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
         'multiAttr': {
-            'imageSize': attributes['imageSizeResponsive'] ? {'Desktop': attributes['imageSize'], ...attributes['imageSizeResponsive']} : attributes['imageSize']
+            'imageSize': attributes['imageSizeResponsive'] ? { 'Desktop': attributes['imageSize'], ...attributes['imageSizeResponsive'] } : attributes['imageSize']
         }
     });
 

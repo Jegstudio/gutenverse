@@ -19,11 +19,13 @@ import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenve
 import getBlockStyle from './styles/block-style';
 import { useRichTextParameter, isEmpty, renderIcon } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
+
 
 const NEW_TAB_REL = 'noreferrer noopener';
 
 export const ImageBoxFigure = attributes => {
-    const { image, imageAlt, altType, altOriginal, lazyLoad } = attributes;
+    const { image, imageAlt, altType, altOriginal, imageLoad } = attributes;
     const { media = {}, size } = image || {};
     const { imageId, sizes = {} } = media || {};
 
@@ -39,7 +41,7 @@ export const ImageBoxFigure = attributes => {
     }
 
     // Handle if empty, pick the 'full' size. If 'full' size also not exist, return placeholder image.
-    const imageLazyLoad = () => <img className="gutenverse-image-box-empty" src={imagePlaceholder} alt={imageAltText} {...(lazyLoad && { loading: 'lazy' })} />;
+    const imageLazyLoad = () => <img className="gutenverse-image-box-empty" src={imagePlaceholder} alt={imageAltText} {...('lazy' === imageLoad && { loading: 'lazy' })} />;
 
     if (isEmpty(sizes)) {
         return imageLazyLoad();
@@ -56,7 +58,7 @@ export const ImageBoxFigure = attributes => {
     }
 
     if (imageId && imageSrc) {
-        return <img className="gutenverse-image-box-filled" src={imageSrc.url} height={imageSrc.height} width={imageSrc.width} alt={imageAltText} {...(lazyLoad && { loading: 'lazy' })} />;
+        return <img className="gutenverse-image-box-filled" src={imageSrc.url} height={imageSrc.height} width={imageSrc.width} alt={imageAltText} {...('lazy' === imageLoad && { loading: 'lazy' })} />;
     }
 
     return imageLazyLoad();
@@ -246,7 +248,15 @@ const ImageBoxBlock = compose(
         linkTarget,
         contentStyle,
         dynamicUrl,
+        imageLoad,
+        lazyLoad,
     } = attributes;
+
+    useEffect(() => {
+        if ('' === imageLoad) {
+            setAttributes({ imageLoad: getImageLoadValue('', lazyLoad) });
+        }
+    }, []);
 
     const {
         panelState,

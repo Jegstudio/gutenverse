@@ -36,6 +36,8 @@ const save = compose(
         enableLoadIconSVG,
         enableLoadIconPosition,
         filterSearchIcon,
+        filterSearchIconSVG,
+        filterSearchIconType,
         filterSearchIconPosition,
         filterSearchFormText,
         itemsPerLoad,
@@ -57,7 +59,10 @@ const save = compose(
         [`grid-tablet-${column && column['Tablet'] ? column['Tablet'] : 2}`],
         [`grid-mobile-${column && column['Mobile'] ? column['Mobile'] : 2}`],
     );
-    const imageCondition = (image) => <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...(image.lazyLoad ? { loading: 'lazy' } : {})} />;
+    const imageCondition = (image) => {
+        const { imageLoad = '' } = image;
+        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })}/>;
+    };
 
     return (
         <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-grid={grid}>
@@ -106,9 +111,15 @@ const save = compose(
                 </div> : <div className="search-filters-wrap">
                     <div className="filter-wrap">
                         <button id="search-filter-trigger" data-flag-all={true} className={`search-filter-trigger icon-position-${filterSearchIconPosition}`}>
-                            {filterSearchIconPosition === 'before' && <i aria-hidden="true" className={filterSearchIcon}></i>}
+                            {filterSearchIconPosition === 'before' && (filterSearchIconSVG && filterSearchIconType === 'svg' ? <div
+                                className="gutenverse-icon-svg"
+                                dangerouslySetInnerHTML={{ __html: svgAtob(filterSearchIconSVG) }}
+                            /> : <i aria-hidden="true" className={filterSearchIcon}></i>)}
                             <span>{filterAll}</span>
-                            {filterSearchIconPosition === 'after' && <i aria-hidden="true" className={filterSearchIcon}></i>}
+                            {filterSearchIconPosition === 'after' && (filterSearchIconSVG && filterSearchIconType === 'svg' ? <div
+                                className="gutenverse-icon-svg"
+                                dangerouslySetInnerHTML={{ __html: svgAtob(filterSearchIconSVG) }}
+                            /> : <i aria-hidden="true" className={filterSearchIcon}></i>)}
                         </button>
                         <ul className={'search-filter-controls'}>
                             <li className={'guten-gallery-control active'} data-flag-all={true} data-filter={filterAll}>{filterAll}</li>

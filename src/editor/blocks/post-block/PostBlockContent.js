@@ -1,8 +1,7 @@
 import { Fragment } from '@wordpress/element';
-import { dummyText } from 'gutenverse-core/helper';
-import { renderIcon } from 'gutenverse-core/helper';
 import { useSelect } from '@wordpress/data';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { store as coreStore } from '@wordpress/core-data';
+import { parseUnicode, renderIcon, dummyText } from 'gutenverse-core/helper';
 
 const PostBlockContent = (props) => {
     const {
@@ -87,7 +86,7 @@ const PostBlockContent = (props) => {
     const renderExcerpt = (post) => {
         if (!excerptEnabled) return null;
 
-        const fullExcerpt = post?.excerpt || dummyText(10, 20);
+        const fullExcerpt = parseUnicode(post?.excerpt) || dummyText(10, 20);
         const trimmedExcerpt = excerptLength > 0 ? trimWords(fullExcerpt, excerptLength) : fullExcerpt;
         const more = excerptMore || '...';
 
@@ -105,7 +104,7 @@ const PostBlockContent = (props) => {
             <div className="guten-post-meta-bottom">
                 {readmoreEnabled && (
                     <div className={`guten-meta-readmore icon-position-${readmoreIconPosition}`}>
-                        <a href="#" aria-label={`Read more about ${post?.title}`} className="guten-readmore">
+                        <a href="#" aria-label={`Read more about ${parseUnicode(post?.title)}`} className="guten-readmore">
                             {readmoreIconPosition === 'before' && renderIcon(readmoreIcon, readmoreIconType, readmoreIconSVG)}
                             {readmoreText}
                             {readmoreIconPosition === 'after' && renderIcon(readmoreIcon, readmoreIconType, readmoreIconSVG)}
@@ -144,7 +143,7 @@ const PostBlockContent = (props) => {
             <div className={`guten-post-category ${position}`}>
                 <span>
                     <a href="#" className={`category-${category.slug}`}>
-                        {category.name}
+                        {parseUnicode(category.name)}
                     </a>
                 </span>
             </div>
@@ -159,8 +158,8 @@ const PostBlockContent = (props) => {
                 const HtmlTag = htmlTag;
                 content.push(
                     <HtmlTag key={`title-${index}`} className="guten-post-title">
-                        <a aria-label={post?.title} href="#">
-                            {post?.title || dummyText(5, 10)}
+                        <a aria-label={parseUnicode(post?.title)} href="#">
+                            {parseUnicode(post?.title) || dummyText(5, 10)}
                         </a>
                     </HtmlTag>
                 );
@@ -194,34 +193,37 @@ const PostBlockContent = (props) => {
         return content;
     };
 
+    // Fetch all media data at once using a single hook
+    const postsMedia = useSelect((select) => {
+        if (!postData || postData.length === 0) return {};
+        const { getMedia, getEntityRecord } = select(coreStore);
+        const mediaMap = {};
+
+        postData.forEach(post => {
+            if (!post?.id) return;
+            const freshPost = getEntityRecord('postType', postType, post.id);
+            const mediaId = freshPost?.featured_media || post?.featured_media;
+
+            if (mediaId) {
+                mediaMap[post.id] = getMedia(mediaId, { context: 'view' });
+            }
+        });
+
+        return mediaMap;
+    }, [postData, postType]);
+
 
     const renderPost = (post, index) => {
         const postClasses = post?.classes || `guten-post post-${index} post type-post status-publish format-standard has-post-thumbnail hentry category-category tag-tag`;
         const category = renderCategory(post);
 
-        const [featuredImage] = useEntityProp('postType', postType, 'featured_media', post?.id);
-
-        const { media } = useSelect(
-            (select) => {
-                const { getMedia, getPostType } = select(coreStore);
-                return {
-                    media:
-                        featuredImage &&
-                        getMedia(featuredImage, {
-                            context: 'view',
-                        }),
-                    postType: postType && getPostType(postType),
-                };
-            },
-            [featuredImage, postType]
-        );
-
+        const media = postsMedia[post?.id];
         const mediaUrl = media?.media_details?.sizes?.[thumbnailSize.value]?.source_url;
 
         return (
             <article key={post?.id || index} className={postClasses}>
                 <div className="guten-thumb">
-                    <a aria-label={post?.title || ''} href="javascript:void(0);">
+                    <a aria-label={parseUnicode(post?.title) || ''} href="javascript:void(0);">
                         <div className="thumbnail-container">
                             <img
                                 loading="eager"
@@ -229,7 +231,7 @@ const PostBlockContent = (props) => {
                                 height={post?.thumbnail?.height || 400}
                                 src={mediaUrl}
                                 className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                alt={post?.title || ''}
+                                alt={parseUnicode(post?.title) || ''}
                                 decoding="async"
                                 sizes={`(max-width: ${post?.thumbnail?.width || 400}px) 100vw, ${post?.thumbnail?.width || 400}px`}
                             />

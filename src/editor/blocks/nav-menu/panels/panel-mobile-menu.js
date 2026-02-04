@@ -13,6 +13,11 @@ export const mobileMenuPanel = (props) => {
             component: ImageSizeControl
         },
         {
+            id: 'mobileMenuLogoLazyLoad',
+            label: __('Set Lazy Load', 'gutenverse'),
+            component: CheckboxControl,
+        },
+        {
             id: 'mobileMenuLink',
             label: __('Menu Link', 'gutenverse'),
             component: SelectControl,

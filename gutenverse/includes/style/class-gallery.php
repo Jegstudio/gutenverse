@@ -255,7 +255,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['fitlerSearchIconSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-after i",
+					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-after i, .{$this->element_id} .search-filter-trigger.icon-position-after .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'margin-left' );
 					},
@@ -266,7 +266,7 @@ class Gallery extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-before i",
+					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-before i, .{$this->element_id} .search-filter-trigger.icon-position-before .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'margin-right' );
 					},

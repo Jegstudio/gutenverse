@@ -1,13 +1,18 @@
 import { __ } from '@wordpress/i18n';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { CheckboxControl, ImageControl, RangeControl, SelectControl, TextControl, IconSVGControl } from 'gutenverse-core/controls';
+import { ImageControl, RangeControl, SelectControl, TextControl, IconSVGControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoad } from "../../../helper";
 
 export const panelIcon = (props) => {
     const {
         elementId,
         iconType,
         altType,
+        imageLoad,
+        lazyLoad,
     } = props;
+    const defaultImageLoad = getDefaultImageLoad(imageLoad, lazyLoad);
+
 
     const deviceType = getDeviceType();
 
@@ -99,10 +104,21 @@ export const panelIcon = (props) => {
             component: ImageControl,
         },
         {
-            id: 'lazyLoad',
+            id: 'imageLoad',
+            label: __('Image Load', 'gutenverse'),
+            component: SelectControl,
+            defaultValue: defaultImageLoad,
             show: iconType && iconType === 'image',
-            label: __('Set Lazy Load', 'gutenverse'),
-            component: CheckboxControl,
+            options: [
+                {
+                    label: __('Normal Load', 'gutenverse'),
+                    value: 'eager'
+                },
+                {
+                    label: __('Lazy Load', 'gutenverse'),
+                    value: 'lazy'
+                },
+            ],
         },
         {
             id: 'altType',

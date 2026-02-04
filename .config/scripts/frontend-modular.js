@@ -89,14 +89,6 @@ const frontendModular = {
                         {
                             source: process.env.NODE_ENV === 'development' ? "./build/chunk-swiper-modules.js*" : "./build/chunk-swiper-modules.js",
                             destination: "./gutenverse/assets/js/frontend/",
-                        },
-                        {
-                            source: process.env.NODE_ENV === 'development' ? "./build/chunk-anime.js*" : "./build/chunk-anime.js",
-                            destination: "./gutenverse/assets/js/frontend/",
-                        },
-                        {
-                            source: process.env.NODE_ENV === 'development' ? "./build/vendors-node_modules_swiper_shared_utils_mjs.js*" : "./build/vendors-node_modules_swiper_shared_utils_mjs.js",
-                            destination: "./gutenverse/assets/js/frontend/",
                         }
                     ],
                 },

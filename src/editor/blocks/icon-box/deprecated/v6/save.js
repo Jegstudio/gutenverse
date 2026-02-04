@@ -1,6 +1,6 @@
 import { compose } from '@wordpress/compose';
 import { classnames } from 'gutenverse-core/components';
-import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks, RichText } from '@wordpress/block-editor';
 import { svgAtob, renderIcon, renderGradientElement } from 'gutenverse-core/helper';
 import { getImageSrc } from 'gutenverse-core/editor-helper';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -164,7 +164,7 @@ const save = compose(
         </div>
     );
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })} >
+        <div className={className} {...advanceAnimationData} >
             <ContentBody />
         </div>
     );

@@ -10,6 +10,7 @@
 namespace Gutenverse\Block;
 
 use Gutenverse\Framework\Block\Post_Abstract;
+use Gutenverse\Framework\Options;
 
 /**
  * Class Post Block
@@ -34,8 +35,9 @@ class Post_Block extends Post_Abstract {
 		if ( $remove_link ) {
 			$content = str_replace( 'href', 'href="javascript:void(0);" data-href', $content );
 		}
+		$image_load = Options::get_instance()->get_image_load( 'lazy', $this->attributes['lazyLoad'], $this->attributes['imageLoad'] );
 
-		if ( $this->attributes['lazyLoad'] ) {
+		if ( 'lazy' === $image_load ) {
 			$content = preg_replace( '/<img(.*?)>/', '<img loading="lazy" $1>', $content );
 		} else {
 			$content = preg_replace( '/<img(.*?)>/', '<img loading="eager" $1>', $content );
@@ -170,7 +172,8 @@ class Post_Block extends Post_Abstract {
 			$category = get_category( $cat_id );
 			$position = 'type-3' === $this->attributes['postblockType'] ? 'position-' . esc_attr( $this->attributes['categoryPosition'] ) : '';
 			$class    = 'class="category-' . esc_attr( $category->slug ) . '"';
-			$category = '<div class="guten-post-category ' . $position . '"><span><a href="' . esc_url( get_category_link( $cat_id ) ) . '" ' . $class . '>' . esc_attr( $category->name ) . '</a></span></div>';
+			$category_aria_label = sprintf( __( 'View all posts in %s', 'gutenverse' ), $category->name );
+			$category = '<div class="guten-post-category ' . $position . '"><span><a href="' . esc_url( get_category_link( $cat_id ) ) . '" aria-label="' . esc_attr( $category_aria_label ) . '" ' . $class . '>' . esc_attr( $category->name ) . '</a></span></div>';
 			if ( 'type-5' === $this->attributes['postblockType'] ) {
 				$category = '<div class="post-category-container">' . $category . '</div>';
 			}
@@ -205,10 +208,12 @@ class Post_Block extends Post_Abstract {
 
 				$icon_html = $this->render_icon( $icon_type, $icon, $icon_svg );
 
+				$author_aria_label = esc_attr( sprintf( __( 'Author %s', 'gutenverse' ), $author_name ) );
+
 				if ( 'before' === $icon_position ) {
-					$author_output = '<div class="guten-meta-author icon-position-' . $icon_position . '">' . $icon_html . '<span class="by">' . $author_by . '</span> <a href="' . $author_url . '">' . $author_name . '</a></div>';
+					$author_output = '<div class="guten-meta-author icon-position-' . $icon_position . '">' . $icon_html . '<span class="by">' . $author_by . '</span> <a href="' . $author_url . '" aria-label="' . $author_aria_label . '">' . $author_name . '</a></div>';
 				} else {
-					$author_output = '<div class="guten-meta-author icon-position-' . $icon_position . '"><span class="by">' . $author_by . '</span><a href="' . $author_url . '">' . $author_name . '</a>' . $icon_html . '</div>';
+					$author_output = '<div class="guten-meta-author icon-position-' . $icon_position . '"><span class="by">' . $author_by . '</span><a href="' . $author_url . '" aria-label="' . $author_aria_label . '">' . $author_name . '</a>' . $icon_html . '</div>';
 				}
 			}
 
@@ -285,8 +290,8 @@ class Post_Block extends Post_Abstract {
 
 			$readmore =
 			'<div class="guten-meta-readmore icon-position-' . $icon_position . '">
-                <a aria-label="Read more about ' . $post_title . '" href="' . esc_url( get_the_permalink( $post ) ) . '" class="guten-readmore">' . $readmore . '</a>
-            </div>';
+				<a aria-label="Read more about ' . $post_title . '" href="' . esc_url( get_the_permalink( $post ) ) . '" class="guten-readmore">' . $readmore . '<span class="screen-reader-text">' . esc_html__( ' about ', 'gutenverse' ) . $post_title . '</span></a>
+			</div>';
 		}
 
 		return $readmore;
@@ -339,9 +344,14 @@ class Post_Block extends Post_Abstract {
 				$inner_comment_content = '<span>' . $number . '</span>' . $icon_html;
 			}
 
+			$comment_aria_label = sprintf( _n( '%s comment', '%s comments', $number, 'gutenverse' ), $number );
+			if ( $number == 0 ) {
+				$comment_aria_label = __( 'Leave a comment', 'gutenverse' );
+			}
+
 			$comment =
 			'<div class="guten-meta-comment icon-position-' . $icon_position . '">
-                <a href="' . $this->guten_get_respond_link( $post->ID ) . '" >
+                <a href="' . $this->guten_get_respond_link( $post->ID ) . '" aria-label="' . esc_attr( $comment_aria_label ) . '">
                     ' . $inner_comment_content . '
                 </a>
             </div>';
@@ -418,7 +428,7 @@ class Post_Block extends Post_Abstract {
 		$last_idx       = $this->attributes['alreadyFetch'] ?? 0;
 		$thumbnail_size = $this->attributes['thumbnailSize'];
 
-		if ( ( 'loadmore' === $pagination || 'scrollload' === $pagination ) && ( $load_anim && 'none' != $load_anim ) && $from_pag ) {
+		if ( ( 'loadmore' === $pagination || 'scrollload' === $pagination ) && ( $load_anim && 'none' !== $load_anim ) && $from_pag ) {
 			$add_class = " animated {$load_anim} initial-hide loadmore-animation";
 		}
 
@@ -444,7 +454,7 @@ class Post_Block extends Post_Abstract {
 				if ( 'title' === $order['value'] ) {
 					$content .=
 						'<' . $html_tag . ' class="guten-post-title">
-							<a aria-label="' . $post_title .'" href="' . $post_url . '">' . $post_title . '</a>
+							<a aria-label="' . $post_title . '" href="' . $post_url . '">' . $post_title . '</a>
 						</' . $html_tag . '>';
 				}
 

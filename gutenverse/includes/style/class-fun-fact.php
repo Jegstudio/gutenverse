@@ -314,6 +314,32 @@ class Fun_Fact extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['prefixColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .fun-fact-inner .content .number-wrapper .prefix",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['prefixColor'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['suffixColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .fun-fact-inner .content .number-wrapper .suffix",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['suffixColor'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['numberTypography'] ) ) {
 			$this->inject_typography(
 				array(
@@ -331,6 +357,28 @@ class Fun_Fact extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .fun-fact-inner .content .title",
 					'property'       => function ( $value ) {},
 					'value'          => $this->attrs['titleTypography'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['prefixTypography'] ) ) {
+			$this->inject_typography(
+				array(
+					'selector'       => ".{$this->element_id} .fun-fact-inner .content .number-wrapper .prefix",
+					'property'       => function ( $value ) {},
+					'value'          => $this->attrs['prefixTypography'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['suffixTypography'] ) ) {
+			$this->inject_typography(
+				array(
+					'selector'       => ".{$this->element_id} .fun-fact-inner .content .number-wrapper .suffix",
+					'property'       => function ( $value ) {},
+					'value'          => $this->attrs['suffixTypography'],
 					'device_control' => false,
 				)
 			);

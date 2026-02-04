@@ -152,7 +152,7 @@ gulp.task('copy-framework', function () {
 gulp.task('replace-text-domain', function () {
     return gulp
         .src(['./release/gutenverse/lib/framework/**/*.js', './release/gutenverse/lib/framework/**/*.php'])
-        .pipe(replace('--gctd--', 'gutenverse'))
+        .pipe(replace('--gctd--', 'gutenverse', { logs: { enabled: false } }))
         .pipe(gulp.dest('./release/gutenverse/lib/framework/'));
 });
 

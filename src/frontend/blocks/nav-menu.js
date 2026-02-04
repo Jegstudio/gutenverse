@@ -125,7 +125,7 @@ class GutenverseNavMenu extends Default {
             });
         }
 
-        const dropdownToggle = item.wrapper.find('li.menu-item-has-children > a i, li.menu-item-has-children > a svg');
+        const dropdownToggle = item.wrapper.find('li.menu-item-has-children > a i, li.menu-item-has-children > a .gutenverse-icon-svg');
         dropdownToggle.on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();

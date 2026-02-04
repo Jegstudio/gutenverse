@@ -10,6 +10,10 @@
         word-wrap: break-word;
         word-break: break-word;
 
+        .gutenverse-icon-svg svg {
+            fill: currentColor !important;
+        }
+
         a {
             display: flex;
             @include alignitemscenter();

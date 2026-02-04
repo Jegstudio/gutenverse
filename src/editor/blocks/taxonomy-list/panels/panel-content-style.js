@@ -119,44 +119,7 @@ export const contentStylePanel = (props) => {
             label: __('Content Spacing Vertical', 'gutenverse'),
             component: SizeControl,
             allowDeviceControl: true,
-            liveStyle: layout === 'column' ? [
-                {
-                    'type': 'unitPoint',
-                    'id': 'contentSpacing',
-                    'responsive': true,
-                    'selector': `.${elementId} .taxonomy-list-wrapper`,
-                    'properties': [
-                        {
-                            'name': 'row-gap',
-                            'valueType': 'pattern',
-                            'pattern': 'calc({value}/2)',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        }
-                    ],
-                },
-                {
-                    'type': 'unitPoint',
-                    'id': 'contentSpacing',
-                    'responsive': true,
-                    'selector': `.${elementId} .taxonomy-list-item:not(:first-child)`,
-                    'properties': [
-                        {
-                            'name': 'padding-top',
-                            'valueType': 'pattern',
-                            'pattern': 'calc({value}/2)',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        }
-                    ],
-                }
-            ] : [
+            liveStyle: [
                 {
                     'type': 'unitPoint',
                     'id': 'contentSpacing',
@@ -174,7 +137,7 @@ export const contentStylePanel = (props) => {
                             }
                         }
                     ],
-                }
+                },
             ]
         },
         {
@@ -193,25 +156,7 @@ export const contentStylePanel = (props) => {
                         {
                             'name': 'column-gap',
                             'valueType': 'pattern',
-                            'pattern':'calc({value}/2)',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        }
-                    ],
-                },
-                {
-                    'type': 'unitPoint',
-                    'id': 'contentSpacingHorizontal',
-                    'responsive': true,
-                    'selector': `.${elementId} .taxonomy-list-item:not(:first-child)`,
-                    'properties': [
-                        {
-                            'name': 'padding-left',
-                            'valueType': 'pattern',
-                            'pattern':'calc({value}/2)',
+                            'pattern': '{value}',
                             'patternValues': {
                                 'value': {
                                     'type': 'direct'
@@ -265,7 +210,7 @@ export const contentStylePanel = (props) => {
                     unit: '%',
                 },
             },
-            liveStyle : [
+            liveStyle: [
                 {
                     'type': 'unitPoint',
                     'id': 'customItemWidth',
@@ -273,7 +218,7 @@ export const contentStylePanel = (props) => {
                     'properties': [
                         {
                             'name': 'width',
-                            'valueType' : 'direct'
+                            'valueType': 'direct'
                         }
                     ],
                     'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item`,

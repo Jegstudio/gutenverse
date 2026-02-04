@@ -13,6 +13,7 @@ import { __ } from '@wordpress/i18n';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { parseUnicode } from 'gutenverse-core/helper';
 
 const PostTitleBlock = compose(
     withPartialRender
@@ -72,7 +73,7 @@ const PostTitleBlock = compose(
         </InspectorControls>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div  {...blockProps}>
-            <HtmlTag>{postLink ? <a href={link} target={linkTarget} rel={postLinkRel} onClick={e => e.preventDefault()}>{postTitle}</a> : postTitle}</HtmlTag>
+            <HtmlTag>{postLink ? <a href={link} target={linkTarget} rel={postLinkRel} onClick={e => e.preventDefault()}>{parseUnicode(postTitle)}</a> : parseUnicode(postTitle)}</HtmlTag>
         </div>
     </>;
 });

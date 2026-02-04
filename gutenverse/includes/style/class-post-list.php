@@ -427,7 +427,7 @@ class Post_List extends Style_Abstract {
 		if ( isset( $this->attrs['iconColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-post a .icon-list i",
+					'selector'       => ".{$this->element_id} .guten-post a .icon-list i, .{$this->element_id} .guten-post a .icon-list .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},

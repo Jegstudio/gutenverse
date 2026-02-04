@@ -2,7 +2,7 @@
 @import "gutenverse-core/src/assets/variables";
 @import "gutenverse-core/src/assets/wp-fix";
 
-.guten-nav-menu {  
+.guten-nav-menu {
   * {
     transition: background-color 0.4s ease 0s, border 0.4s ease 0s, border-radius 0.4s ease 0s, box-shadow 0.4s ease 0s, color 0.4s ease 0s, height 0.4s ease 0s;
   }
@@ -117,7 +117,7 @@
         }
 
         >a i,
-        >a svg {
+        >a .gutenverse-icon-svg {
           margin-left: 5px;
           display: flex;
           align-items: center;
