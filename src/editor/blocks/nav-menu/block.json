@@ -585,6 +585,10 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"menuAriaLabel": {
+			"type": "string",
+			"copyStyle": true
 		}
 	},
 	"supports": {

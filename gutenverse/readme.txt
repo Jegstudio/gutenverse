@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.4.4
+Stable tag: 3.4.5-dev
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,6 +298,19 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+= 3.4.5-dev =
+##### New & Improvements
+* add explicit image width & height in post features image
+* add aria label in nav menu block
+* add aria label in logo slider link
+
+##### Bug Fixes
+* fix transform transition
+* fix popup video setting is showed when popup type is not video
+* fix missing aria label in post block readmore button
+* fix tooltip info icon position
+* fix divider position in taxonomy list block
+
 = 3.4.4 =
 ##### New & Improvements
 * add image width & height for gallery block
