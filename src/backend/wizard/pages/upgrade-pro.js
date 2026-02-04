@@ -420,7 +420,7 @@ export const UpgradePro = ({ updateProgress, requirement }) => {
         </div>
         <div className="upgrade-footer">
             <div className="upgrade-actions">
-                <div onClick={() => requirement ? updateProgress('importTemplate', 2) : updateProgress('pluginAndTheme', 1)} className="button-back">
+                <div onClick={() => updateProgress('startWizard', 0)} className="button-back">
                     <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 5.1C15.3314 5.1 15.6 4.83137 15.6 4.5C15.6 4.16863 15.3314 3.9 15 3.9V5.1ZM0.575736 4.07574C0.341421 4.31005 0.341421 4.68995 0.575736 4.92426L4.39411 8.74264C4.62843 8.97696 5.00833 8.97696 5.24264 8.74264C5.47696 8.50833 5.47696 8.12843 5.24264 7.89411L1.84853 4.5L5.24264 1.10589C5.47696 0.871573 5.47696 0.491674 5.24264 0.257359C5.00833 0.0230446 4.62843 0.0230446 4.39411 0.257359L0.575736 4.07574ZM15 3.9L1 3.9V5.1L15 5.1V3.9Z" fill="currentColor" />
                     </svg>
