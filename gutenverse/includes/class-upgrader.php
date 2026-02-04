@@ -28,20 +28,6 @@ class Upgrader {
 		add_action( 'wp_ajax_gutenverse_upgrader_page_content_close', array( $this, 'upgrader_page_content_close' ) );
 		add_action( 'wp_ajax_gutenverse_upgrader_page_upgrade_close', array( $this, 'upgrader_page_upgrade_close' ) );
 		add_action( 'gutenverse_plugin_upgrade', array( $this, 'upgrade_like' ), 20 );
-		add_action( 'after_switch_theme', array( $this, 'on_lite_theme_activated' ) );
-	}
-
-	/**
-	 * On Lite Theme Activated.
-	 */
-	public function on_lite_theme_activated() {
-		// Only trigger for Lite theme.
-		if ( ! apply_filters( 'gutenverse_wporg_plus_mechanism', false ) ) {
-			return;
-		}
-
-		// Mark onboarding as needed.
-		set_transient( 'gutenverse_wizard_redirect', true, MINUTE_IN_SECONDS );
 	}
 
 	/**
