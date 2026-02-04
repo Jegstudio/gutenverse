@@ -39,24 +39,28 @@ const PostFeaturedImageBlock = compose(
         galleryPrevButtonIconType,
         galleryPrevButtonIconSVG,
         galleryHideDots,
+        galleryOverride,
+        videoOverride,
     } = attributes;
+
+    const [postFormat] = useEntityProp('postType', postType, 'format', postId);
 
     const [block, setBlock] = useState(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
 
     useEffect(() => {
-        /* Only change the block preview if gvnewsEssentials is true and not on Post Loop */
-        if (!gvnewsEssentials || postId) {
+        if (!gvnewsEssentials) {
             return;
         }
-        if (gutenversePreviewBlock === 'featuredGallery') {
-            setBlock(<GalleryContent attributes={attributes} block={block} />);
-        } else if (gutenversePreviewBlock === 'featuredVideo') {
+        if ((undefined === postId && gutenversePreviewBlock === 'featuredGallery') || (galleryOverride && 'gallery' === postFormat)) {
+            setBlock(<GalleryContent attributes={attributes} block={block} postId={postId} postType={postType} />);
+        } else if ((undefined === postId && gutenversePreviewBlock === 'featuredVideo') || (videoOverride && 'video' === postFormat)) {
             setBlock(<VideoContent />);
         } else {
             setBlock(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
         }
 
     }, [
+        postFormat,
         gutenversePreviewBlock,
         galleryHideNav,
         galleryNextButtonIcon,
@@ -66,12 +70,13 @@ const PostFeaturedImageBlock = compose(
         galleryPrevButtonIconType,
         galleryPrevButtonIconSVG,
         galleryHideDots,
+        galleryOverride,
+        videoOverride,
     ]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
-
 
 
     const blockProps = useBlockProps({
@@ -85,8 +90,6 @@ const PostFeaturedImageBlock = compose(
         ),
         ref: elementRef
     });
-
-
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -149,16 +152,16 @@ const StandardFormat = ({ attributes, postId, postType }) => {
     return <>{content}</>;
 }
 
-const GalleryContent = ({ attributes, block }) => {
+const GalleryContent = ({ attributes, block, postId, postType }) => {
     return applyFilters('gutenverse.post-featured-image.galleryContent',
         <></>
-        , attributes, block);
+        , attributes, block, postId, postType);
 }
 
 
 const VideoContent = () => {
     return (
-        <div className="gvnews_featured featured_video top_right ">
+        <div className="gvnews_featured featured_video">
             <div className="gvnews_featured_video_preview">
                 <img src={imagePlaceholder} />
             </div>
