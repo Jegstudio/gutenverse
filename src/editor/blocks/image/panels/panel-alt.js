@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { SelectControl, TextControl } from 'gutenverse-core/controls';
-import { getDefaultImageLoad } from "../../../helper";
+import { CheckboxControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoad } from '../../../helper';
 
 export const altPanel = (props) => {
     const {
@@ -27,6 +27,12 @@ export const altPanel = (props) => {
                     value: 'lazy'
                 },
             ],
+        },
+        {
+            id: 'fetchPriorityHigh',
+            label: __('Fetch Priority High', 'gutenverse'),
+            component: CheckboxControl,
+            description: __('Signals the browser to prioritize fetching this image. Use this only for the LCP (Largest Contentful Paint) element.', '--gctd--')
         },
         {
             id: 'altType',
