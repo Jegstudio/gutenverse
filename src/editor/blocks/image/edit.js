@@ -24,7 +24,7 @@ import { getImageLoadValue } from '../../helper';
 const NEW_TAB_REL = 'noreferrer noopener';
 
 export const ImageBoxFigure = attributes => {
-    const { imgSrc, altType, altOriginal, altCustom, imageLoad } = attributes;
+    const { imgSrc, altType, altOriginal, altCustom, imageLoad, lazyLoad, fetchPriorityHigh = false } = attributes;
     const { media = {}, size } = imgSrc || {};
     const { imageId, sizes = {} } = media || {};
 
@@ -38,7 +38,7 @@ export const ImageBoxFigure = attributes => {
             imageAltText = altCustom;
             break;
     }
-    const imageLazyLoad = () => <img className="gutenverse-image-box-empty" src={imagePlaceholder} alt={imageAltText}  {...('lazy' === imageLoad && { loading: 'lazy' })}  />;
+    const imageLazyLoad = () => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} className="gutenverse-image-box-empty" src={imagePlaceholder} alt={imageAltText}  {...((imageLoad === 'lazy' || (imageLoad === '' && lazyLoad)) && { loading: 'lazy' })} />;
 
     // Handle if empty, pick the 'full' size. If 'full' size also not exist, return placeholder image.
 
@@ -57,7 +57,7 @@ export const ImageBoxFigure = attributes => {
     }
 
     if (imageId && imageSrc) {
-        return <img className="gutenverse-image-box-filled" src={imageSrc.url} height={imageSrc.height} width={imageSrc.width} alt={imageAltText}  {...('lazy' === imageLoad && { loading: 'lazy' })}  />;
+        return <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} className="gutenverse-image-box-filled" src={imageSrc.url} height={imageSrc.height} width={imageSrc.width} alt={imageAltText}  {...((imageLoad === 'lazy' || (imageLoad === '' && lazyLoad)) && { loading: 'lazy' })} />;
     }
 
     return imageLazyLoad();
@@ -134,6 +134,7 @@ const ImageBlock = compose(
         dynamicUrl,
         lazyLoad,
         imageLoad = '',
+        fetchPriorityHigh = false,
     } = attributes;
 
     const {
@@ -215,7 +216,7 @@ const ImageBlock = compose(
     };
 
     const blockElement = <div {...blockProps}>
-        {!isEmpty(imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img src={defaultSrc} onClick={open} />}</ImagePicker>}
+        {!isEmpty(imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} src={defaultSrc} onClick={open} />}</ImagePicker>}
         {caption()}
     </div>;
 

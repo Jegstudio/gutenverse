@@ -179,7 +179,25 @@ class Taxonomy_List extends Style_Abstract {
 							return '';
 						}
 
-						return "row-gap: {$point}{$unit};";
+						return "row-gap: calc({$point}{$unit} / 2);";
+					},
+					'value'          => $this->attrs['contentSpacing'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .taxonomy-list-wrapper .taxonomy-list-item:not(:first-child)",
+					'property'       => function ( $value ) {
+						$unit  = $value['unit'] ?? '';
+						$point = $value['point'] ?? '';
+
+						if ( '' === $point || ! is_numeric( $point ) ) {
+							return '';
+						}
+
+						return "padding-top: calc({$point}{$unit} / 2);";
 					},
 					'value'          => $this->attrs['contentSpacing'],
 					'device_control' => true,

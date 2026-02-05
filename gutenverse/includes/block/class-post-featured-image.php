@@ -39,7 +39,8 @@ class Post_Featured_Image extends Block_Abstract {
 		$post_featured   = get_the_post_thumbnail_url( $post_id, $image_size['value'] );
 		$custom_classes  = $this->get_custom_classes();
 		$content         = '';
-		$image_load      = Options::get_instance()->get_image_load( 'lazy', $this->attributes['lazyLoad'], $this->attributes['imageLoad'] );
+		$lazy_load       = isset( $this->attributes['lazyLoad'] ) ? $this->attributes['lazyLoad'] : false;
+		$image_load      = Options::get_instance()->get_image_load( 'lazy', $lazy_load, $this->attributes['imageLoad'] );
 		$override_featured_image = apply_filters( 'gutenverse_featured_image_override', false, $post_id, $this->attributes );
 		if ( $override_featured_image ) {
 			$content = apply_filters( 'gutenverse_featured_image_content', $content, $post_id, $this->attributes );

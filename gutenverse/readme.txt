@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.4.4
+Stable tag: 3.4.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,6 +298,28 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+= 3.4.5 =
+##### New & Improvements
+* add explicit image width & height in post features image
+* add aria label in nav menu block
+* add aria label in logo slider link
+* add aria label in post block meta
+* add fetch priority high option for image block
+
+##### Bug Fixes
+* fix transform transition
+* fix popup video setting is showed when popup type is not video
+* fix missing aria label in post block readmore button
+* fix tooltip info icon position
+* fix divider position in taxonomy list block
+* fix progress bar slide issue
+* fix popup animation exit not working properly
+* fix post block pagination alignment
+* fix post block issue with unicode character in category name
+* fix aria label not showing while editing
+* fix nav menu aria label bug when using icon as a label
+* fix button transform transition
+
 = 3.4.4 =
 ##### New & Improvements
 * add image width & height for gallery block

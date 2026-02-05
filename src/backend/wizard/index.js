@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { IconPluginCheckSVG, IconPluginFormSVG, IconPluginFontSVG } from '../../assets/icon/index';
 import classnames from 'classnames';
 import apiFetch from '@wordpress/api-fetch';
-import WizardPage from './components/wizard';
+import WizardPage from './pages/wizard-lite';
 
 const WizardItem = ({ part, selected, toggleSelected, icon, title, subtitle }) => {
     const classes = classnames('wizard-gutenverse-form', 'wizard-item', {
@@ -228,18 +228,19 @@ const UpgradeWizard = () => {
     return 'install' === stage ? <WizardContainer setStage={setStage} /> : <WizardInstallLater setStage={setStage} />;
 };
 
+
 const loadWizard = () => {
     const wizardDiv = document.getElementById('gutenverse-wizard');
-    const onboardWizardDiv = document.getElementById('gutenverse-onboard-wizard');
-
-    if (onboardWizardDiv) {
-        const root = createRoot(onboardWizardDiv);
-        root.render(<WizardPage/>);
-    }
 
     if (wizardDiv) {
         const root = createRoot(wizardDiv);
         root.render(<UpgradeWizard />);
+    }
+
+    const onboardWizardDiv = document.getElementById('gutenverse-onboard-wizard');
+    if (onboardWizardDiv) {
+        const root = createRoot(onboardWizardDiv);
+        root.render(<WizardPage />);
     }
 };
 
