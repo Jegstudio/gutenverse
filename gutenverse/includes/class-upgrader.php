@@ -50,7 +50,7 @@ class Upgrader {
 		}
 
 		delete_transient( 'gutenverse_wizard_redirect' );
-		update_option( $option_key, true );
+		update_option( $option_key, true, false );
 
 		wp_safe_redirect(
 			admin_url( 'admin.php?page=gutenverse-onboarding-wizard' )
@@ -135,14 +135,14 @@ class Upgrader {
 	 * Change option page content to false.
 	 */
 	public function upgrader_page_content_close() {
-		update_option( $this->get_page_content_option_name(), false );
+		update_option( $this->get_page_content_option_name(), false, false );
 	}
 
 	/**
 	 * Change option page upgrade to true.
 	 */
 	public function upgrader_page_upgrade_close() {
-		update_option( $this->get_plugin_upgrade_option_name(), true );
+		update_option( $this->get_plugin_upgrade_option_name(), true, false );
 	}
 
 	/**
