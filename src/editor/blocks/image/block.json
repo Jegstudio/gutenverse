@@ -265,11 +265,21 @@
 		"imageLoad": {
 			"type": "string",
 			"default": ""
+		},
+		"fetchPriorityHigh": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {
 		"anchor": true
 	},
-	"keywords": ["image", "symbol", "logo"],
-	"style": ["gutenverse-frontend-image-style"]
+	"keywords": [
+		"image",
+		"symbol",
+		"logo"
+	],
+	"style": [
+		"gutenverse-frontend-image-style"
+	]
 }
