@@ -318,6 +318,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * fix post block issue with unicode character in category name
 * fix aria label not showing while editing
 * fix nav menu aria label bug when using icon as a label
+* fix button transform transition
 
 = 3.4.4 =
 ##### New & Improvements
