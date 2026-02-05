@@ -23,7 +23,6 @@ class Upgrader {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'set_upgrader_page_content' ), 99 );
-		add_action( 'init', array( $this, 'set_upgrader_plugin_split' ), 99 );
 		add_action( 'admin_init', array( $this, 'set_upgrader_theme_select' ), 99 );
 		add_action( 'wp_ajax_gutenverse_upgrader_page_content_close', array( $this, 'upgrader_page_content_close' ) );
 		add_action( 'wp_ajax_gutenverse_upgrader_page_upgrade_close', array( $this, 'upgrader_page_upgrade_close' ) );
@@ -189,21 +188,6 @@ class Upgrader {
 
 		if ( ! $flag ) {
 			add_option( $this->get_page_content_option_name(), true );
-		}
-	}
-
-	/**
-	 * Set form split option meta
-	 */
-	public function set_upgrader_plugin_split() {
-		$flag            = get_option( $this->get_plugin_split_option_name() );
-		$tracker         = Meta_Option::instance()->get_option( 'tracker' )[ GUTENVERSE ];
-		$version_history = $tracker['version_history'];
-		$version_flag    = count( $version_history ) > 0 && version_compare( $version_history[ count( $version_history ) - 1 ], '2.0.0', '<' ) ? true : false;
-
-		if ( ! $flag && $version_flag && current_user_can( 'manage_options' ) ) {
-			add_option( $this->get_plugin_split_option_name(), true );
-			wp_safe_redirect( admin_url( 'admin.php?action=gutenverse-upgrade-wizard' ) );
 		}
 	}
 
