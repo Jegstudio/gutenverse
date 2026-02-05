@@ -313,12 +313,18 @@ class Upgrade_Wizard {
 	 */
 	public function register_onboarding_page() {
 		add_submenu_page(
-			null, // hidden page
+			'gutenverse', // valid parent.
 			__( 'Welcome to Gutenverse', 'gutenverse' ),
 			__( 'Gutenverse Onboarding', 'gutenverse' ),
-			'install_plugins',
+			'manage_options',
 			'gutenverse-onboarding-wizard',
 			array( $this, 'render_onboard_wizard' )
+		);
+
+		// Hide it from the menu.
+		remove_submenu_page(
+			'gutenverse',
+			'gutenverse-onboarding-wizard'
 		);
 	}
 
