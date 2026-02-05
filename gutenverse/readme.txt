@@ -303,6 +303,8 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * add explicit image width & height in post features image
 * add aria label in nav menu block
 * add aria label in logo slider link
+* add aria label in post block meta
+* add fetch priority high option for image block
 
 ##### Bug Fixes
 * fix transform transition
@@ -310,6 +312,12 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * fix missing aria label in post block readmore button
 * fix tooltip info icon position
 * fix divider position in taxonomy list block
+* fix progress bar slide issue
+* fix popup animation exit not working properly
+* fix post block pagination alignment
+* fix post block issue with unicode character in category name
+* fix aria label not showing while editing
+* fix nav menu aria label bug when using icon as a label
 
 = 3.4.4 =
 ##### New & Improvements
