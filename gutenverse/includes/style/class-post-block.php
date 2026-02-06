@@ -1216,7 +1216,9 @@ class Post_Block extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .guten-postblock.guten-pagination-prevnext .guten_block_nav,
-						.{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav",
+						.{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav,
+						.{$this->element_id} .guten-postblock.guten-pagination-normal-prevnext .guten_block_nav,
+						.{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav",
 					'property'       => function ( $value ) {
 						return "justify-content: {$value};";
 					},

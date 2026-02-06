@@ -295,6 +295,10 @@
 		"imageLoad": {
 			"type": "string",
 			"default": ""
+		},
+		"fetchPriorityHigh": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {

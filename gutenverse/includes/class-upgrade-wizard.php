@@ -25,25 +25,14 @@ class Upgrade_Wizard {
 	public static $action = 'gutenverse-upgrade-wizard';
 
 	/**
-	 * Hold API Variable Instance.
-	 *
-	 * @var Api
-	 */
-	public $api;
-
-	/**
-	 * Onboard Action Slug
-	 *
-	 * @var string
-	 */
-	public static $onboard = 'gutenverse-onboarding-wizard';
-
-	/**
 	 * Upgrade_Wizard constructor.
 	 */
 	public function __construct() {
 		add_action( 'admin_action_' . self::$action, array( $this, 'wizard_page' ) );
-		add_action( 'admin_action_' . self::$onboard, array( $this, 'onboard_wizard_page' ) );
+		add_action( 'admin_menu', array( $this, 'register_onboarding_page' ) );
+		add_filter( 'admin_title', array( $this, 'filter_onboarding_admin_title' ), 10, 2 );
+		add_action( 'admin_head', array( $this, 'add_onboarding_meta_tags' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_onboarding_scripts' ), 99 );
 	}
 
 	/**
@@ -182,7 +171,7 @@ class Upgrade_Wizard {
 					'1x' => 'https://ps.w.org/gutenverse-companion/assets/icon-128x128.png?rev=3162415',
 				),
 				'download_url' => '',
-				'version' => '2.0.0',
+				'version'      => '2.0.0',
 			),
 		);
 
@@ -262,52 +251,6 @@ class Upgrade_Wizard {
 	}
 
 	/**
-	 * Wizard Page.
-	 *
-	 * @throws \Exception Throw exception.
-	 */
-	public function onboard_wizard_page() {
-		try {
-
-			if ( ! current_user_can( 'install_plugins' ) ) {
-				throw new \Exception( 'Access denied', 403 );
-			}
-
-			header( 'Content-Type: ' . get_option( 'html_type' ) . '; charset=' . get_option( 'blog_charset' ) );
-			$this->set_hook();
-			$this->render_onboard_wizard();
-			exit();
-		} catch ( \Exception $e ) {
-			echo wp_kses( $e->getMessage(), wp_kses_allowed_html() );
-		}
-	}
-
-	/**
-	 * Render Onboard Wizard.
-	 */
-	public function render_onboard_wizard() {
-		?>
-			<!DOCTYPE html>
-			<html <?php language_attributes(); ?>>
-			<head>
-				<meta charset="utf-8"/>
-				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				<title><?php esc_html_e( 'Welcome to Gutenverse', 'gutenverse' ); ?></title>
-					<?php wp_head(); ?>
-			</head>
-			<body>
-			<div id="gutenverse-onboard-wizard"></div>
-					<?php
-					wp_footer();
-					/** This action is documented in wp-admin/admin-footer.php */
-					do_action( 'admin_print_footer_scripts' );
-					?>
-			</body>
-			</html>
-		<?php
-	}
-
-	/**
 	 * Check if plugin is installed.
 	 *
 	 * @param string $plugin_slug plugin slug.
@@ -325,5 +268,110 @@ class Upgrade_Wizard {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Enqueue Onboarding Scripts
+	 */
+	public function enqueue_onboarding_scripts( $hook ) {
+		if ( 'admin_page_gutenverse-onboarding-wizard' !== $hook ) {
+			return;
+		}
+
+		$include = ( include GUTENVERSE_DIR . '/lib/dependencies/wizard.asset.php' )['dependencies'];
+
+		wp_enqueue_script(
+			'gutenverse-wizard',
+			GUTENVERSE_URL . '/assets/js/wizard.js',
+			$include,
+			GUTENVERSE_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'gutenverse-wizard',
+			'GutenverseWizard',
+			$this->wizard_config()
+		);
+		wp_enqueue_style(
+			'gutenverse-backend-font',
+			'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;family=Roboto:wght@400;500;600&amp;display=swap',
+			array(),
+			GUTENVERSE_FRAMEWORK_VERSION
+		);
+
+		wp_enqueue_style(
+			'gutenverse-wizard',
+			GUTENVERSE_URL . '/assets/css/wizard.css',
+			array(),
+			GUTENVERSE_VERSION
+		);
+	}
+
+	/**
+	 * Register Onboarding Page.
+	 */
+	public function register_onboarding_page() {
+		add_submenu_page(
+			'gutenverse', // valid parent.
+			__( 'Welcome to Gutenverse', 'gutenverse' ),
+			__( 'Gutenverse Onboarding', 'gutenverse' ),
+			'manage_options',
+			'gutenverse-onboarding-wizard',
+			array( $this, 'render_onboard_wizard' )
+		);
+
+		// Hide it from the menu.
+		remove_submenu_page(
+			'gutenverse',
+			'gutenverse-onboarding-wizard'
+		);
+	}
+
+	/**
+	 * Filter Onboarding Admin Title.
+	 *
+	 * @param string $admin_title Admin title.
+	 * @param string $title Title.
+	 *
+	 * @return string
+	 */
+	public function filter_onboarding_admin_title( $admin_title, $title ) {
+		$screen = get_current_screen();
+
+		if ( $screen && 'admin_page_gutenverse-onboarding-wizard' === $screen->id ) {
+			return __( 'Welcome to Gutenverse', 'gutenverse' ) . ' ‹ ' . get_bloginfo( 'name' );
+		}
+
+		return $admin_title;
+	}
+
+	/**
+	 * Add Onboarding Meta Tags.
+	 */
+	public function add_onboarding_meta_tags() {
+		$screen = get_current_screen();
+
+		if ( ! $screen || 'admin_page_gutenverse-onboarding-wizard' !== $screen->id ) {
+			return;
+		}
+		?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="<?php esc_attr_e( 'Gutenverse onboarding wizard', 'gutenverse' ); ?>" />
+		<?php
+	}
+
+	/**
+	 * Render Onboard Wizard.
+	 */
+	public function render_onboard_wizard() {
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_die( __( 'Access denied', 'gutenverse' ), 403 );
+		}
+		?>
+		<div class="wrap gutenverse-onboarding-wrap">
+			<div id="gutenverse-onboard-wizard"></div>
+		</div>
+		<?php
 	}
 }
