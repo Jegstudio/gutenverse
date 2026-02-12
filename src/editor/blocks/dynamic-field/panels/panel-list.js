@@ -1,33 +1,99 @@
 /* WordPress dependencies */
 import { __ } from '@wordpress/i18n';
+import apiFetch from '@wordpress/api-fetch';
 import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel, typographyPanel } from 'gutenverse-core/controls';
-import { TextControl, ColorControl, CheckboxControl } from 'gutenverse-core/controls';
+import { CheckboxControl, SelectControl, TextControl, ColorControl, SelectSearchControl } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 
-export const settingPanel = () => {
+import { isOnEditor } from 'gutenverse-core/helper';
+
+export const settingPanel = (props) => {
+    const { link, context } = props;
+
+    // Create async search function for ACF fields
+    const searchACFFields = isOnEditor() ? (input) => new Promise((resolve) => {
+        const postType = context?.postType;
+
+        if (!postType) {
+            resolve([]);
+            return;
+        }
+
+        apiFetch({ path: `gutenverse/v1/dynamic-fields?postType=${postType}` })
+            .then((response) => {
+                if (response && response.fields) {
+                    // Filter fields based on search input
+                    const filtered = response.fields.filter(field =>
+                        field.label.toLowerCase().includes(input.toLowerCase()) ||
+                        field.value.toLowerCase().includes(input.toLowerCase())
+                    );
+                    resolve(filtered);
+                } else {
+                    resolve([]);
+                }
+            })
+            .catch(() => {
+                resolve([]);
+            });
+    }) : () => [];
+
     return [
         {
             id: 'fieldKey',
             label: __('Field Key', 'gutenverse'),
-            component: TextControl,
-            description: __('Enter the ACF Link/URL Field Name/Key here.', 'gutenverse'),
+            description: __('Search and select an ACF Field.', 'gutenverse'),
+            component: SelectSearchControl,
+            onSearch: searchACFFields,
         },
         {
-            id: 'label',
-            label: __('Label', 'gutenverse'),
+            id: 'htmlTag',
+            label: __('HTML Tag', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                { label: __('P'), value: 'p' },
+                { label: __('Span'), value: 'span' },
+                { label: __('Div'), value: 'div' },
+                { label: __('H1'), value: 'h1' },
+                { label: __('H2'), value: 'h2' },
+                { label: __('H3'), value: 'h3' },
+                { label: __('H4'), value: 'h4' },
+                { label: __('H5'), value: 'h5' },
+                { label: __('H6'), value: 'h6' },
+            ],
+        },
+        {
+            id: 'placeholder',
+            label: __('Placeholder', 'gutenverse'),
             component: TextControl,
-            description: __('Button text if ACF field is just a URL.', 'gutenverse'),
+            description: __('Shown in editor only for preview.', 'gutenverse'),
+        },
+        {
+            id: 'link',
+            label: __('Link to Field Value?', 'gutenverse'),
+            component: CheckboxControl,
         },
         {
             id: 'linkTarget',
+            show: !!link,
             label: __('Open in New Tab', 'gutenverse'),
             component: CheckboxControl,
         },
     ];
 };
 
-export const stylePanel = () => {
+export const stylePanel = (props) => {
     return [
+        {
+            id: 'alignment',
+            label: __('Alignment', 'gutenverse'),
+            component: SelectControl,
+            allowDeviceControl: true,
+            options: [
+                { label: __('Left'), value: 'left' },
+                { label: __('Center'), value: 'center' },
+                { label: __('Right'), value: 'right' },
+            ],
+        },
         {
             id: 'color',
             label: __('Text Color', 'gutenverse'),
@@ -59,7 +125,7 @@ export const panelList = () => {
             initialOpen: false,
             panelArray: (props) => typographyPanel({
                 ...props,
-                styleId: 'acf-link-typography',
+                styleId: 'dynamic-field-typography',
             }),
             tabRole: TabStyle,
         },
@@ -68,7 +134,7 @@ export const panelList = () => {
             initialOpen: false,
             panelArray: (props) => backgroundPanel({
                 ...props,
-                styleId: 'acf-link-background',
+                styleId: 'dynamic-field-background',
                 normalOptions: ['default', 'gradient'],
                 hoverOptions: ['default', 'gradient'],
             }),
@@ -79,8 +145,14 @@ export const panelList = () => {
             initialOpen: false,
             panelArray: (props) => borderPanel({
                 ...props,
-                styleId: 'acf-link-border',
+                styleId: 'dynamic-field-border',
             }),
+            tabRole: TabStyle,
+        },
+        {
+            title: __('Masking', 'gutenverse'),
+            initialOpen: false,
+            panelArray: maskPanel,
             tabRole: TabStyle,
         },
         {
@@ -100,7 +172,7 @@ export const panelList = () => {
             initialOpen: false,
             panelArray: (props) => animationPanel({
                 ...props,
-                styleId: 'acf-link-animation',
+                styleId: 'dynamic-field-animation',
             }),
             tabRole: TabSetting,
         },
@@ -115,7 +187,7 @@ export const panelList = () => {
             initialOpen: false,
             panelArray: (props) => advancePanel({
                 ...props,
-                styleId: 'acf-link-advance',
+                styleId: 'dynamic-field-advance',
             }),
             tabRole: TabSetting,
         },

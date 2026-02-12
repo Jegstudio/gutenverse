@@ -1,6 +1,6 @@
 <?php
 /**
- * Gutenverse ACF_Link
+ * Gutenverse Dynamic Loop Field
  *
  * @author Jegstudio
  * @since 1.0.0
@@ -12,11 +12,11 @@ namespace Gutenverse\Style;
 use Gutenverse\Framework\Style_Abstract;
 
 /**
- * Class ACF_Link
+ * Class Dynamic_Field
  *
  * @package gutenverse\style
  */
-class ACF_Link extends Style_Abstract {
+class Dynamic_Field extends Style_Abstract {
 	/**
 	 * Block Directory
 	 *
@@ -29,7 +29,7 @@ class ACF_Link extends Style_Abstract {
 	 *
 	 * @var array
 	 */
-	protected $name = 'acf-link';
+	protected $name = 'dynamic-field';
 
 	/**
 	 * Constructor
@@ -45,8 +45,6 @@ class ACF_Link extends Style_Abstract {
 				'border'      => null,
 				'positioning' => null,
 				'animation'   => null,
-				'margin'      => null,
-				'padding'     => null,
 				'box_shadow'  => null,
 			)
 		);
@@ -56,39 +54,32 @@ class ACF_Link extends Style_Abstract {
 	 * Generate style base on attribute.
 	 */
 	public function generate() {
-		// Button Alignment
-		if ( isset( $this->attrs['alignButton'] ) ) {
+		if ( isset( $this->attrs['alignment'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-acf-link-wrapper",
+					'selector'       => ".{$this->element_id} .guten-dynamic-field-content",
 					'property'       => function ( $value ) {
-						return "justify-content: {$value};";
+						return "justify-content: {$value}; text-align: {$this->handle_align($value)};";
 					},
-					'value'          => $this->attrs['alignButton'],
+					'value'          => $this->attrs['alignment'],
 					'device_control' => true,
 				)
 			);
 		}
 
-		// Button Padding
-		if ( isset( $this->attrs['paddingButton'] ) ) {
-			$this->inject_style(
+		if ( isset( $this->attrs['typography'] ) ) {
+			$this->inject_typography(
 				array(
-					'selector'       => ".{$this->element_id} .guten-button",
-					'property'       => function ( $value ) {
-						return "padding: {$value};";
-					},
-					'value'          => $this->attrs['paddingButton'],
-					'device_control' => true,
+					'selector' => ".{$this->element_id} .guten-dynamic-field-content",
+					'value'    => $this->attrs['typography'],
 				)
 			);
 		}
 
-		// Button Colors
 		if ( isset( $this->attrs['color'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-button span",
+					'selector'       => ".{$this->element_id} .guten-dynamic-field-content, .{$this->element_id} .guten-dynamic-field-content a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -98,14 +89,17 @@ class ACF_Link extends Style_Abstract {
 			);
 		}
 
-		// Button Background
-		if ( isset( $this->attrs['buttonBackground'] ) ) {
-			$this->handle_background( ".{$this->element_id} .guten-button", $this->attrs['buttonBackground'] );
-		}
-
-		// Button Border
-		if ( isset( $this->attrs['buttonBorder'] ) ) {
-			$this->handle_border( 'buttonBorder', ".{$this->element_id} .guten-button" );
+		if ( isset( $this->attrs['colorHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-dynamic-field-content:hover, .{$this->element_id} .guten-dynamic-field-content a:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['colorHover'],
+					'device_control' => false,
+				)
+			);
 		}
 	}
 }

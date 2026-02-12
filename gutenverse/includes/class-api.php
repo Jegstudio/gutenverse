@@ -146,10 +146,21 @@ class Api {
 
 		register_rest_route(
 			'gutenverse/v1',
-			'acf-field-value',
+			'dynamic-field-value',
 			array(
 				'methods'             => 'GET',
-				'callback'            => array( $this, 'get_acf_field_value' ),
+				'callback'            => array( $this, 'get_dynamic_field_value' ),
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+		register_rest_route(
+			'gutenverse/v1',
+			'dynamic-fields',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_dynamic_fields' ),
 				'permission_callback' => function () {
 					return current_user_can( 'edit_posts' );
 				},
@@ -867,7 +878,50 @@ class Api {
 	 *
 	 * @return WP_REST_Response
 	 */
-	public function get_acf_field_value( $request ) {
+	public function get_dynamic_fields( $request ) {
+		$post_type = $request->get_param( 'postType' );
+
+		if ( ! function_exists( 'acf_get_field_groups' ) || ! function_exists( 'acf_get_fields' ) ) {
+			return new \WP_REST_Response(
+				array(
+					'fields' => array(),
+				),
+				200
+			);
+		}
+
+		// Get field groups assigned to this post type.
+		$groups = \acf_get_field_groups( array( 'post_type' => $post_type ) );
+		$fields = array();
+
+		foreach ( $groups as $group ) {
+			$group_fields = \acf_get_fields( $group['key'] );
+
+			if ( $group_fields ) {
+				foreach ( $group_fields as $field ) {
+					$fields[] = array(
+						'value' => $field['name'],
+						'label' => $field['label'] . ' (' . $group['title'] . ')',
+					);
+				}
+			}
+		}
+
+		return new \WP_REST_Response(
+			array(
+				'fields' => $fields,
+			),
+			200
+		);
+	}
+	/**
+	 * Get ACF field value for editor preview.
+	 *
+	 * @param object $request Request Object.
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function get_dynamic_field_value( $request ) {
 		$field_key = $request->get_param( 'fieldKey' );
 		$post_id   = $request->get_param( 'postId' );
 

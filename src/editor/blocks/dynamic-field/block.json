@@ -1,139 +1,87 @@
 {
 	"apiVersion": 3,
-	"name": "gutenverse/acf-image",
-	"title": "ACF Image",
-	"description": "Display an image from an ACF field.",
-	"category": "gutenverse-element",
-	"keywords": ["acf", "image", "media", "custom field"],
+	"name": "gutenverse/dynamic-field",
+	"title": "Dynamic Field",
+	"description": "Display single field for ACF or other custom field plugins.",
+	"category": "gutenverse-loop",
+	"keywords": ["acf", "text", "custom field", "metadata"],
 	"textdomain": "gutenverse",
-	"usesContext": ["postId", "postType"],
-	"class_callback": "\\Gutenverse\\Block\\ACF_Image",
+	"class_callback": "\\Gutenverse\\Block\\Dynamic_Field",
 	"attributes": {
 		"elementId": {
 			"type": "string"
 		},
 		"fieldKey": {
-			"type": "string",
-			"default": ""
+			"type": "object",
+			"default": null
 		},
-        "size": {
-            "type": "string",
-            "default": "full"
-        },
-		"mouseMoveEffect": {
+		"htmlTag": {
+			"type": "string",
+			"default": "p"
+		},
+		"link": {
+			"type": "boolean",
+			"default": false
+		},
+		"linkTarget": {
+			"type": "boolean",
+			"default": false
+		},
+		"placeholder": {
+			"type": "string",
+			"default": "ACF Field Value"
+		},
+		"alignment": {
 			"type": "object",
 			"copyStyle": true
-		},
-		"captionColor": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"ratio": {
-			"type": "integer",
-			"default": 0
-		},
-		"altType": {
-			"type": "string",
-			"default": "none"
-		},
-		"altCustom": {
-			"type": "string"
-		},
-		"captionType": {
-			"type": "string",
-			"default": "none"
-		},
-		"captionCustom": {
-			"type": "string"
 		},
 		"typography": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"width": {
+		"color": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"height": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"imgFilter": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"opacityHover": {
-			"type": "string",
-			"copyStyle": true
-		},
-		"imgFilterHover": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"imgFit": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"linkTarget": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "target"
-		},
-		"rel": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "rel"
-		},
-		"imgBorder": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"imgBorderResponsive": {
-			"type": "object",
-			"migrate": {
-				"attr": "imgBorder",
-				"type": "border"
-			},
-			"copyStyle": true
-		},
-		"imgShadow": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"align": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"opacity": {
-			"type": "string",
-			"copyStyle": true
-		},
-		"imageFit": {
-			"type": "object",
-			"copyStyle": true
-		},
-		"animation": {
+		"textShadow": {
 			"type": "object",
 			"default": {},
 			"copyStyle": true
 		},
-		"hideDesktop": {
-			"type": "boolean",
+		"colorHover": {
+			"type": "object",
 			"copyStyle": true
 		},
-		"hideTablet": {
-			"type": "boolean",
+		"textShadowHover": {
+			"type": "object",
+			"default": {},
 			"copyStyle": true
 		},
-		"hideMobile": {
-			"type": "boolean",
+		"textStroke": {
+			"type": "object",
 			"copyStyle": true
+		},
+		"textStrokeHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"background": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
-			"default": {},
 			"copyStyle": true
 		},
 		"borderResponsive": {
@@ -150,7 +98,6 @@
 		},
 		"borderHover": {
 			"type": "object",
-			"default": {},
 			"copyStyle": true
 		},
 		"borderHoverResponsive": {
@@ -175,6 +122,23 @@
 		},
 		"zIndex": {
 			"type": "object",
+			"copyStyle": true
+		},
+		"animation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"hideDesktop": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideTablet": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideMobile": {
+			"type": "boolean",
 			"copyStyle": true
 		},
 		"positioningType": {
@@ -209,10 +173,6 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"captionSpace": {
-			"type": "object",
-			"copyStyle": true
-		},
 		"transform": {
 			"type": "object",
 			"copyStyle": true
@@ -221,31 +181,14 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"background": {
-			"type": "object",
-			"default": {},
-			"copyStyle": true
-		},
-		"backgroundHover": {
-			"type": "object",
-			"default": {},
-			"copyStyle": true
-		},
-		"backgroundTransition": {
-			"type": "object",
-			"copyStyle": true,
-			"default": {}
-		},
-		"lazyLoad": {
-			"type": "boolean",
-			"copyStyle": true
-		},
 		"condition": {
 			"type": "object",
 			"default": {}
 		}
 	},
+	"usesContext": ["postId", "postType"],
 	"supports": {
+		"className": false,
 		"anchor": true
 	}
 }

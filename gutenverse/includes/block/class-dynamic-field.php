@@ -1,6 +1,6 @@
 <?php
 /**
- * ACF Text Block class
+ * Dynamic Field Block class
  *
  * @author Jegstudio
  * @since 1.0.0
@@ -12,12 +12,11 @@ namespace Gutenverse\Block;
 use Gutenverse\Framework\Block\Block_Abstract;
 
 /**
- * Class ACF_Text
+ * Class Dynamic Field
  *
  * @package gutenverse\block
  */
-class ACF_Text extends Block_Abstract {
-
+class Dynamic_Field extends Block_Abstract {
 	/**
 	 * Render content
 	 *
@@ -63,7 +62,7 @@ class ACF_Text extends Block_Abstract {
 			$content = "<a href='" . esc_url( $href ) . "' target='" . esc_attr( $target ) . "'>{$content}</a>";
 		}
 
-		return "<{$html_tag} class='guten-acf-text-content'>{$content}</{$html_tag}>";
+		return "<{$html_tag} class='guten-dynamic-field-content'>{$content}</{$html_tag}>";
 	}
 
 	/**
@@ -83,6 +82,6 @@ class ACF_Text extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-acf-text guten-element">' . $this->render_content( $post_id ) . '</div>';
+		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-dynamic-field guten-element">' . $this->render_content( $post_id ) . '</div>';
 	}
 }

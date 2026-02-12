@@ -11,82 +11,77 @@ import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { useEntityProp } from '@wordpress/core-data';
 import apiFetch from '@wordpress/api-fetch';
-import { __ } from '@wordpress/i18n';
 
-const ACFLinkBlock = compose(
+const DynamicFieldBlock = compose(
     withPartialRender
 )((props) => {
     const {
         attributes,
         clientId,
-        context: { postId, postType }
+        context: blockContext
     } = props;
 
     const {
         elementId,
+        placeholder,
         fieldKey,
-        label,
+        postId: blockPostId,
+        htmlTag: HtmlTag = 'p'
     } = attributes;
+
+    // Extract the actual field key string from the SelectSearchControl object
+    const fieldKeyValue = fieldKey?.value || '';
+
+    const context = blockContext || {};
+    const postType = context.postType || 'post';
+    const postId = context.postId || blockPostId;
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
 
-    // Try to get ACF value from entity meta first.
+    // Try to get ACF value from entity meta first (works if field has show_in_rest enabled).
     const [meta] = useEntityProp('postType', postType, 'meta', postId);
-    const entityValue = meta?.[fieldKey];
+    const entityValue = meta?.[fieldKeyValue];
 
     // State for API fallback.
-    const [apiFetchData, setApiFetchData] = useState(null);
+    const [apiFetchValue, setApiFetchValue] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     // Fallback to API fetch if entity value is empty.
     useEffect(() => {
-        if (!fieldKey || !postId || entityValue !== undefined) {
-            setApiFetchData(null);
+        // Only fetch via API if we have a fieldKey, postId, and no entity value.
+        if (!fieldKeyValue || !postId || entityValue !== undefined) {
+            setApiFetchValue(null);
             return;
         }
 
         setIsLoading(true);
         apiFetch({
-            path: `gutenverse/v1/acf-field-value?fieldKey=${encodeURIComponent(fieldKey)}&postId=${postId}`,
+            path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldKeyValue)}&postId=${postId}`,
         })
             .then((response) => {
-                if (response?.type === 'link') {
-                    setApiFetchData(response.value);
-                } else if (typeof response?.value === 'string') {
-                    setApiFetchData({ url: response.value, title: label || response.value });
+                if (response?.value !== undefined) {
+                    setApiFetchValue(response.value);
                 } else {
-                    setApiFetchData(null);
+                    setApiFetchValue(null);
                 }
             })
             .catch(() => {
-                setApiFetchData(null);
+                setApiFetchValue(null);
             })
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [fieldKey, postId, entityValue, label]);
-
-    // Parse entity value if available (could be string URL or link array).
-    const parseLinkData = (value) => {
-        if (!value) return null;
-        if (typeof value === 'object' && value.url) {
-            return { url: value.url, title: value.title || label };
-        }
-        if (typeof value === 'string') {
-            return { url: value, title: label || value };
-        }
-        return null;
-    };
+    }, [fieldKeyValue, postId, entityValue]);
 
     // Use entity value first, then API fallback.
-    const linkData = entityValue !== undefined ? parseLinkData(entityValue) : apiFetchData;
+    const fieldValue = entityValue !== undefined ? entityValue : apiFetchValue;
 
     const blockProps = useBlockProps({
         className: classnames(
             'guten-element',
-            'guten-acf-link',
+            'guten-dynamic-field',
             elementId,
             animationClass,
             displayClass,
@@ -97,18 +92,16 @@ const ACFLinkBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
-    // Determine display text.
+    // Determine what to display.
     let displayText;
     if (isLoading && entityValue === undefined) {
-        displayText = __('Loading...', 'gutenverse');
-    } else if (linkData?.title) {
-        displayText = linkData.title;
-    } else if (label) {
-        displayText = label;
+        displayText = 'Loading...';
+    } else if (fieldValue !== null && fieldValue !== '' && fieldValue !== undefined) {
+        displayText = typeof fieldValue === 'object' ? JSON.stringify(fieldValue) : fieldValue;
     } else if (fieldKey) {
-        displayText = `[Link: ${fieldKey}]`;
+        displayText = `[ACF: ${fieldKey}]`;
     } else {
-        displayText = __('Button Label', 'gutenverse');
+        displayText = placeholder || 'ACF Text Field';
     }
 
     return <>
@@ -116,15 +109,13 @@ const ACFLinkBlock = compose(
         <InspectorControls>
             {/* Additional Inspector Controls */}
         </InspectorControls>
-        <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
+        <BlockPanelController panelList={panelList} props={{...props, postType}} elementRef={elementRef} />
         <div {...blockProps}>
-            <div className="guten-acf-link-wrapper">
-                <a className="guten-button" href="#" onClick={e => e.preventDefault()}>
-                    <span>{displayText}</span>
-                </a>
-            </div>
+            <HtmlTag className="guten-dynamic-content">
+                {displayText}
+            </HtmlTag>
         </div>
     </>;
 });
 
-export default ACFLinkBlock;
+export default DynamicFieldBlock;

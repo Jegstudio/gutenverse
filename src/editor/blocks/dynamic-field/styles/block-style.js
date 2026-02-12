@@ -10,13 +10,13 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['typography']) && data.push({
         'type': 'typography',
         'id': 'typography',
-        'selector': `.${elementId} .guten-acf-text-content, .${elementId} .guten-acf-text-content a`,
+        'selector': `.${elementId} .guten-dynamic-field-content, .${elementId} .guten-dynamic-field-content a`,
     });
 
     isNotEmpty(attributes['color']) && data.push({
         'type': 'color',
         'id': 'color',
-        'selector': `.${elementId} .guten-acf-text-content, .${elementId} .guten-acf-text-content a`,
+        'selector': `.${elementId} .guten-dynamic-field-content, .${elementId} .guten-dynamic-field-content a`,
         'properties': [
             {
                 'name': 'color',
@@ -28,7 +28,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['colorHover']) && data.push({
         'type': 'color',
         'id': 'colorHover',
-        'selector': `.${elementId} .guten-acf-text-content:hover, .${elementId} .guten-acf-text-content a:hover`,
+        'selector': `.${elementId} .guten-dynamic-field-content:hover, .${elementId} .guten-dynamic-field-content a:hover`,
         'properties': [
             {
                 'name': 'color',
@@ -42,7 +42,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'alignment',
         'responsive': true,
-        'selector': `.${elementId} .guten-acf-text-content`,
+        'selector': `.${elementId} .guten-dynamic-field-content`,
         'properties': [
             {
                 'name': 'text-align',
@@ -111,7 +111,7 @@ const getBlockStyle = (elementId, attributes) => {
     return [
         ...data,
         ...applyFilters(
-            'gutenverse.acf-text.blockStyle',
+            'gutenverse.dynamic-field.blockStyle',
             [],
             {
                 elementId,

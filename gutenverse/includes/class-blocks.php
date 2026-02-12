@@ -102,10 +102,8 @@ class Blocks {
 
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/breadcrumb/block.json' );
 
-		// ACF Blocks.
-		$this->register_dynamic_block( GUTENVERSE_DIR . './block/acf-text/block.json' );
-		$this->register_dynamic_block( GUTENVERSE_DIR . './block/acf-image/block.json' );
-		$this->register_dynamic_block( GUTENVERSE_DIR . './block/acf-link/block.json' );
+		// Loop dynamic blocks.
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/dynamic-field/block.json' );
 
 		// Social Share Block.
 		$this->register_social_share_block( GUTENVERSE_DIR . './block/social-share-item/block.json' );
