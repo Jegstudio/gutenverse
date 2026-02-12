@@ -11,7 +11,7 @@ export const settingPanel = (props) => {
     const { link, context } = props;
 
     // Create async search function for ACF fields
-    const searchACFFields = isOnEditor() ? (input) => new Promise((resolve) => {
+    const searchDynamicField = isOnEditor() ? (input) => new Promise((resolve) => {
         const postType = context?.postType;
 
         if (!postType) {
@@ -43,7 +43,7 @@ export const settingPanel = (props) => {
             label: __('Field Key', 'gutenverse'),
             description: __('Search and select an ACF Field.', 'gutenverse'),
             component: SelectSearchControl,
-            onSearch: searchACFFields,
+            onSearch: searchDynamicField,
         },
         {
             id: 'htmlTag',
