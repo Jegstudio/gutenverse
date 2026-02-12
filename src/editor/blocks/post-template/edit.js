@@ -11,9 +11,11 @@ import { classnames } from 'gutenverse-core/components';
 import { Spinner } from '@wordpress/components';
 
 const TEMPLATE = [
-    ['gutenverse/post-featured-image'],
-    ['gutenverse/post-title'],
-    ['gutenverse/post-excerpt']
+    ['gutenverse/container', {}, [
+        ['gutenverse/post-featured-image'],
+        ['gutenverse/post-title'],
+        ['gutenverse/post-excerpt']
+    ]]
 ];
 
 // The inner blocks component for the active/editable post

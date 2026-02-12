@@ -47,11 +47,13 @@ const PostExcerptBlock = compose(
         ref: elementRef
     });
 
-    const [
-        // rawExcerpt,
-        // setExcerpt,
-        { rendered: renderedExcerpt, protected: isProtected } = {},
-    ] = useEntityProp('postType', postType, 'excerpt', postId);
+    const [rawExcerpt] = useEntityProp('postType', postType, 'excerpt', postId);
+
+    // Handle both object format { rendered, protected } and plain string
+    const renderedExcerpt = typeof rawExcerpt === 'object' && rawExcerpt?.rendered
+        ? rawExcerpt.rendered
+        : (typeof rawExcerpt === 'string' ? rawExcerpt : '');
+    const isProtected = typeof rawExcerpt === 'object' ? rawExcerpt?.protected : false;
 
     /**
      * When excerpt is editable, strip the html tags from

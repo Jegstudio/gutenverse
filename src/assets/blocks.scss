@@ -59,6 +59,7 @@
 @import "../editor/blocks/archive-title/styles/editor.scss";
 @import "../editor/blocks/chart/styles/editor.scss";
 @import "../editor/blocks/breadcrumb/styles/editor.scss";
+@import "../editor/blocks/query-loop/styles/editor";
 
 // Blocks Frontend
 @import "../editor/blocks/heading/styles/style";
@@ -113,5 +114,6 @@
 @import "../editor/blocks/text-paragraph/styles/style";
 @import "../editor/blocks/chart/styles/style";
 @import "../editor/blocks/breadcrumb/styles/style";
+@import "../editor/blocks/query-loop/styles/style";
 
 /* reserved line for script, don't delete */

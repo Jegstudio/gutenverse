@@ -15,7 +15,10 @@
 			"default": false
 		},
 		"postType": {
-			"type": "string",
+			"type": [
+				"string",
+				"object"
+			],
 			"default": "post"
 		},
 		"numberPost": {
@@ -97,6 +100,10 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"taxonomies": {
+			"type": "object",
+			"default": {}
 		}
 	},
 	"providesContext": {

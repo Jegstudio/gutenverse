@@ -91,8 +91,13 @@ class Query_Loop extends Block_Abstract {
 	 * @return array
 	 */
 	protected function build_query_args() {
+		$post_type = isset( $this->attributes['postType'] ) ? $this->attributes['postType'] : 'post';
+		if ( is_array( $post_type ) && isset( $post_type['value'] ) ) {
+			$post_type = $post_type['value'];
+		}
+
 		$args = array(
-			'post_type'      => isset( $this->attributes['postType'] ) ? $this->attributes['postType'] : 'post',
+			'post_type'      => $post_type,
 			'posts_per_page' => isset( $this->attributes['numberPost'] ) ? $this->attributes['numberPost'] : 3,
 			'offset'         => isset( $this->attributes['postOffset'] ) ? $this->attributes['postOffset'] : 0,
 			'post_status'    => 'publish',
@@ -171,6 +176,19 @@ class Query_Loop extends Block_Abstract {
 		// Author.
 		if ( ! empty( $this->attributes['includeAuthor'] ) ) {
 			$args['author__in'] = array_column( $this->attributes['includeAuthor'], 'value' );
+		}
+
+		// Custom Taxonomies.
+		if ( ! empty( $this->attributes['taxonomies'] ) ) {
+			foreach ( $this->attributes['taxonomies'] as $taxonomy => $terms ) {
+				if ( ! empty( $terms ) ) {
+					$tax_query[] = array(
+						'taxonomy' => $taxonomy,
+						'field'    => 'term_id',
+						'terms'    => array_column( $terms, 'value' ),
+					);
+				}
+			}
 		}
 
 		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Taxonomy query is required for filtering.

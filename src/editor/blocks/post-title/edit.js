@@ -37,8 +37,10 @@ const PostTitleBlock = compose(
     const elementRef = useRef();
     const linkTarget = postLinkTarget ? '_blank' : '_self';
 
-    const [ postTitle = 'Post Title' ] = useEntityProp('postType', postType, 'title', postId);
-    const [ link ] = useEntityProp( 'postType', postType, 'link', postId );
+    const [postTitle = 'Post Title'] = useEntityProp('postType', postType, 'title', postId);
+    const [link] = useEntityProp('postType', postType, 'link', postId);
+
+    const title = typeof postTitle === 'object' && postTitle.rendered ? postTitle.rendered : postTitle;
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -73,7 +75,7 @@ const PostTitleBlock = compose(
         </InspectorControls>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div  {...blockProps}>
-            <HtmlTag>{postLink ? <a href={link} target={linkTarget} rel={postLinkRel} onClick={e => e.preventDefault()}>{parseUnicode(postTitle)}</a> : parseUnicode(postTitle)}</HtmlTag>
+            <HtmlTag>{postLink ? <a href={link} target={linkTarget} rel={postLinkRel} onClick={e => e.preventDefault()}>{parseUnicode(title)}</a> : parseUnicode(title)}</HtmlTag>
         </div>
     </>;
 });

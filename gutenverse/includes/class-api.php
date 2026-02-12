@@ -155,6 +155,42 @@ class Api {
 				},
 			)
 		);
+		register_rest_route(
+			'gutenverse/v1',
+			'post-types',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_public_post_types' ),
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+	}
+
+	/**
+	 * Get Public Post Types
+	 *
+	 * @param object $request Request Object.
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function get_public_post_types( $request ) {
+		$args = array(
+			'public' => true,
+		);
+
+		$post_types = get_post_types( $args, 'objects' );
+		$result     = array();
+
+		foreach ( $post_types as $post_type ) {
+			$result[] = array(
+				'label' => $post_type->label,
+				'value' => $post_type->name,
+			);
+		}
+
+		return new \WP_REST_Response( $result, 200 );
 	}
 
 	/**

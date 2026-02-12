@@ -1,8 +1,10 @@
 import { compose } from '@wordpress/compose';
 import { useBlockProps, useInnerBlocksProps, BlockContextProvider } from '@wordpress/block-editor';
+import { createBlock } from '@wordpress/blocks';
 import { withMouseMoveEffect, withPartialRender } from 'gutenverse-core/hoc';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
+import QueryLoopVariation from './components/query-loop-variation';
 import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
@@ -10,7 +12,7 @@ import { useRef, useMemo } from '@wordpress/element';
 import { classnames } from 'gutenverse-core/components';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 
 const QueryLoopBlock = compose(
@@ -18,6 +20,7 @@ const QueryLoopBlock = compose(
     withMouseMoveEffect
 )((props) => {
     const { attributes, clientId } = props;
+    const { replaceInnerBlocks } = useDispatch('core/block-editor');
     const {
         elementId,
         column,
@@ -31,11 +34,17 @@ const QueryLoopBlock = compose(
         excludePost,
         includeCategory,
         includeTag,
-        includeAuthor
+        includeAuthor,
+        taxonomies: selectedTaxonomies
     } = attributes;
-
-    const { posts, isResolving } = useSelect((select) => {
+    const { posts, isResolving, postTypes, taxonomies } = useSelect((select) => {
         const { getEntityRecords, isResolving: isEntityResolving } = select(coreStore);
+        const { getPostTypes, getTaxonomies } = select('core');
+
+        const currentPostType = postType?.value || postType || 'post';
+
+        // Fetch taxonomy definitions to map slugs to rest_base
+        const taxonomyDefinitions = getTaxonomies({ type: currentPostType, per_page: -1 });
 
         const args = {
             per_page: numberPost || 3,
@@ -89,13 +98,36 @@ const QueryLoopBlock = compose(
             args.author = includeAuthor.map(a => a.value || a);
         }
 
-        const queryParams = [ 'postType', postType || 'post', args ];
+        // Custom Taxonomies
+        if (selectedTaxonomies) {
+            Object.keys(selectedTaxonomies).forEach(taxonomySlug => {
+                const terms = selectedTaxonomies[taxonomySlug];
+                if (terms && terms.length > 0) {
+                    // Map slug to rest_base
+                    let queryKey = taxonomySlug;
+                    if (taxonomyDefinitions) {
+                        const taxDef = taxonomyDefinitions.find(t => t.slug === taxonomySlug);
+                        if (taxDef && taxDef.rest_base) {
+                            queryKey = taxDef.rest_base;
+                        }
+                    }
+
+                    args[queryKey] = terms.map(t => t.value || t);
+                }
+            });
+        }
+
+        const queryParams = ['postType', currentPostType, args];
+
+        const postTypes = getPostTypes({ per_page: -1 });
 
         return {
             posts: getEntityRecords(...queryParams),
-            isResolving: isEntityResolving('getEntityRecords', queryParams)
+            isResolving: isEntityResolving('getEntityRecords', queryParams),
+            postTypes,
+            taxonomies: taxonomyDefinitions,
         };
-    }, [postType, numberPost, postOffset, sortBy, includePost, excludePost, includeCategory, includeTag, includeAuthor]);
+    }, [postType, numberPost, postOffset, sortBy, includePost, excludePost, includeCategory, includeTag, includeAuthor, selectedTaxonomies]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
@@ -105,6 +137,9 @@ const QueryLoopBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
+    const { getBlocks } = useSelect((select) => select('core/block-editor'), []);
+    const hasInnerBlocks = getBlocks(clientId).length > 0;
+
     const blockProps = useBlockProps({
         className: classnames(
             'guten-element',
@@ -113,6 +148,9 @@ const QueryLoopBlock = compose(
             elementId,
             animationClass,
             displayClass,
+            {
+                'section-variation-picker': !hasInnerBlocks
+            }
         ),
         ref: elementRef,
     });
@@ -141,12 +179,51 @@ const QueryLoopBlock = compose(
         allowedBlocks: ['gutenverse/post-template'],
     });
 
+    const handleVariation = (variationType) => {
+        // Create inner blocks based on selection
+        const titleBlock = createBlock('gutenverse/post-title');
+        const imageBlock = createBlock('gutenverse/post-featured-image');
+        const excerptBlock = createBlock('gutenverse/post-excerpt');
+
+        let containerChildren = [];
+
+        switch (variationType) {
+            case 'title-image-excerpt':
+                containerChildren = [titleBlock, imageBlock, excerptBlock];
+                break;
+            case 'title-image':
+                containerChildren = [titleBlock, imageBlock];
+                break;
+            case 'title-excerpt':
+                containerChildren = [titleBlock, excerptBlock];
+                break;
+            default:
+                containerChildren = [titleBlock, imageBlock, excerptBlock];
+                break;
+        }
+
+        // Create container with the selected children
+        const containerBlock = createBlock('gutenverse/container', {}, containerChildren);
+
+        // Create post template with container as child
+        const postTemplateBlock = createBlock('gutenverse/post-template', {}, [containerBlock]);
+
+        replaceInnerBlocks(clientId, [postTemplateBlock], true);
+    };
+
     return (
         <BlockContextProvider value={{ 'gutenverse/queryPosts': posts, 'gutenverse/isResolving': isResolving }}>
             <CopyElementToolbar {...props} />
-            <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
+            <BlockPanelController panelList={panelList} props={{ ...props, taxonomies }} elementRef={elementRef} />
             <div {...blockProps}>
-                <div {...innerBlocksProps} />
+                {hasInnerBlocks ? (
+                    <div {...innerBlocksProps} />
+                ) : (
+                    <QueryLoopVariation
+                        onSelect={handleVariation}
+                        wrapper="guten-container"
+                    />
+                )}
             </div>
         </BlockContextProvider>
     );

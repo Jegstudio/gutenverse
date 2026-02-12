@@ -1,5 +1,17 @@
 .editor-styles-wrapper {
     .guten-query-loop {
+        .section-variation-picker-list {
+            .section-variation-picker-item {
+                button {
+                    color: #000000;
+
+                    &:hover {
+                        color: #000000 !important;
+                    }
+                }
+            }
+        }
+
         .guten-query-loop-container {
             display: grid;
         }
