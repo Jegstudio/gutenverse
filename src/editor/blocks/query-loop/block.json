@@ -122,10 +122,20 @@
 		"gutenverse/inheritQuery": "inheritQuery"
 	},
 	"supports": {
-		"align": ["wide", "full"],
+		"align": [
+			"wide",
+			"full"
+		],
 		"html": false,
 		"anchor": true,
 		"className": false
 	},
-	"keywords": ["post", "query", "loop"]
+	"keywords": [
+		"post",
+		"query",
+		"loop"
+	],
+	"style": [
+		"gutenverse-frontend-query-loop-style"
+	]
 }

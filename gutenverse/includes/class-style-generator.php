@@ -63,6 +63,8 @@ use Gutenverse\Style\Search;
 use Gutenverse\Style\Search_Result_Title;
 use Gutenverse\Style\Taxonomy_List;
 use Gutenverse\Style\Text;
+use Gutenverse\Style\Post_Template;
+
 
 /**
  * Class Style Generator
@@ -198,6 +200,10 @@ class Style_Generator {
 			case 'gutenverse/post-block':
 				$instance = new Post_Block( $attrs );
 				break;
+			case 'gutenverse/post-template':
+				$instance = new Post_Template( $attrs );
+				break;
+
 			case 'gutenverse/post-list':
 				$instance = new Post_List( $attrs );
 				break;

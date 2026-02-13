@@ -1,9 +1,15 @@
+/** Post Template Specific **/
 .editor-styles-wrapper {
     .guten-post-template {
-        display: contents;
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
 
-        .wp-block-post {
-            cursor: pointer;
+        .guten-post-item {
+            &.block-editor-block-list__layout {
+                display: contents !important;
+            }
         }
     }
 }

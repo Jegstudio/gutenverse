@@ -155,23 +155,8 @@ const QueryLoopBlock = compose(
         ref: elementRef,
     });
 
-    // Calculate grid styles for the container
-    const gridStyle = useMemo(() => {
-        const cols = column?.[deviceType] || column?.Desktop || 3;
-        const colGap = columnGap?.[deviceType] || columnGap?.Desktop || { unit: 'px', point: 20 };
-        const rGap = rowGap?.[deviceType] || rowGap?.Desktop || { unit: 'px', point: 20 };
-
-        return {
-            display: 'grid',
-            gridTemplateColumns: `repeat(${cols}, 1fr)`,
-            columnGap: `${colGap.point || 20}${colGap.unit || 'px'}`,
-            rowGap: `${rGap.point || 20}${rGap.unit || 'px'}`,
-        };
-    }, [column, columnGap, rowGap, deviceType]);
-
     const innerBlocksProps = useInnerBlocksProps({
         className: 'guten-query-loop-container',
-        style: gridStyle
     }, {
         template: [
             ['gutenverse/post-template']

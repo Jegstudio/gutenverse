@@ -4,7 +4,9 @@
 	"title": "Post Template",
 	"description": "Contains the block elements used to render a post, like the title, date, featured image, content or excerpt, and more.",
 	"category": "gutenverse-post",
-	"parent": ["gutenverse/query-loop"],
+	"parent": [
+		"gutenverse/query-loop"
+	],
 	"class_callback": "Gutenverse\\Block\\Post_Template",
 	"usesContext": [
 		"gutenverse/queryId",
@@ -25,10 +27,428 @@
 		"postType",
 		"postId"
 	],
-
 	"attributes": {
 		"elementId": {
 			"type": "string"
+		},
+		"mode": {
+			"type": "string"
+		},
+		"containerLayout": {
+			"type": "string",
+			"default": "full-width",
+			"copyStyle": true
+		},
+		"containerWidth": {
+			"type": "object",
+			"default": {
+				"Desktop": {
+					"unit": "%",
+					"point": "100"
+				}
+			},
+			"copyStyle": true
+		},
+		"minHeight": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexDirection": {
+			"type": "object",
+			"default": {
+				"Desktop": "column"
+			},
+			"copyStyle": true
+		},
+		"justifyContent": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"alignItems": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"columnGap": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"rowGap": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexWrap": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"alignContent": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"overflow": {
+			"type": "string",
+			"default": "visible",
+			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"background": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"backgroundOverlay": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"opacity": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"backgroundOverlayHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"backgroundAnimated": {
+			"type": "object",
+			"default": {}
+		},
+		"opacityHover": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"boxedBackground": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"boxedBackgroundHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"boxedBackgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"boxedBackgroundOverlay": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"boxedOpacity": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"boxedBackgroundOverlayHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"boxedBackgroundAnimated": {
+			"type": "object",
+			"default": {}
+		},
+		"boxedOpacityHover": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"border": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "border",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "borderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"margin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"topDivider": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"bottomDivider": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"topDividerAnimated": {
+			"type": "object",
+			"default": {
+				"type": "none",
+				"loadOn": "pageload",
+				"colorMode": "default",
+				"pauseOnLeave": true,
+				"loop": true
+			},
+			"copyStyle": true
+		},
+		"bottomDividerAnimated": {
+			"type": "object",
+			"default": {
+				"type": "none",
+				"loadOn": "pageload",
+				"colorMode": "default",
+				"pauseOnLeave": true
+			},
+			"copyStyle": true
+		},
+		"padding": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {
+				"Desktop": {
+					"unit": "px",
+					"dimension": {
+						"top": 10,
+						"right": 10,
+						"bottom": 10,
+						"left": 10
+					}
+				}
+			}
+		},
+		"zIndex": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"animation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"hideDesktop": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideTablet": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideMobile": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"positioningType": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningLocation": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"positioningLeft": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningRight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningTop": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningBottom": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"advanceAnimation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"transform": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"pointer": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"blur": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"blurHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
+			"type": "object",
+			"default": {}
+		},
+		"cursorEffect": {
+			"type": "object"
+		},
+		"backgroundEffect": {
+			"type": "object"
+		},
+		"mouseMoveEffect": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typographyHeadingColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typographyTextColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typographyLinkColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typographyLinkHoverColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typographyTextAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"sticky": {
+			"type": "object",
+			"default": {
+				"Desktop": false
+			},
+			"copyStyle": true
+		},
+		"stickyShowOn": {
+			"type": "string",
+			"default": "both",
+			"copyStyle": true
+		},
+		"stickyEase": {
+			"type": "string",
+			"default": "none",
+			"copyStyle": true
+		},
+		"stickyPosition": {
+			"type": "string",
+			"default": "top",
+			"copyStyle": true
+		},
+		"stickyDuration": {
+			"type": "integer",
+			"default": 0.25,
+			"copyStyle": true
+		},
+		"topSticky": {
+			"type": "object",
+			"default": {
+				"Desktop": {
+					"point": "0",
+					"unit": "px"
+				}
+			},
+			"copyStyle": true
+		},
+		"bottomSticky": {
+			"type": "object",
+			"default": {
+				"Desktop": {
+					"point": "0",
+					"unit": "px"
+				}
+			},
+			"copyStyle": true
+		},
+		"stickyIndex": {
+			"type": "integer",
+			"default": 99,
+			"copyStyle": true
+		},
+		"stickyBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"stickyBoxShadow": {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"supports": {
@@ -36,5 +456,8 @@
 		"reusable": false,
 		"anchor": true,
 		"className": false
-	}
+	},
+	"style": [
+		"gutenverse-frontend-post-template-style"
+	]
 }

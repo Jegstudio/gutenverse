@@ -354,6 +354,8 @@ class Frontend_Assets {
 			'text-editor',
 			'text-paragraph',
 			'video',
+			'query-loop',
+			'post-template',
 		);
 
 		wp_register_style(

@@ -11,25 +11,5 @@
                 }
             }
         }
-
-        .guten-query-loop-container {
-            display: grid;
-        }
-
-        .guten-query-loop-loading,
-        .guten-query-loop-no-results {
-            grid-column: 1 / -1;
-        }
-    }
-
-    .guten-post-template {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: contents;
-
-        .wp-block-post {
-            list-style: none;
-        }
     }
 }

@@ -51,17 +51,69 @@ class Post_Template extends Block_Abstract {
 			return '<div class="guten-no-posts-found">' . esc_html__( 'No posts found.', 'gutenverse' ) . '</div>';
 		}
 
-		$content = '';
+		// Build wrapper classes (rendered once, matching editor's .guten-post-template).
+		$classes = array(
+			'guten-element',
+			'guten-post-template',
+			'guten-flex-container',
+			isset( $this->attributes['containerLayout'] ) ? $this->attributes['containerLayout'] : '',
+			isset( $this->attributes['elementId'] ) ? $this->attributes['elementId'] : '',
+			isset( $this->attributes['className'] ) ? $this->attributes['className'] : '',
+		);
 
+		// Calculate data-id.
+		$data_id = '';
+		if ( isset( $this->attributes['elementId'] ) ) {
+			$element_id_parts = explode( '-', $this->attributes['elementId'] );
+			if ( isset( $element_id_parts[1] ) ) {
+				$data_id = $element_id_parts[1];
+			}
+		}
+
+		// Background & Overlay.
+		$background_overlay = '';
+		if ( isset( $this->attributes['backgroundOverlay'] ) && ! empty( $this->attributes['backgroundOverlay'] ) ) {
+			$background_overlay = '<div class="guten-background-overlay"></div>';
+		}
+
+		// Background Video/Slide markup.
+		$background_markup = '';
+		if ( isset( $this->attributes['background'] ) && isset( $this->attributes['background']['backgroundType'] ) ) {
+			$bg_type = $this->attributes['background']['backgroundType'];
+			if ( 'video' === $bg_type && isset( $this->attributes['background']['videoUrl'] ) ) {
+				$classes[]      = 'guten-video-background';
+				$video_url      = $this->attributes['background']['videoUrl'];
+				$background_markup .= '<div class="guten-video-background">';
+				$background_markup .= '<video autoplay muted loop playsinline><source src="' . esc_url( $video_url ) . '" type="video/mp4"></video>';
+				$background_markup .= '</div>';
+			}
+		}
+
+		// Open the single outer wrapper.
+		$content  = '<div class="' . \esc_attr( implode( ' ', array_filter( $classes ) ) ) . '" data-id="' . \esc_attr( $data_id ) . '">';
+		$content .= $background_markup . $background_overlay;
+
+		// Boxed layout gets an inner container.
+		$container_layout = isset( $this->attributes['containerLayout'] ) ? $this->attributes['containerLayout'] : 'full-width';
+		$is_boxed         = 'boxed' === $container_layout;
+
+		if ( $is_boxed ) {
+			$content .= '<div class="guten-inner-container">';
+		}
+
+		// Loop posts inside the wrapper as .guten-post-item children.
 		foreach ( $posts as $post ) {
-			// Setup post data for template tags.
 			setup_postdata( $post );
-
-			// Render inner blocks for this post.
 			$content .= $this->render_post_item( $post );
 		}
 
 		wp_reset_postdata();
+
+		if ( $is_boxed ) {
+			$content .= '</div>'; // Close .guten-inner-container.
+		}
+
+		$content .= '</div>'; // Close .guten-post-template wrapper.
 
 		return $content;
 	}
@@ -90,13 +142,12 @@ class Post_Template extends Block_Abstract {
 		// Re-render each inner block with the post context.
 		if ( isset( $this->block->inner_blocks ) ) {
 			foreach ( $this->block->inner_blocks as $inner_block ) {
-				// Create a new WP_Block instance with the updated context.
 				$new_block      = new \WP_Block( $inner_block->parsed_block, $block_context );
 				$inner_content .= $new_block->render();
 			}
 		}
 
-		return $inner_content;
+		return '<div class="guten-post-item">' . $inner_content . '</div>';
 	}
 
 	/**

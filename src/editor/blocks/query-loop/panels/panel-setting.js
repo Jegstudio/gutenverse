@@ -24,51 +24,29 @@ const searchTerms = (taxonomy) => (input) => new Promise(resolve => {
     });
 });
 
-const DynamicTaxonomiesControl = (props) => {
-    const { value, onChange, taxonomiesList } = props;
-
-    // Fallback: use setAttributes if onChange is missing.
-    // This handles cases where BlockPanelController doesn't inject onChange for custom IDs.
-    const updateTaxonomies = (newValue) => {
-        if (typeof onChange === 'function') {
-            onChange(newValue);
-        } else if (props.setAttributes) {
-            props.setAttributes({ taxonomies: newValue });
-        }
-    };
-
-    return (
-        <>
-            {taxonomiesList.map(tax => (
-                <SelectSearchControl
-                    key={tax.slug}
-                    label={tax.name}
-                    description={__(`Filter posts by ${tax.name}`, 'gutenverse')}
-                    isMulti={true}
-                    value={value?.[tax.slug] || []}
-                    onSearch={isOnEditor() ? searchTerms(tax) : () => []}
-                    onValueChange={(newTerms) => updateTaxonomies({ ...value, [tax.slug]: newTerms })}
-                />
-            ))}
-        </>
-    );
+/**
+ * Helper to resolve postType to a string slug.
+ * Handles both object ({ label, value }) and string formats.
+ */
+const resolvePostType = (postType) => {
+    if (typeof postType === 'object' && postType?.value) return postType.value;
+    if (typeof postType === 'string') return postType;
+    return 'post';
 };
 
-export const settingPanel = (props) => {
-    // Handle both direct attributes or props with attributes
-    const attributes = props.attributes || props;
-    const { postType } = attributes;
-
+/**
+ * A proper React component that handles all taxonomy-related filter controls.
+ * This replaces the old approach where useState/useEffect lived inside the
+ * settingPanel function (which is NOT a React component), causing React error #310
+ * when switching between TabSetting and TabStyle.
+ */
+const TaxonomyFilterControls = (props) => {
+    const { values, setAttributes } = props;
+    const postType = values?.postType;
     const [fetchedTaxonomies, setFetchedTaxonomies] = useState([]);
 
     useEffect(() => {
-        let type = 'post';
-        // Handle postType object (label/value) or string
-        if (typeof postType === 'object' && postType?.value) {
-            type = postType.value;
-        } else if (typeof postType === 'string') {
-            type = postType;
-        }
+        const type = resolvePostType(postType);
 
         apiFetch({
             path: addQueryArgs('/wp/v2/taxonomies', {
@@ -81,6 +59,65 @@ export const settingPanel = (props) => {
             setFetchedTaxonomies([]);
         });
     }, [postType]);
+
+    const hasCategory = fetchedTaxonomies.some(t => t.slug === 'category');
+    const hasTag = fetchedTaxonomies.some(t => t.slug === 'post_tag');
+    const customTaxonomies = fetchedTaxonomies.filter(t => t.slug !== 'category' && t.slug !== 'post_tag');
+
+    return (
+        <>
+            {hasCategory && (
+                <SelectSearchControl
+                    label={__('Categories', 'gutenverse')}
+                    description={__('Filter posts by category', 'gutenverse')}
+                    isMulti={true}
+                    value={values?.includeCategory || []}
+                    onSearch={isOnEditor() ? searchCategory : () => []}
+                    onValueChange={(val) => setAttributes({ includeCategory: val })}
+                />
+            )}
+            {hasTag && (
+                <SelectSearchControl
+                    label={__('Tags', 'gutenverse')}
+                    description={__('Filter posts by tag', 'gutenverse')}
+                    isMulti={true}
+                    value={values?.includeTag || []}
+                    onSearch={isOnEditor() ? searchTag : () => []}
+                    onValueChange={(val) => setAttributes({ includeTag: val })}
+                />
+            )}
+            {customTaxonomies.map(tax => (
+                <SelectSearchControl
+                    key={tax.slug}
+                    label={tax.name}
+                    description={__(`Filter posts by ${tax.name}`, 'gutenverse')}
+                    isMulti={true}
+                    value={values?.taxonomies?.[tax.slug] || []}
+                    onSearch={isOnEditor() ? searchTerms(tax) : () => []}
+                    onValueChange={(newTerms) => setAttributes({
+                        taxonomies: { ...values?.taxonomies, [tax.slug]: newTerms }
+                    })}
+                />
+            ))}
+            <SelectSearchControl
+                label={__('Authors', 'gutenverse')}
+                description={__('Filter posts by author', 'gutenverse')}
+                isMulti={true}
+                value={values?.includeAuthor || []}
+                onSearch={isOnEditor() ? searchAuthor : () => []}
+                onValueChange={(val) => setAttributes({ includeAuthor: val })}
+            />
+        </>
+    );
+};
+
+export const settingPanel = (props) => {
+    // Handle both direct attributes or props with attributes
+    const attributes = props.attributes || props;
+    const { postType } = attributes;
+
+    // No React hooks here! This is a plain function, not a React component.
+    // Hooks have been moved into TaxonomyFilterControls (a proper React component).
 
     const searchPosts = isOnEditor() ? (input) => new Promise(resolve => {
         let type = 'post';
@@ -145,7 +182,7 @@ export const settingPanel = (props) => {
         };
     };
 
-    const controls = [
+    return [
         {
             id: 'inheritQuery',
             label: __('Inherit Query from Template', 'gutenverse'),
@@ -202,49 +239,9 @@ export const settingPanel = (props) => {
             isMulti: true,
             onSearch: searchPosts
         },
+        {
+            id: 'taxonomyFilters',
+            component: TaxonomyFilterControls,
+        },
     ];
-
-    if (fetchedTaxonomies.some(t => t.slug === 'category')) {
-        controls.push({
-            id: 'includeCategory',
-            label: __('Categories', 'gutenverse'),
-            description: __('Filter posts by category', 'gutenverse'),
-            component: SelectSearchControl,
-            isMulti: true,
-            onSearch: isOnEditor() ? searchCategory : () => []
-        });
-    }
-
-    if (fetchedTaxonomies.some(t => t.slug === 'post_tag')) {
-        controls.push({
-            id: 'includeTag',
-            label: __('Tags', 'gutenverse'),
-            description: __('Filter posts by tag', 'gutenverse'),
-            component: SelectSearchControl,
-            isMulti: true,
-            onSearch: isOnEditor() ? searchTag : () => []
-        });
-    }
-
-    const customTaxonomies = fetchedTaxonomies.filter(t => t.slug !== 'category' && t.slug !== 'post_tag');
-
-    if (customTaxonomies.length > 0) {
-        controls.push({
-            id: 'taxonomies',
-            component: DynamicTaxonomiesControl,
-            taxonomiesList: customTaxonomies
-        });
-    }
-
-    // Default to showing Author if standard post type, or if we can't determine otherwise.
-    controls.push({
-        id: 'includeAuthor',
-        label: __('Authors', 'gutenverse'),
-        description: __('Filter posts by author', 'gutenverse'),
-        component: SelectSearchControl,
-        isMulti: true,
-        onSearch: isOnEditor() ? searchAuthor : () => []
-    });
-
-    return controls;
 };
