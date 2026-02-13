@@ -189,7 +189,7 @@ class GutenversePopupElement {
                 u(document).on('scroll', () => {
                     scrollOffset = (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0);
 
-                    if (scrollOffset > scrollDistance && !alreadyLoaded()) {
+                    if (scrollOffset > scrollDistance && !alreadyLoaded() && !this.popup.hasClass('show')) {
                         this._showPopup();
                     }
                 });

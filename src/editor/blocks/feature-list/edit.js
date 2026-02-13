@@ -12,6 +12,7 @@ import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenve
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { getImageLoadValue } from '../../helper';
+import { svgAtob } from 'gutenverse-core/helper';
 
 const FeatureListBlock = compose(
     withPartialRender,
@@ -103,7 +104,7 @@ const FeatureListBlock = compose(
                 </div>;
             case 'svg':
                 try {
-                    const svgData = atob(item.svg);
+                    const svgData = svgAtob(item.svg);
                     return <div className="icon-wrapper">
                         <div className="icon">
                             <div
