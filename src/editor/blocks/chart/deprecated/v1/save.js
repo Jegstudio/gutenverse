@@ -1,5 +1,5 @@
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -70,7 +70,7 @@ const save = compose(
     </div>;
 
     return (
-        <div {...useBlockProps.save({ className })} >
+        <div className={className} >
             <div className="chart-content content-card">
                 <RichText.Content
                     className={'chart-title'}

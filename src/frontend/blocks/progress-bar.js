@@ -8,6 +8,24 @@ class GutenverseProgressBar extends Default {
         });
     }
 
+    playOnScreen(element, animations) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    animations.forEach((animation) => animation.play());
+                } else {
+                    animations.forEach((animation) => {
+                        animation.pause();
+                        animation.seek(0);
+                    });
+                }
+            },
+            { threshold: [0.5] }
+        );
+
+        observer.observe(element);
+    }
+
     /* private */
     _addAnimations(element) {
         const blockElement = u(element);

@@ -11,6 +11,7 @@ export const closePanel = (props) => {
     } = props;
 
     const device = getDeviceType();
+    const closeSwitch = switcher.closeSwitch ? switcher.closeSwitch : 'normal';
 
     return [
         {
@@ -341,7 +342,7 @@ export const closePanel = (props) => {
         {
             id: 'closeButtonColor',
             label: __('Close Icon Color', 'gutenverse'),
-            show: showCloseButton && (!switcher.closeSwitch || switcher.closeSwitch === 'normal'),
+            show: showCloseButton && closeSwitch === 'normal',
             component: ColorControl,
             allowDeviceControl: true,
             liveStyle: [
@@ -374,7 +375,7 @@ export const closePanel = (props) => {
         {
             id: 'closeButtonBgColor',
             component: BackgroundControl,
-            show: showCloseButton && (!switcher.closeSwitch || switcher.closeSwitch === 'normal'),
+            show: showCloseButton && closeSwitch === 'normal',
             label: __('Close Icon Background Color', 'gutenverse'),
             options: ['default', 'gradient'],
             liveStyle: [
@@ -387,7 +388,7 @@ export const closePanel = (props) => {
         },
         {
             id: 'closeBorder',
-            show: device === 'Desktop' && showCloseButton && (!switcher.closeSwitch || switcher.closeSwitch === 'normal'),
+            show: device === 'Desktop' && showCloseButton && closeSwitch === 'normal',
             label: __('Border', 'gutenverse'),
             component: BorderControl,
             liveStyle: [
@@ -400,7 +401,7 @@ export const closePanel = (props) => {
         },
         {
             id: 'closeBorderResponsive',
-            show: device !== 'Desktop' && showCloseButton && (!switcher.closeSwitch || switcher.closeSwitch === 'normal'),
+            show: device !== 'Desktop' && showCloseButton && closeSwitch === 'normal',
             label: __('Border', 'gutenverse'),
             component: BorderResponsiveControl,
             allowDeviceControl: true,
@@ -416,7 +417,7 @@ export const closePanel = (props) => {
             id: 'closeBoxShadow',
             label: __('Box Shadow', 'gutenverse'),
             component: BoxShadowControl,
-            show: showCloseButton && (!switcher.closeSwitch || switcher.closeSwitch === 'normal'),
+            show: showCloseButton && closeSwitch === 'normal',
             liveStyle: [
                 {
                     'type': 'boxShadow',
@@ -434,7 +435,7 @@ export const closePanel = (props) => {
         {
             id: 'closeButtonColorHover',
             label: __('Close Icon Color', 'gutenverse'),
-            show: showCloseButton && (switcher.closeSwitch && switcher.closeSwitch === 'hover'),
+            show: showCloseButton && closeSwitch === 'hover',
             component: ColorControl,
             allowDeviceControl: true,
             liveStyle: [
@@ -467,7 +468,7 @@ export const closePanel = (props) => {
         {
             id: 'closeButtonBgColorHover',
             component: BackgroundControl,
-            show: showCloseButton && (switcher.closeSwitch && switcher.closeSwitch === 'hover'),
+            show: showCloseButton && closeSwitch === 'hover',
             label: __('Close Icon Background Color', 'gutenverse'),
             options: ['default', 'gradient'],
             liveStyle: [
@@ -480,7 +481,7 @@ export const closePanel = (props) => {
         },
         {
             id: 'closeBorderHover',
-            show: showCloseButton && (switcher.closeSwitch && switcher.closeSwitch === 'hover') && device === 'Desktop',
+            show: showCloseButton && closeSwitch === 'hover' && device === 'Desktop',
             label: __('Border', 'gutenverse'),
             component: BorderControl,
             liveStyle: [
@@ -493,7 +494,7 @@ export const closePanel = (props) => {
         },
         {
             id: 'closeBorderHoverResponsive',
-            show: showCloseButton && (switcher.closeSwitch && switcher.closeSwitch === 'hover') && device !== 'Desktop',
+            show: showCloseButton && closeSwitch === 'hover' && device !== 'Desktop',
             label: __('Border', 'gutenverse'),
             component: BorderResponsiveControl,
             allowDeviceControl: true,
@@ -509,7 +510,7 @@ export const closePanel = (props) => {
             id: 'closeBoxShadowHover',
             label: __('Box Shadow', 'gutenverse'),
             component: BoxShadowControl,
-            show: showCloseButton && (switcher.closeSwitch && switcher.closeSwitch === 'hover'),
+            show: showCloseButton && closeSwitch === 'hover',
             liveStyle: [
                 {
                     'type': 'boxShadow',

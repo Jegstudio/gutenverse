@@ -198,8 +198,44 @@
 			"type": "object",
 			"default": {},
 			"anchor": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
-	"keywords": ["divider", "line", "separator"],
-	"style": ["gutenverse-frontend-divider-style"]
+	"keywords": [
+		"divider",
+		"line",
+		"separator"
+	],
+	"style": [
+		"gutenverse-frontend-divider-style"
+	]
 }

@@ -230,7 +230,9 @@ const panelPaginationStyle = (elementId, attributes, data) => {
         'id': 'navigationAlign',
         'responsive': true,
         'selector': `.${elementId} .guten-postblock.guten-pagination-prevnext .guten_block_nav,
-                        .${elementId} .guten-postblock.guten-pagination-number .guten_block_nav`,
+                        .${elementId} .guten-postblock.guten-pagination-number .guten_block_nav,
+                        .${elementId} .guten-postblock.guten-pagination-normal-prevnext .guten_block_nav,
+                        .${elementId} .guten-postblock.guten-pagination-normal-number .guten_block_nav`,
         'properties': [
             {
                 'name': 'justify-content',

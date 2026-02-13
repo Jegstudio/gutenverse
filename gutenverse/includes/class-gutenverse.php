@@ -9,8 +9,6 @@
 
 namespace Gutenverse;
 
-use Gutenverse\Form_Fallback\Form_Fallback_Init;
-
 /**
  * Class Gutenverse
  *
@@ -142,20 +140,6 @@ class Gutenverse {
 	 * @var Upgrade_Wizard
 	 */
 	public $upgrade_wizard;
-
-	/**
-	 * Form Fallback
-	 *
-	 * @var Form_Fallback
-	 */
-	public $form_fallback;
-
-	/**
-	 * Hold ACF Instance.
-	 *
-	 * @var Acf
-	 */
-	public $acf;
 
 	/**
 	 * Singleton page for Gutenverse Class
@@ -463,9 +447,6 @@ class Gutenverse {
 		if ( $multisite_plugins ) {
 			$active_plugins_multisite = array_keys( $multisite_plugins );
 			$active_plugins           = array_merge( $active_plugins, $active_plugins_multisite );
-		}
-		if ( ! in_array( 'gutenverse-form/gutenverse-form.php', $active_plugins, true ) ) {
-			$this->form_fallback = new Form_Fallback_Init();
 		}
 	}
 

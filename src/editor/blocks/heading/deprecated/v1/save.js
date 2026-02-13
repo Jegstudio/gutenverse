@@ -3,7 +3,7 @@
 import { classnames } from 'gutenverse-core/components';
 
 /* WordPress dependencies */
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 
 /* Gutenverse dependencies */
@@ -38,7 +38,7 @@ const save = compose(
     );
 
     return (
-        <TagName {...useBlockProps.save({ className, id: anchor, ...advanceAnimationData })}>
+        <TagName className={className} id={anchor} {...advanceAnimationData}>
             <RichText.Content value={content} />
         </TagName>
     );

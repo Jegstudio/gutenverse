@@ -323,13 +323,52 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["gallery", "image", "tab", "portofolio"],
-	"viewScript": ["gutenverse-frontend-portfolio-gallery-script"],
-	"style": ["gutenverse-frontend-portfolio-gallery-style"]
+	"keywords": [
+		"gallery",
+		"image",
+		"tab",
+		"portofolio"
+	],
+	"viewScript": [
+		"gutenverse-frontend-portfolio-gallery-script"
+	],
+	"style": [
+		"gutenverse-frontend-portfolio-gallery-style"
+	]
 }

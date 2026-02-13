@@ -1,7 +1,6 @@
 
 import { compose } from '@wordpress/compose';
 import { InnerBlocks } from '@wordpress/block-editor';
-import { useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
@@ -36,7 +35,7 @@ const save = compose(
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
 
-    const blockProps = useBlockProps.save({
+    const blockProps = {
         className: classnames(
             'guten-element',
             'guten-popup-builder',
@@ -54,7 +53,7 @@ const save = compose(
         'data-exit-animation': exitAnimation,
         'data-exit-duration': exitAnimationDuration,
         'data-exit-delay': exitAnimationDelay,
-    });
+    };
 
     return (
         <div {...blockProps}>

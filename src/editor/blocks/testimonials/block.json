@@ -610,13 +610,51 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["testimonial", "review", "feedback"],
-	"viewScript": ["gutenverse-frontend-testimonials-script"],
-	"style": ["gutenverse-frontend-testimonials-style"]
+	"keywords": [
+		"testimonial",
+		"review",
+		"feedback"
+	],
+	"viewScript": [
+		"gutenverse-frontend-testimonials-script"
+	],
+	"style": [
+		"gutenverse-frontend-testimonials-style"
+	]
 }

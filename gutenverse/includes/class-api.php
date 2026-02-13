@@ -382,7 +382,8 @@ class Api {
 				'gutenverse-companion-base-theme',
 				array(
 					'fetch_time' => $next_fetch,
-				)
+				),
+				false
 			);
 		}
 		if ( null === $fetch_time || $fetch_time < $now ) {
@@ -401,7 +402,8 @@ class Api {
 				'gutenverse-companion-base-theme',
 				array(
 					'fetch_time' => $next_fetch,
-				)
+				),
+				false
 			);
 		}
 

@@ -42,6 +42,7 @@ const IconListItemBlock = (props) => {
         linkTarget,
         hideIcon,
         dynamicUrl,
+        ariaLabel,
     } = attributes;
 
     const {
@@ -153,7 +154,7 @@ const IconListItemBlock = (props) => {
         </BlockControls>
         <li {...blockProps}>
             <div className="list-divider"></div>
-            <a id={elementId}>
+            <a id={elementId} aria-label={ariaLabel}>
                 {!hideIcon && renderIcon(icon, iconType, iconSVG)}
                 <RichTextComponent
                     classNames={`list-text ${hideIcon ? 'no-icon' : ''}`}

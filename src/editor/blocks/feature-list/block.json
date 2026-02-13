@@ -299,12 +299,48 @@
 		"iconWrapperVerticalAlignment": {
 			"type": "string",
 			"default": "middle"
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["feature", "list", "texts"],
-	"style": ["gutenverse-frontend-feature-list-style"]
+	"keywords": [
+		"feature",
+		"list",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-feature-list-style"
+	]
 }
