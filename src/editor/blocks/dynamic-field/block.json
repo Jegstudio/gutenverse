@@ -2,7 +2,7 @@
 	"apiVersion": 3,
 	"name": "gutenverse/dynamic-field",
 	"title": "Dynamic Field",
-	"description": "Display single field for ACF or other custom field plugins.",
+	"description": "Display single field for ACF, SCF or other custom field plugins.",
 	"category": "gutenverse-loop",
 	"keywords": ["acf", "text", "custom field", "metadata"],
 	"textdomain": "gutenverse",
