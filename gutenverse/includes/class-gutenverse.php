@@ -142,6 +142,13 @@ class Gutenverse {
 	public $upgrade_wizard;
 
 	/**
+	 * ACF Instance
+	 *
+	 * @var ACF
+	 */
+	public $acf;
+
+	/**
 	 * Singleton page for Gutenverse Class
 	 *
 	 * @return Gutenverse
