@@ -98,7 +98,11 @@ class Breadcrumb extends Block_Abstract {
 			</li>";
 
 			if ( $is_not_last ) {
-				$separator_icon = $this->render_icon( $this->attributes['separatorIconType'], $this->attributes['separatorIcon'], $this->attributes['separatorIconSVG'] );
+				$separator_icon_type = isset( $this->attributes['separatorIconType'] ) ? $this->attributes['separatorIconType'] : 'icon';
+				$the_icon            = isset( $this->attributes['separatorIcon'] ) ? $this->attributes['separatorIcon'] : 'fas fa-chevron-right';
+				$separator_icon_svg  = isset( $this->attributes['separatorIconSVG'] ) ? $this->attributes['separatorIconSVG'] : '';
+
+				$separator_icon = $this->render_icon( $separator_icon_type, $the_icon, $separator_icon_svg );
 				$component     .= "
 				<li class='separator'>
 					{$separator_icon}
