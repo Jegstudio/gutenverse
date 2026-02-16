@@ -62,9 +62,6 @@ class Query_Loop extends Block_Abstract {
 			'guten-element',
 		);
 
-		// Inner container for grid layout.
-		$inner_class = array( 'guten-query-loop-container' );
-
 		// Build context with query results to pass to inner blocks.
 		$block_context                          = $this->block->context ?? array();
 		$block_context['gutenverse/queryPosts'] = $query->posts;
@@ -78,11 +75,7 @@ class Query_Loop extends Block_Abstract {
 			}
 		}
 
-		$content  = '<div class="' . implode( ' ', array_filter( $class ) ) . '">';
-		$content .= '<div class="' . implode( ' ', $inner_class ) . '">' . $inner_content . '</div>';
-		$content .= '</div>';
-
-		return $content;
+		return '<div class="' . implode( ' ', array_filter( $class ) ) . '">'  . $inner_content . '</div>';
 	}
 
 	/**

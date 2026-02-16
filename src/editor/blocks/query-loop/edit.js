@@ -155,9 +155,7 @@ const QueryLoopBlock = compose(
         ref: elementRef,
     });
 
-    const innerBlocksProps = useInnerBlocksProps({
-        className: 'guten-query-loop-container',
-    }, {
+    const innerBlocksProps = useInnerBlocksProps(blockProps, {
         template: [
             ['gutenverse/post-template']
         ],
@@ -200,16 +198,16 @@ const QueryLoopBlock = compose(
         <BlockContextProvider value={{ 'gutenverse/queryPosts': posts, 'gutenverse/isResolving': isResolving }}>
             <CopyElementToolbar {...props} />
             <BlockPanelController panelList={panelList} props={{ ...props, taxonomies }} elementRef={elementRef} />
-            <div {...blockProps}>
-                {hasInnerBlocks ? (
-                    <div {...innerBlocksProps} />
-                ) : (
+            {hasInnerBlocks ? (
+                <div {...innerBlocksProps} />
+            ) : (
+                <div {...blockProps}>
                     <QueryLoopVariation
                         onSelect={handleVariation}
                         wrapper="guten-container"
                     />
-                )}
-            </div>
+                </div>
+            )}
         </BlockContextProvider>
     );
 });

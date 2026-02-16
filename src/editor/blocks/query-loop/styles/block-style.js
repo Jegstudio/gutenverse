@@ -130,7 +130,7 @@ const getBlockStyle = (elementId, attributes) => {
                 }
             }
         ],
-        'selector': `.${elementId} .guten-query-loop-container`,
+        'selector': `.${elementId}`,
     });
 
     // Column Gap
@@ -144,7 +144,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-query-loop-container`,
+        'selector': `.${elementId}`,
     });
 
     // Row Gap
@@ -158,7 +158,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-query-loop-container`,
+        'selector': `.${elementId}`,
     });
 
     // Positioning Panel
