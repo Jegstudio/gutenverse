@@ -70,7 +70,7 @@ const ContentItem = (data) => {
                 return <div className="testimonial-slider hover-from-left testimonial-content" >
                     <div className="comment-bio">
                         <div className="profile-image">
-                            {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
+                            {showClientImage ? lazy ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                         </div>
                         <ul className="rating-stars">{starRating}</ul>
                         <span className="profile-info">
