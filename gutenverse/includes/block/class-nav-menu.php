@@ -107,7 +107,7 @@ class Nav_Menu extends Block_Abstract {
 			$src        = '';
 			$width      = '';
 			$height     = '';
-			$loading    = $lazy ? 'lazy' : 'eager';
+			$loading    = ( 'lazy' === $lazy || true === $lazy ) ? 'lazy' : 'eager';
 
 			if ( ! empty( $media['sizes'][ $size ]['url'] ) ) {
 				$src = $media['sizes'][ $size ]['url'];
