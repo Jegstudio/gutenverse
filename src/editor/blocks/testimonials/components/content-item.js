@@ -92,7 +92,7 @@ const ContentItem = (data) => {
                     <div className="comment-bio">
                         <div className="bio-details">
                             <div className="profile-image">
-                                {showClientImage ? lazy ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
+                                {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                             </div>
                             <span className="profile-info">
                                 {contentRichText(name, 'strong', 'profile-name', 'name', index)}
@@ -112,7 +112,7 @@ const ContentItem = (data) => {
                     <div className="comment-bio">
                         <div className="bio-details">
                             <div className="profile-image">
-                                {showClientImage ? lazy ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
+                                {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ const ContentItem = (data) => {
                         <div className="bio-details">
                             {starPosition !== undefined && starPosition === 'above-image' && <ul className="rating-stars">{starRating}</ul>}
                             <div className="profile-image">
-                                {showClientImage ? lazy ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
+                                {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                             </div>
                             {(starPosition === undefined || starPosition === 'below-image') && <ul className="rating-stars">{starRating}</ul>}
                             <span className="profile-info">
