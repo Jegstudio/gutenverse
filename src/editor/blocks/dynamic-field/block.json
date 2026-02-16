@@ -11,7 +11,7 @@
 		"elementId": {
 			"type": "string"
 		},
-		"fieldKey": {
+		"fieldContent": {
 			"type": "object",
 			"default": null
 		},
@@ -27,9 +27,13 @@
 			"type": "boolean",
 			"default": false
 		},
+		"fieldLink": {
+			"type": "object",
+			"default": null
+		},
 		"placeholder": {
 			"type": "string",
-			"default": "ACF Field Value"
+			"default": "Dynamic Field Value"
 		},
 		"alignment": {
 			"type": "object",

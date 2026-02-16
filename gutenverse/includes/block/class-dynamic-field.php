@@ -25,10 +25,15 @@ class Dynamic_Field extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $post_id ) {
-		$field_key = isset( $this->attributes['fieldKey'] ) ? $this->attributes['fieldKey'] : '';
-		$html_tag  = isset( $this->attributes['htmlTag'] ) ? $this->attributes['htmlTag'] : 'p';
-		$is_link   = isset( $this->attributes['link'] ) ? $this->attributes['link'] : false;
-		$target    = isset( $this->attributes['linkTarget'] ) && $this->attributes['linkTarget'] ? '_blank' : '_self';
+		$field_content = isset( $this->attributes['fieldContent'] ) ? $this->attributes['fieldContent'] : '';
+		$html_tag      = isset( $this->attributes['htmlTag'] ) ? $this->attributes['htmlTag'] : 'p';
+		$is_link       = isset( $this->attributes['link'] ) ? $this->attributes['link'] : false;
+		$target        = isset( $this->attributes['linkTarget'] ) && $this->attributes['linkTarget'] ? '_blank' : '_self';
+
+		$field_key = is_array( $field_content ) && isset( $field_content['value'] ) ? $field_content['value'] : $field_content;
+
+		$field_link       = isset( $this->attributes['fieldLink'] ) ? $this->attributes['fieldLink'] : '';
+		$field_link_key   = is_array( $field_link ) && isset( $field_link['value'] ) ? $field_link['value'] : $field_link;
 
 		if ( empty( $field_key ) ) {
 			return '';
@@ -51,15 +56,28 @@ class Dynamic_Field extends Block_Abstract {
 		$content = wp_kses_post( $value );
 
 		if ( $is_link ) {
-			// If the value itself looks like a URL, use it. Otherwise, we might need another strategy or just link to the current post?
-			// Usually "Link to Field Value" implies the field value IS the link.
-			// Or maybe the user wants to link the text to the post permalink?
-			// Based on property name 'link', checking if it's a URL is safer, or just using the value as href.
-			$href = $value;
-			if ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
-				$content = $value;
+			$href = '';
+
+			// 1. Try Field Link first
+			if ( ! empty( $field_link_key ) ) {
+				$link_val = get_field( $field_link_key, $post_id );
+				if ( $link_val ) {
+					$href = $link_val;
+				}
 			}
-			$content = "<a href='" . esc_url( $href ) . "' target='" . esc_attr( $target ) . "'>{$content}</a>";
+
+			// 2. Fallback to using the content value itself
+			if ( empty( $href ) ) {
+				if ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
+					$href = $value;
+				} else {
+					$href = $value; // Just use the value as href even if not validated URL? Original code did this.
+				}
+			}
+
+			if ( ! empty( $href ) ) {
+				$content = "<a href='" . esc_url( $href ) . "' target='" . esc_attr( $target ) . "'>{$content}</a>";
+			}
 		}
 
 		return "<{$html_tag} class='guten-dynamic-field-content'>{$content}</{$html_tag}>";

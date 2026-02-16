@@ -903,7 +903,7 @@ class Api {
 				foreach ( $group_fields as $field ) {
 					$fields[] = array(
 						'value' => $field['name'],
-						'label' => $field['label'] . ' (' . $group['title'] . ')',
+						'label' => $field['label'] . ' (' . ucwords( str_replace( '_', ' ', $field['type'] ) ) . ')',
 					);
 				}
 			}

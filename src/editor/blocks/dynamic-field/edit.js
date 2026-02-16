@@ -24,13 +24,15 @@ const DynamicFieldBlock = compose(
     const {
         elementId,
         placeholder,
-        fieldKey,
+        fieldContent,
         postId: blockPostId,
         htmlTag: HtmlTag = 'p'
     } = attributes;
 
     // Extract the actual field key string from the SelectSearchControl object
-    const fieldKeyValue = fieldKey?.value || '';
+    const fieldContentValue = fieldContent?.value || '';
+    const fieldLinkKey = attributes.fieldLink?.value || '';
+
 
     const context = blockContext || {};
     const postType = context.postType || 'post';
@@ -40,25 +42,27 @@ const DynamicFieldBlock = compose(
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
 
-    // Try to get ACF value from entity meta first (works if field has show_in_rest enabled).
+    // Try to get value from entity meta first (works if field has show_in_rest enabled).
     const [meta] = useEntityProp('postType', postType, 'meta', postId);
-    const entityValue = meta?.[fieldKeyValue];
+    const entityValue = meta?.[fieldContentValue];
+    const entityLinkValue = meta?.[fieldLinkKey];
 
     // State for API fallback.
     const [apiFetchValue, setApiFetchValue] = useState(null);
+    const [apiLinkValue, setApiLinkValue] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     // Fallback to API fetch if entity value is empty.
     useEffect(() => {
-        // Only fetch via API if we have a fieldKey, postId, and no entity value.
-        if (!fieldKeyValue || !postId || entityValue !== undefined) {
+        // Only fetch via API if we have a fieldContent, postId, and no entity value.
+        if (!fieldContentValue || !postId || entityValue !== undefined) {
             setApiFetchValue(null);
             return;
         }
 
         setIsLoading(true);
         apiFetch({
-            path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldKeyValue)}&postId=${postId}`,
+            path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldContentValue)}&postId=${postId}`,
         })
             .then((response) => {
                 if (response?.value !== undefined) {
@@ -73,10 +77,33 @@ const DynamicFieldBlock = compose(
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [fieldKeyValue, postId, entityValue]);
+    }, [fieldContentValue, postId, entityValue]);
+
+    // Fallback to API fetch for link value
+    useEffect(() => {
+        if (!fieldLinkKey || !postId || entityLinkValue !== undefined) {
+            setApiLinkValue(null);
+            return;
+        }
+
+        apiFetch({
+            path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldLinkKey)}&postId=${postId}`,
+        })
+            .then((response) => {
+                if (response?.value !== undefined) {
+                    setApiLinkValue(response.value);
+                } else {
+                    setApiLinkValue(null);
+                }
+            })
+            .catch(() => {
+                setApiLinkValue(null);
+            });
+    }, [fieldLinkKey, postId, entityLinkValue]);
 
     // Use entity value first, then API fallback.
     const fieldValue = entityValue !== undefined ? entityValue : apiFetchValue;
+    const linkValue = entityLinkValue !== undefined ? entityLinkValue : apiLinkValue;
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -98,21 +125,38 @@ const DynamicFieldBlock = compose(
         displayText = 'Loading...';
     } else if (fieldValue !== null && fieldValue !== '' && fieldValue !== undefined) {
         displayText = typeof fieldValue === 'object' ? JSON.stringify(fieldValue) : fieldValue;
-    } else if (fieldKey) {
-        displayText = `[ACF: ${fieldKey}]`;
+    } else if (fieldContent) {
+        const label = fieldContent?.label || fieldContent;
+        const cleanLabel = label.includes(' (') ? label.split(' (')[0] : label;
+        displayText = `[${cleanLabel}]`;
     } else {
-        displayText = placeholder || 'ACF Text Field';
+        displayText = placeholder || 'Dynamic Field';
+    }
+
+    let content = displayText;
+
+    if (attributes.link) {
+        const urlKey = linkValue || fieldValue;
+        const target = attributes.linkTarget ? '_blank' : '_self';
+
+        if (urlKey) {
+            content = (
+                <a href={urlKey} target={target} onClick={(e) => e.preventDefault()}>
+                    {displayText}
+                </a>
+            );
+        }
     }
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <InspectorControls>
             {/* Additional Inspector Controls */}
         </InspectorControls>
-        <BlockPanelController panelList={panelList} props={{...props, postType}} elementRef={elementRef} />
+        <BlockPanelController panelList={panelList} props={{ ...props, postType }} elementRef={elementRef} />
         <div {...blockProps}>
             <HtmlTag className="guten-dynamic-content">
-                {displayText}
+                {content}
             </HtmlTag>
         </div>
     </>;

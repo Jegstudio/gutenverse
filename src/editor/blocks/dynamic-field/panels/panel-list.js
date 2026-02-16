@@ -39,9 +39,9 @@ export const settingPanel = (props) => {
 
     return [
         {
-            id: 'fieldKey',
-            label: __('Field Key', 'gutenverse'),
-            description: __('Search and select an ACF Field.', 'gutenverse'),
+            id: 'fieldContent',
+            label: __('Field Content Key', 'gutenverse'),
+            description: __('Search and select an Dynamic Field.', 'gutenverse'),
             component: SelectSearchControl,
             onSearch: searchDynamicField,
         },
@@ -50,9 +50,9 @@ export const settingPanel = (props) => {
             label: __('HTML Tag', 'gutenverse'),
             component: SelectControl,
             options: [
-                { label: __('P'), value: 'p' },
-                { label: __('Span'), value: 'span' },
-                { label: __('Div'), value: 'div' },
+                { label: __('Paragraph'), value: 'p' },
+                { label: __('span'), value: 'span' },
+                { label: __('div'), value: 'div' },
                 { label: __('H1'), value: 'h1' },
                 { label: __('H2'), value: 'h2' },
                 { label: __('H3'), value: 'h3' },
@@ -69,7 +69,7 @@ export const settingPanel = (props) => {
         },
         {
             id: 'link',
-            label: __('Link to Field Value?', 'gutenverse'),
+            label: __('Turn as Link', 'gutenverse'),
             component: CheckboxControl,
         },
         {
@@ -77,6 +77,14 @@ export const settingPanel = (props) => {
             show: !!link,
             label: __('Open in New Tab', 'gutenverse'),
             component: CheckboxControl,
+        },
+        {
+            id: 'fieldLink',
+            label: __('Field Link (Optional)', 'gutenverse'),
+            description: __('Select a field to use as the link. If empty, the content itself will be the link.', 'gutenverse'),
+            component: SelectSearchControl,
+            onSearch: searchDynamicField,
+            show: !!link,
         },
     ];
 };
