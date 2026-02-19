@@ -241,13 +241,16 @@ const PostTemplateBlock = compose(
                     <PostItemWithMeta key={post.id} post={post} isActive={isActive}>
                         {(blockContext) => (
                             <BlockContextProvider value={blockContext}>
-                                {isActive && <PostTemplateInnerBlocks />}
-                                <MemoizedPostTemplateBlockPreview
-                                    blocks={blocks}
-                                    blockContextId={post.id}
-                                    isHidden={isActive}
-                                    setActiveBlockContextId={setActiveBlockContextId}
-                                />
+                                {isActive ? (
+                                    <PostTemplateInnerBlocks />
+                                ) : (
+                                    <MemoizedPostTemplateBlockPreview
+                                        blocks={blocks}
+                                        blockContextId={post.id}
+                                        isHidden={false}
+                                        setActiveBlockContextId={setActiveBlockContextId}
+                                    />
+                                )}
                             </BlockContextProvider>
                         )}
                     </PostItemWithMeta>
