@@ -1,8 +1,14 @@
-import { useBlockProps, useInnerBlocksProps, BlockContextProvider } from '@wordpress/block-editor';
+import {
+    __experimentalUseBlockPreview as useBlockPreview,
+    useBlockProps,
+    useInnerBlocksProps,
+    BlockContextProvider,
+    store as blockEditorStore,
+} from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import { useSelect } from '@wordpress/data';
 import { useEntityProp } from '@wordpress/core-data';
-import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
+import { memo, useEffect, useMemo, useRef, useState } from '@wordpress/element';
 import classnames from 'classnames';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { determineLocation, isAnimationActive, isSticky, theDeviceType } from 'gutenverse-core/helper';
@@ -11,7 +17,7 @@ import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import isEmpty from 'lodash/isEmpty';
-import { Spinner, SlotFillProvider } from '@wordpress/components';
+import { Spinner } from '@wordpress/components';
 import { panelList } from './panels/panel-list';
 
 const TEMPLATE = [
@@ -22,7 +28,22 @@ const TEMPLATE = [
     ]]
 ];
 
-const PostItem = ({ post, isActive, onSelect, innerBlocksTemplate }) => {
+/**
+ * Renders the active (editable) post item with full useInnerBlocksProps.
+ */
+function PostTemplateInnerBlocks() {
+    const innerBlocksProps = useInnerBlocksProps(
+        { className: 'guten-post-item' },
+        { template: TEMPLATE, __unstableDisableLayoutClassNames: true }
+    );
+    return <div {...innerBlocksProps} />;
+}
+
+/**
+ * Wraps a post item to fetch its meta via useEntityProp and pass
+ * a complete blockContext (postType, postId, meta) to children.
+ */
+function PostItemWithMeta({ post, children }) {
     const [meta] = useEntityProp('postType', post.type, 'meta', post.id);
 
     const blockContext = useMemo(() => ({
@@ -31,32 +52,45 @@ const PostItem = ({ post, isActive, onSelect, innerBlocksTemplate }) => {
         meta,
     }), [post.type, post.id, meta]);
 
-    const handleSelect = () => onSelect(blockContext.postId);
+    return children(blockContext);
+}
 
-    const innerBlocksProps = useInnerBlocksProps(
-        {
-            className: classnames('guten-post-item', { 'is-active': isActive }),
-            onClick: handleSelect,
+/**
+ * Renders an inactive (read-only) post item via useBlockPreview.
+ * Clicking on it makes this post the active one.
+ * When this post IS the active one, it's hidden (display:none)
+ * to avoid flicker when switching — the cached preview is instantly
+ * shown when switching away from this post.
+ */
+function PostTemplateBlockPreview({ blocks, blockContextId, isHidden, setActiveBlockContextId }) {
+    const blockPreviewProps = useBlockPreview({
+        blocks,
+        props: {
+            className: 'guten-post-item',
         },
-        { template: innerBlocksTemplate, __unstableDisableLayoutClassNames: true }
-    );
+    });
 
-    const content = (
-        <BlockContextProvider value={blockContext}>
-            <div {...innerBlocksProps} />
-        </BlockContextProvider>
-    );
+    const handleOnClick = () => {
+        setActiveBlockContextId(blockContextId);
+    };
 
-    if (isActive) {
-        return content;
-    }
+    const style = {
+        display: isHidden ? 'none' : undefined,
+    };
 
     return (
-        <SlotFillProvider>
-            {content}
-        </SlotFillProvider>
+        <div
+            {...blockPreviewProps}
+            tabIndex={0}
+            role="button"
+            onClick={handleOnClick}
+            onKeyPress={handleOnClick}
+            style={style}
+        />
     );
-};
+}
+
+const MemoizedPostTemplateBlockPreview = memo(PostTemplateBlockPreview);
 
 const PostTemplateBlock = compose(
     withPartialRender,
@@ -96,6 +130,12 @@ const PostTemplateBlock = compose(
 
     const elementRef = useRef();
     const deviceType = useSelect(() => theDeviceType(determineLocation()), []);
+
+    // Get inner blocks (the template structure) for use in read-only previews
+    const blocks = useSelect(
+        (selectFn) => selectFn(blockEditorStore).getBlocks(clientId),
+        [clientId]
+    );
 
     // Generate element ID and apply dynamic styles at the top level
     useGenerateElementId(clientId, elementId, elementRef);
@@ -169,6 +209,10 @@ const PostTemplateBlock = compose(
         );
     }
 
+    // To avoid flicker when switching active post contexts, a preview is rendered
+    // for each post, but the preview for the active post is hidden.
+    // This ensures that when it is displayed again, the cached rendering of the
+    // block preview is used, instead of having to re-render the preview from scratch.
     return <>
         <BlockPanelController props={{ ...props, transientState, setTransientState }} panelList={panelList} elementRef={elementRef} />
         <div {...blockProps}>
@@ -190,16 +234,25 @@ const PostTemplateBlock = compose(
             {/* Overlay */}
             {!isEmpty(attributes.backgroundOverlay) && <div className="guten-background-overlay" />}
 
-            {/* Post Items */}
-            {posts.map((post) => (
-                <PostItem
-                    key={post.id}
-                    post={post}
-                    isActive={post.id === (activeBlockContextId || posts[0]?.id)}
-                    onSelect={setActiveBlockContextId}
-                    innerBlocksTemplate={TEMPLATE}
-                />
-            ))}
+            {/* Post Items: active post is editable, others are read-only previews */}
+            {posts.map((post) => {
+                const isActive = post.id === (activeBlockContextId || posts[0]?.id);
+                return (
+                    <PostItemWithMeta key={post.id} post={post} isActive={isActive}>
+                        {(blockContext) => (
+                            <BlockContextProvider value={blockContext}>
+                                {isActive && <PostTemplateInnerBlocks />}
+                                <MemoizedPostTemplateBlockPreview
+                                    blocks={blocks}
+                                    blockContextId={post.id}
+                                    isHidden={isActive}
+                                    setActiveBlockContextId={setActiveBlockContextId}
+                                />
+                            </BlockContextProvider>
+                        )}
+                    </PostItemWithMeta>
+                );
+            })}
         </div>
     </>;
 });

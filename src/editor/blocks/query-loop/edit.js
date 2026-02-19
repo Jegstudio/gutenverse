@@ -1,3 +1,4 @@
+// ... imports
 import { compose } from '@wordpress/compose';
 import { useBlockProps, useInnerBlocksProps, BlockContextProvider } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
@@ -8,19 +9,24 @@ import QueryLoopVariation from './components/query-loop-variation';
 import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
-import { useRef, useMemo } from '@wordpress/element';
-import { classnames } from 'gutenverse-core/components';
+import { useRef, useState, createPortal } from '@wordpress/element';
+import { classnames, LibraryModal } from 'gutenverse-core/components';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { fetchLibraryData } from 'gutenverse-core/requests';
+import { IconBlocksSVG } from 'gutenverse-core/icons';
+import { useSelect, useDispatch, dispatch } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
+import { Placeholder, Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import { applyFilters } from '@wordpress/hooks';
 
 const QueryLoopBlock = compose(
     withPartialRender,
     withMouseMoveEffect
 )((props) => {
-    const { attributes, clientId } = props;
-    const { replaceInnerBlocks } = useDispatch('core/block-editor');
+    const { attributes, clientId, name } = props;
+    const { replaceInnerBlocks, replaceBlocks } = useDispatch('core/block-editor');
     const {
         elementId,
         column,
@@ -37,7 +43,14 @@ const QueryLoopBlock = compose(
         includeAuthor,
         taxonomies: selectedTaxonomies
     } = attributes;
-    const { posts, isResolving, postTypes, taxonomies } = useSelect((select) => {
+
+    // State for Placeholder
+    const [ isStartingBlank, setIsStartingBlank ] = useState( false );
+    const [ isPatternSelectionModalOpen, setIsPatternSelectionModalOpen ] = useState( false );
+    const [ libraryLoading, setLibraryLoading ] = useState( true );
+    const [ libraryError, setLibraryError ] = useState( false );
+
+    const { posts, isResolving, taxonomies } = useSelect((select) => {
         const { getEntityRecords, isResolving: isEntityResolving } = select(coreStore);
         const { getPostTypes, getTaxonomies } = select('core');
 
@@ -124,10 +137,9 @@ const QueryLoopBlock = compose(
         return {
             posts: getEntityRecords(...queryParams),
             isResolving: isEntityResolving('getEntityRecords', queryParams),
-            postTypes,
             taxonomies: taxonomyDefinitions,
         };
-    }, [postType, numberPost, postOffset, sortBy, includePost, excludePost, includeCategory, includeTag, includeAuthor, selectedTaxonomies]);
+    }, [postType, numberPost, postOffset, sortBy, includePost, excludePost, includeCategory, includeTag, includeAuthor, selectedTaxonomies, name]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
@@ -194,6 +206,75 @@ const QueryLoopBlock = compose(
         replaceInnerBlocks(clientId, [postTemplateBlock], true);
     };
 
+    const openLibrary = async () => {
+        setIsPatternSelectionModalOpen(true);
+        setLibraryLoading(true);
+
+        const dev = 'true' == '--dev_mode--';
+        const result = await fetchLibraryData(dev);
+
+        // Filter section-data for query-loop category
+        const queryLoopCategorySlug = 'query-loop';
+        const filteredSectionData = (result['section-data'] || []).filter(section =>
+            section.categories && section.categories.some(cat => cat.slug === queryLoopCategorySlug)
+        );
+
+        // Filter section-categories for query-loop category
+        const filteredSectionCategories = (result['section-categories'] || []).filter(cat =>
+            cat.slug === queryLoopCategorySlug
+        );
+
+        dispatch('gutenverse/library').initialLibraryData({
+            'layoutData': result['layout-data'],
+            'layoutCategories': result['layout-categories'],
+            'themeData': result['theme-data'],
+            'themeCategories': result['theme-categories'],
+            'sectionData': filteredSectionData,
+            'sectionCategories': filteredSectionCategories,
+            'pluginEcosystem': result['plugin-ecosystem'],
+        });
+
+        const { plugins } = window['GutenverseConfig'] || {};
+
+        dispatch('gutenverse/library').initialPluginData({
+            'installedPlugin': plugins,
+        });
+
+        const emptyLicense = applyFilters('gutenverse.panel.tab.pro.content', true);
+        const companionActive = plugins['gutenverse-companion']?.active;
+
+        dispatch('gutenverse/library').initialModalData({
+            'libraryData': {
+                attributes: {emptyLicense, companionActive},
+                active: 'section',
+                tabs: [
+                    {
+                        id: 'section',
+                        icon: <IconBlocksSVG />,
+                        label: __('Sections', 'gutenverse'),
+                    },
+                ],
+            },
+            'layoutContentData': {
+                categories: [],
+                license: '',
+                keyword: '',
+                author: '',
+                paging: 1,
+                library: 'section',
+            },
+        });
+
+        setLibraryLoading(false);
+    };
+
+    const handleSectionSelect = (blocks) => {
+        console.log('--handle section select--');
+        replaceBlocks(clientId, blocks);
+        setIsPatternSelectionModalOpen(false);
+    };
+
+
     return (
         <BlockContextProvider value={{ 'gutenverse/queryPosts': posts, 'gutenverse/isResolving': isResolving }}>
             <CopyElementToolbar {...props} />
@@ -202,10 +283,56 @@ const QueryLoopBlock = compose(
                 <div {...innerBlocksProps} />
             ) : (
                 <div {...blockProps}>
-                    <QueryLoopVariation
-                        onSelect={handleVariation}
-                        wrapper="guten-container"
-                    />
+                    { isPatternSelectionModalOpen && (
+                        <>
+                            {createPortal(
+                                <LibraryModal
+                                    open={isPatternSelectionModalOpen}
+                                    setOpen={setIsPatternSelectionModalOpen}
+                                    visible={true}
+                                    setVisibility={setIsPatternSelectionModalOpen}
+                                    loading={libraryLoading}
+                                    setLoading={setLibraryLoading}
+                                    setLibraryError={setLibraryError}
+                                    onSectionSelect={handleSectionSelect}
+                                />,
+                                document.getElementById('gutenverse-root') || document.body
+                            )}
+                            {libraryError !== false && createPortal(libraryError, document.body)}
+                        </>
+                    ) }
+
+                    { isStartingBlank ? (
+                        <QueryLoopVariation
+                            onSelect={handleVariation}
+                            wrapper="guten-container"
+                        />
+                    ) : (
+                        <Placeholder
+                            className="block-editor-media-placeholder"
+                            icon="layout"
+                            label={ __( 'Query Loop', 'gutenverse' ) }
+                            instructions={ __( 'Choose a pattern for the query loop or start blank.', 'gutenverse' ) }
+                        >
+                            <Button
+                                __next40pxDefaultSize
+                                variant="primary"
+                                onClick={ openLibrary }
+                            >
+                                { __( 'Choose', 'gutenverse' ) }
+                            </Button>
+
+                            <Button
+                                __next40pxDefaultSize
+                                variant="secondary"
+                                onClick={ () => {
+                                    setIsStartingBlank( true );
+                                } }
+                            >
+                                { __( 'Start blank', 'gutenverse' ) }
+                            </Button>
+                        </Placeholder>
+                    )}
                 </div>
             )}
         </BlockContextProvider>
