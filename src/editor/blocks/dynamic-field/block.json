@@ -190,7 +190,7 @@
 			"default": {}
 		}
 	},
-	"usesContext": ["postId", "postType"],
+	"usesContext": ["postId", "postType", "meta"],
 	"supports": {
 		"className": false,
 		"anchor": true

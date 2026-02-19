@@ -142,11 +142,11 @@ class Gutenverse {
 	public $upgrade_wizard;
 
 	/**
-	 * ACF Instance
+	 * Dynamic Field Instance
 	 *
-	 * @var ACF
+	 * @var Dynamic Field
 	 */
-	public $acf;
+	public $dynamic_field;
 
 	/**
 	 * Singleton page for Gutenverse Class
@@ -447,7 +447,7 @@ class Gutenverse {
 		$this->upgrader        = new Upgrader();
 		$this->meta_option     = new Meta_Option();
 		$this->upgrade_wizard  = new Upgrade_Wizard();
-		$this->acf             = new Acf();
+		$this->dynamic_field   = new Dynamic_Field();
 
 		$active_plugins    = get_option( 'active_plugins' );
 		$multisite_plugins = get_site_option( 'active_sitewide_plugins' );

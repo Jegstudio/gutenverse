@@ -1,6 +1,7 @@
 import { useBlockProps, useInnerBlocksProps, BlockContextProvider } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import { useSelect } from '@wordpress/data';
+import { useEntityProp } from '@wordpress/core-data';
 import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 import classnames from 'classnames';
 import { BlockPanelController } from 'gutenverse-core/controls';
@@ -22,10 +23,13 @@ const TEMPLATE = [
 ];
 
 const PostItem = ({ post, isActive, onSelect, innerBlocksTemplate }) => {
+    const [meta] = useEntityProp('postType', post.type, 'meta', post.id);
+
     const blockContext = useMemo(() => ({
         postType: post.type,
         postId: post.id,
-    }), [post.type, post.id]);
+        meta,
+    }), [post.type, post.id, meta]);
 
     const handleSelect = () => onSelect(blockContext.postId);
 

@@ -9,7 +9,6 @@ import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
-import { useEntityProp } from '@wordpress/core-data';
 import apiFetch from '@wordpress/api-fetch';
 
 const DynamicFieldBlock = compose(
@@ -33,17 +32,17 @@ const DynamicFieldBlock = compose(
     const fieldContentValue = fieldContent?.value || '';
     const fieldLinkKey = attributes.fieldLink?.value || '';
 
-
     const context = blockContext || {};
     const postType = context.postType || 'post';
     const postId = context.postId || blockPostId;
+    const meta = context.meta || {};
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
 
     // Try to get value from entity meta first (works if field has show_in_rest enabled).
-    const [meta] = useEntityProp('postType', postType, 'meta', postId);
+    // const [meta] = useEntityProp('postType', postType, 'meta', postId);
     const entityValue = meta?.[fieldContentValue];
     const entityLinkValue = meta?.[fieldLinkKey];
 
@@ -61,9 +60,7 @@ const DynamicFieldBlock = compose(
         }
 
         setIsLoading(true);
-        apiFetch({
-            path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldContentValue)}&postId=${postId}`,
-        })
+        apiFetch({ path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldContentValue)}&postId=${postId}` })
             .then((response) => {
                 if (response?.value !== undefined) {
                     setApiFetchValue(response.value);
@@ -86,9 +83,7 @@ const DynamicFieldBlock = compose(
             return;
         }
 
-        apiFetch({
-            path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldLinkKey)}&postId=${postId}`,
-        })
+        apiFetch({ path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldLinkKey)}&postId=${postId}` })
             .then((response) => {
                 if (response?.value !== undefined) {
                     setApiLinkValue(response.value);
