@@ -86,6 +86,7 @@ function PostTemplateBlockPreview({ blocks, blockContextId, isHidden, setActiveB
             onClick={handleOnClick}
             onKeyPress={handleOnClick}
             style={style}
+            data-post-id={blockContextId}
         />
     );
 }
@@ -177,10 +178,59 @@ const PostTemplateBlock = compose(
         }
     );
 
+    const handleContainerClick = (e) => {
+        if (!elementRef.current) return;
+
+        // Prevent intercepting clicks inside the currently active post item
+        const activeItem = elementRef.current.querySelector('.guten-post-item:not(.block-editor-block-preview__live-content)');
+        if (activeItem && activeItem.contains(e.target)) {
+            return;
+        }
+
+        // Hit-test on inert preview wrappers since they use display: contents
+        const previews = elementRef.current.querySelectorAll('.block-editor-block-preview__live-content');
+        for (let i = 0; i < previews.length; i++) {
+            const preview = previews[i];
+
+            // Skip hidden previews
+            if (preview.style.display === 'none') continue;
+
+            const children = preview.children;
+            let hit = false;
+            for (let j = 0; j < children.length; j++) {
+                const child = children[j];
+                const tag = child.tagName.toLowerCase();
+                if (tag === 'style' || tag === 'svg' || tag === 'script') continue;
+
+                const rect = child.getBoundingClientRect();
+                if (
+                    rect.width > 0 && rect.height > 0 &&
+                    e.clientX >= rect.left && e.clientX <= rect.right &&
+                    e.clientY >= rect.top && e.clientY <= rect.bottom
+                ) {
+                    hit = true;
+                    break;
+                }
+            }
+
+            if (hit) {
+                const postId = preview.getAttribute('data-post-id');
+                if (postId) {
+                    const parsedId = Number(postId);
+                    setActiveBlockContextId(isNaN(parsedId) ? postId : parsedId);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    break;
+                }
+            }
+        }
+    };
+
     const blockProps = useBlockProps({
         className: classes,
         ref: elementRef,
         'data-id': elementId ? elementId.split('-')[1] : '',
+        onClickCapture: handleContainerClick,
     });
 
     if (posts === undefined && isResolving === undefined) {
