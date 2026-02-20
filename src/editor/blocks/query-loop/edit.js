@@ -20,6 +20,7 @@ import { store as coreStore } from '@wordpress/core-data';
 import { Placeholder, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { applyFilters } from '@wordpress/hooks';
+import { Loader } from 'react-feather';
 
 const QueryLoopBlock = compose(
     withPartialRender,
@@ -319,7 +320,16 @@ const QueryLoopBlock = compose(
                                 variant="primary"
                                 onClick={ openLibrary }
                             >
-                                { __( 'Choose', 'gutenverse' ) }
+                                { libraryLoading && isPatternSelectionModalOpen ? (
+                                    <div style={{ marginRight: '10px' }}>
+                                        <div className="rotating" style={{ display: 'flex' }}>
+                                            <Loader size={20} />
+                                        </div>
+                                    </div>
+                                ) : null }
+                                { libraryLoading && isPatternSelectionModalOpen
+                                    ? __( 'Updating ...', 'gutenverse' )
+                                    : __( 'Choose', 'gutenverse' ) }
                             </Button>
 
                             <Button
