@@ -2,8 +2,8 @@
 	"apiVersion": 3,
 	"name": "gutenverse/post-terms",
 	"class_callback": "\\Gutenverse\\Block\\Post_Terms",
-	"title": "Post Terms",
-	"description": "Show the categories/tags of a single post.",
+	"title": "Post Taxonomy",
+	"description": "Show the taxonomy of a single post.",
 	"category": "gutenverse-post",
 	"allowCopyStyle": true,
 	"attributes": {

@@ -3,7 +3,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { store as coreStore } from '@wordpress/core-data';
 import { useRef } from '@wordpress/element';
 import { withPartialRender } from 'gutenverse-core/hoc';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
@@ -22,7 +22,7 @@ const PostTermsBlock = compose(
     const {
         attributes,
         clientId,
-        context: { postId, postType }
+        context: { postId, postType = 'post' }
     } = props;
 
     const {
@@ -39,26 +39,27 @@ const PostTermsBlock = compose(
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
 
-    let type = taxonomy === 'post_tag' ? 'tags' : 'categories';
-
-    const [termIds = []] = useEntityProp('postType', postType, type, postId);
-
     const terms = useSelect(
         (select) => {
             const { getEntityRecords } = select(coreStore);
+
+            if (!postId || !taxonomy) {
+                return [];
+            }
 
             const data = getEntityRecords(
                 'taxonomy',
                 taxonomy,
                 {
-                    include: termIds,
+                    post: postId,
+                    per_page: -1,
                     context: 'view',
                 }
             );
 
             return data ? data : [];
         },
-        [taxonomy]
+        [taxonomy, postId]
     );
 
     const blockProps = useBlockProps({
@@ -75,7 +76,6 @@ const PostTermsBlock = compose(
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
 
     const contentHTML = () => {
         switch (contentType) {
@@ -126,7 +126,7 @@ const PostTermsBlock = compose(
                 ]}
             />
         </InspectorControls>
-        <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
+        <BlockPanelController panelList={panelList} props={{ ...props, postType }} elementRef={elementRef} />
         <div  {...blockProps}>
             {contentHTML()}
         </div>

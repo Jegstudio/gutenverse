@@ -1,22 +1,37 @@
 import { __ } from '@wordpress/i18n';
+import { useMemo } from '@wordpress/element';
 import { CheckboxControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { useSelect } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
 
-export const settingPanel = ({contentType}) => {
+export const settingPanel = (props) => {
+    const { context, contentType } = props;
+
+    const taxonomies = useSelect(
+        (select) => {
+            const { getTaxonomies } = select(coreStore);
+            return getTaxonomies({ per_page: -1 });
+        },
+        []
+    );
+
+    const allTaxonomies = useMemo(() => {
+        if (!taxonomies) {
+            return [];
+        }
+
+        return taxonomies
+            .filter((tax) => tax.types && tax.types.includes(context?.postType || 'post'))
+            .map((tax) => ({ label: tax.name, value: tax.slug }));
+    }, [taxonomies, context?.postType]);
+
     return [
         {
             id: 'taxonomy',
             label: __('Taxonomy', 'gutenverse'),
+            description: __('Search and select a taxonomy.', 'gutenverse'),
             component: SelectControl,
-            options: [
-                {
-                    label: __('Post Category', 'gutenverse'),
-                    value: 'category'
-                },
-                {
-                    label: __('Post Tag', 'gutenverse'),
-                    value: 'post_tag'
-                },
-            ],
+            options: allTaxonomies,
         },
         {
             id: 'contentType',
