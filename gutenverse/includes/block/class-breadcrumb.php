@@ -83,8 +83,8 @@ class Breadcrumb extends Block_Abstract {
 
 			$is_not_last = $index < ( $data_length - 1 );
 
-			$item_name = $data[ $index ]['name'];
-			$item_url  = $data[ $index ]['url'];
+			$item_name = esc_html( $data[ $index ]['name'] );
+			$item_url  = esc_url( $data[ $index ]['url'] );
 			$position  = $index + 1;
 
 			$link = ( $is_not_last || $this->attributes['hideCurrentTitle'] )
