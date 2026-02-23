@@ -49,7 +49,7 @@ class Post_Featured_Image extends Block_Abstract {
 		}
 
 		if ( ! empty( $post_link ) && ! empty( $post_url ) ) {
-			$content = '<a href="' . $post_url . '" class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-element guten-post-featured-image">' . $content . '</a>';
+			$content = '<a href="' . esc_url( $post_url ) . '" class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-element guten-post-featured-image">' . $content . '</a>';
 		} else {
 			$content = '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-element guten-post-featured-image">' . $content . '</div>';
 		}
