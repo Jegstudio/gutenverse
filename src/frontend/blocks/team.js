@@ -49,6 +49,17 @@ class GutenverseTeam extends Default {
 
     _popupElement(blockElement, {img = '', name = '', job = '', desc = '', phone = '', email = ''}) {
         const socials = blockElement.find('.socials-wrapper').html();
+        const escapeHtml = (str) => {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        };
+
+        const escapedName = escapeHtml(name);
+        const escapedJob = escapeHtml(job);
+        const escapedDesc = escapeHtml(desc);
+        const escapedPhone = escapeHtml(phone);
+        const escapedEmail = escapeHtml(email);
 
         return `<div class="overlay"></div>
         <div class="popup">
@@ -58,14 +69,14 @@ class GutenverseTeam extends Default {
                 </svg>
             </div>
             <div class="content-1">
-                <img src="${img}" alt="${name}">
+                <img src="${img}" alt="${escapedName}">
             </div>
             <div class="content-2">
-                <h3 class="profile-title">${name}</h3>
-                <p class="profile-sub">${job}</p>
-                <p class="profile-desc">${desc}</p>
-                <p class="profile-phone"><strong>Phone :</strong>${phone}</p>
-                <p class="profile-email"><strong>Email :</strong>${email}</p>
+                <h3 class="profile-title">${escapedName}</h3>
+                <p class="profile-sub">${escapedJob}</p>
+                <p class="profile-desc">${escapedDesc}</p>
+                <p class="profile-phone"><strong>Phone :</strong>${escapedPhone}</p>
+                <p class="profile-email"><strong>Email :</strong>${escapedEmail}</p>
                 ${socials}
             </div>
         </div>`;
