@@ -4,7 +4,6 @@ import apiFetch from '@wordpress/api-fetch';
 import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel, typographyPanel } from 'gutenverse-core/controls';
 import { CheckboxControl, SelectControl, TextControl, ColorControl, SelectSearchControl } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
-
 import { isOnEditor } from 'gutenverse-core/helper';
 
 export const settingPanel = (props) => {

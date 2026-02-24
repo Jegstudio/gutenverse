@@ -148,7 +148,7 @@ const DynamicFieldBlock = compose(
         <InspectorControls>
             {/* Additional Inspector Controls */}
         </InspectorControls>
-        <BlockPanelController panelList={panelList} props={{ ...props, postType }} elementRef={elementRef} />
+        <BlockPanelController panelList={panelList} props={{ ...props }} elementRef={elementRef} />
         <div {...blockProps}>
             <HtmlTag className="guten-dynamic-content">
                 {content}
