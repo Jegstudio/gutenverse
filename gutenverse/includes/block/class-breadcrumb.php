@@ -292,6 +292,7 @@ class Breadcrumb extends Block_Abstract {
 	/**
 	 * Get primary post category if post has multiple categories.
 	 *
+	 * @param mixed $post_id post id.
 	 * @return \WP_Term|array|\WP_Error|null
 	 */
 	private function get_primary_category( $post_id ) {
