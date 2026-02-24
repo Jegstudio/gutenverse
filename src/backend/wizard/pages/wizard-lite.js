@@ -198,7 +198,7 @@ const UpgradePro = ({ updateProgress }) => {
     const barsFill = useRef([]);
     const bars = useRef([]);
     const pause = useRef([]);
-    const { upgradePro, pro_preview, pro_title } = window['GutenThemeConfig'];
+    const { upgradePro, pro_preview, pro_title, slug } = window['GutenThemeConfig'];
     const { gutenverseImgDir : images } = window['GutenverseWizard'];
 
     const animations = {
@@ -357,7 +357,7 @@ const UpgradePro = ({ updateProgress }) => {
                                         <span>{__('Unlock ', 'gutenverse-companion')}<b>{__('1000+', 'gutenverse-companion')}</b>{__(' Icons Selector', 'gutenverse-companion')}</span>
                                     </li>
                                 </ul>
-                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro, '_blank')}>
+                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro + '?utm_source=' + slug +'&utm_medium=wizard&utm_campaign=upgradepro', '_blank')}>
                                     <div className="button-content-wrapper">
                                         <span>{__('Upgrade To PRO', 'gutenverse-companion')}</span>
                                         <svg width={16} height={16} viewBox="0 0 15 15" fill={'white'} transform={'translate(0,0)'} xmlns="http://www.w3.org/2000/svg">
@@ -425,7 +425,7 @@ const UpgradePro = ({ updateProgress }) => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro, '_blank')}>
+                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro + '?utm_source=' + slug + '&utm_medium=wizard&utm_campaign=upgradepro', '_blank')}>
                                     <div className="button-content-wrapper">
                                         <span>{__('Upgrade To PRO', 'gutenverse-companion')}</span>
                                         <svg width={16} height={16} viewBox="0 0 15 15" fill={'white'} transform={'translate(0,0)'} xmlns="http://www.w3.org/2000/svg">
@@ -475,7 +475,7 @@ const UpgradePro = ({ updateProgress }) => {
                                         <span>{__('Gutenverse News.', 'gutenverse-companion')}</span>
                                     </li>
                                 </ul>
-                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro, '_blank')}>
+                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro + '?utm_source=' + slug + '&utm_medium=wizard&utm_campaign=upgradepro', '_blank')}>
                                     <div className="button-content-wrapper">
                                         <span>{__('Upgrade To PRO', 'gutenverse-companion')}</span>
                                         <svg width={16} height={16} viewBox="0 0 15 15" fill={'white'} transform={'translate(0,0)'} xmlns="http://www.w3.org/2000/svg">
@@ -509,7 +509,7 @@ const UpgradePro = ({ updateProgress }) => {
                                 <p className="content-desc bold">
                                     {__('Ready to take your website to the next stage?', 'gutenverse-companion')}
                                 </p>
-                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro, '_blank')}>
+                                <div className="upgrade-pro-button" onClick={() => window.open(upgradePro + '?utm_source=' + slug + '&utm_medium=wizard&utm_campaign=upgradepro', '_blank')}>
                                     <div className="button-content-wrapper">
                                         <span>{__('Upgrade To PRO', 'gutenverse-companion')}</span>
                                         <svg width={16} height={16} viewBox="0 0 15 15" fill={'white'} transform={'translate(0,0)'} xmlns="http://www.w3.org/2000/svg">
