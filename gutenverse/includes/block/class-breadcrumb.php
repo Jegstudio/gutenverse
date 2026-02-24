@@ -255,7 +255,7 @@ class Breadcrumb extends Block_Abstract {
 			global $post;
 		}
 
-		$primary_category = $this->get_primary_category();
+		$primary_category = $this->get_primary_category( $post_id );
 
 		if ( $primary_category instanceof \WP_Term ) {
 			$initial_data = $this->taxonomy_category_data( $initial_data, $primary_category );
@@ -294,8 +294,19 @@ class Breadcrumb extends Block_Abstract {
 	 *
 	 * @return \WP_Term|array|\WP_Error|null
 	 */
-	private function get_primary_category() {
-		$category = apply_filters( 'gutenverse_primary_category', false );
+	private function get_primary_category( $post_id ) {
+		$category_id = null;
+
+		if ( get_post_type( $post_id ) === 'post' ) {
+			$categories = array_slice( get_the_category( $post_id ), 0, 1 );
+			if ( empty( $categories ) ) {
+				return null;
+			}
+			$category    = array_shift( $categories );
+			$category_id = $category->term_id;
+		}
+
+		$category = apply_filters( 'gutenverse_primary_category', $category_id, $post_id );
 		$category = get_term( $category );
 
 		if ( $category instanceof \WP_Term ) {
