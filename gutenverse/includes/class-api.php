@@ -623,7 +623,15 @@ class Api {
 				$primary_category = null;
 				$categories       = get_the_category( $post_id );
 				if ( ! empty( $categories ) ) {
-					$category         = $categories[0];
+					$category    = $categories[0];
+					$category_id = $category->term_id;
+				}
+
+				$primary_id = apply_filters( 'gutenverse_primary_category', $category_id, $post_id );
+				$category   = get_term( $primary_id );
+
+				$primary_category = null;
+				if ( $category instanceof \WP_Term ) {
 					$primary_category = array(
 						'name' => $category->name,
 						'slug' => $category->slug,
