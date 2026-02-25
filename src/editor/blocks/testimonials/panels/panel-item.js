@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { ImageControl, RangeControl, RepeaterControl, CheckboxControl, TextareaControl, TextControl } from 'gutenverse-core/controls';
+import { ImageControl, RangeControl, RepeaterControl, SelectControl, TextareaControl, TextControl } from 'gutenverse-core/controls';
 
 export const itemPanel = () => {
     return [
@@ -21,8 +21,18 @@ export const itemPanel = () => {
                 },
                 {
                     id: 'lazy',
-                    label: __('Set Lazy Load', 'gutenverse'),
-                    component: CheckboxControl,
+                    label: __('Image Load', 'gutenverse'),
+                    component: SelectControl,
+                    options: [
+                        {
+                            value: 'normal',
+                            label: __('Normal Load', 'gutenverse')
+                        },
+                        {
+                            value: 'lazy',
+                            label: __('Lazy Load', 'gutenverse')
+                        },
+                    ]
                 },
                 {
                     id: 'rating',

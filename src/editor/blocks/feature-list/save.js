@@ -7,6 +7,7 @@ import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { useAnimationAdvanceData } from 'gutenverse-core/hooks';
 import { getImageLoadValue } from '../../helper';
+import { svgAtob } from 'gutenverse-core/helper';
 
 const save = compose(
     withAnimationAdvanceScript('icon-box'),
@@ -37,6 +38,8 @@ const save = compose(
 
     const iconContent = (item, index) => {
         const { imageLoad = '', lazyLoad = false } = item;
+        // console.log('debug from save');
+        // console.table(item);
         switch (item.type) {
             case 'icon':
                 return <div className="icon-wrapper">
@@ -64,7 +67,7 @@ const save = compose(
                 </div>;
             case 'svg':
                 try {
-                    const svgData = atob(item.svg);
+                    const svgData = svgAtob(item.svg);
                     return <div className="icon-wrapper">
                         <div className="icon">
                             <div

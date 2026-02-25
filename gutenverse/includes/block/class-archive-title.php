@@ -31,8 +31,10 @@ class Archive_Title extends Block_Abstract {
 		$link_target  = ! empty( $this->attributes['archiveLinkTarget'] ) ? '_blank' : '_self';
 		$link_rel     = ! empty( $this->attributes['archiveLinkRel'] ) ? esc_attr( $this->attributes['archiveLinkRel'] ) : 'noreferrer';
 
+		$archive_title = esc_html( $archive_title );
+
 		if ( $category_url ) {
-			$archive_title = "<a href='{$category_url}' target='{$link_target}' rel='{$link_rel}'>{$archive_title}</a>";
+			$archive_title = "<a href='" . esc_url( $category_url ) . "' target='{$link_target}' rel='{$link_rel}'>{$archive_title}</a>";
 		}
 
 		return "<{$html_tag}>{$archive_title}</{$html_tag}>";
