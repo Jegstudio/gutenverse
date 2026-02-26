@@ -29,7 +29,11 @@ const DynamicFieldBlock = compose(
         formatOptionsDate = '',
         formatOptionsDecimals = 0,
         formatOptionsTextCase = '',
-        formatOptionsArray = ''
+        formatOptionsArray = '',
+        formatOptionsRegexPattern = '',
+        formatOptionsRegexReplace = '',
+        formatOptionsDateBefore = '',
+        formatOptionsDateAfter = ''
     } = attributes;
 
     // Extract the actual field key string from the SelectSearchControl object
@@ -65,8 +69,8 @@ const DynamicFieldBlock = compose(
         setIsLoading(true);
         apiFetch({ path: `gutenverse/v1/dynamic-field-value?fieldKey=${encodeURIComponent(fieldContentValue)}&postId=${postId}` })
             .then((response) => {
-                if (response?.value !== undefined) {
-                    setApiFetchValue(response.value);
+                if (response?.raw !== undefined) {
+                    setApiFetchValue(response.raw);
                 } else {
                     setApiFetchValue(null);
                 }
@@ -123,7 +127,13 @@ const DynamicFieldBlock = compose(
             formatOptionsDate,
             formatOptionsDecimals: String(formatOptionsDecimals),
             formatOptionsTextCase,
-            formatOptionsArray
+            formatOptionsArray,
+            formatOptionsRegexPattern,
+            formatOptionsRegexReplace,
+            formatOptionsDateBefore,
+            formatOptionsDateAfter,
+            fieldKey: fieldContentValue,
+            postId: postId
         });
 
         apiFetch({ path: `gutenverse/v1/dynamic-field-format?${params.toString()}` })
@@ -137,7 +147,7 @@ const DynamicFieldBlock = compose(
             .catch(() => {
                 setFormattedValue(rawFieldValue);
             });
-    }, [rawFieldValue, formatType, formatOptionsDate, formatOptionsDecimals, formatOptionsTextCase, formatOptionsArray]);
+    }, [rawFieldValue, formatType, formatOptionsDate, formatOptionsDecimals, formatOptionsTextCase, formatOptionsArray, formatOptionsRegexPattern, formatOptionsRegexReplace, formatOptionsDateBefore, formatOptionsDateAfter]);
 
     const fieldValue = formattedValue !== null ? formattedValue : rawFieldValue;
 
@@ -189,7 +199,7 @@ const DynamicFieldBlock = compose(
         <InspectorControls>
             {/* Additional Inspector Controls */}
         </InspectorControls>
-        <BlockPanelController panelList={panelList} props={{ ...props, formatType, formatOptionsDate, formatOptionsDecimals, formatOptionsTextCase, formatOptionsArray }} elementRef={elementRef} />
+        <BlockPanelController panelList={panelList} props={{ ...props }} elementRef={elementRef} />
         <div {...blockProps}>
             <HtmlTag className="guten-dynamic-content">
                 {content}

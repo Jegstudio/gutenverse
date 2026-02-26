@@ -964,7 +964,8 @@ class Api {
 			$post_id = get_the_ID();
 		}
 
-		$value = get_field( $field_key, $post_id );
+		$value     = get_field( $field_key, $post_id );
+		$raw_value = get_field( $field_key, $post_id, false );
 
 		// Handle different field types.
 		$formatted_value = $value;
@@ -1000,7 +1001,7 @@ class Api {
 			array(
 				'value' => $formatted_value,
 				'type'  => $field_type,
-				'raw'   => $value,
+				'raw'   => $raw_value,
 			),
 			200
 		);
@@ -1014,9 +1015,15 @@ class Api {
 	 * @return WP_REST_Response
 	 */
 	public function format_dynamic_field_value( $request ) {
-		$value       = $request->get_param( 'value' );
-		$format_type = $request->get_param( 'formatType' );
-		$case_opt    = $request->get_param( 'formatOptionsTextCase' );
+		$value         = $request->get_param( 'value' );
+		$format_type   = $request->get_param( 'formatType' );
+		$case_opt      = $request->get_param( 'formatOptionsTextCase' );
+		$regex_pattern = $request->get_param( 'formatOptionsRegexPattern' );
+		$regex_replace = $request->get_param( 'formatOptionsRegexReplace' );
+		$date_before   = $request->get_param( 'formatOptionsDateBefore' );
+		$date_after    = $request->get_param( 'formatOptionsDateAfter' );
+		$field_key     = $request->get_param( 'fieldKey' );
+		$post_id       = $request->get_param( 'postId' );
 
 		if ( empty( $format_type ) || 'none' === $format_type ) {
 			return new \WP_REST_Response(
@@ -1026,7 +1033,13 @@ class Api {
 		}
 
 		$format_options = array(
-			'textCase' => ! empty( $case_opt ) ? sanitize_text_field( $case_opt ) : '',
+			'textCase'     => ! empty( $case_opt ) ? sanitize_text_field( $case_opt ) : '',
+			'regexPattern' => ! empty( $regex_pattern ) ? $regex_pattern : '',
+			'regexReplace' => ! empty( $regex_replace ) ? $regex_replace : '',
+			'dateBefore'   => ! empty( $date_before ) ? sanitize_text_field( $date_before ) : '',
+			'dateAfter'    => ! empty( $date_after ) ? sanitize_text_field( $date_after ) : '',
+			'fieldKey'     => ! empty( $field_key ) ? sanitize_text_field( $field_key ) : '',
+			'postId'       => ! empty( $post_id ) ? sanitize_text_field( $post_id ) : '',
 		);
 
 		$formatted = Dynamic_Field::format_dynamic_data( $value, $format_type, $format_options );

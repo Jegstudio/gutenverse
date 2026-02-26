@@ -27,15 +27,27 @@ class Dynamic_Field extends Block_Abstract {
 	public function render_content( $post_id ) {
 		$format_type         = isset( $this->attributes['formatType'] ) ? $this->attributes['formatType'] : 'none';
 		$format_options_case = isset( $this->attributes['formatOptionsTextCase'] ) ? $this->attributes['formatOptionsTextCase'] : '';
-		$format_options      = array(
-			'textCase' => $format_options_case,
-		);
-		$field_content       = isset( $this->attributes['fieldContent'] ) ? $this->attributes['fieldContent'] : '';
-		$html_tag            = isset( $this->attributes['htmlTag'] ) ? $this->attributes['htmlTag'] : 'p';
-		$is_link             = isset( $this->attributes['link'] ) ? $this->attributes['link'] : false;
-		$target              = isset( $this->attributes['linkTarget'] ) && $this->attributes['linkTarget'] ? '_blank' : '_self';
+		$regex_pattern       = isset( $this->attributes['formatOptionsRegexPattern'] ) ? $this->attributes['formatOptionsRegexPattern'] : '';
+		$regex_replace       = isset( $this->attributes['formatOptionsRegexReplace'] ) ? $this->attributes['formatOptionsRegexReplace'] : '';
+		$date_before         = isset( $this->attributes['formatOptionsDateBefore'] ) ? $this->attributes['formatOptionsDateBefore'] : '';
+		$date_after          = isset( $this->attributes['formatOptionsDateAfter'] ) ? $this->attributes['formatOptionsDateAfter'] : '';
 
-		$field_key = is_array( $field_content ) && isset( $field_content['value'] ) ? $field_content['value'] : $field_content;
+		$field_content = isset( $this->attributes['fieldContent'] ) ? $this->attributes['fieldContent'] : '';
+		$field_key     = is_array( $field_content ) && isset( $field_content['value'] ) ? $field_content['value'] : $field_content;
+
+		$format_options = array(
+			'textCase'     => $format_options_case,
+			'regexPattern' => $regex_pattern,
+			'regexReplace' => $regex_replace,
+			'dateBefore'   => $date_before,
+			'dateAfter'    => $date_after,
+			'fieldKey'     => $field_key,
+			'postId'       => $post_id,
+		);
+
+		$html_tag = isset( $this->attributes['htmlTag'] ) ? $this->attributes['htmlTag'] : 'p';
+		$is_link  = isset( $this->attributes['link'] ) ? $this->attributes['link'] : false;
+		$target   = isset( $this->attributes['linkTarget'] ) && $this->attributes['linkTarget'] ? '_blank' : '_self';
 
 		$field_link     = isset( $this->attributes['fieldLink'] ) ? $this->attributes['fieldLink'] : '';
 		$field_link_key = is_array( $field_link ) && isset( $field_link['value'] ) ? $field_link['value'] : $field_link;
@@ -48,8 +60,12 @@ class Dynamic_Field extends Block_Abstract {
 			return '';
 		}
 
-		$value = get_field( $field_key, $post_id );
+		$format_acf = true;
+		if ( 'none' !== $format_type && ! empty( $format_type ) ) {
+			$format_acf = false;
+		}
 
+		$value = get_field( $field_key, $post_id, $format_acf );
 		if ( ! $value && 0 !== $value && '0' !== $value ) {
 			return '';
 		}
@@ -113,6 +129,71 @@ class Dynamic_Field extends Block_Abstract {
 						return strtolower( $value );
 					} elseif ( 'capitalize' === $text_case ) {
 						return ucwords( $value );
+					}
+				}
+				break;
+
+			case 'regex':
+				if ( is_string( $value ) ) {
+					$pattern = isset( $format_options['regexPattern'] ) ? $format_options['regexPattern'] : '';
+					$replace = isset( $format_options['regexReplace'] ) ? $format_options['regexReplace'] : '';
+
+					if ( ! empty( $pattern ) ) {
+						$delimiter = mb_substr( $pattern, 0, 1 );
+						if ( ! in_array( $delimiter, array( '/', '#', '~', '@', '%' ), true ) || mb_substr( $pattern, -1, 1 ) !== $delimiter ) {
+							$pattern = '/' . str_replace( '/', '\/', $pattern ) . '/';
+						}
+
+						$result = @preg_replace( $pattern, $replace, $value );
+						if ( null !== $result && false !== $result ) {
+							return $result;
+						}
+					}
+				}
+				break;
+
+			case 'date':
+				if ( is_string( $value ) || is_numeric( $value ) ) {
+					$before = isset( $format_options['dateBefore'] ) ? $format_options['dateBefore'] : '';
+					$after  = isset( $format_options['dateAfter'] ) ? $format_options['dateAfter'] : '';
+
+					// Attempt to dynamically fetch ACF formatting parameters if not specified manually.
+					if ( ( empty( $before ) || empty( $after ) ) && function_exists( 'get_field_object' ) ) {
+						$f_key = isset( $format_options['fieldKey'] ) ? $format_options['fieldKey'] : '';
+						$p_id  = isset( $format_options['postId'] ) ? $format_options['postId'] : false;
+
+						if ( ! empty( $f_key ) ) {
+							$field_obj = get_field_object( $f_key, $p_id, false, false );
+							if ( $field_obj && in_array( $field_obj['type'], array( 'date_picker', 'date_time_picker', 'time_picker' ), true ) ) {
+								if ( empty( $before ) && isset( $field_obj['return_format'] ) ) {
+									$before = $field_obj['return_format'];
+								}
+								if ( empty( $after ) && isset( $field_obj['display_format'] ) ) {
+									$after = $field_obj['display_format'];
+								}
+							}
+						}
+					}
+
+					if ( empty( $before ) ) {
+						// Fallback to standard strtotime if no 'before' format is provided.
+						$timestamp = strtotime( $value );
+					} else {
+						$date = \DateTime::createFromFormat( $before, $value );
+						if ( $date ) {
+							$timestamp = $date->getTimestamp();
+						} else {
+							// Return original text if format mismatch.
+							return $value;
+						}
+					}
+
+					if ( $timestamp ) {
+						if ( ! empty( $after ) ) {
+							return date_i18n( $after, $timestamp );
+						} else {
+							return date_i18n( get_option( 'date_format' ), $timestamp );
+						}
 					}
 				}
 				break;

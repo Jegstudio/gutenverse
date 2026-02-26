@@ -39,6 +39,22 @@
 			"type": "string",
 			"default": ""
 		},
+		"formatOptionsRegexPattern": {
+			"type": "string",
+			"default": ""
+		},
+		"formatOptionsRegexReplace": {
+			"type": "string",
+			"default": ""
+		},
+		"formatOptionsDateBefore": {
+			"type": "string",
+			"default": ""
+		},
+		"formatOptionsDateAfter": {
+			"type": "string",
+			"default": ""
+		},
 		"alignment": {
 			"type": "object",
 			"copyStyle": true

@@ -2,12 +2,12 @@
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel, typographyPanel } from 'gutenverse-core/controls';
-import { CheckboxControl, SelectControl, ColorControl, SelectSearchControl } from 'gutenverse-core/controls';
+import { CheckboxControl, SelectControl, ColorControl, SelectSearchControl, TextControl } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 import { isOnEditor } from 'gutenverse-core/helper';
 
 export const settingPanel = (props) => {
-    const { link, context, formatType, formatOptionsTextCase = '', setAttributes } = props;
+    const { link, context } = props;
 
     // Create async search function for ACF fields
     const searchDynamicField = isOnEditor() ? (input) => new Promise((resolve) => {
@@ -79,6 +79,21 @@ export const settingPanel = (props) => {
             onSearch: searchDynamicField,
             show: !!link,
         },
+    ];
+};
+
+export const formatPanel = (props) => {
+    const {
+        formatType,
+        formatOptionsTextCase,
+        formatOptionsRegexPattern,
+        formatOptionsRegexReplace,
+        formatOptionsDateBefore,
+        formatOptionsDateAfter,
+        setAttributes
+    } = props;
+
+    return [
         {
             id: 'formatType',
             label: __('Format Data', 'gutenverse'),
@@ -86,6 +101,8 @@ export const settingPanel = (props) => {
             options: [
                 { label: __('None', 'gutenverse'), value: 'none' },
                 { label: __('Text Case', 'gutenverse'), value: 'textCase' },
+                { label: __('Regex', 'gutenverse'), value: 'regex' },
+                { label: __('Date', 'gutenverse'), value: 'date' },
             ]
         },
         {
@@ -100,6 +117,42 @@ export const settingPanel = (props) => {
                 { label: __('Capitalize', 'gutenverse'), value: 'capitalize' },
             ],
             customChange: (val) => setAttributes({ formatOptionsTextCase: val })
+        },
+        {
+            id: 'formatOptionsRegexPattern',
+            label: __('Regex Pattern', 'gutenverse'),
+            description: __('Enter regular expression pattern, e.g. /[0-9]+/', 'gutenverse'),
+            component: TextControl,
+            show: formatType === 'regex',
+            customValue: formatOptionsRegexPattern || '',
+            customChange: (val) => setAttributes({ formatOptionsRegexPattern: val })
+        },
+        {
+            id: 'formatOptionsRegexReplace',
+            label: __('Regex Replace', 'gutenverse'),
+            description: __('Enter replacement string.', 'gutenverse'),
+            component: TextControl,
+            show: formatType === 'regex',
+            customValue: formatOptionsRegexReplace || '',
+            customChange: (val) => setAttributes({ formatOptionsRegexReplace: val })
+        },
+        {
+            id: 'formatOptionsDateBefore',
+            label: __('Date Before Format', 'gutenverse'),
+            description: __('Enter source date format, e.g. Ymd (for ACF dates).', 'gutenverse'),
+            component: TextControl,
+            show: formatType === 'date',
+            customValue: formatOptionsDateBefore || '',
+            customChange: (val) => setAttributes({ formatOptionsDateBefore: val })
+        },
+        {
+            id: 'formatOptionsDateAfter',
+            label: __('Date After Format', 'gutenverse'),
+            description: __('Enter target date format, e.g. F j, Y.', 'gutenverse'),
+            component: TextControl,
+            show: formatType === 'date',
+            customValue: formatOptionsDateAfter || '',
+            customChange: (val) => setAttributes({ formatOptionsDateAfter: val })
         },
     ];
 };
@@ -137,6 +190,12 @@ export const panelList = () => {
             panelArray: settingPanel,
             tabRole: TabSetting,
             initialOpen: true,
+        },
+        {
+            title: __('Format Data', 'gutenverse'),
+            panelArray: formatPanel,
+            tabRole: TabSetting,
+            initialOpen: false,
         },
         {
             title: __('Style', 'gutenverse'),
