@@ -25,15 +25,20 @@ class Dynamic_Field extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $post_id ) {
-		$field_content = isset( $this->attributes['fieldContent'] ) ? $this->attributes['fieldContent'] : '';
-		$html_tag      = isset( $this->attributes['htmlTag'] ) ? $this->attributes['htmlTag'] : 'p';
-		$is_link       = isset( $this->attributes['link'] ) ? $this->attributes['link'] : false;
-		$target        = isset( $this->attributes['linkTarget'] ) && $this->attributes['linkTarget'] ? '_blank' : '_self';
+		$format_type         = isset( $this->attributes['formatType'] ) ? $this->attributes['formatType'] : 'none';
+		$format_options_case = isset( $this->attributes['formatOptionsTextCase'] ) ? $this->attributes['formatOptionsTextCase'] : '';
+		$format_options      = array(
+			'textCase' => $format_options_case,
+		);
+		$field_content       = isset( $this->attributes['fieldContent'] ) ? $this->attributes['fieldContent'] : '';
+		$html_tag            = isset( $this->attributes['htmlTag'] ) ? $this->attributes['htmlTag'] : 'p';
+		$is_link             = isset( $this->attributes['link'] ) ? $this->attributes['link'] : false;
+		$target              = isset( $this->attributes['linkTarget'] ) && $this->attributes['linkTarget'] ? '_blank' : '_self';
 
 		$field_key = is_array( $field_content ) && isset( $field_content['value'] ) ? $field_content['value'] : $field_content;
 
-		$field_link       = isset( $this->attributes['fieldLink'] ) ? $this->attributes['fieldLink'] : '';
-		$field_link_key   = is_array( $field_link ) && isset( $field_link['value'] ) ? $field_link['value'] : $field_link;
+		$field_link     = isset( $this->attributes['fieldLink'] ) ? $this->attributes['fieldLink'] : '';
+		$field_link_key = is_array( $field_link ) && isset( $field_link['value'] ) ? $field_link['value'] : $field_link;
 
 		if ( empty( $field_key ) ) {
 			return '';
@@ -52,6 +57,8 @@ class Dynamic_Field extends Block_Abstract {
 		if ( is_array( $value ) ) {
 			$value = implode( ', ', $value );
 		}
+
+		$value = self::format_dynamic_data( $value, $format_type, $format_options );
 
 		$content = wp_kses_post( $value );
 
@@ -81,6 +88,41 @@ class Dynamic_Field extends Block_Abstract {
 		}
 
 		return "<{$html_tag} class='guten-dynamic-field-content'>{$content}</{$html_tag}>";
+	}
+
+	/**
+	 * Format dynamic data for Frontend rendering.
+	 *
+	 * @param mixed  $value The raw dataset.
+	 * @param string $format_type e.g., 'date', 'number', 'textCase', 'array'.
+	 * @param array  $format_options Options specific to the formatType.
+	 * @return mixed The formatted string.
+	 */
+	public static function format_dynamic_data( $value, $format_type, $format_options ) {
+		if ( null === $value || '' === $value ) {
+			return $value;
+		}
+
+		switch ( $format_type ) {
+			case 'textCase':
+				if ( is_string( $value ) ) {
+					$text_case = isset( $format_options['textCase'] ) ? $format_options['textCase'] : 'uppercase';
+					if ( 'uppercase' === $text_case ) {
+						return strtoupper( $value );
+					} elseif ( 'lowercase' === $text_case ) {
+						return strtolower( $value );
+					} elseif ( 'capitalize' === $text_case ) {
+						return ucwords( $value );
+					}
+				}
+				break;
+
+			case 'none':
+			default:
+				return $value;
+		}
+
+		return $value;
 	}
 
 	/**

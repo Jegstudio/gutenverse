@@ -2,12 +2,12 @@
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel, typographyPanel } from 'gutenverse-core/controls';
-import { CheckboxControl, SelectControl, TextControl, ColorControl, SelectSearchControl } from 'gutenverse-core/controls';
+import { CheckboxControl, SelectControl, ColorControl, SelectSearchControl } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 import { isOnEditor } from 'gutenverse-core/helper';
 
 export const settingPanel = (props) => {
-    const { link, context } = props;
+    const { link, context, formatType, formatOptionsTextCase = '', setAttributes } = props;
 
     // Create async search function for ACF fields
     const searchDynamicField = isOnEditor() ? (input) => new Promise((resolve) => {
@@ -61,12 +61,6 @@ export const settingPanel = (props) => {
             ],
         },
         {
-            id: 'placeholder',
-            label: __('Placeholder', 'gutenverse'),
-            component: TextControl,
-            description: __('Shown in editor only for preview.', 'gutenverse'),
-        },
-        {
             id: 'link',
             label: __('Turn as Link', 'gutenverse'),
             component: CheckboxControl,
@@ -84,6 +78,28 @@ export const settingPanel = (props) => {
             component: SelectSearchControl,
             onSearch: searchDynamicField,
             show: !!link,
+        },
+        {
+            id: 'formatType',
+            label: __('Format Data', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                { label: __('None', 'gutenverse'), value: 'none' },
+                { label: __('Text Case', 'gutenverse'), value: 'textCase' },
+            ]
+        },
+        {
+            id: 'formatOptionsTextCase',
+            label: __('Text Case', 'gutenverse'),
+            component: SelectControl,
+            show: formatType === 'textCase',
+            customValue: formatOptionsTextCase || 'uppercase',
+            options: [
+                { label: __('Uppercase', 'gutenverse'), value: 'uppercase' },
+                { label: __('Lowercase', 'gutenverse'), value: 'lowercase' },
+                { label: __('Capitalize', 'gutenverse'), value: 'capitalize' },
+            ],
+            customChange: (val) => setAttributes({ formatOptionsTextCase: val })
         },
     ];
 };

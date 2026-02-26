@@ -31,9 +31,13 @@
 			"type": "object",
 			"default": null
 		},
-		"placeholder": {
+		"formatType": {
 			"type": "string",
-			"default": "Dynamic Field Value"
+			"default": "none"
+		},
+		"formatOptionsTextCase": {
+			"type": "string",
+			"default": ""
 		},
 		"alignment": {
 			"type": "object",

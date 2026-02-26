@@ -22,10 +22,14 @@ const DynamicFieldBlock = compose(
 
     const {
         elementId,
-        placeholder,
         fieldContent,
         postId: blockPostId,
-        htmlTag: HtmlTag = 'p'
+        htmlTag: HtmlTag = 'p',
+        formatType = 'none',
+        formatOptionsDate = '',
+        formatOptionsDecimals = 0,
+        formatOptionsTextCase = '',
+        formatOptionsArray = ''
     } = attributes;
 
     // Extract the actual field key string from the SelectSearchControl object
@@ -33,7 +37,6 @@ const DynamicFieldBlock = compose(
     const fieldLinkKey = attributes.fieldLink?.value || '';
 
     const context = blockContext || {};
-    const postType = context.postType || 'post';
     const postId = context.postId || blockPostId;
     const meta = context.meta || {};
 
@@ -97,8 +100,46 @@ const DynamicFieldBlock = compose(
     }, [fieldLinkKey, postId, entityLinkValue]);
 
     // Use entity value first, then API fallback.
-    const fieldValue = entityValue !== undefined ? entityValue : apiFetchValue;
+    const rawFieldValue = entityValue !== undefined ? entityValue : apiFetchValue;
     const linkValue = entityLinkValue !== undefined ? entityLinkValue : apiLinkValue;
+
+    // Server-side formatting.
+    const [formattedValue, setFormattedValue] = useState(null);
+
+    useEffect(() => {
+        if (rawFieldValue === null || rawFieldValue === undefined || rawFieldValue === '') {
+            setFormattedValue(rawFieldValue);
+            return;
+        }
+
+        if (!formatType || formatType === 'none') {
+            setFormattedValue(rawFieldValue);
+            return;
+        }
+
+        const params = new URLSearchParams({
+            value: typeof rawFieldValue === 'object' ? JSON.stringify(rawFieldValue) : String(rawFieldValue),
+            formatType,
+            formatOptionsDate,
+            formatOptionsDecimals: String(formatOptionsDecimals),
+            formatOptionsTextCase,
+            formatOptionsArray
+        });
+
+        apiFetch({ path: `gutenverse/v1/dynamic-field-format?${params.toString()}` })
+            .then((response) => {
+                if (response?.formatted !== undefined) {
+                    setFormattedValue(response.formatted);
+                } else {
+                    setFormattedValue(rawFieldValue);
+                }
+            })
+            .catch(() => {
+                setFormattedValue(rawFieldValue);
+            });
+    }, [rawFieldValue, formatType, formatOptionsDate, formatOptionsDecimals, formatOptionsTextCase, formatOptionsArray]);
+
+    const fieldValue = formattedValue !== null ? formattedValue : rawFieldValue;
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -125,7 +166,7 @@ const DynamicFieldBlock = compose(
         const cleanLabel = label.includes(' (') ? label.split(' (')[0] : label;
         displayText = `[${cleanLabel}]`;
     } else {
-        displayText = placeholder || 'Dynamic Field';
+        displayText = 'Dynamic Field';
     }
 
     let content = displayText;
@@ -148,7 +189,7 @@ const DynamicFieldBlock = compose(
         <InspectorControls>
             {/* Additional Inspector Controls */}
         </InspectorControls>
-        <BlockPanelController panelList={panelList} props={{ ...props }} elementRef={elementRef} />
+        <BlockPanelController panelList={panelList} props={{ ...props, formatType, formatOptionsDate, formatOptionsDecimals, formatOptionsTextCase, formatOptionsArray }} elementRef={elementRef} />
         <div {...blockProps}>
             <HtmlTag className="guten-dynamic-content">
                 {content}

@@ -9,6 +9,7 @@
 
 namespace Gutenverse;
 
+use Gutenverse\Block\Dynamic_Field;
 use Gutenverse\Block\Post_Block;
 use Gutenverse\Block\Post_List;
 use Gutenverse\Framework\Init;
@@ -150,6 +151,17 @@ class Api {
 			array(
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_dynamic_field_value' ),
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+		register_rest_route(
+			'gutenverse/v1',
+			'dynamic-field-format',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'format_dynamic_field_value' ),
 				'permission_callback' => function () {
 					return current_user_can( 'edit_posts' );
 				},
@@ -990,6 +1002,37 @@ class Api {
 				'type'  => $field_type,
 				'raw'   => $value,
 			),
+			200
+		);
+	}
+
+	/**
+	 * Format a dynamic field value on the server.
+	 *
+	 * @param object $request Request Object.
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function format_dynamic_field_value( $request ) {
+		$value       = $request->get_param( 'value' );
+		$format_type = $request->get_param( 'formatType' );
+		$case_opt    = $request->get_param( 'formatOptionsTextCase' );
+
+		if ( empty( $format_type ) || 'none' === $format_type ) {
+			return new \WP_REST_Response(
+				array( 'formatted' => $value ),
+				200
+			);
+		}
+
+		$format_options = array(
+			'textCase' => ! empty( $case_opt ) ? sanitize_text_field( $case_opt ) : '',
+		);
+
+		$formatted = Dynamic_Field::format_dynamic_data( $value, $format_type, $format_options );
+
+		return new \WP_REST_Response(
+			array( 'formatted' => $formatted ),
 			200
 		);
 	}
