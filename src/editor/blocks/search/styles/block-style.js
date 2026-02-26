@@ -251,6 +251,20 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
+    isNotEmpty(attributes['inputColorNormal']) && data.push({
+        'type': 'color',
+        'id': 'inputColorNormal',
+        'responsive': true,
+        'selector': `.${elementId} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill`,
+        'properties': [
+            {
+                'name': '-webkit-text-fill-color',
+                'valueType': 'direct',
+                'important': true
+            }
+        ],
+    });
+
     isNotEmpty(attributes['inputBgColorNormal']) && data.push({
         'type': 'color',
         'id': 'inputBgColorNormal',
@@ -263,6 +277,22 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
     });
+
+    isNotEmpty(attributes['inputBgColorNormal']) && data.push(
+        {
+            'type': 'plain',
+            'id': 'inputBgColorNormal',
+            'selector': `.${elementId} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill`,
+            'properties': [
+                {
+                    'name': 'box-shadow',
+                    'valueType': 'function',
+                    'functionName': 'handleInputAutofillBackgroundColor',
+                },
+            ],
+            'responsive': true,
+        },
+    );
 
     isNotEmpty(attributes['inputBorderNormal']) && data.push({
         'type': 'border',
