@@ -23,7 +23,17 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "span"
+			"default": "span",
+			"enum": [
+				"span",
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"dateType": {
 			"type": "string",
