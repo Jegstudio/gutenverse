@@ -81,8 +81,8 @@ export class AnimationStyle {
         
         wrapper.html(
             escapedText.replace(
-                this.splitByWord ? /\b\w+\b/g : /\S/g,
-                (word) => `<span class='letter'>${word}</span>`
+                this.splitByWord ? /&[a-z0-9]+;|\b\w+\b/gi : /&[a-z0-9]+;|\S/gi,
+                (match) => `<span class='letter'>${match}</span>`
             )
         );
     }
