@@ -160,7 +160,7 @@ class Api {
 			'gutenverse/v1',
 			'dynamic-field-format',
 			array(
-				'methods'             => 'GET',
+				'methods'             => 'POST',
 				'callback'            => array( $this, 'format_dynamic_field_value' ),
 				'permission_callback' => function () {
 					return current_user_can( 'edit_posts' );
@@ -1015,34 +1015,64 @@ class Api {
 	 * @return WP_REST_Response
 	 */
 	public function format_dynamic_field_value( $request ) {
-		$value         = $request->get_param( 'value' );
-		$format_type   = $request->get_param( 'formatType' );
-		$case_opt      = $request->get_param( 'formatOptionsTextCase' );
-		$regex_pattern = $request->get_param( 'formatOptionsRegexPattern' );
-		$regex_replace = $request->get_param( 'formatOptionsRegexReplace' );
-		$date_before   = $request->get_param( 'formatOptionsDateBefore' );
-		$date_after    = $request->get_param( 'formatOptionsDateAfter' );
-		$field_key     = $request->get_param( 'fieldKey' );
-		$post_id       = $request->get_param( 'postId' );
+		$value            = $request->get_param( 'value' );
+		$format_type      = $request->get_param( 'formatType' );
+		$case_opt         = $request->get_param( 'formatOptionsTextCase' );
+		$regex_pattern    = $request->get_param( 'formatOptionsRegexPattern' );
+		$regex_replace    = $request->get_param( 'formatOptionsRegexReplace' );
+		$date_before      = $request->get_param( 'formatOptionsDateBefore' );
+		$date_after       = $request->get_param( 'formatOptionsDateAfter' );
+		$num_decimals     = $request->get_param( 'formatOptionsNumberDecimals' );
+		$num_decimal_sep  = $request->get_param( 'formatOptionsNumberDecimalSeparator' );
+		$num_thousand_sep = $request->get_param( 'formatOptionsNumberThousandSeparator' );
+		$cond_type        = $request->get_param( 'formatConditionType' );
+		$cond_value       = $request->get_param( 'formatConditionValue' );
+		$cond_true        = $request->get_param( 'formatConditionTextTrue' );
+		$cond_false       = $request->get_param( 'formatConditionTextFalse' );
+		$field_key        = $request->get_param( 'fieldKey' );
+		$post_id          = $request->get_param( 'postId' );
+		$prefix           = $request->get_param( 'prefix' );
+		$suffix           = $request->get_param( 'suffix' );
 
 		if ( empty( $format_type ) || 'none' === $format_type ) {
+			$wrapped   = $prefix . $value . $suffix;
+			$formatted = Dynamic_Field::apply_format_condition(
+				$value,
+				array(
+					'conditionType'  => $cond_type,
+					'conditionValue' => $cond_value,
+					'conditionTrue'  => $cond_true,
+					'conditionFalse' => $cond_false,
+				),
+				$wrapped
+			);
+
 			return new \WP_REST_Response(
-				array( 'formatted' => $value ),
+				array( 'formatted' => $formatted ),
 				200
 			);
 		}
 
 		$format_options = array(
-			'textCase'     => ! empty( $case_opt ) ? sanitize_text_field( $case_opt ) : '',
-			'regexPattern' => ! empty( $regex_pattern ) ? $regex_pattern : '',
-			'regexReplace' => ! empty( $regex_replace ) ? $regex_replace : '',
-			'dateBefore'   => ! empty( $date_before ) ? sanitize_text_field( $date_before ) : '',
-			'dateAfter'    => ! empty( $date_after ) ? sanitize_text_field( $date_after ) : '',
-			'fieldKey'     => ! empty( $field_key ) ? sanitize_text_field( $field_key ) : '',
-			'postId'       => ! empty( $post_id ) ? sanitize_text_field( $post_id ) : '',
+			'textCase'                => ! empty( $case_opt ) ? sanitize_text_field( $case_opt ) : '',
+			'regexPattern'            => ! empty( $regex_pattern ) ? $regex_pattern : '',
+			'regexReplace'            => ! empty( $regex_replace ) ? $regex_replace : '',
+			'dateBefore'              => ! empty( $date_before ) ? sanitize_text_field( $date_before ) : '',
+			'dateAfter'               => ! empty( $date_after ) ? sanitize_text_field( $date_after ) : '',
+			'numberDecimals'          => isset( $num_decimals ) ? intval( $num_decimals ) : 0,
+			'numberDecimalSeparator'  => isset( $num_decimal_sep ) ? sanitize_text_field( $num_decimal_sep ) : '.',
+			'numberThousandSeparator' => isset( $num_thousand_sep ) ? sanitize_text_field( $num_thousand_sep ) : ',',
+			'conditionType'           => ! empty( $cond_type ) ? sanitize_text_field( $cond_type ) : 'none',
+			'conditionValue'          => isset( $cond_value ) ? $cond_value : '',
+			'conditionTrue'           => isset( $cond_true ) ? $cond_true : '',
+			'conditionFalse'          => isset( $cond_false ) ? $cond_false : '',
+			'fieldKey'                => ! empty( $field_key ) ? sanitize_text_field( $field_key ) : '',
+			'postId'                  => ! empty( $post_id ) ? sanitize_text_field( $post_id ) : '',
 		);
 
 		$formatted = Dynamic_Field::format_dynamic_data( $value, $format_type, $format_options );
+		$wrapped   = $prefix . $formatted . $suffix;
+		$formatted = Dynamic_Field::apply_format_condition( $formatted, $format_options, $wrapped );
 
 		return new \WP_REST_Response(
 			array( 'formatted' => $formatted ),

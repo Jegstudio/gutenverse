@@ -33,7 +33,16 @@ const DynamicFieldBlock = compose(
         formatOptionsRegexPattern = '',
         formatOptionsRegexReplace = '',
         formatOptionsDateBefore = '',
-        formatOptionsDateAfter = ''
+        formatOptionsDateAfter = '',
+        formatOptionsNumberDecimals = 0,
+        formatOptionsNumberDecimalSeparator = '.',
+        formatOptionsNumberThousandSeparator = ',',
+        formatConditionType = 'none',
+        formatConditionValue = '',
+        formatConditionTextTrue = '',
+        formatConditionTextFalse = '',
+        prefix = '',
+        suffix = ''
     } = attributes;
 
     // Extract the actual field key string from the SelectSearchControl object
@@ -111,32 +120,45 @@ const DynamicFieldBlock = compose(
     const [formattedValue, setFormattedValue] = useState(null);
 
     useEffect(() => {
-        if (rawFieldValue === null || rawFieldValue === undefined || rawFieldValue === '') {
+        const isActive = (formatType && formatType !== 'none') || prefix || suffix || (formatConditionType && formatConditionType !== 'none');
+
+        if (!isActive) {
             setFormattedValue(rawFieldValue);
             return;
         }
 
-        if (!formatType || formatType === 'none') {
+        if ((rawFieldValue === null || rawFieldValue === undefined || rawFieldValue === '') && formatConditionType !== 'empty') {
             setFormattedValue(rawFieldValue);
             return;
         }
 
-        const params = new URLSearchParams({
-            value: typeof rawFieldValue === 'object' ? JSON.stringify(rawFieldValue) : String(rawFieldValue),
-            formatType,
-            formatOptionsDate,
-            formatOptionsDecimals: String(formatOptionsDecimals),
-            formatOptionsTextCase,
-            formatOptionsArray,
-            formatOptionsRegexPattern,
-            formatOptionsRegexReplace,
-            formatOptionsDateBefore,
-            formatOptionsDateAfter,
-            fieldKey: fieldContentValue,
-            postId: postId
-        });
-
-        apiFetch({ path: `gutenverse/v1/dynamic-field-format?${params.toString()}` })
+        apiFetch({
+            path: 'gutenverse/v1/dynamic-field-format',
+            method: 'POST',
+            data: {
+                value: typeof rawFieldValue === 'object' ? JSON.stringify(rawFieldValue) : String(rawFieldValue),
+                formatType,
+                formatOptionsDate,
+                formatOptionsDecimals: String(formatOptionsDecimals),
+                formatOptionsTextCase,
+                formatOptionsArray,
+                formatOptionsRegexPattern,
+                formatOptionsRegexReplace,
+                formatOptionsDateBefore,
+                formatOptionsDateAfter,
+                formatOptionsNumberDecimals: String(formatOptionsNumberDecimals),
+                formatOptionsNumberDecimalSeparator,
+                formatOptionsNumberThousandSeparator,
+                formatConditionType,
+                formatConditionValue,
+                formatConditionTextTrue,
+                formatConditionTextFalse,
+                fieldKey: fieldContentValue,
+                postId: postId,
+                prefix,
+                suffix
+            }
+        })
             .then((response) => {
                 if (response?.formatted !== undefined) {
                     setFormattedValue(response.formatted);
@@ -147,7 +169,27 @@ const DynamicFieldBlock = compose(
             .catch(() => {
                 setFormattedValue(rawFieldValue);
             });
-    }, [rawFieldValue, formatType, formatOptionsDate, formatOptionsDecimals, formatOptionsTextCase, formatOptionsArray, formatOptionsRegexPattern, formatOptionsRegexReplace, formatOptionsDateBefore, formatOptionsDateAfter]);
+    }, [
+        rawFieldValue,
+        formatType,
+        formatOptionsDate,
+        formatOptionsDecimals,
+        formatOptionsTextCase,
+        formatOptionsArray,
+        formatOptionsRegexPattern,
+        formatOptionsRegexReplace,
+        formatOptionsDateBefore,
+        formatOptionsDateAfter,
+        formatOptionsNumberDecimals,
+        formatOptionsNumberDecimalSeparator,
+        formatOptionsNumberThousandSeparator,
+        formatConditionType,
+        formatConditionValue,
+        formatConditionTextTrue,
+        formatConditionTextFalse,
+        prefix,
+        suffix
+    ]);
 
     const fieldValue = formattedValue !== null ? formattedValue : rawFieldValue;
 

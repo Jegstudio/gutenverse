@@ -1,7 +1,7 @@
 /* WordPress dependencies */
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
-import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel, typographyPanel } from 'gutenverse-core/controls';
+import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, HeadingControl, maskPanel, positioningPanel, responsivePanel, transformPanel, typographyPanel } from 'gutenverse-core/controls';
 import { CheckboxControl, SelectControl, ColorControl, SelectSearchControl, TextControl } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 import { isOnEditor } from 'gutenverse-core/helper';
@@ -85,11 +85,10 @@ export const settingPanel = (props) => {
 export const formatPanel = (props) => {
     const {
         formatType,
-        formatOptionsTextCase,
-        formatOptionsRegexPattern,
-        formatOptionsRegexReplace,
-        formatOptionsDateBefore,
-        formatOptionsDateAfter,
+        formatConditionType,
+        formatConditionValue,
+        formatConditionTextTrue,
+        formatConditionTextFalse,
         setAttributes
     } = props;
 
@@ -103,6 +102,7 @@ export const formatPanel = (props) => {
                 { label: __('Text Case', 'gutenverse'), value: 'textCase' },
                 { label: __('Regex', 'gutenverse'), value: 'regex' },
                 { label: __('Date', 'gutenverse'), value: 'date' },
+                { label: __('Number (Price)', 'gutenverse'), value: 'number' },
             ]
         },
         {
@@ -110,7 +110,6 @@ export const formatPanel = (props) => {
             label: __('Text Case', 'gutenverse'),
             component: SelectControl,
             show: formatType === 'textCase',
-            customValue: formatOptionsTextCase || 'uppercase',
             options: [
                 { label: __('Uppercase', 'gutenverse'), value: 'uppercase' },
                 { label: __('Lowercase', 'gutenverse'), value: 'lowercase' },
@@ -124,7 +123,6 @@ export const formatPanel = (props) => {
             description: __('Enter regular expression pattern, e.g. /[0-9]+/', 'gutenverse'),
             component: TextControl,
             show: formatType === 'regex',
-            customValue: formatOptionsRegexPattern || '',
             customChange: (val) => setAttributes({ formatOptionsRegexPattern: val })
         },
         {
@@ -133,7 +131,6 @@ export const formatPanel = (props) => {
             description: __('Enter replacement string.', 'gutenverse'),
             component: TextControl,
             show: formatType === 'regex',
-            customValue: formatOptionsRegexReplace || '',
             customChange: (val) => setAttributes({ formatOptionsRegexReplace: val })
         },
         {
@@ -142,7 +139,6 @@ export const formatPanel = (props) => {
             description: __('Enter source date format, e.g. Ymd (for ACF dates).', 'gutenverse'),
             component: TextControl,
             show: formatType === 'date',
-            customValue: formatOptionsDateBefore || '',
             customChange: (val) => setAttributes({ formatOptionsDateBefore: val })
         },
         {
@@ -151,8 +147,93 @@ export const formatPanel = (props) => {
             description: __('Enter target date format, e.g. F j, Y.', 'gutenverse'),
             component: TextControl,
             show: formatType === 'date',
-            customValue: formatOptionsDateAfter || '',
             customChange: (val) => setAttributes({ formatOptionsDateAfter: val })
+        },
+        {
+            id: 'formatOptionsNumberDecimals',
+            label: __('Decimals', 'gutenverse'),
+            component: TextControl,
+            type: 'number',
+            show: formatType === 'number',
+            customChange: (val) => setAttributes({ formatOptionsNumberDecimals: parseInt(val) })
+        },
+        {
+            id: 'formatOptionsNumberDecimalSeparator',
+            label: __('Decimal Separator', 'gutenverse'),
+            component: TextControl,
+            show: formatType === 'number',
+            customChange: (val) => setAttributes({ formatOptionsNumberDecimalSeparator: val })
+        },
+        {
+            id: 'formatOptionsNumberThousandSeparator',
+            label: __('Thousand Separator', 'gutenverse'),
+            component: TextControl,
+            show: formatType === 'number',
+            customChange: (val) => setAttributes({ formatOptionsNumberThousandSeparator: val })
+        },
+        {
+            id: 'prefixSuffixHeading',
+            component: HeadingControl,
+            label: __('Prefix & Suffix', 'gutenverse'),
+        },
+        {
+            id: 'prefix',
+            label: __('Prefix', 'gutenverse'),
+            component: TextControl,
+            customChange: (val) => setAttributes({ prefix: val })
+        },
+        {
+            id: 'suffix',
+            label: __('Suffix', 'gutenverse'),
+            component: TextControl,
+            customChange: (val) => setAttributes({ suffix: val })
+        },
+        {
+            id: 'conditionHeading',
+            component: HeadingControl,
+            label: __('Format Condition', 'gutenverse'),
+        },
+        {
+            id: 'formatConditionType',
+            label: __('Condition Type', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                { label: __('None', 'gutenverse'), value: 'none' },
+                { label: __('Is Empty', 'gutenverse'), value: 'empty' },
+                { label: __('Is Not Empty', 'gutenverse'), value: 'notEmpty' },
+                { label: __('Equals', 'gutenverse'), value: 'equal' },
+                { label: __('Not Equals', 'gutenverse'), value: 'notEqual' },
+                { label: __('Greater Than', 'gutenverse'), value: 'greaterThan' },
+                { label: __('Less Than', 'gutenverse'), value: 'lessThan' },
+                { label: __('Contains', 'gutenverse'), value: 'contains' },
+            ],
+            customValue: formatConditionType || 'none',
+            customChange: (val) => setAttributes({ formatConditionType: val })
+        },
+        {
+            id: 'formatConditionValue',
+            label: __('Comparison Value', 'gutenverse'),
+            component: TextControl,
+            show: !['none', 'empty', 'notEmpty'].includes(formatConditionType),
+            customValue: formatConditionValue || '',
+            customChange: (val) => setAttributes({ formatConditionValue: val })
+        },
+        {
+            id: 'formatConditionTextTrue',
+            label: __('Content if True', 'gutenverse'),
+            component: TextControl,
+            show: formatConditionType !== 'none',
+            customValue: formatConditionTextTrue || '',
+            customChange: (val) => setAttributes({ formatConditionTextTrue: val })
+        },
+        {
+            id: 'formatConditionTextFalse',
+            label: __('Content if False (Optional)', 'gutenverse'),
+            description: __('Leave empty to show the original value.', 'gutenverse'),
+            component: TextControl,
+            show: formatConditionType !== 'none',
+            customValue: formatConditionTextFalse || '',
+            customChange: (val) => setAttributes({ formatConditionTextFalse: val })
         },
     ];
 };

@@ -31,18 +31,34 @@ class Dynamic_Field extends Block_Abstract {
 		$regex_replace       = isset( $this->attributes['formatOptionsRegexReplace'] ) ? $this->attributes['formatOptionsRegexReplace'] : '';
 		$date_before         = isset( $this->attributes['formatOptionsDateBefore'] ) ? $this->attributes['formatOptionsDateBefore'] : '';
 		$date_after          = isset( $this->attributes['formatOptionsDateAfter'] ) ? $this->attributes['formatOptionsDateAfter'] : '';
+		$number_decimals     = isset( $this->attributes['formatOptionsNumberDecimals'] ) ? $this->attributes['formatOptionsNumberDecimals'] : 0;
+		$number_decimal_sep  = isset( $this->attributes['formatOptionsNumberDecimalSeparator'] ) ? $this->attributes['formatOptionsNumberDecimalSeparator'] : '.';
+		$number_thousand_sep = isset( $this->attributes['formatOptionsNumberThousandSeparator'] ) ? $this->attributes['formatOptionsNumberThousandSeparator'] : ',';
+		$condition_type      = isset( $this->attributes['formatConditionType'] ) ? $this->attributes['formatConditionType'] : 'none';
+		$condition_value     = isset( $this->attributes['formatConditionValue'] ) ? $this->attributes['formatConditionValue'] : '';
+		$condition_true      = isset( $this->attributes['formatConditionTextTrue'] ) ? $this->attributes['formatConditionTextTrue'] : '';
+		$condition_false     = isset( $this->attributes['formatConditionTextFalse'] ) ? $this->attributes['formatConditionTextFalse'] : '';
+		$prefix              = isset( $this->attributes['prefix'] ) ? $this->attributes['prefix'] : '';
+		$suffix              = isset( $this->attributes['suffix'] ) ? $this->attributes['suffix'] : '';
 
 		$field_content = isset( $this->attributes['fieldContent'] ) ? $this->attributes['fieldContent'] : '';
 		$field_key     = is_array( $field_content ) && isset( $field_content['value'] ) ? $field_content['value'] : $field_content;
 
 		$format_options = array(
-			'textCase'     => $format_options_case,
-			'regexPattern' => $regex_pattern,
-			'regexReplace' => $regex_replace,
-			'dateBefore'   => $date_before,
-			'dateAfter'    => $date_after,
-			'fieldKey'     => $field_key,
-			'postId'       => $post_id,
+			'textCase'                => $format_options_case,
+			'regexPattern'            => $regex_pattern,
+			'regexReplace'            => $regex_replace,
+			'dateBefore'              => $date_before,
+			'dateAfter'               => $date_after,
+			'numberDecimals'          => $number_decimals,
+			'numberDecimalSeparator'  => $number_decimal_sep,
+			'numberThousandSeparator' => $number_thousand_sep,
+			'conditionType'           => $condition_type,
+			'conditionValue'          => $condition_value,
+			'conditionTrue'           => $condition_true,
+			'conditionFalse'          => $condition_false,
+			'fieldKey'                => $field_key,
+			'postId'                  => $post_id,
 		);
 
 		$html_tag = isset( $this->attributes['htmlTag'] ) ? $this->attributes['htmlTag'] : 'p';
@@ -66,7 +82,7 @@ class Dynamic_Field extends Block_Abstract {
 		}
 
 		$value = get_field( $field_key, $post_id, $format_acf );
-		if ( ! $value && 0 !== $value && '0' !== $value ) {
+		if ( 'none' === $condition_type && ! $value && 0 !== $value && '0' !== $value ) {
 			return '';
 		}
 
@@ -74,7 +90,9 @@ class Dynamic_Field extends Block_Abstract {
 			$value = implode( ', ', $value );
 		}
 
-		$value = self::format_dynamic_data( $value, $format_type, $format_options );
+		$formatted = self::format_dynamic_data( $value, $format_type, $format_options );
+		$wrapped   = $prefix . $formatted . $suffix;
+		$value     = self::apply_format_condition( $formatted, $format_options, $wrapped );
 
 		$content = wp_kses_post( $value );
 
@@ -197,6 +215,15 @@ class Dynamic_Field extends Block_Abstract {
 					}
 				}
 				break;
+			case 'number':
+				if ( is_numeric( $value ) ) {
+					$decimals     = isset( $format_options['numberDecimals'] ) ? $format_options['numberDecimals'] : 0;
+					$decimal_sep  = isset( $format_options['numberDecimalSeparator'] ) ? $format_options['numberDecimalSeparator'] : '.';
+					$thousand_sep = isset( $format_options['numberThousandSeparator'] ) ? $format_options['numberThousandSeparator'] : ',';
+
+					return number_format( (float) $value, (int) $decimals, $decimal_sep, $thousand_sep );
+				}
+				break;
 
 			case 'none':
 			default:
@@ -204,6 +231,56 @@ class Dynamic_Field extends Block_Abstract {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Apply format condition.
+	 *
+	 * @param mixed  $value    The value.
+	 * @param array  $options  The options.
+	 * @param string $fallback The fallback value (prefixed/suffixed).
+	 * @return mixed
+	 */
+	public static function apply_format_condition( $value, $options, $fallback = '' ) {
+		$type  = isset( $options['conditionType'] ) ? $options['conditionType'] : 'none';
+		$comp  = isset( $options['conditionValue'] ) ? $options['conditionValue'] : '';
+		$true  = isset( $options['conditionTrue'] ) ? $options['conditionTrue'] : '';
+		$false = isset( $options['conditionFalse'] ) ? $options['conditionFalse'] : '';
+
+		if ( 'none' === $type ) {
+			return '' !== $fallback ? $fallback : $value;
+		}
+
+		$is_met = false;
+		switch ( $type ) {
+			case 'empty':
+				$is_met = empty( $value ) && 0 !== $value && '0' !== $value;
+				break;
+			case 'notEmpty':
+				$is_met = ! empty( $value ) || 0 === $value || '0' === $value;
+				break;
+			case 'equal':
+				$is_met = (string) $value === (string) $comp;
+				break;
+			case 'notEqual':
+				$is_met = (string) $value !== (string) $comp;
+				break;
+			case 'greaterThan':
+				$is_met = is_numeric( $value ) && is_numeric( $comp ) && (float) $value > (float) $comp;
+				break;
+			case 'lessThan':
+				$is_met = is_numeric( $value ) && is_numeric( $comp ) && (float) $value < (float) $comp;
+				break;
+			case 'contains':
+				$is_met = is_string( $value ) && strpos( $value, $comp ) !== false;
+				break;
+		}
+
+		if ( $is_met ) {
+			return $true;
+		} else {
+			return ! empty( $false ) ? $false : $fallback;
+		}
 	}
 
 	/**

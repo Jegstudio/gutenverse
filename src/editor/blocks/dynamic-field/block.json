@@ -55,6 +55,42 @@
 			"type": "string",
 			"default": ""
 		},
+		"formatOptionsNumberDecimals": {
+			"type": "number",
+			"default": 0
+		},
+		"formatOptionsNumberDecimalSeparator": {
+			"type": "string",
+			"default": "."
+		},
+		"formatOptionsNumberThousandSeparator": {
+			"type": "string",
+			"default": ","
+		},
+		"formatConditionType": {
+			"type": "string",
+			"default": "none"
+		},
+		"formatConditionValue": {
+			"type": "string",
+			"default": ""
+		},
+		"formatConditionTextTrue": {
+			"type": "string",
+			"default": ""
+		},
+		"formatConditionTextFalse": {
+			"type": "string",
+			"default": ""
+		},
+		"prefix": {
+			"type": "string",
+			"default": ""
+		},
+		"suffix": {
+			"type": "string",
+			"default": ""
+		},
 		"alignment": {
 			"type": "object",
 			"copyStyle": true
