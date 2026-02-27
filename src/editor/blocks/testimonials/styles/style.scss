@@ -6,6 +6,9 @@
 .guten-testimonials {
     line-height: 1.4em;
 
+    /** Fix testimonial in container*/
+    width: 100%;
+
     .swiper-container {
         padding: 20px 5px;
         width: 100%;
