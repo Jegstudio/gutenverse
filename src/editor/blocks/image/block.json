@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/image",
+	"class_callback": "\\Gutenverse\\Block\\Image",
 	"title": "Image",
 	"description": "Edit, crop, and showcase your image.",
 	"category": "gutenverse-element",
@@ -84,16 +85,10 @@
 			"default": false
 		},
 		"linkTarget": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "target"
+			"type": "string"
 		},
 		"rel": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "rel"
+			"type": "string"
 		},
 		"imgBorder": {
 			"type": "object",
