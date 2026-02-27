@@ -347,7 +347,7 @@ const getBlockStyle = (elementId, attributes) => {
     }
     // <<---- END STYLE FALLBACK ---->>
 
-    
+
     /** Position Flex Item */
     const selector = `.${elementId}.guten-element`;
 
@@ -479,7 +479,7 @@ const getBlockStyle = (elementId, attributes) => {
     }
 
     /** End Position Flex Item */
-return [
+    return [
         ...data,
         ...applyFilters(
             'gutenverse.animated-text.blockStyle',

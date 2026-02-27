@@ -393,7 +393,7 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId}.guten-element`,
         'attributeType': 'custom',
     });
-    
+
     /** Position Flex Item */
     const selector = `.${elementId}.guten-element`;
 
@@ -525,7 +525,7 @@ const getBlockStyle = (elementId, attributes) => {
     }
 
     /** End Position Flex Item */
-return [
+    return [
         ...data,
         ...applyFilters(
             'gutenverse.search-title.blockStyle',

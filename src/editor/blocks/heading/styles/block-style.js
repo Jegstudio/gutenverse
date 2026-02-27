@@ -444,56 +444,16 @@ const getBlockStyle = (elementId, attributes) => {
             'selector': selector,
             'properties': [
                 {
-                    'name': 'flex-grow',
+                    'name': 'flex',
                     'valueType': 'function',
-                    'valueFunc': (value) => value === 'grow' ? '1' : undefined
+                    'functionName' : 'handleFlexSize'
                 }
             ],
+            'otherAttribute' : {
+                'flexSizeGrow' : flexSizeGrow,
+                'flexSizeShrink' : flexSizeShrink
+            },
         });
-        // Handle shrink preset
-        data.push({
-            'type': 'plain',
-            'id': 'flexSize',
-            'responsive': true,
-            'selector': selector,
-            'properties': [
-                {
-                    'name': 'flex-shrink',
-                    'valueType': 'function',
-                    'valueFunc': (value) => value === 'shrink' ? '1' : undefined
-                }
-            ],
-        });
-        // Handle custom grow
-        if (isNotEmpty(flexSizeGrow)) {
-            data.push({
-                'type': 'plain',
-                'id': 'flexSizeGrow',
-                'responsive': true,
-                'selector': selector,
-                'properties': [
-                    {
-                        'name': 'flex-grow',
-                        'valueType': 'direct'
-                    }
-                ],
-            });
-        }
-        // Handle custom shrink
-        if (isNotEmpty(flexSizeShrink)) {
-            data.push({
-                'type': 'plain',
-                'id': 'flexSizeShrink',
-                'responsive': true,
-                'selector': selector,
-                'properties': [
-                    {
-                        'name': 'flex-shrink',
-                        'valueType': 'direct'
-                    }
-                ],
-            });
-        }
     }
 
     /** End Position Flex Item */
