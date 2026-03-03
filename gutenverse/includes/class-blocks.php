@@ -120,7 +120,6 @@ class Blocks {
 	 */
 	private function register_dynamic_block( $json ) {
 		if ( ! file_exists( $json ) ) {
-			gutenverse_jlog( $json );
 			return;
 		}
 
