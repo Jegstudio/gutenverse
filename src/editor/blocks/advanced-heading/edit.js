@@ -23,7 +23,8 @@ const AdvancedHeadingBlock = compose(
         attributes,
         setAttributes,
         clientId,
-        setBlockRef
+        setBlockRef,
+        context,
     } = props;
 
     const {
@@ -81,6 +82,7 @@ const AdvancedHeadingBlock = compose(
             dynamicList={identifier + 'DynamicList'}
             isUseDinamic={true}
             isUseHighlight={true}
+            context={context}
         />;
     };
 

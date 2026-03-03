@@ -12,6 +12,7 @@ const TeamProfile = (props) => {
         setPanelState,
         frontEnd,
         clientId,
+        context,
     } = props;
     const {
         profileType,
@@ -77,6 +78,7 @@ const TeamProfile = (props) => {
                         dynamicList={identifier + 'DynamicList'}
                         isUseDinamic={true}
                         isUseHighlight={true}
+                        context={context}
                     />
                 );
             }
@@ -107,6 +109,7 @@ const TeamProfile = (props) => {
                         dynamicList={identifier + 'DynamicList'}
                         isUseDinamic={true}
                         isUseHighlight={true}
+                        context={context}
                     />
                 );
             }

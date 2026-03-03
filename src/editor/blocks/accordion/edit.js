@@ -43,6 +43,7 @@ const Accordion = props => {
         attributes,
         setAttributes,
         clientId,
+        context,
     } = props;
 
     const {
@@ -259,6 +260,7 @@ const Accordion = props => {
                     dynamicList={'dynamicDataList'}
                     isUseDinamic={true}
                     isUseHighlight={true}
+                    context={context}
                 />
                 {iconPosition === 'right' && <AccordionIcon iconClosed={iconClosed} iconClosedType={iconClosedType} iconClosedSVG={iconClosedSVG} iconOpen={iconOpen} iconOpenType={iconOpenType} iconOpenSVG={iconOpenSVG} />}
             </div>

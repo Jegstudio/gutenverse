@@ -56,7 +56,8 @@ const ChartBlock = compose(
         setPanelState,
         setAttributes,
         panelIsClicked,
-        setPanelIsClicked
+        setPanelIsClicked,
+        context
     } = props;
 
     const {
@@ -240,6 +241,7 @@ const ChartBlock = compose(
                         attributes={attributes}
                         clientId={clientId}
                         contentAttribute={'title'}
+                        context={context}
                     // panelDynamic={{ panel: 'setting', section: 3 }}
                     // panelPosition={{ panel: 'style', section: 1 }}
                     // setPanelState={setPanelState}
@@ -262,6 +264,7 @@ const ChartBlock = compose(
                         attributes={attributes}
                         clientId={clientId}
                         contentAttribute={'description'}
+                        context={context}
                     // panelDynamic={{ panel: 'setting', section: 3 }}
                     // panelPosition={{ panel: 'style', section: 1 }}
                     // setPanelState={setPanelState}

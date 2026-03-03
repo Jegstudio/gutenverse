@@ -32,6 +32,7 @@ const TextBlock = compose(
         clientId,
         setAttributes,
         setBlockRef,
+        context,
     } = props;
 
     const {
@@ -137,6 +138,7 @@ const TextBlock = compose(
             dynamicList={'dynamicDataList'}
             isUseDinamic={true}
             isUseHighlight={true}
+            context={context}
         />
     </>;
 });

@@ -47,6 +47,7 @@ const IconBoxBlock = compose(
         attributes,
         setAttributes,
         setBlockRef,
+        context
     } = props;
 
     const {
@@ -293,6 +294,7 @@ const IconBoxBlock = compose(
                             isUseDinamic={true}
                             isUseHighlight={true}
                             parentHasLink={isGlobalLinkSet}
+                            context={context}
                         />
                     }
                     {
@@ -315,6 +317,7 @@ const IconBoxBlock = compose(
                             isUseDinamic={true}
                             isUseHighlight={true}
                             parentHasLink={isGlobalLinkSet}
+                            context={context}
                         />
                     }
                     <div {...innerBlockProps} />
@@ -340,6 +343,7 @@ const IconBoxBlock = compose(
                         isUseDinamic={true}
                         isUseHighlight={true}
                         parentHasLink={isGlobalLinkSet}
+                        context={context}
                     />
                 </div>}
                 {watermarkShow && <div className="hover-watermark">

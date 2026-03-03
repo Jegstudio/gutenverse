@@ -30,6 +30,7 @@ const IconListItemBlock = (props) => {
         setAttributes,
         isSelected,
         clientId,
+        context,
     } = props;
 
     const {
@@ -175,6 +176,7 @@ const IconListItemBlock = (props) => {
                     isUseDinamic={true}
                     isUseHighlight={true}
                     parentHasLink={isGlobalLinkSet}
+                    context={context}
                 />
             </a>
         </li>

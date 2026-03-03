@@ -99,7 +99,7 @@ const ImageBoxPicker = (props) => {
     );
 };
 
-const ImageBoxBody = ({ setAttributes, attributes, clientId, setPanelState }) => {
+const ImageBoxBody = ({ setAttributes, attributes, clientId, setPanelState, context }) => {
     const {
         getBlocks
     } = useSelect(
@@ -123,7 +123,7 @@ const ImageBoxBody = ({ setAttributes, attributes, clientId, setPanelState }) =>
         rel,
         linkTarget,
         separateButtonLink,
-        includeButton
+        includeButton,
     } = attributes;
 
     const isGlobalLinkSet = url !== undefined && url !== '';
@@ -194,6 +194,7 @@ const ImageBoxBody = ({ setAttributes, attributes, clientId, setPanelState }) =>
                     isUseDinamic={true}
                     isUseHighlight={true}
                     parentHasLink={isGlobalLinkSet}
+                    context={context}
                 />
                 {titleIconPosition === 'after' && <span className="image-box-icon icon-position-after">
                     {renderIcon(titleIcon, titleIconType, titleIconSVG)}
@@ -218,6 +219,7 @@ const ImageBoxBody = ({ setAttributes, attributes, clientId, setPanelState }) =>
                 isUseDinamic={true}
                 isUseHighlight={true}
                 parentHasLink={isGlobalLinkSet}
+                context={context}
             />
             {includeButton && <div {...innerBlockProps} />}
             {hoverBottom && <div className={'border-bottom'}>
@@ -239,6 +241,7 @@ const ImageBoxBlock = compose(
         isSelected,
         clientId,
         setBlockRef,
+        context
     } = props;
 
     const {
@@ -368,7 +371,7 @@ const ImageBoxBlock = compose(
                 <div className="image-box-header">
                     <ImageBoxFigure {...attributes} />
                 </div>
-                <ImageBoxBody {...props} setPanelState={setPanelState} />
+                <ImageBoxBody {...props} setPanelState={setPanelState} context={context} />
             </div>
         </div>
     </>;

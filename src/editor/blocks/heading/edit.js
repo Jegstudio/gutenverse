@@ -65,6 +65,7 @@ const HeadingBlock = compose(
         setAttributes,
         clientId,
         setBlockRef,
+        context,
     } = props;
 
     let {
@@ -137,6 +138,7 @@ const HeadingBlock = compose(
             dynamicList={'dynamicDataList'}
             isUseDinamic={true}
             isUseHighlight={true}
+            context={context}
         />
     </>;
 });
