@@ -64,6 +64,10 @@ use Gutenverse\Style\Search_Result_Title;
 use Gutenverse\Style\Taxonomy_List;
 use Gutenverse\Style\Text;
 use Gutenverse\Style\Post_Template;
+use Gutenverse\Style\Dynamic_Pagination;
+use Gutenverse\Style\Dynamic_Pagination_Next;
+use Gutenverse\Style\Dynamic_Pagination_Previous;
+use Gutenverse\Style\Dynamic_Pagination_Numbers;
 
 
 /**
@@ -202,6 +206,18 @@ class Style_Generator {
 				break;
 			case 'gutenverse/post-template':
 				$instance = new Post_Template( $attrs );
+				break;
+			case 'gutenverse/dynamic-pagination':
+				$instance = new Dynamic_Pagination( $attrs );
+				break;
+			case 'gutenverse/dynamic-pagination-previous':
+				$instance = new Dynamic_Pagination_Previous( $attrs );
+				break;
+			case 'gutenverse/dynamic-pagination-next':
+				$instance = new Dynamic_Pagination_Next( $attrs );
+				break;
+			case 'gutenverse/dynamic-pagination-numbers':
+				$instance = new Dynamic_Pagination_Numbers( $attrs );
 				break;
 
 			case 'gutenverse/post-list':

@@ -170,9 +170,10 @@ const QueryLoopBlock = compose(
 
     const innerBlocksProps = useInnerBlocksProps(blockProps, {
         template: [
-            ['gutenverse/post-template']
+            ['gutenverse/post-template'],
+            ['gutenverse/dynamic-pagination']
         ],
-        allowedBlocks: ['gutenverse/post-template'],
+        allowedBlocks: ['gutenverse/post-template', 'gutenverse/dynamic-pagination'],
     });
 
     const handleVariation = (variationType) => {

@@ -63,6 +63,13 @@ class Post_Template extends Style_Abstract {
      * Container Style
      */
     public function container_style() {
+        $container_layout = isset( $this->attrs['containerLayout'] ) ? $this->attrs['containerLayout'] : 'full-width';
+
+		// For boxed layout, target the inner container.
+		$content_selector = 'boxed' === $container_layout
+			? ".guten-flex-container.{$this->element_id} > .guten-inner-container"
+			: ".guten-flex-container.{$this->element_id}";
+
         // Layout
         if ( isset( $this->attrs['containerLayout'] ) ) {
             $this->inject_style(
@@ -84,7 +91,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['containerWidth'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id}",
+                    'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return $this->handle_unit_point( $value, 'width' );
                     },
@@ -98,7 +105,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['minHeight'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id}",
+                    'selector'       => ".guten-flex-container.{$this->element_id}",
                     'property'       => function ( $value ) {
                         return $this->handle_unit_point( $value, 'min-height' );
                     },
@@ -112,7 +119,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['flexDirection'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id} > .guten-inner-container",
+                    'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return "flex-direction: {$value};";
                     },
@@ -126,7 +133,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['justifyContent'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id} > .guten-inner-container",
+                    'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return "justify-content: {$value};";
                     },
@@ -140,7 +147,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['alignItems'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id} > .guten-inner-container",
+                    'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return "align-items: {$value};";
                     },
@@ -154,7 +161,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['columnGap'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id} > .guten-inner-container",
+                   'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return $this->handle_unit_point( $value, 'column-gap' );
                     },
@@ -168,7 +175,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['rowGap'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id} > .guten-inner-container",
+                    'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return $this->handle_unit_point( $value, 'row-gap' );
                     },
@@ -182,7 +189,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['flexWrap'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id} > .guten-inner-container",
+                    'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return "flex-wrap: {$value};";
                     },
@@ -196,7 +203,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['alignContent'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id} > .guten-inner-container",
+                    'selector'       => $content_selector,
                     'property'       => function ( $value ) {
                         return "align-content: {$value};";
                     },
@@ -210,7 +217,7 @@ class Post_Template extends Style_Abstract {
         if ( isset( $this->attrs['overflow'] ) ) {
             $this->inject_style(
                 array(
-                    'selector'       => ".{$this->element_id}",
+                    'selector'       => ".guten-flex-container.{$this->element_id}",
                     'property'       => function ( $value ) {
                         return "overflow: {$value};";
                     },

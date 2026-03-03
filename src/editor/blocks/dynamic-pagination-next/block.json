@@ -1,0 +1,36 @@
+{
+    "apiVersion": 3,
+    "name": "gutenverse/dynamic-pagination-next",
+    "title": "Next Page",
+    "category": "gutenverse-post",
+    "class_callback": "Gutenverse\\Block\\Dynamic_Pagination_Next",
+    "parent": [
+        "gutenverse/dynamic-pagination"
+    ],
+    "description": "Displays the next posts page link.",
+    "textdomain": "gutenverse",
+    "attributes": {
+        "elementId": {
+            "type": "string"
+        },
+        "label": {
+            "type": "string"
+        }
+    },
+    "usesContext": [
+        "gutenverse/queryId",
+        "gutenverse/queryPosts",
+        "gutenverse/paginationArrow",
+        "gutenverse/showLabel",
+        "gutenverse/queryPage",
+        "gutenverse/queryTotalPages"
+    ],
+    "supports": {
+        "className": false,
+        "anchor": true,
+        "html": false
+    },
+    "style": [
+        "gutenverse-frontend-dynamic-pagination-next-style"
+    ]
+}

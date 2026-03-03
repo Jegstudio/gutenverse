@@ -1,0 +1,35 @@
+{
+    "apiVersion": 3,
+    "name": "gutenverse/dynamic-pagination-previous",
+    "title": "Previous Page",
+    "category": "gutenverse-post",
+    "class_callback": "Gutenverse\\Block\\Dynamic_Pagination_Previous",
+    "parent": [
+        "gutenverse/dynamic-pagination"
+    ],
+    "description": "Displays the previous posts page link.",
+    "textdomain": "gutenverse",
+    "attributes": {
+        "elementId": {
+            "type": "string"
+        },
+        "label": {
+            "type": "string"
+        }
+    },
+    "usesContext": [
+        "gutenverse/queryId",
+        "gutenverse/queryPosts",
+        "gutenverse/paginationArrow",
+        "gutenverse/showLabel",
+        "gutenverse/queryPage",
+        "gutenverse/queryTotalPages"
+    ],
+    "supports": {
+        "className": false,
+        "html": false
+    },
+    "style": [
+        "gutenverse-frontend-dynamic-pagination-previous-style"
+    ]
+}

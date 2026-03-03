@@ -62,9 +62,29 @@ class Query_Loop extends Block_Abstract {
 			'guten-element',
 		);
 
+		$query_id = '';
+		if ( isset( $this->attributes['elementId'] ) ) {
+			$element_id_parts = explode( '-', $this->attributes['elementId'] );
+			if ( isset( $element_id_parts[1] ) ) {
+				$query_id = $element_id_parts[1];
+			}
+		}
+
+		$current_page = 1;
+		if ( ! empty( $query_id ) && isset( $_GET[ 'query-' . $query_id . '-page' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$current_page = max( 1, intval( $_GET[ 'query-' . $query_id . '-page' ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		} elseif ( \get_query_var( 'paged' ) ) {
+			$current_page = \get_query_var( 'paged' );
+		} elseif ( \get_query_var( 'page' ) ) {
+			$current_page = \get_query_var( 'page' );
+		}
+
 		// Build context with query results to pass to inner blocks.
-		$block_context                          = $this->block->context ?? array();
-		$block_context['gutenverse/queryPosts'] = $query->posts;
+		$block_context                               = $this->block->context ?? array();
+		$block_context['gutenverse/queryPosts']      = $query->posts;
+		$block_context['gutenverse/queryTotalPages'] = $query->max_num_pages;
+		$block_context['gutenverse/queryId']         = $query_id;
+		$block_context['gutenverse/queryPage']       = $current_page;
 
 		// Render inner blocks with query results in context.
 		$inner_content = '';
@@ -89,12 +109,37 @@ class Query_Loop extends Block_Abstract {
 			$post_type = $post_type['value'];
 		}
 
+		$query_id = '';
+		if ( isset( $this->attributes['elementId'] ) ) {
+			$element_id_parts = explode( '-', $this->attributes['elementId'] );
+			if ( isset( $element_id_parts[1] ) ) {
+				$query_id = $element_id_parts[1];
+			}
+		}
+
+		$current_page = 1;
+		if ( ! empty( $query_id ) && isset( $_GET[ 'query-' . $query_id . '-page' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$current_page = max( 1, intval( $_GET[ 'query-' . $query_id . '-page' ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		} elseif ( \get_query_var( 'paged' ) ) {
+			$current_page = \get_query_var( 'paged' );
+		} elseif ( \get_query_var( 'page' ) ) {
+			$current_page = \get_query_var( 'page' );
+		}
+
 		$args = array(
 			'post_type'      => $post_type,
 			'posts_per_page' => isset( $this->attributes['numberPost'] ) ? $this->attributes['numberPost'] : 3,
-			'offset'         => isset( $this->attributes['postOffset'] ) ? $this->attributes['postOffset'] : 0,
 			'post_status'    => 'publish',
+			'paged'          => $current_page,
 		);
+
+		// Only set offset if explicitly configured to a non-zero value.
+		// WP_Query ignores 'paged' when 'offset' is set (even to 0),
+		// so we must omit it for normal pagination to work.
+		$post_offset = isset( $this->attributes['postOffset'] ) ? intval( $this->attributes['postOffset'] ) : 0;
+		if ( $post_offset > 0 ) {
+			$args['offset'] = $post_offset + ( ( $current_page - 1 ) * $args['posts_per_page'] );
+		}
 
 		// Sorting.
 		$sort_by = isset( $this->attributes['sortBy'] ) ? $this->attributes['sortBy'] : 'latest';

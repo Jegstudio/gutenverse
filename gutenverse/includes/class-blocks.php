@@ -105,6 +105,10 @@ class Blocks {
 
 		// Loop dynamic blocks.
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/dynamic-field/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/dynamic-pagination/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/dynamic-pagination-previous/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/dynamic-pagination-numbers/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/dynamic-pagination-next/block.json' );
 
 		// Social Share Block.
 		$this->register_social_share_block( GUTENVERSE_DIR . './block/social-share-item/block.json' );
