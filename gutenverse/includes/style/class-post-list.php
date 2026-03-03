@@ -41,8 +41,14 @@ class Post_List extends Style_Abstract {
 
 		$this->set_feature(
 			array(
-				'background'  => null,
-				'border'      => null,
+				'background'  => array(
+					'normal' => ".{$this->element_id}.guten-element",
+					'hover'  => ".{$this->element_id}.guten-element:hover",
+				),
+				'border'      => array(
+					'normal' => ".{$this->element_id}.guten-element",
+					'hover'  => ".{$this->element_id}.guten-element:hover",
+				),
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,

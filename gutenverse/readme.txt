@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.4.6
+Stable tag: 3.4.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,6 +298,17 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+= 3.4.7 =
+##### Bug Fixes
+* fix breadcrumb warning
+* fix icon type svg in feature list block
+* fix close icon styling in popup builder
+* fix animation entrance in popup builder
+* fix post list frontend border & background selector
+* fix item gallery copy icon
+* fix lazyload option into dropdown
+* fix hover button transition
+
 = 3.4.6 =
 ##### New & Improvements
 * improve plugin file size, remove unused assets

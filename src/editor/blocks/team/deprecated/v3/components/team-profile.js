@@ -46,7 +46,7 @@ const TeamProfile = (props) => {
                 break;
         }
 
-        return <img src={getImageSrc(src)} alt={imageAltText} {...(lazy === 'lazy' && { loading: 'lazy' })} {...(height && { height })} {...(width && { width })} />;
+        return <img src={getImageSrc(src)} alt={imageAltText} {...(lazy && { loading: 'lazy' })} {...(height && { height })} {...(width && { width })} />;
     };
 
     const contentDesc = (classnames, ariaLabel, identifier, data, tag) => {

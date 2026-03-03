@@ -54,8 +54,8 @@
 			"default": "h3"
 		},
 		"lazy": {
-			"type": "boolean",
-			"default": false
+			"type": "string",
+			"default": "normal"
 		},
 		"name": {
 			"type": "string",

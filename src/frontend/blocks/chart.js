@@ -625,7 +625,7 @@ class GutenverseChart extends Default {
 
         return {
             show(text, event) {
-                tooltip.html(text)
+                tooltip.text(text)
                     .transition()
                     .duration(300)
                     .style('opacity', 1);

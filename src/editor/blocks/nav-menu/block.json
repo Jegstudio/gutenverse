@@ -579,7 +579,8 @@
 			"copyStyle": true
 		},
 		"mobileMenuLogoLazyLoad": {
-			"type": "boolean",
+			"type": "string",
+			"default" : "normal",
 			"copyStyle": true
 		},
 		"condition": {

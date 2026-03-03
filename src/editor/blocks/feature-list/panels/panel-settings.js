@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, IconControl, ImageControl, NumberControl, RangeControl, RepeaterControl, SelectControl, SVGControl, TextareaControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconSVGControl, ImageControl, NumberControl, RangeControl, RepeaterControl, SelectControl, TextareaControl, TextControl } from 'gutenverse-core/controls';
 import { getDefaultImageLoadRepeater } from "../../../helper";
 
 export const settingsPanel = (props) => {
@@ -79,14 +79,11 @@ export const settingsPanel = (props) => {
                 {
                     id: 'icon',
                     label: __('Icon', 'gutenverse'),
-                    show: value => value.type === 'icon',
-                    component: IconControl,
-                },
-                {
-                    id: 'svg',
-                    label: __('SVG', 'gutenverse'),
-                    show: value => value.type === 'svg',
-                    component: SVGControl,
+                    show: value => value.type === 'icon' || value.type === 'svg',
+                    component: IconSVGControl,
+                    isInsideRepeater: true,
+                    typeKey: 'type',
+                    svgKey: 'svg',
                 },
                 {
                     id: 'number',
