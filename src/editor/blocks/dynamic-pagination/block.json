@@ -1,0 +1,50 @@
+{
+    "apiVersion": 3,
+    "name": "gutenverse/dynamic-pagination",
+    "title": "Dynamic Pagination",
+    "category": "gutenverse-post",
+    "class_callback": "Gutenverse\\Block\\Dynamic_Pagination",
+    "parent": [
+        "gutenverse/query-loop"
+    ],
+    "allowedBlocks": [
+        "gutenverse/dynamic-pagination-previous",
+        "gutenverse/dynamic-pagination-numbers",
+        "gutenverse/dynamic-pagination-next"
+    ],
+    "description": "Displays a paginated navigation to next/previous set of posts, when applicable.",
+    "textdomain": "gutenverse",
+    "attributes": {
+        "elementId": {
+            "type": "string"
+        },
+        "paginationArrow": {
+            "type": "string",
+            "default": "none"
+        },
+        "showLabel": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "usesContext": [
+        "gutenverse/queryId",
+        "gutenverse/queryPosts",
+        "gutenverse/isResolving",
+        "gutenverse/queryPage",
+        "gutenverse/queryTotalPages"
+    ],
+    "providesContext": {
+        "gutenverse/paginationArrow": "paginationArrow",
+        "gutenverse/showLabel": "showLabel"
+    },
+    "supports": {
+        "className": false,
+        "html": false
+    },
+    "style": [
+        "gutenverse-frontend-dynamic-pagination-style",
+        "gutenverse-frontend"
+    ],
+    "editorStyle": "gutenverse-editor"
+}

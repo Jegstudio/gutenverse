@@ -1,0 +1,63 @@
+.guten-dynamic-pagination-numbers {
+    text-align: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 5px;
+    height: fit-content;
+    align-items: center;
+
+    .btn-pagination {
+        color: #212121;
+        padding: 0 10px;
+        display: inline-block;
+        border: 1px solid #eee;
+        text-align: center;
+        min-width: 30px;
+        line-height: 30px;
+        font-size: 13px;
+        font-weight: 700;
+        transition: .2s ease;
+        height: fit-content;
+        align-content: center;
+
+        i {
+            transition: none;
+        }
+
+        .gutenverse-icon-svg {
+            display: inline-flex;
+            vertical-align: sub;
+
+            svg {
+                fill: currentColor;
+            }
+        }
+
+        &.disabled {
+            color: #a0a0a0;
+            border-color: #eee;
+            cursor: auto;
+        }
+
+        &.current {
+            background-color: var(--guten-btn-bg-color, #0058e6);
+            color: var(--guten-btn-txt-color, #fff);
+            cursor: auto;
+        }
+
+        &.next,
+        &.prev {
+            align-items: center;
+            display: inline-flex;
+            gap: 5px;
+            justify-content: center;
+        }
+    }
+
+    span {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}

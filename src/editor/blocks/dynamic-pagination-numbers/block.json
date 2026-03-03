@@ -1,0 +1,34 @@
+{
+    "apiVersion": 3,
+    "name": "gutenverse/dynamic-pagination-numbers",
+    "title": "Page Numbers",
+    "category": "gutenverse-post",
+    "class_callback": "Gutenverse\\Block\\Dynamic_Pagination_Numbers",
+    "parent": [
+        "gutenverse/dynamic-pagination"
+    ],
+    "description": "Displays a list of page numbers for pagination.",
+    "textdomain": "gutenverse",
+    "attributes": {
+        "elementId": {
+            "type": "string"
+        },
+        "midSize": {
+            "type": "number",
+            "default": 2
+        }
+    },
+    "usesContext": [
+        "gutenverse/queryId",
+        "gutenverse/queryPosts",
+        "gutenverse/queryPage",
+        "gutenverse/queryTotalPages"
+    ],
+    "supports": {
+        "className": false,
+        "html": false
+    },
+    "style": [
+        "gutenverse-frontend-dynamic-pagination-numbers-style"
+    ]
+}

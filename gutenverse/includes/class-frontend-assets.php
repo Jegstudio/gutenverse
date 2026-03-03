@@ -356,6 +356,10 @@ class Frontend_Assets {
 			'video',
 			'query-loop',
 			'post-template',
+			'dynamic-pagination',
+			'dynamic-pagination-numbers',
+			'dynamic-pagination-next',
+			'dynamic-pagination-previous',
 		);
 
 		wp_register_style(
