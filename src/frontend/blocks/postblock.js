@@ -128,7 +128,9 @@ class GutenversePostblock extends Default {
         element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`);
         setTimeout(() => {
             apiFetch({
-                path: addQueryArgs('/gutenverse-client/v1/postblock/data', {
+                path: 'gutenverse-client/v1/postblock/data',
+                method: 'POST',
+                data: {
                     attributes: {
                         postItemMargin,
                         postItemPadding,
@@ -194,13 +196,9 @@ class GutenversePostblock extends Default {
                         paginationLoadmoreAnimation,
                         paginationLoadmoreAnimationSequence,
                         qApi,
-                        qSearch: query && query['q_search'],
-                        qCategory: query && query['q_category_name'],
-                        qTag: query && query['q_tag'],
-                        qAuthor: query && query['q_author'],
-                        contentOrder
-                    },
-                }),
+                        query
+                    }
+                }
             }).then((data) => {
                 element.replace(data.rendered);
                 element.find('.guten-block-loadmore').text(paginationLoadmoreText);
@@ -263,7 +261,9 @@ class GutenversePostblock extends Default {
         }
 
         apiFetch({
-            path: addQueryArgs('/gutenverse-client/v1/postblock/data', {
+            path: 'gutenverse-client/v1/postblock/data',
+            method: 'POST',
+            data: {
                 attributes: {
                     ...settings,
                     paged: currentPage,
@@ -274,8 +274,8 @@ class GutenversePostblock extends Default {
                     qCategory: query && query['q_category_name'],
                     qTag: query && query['q_tag'],
                     qAuthor: query && query['q_author'],
-                },
-            }),
+                }
+            }
         }).then((data) => {
             element.html(data.rendered);
             this._tabItems(`.${elementId}.guten-post-block`);
