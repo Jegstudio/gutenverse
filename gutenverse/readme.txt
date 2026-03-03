@@ -301,8 +301,12 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 = 3.4.8-dev =
 ##### New & Improvements
+* add new container block
 
 ##### Bug Fixes
+* fix issue with icon box when adding aria label
+* fix animated text issue with special character
+* fix post block pagination load more keeps loading issue
 
 = 3.4.7 =
 ##### Bug Fixes
