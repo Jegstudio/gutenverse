@@ -25,15 +25,15 @@ class Image extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $post_id ) {
-		$caption_type     = isset( $this->attributes['captionType'] ) ? $this->attributes['captionType'] : 'none';
-		$caption_original = isset( $this->attributes['captionOriginal'] ) ? $this->attributes['captionOriginal'] : '';
-		$caption_custom   = isset( $this->attributes['captionCustom'] ) ? $this->attributes['captionCustom'] : '';
-		$url              = isset( $this->attributes['url'] ) ? $this->attributes['url'] : '';
-		$link_target      = isset( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '_self';
-		$rel              = isset( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
-		$aria_label       = isset( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
+		$caption_type   = isset( $this->attributes['captionType'] ) ? $this->attributes['captionType'] : 'none';
+		$caption_custom = isset( $this->attributes['captionCustom'] ) ? $this->attributes['captionCustom'] : '';
+		$url            = isset( $this->attributes['url'] ) ? $this->attributes['url'] : '';
+		$link_target    = isset( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '_self';
+		$rel            = isset( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
+		$aria_label     = isset( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
 
-		$img_html = self::apply_image_box_figure( $this->attributes );
+		$caption_original = null;
+		$img_html         = self::apply_image_box_figure( $this->attributes, $caption_original );
 
 		// Link wrapper.
 		$element_id  = $this->get_element_id();
@@ -76,20 +76,28 @@ class Image extends Block_Abstract {
 	/**
 	 * Apply image box figure
 	 *
-	 * @param array $attributes The attributes.
+	 * @param array  $attributes       The attributes.
+	 * @param string $caption_original The original caption.
 	 *
 	 * @return string
 	 */
-	public static function apply_image_box_figure( $attributes ) {
-		$img_src             = isset( $attributes['imgSrc'] ) ? $attributes['imgSrc'] : array();
-		$dynamic_image       = isset( $attributes['dynamicImage'] ) ? $attributes['dynamicImage'] : array();
-		$img_src             = apply_filters( 'gutenverse_dynamic_generate_image', $img_src, $dynamic_image );
+	public static function apply_image_box_figure( $attributes, &$caption_original = null ) {
+		$img_src       = isset( $attributes['imgSrc'] ) ? $attributes['imgSrc'] : array();
+		$dynamic_image = isset( $attributes['dynamicImage'] ) ? $attributes['dynamicImage'] : array();
+		$img_src       = apply_filters( 'gutenverse_dynamic_generate_image', $img_src, $dynamic_image );
+
 		$alt_type            = isset( $attributes['altType'] ) ? $attributes['altType'] : 'none';
-		$alt_original        = isset( $attributes['altOriginal'] ) ? $attributes['altOriginal'] : '';
 		$alt_custom          = isset( $attributes['altCustom'] ) ? $attributes['altCustom'] : '';
 		$lazy_load           = isset( $attributes['lazyLoad'] ) ? $attributes['lazyLoad'] : false;
 		$image_load          = isset( $attributes['imageLoad'] ) ? $attributes['imageLoad'] : '';
 		$fetch_priority_high = isset( $attributes['fetchPriorityHigh'] ) ? $attributes['fetchPriorityHigh'] : false;
+
+		// Get image attachment ID.
+		$image_id = isset( $img_src['media']['imageId'] ) ? $img_src['media']['imageId'] : null;
+
+		// Get alt text and caption from the attachment.
+		$alt_original     = $image_id ? get_post_meta( $image_id, '_wp_attachment_image_alt', true ) : '';
+		$caption_original = $image_id ? get_post_field( 'post_excerpt', $image_id ) : '';
 
 		$image_alt_text = '';
 		switch ( $alt_type ) {

@@ -1,4 +1,4 @@
-import { useCallback } from '@wordpress/element';
+import { useCallback, useEffect, useRef } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 import { Image } from 'gutenverse-core/components';
@@ -10,8 +10,6 @@ import { panelList } from './panels/panel-list';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { URLToolbar } from 'gutenverse-core/toolbars';
 import { imagePlaceholder } from 'gutenverse-core/config';
-import { useEffect } from '@wordpress/element';
-import { useRef } from '@wordpress/element';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
 import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useDynamicImage } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
@@ -129,7 +127,6 @@ const ImageBlock = compose(
         linkTarget,
         rel,
         captionType,
-        captionOriginal,
         captionCustom,
         ariaLabel,
         dynamicUrl,
@@ -158,6 +155,18 @@ const ImageBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    const resolvedAttributes = !isEmpty(dynamicImg) ? { ...attributes, imgSrc: dynamicImg } : attributes;
+
+    const { media } = useSelect(
+        (select) => {
+            const id = resolvedAttributes?.imgSrc?.media?.imageId;
+            return {
+                media: id ? select('core').getMedia(id) : null,
+            };
+        },
+        [resolvedAttributes?.imgSrc?.media?.imageId]
+    );
 
     useEffect(() => {
         if ('' === imageLoad) {
@@ -200,9 +209,10 @@ const ImageBlock = compose(
     );
 
     const caption = () => {
+        const mediaCaption = media?.caption?.raw || media?.caption?.rendered || (typeof media?.caption === 'string' ? media.caption : '');
         switch (captionType) {
             case 'original':
-                return <span className="guten-caption">{captionOriginal}</span>;
+                return <span className="guten-caption">{mediaCaption}</span>;
             case 'custom':
                 return <span className="guten-caption">{captionCustom}</span>;
             default:
@@ -210,18 +220,12 @@ const ImageBlock = compose(
         }
     };
 
-    const effectiveAttributes = dynamicImg !== undefined ? { ...attributes, imgSrc: dynamicImg } : attributes;
-
     const urlAriaLabel = () => {
-        if (ariaLabel) {
-            return <a className="guten-image-wrapper" aria-label={ariaLabel} href="javascript:void(0);" target={linkTarget} rel={rel} ><ImageBoxFigure {...effectiveAttributes} /></a>;
-        } else {
-            return <a className="guten-image-wrapper" href="javascript:void(0);" target={linkTarget} rel={rel}><ImageBoxFigure {...effectiveAttributes} /></a>;
-        }
+        return <a className="guten-image-wrapper" {...(ariaLabel && { 'aria-label': ariaLabel })} href="javascript:void(0);" target={linkTarget} rel={rel}><ImageBoxFigure {...resolvedAttributes} /></a>;
     };
 
     const blockElement = <div {...blockProps}>
-        {!isEmpty(effectiveAttributes.imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} src={defaultSrc} onClick={open} />}</ImagePicker>}
+        {!isEmpty(resolvedAttributes.imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} src={defaultSrc} onClick={open} />}</ImagePicker>}
         {caption()}
     </div>;
 
@@ -233,14 +237,8 @@ const ImageBlock = compose(
     useEffect(() => {
         if (dynamicHref !== undefined) {
             setAttributes({ url: dynamicHref, isDynamic: true });
-        } else { setAttributes({ url: url }); }
-    }, [dynamicHref]);
-
-    useEffect(() => {
-        if (dynamicImg !== undefined) {
-            setAttributes({ imgSrc: dynamicImg, isDynamic: true });
         }
-    }, [dynamicImg]);
+    }, [dynamicHref]);
 
     useEffect(() => {
         if (elementRef) {
