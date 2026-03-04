@@ -79,7 +79,7 @@ const save = compose(
 
     switch (altType) {
         case 'original':
-            imageAltText = image.altOriginal;
+            imageAltText = image?.altOriginal;
             break;
         case 'custom':
             imageAltText = imageAlt;
