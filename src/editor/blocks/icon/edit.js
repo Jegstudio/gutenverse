@@ -33,6 +33,7 @@ const IconBlock = compose(
         isSelected,
         clientId,
         setBlockRef,
+        context
     } = props;
 
     const {
@@ -58,7 +59,7 @@ const IconBlock = compose(
     const elementRef = useRef();
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
-    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
 
     const blockProps = useBlockProps({
         className: classnames(

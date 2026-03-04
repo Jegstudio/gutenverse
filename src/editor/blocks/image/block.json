@@ -76,6 +76,10 @@
 		"url": {
 			"type": "string"
 		},
+		"dynamicImage": {
+			"type": "object",
+			"default": {}
+		},
 		"dynamicUrl": {
 			"type": "object",
 			"default": {}
@@ -296,15 +300,10 @@
 			"default": false
 		}
 	},
+	"usesContext": ["postId", "postType", "meta"],
 	"supports": {
 		"anchor": true
 	},
-	"keywords": [
-		"image",
-		"symbol",
-		"logo"
-	],
-	"style": [
-		"gutenverse-frontend-image-style"
-	]
+	"keywords": ["image", "symbol", "logo"],
+	"style": ["gutenverse-frontend-image-style"]
 }

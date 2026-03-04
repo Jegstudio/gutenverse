@@ -13,7 +13,7 @@ import { imagePlaceholder } from 'gutenverse-core/config';
 import { useEffect } from '@wordpress/element';
 import { useRef } from '@wordpress/element';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useDynamicImage } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
@@ -119,6 +119,7 @@ const ImageBlock = compose(
         setAttributes,
         isSelected,
         setBlockRef,
+        context
     } = props;
 
     const {
@@ -132,6 +133,7 @@ const ImageBlock = compose(
         captionCustom,
         ariaLabel,
         dynamicUrl,
+        dynamicImage,
         lazyLoad,
         imageLoad = '',
         fetchPriorityHigh = false,
@@ -150,7 +152,8 @@ const ImageBlock = compose(
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef(null);
-    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
+    const { dynamicImg } = useDynamicImage({ ...dynamicImage, context });
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -207,16 +210,18 @@ const ImageBlock = compose(
         }
     };
 
+    const effectiveAttributes = dynamicImg !== undefined ? { ...attributes, imgSrc: dynamicImg } : attributes;
+
     const urlAriaLabel = () => {
         if (ariaLabel) {
-            return <a className="guten-image-wrapper" aria-label={ariaLabel} href="javascript:void(0);" target={linkTarget} rel={rel} ><ImageBoxFigure {...attributes} /></a>;
+            return <a className="guten-image-wrapper" aria-label={ariaLabel} href="javascript:void(0);" target={linkTarget} rel={rel} ><ImageBoxFigure {...effectiveAttributes} /></a>;
         } else {
-            return <a className="guten-image-wrapper" href="javascript:void(0);" target={linkTarget} rel={rel}><ImageBoxFigure {...attributes} /></a>;
+            return <a className="guten-image-wrapper" href="javascript:void(0);" target={linkTarget} rel={rel}><ImageBoxFigure {...effectiveAttributes} /></a>;
         }
     };
 
     const blockElement = <div {...blockProps}>
-        {!isEmpty(imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} src={defaultSrc} onClick={open} />}</ImagePicker>}
+        {!isEmpty(effectiveAttributes.imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} src={defaultSrc} onClick={open} />}</ImagePicker>}
         {caption()}
     </div>;
 
@@ -230,6 +235,12 @@ const ImageBlock = compose(
             setAttributes({ url: dynamicHref, isDynamic: true });
         } else { setAttributes({ url: url }); }
     }, [dynamicHref]);
+
+    useEffect(() => {
+        if (dynamicImg !== undefined) {
+            setAttributes({ imgSrc: dynamicImg, isDynamic: true });
+        }
+    }, [dynamicImg]);
 
     useEffect(() => {
         if (elementRef) {

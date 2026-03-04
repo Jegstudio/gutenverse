@@ -100,7 +100,7 @@ const IconBoxBlock = compose(
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
     const prevHoverWithParent = useRef();
-    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
     const isGlobalLinkSet = url !== undefined && url !== '';
     const deviceType = getDeviceType();
     let imageAltText = imageAlt || null;

@@ -56,7 +56,7 @@ const IconListItemBlock = (props) => {
     const elementRef = useRef(null);
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
-    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
     const isGlobalLinkSet = url !== undefined && url !== '';
 
     useGenerateElementId(clientId, elementId, elementRef);

@@ -67,7 +67,7 @@ export const settingPanel = ({postType}) => {
     return [
         {
             id: 'inheritQuery',
-            label: __('Inherit Query from Template', 'gutenverse'),
+            label: __('Inherit Main Query', 'gutenverse'),
             description: __('In Frontend, this will automatically show list of post depend on the current template such as : Archive, Search, etc.'),
             component: CheckboxControl,
         },

@@ -38,6 +38,7 @@ const SocialIcon = compose(
         isSelected,
         clientId,
         setBlockRef,
+        context
     } = props;
 
     const {
@@ -64,7 +65,7 @@ const SocialIcon = compose(
     const animationClass = useAnimationEditor(attributes);
     const socialType = getSocialType(icon);
     const elementRef = useRef();
-    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
     const iconClass = iconType === 'svg' ? 'svg' : '';
 
     const blockProps = useBlockProps({

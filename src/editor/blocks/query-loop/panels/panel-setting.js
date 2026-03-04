@@ -185,7 +185,7 @@ export const settingPanel = (props) => {
     return [
         {
             id: 'inheritQuery',
-            label: __('Inherit Query from Template', 'gutenverse'),
+            label: __('Inherit Main Query', 'gutenverse'),
             description: __('Enable this option to use the default query based on the template. Useful for archive pages like blog, category, tag pages, etc.', 'gutenverse'),
             component: CheckboxControl,
         },

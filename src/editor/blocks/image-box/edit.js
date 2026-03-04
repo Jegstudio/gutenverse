@@ -274,7 +274,7 @@ const ImageBoxBlock = compose(
     const elementRef = useRef();
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
-    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
 
     applyFilters(
         'gutenverse.pro.dynamic.toolbar',

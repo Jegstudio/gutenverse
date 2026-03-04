@@ -36,8 +36,9 @@ class Image extends Block_Abstract {
 		$img_html = self::apply_image_box_figure( $this->attributes );
 
 		// Link wrapper.
-		$element_id = $this->get_element_id();
-		$href       = apply_filters( 'gutenverse_dynamic_generate_url', $url, $this->attributes['dynamicUrl'], $element_id );
+		$element_id  = $this->get_element_id();
+		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
+		$href        = apply_filters( 'gutenverse_dynamic_generate_url', $url, $dynamic_url, $element_id );
 
 		if ( ! empty( $href ) ) {
 			$link_attr     = array(
@@ -81,6 +82,8 @@ class Image extends Block_Abstract {
 	 */
 	public static function apply_image_box_figure( $attributes ) {
 		$img_src             = isset( $attributes['imgSrc'] ) ? $attributes['imgSrc'] : array();
+		$dynamic_image       = isset( $attributes['dynamicImage'] ) ? $attributes['dynamicImage'] : array();
+		$img_src             = apply_filters( 'gutenverse_dynamic_generate_image', $img_src, $dynamic_image );
 		$alt_type            = isset( $attributes['altType'] ) ? $attributes['altType'] : 'none';
 		$alt_original        = isset( $attributes['altOriginal'] ) ? $attributes['altOriginal'] : '';
 		$alt_custom          = isset( $attributes['altCustom'] ) ? $attributes['altCustom'] : '';

@@ -30,9 +30,11 @@ const ButtonBlock = compose(
         setAttributes,
         isSelected,
         clientId,
-        context: { hoverWithParent, parentSelector },
+        context,
         setBlockRef,
     } = props;
+
+    const { hoverWithParent, parentSelector } = context;
 
     const prevHoverWithParent = useRef();
     useEffect(() => {
@@ -217,8 +219,8 @@ const ButtonBlock = compose(
         />;
     };
 
-    const { dynamicText } = useDynamicContent(dynamicContent);
-    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const { dynamicText } = useDynamicContent({ ...dynamicContent, context});
+    const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
 
     useEffect(() => {
         if (dynamicHref !== undefined) {
