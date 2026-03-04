@@ -196,7 +196,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['alignText']) && data.push({
         'type': 'plain',
         'id': 'alignText',
-        'selector': `.${elementId}.guten-advanced-heading, .${elementId}.guten-advanced-heading .heading-section`,
+        'selector': `.${elementId}.guten-advanced-heading, .${elementId}.guten-advanced-heading .heading-section, .${elementId}.guten-advanced-heading .heading-subtitle`,
         'properties': [
             {
                 'name': 'justify-content',
@@ -206,6 +206,19 @@ const getBlockStyle = (elementId, attributes) => {
                 'name': 'text-align',
                 'valueType': 'function',
                 'functionName': 'handleAlign',
+            }
+        ],
+        'responsive': true,
+    });
+
+    isNotEmpty(attributes['alignText']) && data.push({
+        'type': 'plain',
+        'id': 'alignText',
+        'selector': `.${elementId}.guten-advanced-heading .heading-line`,
+        'properties': [
+            {
+                'name': 'justify-self',
+                'valueType': 'direct',
             }
         ],
         'responsive': true,
