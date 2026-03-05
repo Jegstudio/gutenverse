@@ -20,11 +20,9 @@ class Icon extends Block_Abstract {
 	/**
 	 * Render content
 	 *
-	 * @param int $post_id .
-	 *
 	 * @return string
 	 */
-	public function render_content( $post_id ) {
+	public function render_content() {
 		$icon        = isset( $this->attributes['icon'] ) ? $this->attributes['icon'] : 'fab fa-wordpress';
 		$icon_type   = isset( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
 		$icon_svg    = isset( $this->attributes['iconSVG'] ) ? $this->attributes['iconSVG'] : '';
@@ -46,7 +44,9 @@ class Icon extends Block_Abstract {
 		if ( ! empty( $resolved ) && is_array( $resolved ) ) {
 			$icon_type = isset( $resolved['type'] ) ? $resolved['type'] : $icon_type;
 			if ( 'icon' === $icon_type ) {
-				$icon = isset( $resolved['value'] ) ? $resolved['value'] : $icon;
+				if ( ! is_array( $resolved['value'] ) ) {
+					$icon = isset( $resolved['value'] ) ? $resolved['value'] : $icon;
+				}
 			} else {
 				$icon_svg = isset( $resolved['value'] ) ? $resolved['value'] : $icon_svg;
 			}
