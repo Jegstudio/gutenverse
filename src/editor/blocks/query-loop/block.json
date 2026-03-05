@@ -73,18 +73,36 @@
 		"columnGap": {
 			"type": "object",
 			"default": {
-				"Desktop": { "unit": "px", "point": 20 },
-				"Tablet": { "unit": "px", "point": 20 },
-				"Mobile": { "unit": "px", "point": 20 }
+				"Desktop": {
+					"unit": "px",
+					"point": 20
+				},
+				"Tablet": {
+					"unit": "px",
+					"point": 20
+				},
+				"Mobile": {
+					"unit": "px",
+					"point": 20
+				}
 			},
 			"copyStyle": true
 		},
 		"rowGap": {
 			"type": "object",
 			"default": {
-				"Desktop": { "unit": "px", "point": 20 },
-				"Tablet": { "unit": "px", "point": 20 },
-				"Mobile": { "unit": "px", "point": 20 }
+				"Desktop": {
+					"unit": "px",
+					"point": 20
+				},
+				"Tablet": {
+					"unit": "px",
+					"point": 20
+				},
+				"Mobile": {
+					"unit": "px",
+					"point": 20
+				}
 			},
 			"copyStyle": true
 		},
@@ -104,6 +122,14 @@
 		"taxonomies": {
 			"type": "object",
 			"default": {}
+		},
+		"metaFilters": {
+			"type": "array",
+			"default": []
+		},
+		"metaFilterRelation": {
+			"type": "string",
+			"default": "all"
 		}
 	},
 	"providesContext": {

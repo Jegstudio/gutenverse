@@ -39,9 +39,13 @@ function PostTemplateInnerBlocks() {
     return <div {...innerBlocksProps} />;
 }
 
+
+
 /**
  * Wraps a post item to fetch its meta via useEntityProp and pass
  * a complete blockContext (postType, postId, meta) to children.
+ * Also applies client-side meta filtering — returns null if the
+ * post does not match the configured meta filters.
  */
 function PostItemWithMeta({ post, children }) {
     const [meta] = useEntityProp('postType', post.type, 'meta', post.id);
@@ -127,7 +131,10 @@ const PostTemplateBlock = compose(
     const [activeBlockContextId, setActiveBlockContextId] = useState();
     const [transientState, setTransientState] = useState({});
 
-    const { 'gutenverse/queryPosts': posts, 'gutenverse/isResolving': isResolving } = context;
+    const {
+        'gutenverse/queryPosts': posts,
+        'gutenverse/isResolving': isResolving
+    } = context;
 
     const elementRef = useRef();
     const deviceType = useSelect(() => theDeviceType(determineLocation()), []);
@@ -288,7 +295,11 @@ const PostTemplateBlock = compose(
             {posts.map((post) => {
                 const isActive = post.id === (activeBlockContextId || posts[0]?.id);
                 return (
-                    <PostItemWithMeta key={post.id} post={post} isActive={isActive}>
+                    <PostItemWithMeta
+                        key={post.id}
+                        post={post}
+                        isActive={isActive}
+                    >
                         {(blockContext) => (
                             <BlockContextProvider value={blockContext}>
                                 {isActive ? (

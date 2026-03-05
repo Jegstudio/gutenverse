@@ -22,6 +22,47 @@ import { __ } from '@wordpress/i18n';
 import { applyFilters } from '@wordpress/hooks';
 import { Loader } from 'react-feather';
 
+/**
+ * Check if a post's meta matches the configured meta filters.
+ *
+ * @param {Object}  meta     Post meta object (key → value).
+ * @param {Array}   filters  Array of filter objects ({ meta_name, meta_value, relevance }).
+ * @param {string}  relation 'all' (AND) or 'one' (OR).
+ * @return {boolean} Whether the post should be shown.
+ */
+function doesPostMatchFilters(meta, filters, relation) {
+    if (!filters?.length) return true; // no filters = show all
+
+    const results = filters.map((filter) => {
+        const { meta_name, meta_value, relevance } = filter;
+        if (!meta_name) return true;
+
+        const actual = meta?.[meta_name];
+        if (actual === undefined) return false;
+
+        switch (relevance) {
+            case 'equal':
+                return String(actual) === String(meta_value);
+            case 'not_equal':
+                return String(actual) !== String(meta_value);
+            case 'include':
+                return String(actual).includes(String(meta_value));
+            case 'bigger':
+                return parseFloat(actual) > parseFloat(meta_value);
+            case 'smaller':
+                return parseFloat(actual) < parseFloat(meta_value);
+            case 'boolean':
+                return Number(actual) === Number(meta_value);
+            default:
+                return true;
+        }
+    });
+
+    return relation === 'all'
+        ? results.every(Boolean)
+        : results.some(Boolean);
+}
+
 const QueryLoopBlock = compose(
     withPartialRender,
     withMouseMoveEffect
@@ -42,7 +83,9 @@ const QueryLoopBlock = compose(
         includeCategory,
         includeTag,
         includeAuthor,
-        taxonomies: selectedTaxonomies
+        taxonomies: selectedTaxonomies,
+        metaFilters,
+        metaFilterRelation = 'all'
     } = attributes;
 
     // State for Placeholder
@@ -131,16 +174,28 @@ const QueryLoopBlock = compose(
             });
         }
 
+
+
         const queryParams = ['postType', currentPostType, args];
 
         const postTypes = getPostTypes({ per_page: -1 });
 
+        const fetchedPosts = getEntityRecords(...queryParams);
+
+        let filteredPosts = fetchedPosts;
+        if (fetchedPosts && metaFilters && metaFilters.length > 0) {
+            filteredPosts = fetchedPosts.filter(post => {
+                const meta = select(coreStore).getEditedEntityRecord('postType', currentPostType, post.id)?.meta || post.meta;
+                return doesPostMatchFilters(meta, metaFilters, metaFilterRelation);
+            });
+        }
+
         return {
-            posts: getEntityRecords(...queryParams),
+            posts: filteredPosts,
             isResolving: isEntityResolving('getEntityRecords', queryParams),
             taxonomies: taxonomyDefinitions,
         };
-    }, [postType, numberPost, postOffset, sortBy, includePost, excludePost, includeCategory, includeTag, includeAuthor, selectedTaxonomies, name]);
+    }, [postType, numberPost, postOffset, sortBy, includePost, excludePost, includeCategory, includeTag, includeAuthor, selectedTaxonomies, metaFilters, metaFilterRelation, name]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
@@ -276,9 +331,15 @@ const QueryLoopBlock = compose(
         setIsPatternSelectionModalOpen(false);
     };
 
+    console.log('--test--');
 
     return (
-        <BlockContextProvider value={{ 'gutenverse/queryPosts': posts, 'gutenverse/isResolving': isResolving }}>
+        <BlockContextProvider value={{
+            'gutenverse/queryPosts': posts,
+            'gutenverse/isResolving': isResolving,
+            'gutenverse/metaFilters': metaFilters,
+            'gutenverse/metaFilterRelation': attributes.metaFilterRelation || 'all',
+        }}>
             <CopyElementToolbar {...props} />
             <BlockPanelController panelList={panelList} props={{ ...props, taxonomies }} elementRef={elementRef} />
             {hasInnerBlocks ? (

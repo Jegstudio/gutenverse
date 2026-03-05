@@ -1,6 +1,6 @@
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
-import { NumberControl, RangeControl, SelectSearchControl, SelectControl, CheckboxControl } from 'gutenverse-core/controls';
+import { NumberControl, RangeControl, SelectSearchControl, SelectControl, CheckboxControl, RepeaterControl, TextControl } from 'gutenverse-core/controls';
 import { addQueryArgs } from '@wordpress/url';
 import { searchAuthor, searchCategory, searchTag } from 'gutenverse-core/requests';
 import { isOnEditor } from 'gutenverse-core/helper';
@@ -108,6 +108,76 @@ const TaxonomyFilterControls = (props) => {
                 onValueChange={(val) => setAttributes({ includeAuthor: val })}
             />
         </>
+    );
+};
+
+/**
+ * A React component that renders a RepeaterControl for meta field filters.
+ * Each repeater item has: meta_name, meta_value, and relevance.
+ */
+const MetaFilterControls = (props) => {
+    const { values, setAttributes } = props;
+
+    return (
+        <RepeaterControl
+            label={__('Meta Field Filters', 'gutenverse')}
+            value={values?.metaFilters || []}
+            onValueChange={(metaFilters) => setAttributes({ metaFilters })}
+            titleFormat={(item) => {
+                if (item.meta_name) {
+                    return `Meta: <strong>${item.meta_name}</strong>`;
+                }
+                return __('New Meta Filter', 'gutenverse');
+            }}
+            repeaterDefault={{
+                meta_name: '',
+                meta_value: '',
+                relevance: 'equal',
+            }}
+            options={[
+                {
+                    id: 'meta_name',
+                    label: __('Meta field name', 'gutenverse'),
+                    component: TextControl,
+                },
+                {
+                    id: 'meta_value',
+                    label: __('Meta field value', 'gutenverse'),
+                    component: TextControl,
+                },
+                {
+                    id: 'relevance',
+                    label: __('Relevance', 'gutenverse'),
+                    component: SelectControl,
+                    options: [
+                        {
+                            label: __('Equal', 'gutenverse'),
+                            value: 'equal',
+                        },
+                        {
+                            label: __('Not Equal', 'gutenverse'),
+                            value: 'not_equal',
+                        },
+                        {
+                            label: __('Included', 'gutenverse'),
+                            value: 'include',
+                        },
+                        {
+                            label: __('Bigger Than', 'gutenverse'),
+                            value: 'bigger',
+                        },
+                        {
+                            label: __('Smaller Than', 'gutenverse'),
+                            value: 'smaller',
+                        },
+                        {
+                            label: __('Boolean', 'gutenverse'),
+                            value: 'boolean',
+                        },
+                    ],
+                },
+            ]}
+        />
     );
 };
 
@@ -243,5 +313,26 @@ export const settingPanel = (props) => {
             id: 'taxonomyFilters',
             component: TaxonomyFilterControls,
         },
+        {
+            id: 'metaFilterRelation',
+            label: __('Meta Filter Match', 'gutenverse'),
+            component: SelectControl,
+            show: (values) => values?.metaFilters?.length > 1,
+            options: [
+                {
+                    label: __('if all filter match', 'gutenverse'),
+                    value: 'all'
+                },
+                {
+                    label: __('even only one filter match', 'gutenverse'),
+                    value: 'one'
+                },
+            ],
+        },
+        {
+            id: 'metaFilters',
+            component: MetaFilterControls,
+        },
+
     ];
 };
