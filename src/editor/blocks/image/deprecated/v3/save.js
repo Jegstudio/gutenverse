@@ -72,16 +72,13 @@ const save = compose(
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
 
-    const blockProps = useBlockProps.save({
-        ...advanceAnimationData,
-        className: classnames(
-            'guten-element',
-            'guten-image',
-            elementId,
-            animationClass,
-            displayClass,
-        ),
-    });
+    const className = classnames(
+        'guten-element',
+        'guten-image',
+        elementId,
+        animationClass,
+        displayClass,
+    );
 
     const caption = () => {
         switch (captionType) {
@@ -104,13 +101,13 @@ const save = compose(
 
     const imageWrapper = url ?
         (<a className="guten-image-wrapper" href={href} target={linkTarget} rel={rel} aria-label={ariaLabel}>
-            <ImageBoxFigure {...attributes}/>
+            <ImageBoxFigure {...attributes} />
         </a>) :
         <div className="guten-image-wrapper">
-            <ImageBoxFigure {...attributes}/>
+            <ImageBoxFigure {...attributes} />
         </div>;
 
-    return <div {...blockProps}>
+    return <div className={className} {...advanceAnimationData}>
         {imageWrapper}
         {caption()}
     </div>;

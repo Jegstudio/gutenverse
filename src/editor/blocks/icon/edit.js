@@ -11,11 +11,11 @@ import { renderIcon } from 'gutenverse-core/helper';
 import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef, withTooltip } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useDynamicIcon } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 import getBlockStyle from './styles/block-style';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
-import { useRichTextParameter } from 'gutenverse-core/helper';
+import { useRichTextParameter, isEmpty } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 
 const NEW_TAB_REL = 'noreferrer noopener';
@@ -47,6 +47,7 @@ const IconBlock = compose(
         rel,
         linkTarget,
         dynamicUrl,
+        dynamicIcon,
     } = attributes;
 
     const {
@@ -60,6 +61,13 @@ const IconBlock = compose(
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const { dynamicHref } = useDynamicUrl({ ...dynamicUrl, context });
+    const { dynamicIco } = useDynamicIcon({ ...dynamicIcon, context });
+
+    const resolvedIcon = !isEmpty(dynamicIco) ? {
+        icon: dynamicIco.type === 'icon' ? dynamicIco.value : icon,
+        iconType: dynamicIco.type,
+        iconSVG: dynamicIco.type === 'svg' ? dynamicIco.value : iconSVG,
+    } : { icon, iconType, iconSVG };
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -112,7 +120,9 @@ const IconBlock = compose(
     useEffect(() => {
         if (dynamicHref !== undefined) {
             setAttributes({ url: dynamicHref, isDynamic: true });
-        } else { setAttributes({ url: url }); }
+        } else {
+            setAttributes({ url: url });
+        }
     }, [dynamicHref]);
 
     useEffect(() => {
@@ -147,7 +157,7 @@ const IconBlock = compose(
         </BlockControls>
         <div {...blockProps}>
             <div {...wrapperProps}>
-                {renderIcon(icon, iconType, iconSVG)}
+                {renderIcon(resolvedIcon.icon, resolvedIcon.iconType, resolvedIcon.iconSVG)}
             </div>
         </div>
     </>;

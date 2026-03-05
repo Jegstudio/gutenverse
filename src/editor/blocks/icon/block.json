@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/icon",
+	"class_callback": "\\Gutenverse\\Block\\Icon",
 	"title": "Icon",
 	"description": "Add a beautiful icon with more than 100 icon options",
 	"category": "gutenverse-element",
@@ -80,6 +81,10 @@
 		},
 		"url": {
 			"type": "string"
+		},
+		"dynamicIcon": {
+			"type": "object",
+			"default": {}
 		},
 		"dynamicUrl": {
 			"type": "object",
@@ -272,6 +277,7 @@
 			"copyStyle": true
 		}
 	},
+	"usesContext": ["postId", "postType", "meta"],
 	"supports": {
 		"anchor": true
 	},
