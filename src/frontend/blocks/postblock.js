@@ -196,7 +196,11 @@ class GutenversePostblock extends Default {
                         paginationLoadmoreAnimation,
                         paginationLoadmoreAnimationSequence,
                         qApi,
-                        query
+                        qSearch: query && query['q_search'],
+                        qCategory: query && query['q_category_name'],
+                        qTag: query && query['q_tag'],
+                        qAuthor: query && query['q_author'],
+                        contentOrder
                     }
                 }
             }).then((data) => {
