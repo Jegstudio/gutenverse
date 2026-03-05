@@ -138,7 +138,9 @@ class Frontend_Assets {
 				$this->icon_conditional_load_by_empty_value( $attrs, 'titleIcon', $conditions );
 				break;
 			case 'gutenverse/popup-builder':
-				$this->icon_conditional_load_by_value( $attrs, 'closeIcon', $conditions );
+				if ( isset( $attrs['showCloseButton'] ) && $attrs['showCloseButton'] ) {
+					$this->icon_conditional_load_by_value( $attrs, 'closeIcon', $conditions );
+				}
 				break;
 			case 'gutenverse/portfolio-gallery':
 				if ( ! isset( $attrs['showLink'] ) ) {
