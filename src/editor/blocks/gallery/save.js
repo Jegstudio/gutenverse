@@ -42,7 +42,8 @@ const save = compose(
         filterSearchFormText,
         itemsPerLoad,
         zoomOptions,
-        titleHeadingType: HtmlTag = 'h5'
+        titleHeadingType: HtmlTag = 'h5',
+        filterRemoveAnimation = false
     } = attributes;
     const advanceAnimationData = useAnimationAdvanceData(attributes);
     const animationClass = useAnimationFrontend(attributes);
@@ -61,11 +62,11 @@ const save = compose(
     );
     const imageCondition = (image) => {
         const { imageLoad = '' } = image;
-        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })}/>;
+        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })} />;
     };
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-grid={grid}>
+        <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-grid={grid} {...(filterRemoveAnimation ? { 'data-remove-animation': true } : {})}>
             <div className="gutenverse-popup-gallery hidden">
                 <div className="gallery-header">
                     <div className="left-header">

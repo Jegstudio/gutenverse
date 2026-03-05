@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl, RepeaterControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 
-export const filterPanel = ({filter}) => {
+export const filterPanel = ({ filter }) => {
     return [
         {
             id: 'filter',
@@ -43,5 +43,11 @@ export const filterPanel = ({filter}) => {
                 },
             ],
         },
+        {
+            id: 'filterRemoveAnimation',
+            label: __('Remove Animation', 'gutenverse'),
+            component: CheckboxControl,
+            description: __('If this option is enabled, the gallery items will not have any animation when the filter is applied.', 'gutenverse'),
+        }
     ];
 };

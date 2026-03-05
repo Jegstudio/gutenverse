@@ -55,7 +55,8 @@ const GalleryBlock = compose(
         filterSearchIconSVG,
         filterSearchIconPosition,
         filterSearchFormText,
-        titleHeadingType = 'h5'
+        titleHeadingType = 'h5',
+        filterRemoveAnimation = false
     } = attributes;
 
     /* set image load attribute from calculating the lazyload attribute and dashboard image load attribut on first load block on editor */
@@ -101,6 +102,7 @@ const GalleryBlock = compose(
         column,
         layout,
         images,
+        filterRemoveAnimation
     });
 
     useGenerateElementId(clientId, elementId, elementRef);
@@ -165,7 +167,7 @@ const GalleryBlock = compose(
             shuffleInstance.current = new Shuffle(elementRef.current.querySelector('.gallery-items'), {
                 itemSelector: `.${elementId} .gallery-item-wrap`,
                 sizer: `.${elementId} .gallery-sizer-element`,
-                speed: 500
+                speed: filterRemoveAnimation ? 0 : 500
             });
         }
     };
@@ -214,9 +216,10 @@ const GalleryBlock = compose(
         setLiveAttr({
             ...liveAttr,
             showedItems,
-            images
+            images,
+            filterRemoveAnimation
         });
-    }, [showedItems, images]);
+    }, [showedItems, images, filterRemoveAnimation]);
 
     useEffect(() => {
         if (elementRef.current && elementId) {
