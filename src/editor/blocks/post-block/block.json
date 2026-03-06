@@ -969,5 +969,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-post-block-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }
