@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-social-icons',
         'typography': {
             'font': { 'label': 'Average', 'value': 'Average', 'type': 'google' },
             'size': { 'Desktop': { 'point': '16', 'unit': 'px' } }

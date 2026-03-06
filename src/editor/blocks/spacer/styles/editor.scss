@@ -21,3 +21,16 @@
     }
   }
 }
+
+.is-editing-disabled {
+  .guten-spacer {
+    &.is-selected,
+    &:hover {
+      background: none;
+
+      .spacer-indicator {
+        display: none;
+      }
+    }
+  }
+}

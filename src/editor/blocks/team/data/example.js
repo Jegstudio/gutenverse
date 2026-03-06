@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-team',
         'src': {
             'image': 'https://picsum.photos/id/1005/400/400'
         },

@@ -1,8 +1,9 @@
-import { render, useState } from '@wordpress/element';
+import { useState, createRoot } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { IconPluginCheckSVG, IconPluginFormSVG, IconPluginFontSVG } from '../../assets/icon/index';
 import classnames from 'classnames';
 import apiFetch from '@wordpress/api-fetch';
+import WizardPage from './pages/wizard-lite';
 
 const WizardItem = ({ part, selected, toggleSelected, icon, title, subtitle }) => {
     const classes = classnames('wizard-gutenverse-form', 'wizard-item', {
@@ -175,7 +176,19 @@ const WizardContainer = ({ setStage }) => {
                 </div>}
             </div>
         </div>
-    </div> : <h1>{__('All is Done', 'gutenverse')}</h1>;
+    </div> : <div className="wizard-wrapper">
+        <div className="wizard-container">
+            <div className="wizard-container-header">
+                <h1>{__('All Setup is Done', 'gutenverse')}</h1>
+                <p>{__('All required plugins are upgraded and activated.', 'gutenverse')}</p>
+            </div>
+            <div className="wizard-container-footer">
+                <div className="wizard-button">
+                    <div className="button active" onClick={() => window.open(dashboard)}>{__('Go to Dashboard', 'gutenverse')}</div>
+                </div>
+            </div>
+        </div>
+    </div>;
 };
 
 const WizardInstallLater = ({ setStage }) => {
@@ -215,14 +228,19 @@ const UpgradeWizard = () => {
     return 'install' === stage ? <WizardContainer setStage={setStage} /> : <WizardInstallLater setStage={setStage} />;
 };
 
+
 const loadWizard = () => {
     const wizardDiv = document.getElementById('gutenverse-wizard');
 
     if (wizardDiv) {
-        render(
-            <UpgradeWizard />,
-            wizardDiv
-        );
+        const root = createRoot(wizardDiv);
+        root.render(<UpgradeWizard />);
+    }
+
+    const onboardWizardDiv = document.getElementById('gutenverse-onboard-wizard');
+    if (onboardWizardDiv) {
+        const root = createRoot(onboardWizardDiv);
+        root.render(<WizardPage />);
     }
 };
 

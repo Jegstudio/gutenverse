@@ -46,10 +46,6 @@ class Image extends Style_Abstract {
 				'positioning' => null,
 				'animation'   => null,
 				'advance'     => null,
-				'transform'   => array(
-					'normal' => ".{$this->element_id} img",
-					'hover'  => ".{$this->element_id} img:hover",
-				),
 				'mask'        => null,
 			)
 		);
@@ -62,7 +58,7 @@ class Image extends Style_Abstract {
 		if ( isset( $this->attrs['align'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-image-wrapper",
+					'selector'       => ".{$this->element_id}.guten-image .guten-image-wrapper",
 					'property'       => function ( $value ) {
 						return "justify-content: {$this->handle_align_reverse($value)};";
 					},

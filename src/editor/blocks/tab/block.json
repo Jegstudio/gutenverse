@@ -1,12 +1,10 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/tab",
 	"title": "Tab Item",
 	"description": "Create content inside a tab element",
 	"category": "gutenverse-element",
-	"parent": [
-		"gutenverse/tabs"
-	],
+	"parent": ["gutenverse/tabs"],
 	"example": {},
 	"attributes": {
 		"elementId": {
@@ -33,9 +31,6 @@
 		"className": false,
 		"html": false
 	},
-	"keywords": [
-		"tabs",
-		"accordion",
-		"gutenverse"
-	]
+	"keywords": ["tabs", "accordions", "expand"],
+	"style": ["gutenverse-frontend-tab-style"]
 }

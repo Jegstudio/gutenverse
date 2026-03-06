@@ -1,10 +1,10 @@
-=== Gutenverse – Ultimate Block Addons and Page Builder for Site Editor ===
+=== Gutenverse - Ultimate WordPress FSE Blocks Addons & Ecosystem ===
 
 Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.0.1
+Stable tag: 3.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -12,15 +12,15 @@ The best Gutenberg blocks editor, block addons, page builder and website builder
 
 ## Description
 
-**GUTENVERSE – GUTENBERG BLOCKS AND WEBSITE BUILDER FOR SITE EDITOR, TEMPLATE LIBRARY, POPUP BUILDER, ADVANCED ANIMATION EFFECTS, 45+ FREE USER-FRIENDLY BLOCKS**
+**GUTENVERSE – GUTENBERG BLOCKS AND WEBSITE BUILDER FOR SITE EDITOR, TEMPLATE LIBRARY, POPUP BUILDER, ADVANCED ANIMATION EFFECTS, COMPLETE FEATURE ECOSYSTEM, 45+ FREE USER-FRIENDLY BLOCKS**
 
 Level up your website creation with [Gutenverse](https://gutenverse.com/), a lightweight plugin that powers Gutenberg blocks, and a website builder for WordPress Full Site Editor. With over 600+ FREE template libraries, 45+ FREE block elements, and many other useful features. Gutenverse makes it easy to bring your dream website to life. It simplifies customization and improves your experience with the Gutenberg Block Editor and Site Editor.
 
-To help you get started, we’ve created a beautiful WordPress theme that works seamlessly with Gutenverse. The theme includes pre-designed layouts, flexible settings, and user-friendly controls, allowing for straightforward website creation. It’s also fully compatible with the Gutenberg Block Editor and Site Editor, supporting all Gutenverse features to ensure it performs well.
+To help you get started, we’ve built Unibiz - The First Multipurpose WordPress Block Theme that’s fully compatible with FSE and works seamlessly with Gutenverse. It comes with ready-to-import demo websites, flexible layouts, intuitive settings, and user-friendly controls, making website creation simple and efficient. The theme is fully integrated with the Gutenberg Block and Site Editor, supporting all Gutenverse features for optimal performance.
 
-[Explore The Gutenverse Theme Collection](https://gutenverse.com/theme-list/)
+[Explore The First Multipurpose WordPress Block Theme](https://wordpress.org/themes/unibiz/)
 
-Unlock all the features needed to create your website with [Gutenverse PRO](https://gutenverse.com/pro/).
+Unlock all the features needed to create your website with [Gutenverse PRO](https://gutenverse.com/pricing/).
   
 ## 🚀 Boost Productivity
 
@@ -50,7 +50,7 @@ Whether you're a beginner or a pro at website creation, you deserve to create a 
 
 Choose from a wide selection of fully customizable blocks, each offering advanced and flexible options. Unleash your creativity and build content with endless possibilities.
 
-**2\.** [**Template Library**](https://gutenverse.com/#library)
+**2\. Template Library**
 
 Access a variety of layouts and sections to suit your needs. Install theme templates directly from the library for quick and easy customization.
 
@@ -82,27 +82,27 @@ Customize your editing experience by enabling or disabling blocks for a smoother
 
 Edit breakpoints for tablets and mobile devices to optimize your website’s responsiveness.
 
-**10\.** [**Gutenberg Blocks**](https://gutenverse.com/elements/)
+**10\.** [**Gutenberg Blocks**](https://gutenverse.com/blocks/)
 
 Gutenverse provides a range of blocks grouped into the following categories:
 
-*   [**Wrapper Blocks**](https://gutenverse.com/elements/#wrapper)
+*   [**Wrapper Blocks**](https://gutenverse.com/blocks/#wrapper)
 
 A collection of container or parent blocks for other block elements to group them, apply styles, and manage layout with responsiveness.
 
-*   [**Basic Blocks**](https://gutenverse.com/elements/#basic)
+*   [**Basic Blocks**](https://gutenverse.com/blocks/#basic)
 
 Get the blocks you need for functionality and design. Each block is designed to serve a specific purpose. Mix and match them to best suit your site.
 
-*   [**Post Blocks**](https://gutenverse.com/elements/#post)
+*   [**Post Blocks**](https://gutenverse.com/blocks/#post)
 
 Create detailed post templates with highly customizable blocks.
 
 
 ## Wrapper Blocks
-*   [**Section**](https://gutenverse.com/elements/#wrapper): Add a section to wrap several blocks within columns.
-*   [**Column**](https://gutenverse.com/elements/#wrapper)**:** Resizable column to hold your block elements, with draggable resize control that makes it convenient to use.
-*   [**Flexible Wrapper**](https://gutenverse.com/elements/#wrapper): Flexible Wrapper / Container to contain your block.
+*   [**Section**](https://gutenverse.com/blocks/#wrapper): Add a section to wrap several blocks within columns.
+*   [**Column**](https://gutenverse.com/blocks/#wrapper)**:** Resizable column to hold your block elements, with draggable resize control that makes it convenient to use.
+*   [**Flexible Wrapper**](https://gutenverse.com/blocks/#wrapper): Flexible Wrapper / Container to contain your block.
 *   [**Popup Builder**](https://gutenverse.com/popup/): Create a stunning popup to catch your user's attention.
 
 
@@ -124,7 +124,7 @@ Create detailed post templates with highly customizable blocks.
 *   **[PRO] Background Effect**: Add a glow effect to make your website more eye-catching.
 *   **[PRO] Background Animated**: Animate various background elements, such as colors, gradients, positions, and sizes, to enhance your site's visual appeal.
 *   **Shape Divider**: Add dividers between sections to create smooth transitions.
-*   **[PRO]** [**Shape Divider Animated**](https://gutenverse.com/#shape-divider): Add advanced animated dividers between sections to create smooth transitions.
+*   **[PRO] Shape Divider Animated**: Add advanced animated dividers between sections to create smooth transitions.
 *   **[PRO] Transform**: Easily rotate, scale, or skew elements on your website as you like.
 *   **[PRO] Mouse Move Effect**: Make an effect on the pointed object whenever the cursor moves.
 *   **[PRO] Advanced Animation**: Equipped with various types of animations to make your website look more dynamic.
@@ -134,38 +134,38 @@ Create detailed post templates with highly customizable blocks.
 
 
 ## Basic Blocks
-*   [**Accordions**](https://gutenverse.com/accordion/): A vertically stacked list of expandable/collapsable items.
-*   [**Advanced Heading**](https://gutenverse.com/advance-heading/): A more Advanced Heading with multiple options.
-*   [**Animated Text**](https://gutenverse.com/animated-text/): Create text with a beautiful animation flow.
-*   **[PRO]** [**Text Marquee**](https://gutenverse.com/text-marquee/): Add movement to text with a horizontal scrolling effect.
-*   [**Button**](https://gutenverse.com/button/): Add a beautiful and interactive action button.
-*   **[PRO]** [**Advance Button**](https://gutenverse.com/advance-button/): Enhance your website's button interactivity with customizable typography, colors, hover effects, and icons.
-*   [**Multi Buttons**](https://gutenverse.com/multi-buttons/): Add a collection of beautiful and interactive action buttons.
-*   [**Divider**](https://gutenverse.com/divider/): Split your content with a customizable divider.
-*   [**Fun Facts**](https://gutenverse.com/funfact/): Create an interesting fact about your website or something you achieved.
-*   [**Gallery**](https://gutenverse.com/gallery/): Showcase your images in a grid or masonry layout, with a popup and zoom option.
-*   [**Google Maps**](https://gutenverse.com/google-maps/): Display a location you want to share with your website visitor.
-*   [**Heading**](https://gutenverse.com/heading/): Create a Title/Heading on your page.
-*   [**Icon**](https://gutenverse.com/icon/): Add a beautiful icon with more than 100+ icon options.
-*   [**Icon Box**](https://gutenverse.com/icon-box/): Add an information section with an icon box.
-*   [**Icon List**](https://gutenverse.com/icon-list/): Create a list with icons.
-*   [**Image**](https://gutenverse.com/image/): Showcase your image.
-*   [**Image Box**](https://gutenverse.com/image-box/): Add an information section with an image box.
-*   **[PRO]** [**Image Marquee**](https://gutenverse.com/image-marquee/): Create captivating image carousels or slideshows that showcase multiple images seamlessly.
-*   **[PRO]** [**Lottie**](https://gutenverse.com/lottie/): Add Lottie files to your website and display them anywhere to capture users' attention with engaging motion graphics.
-*   [**Logo Slider**](https://gutenverse.com/logo-slider/): Showcase your clients, sponsors, or a list of images on your website.
-*   [**Nav Menu**](https://gutenverse.com/nav-menu/): Create a navigation menu for your visitor to explore your website.
-*   **[PRO]** [**Mega Menu**](https://gutenverse.com/mega-menu/): Optimize your website with a mega menu that displays multiple levels of navigation in a drop-down format, making it easier for visitors to navigate.
-*   [**Progress Bar**](https://gutenverse.com/progress-bar/): Create a progress bar of your achievement or other things you want to share.
-*   [**Search**](https://gutenverse.com/search/): Create a search bar to easily search your site contents.
-*   [**Social Icons**](https://gutenverse.com/social-icon/): Show social network links to your website visitors.
-*   [**Social Share**](https://gutenverse.com/social-share/): Allow your visitor to share the current page.
+*   [**Accordions**](https://gutenverse.com/blocks/accordion/): A vertically stacked list of expandable/collapsable items.
+*   [**Advanced Heading**](https://gutenverse.com/blocks/advance-heading/): A more Advanced Heading with multiple options.
+*   [**Animated Text**](https://gutenverse.com/blocks/animated-text/): Create text with a beautiful animation flow.
+*   **[PRO]** [**Text Marquee**](https://gutenverse.com/blocks/text-marquee/): Add movement to text with a horizontal scrolling effect.
+*   [**Button**](https://gutenverse.com/blocks/button/): Add a beautiful and interactive action button.
+*   **[PRO]** [**Advance Button**](https://gutenverse.com/blocks/advance-button/): Enhance your website's button interactivity with customizable typography, colors, hover effects, and icons.
+*   [**Multi Buttons**](https://gutenverse.com/blocks/multi-buttons/): Add a collection of beautiful and interactive action buttons.
+*   [**Divider**](https://gutenverse.com/blocks/divider/): Split your content with a customizable divider.
+*   [**Fun Facts**](https://gutenverse.com/blocks/funfact/): Create an interesting fact about your website or something you achieved.
+*   [**Gallery**](https://gutenverse.com/blocks/gallery/): Showcase your images in a grid or masonry layout, with a popup and zoom option.
+*   [**Google Maps**](https://gutenverse.com/blocks/google-maps/): Display a location you want to share with your website visitor.
+*   [**Heading**](https://gutenverse.com/blocks/heading/): Create a Title/Heading on your page.
+*   [**Icon**](https://gutenverse.com/blocks/icon/): Add a beautiful icon with more than 100+ icon options.
+*   [**Icon Box**](https://gutenverse.com/blocks/icon-box/): Add an information section with an icon box.
+*   [**Icon List**](https://gutenverse.com/blocks/icon-list/): Create a list with icons.
+*   [**Image**](https://gutenverse.com/blocks/image/): Showcase your image.
+*   [**Image Box**](https://gutenverse.com/blocks/image-box/): Add an information section with an image box.
+*   **[PRO]** [**Image Marquee**](https://gutenverse.com/blocks/image-marquee/): Create captivating image carousels or slideshows that showcase multiple images seamlessly.
+*   **[PRO]** [**Lottie**](https://gutenverse.com/blocks/lottie/): Add Lottie files to your website and display them anywhere to capture users' attention with engaging motion graphics.
+*   [**Logo Slider**](https://gutenverse.com/blocks/logo-slider/): Showcase your clients, sponsors, or a list of images on your website.
+*   [**Nav Menu**](https://gutenverse.com/blocks/nav-menu/): Create a navigation menu for your visitor to explore your website.
+*   **[PRO]** [**Mega Menu**](https://gutenverse.com/blocks/mega-menu/): Optimize your website with a mega menu that displays multiple levels of navigation in a drop-down format, making it easier for visitors to navigate.
+*   [**Progress Bar**](https://gutenverse.com/blocks/progress-bar/): Create a progress bar of your achievement or other things you want to share.
+*   [**Search**](https://gutenverse.com/blocks/search/): Create a search bar to easily search your site contents.
+*   [**Social Icons**](https://gutenverse.com/blocks/social-icon/): Show social network links to your website visitors.
+*   [**Social Share**](https://gutenverse.com/blocks/social-share/): Allow your visitor to share the current page.
 *   **Spacer**: Create a spacer to give a gap between content.
-*   [**Star Rating**](https://gutenverse.com/star-rating/): Showcase ratings of anything you want to share.
-*   [**Tabs**](https://gutenverse.com/tabs/): Create content inside a tab block.
-*   **[PRO]** [**Advance Tabs**](https://gutenverse.com/advance-tabs/): Divide contents into several tabs with the title in vertical or horizontal style.
-*   [**Team**](https://gutenverse.com/teams/): Show your team details.
-*   [**Testimonials**](https://gutenverse.com/testimonials/): Showcase your client’s or people’s testimonials.
+*   [**Star Rating**](https://gutenverse.com/blocks/star-rating/): Showcase ratings of anything you want to share.
+*   [**Tabs**](https://gutenverse.com/blocks/tabs/): Create content inside a tab block.
+*   **[PRO]** [**Advance Tabs**](https://gutenverse.com/blocks/advance-tabs/): Divide contents into several tabs with the title in vertical or horizontal style.
+*   [**Team**](https://gutenverse.com/blocks/teams/): Show your team details.
+*   [**Testimonials**](https://gutenverse.com/blocks/testimonials/): Showcase your client’s or people’s testimonials.
 *   **Text Editor**: A place to create text content.
 *   **Text Paragraph**: A place to create a simple text paragraph.
 *   **Video**: Embed a video you want to share.
@@ -178,16 +178,16 @@ Create detailed post templates with highly customizable blocks.
 *   **Condition**: Choose which elements or content should be displayed on the page with a conditional filter.
 *   **Dynamic Data**: Continuously update the elements with the latest content to keep your website's information up to date.
 *   **Highlight Style**: Highlight text with solid colors, and gradients, or fill the background.
-*   [**Main Title Text Clip**](https://gutenverse.com/#textclip): Apply text clipping effects to the main title for a unique visual style.
-*   [**Focus Title Text Clip**](https://gutenverse.com/#textclip): Use text clipping effects to the focus title to improve its visibility.
-*   [**Text Clip**](https://gutenverse.com/#textclip): Make every word and letter stand out using customizable gradient colors, adding a unique and vibrant touch to your content.
+*   **Main Title Text Clip**: Apply text clipping effects to the main title for a unique visual style.
+*   **Focus Title Text Clip**: Use text clipping effects to the focus title to improve its visibility.
+*   **Text Clip**: Make every word and letter stand out using customizable gradient colors, adding a unique and vibrant touch to your content.
 *   **Dynamic Global URL**: Automatically update URLs in the Icon Box based on dynamic data to ensure your links are always relevant.
 *   **Dynamic Image Data**: Display images that automatically refresh with the latest data and are always up-to-date.
 
 
 ## Post Block
 *   **Post Author**: Show the post author's name.
-*   [**Post Blocks**](https://gutenverse.com/post-block/): Showcase a block of posts of your choice.
+*   [**Post Blocks**](https://gutenverse.com/blocks/post-block/): Showcase a block of posts of your choice.
 *   **Post Comment**: Show the comment section of a single post.
 *   **Post Content**: Show the content of your post.
 *   **Post Date**: Show the published/modified date of a single post.
@@ -202,11 +202,11 @@ Create detailed post templates with highly customizable blocks.
 
 ## 🏆 [PRO] Advanced Features
 
-*   [**Advanced Form Builder**](https://gutenverse.com/form/): Design any type of forms that perform using advanced features to collect all types of data for your business in less time.
+*   [**Advanced Form Builder**](https://gutenverse.com/features/form/): Design any type of forms that perform using advanced features to collect all types of data for your business in less time.
 *   **Custom Font**: Personalize your website with custom fonts to match your brand’s unique style.
-*   [**Premium Themes**](https://gutenverse.com/theme-list/): Access a selection of premium themes designed to elevate the look and functionality of your website.
-*   [**Premium Template Library**](https://gutenverse.com/#library): Explore a wide variety of beautifully designed templates to make building your website 
-*   [**Advanced Popup Builder**](https://gutenverse.com/popup/): Packed with premade templates and advanced triggering options, optimize user engagement and conversions on your WordPress websites without needing to code. 
+*   [**Explore Unibiz Theme**](https://gutenverse.com/unibiz/): Access a selection of premium themes designed to elevate the look and functionality of your website.
+*   [**Premium Template Library**](https://gutenverse.com/features/template-library/): Explore a wide variety of beautifully designed templates to make building your website 
+*   [**Advanced Popup Builder**](https://gutenverse.com/features/popup/): Packed with premade templates and advanced triggering options, optimize user engagement and conversions on your WordPress websites without needing to code. 
 
   
 
@@ -298,8 +298,303 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+
+= 3.5.0 =
+##### New & Improvements
+* add new container block
+
+##### Bug Fixes
+* fix issue with icon box when adding aria label
+* fix animated text issue with special character
+* fix post block pagination load more keeps loading issue
+
+= 3.4.7 =
+##### Bug Fixes
+* fix breadcrumb warning
+* fix icon type svg in feature list block
+* fix close icon styling in popup builder
+* fix animation entrance in popup builder
+* fix post list frontend border & background selector
+* fix item gallery copy icon
+* fix lazyload option into dropdown
+* fix hover button transition
+
+= 3.4.6 =
+##### New & Improvements
+* improve plugin file size, remove unused assets
+
+##### Bug Fixes
+* fix issue with template not loading correctly
+
+= 3.4.5 =
+##### New & Improvements
+* add explicit image width & height in post features image
+* add aria label in nav menu block
+* add aria label in logo slider link
+* add aria label in post block meta
+* add fetch priority high option for image block
+
+##### Bug Fixes
+* fix transform transition
+* fix popup video setting is showed when popup type is not video
+* fix missing aria label in post block readmore button
+* fix tooltip info icon position
+* fix divider position in taxonomy list block
+* fix progress bar slide issue
+* fix popup animation exit not working properly
+* fix post block pagination alignment
+* fix post block issue with unicode character in category name
+* fix aria label not showing while editing
+* fix nav menu aria label bug when using icon as a label
+* fix button transform transition
+
+= 3.4.4 =
+##### New & Improvements
+* add image width & height for gallery block
+* add aria label options in some blocks for SEO & accessibility
+* add loading state when converting icon to svg for better ux
+* add lazy loading for nav menu mobile logo
+* add show notice on gutenverse dashboard setting
+* update tabs dropdown icon to svg
+
+##### Bug Fixes
+* fix gallery search filter dropdown svg conversion
+* fix issue with background featured image
+* fix link issue in image block
+* fix nav menu svg on frontend
+* fix issue with post comment reply
+* fix reactplayer dependency
+* fix issue with post list icon
+* fix issue with elementId when duplicating block inside post content or template part
+* fix post block error when `number of post initially showed` changed
+* fix gallery item bug in editor
+
+= 3.4.3 =
+##### New & Improvements
+* add aria label to icon box image, post block image, advanced button, and nav menu
+* add width & height image property for team block, logo slider block, testimonial block, and feature list block
+* add option to choose alt text from image for team block, icon box block, and image box block
+* add option for aria label in heading block’s link
+* add option fetch priority high for background image
+
+##### Bug Fixes
+* fix background slideshow style overwritten by default
+* fix issue with glitching background image for background slider mode
+
+= 3.4.1 =
+##### Bug Fixes
+* fix issue with social icon block back to default
+* fix issue with button animation class
+
+= 3.4.0 =
+##### New & Improvements
+* add option to convert Webfont to SVG icon for improved SEO
+* add image data option for post featured image block
+* add heading type and aria label in gallery block
+* add writing mode in heading block
+
+##### Bug Fixes
+* fix issue with global styles fetch in editor
+* fix issue with animation effect not running on tablet/mobile
+* fix issue with animation effect when combined with transform effect
+* fix issue with section background type video
+* fix accordion block padding
+* fix gallery load more not working
+
+= 3.3.2 =
+##### New & Improvements
+* improve styling cache mechanism
+
+##### Bug Fixes
+* fix chart block animation
+* fix line height issue in post terms block
+* fix video block border styling 
+* fix nav menu responsive breakpoint
+* fix post author default style when biography setting is off
+* fix popup video look different in editor vs frontend
+* fix post terms hover effect when in inline mode
+* fix social icons vertical layout
+
+= 3.3.1 =
+##### New & Improvements
+* improve post block pagination
+
+##### Bug Fixes
+* fix taxonomy list
+
+= 3.3.0 =
+##### New & Improvements
+* Improve CSS & JS files to load only if block/feature exist
+* add animation in post block load more pagination
+* add option for width and height in popup video
+
+##### Bug Fixes
+* fix star rating style option
+* fix gallery issue inside pattern
+* fix icon list vertical align
+* fix security issue. credit: Patchstack.
+
+= 3.2.1 =
+##### New & Improvements
+* improve UI, show which current demo is active
+
+##### Bug Fixes
+* fix post block pagination when there is animation effect
+* fix bug with postlist featured image aspect ratio by default browser on frontend
+* fix nav menu overlay style
+* fix issue with global color on older block themes
+
+= 3.2.0 =
+##### New & Improvements
+* add toggle avatar (image) to testimonials block
+* add notification center for Gutenverse notices
+* add Custom Page CSS & JS
+* add new library option when Companion theme is installed
+* add wizard setup for Companion theme
+* add inactive timer to open popup
+* add more options for Advanced Tabs block
+* add author bio on post author block
+* add new settings in dashboard for performance
+* blocks now use API v3 for faster editing experience
+
+##### Bug Fixes
+* fix frontend inline style
+* fix post meta block icon size
+* fix popup exit/close animation
+* fix issue with Taxonomy List block option causing error
+* fix Post Block pagination when value is empty
+* fix Chart block to load on view instead of page load
+* fix more block recovery issues
+
+= 3.1.2 =
+##### Bug Fixes
+* fix social icon item border
+* fix fun fact fallback for previous version
+* fix advance heading text input
+* fix feature list custom icon alignment
+* fix chart block container
+* fix chart block tooltip overlap with title
+* fix chart block inline issue
+* fix chart block bart style
+* fix flexible wrapper width/height slider
+* fix gallery popup error
+* fix portfolio gallery border radius
+* fix portfolio gallery hover link and background hover
+* fix icon box preview frontend and editor
+
+= 3.1.1 =
+##### New & Improvements
+* add default spacing  in paragraph block
+
+##### Bug Fixes
+* fix funfact input with number can now includes decimal numbers
+* fix post terms styling is inconsistent on frontend and backend
+* fix advance heading input 
+* fix post block pagination’s active border
+* fix block preview in library
+* fix google map glitching when there is local anchor url
+* fix security issue. credit: Wordfence.
+
+= 3.1.0 =
+##### New & Improvements
+* improve progress bar block styles
+* add accordion item wrapper background
+* add text indent on text editor
+* fix testimonial typography hover/normal
+
+##### Bug Fixes
+* fix gallery light box
+* fix testimonial arrow
+* fix blocklist enable/disable option for wrapper block
+
+= 3.0.7 =
+##### New & Improvements
+* add icon box height option
+
+##### Bug Fixes
+* fix chart block
+* fix issue with animation in older plugin version
+* fix button mask frontend selector
+* fix archive title block issue
+
+= 3.0.6 =
+##### New & Improvements
+* new block: chart block
+* add px unit for line width and height for advance heading block
+* add filter on hover option for logo slider block
+* add number option for featured list icon
+* add option for icon position for fun fact block
+* add color option for icon in post meta for post block
+* add speed option for fun fact block
+* add responsive styling for divider in icon list block
+* add box shadow option for each socials element in social share block
+* add new rotating text for animated text block
+* add number option for icon type in feature list block
+* add filter styling in normal state for logo style
+* add input background color for search block
+* add “none” option for post author type
+* improve option for border styling for post comment block
+
+##### Bug Fixes
+* fix fun fact icon size in frontend
+* fix search container width issue in search block
+* fix icon box hover covered by overlay
+* fix icon box header margin
+* fix border color issue
+
+= 3.0.5 =
+##### New & Improvements
+* add description in gallery lightbox popup
+
+##### Bug Fixes
+* fix feature list block connector line issue
+* fix feature list block typing text issue
+* fix icon box background overlay
+* fix icon box block’s box shadow issue
+* fix post block pagination box shadow and margin issue
+* fix post block type 5 category align
+* fix post content block toolbar setting is missing
+* fix progress bar wrapper height
+* fix search block button with inline positioning
+* fix search block close icon styling
+* fix search block input width
+* fix section background type video height
+* fix taxonomy alignment with divider on
+* fix team block style for title and socials
+
+= 3.0.4 =
+##### Bug Fixes
+* fix nav menu mobile wrapper color
+* fix icon list text indent & icon item height
+* fix taxonomy default align
+* fix post block pagination
+* fix post block type 5 category vertical align
+* fix image box title color
+* fix testimonial dot color
+* fix fun fact number right space
+* fix responsive font frontend
+* fix post author alignment
+* fix post author avatar issue
+* fix post block category
+
+= 3.0.3 =
+##### Bug Fixes
+* fix google map panel
+* fix column responsive width
+* fix icon box overlay
+* fix post content toolbar
+* fix image box floating option
+* fix caching column width
+* fix post comment
+* fix feature list
+* fix button hover icon color
+
+= 3.0.2 =
+##### Bug Fixes
+* fix missing function
+
 = 3.0.1 =
-##### New & Improvemenets
+##### New & Improvements
 * update border control ui when clicked and filled
 
 ##### Bug Fixes

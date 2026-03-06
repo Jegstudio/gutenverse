@@ -82,6 +82,19 @@ class Text extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['textIndent'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "p.{$this->element_id}.gutenverse-text",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'text-indent', true );
+					},
+					'value'          => $this->attrs['textIndent'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['linkColor'] ) ) {
 			$this->inject_style(
 				array(

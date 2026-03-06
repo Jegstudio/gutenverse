@@ -5,13 +5,22 @@ import { classnames, Notice } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { useRef } from '@wordpress/element';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useFallbackFunction } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
-import { InspectorControls, RecursionProvider, useBlockProps, useHasRecursion, Warning, __experimentalUseBlockPreview as useBlockPreview, store as blockEditorStore } from '@wordpress/block-editor';
+import {
+    InspectorControls,
+    RecursionProvider as RecursionProviderNew,
+    useBlockProps,
+    useHasRecursion,
+    Warning,
+    __experimentalUseBlockPreview as useBlockPreview,
+    __experimentalRecursionProvider as RecursionProviderOld,
+    store as blockEditorStore
+} from '@wordpress/block-editor';
 import { select, useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { PanelTutorial } from 'gutenverse-core/controls';
-import { useSettingFallback, versionCompare } from 'gutenverse-core/helper';
+import { isNotEmpty, useSettingFallback, versionCompare } from 'gutenverse-core/helper';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
 import { parse } from '@wordpress/blocks';
@@ -152,7 +161,10 @@ const PostContentBlock = compose(
 
     useEffect(() => {
         if (versionCompare(wordpressVersion, '6.7.0', '>')) {
-            setBlockEditingMode(clientId, 'contentOnly');
+            const renderingMode = select(editorStore).getRenderingMode();
+            if (renderingMode === 'template-locked') {
+                setBlockEditingMode(clientId, 'contentOnly');
+            }
         }
 
         return () => {
@@ -164,10 +176,21 @@ const PostContentBlock = compose(
     const {
         elementId,
         inheritLayout,
+        inheritDefaultStyle
     } = attributes;
 
+    const isRecursive = (clientId) => {
+        const parents = select('core/block-editor').getBlockParents(clientId);
+        return parents.includes(clientId);
+    };
+
     const { postId: contextPostId, postType: contextPostType } = context;
-    const hasAlreadyRendered = useHasRecursion(contextPostId);
+    const hasAlreadyRendered = useFallbackFunction(
+        useHasRecursion,
+        isRecursive,
+        [contextPostId],
+        [clientId]
+    );
 
     if (contextPostId && contextPostType && hasAlreadyRendered) {
         return <RecursionError />;
@@ -177,6 +200,7 @@ const PostContentBlock = compose(
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
     const layout = useSettingFallback('layout');
+    const RecursionProvider = isNotEmpty(RecursionProviderNew)? RecursionProviderNew : RecursionProviderOld;
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -185,6 +209,7 @@ const PostContentBlock = compose(
             elementId,
             animationClass,
             displayClass,
+            'is-layout-constrained entry-content'
         ),
         ref: elementRef,
         onClick: () => {

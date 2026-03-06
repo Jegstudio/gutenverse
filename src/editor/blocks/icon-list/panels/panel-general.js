@@ -7,7 +7,8 @@ export const panelGeneral = (props) => {
     const {
         elementId,
         isDivider,
-        displayInline
+        displayInline,
+        verticalAlign
     } = props;
 
     return [
@@ -57,10 +58,12 @@ export const panelGeneral = (props) => {
             label: __('Color Divider', 'gutenverse'),
             show: isDivider,
             component: ColorControl,
+            allowDeviceControl: true,
             liveStyle: [
                 {
                     'type': 'color',
                     'id': 'colorDivider',
+                    'responsive': true,
                     'selector': `.${elementId} > .list-wrapper:not(.inline-icon-list) > .guten-icon-list-item:not(:nth-child(1)) .list-divider`,
                     'properties': [
                         {
@@ -100,10 +103,12 @@ export const panelGeneral = (props) => {
             label: displayInline ? __('Height Divider', 'gutenverse') : __('Width Divider', 'gutenverse'),
             show: isDivider,
             component: SizeControl,
+            allowDeviceControl: true,
             liveStyle: [
                 {
                     'type': 'unitPoint',
                     'id': 'widthDivider',
+                    'responsive': true,
                     'selector': `.${elementId}.guten-icon-list > .list-wrapper:not(.inline-icon-list) > .guten-icon-list-item .list-divider`,
                     'properties': [
                         {
@@ -115,6 +120,7 @@ export const panelGeneral = (props) => {
                 {
                     'type': 'unitPoint',
                     'id': 'widthDivider',
+                    'responsive': true,
                     'selector': `.${elementId}.guten-icon-list > .list-wrapper.inline-icon-list > .guten-icon-list-item .list-divider`,
                     'properties': [
                         {
@@ -130,10 +136,12 @@ export const panelGeneral = (props) => {
             label: __('Size Divider', 'gutenverse'),
             show: isDivider,
             component: SizeControl,
+            allowDeviceControl: true,
             liveStyle: [
                 {
                     'type': 'unitPoint',
                     'id': 'sizeDivider',
+                    'responsive': true,
                     'selector': `.${elementId} > .list-wrapper:not(.inline-icon-list) > .guten-icon-list-item:not(:nth-child(1)) .list-divider`,
                     'properties': [
                         {
@@ -145,6 +153,7 @@ export const panelGeneral = (props) => {
                 {
                     'type': 'unitPoint',
                     'id': 'sizeDivider',
+                    'responsive': true,
                     'selector': `.${elementId} > .list-wrapper.inline-icon-list > .guten-icon-list-item:not(:nth-child(1)) .list-divider`,
                     'properties': [
                         {
@@ -283,6 +292,37 @@ export const panelGeneral = (props) => {
                     value: 'flex-end'
                 },
             ],
+        },
+        {
+            id: 'adjustVerticalAlign',
+            label: __('Adjust Vertical Align', 'gutenverse'),
+            component: RangeControl,
+            allowDeviceControl: true,
+            show: verticalAlign === 'flex-start',
+            min: -15,
+            max: 15,
+            step: 1,
+            unit: 'px',
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'adjustVerticalAlign',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'margin-top',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                    'selector': `.${elementId} .guten-icon-list-item i:before`,
+                },
+            ]
         },
     ];
 };

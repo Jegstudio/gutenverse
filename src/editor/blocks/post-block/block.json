@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/post-block",
 	"class_callback": "\\Gutenverse\\Block\\Post_Block",
 	"title": "Post Block",
@@ -34,7 +34,7 @@
 			"type": "object",
 			"default": {}
 		},
-		"excludeCurrentPost":{
+		"excludeCurrentPost": {
 			"type": "boolean",
 			"default": false
 		},
@@ -71,7 +71,16 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "h3"
+			"default": "h3",
+			"enum": [
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"categoryEnabled": {
 			"type": "boolean",
@@ -101,6 +110,13 @@
 			"type": "string",
 			"default": "fas fa-arrow-right"
 		},
+		"readmoreIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"readmoreIconSVG": {
+			"type": "string"
+		},
 		"readmoreIconPosition": {
 			"type": "string",
 			"default": "after"
@@ -116,6 +132,13 @@
 		"commentIcon": {
 			"type": "string",
 			"default": "fas fa-comment"
+		},
+		"commentIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"commentIconSVG": {
+			"type": "string"
 		},
 		"commentIconPosition": {
 			"type": "string",
@@ -136,6 +159,13 @@
 		"metaAuthorIcon": {
 			"type": "string",
 			"default": "fas fa-user"
+		},
+		"metaAuthorIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"metaAuthorIconSVG": {
+			"type": "string"
 		},
 		"metaAuthorIconPosition": {
 			"type": "string",
@@ -160,6 +190,13 @@
 		"metaDateIcon": {
 			"type": "string",
 			"default": "fas fa-clock"
+		},
+		"metaDateIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"metaDateIconSVG": {
+			"type": "string"
 		},
 		"metaDateIconPosition": {
 			"type": "string",
@@ -205,6 +242,14 @@
 			"type": "string",
 			"default": ""
 		},
+		"paginationIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"paginationIconSVG": {
+			"type": "string",
+			"default": ""
+		},
 		"paginationIconPosition": {
 			"type": "string",
 			"default": "before",
@@ -241,6 +286,14 @@
 		"postItemBoxShadow": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"thumbnailSize": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {
+				"label": "Full",
+				"value": "full"
+			}
 		},
 		"thumbnailWidth": {
 			"type": "object",
@@ -329,8 +382,8 @@
 		"categoryVerticalAlign": {
 			"type": "object",
 			"default": {
-                "Desktop": "end"
-            },
+				"Desktop": "end"
+			},
 			"copyStyle": true
 		},
 		"categoryColor": {
@@ -434,11 +487,11 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"readmoreWidth":{
+		"readmoreWidth": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"readmoreAlign":{
+		"readmoreAlign": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -518,6 +571,14 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"metaColorIcon": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"metaSizeIcon": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"metaAuthorTypography": {
 			"type": "object",
 			"copyStyle": true
@@ -549,6 +610,10 @@
 		"lazyLoad": {
 			"type": "boolean",
 			"default": false
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		},
 		"paginationPadding": {
 			"type": "object",
@@ -646,6 +711,18 @@
 			},
 			"copyStyle": true
 		},
+		"paginationActiveBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"paginationActiveBorderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "paginationActiveBorder",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
 		"paginationShadow": {
 			"type": "object",
 			"copyStyle": true
@@ -654,11 +731,15 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"paginationActiveShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"paginationDisabledBorder": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"paginationDisabledShadow":{
+		"paginationDisabledShadow": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -671,6 +752,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -793,41 +879,104 @@
 			"type": "string",
 			"default": "fas fa-chevron-left"
 		},
+		"paginationPrevIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"paginationPrevIconSVG": {
+			"type": "string"
+		},
 		"paginationNextIcon": {
 			"type": "string",
 			"default": "fas fa-chevron-right"
+		},
+		"paginationNextIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"paginationNextIconSVG": {
+			"type": "string"
 		},
 		"editParam": {
 			"type": "object",
 			"default": {}
 		},
-		"contentOrder":{
-			"type":"array",
+		"contentOrder": {
+			"type": "array",
 			"default": [
-                {
-                    "label": "Title",
-                    "value": "title"
-                },
-                {
-                    "label": "Meta",
-                    "value": "meta"
-                },
-                {
-                    "label": "Excerpt",
-                    "value": "excerpt"
-                },
-                {
-                    "label": "Read More",
-                    "value": "read"
-                }
-            ]
+				{
+					"label": "Title",
+					"value": "title"
+				},
+				{
+					"label": "Meta",
+					"value": "meta"
+				},
+				{
+					"label": "Excerpt",
+					"value": "excerpt"
+				},
+				{
+					"label": "Read More",
+					"value": "read"
+				}
+			]
+		},
+		"paginationLoadmoreAnimation": {
+			"type": "string",
+			"default": ""
+		},
+		"paginationLoadmoreAnimationSequence": {
+			"type": "string",
+			"default": ""
+		},
+		"paginationLoadmoreAnimationSequenceDelay": {
+			"type": "string",
+			"default": ""
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"post",
 		"block"
+	],
+	"viewScript": [
+		"gutenverse-frontend-postblock-script"
+	],
+	"style": [
+		"gutenverse-frontend-post-block-style"
 	]
 }

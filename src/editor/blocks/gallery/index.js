@@ -7,13 +7,15 @@ import example from './data/example';
 import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
+import saveV4 from './deprecated/v4/save';
+import saveV5 from './deprecated/v5/save';
 
 const { name, attributes } = metadata;
 
 export { metadata, name };
 export const settings = {
     icon: <IconGallerySVG />,
-    example: example,
+    example,
     edit,
     save,
     deprecated: [
@@ -68,19 +70,19 @@ export const settings = {
                     deprecated: true,
                 },
                 images: {
-                    type: "array",
+                    type: 'array',
                     default: [
                         {
-                            id: "Two"
+                            id: 'Two'
                         },
                         {
-                            id: "Three"
+                            id: 'Three'
                         },
                         {
-                            id: "Four"
+                            id: 'Four'
                         },
                         {
-                            id: "Five"
+                            id: 'Five'
                         }
                     ],
                     deprecated: true,
@@ -108,6 +110,14 @@ export const settings = {
                 },
             },
             save: saveV3,
-        }
+        },
+        {
+            attributes: attributes,
+            save: saveV4
+        },
+        {
+            attributes: attributes,
+            save: saveV5
+        },
     ]
 };

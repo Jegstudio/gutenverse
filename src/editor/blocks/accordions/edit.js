@@ -43,7 +43,11 @@ const Accordions = compose(
     const {
         elementId,
         iconOpen,
+        iconOpenType,
+        iconOpenSVG,
         iconClosed,
+        iconClosedType,
+        iconClosedSVG,
         iconPosition,
         titleTag,
     } = attributes;
@@ -60,12 +64,16 @@ const Accordions = compose(
         getBlocks(clientId).map(child => {
             updateBlockAttributes(child.clientId, {
                 iconOpen,
+                iconOpenType,
+                iconOpenSVG,
                 iconClosed,
+                iconClosedType,
+                iconClosedSVG,
                 iconPosition,
                 titleTag,
             });
         });
-    }, [iconOpen, iconClosed, iconPosition, titleTag]);
+    }, [iconOpen, iconOpenType, iconOpenSVG, iconClosed, iconClosedType, iconClosedSVG, iconPosition, titleTag]);
 
     useEffect(() => {
         if (elementRef) {
@@ -76,7 +84,6 @@ const Accordions = compose(
     const innerBlocksProps = useInnerBlocksProps({
         className: classnames(
             'guten-accordions',
-            elementId,
         )
     }, {
         template: [['gutenverse/accordion']],
@@ -92,7 +99,8 @@ const Accordions = compose(
             'guten-accordions-wrapper',
             'no-margin',
             animationClass,
-            displayClass
+            displayClass,
+            elementId,
         ),
         ref: elementRef
     });
@@ -106,7 +114,7 @@ const Accordions = compose(
         <CopyElementToolbar {...props} />
         <InspectorControls>
             <div className={'parent-button'}>
-                <Button primary={true} onClick={() => addChild()}>
+                <Button variant="secondary" onClick={() => addChild()}>
                     {__('Add Accordion Child', 'gutenverse')}
                 </Button>
             </div>

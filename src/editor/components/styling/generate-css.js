@@ -11,10 +11,10 @@ export const plainGeneratorFunction = (value, props) => {
             if(attribute !== 'end') {
                 switch (selectorType) {
                     case 'first':
-                        value = 'height: 100%; display: grid; grid-template-rows: 1fr auto;';
+                        value = '100%; display: grid; grid-template-rows: 1fr auto;';
                         break;
                     case 'second':
-                        value = `align-self: ${attribute}`;
+                        value = `${attribute}`;
                         break;
                     default:
                         break;

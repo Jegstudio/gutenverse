@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl, ColorControl, NumberControl, RangeControl, SelectControl, TextControl, TypographyControl } from 'gutenverse-core/controls';
 import { isYoutubeUrl } from 'gutenverse-core/helper';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 
 export const videoPanel = (props) => {
     const {
@@ -32,7 +32,8 @@ export const videoPanel = (props) => {
             show: videoType !== undefined,
             label: __('Video URL', 'gutenverse'),
             description: videoType === 'externalLink' ? __('Currently supported External URL Types are : YouTube, Twitch, Vimeo, and DailyMotion', 'gutenverse') : null,
-            component: TextControl
+            component: TextControl,
+            liveUpdate: true,
         },
         {
             id: 'start',

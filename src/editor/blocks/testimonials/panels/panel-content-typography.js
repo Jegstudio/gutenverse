@@ -5,7 +5,8 @@ export const panelContentTypography = props => {
     const {
         elementId,
         quoteOverride,
-        __textHover,
+        switcher,
+        setSwitcher
     } = props;
 
     return [
@@ -102,6 +103,24 @@ export const panelContentTypography = props => {
                             }
                         }
                     ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'quoteSize',
+                    'responsive': true,
+                    'selector': `.${elementId} .guten-testimonial-item .testimonial-box .icon-content svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -185,10 +204,11 @@ export const panelContentTypography = props => {
                     label: 'Hover'
                 }
             ],
+            onChange: ({ __textHover }) => setSwitcher({ ...switcher, state: __textHover })
         },
         {
             id: 'nameNormalColor',
-            show: !__textHover || __textHover === 'normal',
+            show: !switcher.state || switcher.state === 'normal',
             label: __('Name Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -207,13 +227,13 @@ export const panelContentTypography = props => {
         },
         {
             id: 'nameHoverColor',
-            show: __textHover === 'hover',
+            show: switcher.state === 'hover',
             label: __('Name Hover Color', 'gutenverse'),
             component: ColorControl,
         },
         {
             id: 'designationNormalColor',
-            show: !__textHover || __textHover === 'normal',
+            show: !switcher.state || switcher.state === 'normal',
             label: __('Designation Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -232,13 +252,13 @@ export const panelContentTypography = props => {
         },
         {
             id: 'designationHoverColor',
-            show: __textHover === 'hover',
+            show: switcher.state === 'hover',
             label: __('Designation Hover Color', 'gutenverse'),
             component: ColorControl,
         },
         {
             id: 'descriptionNormalColor',
-            show: !__textHover || __textHover === 'normal',
+            show: !switcher.state || switcher.state === 'normal',
             label: __('Comment Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -257,13 +277,13 @@ export const panelContentTypography = props => {
         },
         {
             id: 'descriptionHoverColor',
-            show: __textHover === 'hover',
+            show: switcher.state === 'hover',
             label: __('Comment Hover Color', 'gutenverse'),
             component: ColorControl,
         },
         {
             id: 'quoteNormalColor',
-            show: !__textHover || __textHover === 'normal',
+            show: !switcher.state || switcher.state === 'normal',
             label: __('Quote Icon Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -277,12 +297,23 @@ export const panelContentTypography = props => {
                         }
                     ],
                     'selector': `.${elementId} .guten-testimonial-item .testimonial-box .icon-content i`,
+                },
+                {
+                    'type': 'color',
+                    'id': 'quoteNormalColor',
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.${elementId} .guten-testimonial-item .testimonial-box .icon-content svg`,
                 }
             ]
         },
         {
             id: 'quoteHoverColor',
-            show: __textHover === 'hover',
+            show: switcher.state === 'hover',
             label: __('Quote Icon Hover Color', 'gutenverse'),
             component: ColorControl,
         },

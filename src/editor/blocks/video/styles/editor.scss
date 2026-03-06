@@ -1,0 +1,17 @@
+.guten-post-content.guten-element {
+    .components-disabled {
+        .guten-video {
+            h5.title, .upload-mode, .video-url-wrapper {
+                display: none;
+            }
+        }
+    }
+}
+
+.is-editing-disabled {
+    .guten-video {
+        .upload-mode, .video-url-wrapper, h5.title {
+            display: none;
+        }
+    }
+}

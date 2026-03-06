@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-divider',
         'type': 'double',
         'width': {
             'Desktop': '90'

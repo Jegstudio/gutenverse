@@ -1,4 +1,4 @@
-import { Default, u, applyFilters } from 'gutenverse-core-frontend';
+import { Default, u } from 'gutenverse-core-frontend';
 
 class GutenverseClientLogo extends Default {
     /* public */
@@ -49,23 +49,12 @@ class GutenverseClientLogo extends Default {
             breakpoints: this.swiperBreakpoint(JSON.parse(breakpoints))
         };
 
-        const settingsProps = {
-            id,
-            loop,
-            autoplay,
-            timeout,
-            nav,
-            arrow,
-            breakpoints
-        };
-
-        const settingsFilter = applyFilters(
-            'gutenverse.swiper.frontend',
-            settings,
-            settingsProps
-        );
-        new Swiper(`#${id}`, settingsFilter);
+        new Swiper(`#${id}`, settings);
     }
 }
 
-export default GutenverseClientLogo;
+const selected = u('.guten-client-logo');
+
+if (selected) {
+    new GutenverseClientLogo(selected);
+}

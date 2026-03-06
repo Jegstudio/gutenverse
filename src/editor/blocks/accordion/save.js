@@ -13,7 +13,11 @@ export const save = (props) => {
         first,
         iconPosition,
         iconOpen,
+        iconOpenType,
+        iconOpenSVG,
         iconClosed,
+        iconClosedType,
+        iconClosedSVG,
         titleTag,
         elementId
     } = attributes;
@@ -28,13 +32,13 @@ export const save = (props) => {
 
     return <div className={accordionStyle}>
         <div className={'accordion-heading'}>
-            {iconPosition === 'left' && <AccordionIcon iconClosed={iconClosed} iconOpen={iconOpen} />}
+            {iconPosition === 'left' && <AccordionIcon iconClosed={iconClosed} iconClosedType={iconClosedType} iconClosedSVG={iconClosedSVG} iconOpen={iconOpen} iconOpenType={iconOpenType} iconOpenSVG={iconOpenSVG} />}
             <RichText.Content
                 className={'accordion-text'}
                 value={title}
                 tagName={titleTag}
             />
-            {iconPosition === 'right' && <AccordionIcon iconClosed={iconClosed} iconOpen={iconOpen} />}
+            {iconPosition === 'right' && <AccordionIcon iconClosed={iconClosed} iconClosedType={iconClosedType} iconClosedSVG={iconClosedSVG} iconOpen={iconOpen} iconOpenType={iconOpenType} iconOpenSVG={iconOpenSVG} />}
         </div>
         <div className={'accordion-body'}>
             <div className={'accordion-content'}>

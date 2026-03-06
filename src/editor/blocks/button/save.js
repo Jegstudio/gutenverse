@@ -6,6 +6,7 @@ import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 import { compose } from '@wordpress/compose';
 import { applyFilters } from '@wordpress/hooks';
+import { renderIcon } from './render-icon';
 
 const save = compose(
     withAnimationAdvanceScript('buttons'),
@@ -21,6 +22,8 @@ const save = compose(
         buttonSize,
         showIcon,
         icon,
+        iconType,
+        iconSVG,
         iconPosition,
         role,
         ariaLabel
@@ -35,11 +38,11 @@ const save = compose(
         'guten-button-wrapper',
         elementId,
         displayClass,
+        animationClass,
     );
 
     const buttonClass = classnames(
         'guten-button',
-        animationClass,
         {
             [`guten-button-${buttonType}`]: buttonType && buttonType !== 'default',
             [`guten-button-${buttonSize}`]: buttonSize,
@@ -55,27 +58,31 @@ const save = compose(
             elementId
         );
 
+        return role === 'link' ?
+            <a className={buttonClass} href={href} target={linkTarget} aria-label={ariaLabel} rel={rel}>{children}</a> :
+            <button className={buttonClass} aria-label={ariaLabel} type="submit">{children}</button>;
+    };
+
+    const ButtonTitle = ({ children }) => {
         const title = applyFilters(
             'gutenverse.dynamic.generate-content',
-            children,
+            <RichText.Content value={children} />,
             'dynamicContent',
             attributes,
             elementId
         );
 
-        return role === 'link' ?
-            <a className={buttonClass} href={href} target={linkTarget} aria-label={ariaLabel} rel={rel}>{title}</a> :
-            <button className={buttonClass} type="submit">{title}</button>;
+        return (
+            <span>{title}</span>
+        );
     };
 
     return (
         <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
             <ButtonElement>
-                {showIcon && iconPosition === 'before' && <i className={`fa-lg ${icon}`} />}
-                <span>
-                    <RichText.Content value={content} />
-                </span>
-                {showIcon && iconPosition === 'after' && <i className={`fa-lg ${icon}`} />}
+                {showIcon && iconPosition === 'before' && renderIcon(icon, iconType, iconSVG)}
+                <ButtonTitle>{content}</ButtonTitle>
+                {showIcon && iconPosition === 'after' && renderIcon(icon, iconType, iconSVG)}
             </ButtonElement>
         </div>
     );

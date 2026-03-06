@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/post-list",
 	"class_callback": "\\Gutenverse\\Block\\Post_List",
 	"title": "Post List",
@@ -90,6 +90,13 @@
 			"type": "string",
 			"default": "fas fa-circle"
 		},
+		"iconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconSVG": {
+			"type": "string"
+		},
 		"noContentText": {
 			"type": "string",
 			"default": ""
@@ -118,8 +125,16 @@
 			"type": "string",
 			"default": "fas fa-clock"
 		},
-		"metaDateIconPosition": {
+		"metaDateIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"metaDateIconSVG": {
 			"type": "string"
+		},
+		"metaDateIconPosition": {
+			"type": "string",
+			"default": "before"
 		},
 		"metaCategoryEnabled": {
 			"type": "boolean",
@@ -129,6 +144,13 @@
 			"type": "string",
 			"default": "fas fa-tag"
 		},
+		"metaCategoryIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"metaCategoryIconSVG": {
+			"type": "string"
+		},
 		"metaPosition": {
 			"type": "string",
 			"default": "top"
@@ -136,6 +158,10 @@
 		"lazyLoad": {
 			"type": "boolean",
 			"default": false
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		},
 		"paginationMode": {
 			"type": "string",
@@ -160,6 +186,13 @@
 		"paginationIcon": {
 			"type": "string",
 			"default": ""
+		},
+		"paginationIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"paginationIconSVG": {
+			"type": "string"
 		},
 		"paginationIconPosition": {
 			"type": "string",
@@ -463,6 +496,11 @@
 			"default": {},
 			"copyStyle": true
 		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
 		"border": {
 			"type": "object",
 			"copyStyle": true
@@ -588,20 +626,71 @@
 			"type": "string",
 			"default": "fas fa-chevron-left"
 		},
+		"paginationPrevIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"paginationPrevIconSVG": {
+			"type": "string"
+		},
 		"paginationNextIcon": {
 			"type": "string",
 			"default": "fas fa-chevron-right"
 		},
+		"paginationNextIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"paginationNextIconSVG": {
+			"type": "string"
+		},
 		"editParam": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"post",
 		"list"
+	],
+	"viewScript": [
+		"gutenverse-frontend-postlist-script"
+	],
+	"style": [
+		"gutenverse-frontend-post-list-style"
 	]
 }

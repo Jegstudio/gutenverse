@@ -1,6 +1,6 @@
 
 import { __ } from '@wordpress/i18n';
-import { AlertControl, ColorControl, IconControl, SizeControl, SwitchControl } from 'gutenverse-core/controls';
+import { AlertControl, ColorControl, IconSVGControl, SizeControl, SwitchControl } from 'gutenverse-core/controls';
 
 export const iconPanel = (props) => {
     const {
@@ -22,7 +22,7 @@ export const iconPanel = (props) => {
             id: 'icon',
             show: showIcon,
             label: __('Icon', 'gutenverse'),
-            component: IconControl
+            component: IconSVGControl
         },
         {
             id: 'iconSpace',
@@ -109,6 +109,18 @@ export const iconPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'selector': `.${elementId} .taxonomy-list-wrapper .icon-list svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -144,6 +156,17 @@ export const iconPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColor',
+                    'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a .icon-list svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -160,6 +183,17 @@ export const iconPanel = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColorHover',
+                    'selector': `.${elementId} .taxonomy-list-wrapper .taxonomy-list-item a:hover .icon-list svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]

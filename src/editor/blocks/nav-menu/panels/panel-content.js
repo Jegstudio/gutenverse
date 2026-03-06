@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 
-import { IconRadioControl, SelectControl } from 'gutenverse-core/controls';
+import { IconRadioControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'gutenverse-core/components';
 
 export const contentPanel = () => {
@@ -48,6 +48,21 @@ export const contentPanel = () => {
                     value: 'mobile',
                 },
             ]
+        },
+        {
+            id: 'hamburgerAriaLabel',
+            label: __('Hamburger Button Aria Label', 'gutenverse'),
+            component: TextControl,
+        },
+        {
+            id: 'closeAriaLabel',
+            label: __('Close Button Aria Label', 'gutenverse'),
+            component: TextControl,
+        },
+        {
+            id: 'mobileLogoAriaLabel',
+            label: __('Mobile Logo Aria Label', 'gutenverse'),
+            component: TextControl,
         },
     ];
 };

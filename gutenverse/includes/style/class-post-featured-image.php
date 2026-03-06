@@ -111,6 +111,66 @@ class Post_Featured_Image extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['imageRatio'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} img",
+					'property'       => function ( $value ) {
+						$value = ( $value && 0 !== $value ) ? $value : 'auto';
+						return "aspect-ratio: {$value};";
+					},
+					'device_control' => true,
+					'value'          => $this->attrs['imageRatio'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['imageRatio'] ) && 'custom' === $this->attrs['imageRatio'] && isset( $this->attrs['imageRatioCustom'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} img",
+					'property'       => function ( $value ) {
+						$value = ( $value && 0 !== $value ) ? $value : 'auto';
+						return "aspect-ratio: {$value};";
+					},
+					'device_control' => true,
+					'value'          => $this->attrs['imageRatioCustom'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['imageFit'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} img",
+					'property'       => function ( $value ) {
+						if ( 'default' === $value || ! $value ) {
+							return null;
+						}
+						return "object-fit: {$value};";
+					},
+					'device_control' => true,
+					'value'          => $this->attrs['imageFit'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['imagePosition'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} img",
+					'property'       => function ( $value ) {
+						if ( 'default' === $value || ! $value ) {
+							return 'object-position: center center;';
+						}
+						return "object-position: {$value};";
+					},
+					'device_control' => true,
+					'value'          => $this->attrs['imagePosition'],
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['imageBorder'] ) ) {
 			$this->handle_border( 'imageBorder', ".{$this->element_id} img" );
 		}

@@ -36,6 +36,24 @@ export const closeIconStylePanel = (props) => {
                             }
                         }
                     ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'closeIconSize',
+                    'responsive': true,
+                    'selector': `.${elementId} .gutenverse-search-form .search-input-container .close-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -144,6 +162,18 @@ export const closeIconStylePanel = (props) => {
                             'valueType': 'direct',
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'closeIconColor',
+                    'responsive': true,
+                    'selector': `.${elementId} .gutenverse-search-form .search-input-container .close-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct',
+                        }
+                    ]
                 }
             ]
         },
@@ -158,10 +188,22 @@ export const closeIconStylePanel = (props) => {
                     'type': 'color',
                     'id': 'closeIconColorHover',
                     'responsive': true,
-                    'selector': `.${elementId} .gutenverse-search-form .search-input-container:hover .icon`,
+                    'selector': `.${elementId} .gutenverse-search-form .search-input-container:hover .close-icon`,
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct',
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'closeIconColorHover',
+                    'responsive': true,
+                    'selector': `.${elementId} .gutenverse-search-form .search-input-container:hover .close-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct',
                         }
                     ]

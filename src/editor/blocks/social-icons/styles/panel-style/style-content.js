@@ -36,7 +36,20 @@ const contentStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-social-icon i`,
+        'selector': `.${elementId} .guten-social-icon a i`,
+    });
+
+    isNotEmpty(attributes['iconSize']) && data.push({
+        'type': 'unitPoint',
+        'id': 'iconSize',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'direct'
+            }
+        ],
+        'selector': `.${elementId} .guten-social-icon a svg`,
     });
 
     isNotEmpty(attributes['typography']) && data.push({

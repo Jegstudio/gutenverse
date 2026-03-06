@@ -39,6 +39,7 @@ class Post_Author extends Style_Abstract {
 	public function __construct( $attrs ) {
 		parent::__construct( $attrs );
 
+		$this->in_block = false;
 		$this->set_feature(
 			array(
 				'background'  => null,
@@ -67,11 +68,38 @@ class Post_Author extends Style_Abstract {
 				)
 			);
 		}
+		if ( isset( $this->attrs['verticalAlignment'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}",
+					'property'       => function ( $value ) {
+						return "align-items: {$value};";
+					},
+					'value'          => $this->attrs['verticalAlignment'],
+					'device_control' => true,
+				)
+			);
+		}
 
+		$this->name_style();
+		$this->avatar_style();
+		$this->biography_style();
+	}
+
+	/**
+	 * Name styling
+	 *
+	 * @return void
+	 */
+	private function name_style() {
+		$selector       = ".guten-post-author.{$this->element_id} .author-name,
+							.guten-post-author.{$this->element_id} .author-name a";
+		$selector_hover = ".guten-post-author.{$this->element_id} .author-name:hover,
+							.guten-post-author.{$this->element_id}:hover .author-name";
 		if ( isset( $this->attrs['typography'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector'       => ".{$this->element_id} *",
+					'selector'       => "{$selector}",
 					'property'       => function ( $value ) {},
 					'value'          => $this->attrs['typography'],
 					'device_control' => false,
@@ -82,7 +110,7 @@ class Post_Author extends Style_Abstract {
 		if ( isset( $this->attrs['color'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} *",
+					'selector'       => "{$selector}",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -95,7 +123,7 @@ class Post_Author extends Style_Abstract {
 		if ( isset( $this->attrs['textShadow'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}",
+					'selector'       => "{$selector}",
 					'property'       => function ( $value ) {
 						return $this->handle_text_shadow( $value );
 					},
@@ -108,7 +136,7 @@ class Post_Author extends Style_Abstract {
 		if ( isset( $this->attrs['colorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}:hover *",
+					'selector'       => "{$selector_hover}",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -121,7 +149,7 @@ class Post_Author extends Style_Abstract {
 		if ( isset( $this->attrs['textShadowHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}:hover",
+					'selector'       => "{$selector_hover}",
 					'property'       => function ( $value ) {
 						return $this->handle_text_shadow( $value );
 					},
@@ -130,15 +158,106 @@ class Post_Author extends Style_Abstract {
 				)
 			);
 		}
+	}
 
-		// Author Avatar Styling.
+	/**
+	 * Name styling
+	 *
+	 * @return void
+	 */
+	private function biography_style() {
+		$selector = ".guten-post-author.{$this->element_id} span.author-bio";
+
+		if ( isset( $this->attrs['biographyMargintop'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$selector}",
+					'property'       => function ( $value ) {
+						return "margin-top: {$value}px;";
+					},
+					'value'          => $this->attrs['biographyMargintop'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['biographyTypography'] ) ) {
+			$this->inject_typography(
+				array(
+					'selector'       => "{$selector}",
+					'property'       => function ( $value ) {},
+					'value'          => $this->attrs['biographyTypography'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['biographyColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$selector}",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['biographyColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['biographyTextShadow'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$selector}",
+					'property'       => function ( $value ) {
+						return $this->handle_text_shadow( $value );
+					},
+					'value'          => $this->attrs['biographyTextShadow'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['biographyColorHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$selector}:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['biographyColorHover'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['biographyTextShadowHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$selector}:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_text_shadow( $value );
+					},
+					'value'          => $this->attrs['biographyTextShadowHover'],
+					'device_control' => false,
+				)
+			);
+		}
+	}
+
+	/**
+	 * Avatar styling
+	 *
+	 * @return void
+	 */
+	private function avatar_style() {
 		if ( ! empty( $this->attrs['authorAvatar'] ) ) {
 			if ( isset( $this->attrs['size'] ) ) {
 				$this->inject_style(
 					array(
 						'selector'       => ".{$this->element_id} img",
 						'property'       => function ( $value ) {
-							return $this->handle_unit_point( $value, 'max-width' );
+							return $this->handle_unit_point( $value, 'width' );
 						},
 						'value'          => $this->attrs['size'],
 						'device_control' => true,

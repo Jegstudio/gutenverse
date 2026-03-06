@@ -1,12 +1,52 @@
-import { Default, u, addQueryArgs, apiFetch } from 'gutenverse-core-frontend';
+import { Default, u } from 'gutenverse-core-frontend';
 import isEmpty from 'lodash/isEmpty';
+import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
 
 class GutenversePostblock extends Default {
+    /* static attributes */
+    static lazy_observer = null;
     /* public */
     init() {
         this._elements.map(element => {
             this._tabItems(element);
+            // run lazy observer
+            const images = this._detect_lazy_load(element);
+            this._run_lazy_observer(images);
         });
+    }
+
+    /* private */
+    _run_lazy_observer(images = []) {
+        if ('IntersectionObserver' in window && !GutenversePostblock.lazy_observer) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('lazyloaded');
+                        obs.unobserve(img);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+            GutenversePostblock.lazy_observer = observer;
+        }
+        images.forEach(img => GutenversePostblock.lazy_observer.observe(img));
+    }
+
+    /* private */
+    _detect_lazy_load(element) {
+        let images = [];
+        element.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            if (img.complete && img.naturalHeight !== 0) {
+                img.classList.add('lazyloaded');
+            } else {
+                images.push(img);
+            }
+        });
+
+        return images;
     }
 
     /* private */
@@ -72,7 +112,9 @@ class GutenversePostblock extends Default {
             breakpoint,
             noContentText,
             backgroundHover,
-            contentOrder
+            contentOrder,
+            paginationLoadmoreAnimation,
+            paginationLoadmoreAnimationSequence,
         } = settings;
 
         let query = null;
@@ -84,90 +126,96 @@ class GutenversePostblock extends Default {
         }
 
         element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`);
+        setTimeout(() => {
+            apiFetch({
+                path: 'gutenverse-client/v1/postblock/data',
+                method: 'POST',
+                data: {
+                    attributes: {
+                        postItemMargin,
+                        postItemPadding,
+                        postItemBorder,
+                        thumbnailRadius,
+                        paginationMargin,
+                        paginationPadding,
+                        paginationBorder,
+                        hideDesktop,
+                        hideTablet,
+                        hideMobile,
+                        breakpoint,
+                        noContentText,
+                        backgroundHover,
+                        elementId,
+                        postId,
+                        inheritQuery,
+                        postType,
+                        postOffset,
+                        alreadyFetch: parseInt(numberPost),
+                        numberPost: parseInt(numberPost) + parseInt(paginationNumberPost),
+                        column,
+                        includePost,
+                        excludePost,
+                        includeCategory,
+                        excludeCategory,
+                        includeAuthor,
+                        includeTag,
+                        excludeTag,
+                        sortBy,
+                        htmlTag,
+                        categoryEnabled,
+                        categoryPosition,
+                        excerptEnabled,
+                        excerptLength,
+                        excerptMore,
+                        readmoreEnabled,
+                        readmoreIcon,
+                        readmoreIconPosition,
+                        readmoreText,
+                        commentEnabled,
+                        commentIcon,
+                        commentIconPosition,
+                        metaEnabled,
+                        metaAuthorEnabled,
+                        metaAuthorByText,
+                        metaAuthorIcon,
+                        metaAuthorIconPosition,
+                        metaDateEnabled,
+                        metaDateType,
+                        metaDateFormat,
+                        metaDateFormatCustom,
+                        metaDateIcon,
+                        metaDateIconPosition,
+                        postblockType,
+                        paginationMode,
+                        paginationLoadmoreText,
+                        paginationLoadingText,
+                        paginationNumberPost,
+                        paginationScrollLimit,
+                        paginationIcon,
+                        paginationIconPosition,
+                        paginationLoadmoreAnimation,
+                        paginationLoadmoreAnimationSequence,
+                        qApi,
+                        qSearch: query && query['q_search'],
+                        qCategory: query && query['q_category_name'],
+                        qTag: query && query['q_tag'],
+                        qAuthor: query && query['q_author'],
+                        contentOrder
+                    }
+                }
+            }).then((data) => {
+                element.replace(data.rendered);
+                element.find('.guten-block-loadmore').text(paginationLoadmoreText);
 
-        apiFetch({
-            path: addQueryArgs('/gutenverse-client/v1/postblock/data', {
-                attributes: {
-                    postItemMargin,
-                    postItemPadding,
-                    postItemBorder,
-                    thumbnailRadius,
-                    paginationMargin,
-                    paginationPadding,
-                    paginationBorder,
-                    hideDesktop,
-                    hideTablet,
-                    hideMobile,
-                    breakpoint,
-                    noContentText,
-                    backgroundHover,
-                    elementId,
-                    postId,
-                    inheritQuery,
-                    postType,
-                    postOffset,
-                    numberPost: parseInt(numberPost) + parseInt(paginationNumberPost),
-                    column,
-                    includePost,
-                    excludePost,
-                    includeCategory,
-                    excludeCategory,
-                    includeAuthor,
-                    includeTag,
-                    excludeTag,
-                    sortBy,
-                    htmlTag,
-                    categoryEnabled,
-                    categoryPosition,
-                    excerptEnabled,
-                    excerptLength,
-                    excerptMore,
-                    readmoreEnabled,
-                    readmoreIcon,
-                    readmoreIconPosition,
-                    readmoreText,
-                    commentEnabled,
-                    commentIcon,
-                    commentIconPosition,
-                    metaEnabled,
-                    metaAuthorEnabled,
-                    metaAuthorByText,
-                    metaAuthorIcon,
-                    metaAuthorIconPosition,
-                    metaDateEnabled,
-                    metaDateType,
-                    metaDateFormat,
-                    metaDateFormatCustom,
-                    metaDateIcon,
-                    metaDateIconPosition,
-                    postblockType,
-                    paginationMode,
-                    paginationLoadmoreText,
-                    paginationLoadingText,
-                    paginationNumberPost,
-                    paginationScrollLimit,
-                    paginationIcon,
-                    paginationIconPosition,
-                    qApi,
-                    qSearch: query && query['q_search'],
-                    qCategory: query && query['q_category_name'],
-                    qTag: query && query['q_tag'],
-                    qAuthor: query && query['q_author'],
-                    contentOrder
-                },
-            }),
-        }).then((data) => {
-            element.replace(data.rendered);
-            element.find('.guten-block-loadmore').text(paginationLoadmoreText);
-
-            if (paginationMode === 'scrollload' && this._shouldItBeLoading(element, settings)) {
-                const newElement = u(`.${elementId}.guten-post-block`);
-                const newSettings = JSON.parse(newElement.find('.guten-postblock').data('settings'));
-                this._loadMore(newElement, newSettings);
-            } else {
-                this._tabItems(`.${elementId}.guten-post-block`);
-            }
-        }).catch(() => { });
+                if (paginationMode === 'scrollload' && this._shouldItBeLoading(element, settings)) {
+                    const newElement = u(`.${elementId}.guten-post-block`);
+                    const newSettings = JSON.parse(newElement.find('.guten-postblock').data('settings'));
+                    this._loadMore(newElement, newSettings);
+                } else {
+                    this._tabItems(`.${elementId}.guten-post-block`);
+                }
+            }).catch(() => { });
+        }, 500);
     }
 
     _shouldItBeLoading(element, settings) {
@@ -217,7 +265,9 @@ class GutenversePostblock extends Default {
         }
 
         apiFetch({
-            path: addQueryArgs('/gutenverse-client/v1/postblock/data', {
+            path: 'gutenverse-client/v1/postblock/data',
+            method: 'POST',
+            data: {
                 attributes: {
                     ...settings,
                     paged: currentPage,
@@ -228,8 +278,8 @@ class GutenversePostblock extends Default {
                     qCategory: query && query['q_category_name'],
                     qTag: query && query['q_tag'],
                     qAuthor: query && query['q_author'],
-                },
-            }),
+                }
+            }
         }).then((data) => {
             element.html(data.rendered);
             this._tabItems(`.${elementId}.guten-post-block`);
@@ -255,7 +305,8 @@ class GutenversePostblock extends Default {
             window.addEventListener('scroll', scrolling);
         }
 
-        if (paginationMode === 'prevnext' || paginationMode === 'number') {
+        // Only bind AJAX handlers for AJAX pagination modes, not native modes
+        if ((paginationMode === 'prevnext' || paginationMode === 'number') && paginationMode !== 'normal-prevnext' && paginationMode !== 'normal-number') {
             const prevButton = blockElement.find('.guten_block_nav .prev');
             const nextButton = blockElement.find('.guten_block_nav .next');
 
@@ -297,4 +348,8 @@ class GutenversePostblock extends Default {
     }
 }
 
-export default GutenversePostblock;
+const selected = u('.guten-post-block');
+
+if (selected) {
+    new GutenversePostblock(selected);
+}

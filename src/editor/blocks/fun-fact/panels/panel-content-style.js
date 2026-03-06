@@ -1,8 +1,52 @@
 import { __ } from '@wordpress/i18n';
 import { ColorControl, DimensionControl, RangeControl, TypographyControl } from 'gutenverse-core/controls';
 
-export const contentStylePanel = ({ elementId }) => {
+export const contentStylePanel = (props) => {
+    const {
+        elementId
+    } = props;
+
     return [
+        {
+            id: 'prefixColor',
+            label: __('Prefix Color', 'gutenverse'),
+            component: ColorControl,
+            allowDeviceControl: true,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'prefixColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .prefix`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct',
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'suffixColor',
+            label: __('Suffix Color', 'gutenverse'),
+            component: ColorControl,
+            allowDeviceControl: true,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'suffixColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper .suffix`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct',
+                        }
+                    ]
+                }
+            ]
+        },
         {
             id: 'numberColor',
             label: __('Number Color', 'gutenverse'),
@@ -42,6 +86,16 @@ export const contentStylePanel = ({ elementId }) => {
                     ]
                 }
             ]
+        },
+        {
+            id: 'prefixTypography',
+            label: __('Prefix Typography', 'gutenverse'),
+            component: TypographyControl,
+        },
+        {
+            id: 'suffixTypography',
+            label: __('Suffix Typography', 'gutenverse'),
+            component: TypographyControl,
         },
         {
             id: 'numberTypography',
@@ -97,7 +151,7 @@ export const contentStylePanel = ({ elementId }) => {
                     'type': 'plain',
                     'id': 'numberRightSpace',
                     'responsive': true,
-                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .content .number-wrapper `,
+                    'selector': `.${elementId} .fun-fact-inner .content .number-wrapper .number.loaded`,
                     'properties': [
                         {
                             'name': 'margin-right',

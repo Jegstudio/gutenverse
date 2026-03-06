@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { HeadingControl, BackgroundControl, ColorControl, DimensionControl, IconControl, SwitchControl, TypographyControl, BorderControl, BorderResponsiveControl, RangeControl } from 'gutenverse-core/controls';
+import { HeadingControl, BackgroundControl, ColorControl, DimensionControl, IconSVGControl, SwitchControl, TypographyControl, BorderControl, BorderResponsiveControl, RangeControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 export const SubmenuItemStyle = (props) => {
@@ -15,7 +15,7 @@ export const SubmenuItemStyle = (props) => {
         {
             id: 'submenuItemIndicator',
             label: __('Indicator Item', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'SubmenuIndicatorSize',
@@ -32,6 +32,24 @@ export const SubmenuItemStyle = (props) => {
                     'id': 'SubmenuIndicatorSize',
                     'responsive': true,
                     'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > li > a > i, .${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > ul > li > a > i`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'SubmenuIndicatorSize',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > li > a svg, .${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > ul > li > a svg`,
                     'properties': [
                         {
                             'name': 'font-size',
@@ -214,6 +232,18 @@ export const SubmenuItemStyle = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'submenuIndicatorColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a > svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ],
         },
@@ -270,6 +300,18 @@ export const SubmenuItemStyle = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'submenuIndicatorHoverColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children:hover > a > svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ],
         },
@@ -322,6 +364,18 @@ export const SubmenuItemStyle = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'submenuIndicatorActiveColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children.current-menu-parent > a > svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]

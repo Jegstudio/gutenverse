@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Plus+Jakarta+Sans:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "gutenverse-core/src/assets/mixin";
 @import "gutenverse-core/src/assets/variables";
 @import "gutenverse-core/src/assets/wp-fix";
+@import "./splide.scss";
+@import "./wizard-lite.scss";
 
 body {
     margin: 0;
@@ -100,7 +103,6 @@ body {
 
         &.selected {
             .wizard-item-check {
-
                 path {
                     fill: #3B57F7;
                 }

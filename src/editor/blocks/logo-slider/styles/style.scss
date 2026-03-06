@@ -1,3 +1,8 @@
+@import "gutenverse-core/src/assets/mixin";
+@import "gutenverse-core/src/assets/variables";
+@import "gutenverse-core/src/assets/wp-fix";
+@import "../../../../assets/lib/_swiper.scss";
+
 .guten-client-logo {
   position: relative;
   width: 100%;
@@ -44,10 +49,5 @@
       }
 
     }
-    // .content-image:hover .main-image {
-    //   opacity: 0;
-    //   visibility: hidden;
-    //   @include transition(false, false, all 0.25s ease);
-    // }
   }
 }

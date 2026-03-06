@@ -7,7 +7,7 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { createPortal } from 'react-dom';
 import { IconLibrary } from 'gutenverse-core/controls';
-import { getSocialType, gutenverseRoot } from 'gutenverse-core/helper';
+import { getSocialType, gutenverseRoot, renderIcon } from 'gutenverse-core/helper';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { displayShortcut } from '@wordpress/keycodes';
 import { URLToolbar } from 'gutenverse-core/toolbars';
@@ -16,11 +16,9 @@ import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
 import { withAnimationAdvanceV2, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
 import { SelectParent } from 'gutenverse-core/components';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
-import { useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
-import isEmpty from 'lodash/isEmpty';
-import { isOnEditor } from 'gutenverse-core/helper';
+
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { useRichTextParameter } from 'gutenverse-core/helper';
@@ -45,11 +43,14 @@ const SocialIcon = compose(
     const {
         elementId,
         icon,
+        iconType,
+        iconSVG,
         text,
         url,
         linkTarget,
         rel,
         dynamicUrl,
+        ariaLabel,
     } = attributes;
 
     const {
@@ -63,7 +64,8 @@ const SocialIcon = compose(
     const animationClass = useAnimationEditor(attributes);
     const socialType = getSocialType(icon);
     const elementRef = useRef();
-    const [dynamicHref, setDynamicHref] = useState();
+    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+    const iconClass = iconType === 'svg' ? 'svg' : '';
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -72,6 +74,7 @@ const SocialIcon = compose(
             'no-margin',
             elementId,
             socialType,
+            iconClass,
             animationClass,
             displayClass,
         ),
@@ -107,21 +110,10 @@ const SocialIcon = compose(
     useDynamicScript(elementRef);
 
     useEffect(() => {
-        const dynamicUrlcontent = isEmpty(dynamicUrl) || !isOnEditor() ? dynamicUrl : applyFilters(
-            'gutenverse.dynamic.fetch-url',
-            dynamicUrl
-        );
-
-        (typeof dynamicUrlcontent.then === 'function') && !isEmpty(dynamicUrl) && dynamicUrlcontent
-            .then(result => {
-                if ((!Array.isArray(result) || result.length > 0) && result !== undefined && result !== dynamicHref) {
-                    setDynamicHref(result);
-                } else if (result !== dynamicHref) setDynamicHref(undefined);
-            }).catch(() => { });
         if (dynamicHref !== undefined) {
             setAttributes({ url: dynamicHref, isDynamic: true });
         } else { setAttributes({ url: url }); }
-    }, [dynamicUrl, dynamicHref]);
+    }, [dynamicHref]);
 
     useEffect(() => {
         if (elementRef) {
@@ -159,7 +151,7 @@ const SocialIcon = compose(
                         panelIsClicked={panelIsClicked}
                         setPanelIsClicked={setPanelIsClicked}
                     />,
-                    props,
+                    {...props, setPanelState},
                     socialIconPanelState
                 )}
                 <ToolbarButton
@@ -172,8 +164,8 @@ const SocialIcon = compose(
             </ToolbarGroup>
         </BlockControls>
         <div {...blockProps}>
-            <a id={elementId}>
-                <i className={icon} />
+            <a id={elementId} aria-label={ariaLabel}>
+                {renderIcon(icon, iconType, iconSVG)}
                 <RichText
                     tagName="span"
                     aria-label={__('Button text')}

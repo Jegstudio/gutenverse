@@ -1,223 +1,287 @@
 {
-  "apiVersion": 2,
-  "name": "gutenverse/icon",
-  "title": "Icon",
-  "description": "Add a beautiful icon with more than 100 icon options",
-  "category": "gutenverse-element",
-  "allowCopyStyle": true,
-  "attributes": {
-    "elementId": {
-      "type": "string"
-    },
-    "mouseMoveEffect": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "icon": {
-      "type": "string",
-      "default": "fab fa-wordpress"
-    },
-    "iconAlign": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "ariaLabel": {
-      "type": "string",
-      "copyStyle": true
-    },
-    "iconColorOne": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconSize": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconPadding": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconRotate": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconColorTwo": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconColorHoverOne": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconColorHoverTwo": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconView": {
-      "type": "string",
-      "default": "stacked",
-      "copyStyle": true
-    },
-    "iconShape": {
-      "type": "string",
-      "default": "rounded",
-      "copyStyle": true
-    },
-    "iconBorderWidth": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "iconBorderRadius": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "url": {
-      "type": "string"
-    },
-    "dynamicUrl": {
+	"apiVersion": 3,
+	"name": "gutenverse/icon",
+	"title": "Icon",
+	"description": "Add a beautiful icon with more than 100 icon options",
+	"category": "gutenverse-element",
+	"allowCopyStyle": true,
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"mouseMoveEffect": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"icon": {
+			"type": "string",
+			"default": "fab fa-wordpress"
+		},
+		"iconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconSVG": {
+			"type": "string"
+		},
+		"iconAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"ariaLabel": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"iconColorOne": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconRotate": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconColorTwo": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconColorHoverOne": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconColorHoverTwo": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconView": {
+			"type": "string",
+			"default": "stacked",
+			"copyStyle": true
+		},
+		"iconShape": {
+			"type": "string",
+			"default": "rounded",
+			"copyStyle": true
+		},
+		"iconBorderWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconBorderRadius": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"url": {
+			"type": "string"
+		},
+		"dynamicUrl": {
 			"type": "object",
 			"default": {}
 		},
 		"isDynamic": {
-			"type" : "boolean",
+			"type": "boolean",
 			"default": false
 		},
-    "linkTarget": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "a",
-      "attribute": "target"
-    },
-    "rel": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "a",
-      "attribute": "rel"
-    },
-    "animation": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "hideDesktop": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideTablet": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideMobile": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "background": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "backgroundHover": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "border": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "borderResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "border",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "boxShadow": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "borderHover": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "borderHoverResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "borderHover",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "boxShadowHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "margin": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "padding": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "zIndex": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningType": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningWidth": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningAlign": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningLocation": {
-      "type": "string",
-      "copyStyle": true
-    },
-    "positioningLeft": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningRight": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningTop": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningBottom": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "advanceAnimation": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "transform": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "mask": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "condition": {
-        "type": "object",
-        "default": {}
-    }
-  },
-  "keywords": [
-    "icon"
-  ]
+		"linkTarget": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "target"
+		},
+		"rel": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "rel"
+		},
+		"animation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"tooltip": {
+			"type": "object",
+			"default": {
+				"textContent": "This is tooltip",
+				"arrow": true,
+				"position": {
+					"Desktop": "top"
+				},
+				"textIconType": "icon",
+				"textIconSVG": ""
+			},
+			"copyStyle": true
+		},
+		"hideDesktop": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideTablet": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideMobile": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"background": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"border": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"borderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "border",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"borderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "borderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"margin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"padding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"zIndex": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningType": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningLocation": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"positioningLeft": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningRight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningTop": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningBottom": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"advanceAnimation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"transform": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
+			"type": "object",
+			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		}
+	},
+	"supports": {
+		"anchor": true
+	},
+	"keywords": [
+		"icon",
+		"image",
+		"symbol",
+		"logo"
+	],
+	"style": [
+		"gutenverse-frontend-icon-style"
+	]
 }

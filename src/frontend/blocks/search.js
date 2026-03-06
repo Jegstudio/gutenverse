@@ -42,4 +42,9 @@ class GutenverseSearch extends Default {
         });
     }
 }
-export default GutenverseSearch;
+
+const selected = u('.guten-search');
+
+if (selected) {
+    new GutenverseSearch(selected);
+}

@@ -21,13 +21,13 @@ const itemStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item i`,
+        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item svg`,
     });
 
     isNotEmpty(attributes['iconColor']) && data.push({
         'type': 'color',
         'id': 'iconColor',
-        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item .gutenverse-share-icon i`,
+        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item .gutenverse-share-icon svg`,
         'properties' : [
             {
                 'name' : 'color',
@@ -87,7 +87,7 @@ const itemStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['iconColorHover']) && data.push({
         'type': 'color',
         'id': 'iconColorHover',
-        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item:hover .gutenverse-share-icon i`,
+        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item:hover .gutenverse-share-icon svg`,
         'properties' : [
             {
                 'name' : 'color',

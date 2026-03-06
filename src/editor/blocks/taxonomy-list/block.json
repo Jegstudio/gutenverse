@@ -1,8 +1,8 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/taxonomy-list",
 	"title": "Taxonomy List",
-	"description": "Create a list of categories",
+	"description": "Create a list choosen taxonomy",
 	"class_callback": "\\Gutenverse\\Block\\Taxonomy_List",
 	"category": "gutenverse-post",
 	"allowCopyStyle": true,
@@ -10,40 +10,47 @@
 		"elementId": {
 			"type": "string"
 		},
-		"qty":{
+		"qty": {
 			"type": "integer",
 			"default": 3
 		},
-		"includedCategory":{
+		"includedCategory": {
 			"type": "array",
 			"default": []
 		},
-		"sortType":{
+		"sortType": {
 			"type": "string",
 			"default": "ASC"
 		},
-		"sortBy":{
+		"sortBy": {
 			"type": "string",
 			"default": "count"
 		},
-		"hideEmpty":{
+		"hideEmpty": {
 			"type": "boolean",
 			"default": false
 		},
 		"taxonomyType": {
 			"type": "object",
 			"default": {
-				"label" : "Categories",
-				"value" : "category"
+				"label": "Categories",
+				"value": "category"
 			}
 		},
-		"showIcon":{
+		"showIcon": {
 			"type": "boolean",
 			"default": false
 		},
-		"icon":{
+		"icon": {
 			"type": "string",
-      		"default": "fab fa-wordpress"
+			"default": "fab fa-wordpress"
+		},
+		"iconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconSVG": {
+			"type": "string"
 		},
 		"iconColor": {
 			"type": "object",
@@ -69,43 +76,118 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"contentBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBgColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorderResponsive": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBorderHoverResponsive": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"contentTypography": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"contentAlignment":{
+		"contentAlignment": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"contentSpacing":{
+		"contentSpacing": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"layout":{
+		"contentSpacingHorizontal": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"customItemWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"itemWidth": {
+			"type": "object",
+			"default": {
+				"Desktop": "fit-content"
+			},
+			"copyStyle": true
+		},
+		"layout": {
 			"type": "string",
-      		"default": "column",
-			"copyStyle" : true
+			"default": "column",
+			"copyStyle": true
 		},
-		"showDivider":{
-			"type" : "boolean",
+		"showDivider": {
+			"type": "boolean",
 			"default": false,
 			"copyStyle": true
 		},
-		"colorDivider" :{
-			"type" : "object",
+		"showCount": {
+			"type": "boolean",
+			"default": false,
 			"copyStyle": true
 		},
-		"typeDivider":{
+		"countBracket": {
 			"type": "string",
-      		"default": "solid",
-			"copyStyle" : true
+			"default": "parentheses"
 		},
-		"widthDivider":{
-			"type" : "object",
+		"countTypography": {
+			"type": "object",
 			"copyStyle": true
 		},
-		"sizeDivider":{
-			"type" : "object",
+		"countColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"countJustify": {
+			"type": "object",
+			"default": {
+				"Desktop": "default"
+			},
+			"copyStyle": true
+		},
+		"countSpacing": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"colorDivider": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typeDivider": {
+			"type": "string",
+			"default": "solid",
+			"copyStyle": true
+		},
+		"widthDivider": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"sizeDivider": {
+			"type": "object",
 			"copyStyle": true
 		},
 		"mouseMoveEffect": {
@@ -121,6 +203,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -217,6 +304,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
@@ -224,6 +341,11 @@
 	},
 	"keywords": [
 		"categories",
+		"terms",
+		"tags",
 		"list"
+	],
+	"style": [
+		"gutenverse-frontend-taxonomy-list-style"
 	]
 }

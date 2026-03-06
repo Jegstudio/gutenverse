@@ -14,6 +14,7 @@ use Gutenverse\Style\Accordions;
 use Gutenverse\Style\Advanced_Heading;
 use Gutenverse\Style\Animated_Text;
 use Gutenverse\Style\Archive_Title;
+use Gutenverse\Style\Breadcrumb;
 use Gutenverse\Style\Button;
 use Gutenverse\Style\Buttons;
 use Gutenverse\Style\Countdown;
@@ -31,6 +32,7 @@ use Gutenverse\Style\Image;
 use Gutenverse\Style\Image_Box;
 use Gutenverse\Style\Logo_Slider;
 use Gutenverse\Style\Nav_Menu;
+use Gutenverse\Style\Chart;
 use Gutenverse\Style\Post_Author;
 use Gutenverse\Style\Post_Block;
 use Gutenverse\Style\Post_Comment;
@@ -114,6 +116,9 @@ class Style_Generator {
 				break;
 			case 'gutenverse/animated-text':
 				$instance = new Animated_Text( $attrs );
+				break;
+			case 'gutenverse/breadcrumb':
+				$instance = new Breadcrumb( $attrs );
 				break;
 			case 'gutenverse/taxonomy-list':
 				$instance = new Taxonomy_List( $attrs );
@@ -207,6 +212,9 @@ class Style_Generator {
 				break;
 			case 'gutenverse/nav-menu':
 				$instance = new Nav_Menu( $attrs );
+				break;
+			case 'gutenverse/chart':
+				$instance = new Chart( $attrs );
 				break;
 			case 'gutenverse/progress-bar':
 				$instance = new Progress_Bar( $attrs );

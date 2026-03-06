@@ -70,6 +70,25 @@ const contentTypographyStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['quoteSize']) && data.push({
+        'type': 'plain',
+        'id': 'quoteSize',
+        'responsive': true,
+        'selector': `.${elementId} .guten-testimonial-item .testimonial-box .icon-content svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern' : '{value}px',
+                'patternValues' : {
+                    'value' : {
+                        'type' : 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
     isNotEmpty(attributes['quotePositionTop']) && data.push({
         'type': 'plain',
         'id': 'quotePositionTop',
@@ -192,6 +211,18 @@ const contentTypographyStyle = (elementId, attributes, data) => {
         'selector':  `.${elementId} .guten-testimonial-item .testimonial-box .icon-content i`,
     });
 
+    isNotEmpty(attributes['quoteNormalColor']) && data.push({
+        'type': 'color',
+        'id': 'quoteNormalColor',
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ],
+        'selector':  `.${elementId} .guten-testimonial-item .testimonial-box .icon-content svg`,
+    });
+
     isNotEmpty(attributes['quoteHoverColor']) && data.push({
         'type': 'color',
         'id': 'quoteHoverColor',
@@ -202,6 +233,18 @@ const contentTypographyStyle = (elementId, attributes, data) => {
             }
         ],
         'selector':  `.${elementId} .guten-testimonial-item:hover .testimonial-box .icon-content i`,
+    });
+
+    isNotEmpty(attributes['quoteHoverColor']) && data.push({
+        'type': 'color',
+        'id': 'quoteHoverColor',
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ],
+        'selector':  `.${elementId} .guten-testimonial-item:hover .testimonial-box .icon-content svg`,
     });
     return data;
 };

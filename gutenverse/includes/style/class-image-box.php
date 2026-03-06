@@ -357,12 +357,23 @@ class Image_Box extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .inner-container .image-box-body .body-title svg",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['titleIconSize'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['titleIconSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .inner-container .image-box-body .body-title.icon-position-before i",
+					'selector'       => ".{$this->element_id} .inner-container .image-box-body .body-title.icon-position-before i, .{$this->element_id} .inner-container .image-box-body .body-title.icon-position-before .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
 					},
@@ -373,7 +384,7 @@ class Image_Box extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .inner-container .image-box-body .body-title.icon-position-after i",
+					'selector'       => ".{$this->element_id} .inner-container .image-box-body .body-title.icon-position-after i, .{$this->element_id} .inner-container .image-box-body .body-title.icon-position-after .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return "margin-left: {$value}px;";
 					},
@@ -407,6 +418,17 @@ class Image_Box extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .inner-container .image-box-body .body-title svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['titleNormalIconColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['titleHoverColor'] ) ) {
@@ -428,6 +450,17 @@ class Image_Box extends Style_Abstract {
 					'selector'       => ".{$this->element_id}:hover .inner-container .image-box-body .body-title i",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['titleHoverIconColor'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}:hover .inner-container .image-box-body .body-title svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['titleHoverIconColor'],
 					'device_control' => false,

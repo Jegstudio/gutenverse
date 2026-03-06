@@ -51,6 +51,16 @@
     padding: 20px;
     position: relative;
 
+    .gutenverse-icon-svg {
+      height: 16px;
+      position: relative;
+      width: 16px;
+
+      .chevron-up-icon {
+        display: none;
+      }
+    }
+
     .tab-title {
       cursor: pointer;
       display: flex;
@@ -91,6 +101,16 @@
     &.open {
       .tab-option {
         display: block;
+      }
+
+      .gutenverse-icon-svg {
+        .chevron-up-icon {
+          display: block;
+        }
+
+        .chevron-down-icon {
+          display: none;
+        }
       }
 
       .tab-title {
@@ -220,6 +240,3 @@
     }
   }
 }
-
-
-

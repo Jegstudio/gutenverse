@@ -37,7 +37,7 @@ const readmoreStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'readmoreSpacing',
         'responsive' : true,
-        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-before .guten-readmore i`,
+        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-before .guten-readmore i, .${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-before .guten-readmore .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'margin-right',
@@ -56,7 +56,7 @@ const readmoreStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'readmoreSpacing',
         'responsive' : true,
-        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-after .guten-readmore i`,
+        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-after .guten-readmore i, .${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-after .guten-readmore .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'margin-left',
@@ -76,6 +76,19 @@ const readmoreStyle = (elementId, attributes, data) => {
         'id': 'readmoreIconSize',
         'responsive' : true,
         'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore .guten-readmore i`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['readmoreIconSize']) && data.push({
+        'type': 'unitPoint',
+        'id': 'readmoreIconSize',
+        'responsive' : true,
+        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore .guten-readmore svg`,
         'properties': [
             {
                 'name': 'font-size',
@@ -122,6 +135,18 @@ const readmoreStyle = (elementId, attributes, data) => {
         ],
     });
 
+    isNotEmpty(attributes['readmoreColor']) && data.push({
+        'type': 'color',
+        'id': 'readmoreColor',
+        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
     isNotEmpty(attributes['readmoreHoverColor']) && data.push({
         'type': 'color',
         'id': 'readmoreHoverColor',
@@ -129,6 +154,18 @@ const readmoreStyle = (elementId, attributes, data) => {
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['readmoreHoverColor']) && data.push({
+        'type': 'color',
+        'id': 'readmoreHoverColor',
+        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore:hover svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ],

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { BackgroundControl, BorderResponsiveControl, ColorControl, RangeControl, RepeaterControl, SizeControl, SwitchControl } from 'gutenverse-core/controls';
+import { ColorControl, RepeaterControl, SizeControl, SwitchControl } from 'gutenverse-core/controls';
 import { featureListGetBlockStyle } from '../styles/block-style';
 
 export const iconPanel = (props) => {
@@ -11,124 +11,25 @@ export const iconPanel = (props) => {
     } = props;
     return [
         {
-            id: 'iconWrapperSize',
-            label: __('Icon Wrapper Size', 'gutenverse'),
-            component: RangeControl,
-            min: 10,
-            max: 500,
-            allowDeviceControl: true,
-            liveStyle: [
-                {
-                    'type': 'plain',
-                    'id': 'iconWrapperSize',
-                    'responsive': true,
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .icon-wrapper .icon`,
-                    'properties': [
-                        {
-                            'name': 'width',
-                            'valueType': 'pattern',
-                            'pattern': '{value}px',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        },
-                        {
-                            'name': 'height',
-                            'valueType': 'pattern',
-                            'pattern': '{value}px',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        }
-                    ]
-                },
-                {
-                    'type': 'plain',
-                    'id': 'iconWrapperSize',
-                    'selector': `.${elementId}.guten-feature-list`,
-                    'responsive': true,
-                    'properties': [
-                        {
-                            'name': '--icon-size',
-                            'valueType': 'pattern',
-                            'pattern': '{value}px',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'iconContentSpacing',
-            component: SizeControl,
-            label: __('Icon Content Spacing', 'gutenverse'),
-            allowDeviceControl: true,
-            units: {
-                px: {
-                    text: 'px',
-                    min: 1,
-                    max: 1000,
-                    step: 1,
-                    unit: 'px',
-                },
-                ['%']: {
-                    text: '%',
-                    min: 1,
-                    max: 100,
-                    step: 1,
-                    unit: '%',
-                },
-                vh: {
-                    text: 'vh',
-                    min: 1,
-                    max: 100,
-                    step: 1,
-                    unit: 'vh',
-                },
-            },
-            liveStyle: [
-                {
-                    'type': 'unitPoint',
-                    'id': 'iconContentSpacing',
-                    'responsive': true,
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item`,
-                    'properties': [
-                        {
-                            'name': 'gap',
-                            'valueType': 'direct'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            id: '__styleSwitch',
+            id: '__iconStyleSwitch',
             component: SwitchControl,
             options: [
                 {
                     value: 'all',
-                    label: 'All in One'
+                    label: 'All'
                 },
                 {
                     value: 'single',
                     label: 'Single'
                 }
             ],
-            onChange: ({ __styleSwitch }) => setSwitcher({ ...switcher, styleSwitch: __styleSwitch })
+            onChange: ({ __iconStyleSwitch }) => setSwitcher({ ...switcher, iconStyleSwitch: __iconStyleSwitch })
         },
         {
             id: 'iconSize',
             component: SizeControl,
-            label: __('Icon Size', 'gutenverse'),
-            show: (switcher.styleSwitch === 'all' || !switcher.styleSwitch),
+            label: __('Size', 'gutenverse'),
+            show: (switcher.iconStyleSwitch === 'all' || !switcher.iconStyleSwitch),
             allowDeviceControl: true,
             liveStyle: [
                 {
@@ -150,17 +51,29 @@ export const iconPanel = (props) => {
                     'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .icon img`,
                     'properties': [
                         {
-                            'name': 'width',
+                            'name': 'font-size',
                             'valueType': 'direct'
                         }
                     ]
-                }
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
             ]
         },
         {
-            id: '__allStyleSwitch',
+            id: '__allIconStyleSwitch',
             component: SwitchControl,
-            show: switcher.styleSwitch === 'all' || !switcher.styleSwitch,
+            show: switcher.iconStyleSwitch === 'all' || !switcher.iconStyleSwitch,
             options: [
                 {
                     value: 'normal',
@@ -171,13 +84,13 @@ export const iconPanel = (props) => {
                     label: 'Hover'
                 }
             ],
-            onChange: ({ __allStyleSwitch }) => setSwitcher({ ...switcher, allStyleSwitch: __allStyleSwitch })
+            onChange: ({ __allIconStyleSwitch }) => setSwitcher({ ...switcher, allIconStyleSwitch: __allIconStyleSwitch })
         },
         {
             id: 'iconColor',
             label: __('Icon Color', 'gutenverse'),
             component: ColorControl,
-            show: (switcher.styleSwitch === 'all' || !switcher.styleSwitch) && (switcher.allStyleSwitch === 'normal' || !switcher.allStyleSwitch),
+            show: (switcher.iconStyleSwitch === 'all' || !switcher.iconStyleSwitch) && (switcher.allIconStyleSwitch === 'normal' || !switcher.allIconStyleSwitch),
             liveStyle: [
                 {
                     'type': 'color',
@@ -189,6 +102,17 @@ export const iconPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColor',
+                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -196,7 +120,7 @@ export const iconPanel = (props) => {
             id: 'iconColorHover',
             label: __('Icon Color', 'gutenverse'),
             component: ColorControl,
-            show: (switcher.styleSwitch === 'all' || !switcher.styleSwitch) && switcher.allStyleSwitch === 'hover',
+            show: (switcher.iconStyleSwitch === 'all' || !switcher.iconStyleSwitch) && switcher.allIconStyleSwitch === 'hover',
             liveStyle: [
                 {
                     'type': 'color',
@@ -208,62 +132,17 @@ export const iconPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ]
-                }
-            ]
-        },
-        {
-            id: 'iconBackground',
-            component: BackgroundControl,
-            allowDeviceControl: true,
-            options: ['default', 'gradient'],
-            show: (switcher.styleSwitch === 'all' || !switcher.styleSwitch) && (switcher.allStyleSwitch === 'normal' || !switcher.allStyleSwitch),
-            liveStyle: [
+                },
                 {
-                    'type': 'background',
-                    'id': 'iconBackground',
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .icon`,
-                }
-            ]
-        },
-        {
-            id: 'iconBackgroundHover',
-            component: BackgroundControl,
-            allowDeviceControl: true,
-            options: ['default', 'gradient'],
-            show: (switcher.styleSwitch === 'all' || !switcher.styleSwitch) && switcher.allStyleSwitch === 'hover',
-            liveStyle: [
-                {
-                    'type': 'background',
-                    'id': 'iconBackgroundHover',
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item:hover .icon`,
-                }
-            ]
-        },
-        {
-            id: 'iconBorder',
-            show: (switcher.styleSwitch === 'all' || !switcher.styleSwitch) && (switcher.allStyleSwitch === 'normal' || !switcher.allStyleSwitch),
-            label: __('Border', 'gutenverse'),
-            component: BorderResponsiveControl,
-            allowDeviceControl: true,
-            liveStyle: [
-                {
-                    'type': 'borderResponsive',
-                    'id': 'iconBorder',
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .icon`,
-                }
-            ]
-        },
-        {
-            id: 'iconBorderHover',
-            show: (switcher.styleSwitch === 'all' || !switcher.styleSwitch) && switcher.allStyleSwitch === 'hover',
-            label: __('Border', 'gutenverse'),
-            component: BorderResponsiveControl,
-            allowDeviceControl: true,
-            liveStyle: [
-                {
-                    'type': 'borderResponsive',
-                    'id': 'iconBorderHover',
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item:hover .icon`,
+                    'type': 'color',
+                    'id': 'iconColorHover',
+                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item:hover .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -271,19 +150,17 @@ export const iconPanel = (props) => {
             id: 'featureList',
             component: RepeaterControl,
             titleFormat: '<strong><%= value.title ? value.title : "Feature List" %></strong>',
-            repeaterDefault: {
-                type: 'icon',
-            },
-            show: switcher.styleSwitch === 'single',
+            isAddNew: false,
+            show: switcher.iconStyleSwitch === 'single',
             options: [
                 {
                     id: 'iconSize',
                     component: SizeControl,
-                    label: __('Icon Size', 'gutenverse'),
+                    label: __('Size', 'gutenverse'),
                     allowDeviceControl: true,
                 },
                 {
-                    id: '__singleStyleSwitch',
+                    id: '__singleIconStyleSwitch',
                     component: SwitchControl,
                     options: [
                         {
@@ -295,53 +172,21 @@ export const iconPanel = (props) => {
                             label: 'Hover'
                         }
                     ],
-                    onChange: ({ __singleStyleSwitch }) => setSwitcher({ ...switcher, singleStyleSwitch: __singleStyleSwitch })
+                    onChange: ({ __singleIconStyleSwitch }) => setSwitcher({ ...switcher, singleIconStyleSwitch: __singleIconStyleSwitch })
                 },
                 {
                     id: 'iconColor',
                     label: __('Icon Color', 'gutenverse'),
                     component: ColorControl,
-                    show: () => switcher.singleStyleSwitch === 'normal' || !switcher.singleStyleSwitch,
+                    show: () => switcher.singleIconStyleSwitch === 'normal' || !switcher.singleIconStyleSwitch,
                 },
                 {
                     id: 'iconColorHover',
                     label: __('Icon Color', 'gutenverse'),
                     component: ColorControl,
-                    show: () => switcher.singleStyleSwitch === 'hover',
+                    show: () => switcher.singleIconStyleSwitch === 'hover',
 
-                },
-                {
-                    id: 'iconBackground',
-                    component: BackgroundControl,
-                    allowDeviceControl: true,
-                    options: ['default', 'gradient'],
-                    show: () => switcher.singleStyleSwitch === 'normal' || !switcher.singleStyleSwitch,
-
-                },
-                {
-                    id: 'iconBackgroundHover',
-                    component: BackgroundControl,
-                    allowDeviceControl: true,
-                    options: ['default', 'gradient'],
-                    show: () => switcher.singleStyleSwitch === 'hover',
-
-                },
-                {
-                    id: 'iconBorder',
-                    show: () => switcher.singleStyleSwitch === 'normal' || !switcher.singleStyleSwitch,
-                    label: __('Border', 'gutenverse'),
-                    component: BorderResponsiveControl,
-                    allowDeviceControl: true,
-
-                },
-                {
-                    id: 'iconBorderHover',
-                    show: () => switcher.singleStyleSwitch === 'hover',
-                    label: __('Border', 'gutenverse'),
-                    component: BorderResponsiveControl,
-                    allowDeviceControl: true,
-
-                },
+                }
             ],
             liveStyle : [
                 {

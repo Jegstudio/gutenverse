@@ -2,8 +2,6 @@
 import { classnames } from 'gutenverse-core/components';
 import { useBlockProps } from '@wordpress/block-editor';
 import { swiperData } from 'gutenverse-core/helper';
-import { getImageSrc } from 'gutenverse-core/editor-helper';
-import { isEmpty } from 'lodash';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -41,11 +39,16 @@ const save = compose(
                 <div id={elementId} className="swiper-container" {...swiperData(attributes)}>
                     <div className="swiper-wrapper">
                         {logos.map((logo, index) => {
-                            return <div className="swiper-slide image-list" key={index}>
-                                <div className="content-image">
-                                    {logoNormalLazyLoad(logo)}
-                                    {logoHoverLazyLoad(logo)}
-                                </div>
+                            return <div className="image-list swiper-slide" key={index}>
+                                {
+                                    logo.link ? <a aria-label={logo.title} href={logo.link} className="content-image">
+                                        {logo && logoNormalLazyLoad(logo)}
+                                        {logo && logoHoverLazyLoad(logo)}
+                                    </a> : <div className="content-image">
+                                        {logo && logoNormalLazyLoad(logo)}
+                                        {logo && logoHoverLazyLoad(logo)}
+                                    </div>
+                                }
                             </div>;
                         })}
                     </div>

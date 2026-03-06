@@ -6,21 +6,26 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import { getImageSrc } from 'gutenverse-core/editor-helper';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { dispatch } from '@wordpress/data';
 import { Swiper, swiperSettings } from '../../components/swiper';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
 
 export const logoNormalLazyLoad = (logo) => {
-    return <img className="main-image" src={getImageSrc(logo.src)} alt={logo.title} {...(logo.lazyLoad && { loading: 'lazy' })} />;
+    const { imageLoad = '' } = logo;
+    return <img className="main-image" src={getImageSrc(logo.src)} alt={logo.title} {...('lazy' === imageLoad && { loading: 'lazy' })} width={logo.src?.width} height={logo.src?.height} />;
 };
 
 export const logoHoverLazyLoad = (logo) => {
+    const { imageLoad = '' } = logo;
     const hoverSrc = !isEmpty(logo.hoverSrc) ? getImageSrc(logo.hoverSrc) : getImageSrc(logo.src);
-    return <img className="hover-image" src={hoverSrc} alt={logo.title} {...(logo.lazyLoad && { loading: 'lazy' })} />;
+    const width = !isEmpty(logo.hoverSrc) ? logo.hoverSrc?.width : logo.src?.width;
+    const height = !isEmpty(logo.hoverSrc) ? logo.hoverSrc?.height : logo.src?.height;
+    return <img className="hover-image" src={hoverSrc} alt={logo.title} {...('lazy' === imageLoad && { loading: 'lazy' })} width={width} height={height} />;
 };
 
 const LogoSlider = compose(
@@ -34,6 +39,7 @@ const LogoSlider = compose(
     const {
         clientId,
         attributes,
+        setAttributes
     } = props;
 
     const {
@@ -48,6 +54,27 @@ const LogoSlider = compose(
         autoplay,
         autoplayTimeout
     } = attributes;
+
+    /* set image load attribute from calculating the lazyload attribute and dashboard image load attribut on first load block on editor */
+    useEffect(() => {
+        let newLogos = [];
+        let changes = 0;
+        logos.forEach((logo) => {
+            const { lazyLoad = false, imageLoad = '' } = logo;
+            if ('' === imageLoad) {
+                changes++;
+                newLogos.push({
+                    ...logo,
+                    imageLoad: getImageLoadValue('', lazyLoad)
+                });
+            } else {
+                newLogos.push(logo);
+            }
+        });
+        if (changes > 0) {
+            setAttributes({ logos: newLogos });
+        }
+    }, [logos]);
 
     const elementRef = useRef();
     const animationClass = useAnimationEditor(attributes);
@@ -114,10 +141,15 @@ const LogoSlider = compose(
                     rebuildOnUpdate={true}>
                     {logos.map((logo, index) => {
                         return <div className="image-list" key={index}>
-                            <div className="content-image">
-                                {logo && logoNormalLazyLoad(logo)}
-                                {logo && logoHoverLazyLoad(logo)}
-                            </div>
+                            {
+                                logo.link ? <a aria-label={logo.title} href={logo.link} className="content-image">
+                                    {logo && logoNormalLazyLoad(logo)}
+                                    {logo && logoHoverLazyLoad(logo)}
+                                </a> : <div className="content-image">
+                                    {logo && logoNormalLazyLoad(logo)}
+                                    {logo && logoHoverLazyLoad(logo)}
+                                </div>
+                            }
                         </div>;
                     })}
                 </Swiper>

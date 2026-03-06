@@ -15,7 +15,15 @@ const save = compose(
         text,
         titleTag: TitleTag,
         loop,
-        splitByWord
+        splitByWord,
+        beforeTextAnimated,
+        afterTextAnimated,
+        textType,
+        rotationTexts,
+        highlightedStyle,
+        highlightGradient,
+        highlightColorType,
+        highlightColor,
     } = attributes;
 
     const animationClass = useAnimationFrontend(attributes);
@@ -32,28 +40,35 @@ const save = compose(
         },
     );
 
-    const loadAnimatedText = () => {
-        switch (style) {
-            case 'jump':
-            case 'bend':
-            case 'drop':
-            case 'flip':
-            case 'pop':
-                return <TitleTag className="text-content">
-                    <span className="text-wrapper">
-                        <span className="letters">{text}</span>
-                    </span>
-                </TitleTag>;
-            default:
-                return <TitleTag className="text-content">{text}</TitleTag>;
-        }
+    const animationProps = {
+        loop,
+        splitByWord,
+        style,
+        textType,
+        text,
+        elementId,
+        rotationTexts,
+        highlightedStyle,
+        highlightGradient,
+        highlightColorType,
+        highlightColor,
+        animationDuration: parseInt(attributes.animationDuration),
+        displayDuration: parseInt(attributes.displayDuration),
+        transitionDuration: parseInt(attributes.transitionDuration),
     };
 
-    return (
-        <div {...useBlockProps.save({ className })} data-animation={style} data-loop={loop} data-wordsplit={splitByWord}>
-            {loadAnimatedText()}
-        </div>
-    );
+    return <div {...useBlockProps.save({ className })} data-animation={JSON.stringify(animationProps)}>
+        <TitleTag>
+            <span className={'non-animated-text before-text'}>{beforeTextAnimated}</span>
+            <span className="text-content">
+                <span className="text-wrapper">
+                    <span className="letter">{text}</span>
+                </span>
+                <span className="highlighted" />
+            </span>
+            <span className={'non-animated-text after-text'}>{afterTextAnimated}</span>
+        </TitleTag>
+    </div>;
 });
 
 export default save;

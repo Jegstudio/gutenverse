@@ -1,5 +1,6 @@
 
 import { getImageSrc } from 'gutenverse-core/editor-helper';
+import { svgAtob } from 'gutenverse-core/helper';
 
 const GalleryItem = (attributes) => {
     const {
@@ -7,12 +8,19 @@ const GalleryItem = (attributes) => {
         layout,
         hover,
         zoomIcon,
+        zoomIconType,
+        zoomIconSVG,
         linkIcon,
+        linkIconType,
+        linkIconSVG,
         zoomText,
         linkText,
         onZoom = () => { },
-        zoomOptions = 'item'
+        zoomOptions = 'item',
+        titleHeadingType: HtmlTag = 'h5'
     } = attributes;
+
+    const { imageLoad = '' } = galleryItem;
 
     const hoverClass = () => {
         switch (hover) {
@@ -39,7 +47,13 @@ const GalleryItem = (attributes) => {
 
         return arr.map((item, key) => item === 2 ? <li key={key}><i className="fas fa-star"></i></li> : <li key={key}><i className="fas fa-star-half"></i></li>);
     };
-    const imageCondition = () => <img src={getImageSrc(galleryItem.src)} alt={galleryItem.title} {...(galleryItem.lazyLoad ? { loading: 'lazy' } : {})} />;
+
+    const imageCondition = () => {
+        const height = galleryItem.src?.height;
+        const width = galleryItem.src?.width;
+
+        return <img src={getImageSrc(galleryItem.src)} alt={galleryItem.title} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(height && { height })} {...(width && { width })} />;
+    };
 
     return layout === 'overlay' ? <div className="grid-item">
         <div className="thumbnail-wrap">
@@ -48,7 +62,7 @@ const GalleryItem = (attributes) => {
                 {!galleryItem.disableLightbox && <>
                     <div className="item-hover-bg"></div>
                     <div className="item-caption-over">
-                        <h5 className="item-title">{galleryItem.title}</h5>
+                        <HtmlTag className="item-title">{galleryItem.title}</HtmlTag>
                         <div className="item-content">{galleryItem.content}</div>
                         <div className="item-buttons">
                             {(zoomOptions !== 'disable' && (zoomIcon || undefined !== zoomText)) && <div className={`gallery-link zoom ${'none' !== zoomText && 'with-text'}`}>
@@ -56,15 +70,29 @@ const GalleryItem = (attributes) => {
                                     {zoomText}
                                 </p>}
                                 {zoomIcon && <span className="item-icon-inner" onClick={onZoom}>
-                                    <i className={zoomIcon} aria-hidden="true"></i>
+                                    {zoomIconType === 'svg' && zoomIconSVG ? (
+                                        <div
+                                            className="gutenverse-icon-svg"
+                                            dangerouslySetInnerHTML={{ __html: svgAtob(zoomIconSVG) }}
+                                        />
+                                    ) : (
+                                        <i className={zoomIcon} aria-hidden="true"></i>
+                                    )}
                                 </span>}
                             </div>}
-                            {(!galleryItem.disableLink && (linkIcon || undefined !== linkText)) && <a href={galleryItem.link ? galleryItem.link : ''} className={`gallery-link link ${'none' !== zoomText && 'with-text'}`} onClick={e => e.preventDefault()}>
+                            {(!galleryItem.disableLink && (linkIcon || undefined !== linkText)) && <a aria-label={`Link to ${galleryItem.title}`} href={galleryItem.link ? galleryItem.link : ''} className={`gallery-link link ${'none' !== zoomText && 'with-text'}`} onClick={e => e.preventDefault()}>
                                 {undefined !== linkText && <p className="item-icon-text link-text">
                                     {linkText}
                                 </p>}
                                 {linkIcon && <span className="item-icon-inner">
-                                    <i className={linkIcon} aria-hidden="true"></i>
+                                    {linkIconType === 'svg' && linkIconSVG ? (
+                                        <div
+                                            className="gutenverse-icon-svg"
+                                            dangerouslySetInnerHTML={{ __html: svgAtob(linkIconSVG) }}
+                                        />
+                                    ) : (
+                                        <i className={linkIcon} aria-hidden="true"></i>
+                                    )}
                                 </span>}
                             </a>}
                         </div>
@@ -102,15 +130,29 @@ const GalleryItem = (attributes) => {
                                     {zoomText}
                                 </p>}
                                 <span className="item-icon-inner" onClick={onZoom}>
-                                    <i className={zoomIcon} aria-hidden="true"></i>
+                                    {zoomIconType === 'svg' && zoomIconSVG ? (
+                                        <div
+                                            className="gutenverse-icon-svg"
+                                            dangerouslySetInnerHTML={{ __html: svgAtob(zoomIconSVG) }}
+                                        />
+                                    ) : (
+                                        <i className={zoomIcon} aria-hidden="true"></i>
+                                    )}
                                 </span>
                             </div>}
-                            {(!galleryItem.disableLink && linkIcon) && <a href={galleryItem.link ? galleryItem.link : ''} className={`gallery-link link ${'none' !== zoomText && 'with-text'}`}>
+                            {(!galleryItem.disableLink && linkIcon) && <a aria-label={`Link to ${galleryItem.title}`} href={galleryItem.link ? galleryItem.link : ''} className={`gallery-link link ${'none' !== zoomText && 'with-text'}`}>
                                 {undefined !== linkText && <p className="item-icon-text link-text">
                                     {linkText}
                                 </p>}
                                 <span className="item-icon-inner">
-                                    <i className={linkIcon} aria-hidden="true"></i>
+                                    {linkIconType === 'svg' && linkIconSVG ? (
+                                        <div
+                                            className="gutenverse-icon-svg"
+                                            dangerouslySetInnerHTML={{ __html: svgAtob(linkIconSVG) }}
+                                        />
+                                    ) : (
+                                        <i className={linkIcon} aria-hidden="true"></i>
+                                    )}
                                 </span>
                             </a>}
                         </div>
@@ -123,7 +165,7 @@ const GalleryItem = (attributes) => {
         </div>
         <div className="caption-wrap style-card">
             <div className="item-caption-over">
-                <h5 className="item-title">{galleryItem.title}</h5>
+                <HtmlTag className="item-title">{galleryItem.title}</HtmlTag>
                 <div className="item-content">
                     <p>{galleryItem.content}</p>
                 </div>

@@ -14,6 +14,19 @@ const contentStyle = (elementId, attributes, data) => {
         'selector': `.guten-social-icon #${elementId} i`,
     });
 
+    isNotEmpty(attributes['iconSize']) && data.push({
+        'type': 'unitPoint',
+        'id': 'iconSize',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'direct'
+            }
+        ],
+        'selector': `.guten-social-icon #${elementId} svg`,
+    });
+
     isNotEmpty(attributes['typography']) && data.push({
         'type': 'typography',
         'id': 'typography',

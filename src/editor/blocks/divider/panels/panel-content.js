@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
-import { ColorControl, IconControl, IconRadioControl, RangeControl, SelectControl, SizeControl, TypographyControl } from 'gutenverse-core/controls';
+import { ColorControl, IconSVGControl, IconRadioControl, RangeControl, SelectControl, SizeControl, TypographyControl } from 'gutenverse-core/controls';
 
 export const contentPanel = (props) => {
     const {
@@ -68,6 +68,17 @@ export const contentPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'contentColor',
+                    'selector': `.${elementId} .guten-divider-content svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -86,7 +97,7 @@ export const contentPanel = (props) => {
                     'type': 'plain',
                     'id': 'contentSpacing',
                     'responsive': true,
-                    'selector': `.${elementId} .guten-divider-content span, .${elementId} .guten-divider-content i`,
+                    'selector': `.${elementId} .guten-divider-content span, .${elementId} .guten-divider-content i, .${elementId} .guten-divider-content svg`,
                     'properties': [
                         {
                             'name': 'margin',
@@ -112,7 +123,7 @@ export const contentPanel = (props) => {
             id: 'icon',
             label: __('Divider Icon', 'gutenverse'),
             show: content === 'icon',
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'iconSize',
@@ -139,6 +150,18 @@ export const contentPanel = (props) => {
                     'type': 'unitPoint',
                     'id': 'iconSize',
                     'selector': `.${elementId} .guten-divider-content i`,
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'iconSize',
+                    'selector': `.${elementId} .guten-divider-content svg`,
                     'responsive': true,
                     'properties': [
                         {

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, IconControl, RangeControl, SelectControl, SizeControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconSVGControl, RangeControl, SelectControl, SizeControl, TextControl } from 'gutenverse-core/controls';
 
 export const settingsPanel = (props) => {
     const {
@@ -92,7 +92,7 @@ export const settingsPanel = (props) => {
             id: 'linkIcon',
             show: showLink,
             label: __('Link Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'linkIconPosition',

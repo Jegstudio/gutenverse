@@ -9,6 +9,7 @@ const example = {
         {
             name: 'gutenverse/button',
             attributes: {
+                'elementId': 'guten-preview-buttons',
                 'content': 'Gutenverse Button 1',
                 'paddingButton': {
                     'Desktop': {
@@ -79,6 +80,7 @@ const example = {
         {
             name: 'gutenverse/button',
             attributes: {
+                'elementId': 'guten-preview-buttons-2',
                 'content': 'Gutenverse Button 2',
                 'alignButton': {
                     'Desktop': 'center'

@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, ImageControl, RangeControl, RepeaterControl, TextareaControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, ImageControl, RangeControl, RepeaterControl, SelectControl, TextareaControl, TextControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoadRepeater } from '../../../helper';
 
 export const galleryPanel = () => {
     return [
@@ -8,7 +9,10 @@ export const galleryPanel = () => {
             component: RepeaterControl,
             titleFormat: '<strong><%= value.title ? value.title : "Gallery Item" %></strong>',
             repeaterDefault: {
-                id: ''
+                id: '',
+                title: '',
+                content: '',
+                lazyload: false,
             },
             options: [
                 {
@@ -22,9 +26,20 @@ export const galleryPanel = () => {
                     component: ImageControl,
                 },
                 {
-                    id: 'lazyLoad',
-                    label: __('Set Lazy Load', 'gutenverse'),
-                    component: CheckboxControl,
+                    id: 'imageLoad',
+                    label: __('Image Load', 'gutenverse'),
+                    component: SelectControl,
+                    defaultValue: getDefaultImageLoadRepeater,
+                    options: [
+                        {
+                            label: __('Normal Load', 'gutenverse'),
+                            value: 'eager'
+                        },
+                        {
+                            label: __('Lazy Load', 'gutenverse'),
+                            value: 'lazy'
+                        },
+                    ],
                 },
                 {
                     id: 'title',
@@ -35,6 +50,11 @@ export const galleryPanel = () => {
                     id: 'content',
                     label: __('Content', 'gutenverse'),
                     component: TextareaControl,
+                },
+                {
+                    id: 'lightboxDescription',
+                    label: __('Lightbox Description', 'gutenverse'),
+                    component: CheckboxControl
                 },
                 {
                     id: 'showPrice',

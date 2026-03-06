@@ -130,7 +130,6 @@ class Divider extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['content'] ) && ( 'text' === $this->attrs['content'] || 'icon' === $this->attrs['content'] ) ) {
-
 			if ( isset( $this->attrs['contentColor'] ) ) {
 				$this->inject_style(
 					array(
@@ -142,12 +141,23 @@ class Divider extends Style_Abstract {
 						'device_control' => false,
 					)
 				);
+
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .guten-divider-content svg",
+						'property'       => function ( $value ) {
+							return $this->handle_color( $value, 'fill' );
+						},
+						'value'          => $this->attrs['contentColor'],
+						'device_control' => false,
+					)
+				);
 			}
 
 			if ( isset( $this->attrs['contentSpacing'] ) ) {
 				$this->inject_style(
 					array(
-						'selector'       => ".{$this->element_id} .guten-divider-content span, .{$this->element_id} .guten-divider-content i",
+						'selector'       => ".{$this->element_id} .guten-divider-content span, .{$this->element_id} .guten-divider-content i, .{$this->element_id} .guten-divider-content svg",
 						'property'       => function ( $value ) {
 							return "margin: 0 {$value}px;";
 						},
@@ -172,6 +182,17 @@ class Divider extends Style_Abstract {
 				$this->inject_style(
 					array(
 						'selector'       => ".{$this->element_id} .guten-divider-content i",
+						'property'       => function ( $value ) {
+							return $this->handle_unit_point( $value, 'font-size' );
+						},
+						'value'          => $this->attrs['iconSize'],
+						'device_control' => true,
+					)
+				);
+
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .guten-divider-content svg",
 						'property'       => function ( $value ) {
 							return $this->handle_unit_point( $value, 'font-size' );
 						},

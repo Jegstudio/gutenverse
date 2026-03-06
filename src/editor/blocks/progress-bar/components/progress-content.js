@@ -1,12 +1,15 @@
+import { renderIcon } from 'gutenverse-core/helper';
 
 
-const ProgressContent = ({attributes}) => {
+const ProgressContent = ({ attributes }) => {
     const {
         title,
         style,
         arrowIcon,
         percentage,
-        duration
+        duration,
+        arrowIconType,
+        arrowIconSVG
     } = attributes;
 
     const content = () => {
@@ -35,7 +38,7 @@ const ProgressContent = ({attributes}) => {
                     <div className="skill-bar">
                         <div className="skill-track" data-width={percentage} data-duration={duration}>
                             {['inner-content'].includes(style) && <span className="skill-track-icon">
-                                <i aria-hidden="true" className={arrowIcon}></i>
+                                {renderIcon(arrowIcon, arrowIconType, arrowIconSVG)}
                             </span>}
                             <div className="number-percentage-wrapper">
                                 <span className="number-percentage loaded"></span>

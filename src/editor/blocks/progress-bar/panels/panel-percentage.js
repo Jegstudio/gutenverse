@@ -1,8 +1,8 @@
 
 import { __ } from '@wordpress/i18n';
-import { ColorControl, TextShadowControl, TypographyControl } from 'gutenverse-core/controls';
+import { BorderControl, BoxShadowControl, ColorControl, SizeControl, TextShadowControl, TypographyControl } from 'gutenverse-core/controls';
 
-export const percentPanel = ({ elementId }) => {
+export const percentPanel = ({ elementId, style }) => {
     return [
         {
             id: 'percentBgColor',
@@ -75,7 +75,7 @@ export const percentPanel = ({ elementId }) => {
         },
         {
             id: 'percentTextShadow',
-            label: __('Percent Shadow', 'gutenverse'),
+            label: __('Percent Text Shadow', 'gutenverse'),
             component: TextShadowControl,
             liveStyle: [
                 {
@@ -90,6 +90,62 @@ export const percentPanel = ({ elementId }) => {
                     'selector': `.${elementId} .progress-group .progress-skill-bar .number-percentage, .${elementId} .progress-group .number-percentage`,
                 }
             ]
-        }
+        },
+        {
+            id: 'percentSwitchSize',
+            show: 'switch' === style,
+            label: __('Percent Switch Size', 'gutenverse'),
+            component: SizeControl,
+            units: {
+                px: {
+                    text: 'px',
+                    min: 0,
+                    max: 100,
+                    step: 1
+                },
+            },
+            liveStyle: [
+                {
+                    'type': 'unitPoint',
+                    'id': 'percentSwitchSize',
+                    'properties': [
+                        {
+                            'name': 'width',
+                            'valueType': 'direct'
+                        },
+                        {
+                            'name': 'height',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.${elementId} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before`,
+                }
+            ]
+        },
+        {
+            id: 'percentSwitchBorder',
+            show: 'switch' === style,
+            label: __('Percent Switch Border', 'gutenverse'),
+            component: BorderControl,
+        },
+        {
+            id: 'percentSwitchBoxShadow',
+            label: __('Percent Switch Box Shadow', 'gutenverse'),
+            show: 'switch' === style,
+            component: BoxShadowControl,
+            liveStyle: [
+                {
+                    'type': 'boxShadow',
+                    'id': 'percentSwitchBoxShadow',
+                    'properties': [
+                        {
+                            'name': 'box-shadow',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.${elementId} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before`,
+                }
+            ]
+        },
     ];
 };

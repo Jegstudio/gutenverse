@@ -16,6 +16,7 @@ export const replyPanel = (props) => {
             liveStyle: {
                 'type': 'color',
                 'id': 'replyBgColor',
+                'responsive': true,
                 'selector': `.${elementId} .commentlist .comment .children`,
                 'properties': [
                     {
@@ -83,6 +84,7 @@ export const replyPanel = (props) => {
             liveStyle: {
                 'type': 'borderResponsive',
                 'id': 'replyBorder',
+                'responsive': true,
                 'selector': `.${elementId} .commentlist .comment .children`,
             }
         },

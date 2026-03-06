@@ -4,6 +4,7 @@ import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPa
 import { settingPanel } from './panel-setting';
 import { stylePanel } from './panel-style';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
+import { dataPanel } from './panel-data';
 
 export const panelList = () => {
     return [
@@ -12,10 +13,11 @@ export const panelList = () => {
             panelArray: settingPanel,
             tabRole: TabSetting
         },
-        /* {
-            title: __('Setting (Deprecated)', 'gutenverse'),
-            panelArray: settingPanelDeprecated
-        }, */
+        {
+            title: __('Image Data', 'gutenverse'),
+            panelArray: dataPanel,
+            tabRole: TabSetting
+        },
         {
             title: __('Style', 'gutenverse'),
             initialOpen: false,

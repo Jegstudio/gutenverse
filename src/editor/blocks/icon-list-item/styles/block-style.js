@@ -1,8 +1,10 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
+import { backgroundStyle } from 'gutenverse-core/controls';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({ attributes, data, elementId });
 
     /**Panel Icon */
     isNotEmpty(attributes['iconLineHeight']) && data.push({
@@ -21,22 +23,29 @@ const getBlockStyle = (elementId, attributes) => {
                 }
             }
         ],
-        'selector': `.${elementId}.guten-icon-list-item i`,
+        'selector': `.${elementId} i`,
+    });
+
+    isNotEmpty(attributes['iconLineHeight']) && data.push({
+        'type': 'plain',
+        'id': 'iconLineHeight',
+        'responsive': true,
+        'properties': [
+            {
+                'name': 'height',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ],
+        'selector': `.${elementId} .gutenverse-icon-svg`,
     });
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
-
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
         'id': 'border',

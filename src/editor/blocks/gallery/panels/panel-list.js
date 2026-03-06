@@ -16,6 +16,7 @@ import { filterSearchPanel } from './panel-filter-search';
 import { iconPanel } from './panel-icon';
 import { advanceAnimationPanel } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
+import { lightboxStylePanel } from './panel-lightbox';
 
 export const panelList = () => {
     return [
@@ -76,6 +77,12 @@ export const panelList = () => {
             title: __('Item Card', 'gutenverse'),
             initialOpen: false,
             panelArray: itemCardPanel,
+            tabRole: TabStyle
+        },
+        {
+            title: __('Lightbox Style', 'gutenverse'),
+            initialOpen: false,
+            panelArray: lightboxStylePanel,
             tabRole: TabStyle
         },
         {

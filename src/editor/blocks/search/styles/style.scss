@@ -1,32 +1,54 @@
-.gutenverse-search-form{
+.gutenverse-search-form {
     display: flex;
     flex-wrap: wrap;
 
-    .gutenverse-search.gutenverse-search-input {
-        border: none;
-        width: 350px;
-        padding-right: 26px;
-        background-color: inherit;
-        border: 1px solid #ccc;
-    }
-    .guten-search-button-wrapper, .guten-button-wrapper{
-        display: inline-flex!important;
+    .guten-search-button-wrapper,
+    .guten-button-wrapper {
+        display: inline-flex !important;
         flex-grow: unset !important;
     }
-    .search-input-container {
+
+    .search-input-container-outer {
         display: flex;
         align-items: center;
-    }
-    .close-icon {
         position: relative;
-        padding: 3px;
-        font-size: 20px;
-        margin-left: -26px;
-        color: var(--guten-txt-color);
+        width: 350px;
 
-        i {
-            position: inherit;
-            display: block;
+        .search-input-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+
+            .gutenverse-search.gutenverse-search-input {
+                border: none;
+                padding-right: 26px;
+                background-color: inherit;
+                border: 1px solid #ccc;
+                width: 100%;
+
+            }
+
+            .close-icon {
+                position: absolute;
+                right: 0;
+                padding: 3px;
+                font-size: 20px;
+                color: var(--guten-txt-color);
+
+                i {
+                    display: block;
+                }
+
+                .gutenverse-icon-svg {
+                    display: flex;
+                }
+
+                i:hover,
+                .gutenverse-icon-svg:hover {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

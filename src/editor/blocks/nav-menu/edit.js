@@ -9,7 +9,7 @@ import { addQueryArgs } from '@wordpress/url';
 import { useRef } from '@wordpress/element';
 import { RawHTML } from '@wordpress/element';
 import GutenverseNavMenu from '../../../frontend/blocks/nav-menu';
-import { NavSkeleton, classnames, NavSkeletonNormal } from 'gutenverse-core/components';
+import { NavSkeleton, classnames } from 'gutenverse-core/components';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { isOnEditor } from 'gutenverse-core/helper';
@@ -35,13 +35,23 @@ const NavMenuBlock = compose(
         mobileMenuLink,
         mobileMenuURL,
         mobileIcon,
+        mobileIconType,
+        mobileIconSVG,
         mobileCloseIcon,
+        mobileCloseIconType,
+        mobileCloseIconSVG,
         submenuClick,
         mobileSubmenuClick,
         mobileCloseOnClick,
         submenuItemIndicator,
+        submenuItemIndicatorType,
+        submenuItemIndicatorSVG,
         transform,
         mobileEnableOverlay,
+        hamburgerAriaLabel,
+        mobileLogoAriaLabel,
+        closeAriaLabel,
+        mobileMenuLogoLazyLoad,
     } = attributes;
 
     const animationClass = useAnimationEditor(attributes);
@@ -81,13 +91,23 @@ const NavMenuBlock = compose(
                         mobileMenuLink,
                         mobileMenuURL,
                         mobileIcon,
+                        mobileIconType,
+                        mobileIconSVG,
                         mobileCloseIcon,
+                        mobileCloseIconType,
+                        mobileCloseIconSVG,
                         submenuClick,
                         mobileSubmenuClick,
                         mobileCloseOnClick,
                         submenuItemIndicator,
+                        submenuItemIndicatorType,
+                        submenuItemIndicatorSVG,
                         transform,
-                        mobileEnableOverlay
+                        mobileEnableOverlay,
+                        hamburgerAriaLabel,
+                        mobileLogoAriaLabel,
+                        closeAriaLabel,
+                        mobileMenuLogoLazyLoad,
                     },
                 }),
             }).then((data) => {
@@ -99,7 +119,7 @@ const NavMenuBlock = compose(
         } else {
             setResponse(`<div id="${elementId}" class="guten-element guten-nav-menu nav-menu break-point-tablet submenu-click-title " data-item-indicator="gtn gtn-angle-down-solid" data-close-on-click="1">
                 <div class="gutenverse-hamburger-wrapper">
-                    <button class="gutenverse-hamburger-menu">
+                    <button class="gutenverse-hamburger-menu" aria-label="${hamburgerAriaLabel ? hamburgerAriaLabel : 'Open Navigation Menu'}">
                         <i aria-hidden="true" class="gtn gtn-burger-menu-light"></i>
                     </button>
                 </div>
@@ -122,13 +142,20 @@ const NavMenuBlock = compose(
         mobileMenuLink,
         mobileMenuURL,
         mobileIcon,
+        mobileIconType,
+        mobileIconSVG,
         mobileCloseIcon,
+        mobileCloseIconType,
+        mobileCloseIconSVG,
         submenuClick,
         mobileSubmenuClick,
         mobileCloseOnClick,
         submenuItemIndicator,
+        submenuItemIndicatorType,
+        submenuItemIndicatorSVG,
         transform,
-        mobileEnableOverlay
+        mobileEnableOverlay,
+        mobileMenuLogoLazyLoad,
     ]);
 
     useEffect(() => {
@@ -160,19 +187,21 @@ const NavMenuBlock = compose(
             deviceType?.toLowerCase(),
             `${breakpoint}-breakpoint`,
         ),
-        ['data-item-indicator']: submenuItemIndicator
+        ['data-item-indicator']: submenuItemIndicator,
+        ['data-item-indicator-type']: submenuItemIndicatorType,
+        ['data-item-indicator-svg']: submenuItemIndicatorSVG,
     });
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div {...blockProps}>
-            {menuId ? !loading ? <RawHTML key="html">
+            {!loading && response ? <RawHTML key="html">
                 {response}
-            </RawHTML> : <NavSkeleton /> : <NavSkeletonNormal />}
+            </RawHTML> : <NavSkeleton />}
         </div>
     </>;
 });

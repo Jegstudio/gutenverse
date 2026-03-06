@@ -89,4 +89,8 @@ class GutenverseTabs extends Default {
     }
 }
 
-export default GutenverseTabs;
+const selected = u('.guten-tabs');
+
+if (selected) {
+    new GutenverseTabs(selected);
+}

@@ -8,7 +8,7 @@ const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extract
 
 const wizard = {
     mode: "development",
-    devtool: "cheap-module-source-map",
+    devtool: "source-map",
     entry: {
         wizard: {
             import: path.resolve(__dirname, "../../src/backend/wizard/index.js"),

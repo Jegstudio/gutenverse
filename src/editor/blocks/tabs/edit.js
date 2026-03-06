@@ -116,7 +116,10 @@ const TabHeadingResponsive = ({
                 value={active[0].text}
                 tagName="span"
             />}
-            <i className={'tab-dropdown-icon fas'} />
+            <div className="gutenverse-icon-svg">
+                <svg className="chevron-up-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 173.3 54.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" /></svg>
+                <svg className="chevron-down-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" /></svg>
+            </div>
         </div>
         <div className={'tab-option'}>
             {tabs.map(tab => {
@@ -286,7 +289,7 @@ const Tabs = compose(
 
     const changeActiveTab = key => {
         setActiveTab(key);
-        if(elementRef.current){
+        if (elementRef.current) {
             elementRef.current.querySelectorAll('.tab-body-item.active').forEach(childs => {
                 childs.classList.remove('active');
             });
@@ -336,7 +339,7 @@ const Tabs = compose(
     };
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <BlockControls>
             <ToolbarGroup>

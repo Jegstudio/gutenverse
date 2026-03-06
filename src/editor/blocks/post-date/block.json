@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/post-date",
 	"class_callback": "\\Gutenverse\\Block\\Post_Date",
 	"title": "Post Date",
@@ -23,7 +23,17 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "span"
+			"default": "span",
+			"enum": [
+				"span",
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"dateType": {
 			"type": "string",
@@ -77,6 +87,11 @@
 		"backgroundHover": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -181,6 +196,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"usesContext": [
@@ -189,10 +234,15 @@
 		"queryId"
 	],
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
+		"single",
 		"post",
 		"date"
+	],
+	"style": [
+		"gutenverse-frontend-post-date-style"
 	]
 }

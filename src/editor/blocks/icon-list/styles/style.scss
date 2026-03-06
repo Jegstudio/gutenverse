@@ -4,13 +4,13 @@
         flex-direction: column;
 
         &:not(.inline-icon-list) {
-            .guten-icon-list-item{
+            .guten-icon-list-item {
                 width: 100%;
             }
         }
 
         .guten-icon-list-item {
-            
+
             .list-divider {
                 width: 100%;
                 height: 0;
@@ -24,9 +24,14 @@
             }
 
             a {
-                color: var(--guten-txt-color) !important;
+                color: var(--guten-txt-color);
                 display: flex;
                 align-items: center;
+                gap: 6px;
+            }
+
+            svg {
+                fill: var(--guten-txt-color);
             }
         }
 

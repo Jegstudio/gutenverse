@@ -1,15 +1,15 @@
 .wp-block-gutenverse-divider {
     display: flex;
     justify-content: center;
-    --divider-border-style:none;
-    --divider-border-width:1px;
+    --divider-border-style: none;
+    --divider-border-width: 1px;
     --divider-color: var(--guten-base-lighter-color);
-    --divider-icon-size:20px;
-    --divider-element-spacing:10px;
-    --divider-pattern-height:24px;
-    --divider-pattern-size:20px;
-    --divider-pattern-url:none;
-    --divider-pattern-repeat:repeat-x;
+    --divider-icon-size: 20px;
+    --divider-element-spacing: 10px;
+    --divider-pattern-height: 24px;
+    --divider-pattern-size: 20px;
+    --divider-pattern-url: none;
+    --divider-pattern-repeat: repeat-x;
 
     &.guten-divider-tribal {
         --divider-pattern-size: auto;
@@ -35,22 +35,22 @@
     }
 }
 
-.guten-divider-default{
+.guten-divider-default {
     border-bottom: 2px solid var(--guten-base-color);
     width: 100%;
 }
 
-.guten-divider-double{
+.guten-divider-double {
     border-bottom: 3px double var(--guten-base-color);
     width: 100%;
 }
 
-.guten-divider-dotted{
+.guten-divider-dotted {
     border-bottom: 2px dotted var(--guten-base-color);
     width: 100%;
 }
 
-.guten-divider-dashed{
+.guten-divider-dashed {
     border-bottom: 2px dashed var(--guten-base-color);
     width: 100%;
 }
@@ -58,6 +58,7 @@
 .guten-divider-content {
     padding: 0 10px 0 10px;
     flex-shrink: 0;
+    display: flex;
 }
 
 @media (max-width: 425px) {

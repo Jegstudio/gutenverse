@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-text-editor',
         'columns': {
             'Desktop': '3',
             'Tablet': '1',

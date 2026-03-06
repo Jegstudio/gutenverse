@@ -1,17 +1,27 @@
 import { __ } from '@wordpress/i18n';
-import { RangeControl, SwitchControl } from 'gutenverse-core/controls';
+import { AlertControl, RangeControl, SwitchControl } from 'gutenverse-core/controls';
 
 export const panelFloating = props => {
     const {
         elementId,
         switcher,
         setSwitcher,
+        contentStyle
     } = props;
 
     return [
         {
+            id: 'term-notice',
+            show: contentStyle !== 'floating',
+            component: AlertControl,
+            children: <>
+                <span>{__('This Panel Option Only Show If You Choose Image Content Style "Floating"')}</span>
+            </>
+        },
+        {
             id: 'floatMarginTop',
             label: __('Margin Top', 'gutenverse'),
+            show: contentStyle === 'floating',
             component: RangeControl,
             min: -100,
             max: 100,
@@ -42,6 +52,7 @@ export const panelFloating = props => {
         {
             id: 'floatWidth',
             label: __('Width', 'gutenverse'),
+            show: contentStyle === 'floating',
             component: RangeControl,
             min: 1,
             max: 100,
@@ -72,6 +83,7 @@ export const panelFloating = props => {
         {
             id: '__imageBoxFloat',
             component: SwitchControl,
+            show: contentStyle === 'floating',
             options: [
                 {
                     value: 'normal',
@@ -86,7 +98,7 @@ export const panelFloating = props => {
         },
         {
             id: 'floatHeight',
-            show: !switcher.imageBoxFloat || switcher.imageBoxFloat === 'normal',
+            show: (!switcher.imageBoxFloat || switcher.imageBoxFloat === 'normal') && contentStyle === 'floating',
             label: __('Normal Height', 'gutenverse'),
             component: RangeControl,
             min: 1,
@@ -117,7 +129,7 @@ export const panelFloating = props => {
         },
         {
             id: 'floatHeightHover',
-            show: switcher.imageBoxFloat === 'hover',
+            show: switcher.imageBoxFloat === 'hover' && contentStyle === 'floating',
             label: __('Hover Height', 'gutenverse'),
             component: RangeControl,
             min: 1,

@@ -83,6 +83,24 @@ export const panelStyle = ({ elementId }) => {
                             }
                         }
                     ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'iconSize',
+                    'selector': `.${elementId} .rating-icons svg`,
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -100,6 +118,24 @@ export const panelStyle = ({ elementId }) => {
                     'type': 'plain',
                     'id': 'iconGap',
                     'selector': `.${elementId} .rating-icons i`,
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'margin-right',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'iconGap',
+                    'selector': `.${elementId} .gutenverse-icon-svg`,
                     'responsive': true,
                     'properties': [
                         {
@@ -131,6 +167,17 @@ export const panelStyle = ({ elementId }) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColorMarked',
+                    'selector': `.${elementId} .rating-icons .gutenverse-icon-svg.full svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -146,6 +193,17 @@ export const panelStyle = ({ elementId }) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColorUnmarked',
+                    'selector': `.${elementId} .rating-icons .gutenverse-icon-svg..empty svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]

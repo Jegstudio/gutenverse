@@ -7,42 +7,54 @@
         border: 1px solid var(--guten-border-color);
         border-radius: 5px;
         transition: all .4s ease;
-        overflow: hidden;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+
+        &::before {
+            pointer-events: none;
+        }
     }
+
     >a {
         text-decoration: none;
     }
+
     .icon-box-link {
         color: unset;
     }
+
     .guten-background-filter {
         background-color: var(--guten-bg-color);
     }
+
     &.icon-position-left .guten-icon-box-wrapper {
         display: flex;
         align-items: flex-start;
+
         .icon-box.icon-box-header {
             margin-right: 15px;
         }
     }
+
     &.icon-position-right .guten-icon-box-wrapper {
         display: flex;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: reverse;
         -ms-flex-direction: row-reverse;
         flex-direction: row-reverse;
+
         .icon-box.icon-box-header {
             margin-left: 15px;
         }
     }
+
     .icon-box {
         &.icon-box-header {
             position: relative;
             z-index: 2;
             line-height: 0;
+
             .icon {
                 display: inline-block;
                 margin-bottom: 13px;
@@ -50,7 +62,8 @@
                 transition: all .4s ease;
                 overflow: hidden;
 
-                i {
+                i,
+                svg {
                     font-size: 40px;
                 }
 
@@ -63,27 +76,32 @@
             }
 
             .icon-style-gradient {
-                background-image: linear-gradient(180deg,var(--guten-txt-color) 0,var(--guten-txt-color) 100%);
+                background-image: linear-gradient(180deg, var(--guten-txt-color) 0, var(--guten-txt-color) 100%);
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
                 -webkit-background-clip: text;
             }
         }
+
         &.icon-box-body {
             position: relative;
             z-index: 2;
+
             .title {
                 padding: 0px 0px 0px 0px;
                 color: var(--guten-txt-color);
                 font-size: 23px;
-                transition: all 0s;
+                transition: all .3s ease;
             }
+
             .icon-box-button {
                 position: relative;
                 z-index: 2;
+
                 .btn-wrapper {
                     position: relative;
                     z-index: 2;
+
                     .icon-box-link {
                         border-radius: 5px;
                         font-size: 15px;
@@ -98,29 +116,35 @@
                         text-align: center;
                         background-color: var(--guten-btn-bg-color);
                         transition: all .4s ease;
+
                         &:hover {
                             background-color: var(--guten-btn-bg-hover-color);
                         }
                     }
                 }
+
                 &.hover .btn-wrapper .icon-box-link {
                     opacity: 0;
                 }
             }
+
             .icon-box-description {
                 color: var(--guten-txt-color);
             }
         }
     }
+
     &:hover {
         .icon-box.icon-box-body .icon-box-button.hover .btn-wrapper .icon-box-link {
             opacity: 100;
         }
+
         .hover-watermark {
             bottom: 0;
             opacity: 100;
         }
     }
+
     .hover-watermark {
         position: absolute;
         bottom: -50px;
@@ -128,40 +152,50 @@
         opacity: 0;
         transition: all .4s ease;
         z-index: 1;
-        i {
+
+        i,
+        svg {
             font-size: 100px;
         }
     }
+
     .icon-box-badge {
         position: absolute;
         line-height: 1;
         z-index: 2;
+
         &.topleft {
             top: 0;
             left: 0;
         }
+
         &.topcenter {
             top: 0;
             left: 50%;
             transform: translateX(-50%);
         }
+
         &.topright {
             top: 0;
             right: 0;
         }
+
         &.bottomleft {
             left: 0;
             bottom: 0;
         }
+
         &.bottomcenter {
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
         }
+
         &.bottomright {
             bottom: 0;
             right: 0;
         }
+
         .badge-text {
             padding: 10px 10px 10px 10px;
             border-radius: 0px 0px 0px 0px;

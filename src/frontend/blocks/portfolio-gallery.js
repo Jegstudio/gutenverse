@@ -40,7 +40,7 @@ class GutenversePortfolioGallery extends Default {
                     imageEl.removeClass('current-item');
                 }
             }
-        })
+        });
     }
     __addClass(target, blockElement){
         const current = u(target);
@@ -53,4 +53,8 @@ class GutenversePortfolioGallery extends Default {
     }
 }
 
-export default GutenversePortfolioGallery;
+const selected = u('.guten-portfolio-gallery');
+
+if (selected) {
+    new GutenversePortfolioGallery(selected);
+}

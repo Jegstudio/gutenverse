@@ -18,6 +18,67 @@ const postMetaStyle = (elementId, attributes, data) => {
             }
         ],
     });
+    isNotEmpty(attributes['metaColorIcon']) && data.push({
+        'type': 'color',
+        'id': 'metaColorIcon',
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta i`,
+        'properties': [
+            {
+                'name': 'color',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['metaColorIcon']) && data.push({
+        'type': 'color',
+        'id': 'metaColorIcon',
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['metaSizeIcon']) && data.push({
+        'type': 'plain',
+        'id': 'metaSizeIcon',
+        'responsive' : true,
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta i`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['metaSizeIcon']) && data.push({
+        'type': 'plain',
+        'id': 'metaSizeIcon',
+        'responsive' : true,
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
 
     isNotEmpty(attributes['metaAuthorTypography']) && data.push({
         'type': 'typography',
@@ -54,7 +115,7 @@ const postMetaStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'metaAuthorIconSpacing',
         'responsive' : true,
-        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-before i`,
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-before i, .${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-before svg`,
         'properties': [
             {
                 'name': 'margin-right',
@@ -73,7 +134,7 @@ const postMetaStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'metaAuthorIconSpacing',
         'responsive' : true,
-        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-after i`,
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-after i, .${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-after svg`,
         'properties': [
             {
                 'name': 'margin-left',
@@ -92,7 +153,7 @@ const postMetaStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'metaDateIconSpacing',
         'responsive' : true,
-        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-before i`,
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-before i, .${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-before svg`,
         'properties': [
             {
                 'name': 'margin-right',
@@ -111,7 +172,7 @@ const postMetaStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'metaDateIconSpacing',
         'responsive' : true,
-        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-after i`,
+        'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-after i, .${elementId} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-after svg`,
         'properties': [
             {
                 'name': 'margin-left',

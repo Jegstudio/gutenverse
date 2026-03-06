@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/logo-slider",
 	"title": "Logo Slider",
 	"description": "Showcase your clients, sponsors, or a list of images on your website.",
@@ -95,6 +95,14 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"filter": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"filterHover": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"spacing": {
 			"type": "object",
 			"default": {},
@@ -124,14 +132,6 @@
 		"showArrow": {
 			"type": "boolean",
 			"default": false
-		},
-		"leftArrow": {
-			"type": "string",
-			"default": "fa fa-angle-left"
-		},
-		"rightArrow": {
-			"type": "string",
-			"default": "fa fa-angle-right"
 		},
 		"arrowPosition": {
 			"type": "string",
@@ -263,6 +263,11 @@
 			"default": {},
 			"copyStyle": true
 		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
 		"border": {
 			"type": "object",
 			"default": {},
@@ -386,20 +391,58 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"logoBackgroundNormal":{
+		"logoBackgroundNormal": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"logoBackgroundHover":{
+		"logoBackgroundHover": {
 			"type": "object",
+			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
 			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"logo",
-		"slider"
+		"slider",
+		"image"
+	],
+	"viewScript": [
+		"gutenverse-frontend-client-logo-script"
+	],
+	"style": [
+		"gutenverse-frontend-logo-slider-style"
 	]
 }

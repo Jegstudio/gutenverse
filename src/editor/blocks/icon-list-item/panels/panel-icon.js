@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { RangeControl, TextControl } from 'gutenverse-core/controls';
+import { IconSVGControl, RangeControl, TextControl } from 'gutenverse-core/controls';
 
 export const panelIcon = (props) => {
     const {
@@ -7,6 +7,11 @@ export const panelIcon = (props) => {
     } = props;
 
     return [
+        {
+            id: 'icon',
+            label: __('Icon', 'gutenverse'),
+            component: IconSVGControl,
+        },
         {
             id: 'iconLineHeight',
             label: __('Icon line height', 'gutenverse'),
@@ -34,6 +39,24 @@ export const panelIcon = (props) => {
                         }
                     ],
                     'selector': `.${elementId}.guten-icon-list-item i`,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'iconLineHeight',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'height',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                    'selector': `.${elementId}.guten-icon-list-item .gutenverse-icon-svg`,
                 }
             ]
         },

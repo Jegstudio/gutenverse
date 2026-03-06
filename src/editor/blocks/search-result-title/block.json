@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/search-result-title",
 	"class_callback": "\\Gutenverse\\Block\\Search_Result_Title",
 	"title": "Search Result Title",
@@ -15,10 +15,19 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "h1"
+			"default": "h1",
+			"enum": [
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"staticText": {
-			"type" : "string",
+			"type": "string",
 			"default": "Search Result For:"
 		},
 		"alignment": {
@@ -90,6 +99,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -192,9 +206,39 @@
 			"type": "object",
 			"copyStyle": true
 		},
-        "condition": {
+		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"usesContext": [
@@ -203,10 +247,16 @@
 		"queryId"
 	],
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
+		"single",
 		"archive",
-		"title"
+		"title",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-search-result-title-style"
 	]
 }

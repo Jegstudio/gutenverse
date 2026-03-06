@@ -44,13 +44,13 @@ class Countdown extends Style_Abstract {
 				'background'  => null,
 				'border'      => null,
 				'positioning' => null,
-				'animation'   => ".{$this->element_id} .guten-countdown",
+				'animation'   => ".{$this->element_id}.guten-countdown",
 				'advance'     => null,
 				'transform'   => array(
-					'normal' => ".{$this->element_id} .guten-countdown",
-					'hover'  => ".{$this->element_id} .guten-countdown:hover",
+					'normal' => ".{$this->element_id}",
+					'hover'  => ".{$this->element_id}:hover",
 				),
-				'mask'        => ".{$this->element_id} .guten-countdown",
+				'mask'        => ".{$this->element_id}.guten-countdown",
 			)
 		);
 	}

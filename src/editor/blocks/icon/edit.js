@@ -1,25 +1,18 @@
+
 import { compose } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
 import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
-import { createPortal } from 'react-dom';
-import { IconLibrary } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
-import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { ToolbarGroup } from '@wordpress/components';
 import { URLToolbar } from 'gutenverse-core/toolbars';
 import { useCallback } from '@wordpress/element';
-import { displayShortcut } from '@wordpress/keycodes';
-import { gutenverseRoot } from 'gutenverse-core/helper';
-import { LogoCircleColor24SVG } from 'gutenverse-core/icons';
+import { renderIcon } from 'gutenverse-core/helper';
 import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
-import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef, withTooltip } from 'gutenverse-core/hoc';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
-import isEmpty from 'lodash/isEmpty';
-import { isOnEditor } from 'gutenverse-core/helper';
 import getBlockStyle from './styles/block-style';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import { useRichTextParameter } from 'gutenverse-core/helper';
@@ -31,7 +24,8 @@ const IconBlock = compose(
     withPartialRender,
     withPassRef,
     withAnimationAdvanceV2('icon'),
-    withMouseMoveEffect
+    withMouseMoveEffect,
+    // withTooltip ? withTooltip('.guten-icon-wrapper') : (BlockElement) => (props) => <BlockElement {...props} />,
 )((props) => {
     const {
         attributes,
@@ -44,6 +38,8 @@ const IconBlock = compose(
     const {
         elementId,
         icon,
+        iconType,
+        iconSVG,
         iconShape,
         iconView,
         url,
@@ -59,11 +55,10 @@ const IconBlock = compose(
         panelIsClicked
     } = useRichTextParameter();
 
-    const [openIconLibrary, setOpenIconLibrary] = useState(false);
     const elementRef = useRef();
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
-    const [dynamicHref, setDynamicHref] = useState();
+    const { dynamicHref } = useDynamicUrl(dynamicUrl);
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -114,21 +109,10 @@ const IconBlock = compose(
     useDynamicScript(elementRef);
 
     useEffect(() => {
-        const dynamicUrlcontent = isEmpty(dynamicUrl) || !isOnEditor() ? dynamicUrl : applyFilters(
-            'gutenverse.dynamic.fetch-url',
-            dynamicUrl
-        );
-
-        (typeof dynamicUrlcontent.then === 'function') && !isEmpty(dynamicUrl) && dynamicUrlcontent
-            .then(result => {
-                if ((!Array.isArray(result) || result.length > 0) && result !== undefined && result !== dynamicHref) {
-                    setDynamicHref(result);
-                } else if (result !== dynamicHref) setDynamicHref(undefined);
-            }).catch(() => { });
         if (dynamicHref !== undefined) {
             setAttributes({ url: dynamicHref, isDynamic: true });
         } else { setAttributes({ url: url }); }
-    }, [dynamicUrl, dynamicHref]);
+    }, [dynamicHref]);
 
     useEffect(() => {
         if (elementRef) {
@@ -137,7 +121,7 @@ const IconBlock = compose(
     }, [elementRef]);
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} panelState={panelState} setPanelIsClicked={setPanelIsClicked} />
         <BlockControls>
             <ToolbarGroup>
@@ -155,32 +139,14 @@ const IconBlock = compose(
                         panelIsClicked={panelIsClicked}
                         setPanelIsClicked={setPanelIsClicked}
                     />,
-                    props,
+                    { ...props, setPanelState },
                     iconPanelState
                 )}
-                <ToolbarButton
-                    name="icon"
-                    icon={<LogoCircleColor24SVG />}
-                    title={__('Choose Icon', 'gutenverse')}
-                    shortcut={displayShortcut.primary('i')}
-                    onClick={() => setOpenIconLibrary(true)}
-                />
             </ToolbarGroup>
         </BlockControls>
         <div {...blockProps}>
-            {openIconLibrary && createPortal(
-                <IconLibrary
-                    closeLibrary={() => setOpenIconLibrary(false)}
-                    value={icon}
-                    onChange={icon => setAttributes({ icon })}
-                />,
-                gutenverseRoot
-            )}
             <div {...wrapperProps}>
-                <i
-                    className={`${icon}`}
-                    onClick={() => setOpenIconLibrary(true)}
-                />
+                {renderIcon(icon, iconType, iconSVG)}
             </div>
         </div>
     </>;

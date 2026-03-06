@@ -65,7 +65,19 @@ export const contentPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.${elementId} .guten-social-icon i`,
+                    'selector': `.${elementId} .guten-social-icon a i`,
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.${elementId} .guten-social-icon a svg`,
                 }
             ]
         },

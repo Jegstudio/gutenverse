@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/animated-text",
 	"title": "Animated Text",
 	"description": "Create text with beautiful animation flow.",
@@ -13,18 +13,61 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"textType": {
+			"type": "string",
+			"default": "default"
+		},
 		"titleTag": {
 			"type": "string",
 			"default": "h2"
 		},
 		"style": {
 			"type": "string",
-			"default": "none",
+			"default": "zoom",
+			"copyStyle": true
+		},
+		"highlightedStyle": {
+			"type": "string",
+			"default": "circle",
 			"copyStyle": true
 		},
 		"text": {
 			"type": "string",
 			"default": "Placeholder Text"
+		},
+		"rotationTexts": {
+			"type": "array",
+			"default": [
+				{
+					"rotationText": "Three"
+				},
+				{
+					"rotationText": "Two"
+				},
+				{
+					"rotationText": "One"
+				}
+			]
+		},
+		"beforeTextAnimated": {
+			"type": "string",
+			"default": "Before "
+		},
+		"afterTextAnimated": {
+			"type": "string",
+			"default": " After"
+		},
+		"displayDuration": {
+			"type": "string",
+			"default": "1000"
+		},
+		"animationDuration": {
+			"type": "string",
+			"default": "600"
+		},
+		"transitionDuration": {
+			"type": "string",
+			"default": "500"
 		},
 		"splitByWord": {
 			"type": "boolean"
@@ -38,18 +81,98 @@
 			"default": true,
 			"copyStyle": true
 		},
-		"color": {
+		"animatedColorType": {
+			"type": "string",
+			"default": "color"
+		},
+		"textAnimatedColor": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"typography": {
+		"textAnimatedColorHover": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"textShadow": {
+		"textAnimatedGradient": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"textAnimatedGradientHover": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"textAnimatedTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textAnimatedShadow": {
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"textAnimatedStroke": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"normalColorType": {
+			"type": "string",
+			"default": "color"
+		},
+		"textNormalColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textNormalColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textNormalGradient": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"textNormalGradientHover": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"textNormalTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textNormalShadow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"textNormalStroke": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"highlightColorType": {
+			"type": "string",
+			"default": "color"
+		},
+		"highlightColor": {
+			"type": "object",
+			"default": {}
+		},
+		"highlightGradient": {
+			"type": "array"
+		},
+		"highlightWidth": {
+			"type": "string",
+			"default": "10"
+		},
+		"highlightRoundedEdges": {
+			"type": "boolean",
+			"default": true
+		},
+		"highlightInFront": {
+			"type": "boolean",
+			"default": true
 		},
 		"height": {
 			"type": "object",
@@ -68,6 +191,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -166,26 +294,78 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"textStroke": {
-			"type": "object",
-			"copyStyle": true
-		},
 		"mask": {
 			"type": "object",
 			"copyStyle": true
 		},
-        "condition": {
+		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"color": {
+			"copyStyle": true,
+			"type": "object"
+		},
+		"textShadow": {
+			"copyStyle": true,
+			"default": {},
+			"type": "object"
+		},
+		"textStroke": {
+			"copyStyle": true,
+			"type": "object"
+		},
+		"typography": {
+			"copyStyle": true,
+			"type": "object"
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"heading",
 		"animated",
 		"animation",
-		"text"
+		"moving",
+		"title",
+		"texts"
+	],
+	"viewScript": [
+		"gutenverse-frontend-animated-text-script"
+	],
+	"style": [
+		"gutenverse-frontend-animated-text-style"
 	]
 }

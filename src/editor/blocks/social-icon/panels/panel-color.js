@@ -44,6 +44,17 @@ export const contentColor = (props) => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
+                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId} svg, .guten-social-icons.border .guten-social-icon #${elementId} svg, .guten-social-icons.custom .guten-social-icon #${elementId} svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColor',
                     'selector': `.guten-social-icons.border .guten-social-icon #${elementId}`,
                     'properties': [
                         {
@@ -86,6 +97,17 @@ export const contentColor = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'hoverIconColor',
+                    'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover svg, .guten-social-icons.border .guten-social-icon #${elementId}:hover svg, .guten-social-icons.custom .guten-social-icon #${elementId}:hover svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]

@@ -9,6 +9,7 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { renderIcon } from 'gutenverse-core/helper';
 
 const SearchBlock = compose(
     withPartialRender,
@@ -20,6 +21,8 @@ const SearchBlock = compose(
     } = props;
     const {
         closeIcon,
+        closeIconType,
+        closeIconSVG,
         showButton,
         inputPlaceholder,
         elementId,
@@ -76,21 +79,23 @@ const SearchBlock = compose(
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div  {...blockProps}>
             <div className="gutenverse-search-form">
-                <div className="search-input-container">
-                    <input type="text"
-                        placeholder={inputPlaceholder}
-                        name="s"
-                        className={classnames(
-                            'gutenverse-search',
-                            'gutenverse-search-input',
-                        )}
-                        value={inputValue}
-                        onChange={(event) => {
-                            setInputValue(event.target.value);
-                        }}
-                    />
-                    <div className="close-icon" ref={closeIconRef} onClick={() => setInputValue('')}>
-                        <i className={closeIcon}></i>
+                <div className={'search-input-container-outer'}>
+                    <div className={'search-input-container'}>
+                        <input type="text"
+                            placeholder={inputPlaceholder}
+                            name="s"
+                            className={classnames(
+                                'gutenverse-search',
+                                'gutenverse-search-input',
+                            )}
+                            value={inputValue}
+                            onChange={(event) => {
+                                setInputValue(event.target.value);
+                            }}
+                        />
+                        <div className="close-icon" ref={closeIconRef} onClick={() => setInputValue('')}>
+                            {renderIcon(closeIcon, closeIconType, closeIconSVG)}
+                        </div>
                     </div>
                 </div>
                 {

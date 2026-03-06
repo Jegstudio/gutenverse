@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/social-share",
 	"title": "Social Share",
 	"description": "Allow your visitor to share the current page",
@@ -124,6 +124,11 @@
 			"default": {},
 			"copyStyle": true
 		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
 		"border": {
 			"type": "object",
 			"copyStyle": true
@@ -228,6 +233,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"variations": [
@@ -260,6 +295,10 @@
 	},
 	"keywords": [
 		"social",
-		"share"
+		"share",
+		"link"
+	],
+	"style": [
+		"gutenverse-frontend-social-share-style"
 	]
 }

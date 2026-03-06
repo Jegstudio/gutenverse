@@ -1,6 +1,6 @@
 import { BackgroundControl, BorderControl, BorderResponsiveControl, BoxShadowControl, DimensionControl, RangeControl } from 'gutenverse-core/controls';
 import { __ } from '@wordpress/i18n';
-import { ColorControl, IconControl, SwitchControl } from 'gutenverse-core/controls';
+import { ColorControl, IconSVGControl, SwitchControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 export const panelIconStyle = (props) => {
@@ -98,6 +98,24 @@ export const panelIconStyle = (props) => {
                             }
                         }
                     ],
+                },
+                {
+                    'type': 'plain',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'selector': `.${elementId} .accordion-item .accordion-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct',
+                                }
+                            }
+                        }
+                    ],
                 }
             ]
         },
@@ -105,7 +123,7 @@ export const panelIconStyle = (props) => {
             id: 'iconClosed',
             show: !switcher.accIcon || switcher.accIcon === 'normal',
             label: __('Normal Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'iconColor',
@@ -120,6 +138,17 @@ export const panelIconStyle = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ],
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColor',
+                    'selector': `.${elementId} .accordion-item .accordion-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ],
@@ -212,6 +241,23 @@ export const panelIconStyle = (props) => {
                             }
                         }
                     ],
+                },
+                {
+                    'type': 'plain',
+                    'responsive': true,
+                    'selector': `.${elementId} .accordion-item.active .accordion-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct',
+                                }
+                            }
+                        }
+                    ],
                 }
             ]
         },
@@ -219,7 +265,7 @@ export const panelIconStyle = (props) => {
             id: 'iconOpen',
             show: switcher.accIcon === 'active',
             label: __('Active Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'iconActiveColor',
@@ -233,6 +279,16 @@ export const panelIconStyle = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ],
+                },
+                {
+                    'type': 'color',
+                    'selector': `.${elementId} .accordion-item.active .accordion-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ],

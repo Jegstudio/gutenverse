@@ -1,7 +1,10 @@
+import { applyFilters } from '@wordpress/hooks';
+import { backgroundStyle } from 'gutenverse-core/controls';
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({ attributes, data, elementId });
 
     isNotEmpty(attributes['height']) && data.push({
         'type': 'plain',
@@ -10,10 +13,10 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId}.gutenverse-maps iframe`,
         'properties': [
             {
-                'name' : 'height',
-                'valueType' : 'pattern',
-                'pattern' : '{value}px',
-                'patternValues' : {
+                'name': 'height',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
                     'value': {
                         'type': 'direct',
                     }
@@ -49,18 +52,6 @@ const getBlockStyle = (elementId, attributes) => {
     });
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
-
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
         'id': 'border',
@@ -304,7 +295,18 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId}.guten-element`,
         'attributeType': 'custom',
     });
-    return data;
+
+    return [
+        ...data,
+        ...applyFilters(
+            'gutenverse.google-map.blockStyle',
+            [],
+            {
+                elementId,
+                attributes
+            }
+        )
+    ];
 };
 
 

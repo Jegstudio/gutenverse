@@ -51,6 +51,7 @@ class Icon extends Style_Abstract {
 					'hover'  => ".{$this->element_id} .guten-icon-wrapper:hover",
 				),
 				'mask'        => null,
+				'tooltip'     => null,
 			)
 		);
 	}
@@ -75,7 +76,17 @@ class Icon extends Style_Abstract {
 		if ( isset( $this->attrs['iconSize'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} i",
+					'selector'       => ".{$this->element_id} .guten-icon-wrapper i",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'font-size' );
+					},
+					'value'          => $this->attrs['iconSize'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-icon-wrapper svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'font-size' );
 					},
@@ -101,7 +112,7 @@ class Icon extends Style_Abstract {
 		if ( isset( $this->attrs['iconRotate'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-icon-wrapper i",
+					'selector'       => ".{$this->element_id} .guten-icon-wrapper i, .{$this->element_id} .guten-icon-wrapper svg",
 					'property'       => function ( $value ) {
 						return "transform: rotate({$value}deg);";
 					},
@@ -155,6 +166,17 @@ class Icon extends Style_Abstract {
 
 			$this->inject_style(
 				array(
+					'selector'       => ".{$this->element_id} .guten-icon-wrapper.framed svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['iconColorOne'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
 					'selector'       => ".{$this->element_id} .guten-icon-wrapper.framed",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'border-color' );
@@ -190,6 +212,17 @@ class Icon extends Style_Abstract {
 
 			$this->inject_style(
 				array(
+					'selector'       => ".{$this->element_id} .guten-icon-wrapper.stacked svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['iconColorTwo'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
 					'selector'       => ".{$this->element_id} .guten-icon-wrapper.framed",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
@@ -206,6 +239,17 @@ class Icon extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .guten-icon-wrapper.framed:hover i",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['iconColorHoverOne'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-icon-wrapper.framed:hover svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['iconColorHoverOne'],
 					'device_control' => false,
@@ -241,6 +285,17 @@ class Icon extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .guten-icon-wrapper.stacked:hover i",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['iconColorHoverTwo'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-icon-wrapper.stacked:hover svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['iconColorHoverTwo'],
 					'device_control' => false,

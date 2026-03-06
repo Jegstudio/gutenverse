@@ -6,7 +6,7 @@ import { panelList } from './panels/panel-list';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { getDate } from 'gutenverse-core/editor-helper';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 import { useRef } from '@wordpress/element';
 import { withPartialRender } from 'gutenverse-core/hoc';
 import { useEntityProp } from '@wordpress/core-data';

@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 import { oldImagePlaceholder } from 'gutenverse-core/config';
 
 export const ImageBoxFigure = attributes => {

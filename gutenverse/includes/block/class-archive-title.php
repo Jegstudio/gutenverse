@@ -28,12 +28,13 @@ class Archive_Title extends Block_Abstract {
 	 */
 	public function render_content( $archive_title, $category_url ) {
 		$html_tag     = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'h2' ) );
-		$archive_link = ! empty( $this->attributes['archiveLink'] ) ? $this->attributes['archiveLink'] : false;
 		$link_target  = ! empty( $this->attributes['archiveLinkTarget'] ) ? '_blank' : '_self';
 		$link_rel     = ! empty( $this->attributes['archiveLinkRel'] ) ? esc_attr( $this->attributes['archiveLinkRel'] ) : 'noreferrer';
 
-		if ( $archive_link ) {
-			$archive_title = "<a href='{$category_url}' target='{$link_target}' rel='{$link_rel}'>{$archive_title}</a>";
+		$archive_title = esc_html( $archive_title );
+
+		if ( $category_url ) {
+			$archive_title = "<a href='" . esc_url( $category_url ) . "' target='{$link_target}' rel='{$link_rel}'>{$archive_title}</a>";
 		}
 
 		return "<{$html_tag}>{$archive_title}</{$html_tag}>";
@@ -63,6 +64,12 @@ class Archive_Title extends Block_Abstract {
 			$title            = single_term_title( '', false );
 			$current_category = get_queried_object();
 			$category_url     = get_term_link( $current_category );
+		}
+
+		if ( is_author() ) {
+			$author       = get_queried_object();
+			$title        = $author->display_name;
+			$category_url = get_author_posts_url( $author->ID );
 		}
 
 		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-archive-title guten-element">' . $this->render_content( $title, $category_url ) . '</div>';

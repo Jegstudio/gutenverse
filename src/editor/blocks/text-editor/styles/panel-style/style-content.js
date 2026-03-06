@@ -14,6 +14,19 @@ const contentStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['textIndent']) && data.push({
+        'type': 'unitPoint',
+        'id': 'textIndent',
+        'responsive': true,
+        'selector': `.${elementId}:not(.dropcap) p, .${elementId}.dropcap p:not(:first-child)`,
+        'properties': [
+            {
+                'name': 'text-indent',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
     isNotEmpty(attributes['gap']) && data.push({
         'type': 'unitPoint',
         'id': 'gap',

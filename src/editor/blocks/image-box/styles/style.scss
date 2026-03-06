@@ -1,4 +1,8 @@
-.guten-image-box, 
+@import "gutenverse-core/src/assets/mixin";
+@import "gutenverse-core/src/assets/variables";
+@import "gutenverse-core/src/assets/wp-fix";
+
+.guten-image-box,
 .gutenverse-image-box {
     @include transition(false, false, all .4s ease);
     display: flex;
@@ -9,47 +13,66 @@
         display: flex;
         margin: 0;
         flex-direction: column;
-        
+
         .image-box-header {
             @include transition(false, false, all .4s ease);
             position: relative;
             overflow: hidden;
             line-height: 0;
+
             img {
                 @include transition(false, false, all .4s ease);
                 -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
+                min-width: 0;
                 width: -webkit-fill-available;
+                width: 100%; //fallback.
+                flex: 1;
                 height: auto;
                 margin: 0;
                 object-fit: cover;
                 border-radius: inherit;
             }
-            a{
+
+            a {
                 line-height: 0;
             }
         }
+
         .image-box-body {
             margin: 0;
         }
+
         .body-inner {
             padding: 30px 35px;
             position: relative;
             overflow: hidden;
-            background: var(--jkit-bg-color);
+            background: var(--guten-bg-color);
             @include boxshadow(0 0 20px 0 rgba(0, 0, 0, 0.25));
+
+            .body-description {
+                color: var(--guten-txt-h-color);
+            }
         }
+
         .body-title {
             font-size: 18px;
             margin-bottom: 20px;
-            color: var(--jkit-txt-h-color);
+            color: var(--guten-txt-h-color);
             font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+
+            svg {
+                fill: var(--guten-txt-h-color);
+            }
 
             a {
                 text-decoration: none;
-                color: var(--jkit-txt-h-color);
+                color: var(--guten-txt-h-color);
             }
         }
+
         &.style-floating {
             .body-inner {
                 background-color: #fff;
@@ -60,6 +83,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: -50px;
+
                 .body-description,
                 .guten-button {
                     @include transition(false, false, all .4s ease);
@@ -67,9 +91,11 @@
                     visibility: hidden;
                 }
             }
+
             &:hover {
                 .body-inner {
                     height: 220px;
+
                     .body-description,
                     .guten-button {
                         opacity: 1;

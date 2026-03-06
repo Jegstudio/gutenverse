@@ -63,7 +63,7 @@ const SearchResultTitleBlock = compose(
         </InspectorControls>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div  {...blockProps}>
-            <HtmlTag>{staticText} <span className="search-input-text">{__('<Search Input>', 'gutenverse')}</span></HtmlTag>
+            <HtmlTag>{staticText} <span className="search-input-text"><span className="placeholder-text">{__('<Search Input>', 'gutenverse')}</span></span></HtmlTag>
         </div>
     </>;
 });

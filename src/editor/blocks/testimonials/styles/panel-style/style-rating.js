@@ -32,6 +32,21 @@ const ratingStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['ratingColor']) && data.push({
+        'type': 'color',
+        'id': 'ratingColor',
+        'selector': `.${elementId}.style-1 .guten-testimonial-item ul.rating-stars li svg, 
+                    .${elementId}.style-2 .guten-testimonial-item ul.rating-stars li svg, 
+                    .${elementId}.style-3 .guten-testimonial-item ul.rating-stars li svg, 
+                    .${elementId}.style-4 .guten-testimonial-item ul.rating-stars li svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
     isNotEmpty(attributes['ratingColorHover']) && data.push({
         'type': 'color',
         'id': 'ratingColorHover',
@@ -47,11 +62,45 @@ const ratingStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['ratingColorHover']) && data.push({
+        'type': 'color',
+        'id': 'ratingColorHover',
+        'selector': `.${elementId}.style-1 .guten-testimonial-item:hover ul.rating-stars li svg, 
+                                .${elementId}.style-2 .guten-testimonial-item:hover ul.rating-stars li svg, 
+                                .${elementId}.style-3 .guten-testimonial-item:hover ul.rating-stars li svg, 
+                                .${elementId}.style-4 .guten-testimonial-item:hover ul.rating-stars li svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
     isNotEmpty(attributes['ratingIconSize']) && data.push({
         'type': 'plain',
         'id': 'ratingIconSize',
         'responsive': true,
-        'selector': `.${elementId} ul.rating-stars li i`,
+        'selector': `.${elementId} .guten-testimonial-item ul.rating-stars li i`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern' : '{value}px',
+                'patternValues' : {
+                    'value' : {
+                        'type' : 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['ratingIconSize']) && data.push({
+        'type': 'plain',
+        'id': 'ratingIconSize',
+        'responsive': true,
+        'selector': `.${elementId} .guten-testimonial-item ul.rating-stars li .gutenverse-icon-svg svg`,
         'properties': [
             {
                 'name': 'font-size',

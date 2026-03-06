@@ -5,6 +5,8 @@ import { settingPanel } from './panel-setting';
 // import { settingPanelDeprecated } from './panel-setting-deprecated';
 import { stylePanel } from './panel-style';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
+import { avatarStylePanel } from './panel-avatar-style.';
+import { biographyStylePanel } from './panel-biography-style';
 
 export const panelList = () => {
     return [
@@ -18,9 +20,21 @@ export const panelList = () => {
             panelArray: settingPanelDeprecated
         }, */
         {
-            title: __('Style', 'gutenverse'),
+            title: __('Name Style', 'gutenverse'),
             initialOpen: false,
             panelArray: stylePanel,
+            tabRole: TabStyle
+        },
+        {
+            title: __('Biography Style', 'gutenverse'),
+            initialOpen: false,
+            panelArray: biographyStylePanel,
+            tabRole: TabStyle
+        },
+        {
+            title: __('Avatar Style', 'gutenverse'),
+            initialOpen: false,
+            panelArray: avatarStylePanel,
             tabRole: TabStyle
         },
         {
@@ -58,7 +72,7 @@ export const panelList = () => {
         {
             title: __('Positioning', 'gutenverse'),
             initialOpen: false,
-            panelArray: positioningPanel,
+            panelArray: value => positioningPanel({ ...value, inBlock: false }),
             tabRole: TabSetting
         },
         {

@@ -1,3 +1,6 @@
+div[data-type="core/block"][data-title="Pattern"]:has(> .guten-gallery) {
+    width: 100%;
+}
 .guten-gallery {
     &.desktop {
         &.grid-desktop-1 {

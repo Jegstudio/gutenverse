@@ -1,6 +1,7 @@
 
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, IconControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconSVGControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoad } from "../../../helper";
 
 export const contentPanel = (props) => {
     const {
@@ -10,8 +11,11 @@ export const contentPanel = (props) => {
         metaEnabled,
         metaDateEnabled,
         metaCategoryEnabled,
-        metaDateFormat
+        metaDateFormat,
+        imageLoad,
+        lazyLoad
     } = props;
+    const defaultImageLoad = getDefaultImageLoad(imageLoad, lazyLoad);
 
     return [
         {
@@ -109,7 +113,7 @@ export const contentPanel = (props) => {
             id: 'icon',
             show: iconEnabled,
             label: __('Icon', 'gutenverse'),
-            component: IconControl
+            component: IconSVGControl
         },
         {
             id: 'metaEnabled',
@@ -172,7 +176,7 @@ export const contentPanel = (props) => {
             id: 'metaDateIcon',
             show: metaEnabled && metaDateEnabled,
             label: __('Date Icon', 'gutenverse'),
-            component: IconControl
+            component: IconSVGControl
         },
         {
             id: 'metaDateIconPosition',
@@ -200,7 +204,7 @@ export const contentPanel = (props) => {
             id: 'metaCategoryIcon',
             show: metaEnabled && metaCategoryEnabled,
             label: __('Category Icon', 'gutenverse'),
-            component: IconControl
+            component: IconSVGControl
         },
         {
             id: 'metaPosition',
@@ -219,9 +223,20 @@ export const contentPanel = (props) => {
             ]
         },
         {
-            id: 'lazyLoad',
-            label: __('Set Lazy Load', 'gutenverse'),
-            component: CheckboxControl,
-        },
+            id: 'imageLoad',
+            label: __('Image Load', 'gutenverse'),
+            component: SelectControl,
+            defaultValue: defaultImageLoad,
+            options: [
+                {
+                    label: __('Normal Load', 'gutenverse'),
+                    value: 'eager'
+                },
+                {
+                    label: __('Lazy Load', 'gutenverse'),
+                    value: 'lazy'
+                },
+            ]
+        }
     ];
 };

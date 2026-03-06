@@ -1,0 +1,31 @@
+#wpadminbar #wp-admin-bar-gutenverse-adminbar-notification-default .gutenverse-upgrade-notice-center,
+#gutenverse-dashboard .navigation-wrapper .dashboard-notifications .notification-list .gutenverse-notification .gutenverse-upgrade-notice-center {
+    ol {
+        margin-top: 10px;
+        font-size: 11px;
+        margin-left: 1rem;
+
+        li {
+            font-size: inherit;
+            font-size: inherit;
+            list-style: decimal;
+        }
+    }
+
+    .gutenverse-upgrade-action {
+        margin-top: 10px;
+
+        .button-primary {
+            border-radius: 3px;
+            padding: 10px 8px;
+            background: #3B57F7;
+            font-family: Roboto;
+            font-weight: 500;
+            font-size: 11px;
+            color: #FFFFFF;
+            line-height: 1rem;
+            display: flex;
+        }
+
+    }
+}

@@ -37,11 +37,18 @@ const TestimonialsBlock = compose(
         contentType,
         showQuote,
         iconQuote,
+        iconQuoteType,
+        iconQuoteSVG,
         quoteOverride,
         contentPosition,
         showRating,
+        showClientImage,
         iconRatingHalf,
+        iconRatingHalfType,
+        iconRatingHalfSVG,
         iconRatingFull,
+        iconRatingFullType,
+        iconRatingFullSVG,
         starPosition,
     } = attributes;
 
@@ -71,7 +78,7 @@ const TestimonialsBlock = compose(
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div {...blockProps}>
             <div className="testimonials-list" onClick={focusBlock}>
@@ -84,17 +91,25 @@ const TestimonialsBlock = compose(
                             contentType={contentType}
                             showQuote={showQuote}
                             iconQuote={iconQuote}
+                            iconQuoteType={iconQuoteType}
+                            iconQuoteSVG={iconQuoteSVG}
                             quoteOverride={quoteOverride}
                             contentPosition={contentPosition}
                             showRating={showRating}
+                            showClientImage={showClientImage}
                             iconRatingFull={iconRatingFull}
+                            iconRatingFullType={iconRatingFullType}
+                            iconRatingFullSVG={iconRatingFullSVG}
                             iconRatingHalf={iconRatingHalf}
+                            iconRatingHalfType={iconRatingHalfType}
+                            iconRatingHalfSVG={iconRatingHalfSVG}
                             starPosition={starPosition}
                             frontEnd={false}
                             setAttributes={setAttributes}
                             index={index}
                             testimonialData={testimonialData}
                             src={getImageSrc(data.src)}
+                            imgDetail={data.src}
                         />
                     </div>)}
                 </WPSwiper>

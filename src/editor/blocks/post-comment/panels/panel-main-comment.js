@@ -21,6 +21,7 @@ export const mainCommentPanel = (props) => {
             liveStyle: {
                 'type': 'color',
                 'id': 'mainContainerBgColor',
+                'responsive': true,
                 'selector': `.${elementId} .commentlist .comment.depth-1`,
                 'properties': [
                     {
@@ -104,6 +105,7 @@ export const mainCommentPanel = (props) => {
             liveStyle: {
                 'type': 'color',
                 'id': 'mainBgColor',
+                'responsive': true,
                 'selector': `.${elementId} .commentlist .comment.depth-1 > .comment-body`,
                 'properties': [
                     {

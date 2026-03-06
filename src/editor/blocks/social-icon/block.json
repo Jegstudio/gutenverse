@@ -1,169 +1,172 @@
 {
-  "apiVersion": 2,
-  "name": "gutenverse/social-icon",
-  "title": "Social Icon Item",
-  "parent": [
-    "gutenverse/social-icons"
-  ],
-  "description": "Show social networks link to your website visitors.",
-  "category": "gutenverse-element",
-  "allowCopyStyle": true,
-  "attributes": {
-    "elementId": {
-      "type": "string"
-    },
-    "url": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "a",
-      "attribute": "href"
-    },
-    "dynamicUrl": {
+	"apiVersion": 3,
+	"name": "gutenverse/social-icon",
+	"title": "Social Icon Item",
+	"parent": ["gutenverse/social-icons"],
+	"description": "Show social networks link to your website visitors.",
+	"category": "gutenverse-element",
+	"allowCopyStyle": true,
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"url": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "href"
+		},
+		"dynamicUrl": {
 			"type": "object",
 			"default": {}
 		},
 		"isDynamic": {
-			"type" : "boolean",
+			"type": "boolean",
 			"default": false
 		},
-    "linkTarget": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "a",
-      "attribute": "target"
-    },
-    "rel": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "a",
-      "attribute": "rel"
-    },
-    "ariaLabel": {
-      "type": "string",
-      "copyStyle": true
-    },
-    "icon": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "i",
-      "attribute": "class",
-      "default": "fab fa-wordpress"
-    },
-    "text": {
-      "type": "string",
-      "source": "html",
-      "selector": "span"
-    },
-    "iconColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "bgColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "textColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "border": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "borderResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "border",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "borderHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "borderHoverResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "borderHover",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "hoverIconColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverBgColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverTextColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverBorderColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "forceHideText": {
-      "type": "boolean",
-      "default": false,
-      "copyStyle": true
-    },
-    "iconSize": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "typography": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "animation": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "hideDesktop": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideTablet": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideMobile": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "advanceAnimation": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "mask": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "condition": {
-        "type": "object",
-        "default": {}
-    },
-    "bgGradient": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverBgGradient": {
-      "type": "object",
-      "copyStyle": true
-    }
-  },
-  "supports": {
-    "className": false
-  },
-  "keywords": [
-    "social",
-    "icon",
-    "gutenverse"
-  ]
+		"linkTarget": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "target"
+		},
+		"rel": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "rel"
+		},
+		"ariaLabel": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"icon": {
+			"type": "string",
+			"default": "fab fa-wordpress"
+		},
+		"iconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconSVG": {
+			"type": "string"
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": "span"
+		},
+		"iconColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"bgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"border": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderRadius": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "border",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"borderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "borderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"hoverIconColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverTextColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverBorderColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"forceHideText": {
+			"type": "boolean",
+			"default": false,
+			"copyStyle": true
+		},
+		"iconSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"animation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"hideDesktop": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideTablet": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideMobile": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"advanceAnimation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
+			"type": "object",
+			"default": {}
+		},
+		"bgGradient": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverBgGradient": {
+			"type": "object",
+			"copyStyle": true
+		}
+	},
+	"supports": {
+		"className": false
+	},
+	"keywords": ["social", "icon"],
+	"style": ["gutenverse-frontend-social-icon-style"]
 }

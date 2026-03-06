@@ -25,8 +25,8 @@ class Search_Result_Title extends Block_Abstract {
 	 */
 	public function render_content() {
 		$html_tag     = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'h2' ) );
-		$search_input = get_query_var( 's' );
-		$static_text  = $this->attributes['staticText'] ? $this->attributes['staticText'] : 'Search Result For:';
+		$search_input = esc_html( get_query_var( 's' ) );
+		$static_text  = esc_html( $this->attributes['staticText'] ? $this->attributes['staticText'] : 'Search Result For:' );
 		return "<{$html_tag}>{$static_text} <span class='search-input-text'>{$search_input}</span></{$html_tag}>";
 	}
 

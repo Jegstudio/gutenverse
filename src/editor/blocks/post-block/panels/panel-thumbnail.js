@@ -1,11 +1,27 @@
 import { __ } from '@wordpress/i18n';
-import { BorderControl, BorderResponsiveControl, BoxShadowControl, DimensionControl, RangeControl } from 'gutenverse-core/controls';
+import { BorderControl, BorderResponsiveControl, BoxShadowControl, DimensionControl, RangeControl, SelectSearchControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { isOnEditor } from 'gutenverse-core/helper';
+import { fetchImageSizes } from 'gutenverse-core/requests';
 
 export const thumbnailPanel = ({ elementId }) => {
     const device = getDeviceType();
 
+    const imageSize = isOnEditor() ? fetchImageSizes :
+        () => {
+            return {
+                label: '',
+                value: ''
+            };
+        };
+
     return [
+        {
+            id: 'thumbnailSize',
+            label: __('Image Size', 'gutenverse'),
+            component: SelectSearchControl,
+            onSearch: imageSize
+        },
         {
             id: 'thumbnailWidth',
             label: __('Width', 'gutenverse'),

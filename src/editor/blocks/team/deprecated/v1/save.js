@@ -1,7 +1,7 @@
 import { compose } from '@wordpress/compose';
 
 import { classnames } from 'gutenverse-core/components';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 import TeamProfile from './components/team-profile';
 import { getImageSrc } from 'gutenverse-core/editor-helper';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -43,7 +43,7 @@ const save = compose(
     const socialComponent = <InnerBlocks.Content/>;
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+        <div className={className} {...advanceAnimationData}>
             <TeamProfile
                 {...props}
                 frontEnd={true}

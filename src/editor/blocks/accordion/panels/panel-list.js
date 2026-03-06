@@ -1,5 +1,6 @@
 import { TabSetting, TabStyle, childStylePanel, dynamicContentPanel } from 'gutenverse-core/controls';
 import { __ } from '@wordpress/i18n';
+import { panelBody } from './panel-body';
 
 
 export const panelList = () => {
@@ -16,6 +17,13 @@ export const panelList = () => {
             initialOpen: false,
             tabRole: TabSetting,
             pro: true,
+        },
+        {
+            title: __('Body', 'gutenverse'),
+            panelArray: panelBody,
+            tabRole: TabStyle,
+            initialOpen: true,
+            pro: false
         },
         {
             title: __('Highlight Style', 'gutenverse'),

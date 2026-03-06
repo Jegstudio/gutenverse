@@ -381,7 +381,10 @@ class Post_Block extends Style_Abstract {
 							$this->inject_style(
 								array(
 									'selector'       => ".{$this->element_id} .guten-postblock .guten-block-container .guten-postblock-content",
-									'property'       => function () {
+									'property'       => function ( $value ) {
+										if ( 'end' === $value ) {
+											return '';
+										}
 										return 'height: 100%; display: grid; grid-template-rows: 1fr auto;';
 									},
 									'value'          => $this->attrs['categoryVerticalAlign'],
@@ -394,6 +397,9 @@ class Post_Block extends Style_Abstract {
 						array(
 							'selector'       => ".{$this->element_id} .guten-postblock .guten-block-container .guten-postblock-content .post-category-container",
 							'property'       => function ( $value ) {
+								if ( 'end' === $value ) {
+									return '';
+								}
 								return "align-self: {$value}";
 							},
 							'value'          => $this->attrs['categoryVerticalAlign'],
@@ -651,7 +657,7 @@ class Post_Block extends Style_Abstract {
 		if ( isset( $this->attrs['readmoreSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-before .guten-readmore i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-before .guten-readmore i, .{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-before .guten-readmore .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
 					},
@@ -662,7 +668,7 @@ class Post_Block extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-after .guten-readmore i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-after .guten-readmore i, .{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore.icon-position-after .guten-readmore .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return "margin-left: {$value}px;";
 					},
@@ -683,7 +689,19 @@ class Post_Block extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore .guten-readmore svg",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'font-size' );
+					},
+					'value'          => $this->attrs['readmoreIconSize'],
+					'device_control' => true,
+				)
+			);
 		}
+
 		if ( isset( $this->attrs['readmoreWidth'] ) ) {
 			$this->inject_style(
 				array(
@@ -721,6 +739,17 @@ class Post_Block extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['readmoreColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['readmoreHoverColor'] ) ) {
@@ -729,6 +758,17 @@ class Post_Block extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore:hover a",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['readmoreHoverColor'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore:hover svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['readmoreHoverColor'],
 					'device_control' => false,
@@ -821,12 +861,34 @@ class Post_Block extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-comment svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['commentColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['commentSize'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-comment a",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['commentSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post .guten-postblock-content .guten-meta-comment svg",
 					'property'       => function ( $value ) {
 						return "font-size: {$value}px;";
 					},
@@ -908,6 +970,54 @@ class Post_Block extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['metaColorIcon'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta i",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['metaColorIcon'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['metaColorIcon'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['metaSizeIcon'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta i",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['metaSizeIcon'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta svg",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['metaSizeIcon'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['metaAuthorTypography'] ) ) {
 			$this->inject_typography(
 				array(
@@ -946,7 +1056,7 @@ class Post_Block extends Style_Abstract {
 		if ( isset( $this->attrs['metaAuthorIconSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-before i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-before i, .{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-before svg",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
 					},
@@ -957,7 +1067,7 @@ class Post_Block extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-after i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-after i, .{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-author.icon-position-after svg",
 					'property'       => function ( $value ) {
 						return "margin-left: {$value}px;";
 					},
@@ -970,7 +1080,7 @@ class Post_Block extends Style_Abstract {
 		if ( isset( $this->attrs['metaDateIconSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-before i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-before i, .{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-before svg",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
 					},
@@ -981,7 +1091,7 @@ class Post_Block extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-after i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-after i, .{$this->element_id} .guten-postblock .guten-postblock-content .guten-post-meta .guten-meta-date.icon-position-after svg",
 					'property'       => function ( $value ) {
 						return "margin-left: {$value}px;";
 					},
@@ -1018,7 +1128,7 @@ class Post_Block extends Style_Abstract {
 		if ( isset( $this->attrs['paginationMargin'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postblock .guten_block_nav",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination, .{$this->element_id} .guten-postblock .guten_block_nav .pagination-elipsis",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'margin' );
 					},
@@ -1071,7 +1181,8 @@ class Post_Block extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .guten-postblock.guten-pagination-prevnext .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-prevnext .guten_block_nav .btn-pagination.prev,
-                        .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.prev",
+                        .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.prev,
+                        .{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav .btn-pagination.prev",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'width' );
 					},
@@ -1084,7 +1195,7 @@ class Post_Block extends Style_Abstract {
 		if ( isset( $this->attrs['paginationHeight'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination:not(.next):not(.prev), .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav span",
+					'selector'       => ".{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination:not(.next):not(.prev), .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav span, .{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav .btn-pagination:not(.next):not(.prev), .{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav span",
 					'property'       => function ( $value ) {
 						return "height: {$value}px;";
 					},
@@ -1098,7 +1209,8 @@ class Post_Block extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .guten-postblock.guten-pagination-prevnext .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-prevnext .guten_block_nav .btn-pagination.prev,
-                        .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.prev",
+                        .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav .btn-pagination.prev,
+                        .{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav .btn-pagination.next, .{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav .btn-pagination.prev",
 					'property'       => function ( $value ) {
 						return "height: {$value}px;";
 					},
@@ -1112,7 +1224,9 @@ class Post_Block extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .guten-postblock.guten-pagination-prevnext .guten_block_nav,
-						.{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav",
+						.{$this->element_id} .guten-postblock.guten-pagination-number .guten_block_nav,
+						.{$this->element_id} .guten-postblock.guten-pagination-normal-prevnext .guten_block_nav,
+						.{$this->element_id} .guten-postblock.guten-pagination-normal-number .guten_block_nav",
 					'property'       => function ( $value ) {
 						return "justify-content: {$value};";
 					},
@@ -1125,7 +1239,7 @@ class Post_Block extends Style_Abstract {
 		if ( isset( $this->attrs['paginationIconSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-before i, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.prev i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-before i, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.prev i, .{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-before svg, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.prev svg",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
 					},
@@ -1136,7 +1250,7 @@ class Post_Block extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-after i, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.next i",
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-after i, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.next i, .{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-after svg, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.next svg",
 					'property'       => function ( $value ) {
 						return "margin-left: {$value}px;";
 					},
@@ -1161,6 +1275,28 @@ class Post_Block extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-after i, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.next i",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'font-size' );
+					},
+					'value'          => $this->attrs['paginationIconSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-before svg, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.prev svg",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'font-size' );
+					},
+					'value'          => $this->attrs['paginationIconSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.icon-position-after svg, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.next svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'font-size' );
 					},
@@ -1194,6 +1330,17 @@ class Post_Block extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore svg, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['paginationColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['paginationCurrentColor'] ) ) {
@@ -1202,6 +1349,17 @@ class Post_Block extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.current",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['paginationCurrentColor'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.current svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['paginationCurrentColor'],
 					'device_control' => false,
@@ -1220,6 +1378,17 @@ class Post_Block extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.disabled svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['paginationDisabledColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['paginationHoverColor'] ) ) {
@@ -1228,6 +1397,17 @@ class Post_Block extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore:hover, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination:not(.disabled):not(.current):hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['paginationHoverColor'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore:hover svg, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination:not(.disabled):not(.current):hover svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['paginationHoverColor'],
 					'device_control' => false,
@@ -1291,6 +1471,26 @@ class Post_Block extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['paginationActiveBorder'] ) ) {
+			$this->handle_border( 'paginationActiveBorder', ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.current, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.current" );
+		}
+
+		if ( isset( $this->attrs['paginationActiveBorderResponsive'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.current, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.current",
+					'property'       => function ( $value ) {
+						return $this->handle_border_responsive( $value );
+					},
+					'value'          => $this->attrs['paginationActiveBorderResponsive'],
+					'device_control' => true,
+					'skip_device'    => array(
+						'Desktop',
+					),
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['paginationDisabledBorder'] ) ) {
 			$this->inject_style(
 				array(
@@ -1330,6 +1530,19 @@ class Post_Block extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['paginationActiveShadow'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-block-pagination .guten-block-loadmore.current, .{$this->element_id} .guten-postblock .guten_block_nav .btn-pagination.current",
+					'property'       => function ( $value ) {
+						return $this->handle_box_shadow( $value );
+					},
+					'value'          => $this->attrs['paginationActiveShadow'],
+					'device_control' => false,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['paginationDisabledShadow'] ) ) {
 			$this->inject_style(
 				array(
@@ -1338,6 +1551,19 @@ class Post_Block extends Style_Abstract {
 						return $this->handle_box_shadow( $value );
 					},
 					'value'          => $this->attrs['paginationDisabledShadow'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['paginationLoadmoreAnimationSequenceDelay'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .guten-postblock .guten-post.loadmore-animation.has-delay",
+					'property'       => function ( $value ) {
+						return $value ? "--guten-post-block-loadmore-anim-delay: {$value}ms;" : '';
+					},
+					'value'          => $this->attrs['paginationLoadmoreAnimationSequenceDelay'],
 					'device_control' => false,
 				)
 			);

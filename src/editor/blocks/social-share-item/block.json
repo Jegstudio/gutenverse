@@ -1,106 +1,113 @@
 {
-    "apiVersion": 2,
-    "category": "gutenverse-element",
-    "allowCopyStyle": true,
-    "parent": [
-        "gutenverse/social-share"
-    ],
-    "attributes": {
-        "elementId": {
-            "type": "string"
-        },
-        "selectedIcon": {
-            "type": "string",
-            "copyStyle": true
-        },
-        "iconPading": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "textPading": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "showText": {
-            "type": "boolean",
-            "default": true
-        },
-        "iconColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "iconBackgroundColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "backgroundColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "textColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "border": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "borderResponsive": {
-            "type": "object",
-            "migrate": {
-                "attr": "border",
-                "type": "border"
-            },
-            "copyStyle": true
-        },
-        "iconColorHover": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "iconBackgroundColorHover": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "backgroundColorHover": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "textColorHover": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "borderHover": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "borderHoverResponsive": {
-            "type": "object",
-            "migrate": {
-                "attr": "borderHover",
-                "type": "border"
-            },
-            "copyStyle": true
-        },
-        "iconSize": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "typography": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mask": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "condition": {
-            "type": "object",
-            "default": {}
-        }
-    },
-    "keywords": [
-        "social",
-        "share",
-        "gutenverse"
-    ]
+	"apiVersion": 3,
+	"category": "gutenverse-element",
+	"allowCopyStyle": true,
+	"parent": ["gutenverse/social-share"],
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"selectedIcon": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"iconPading": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textPading": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"showText": {
+			"type": "boolean",
+			"default": true
+		},
+		"iconColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconBackgroundColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"backgroundColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"border": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "border",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"iconColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconBackgroundColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"backgroundColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"textColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "borderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"boxShadowHover": {
+			"type": "object",
+			"migrate": {
+				"attr": "boxShadow",
+				"type": "boxShadow"
+			},
+			"copyStyle": true
+		},
+		"iconSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
+			"type": "object",
+			"default": {}
+		}
+	},
+	"keywords": ["social", "share"],
+	"style": ["gutenverse-frontend-social-share-item-style"]
 }

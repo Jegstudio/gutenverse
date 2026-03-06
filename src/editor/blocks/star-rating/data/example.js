@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-star-rating',
         'title': 'Rating',
         'align': { 'Desktop': 'center' },
         'starIcon': 'default',

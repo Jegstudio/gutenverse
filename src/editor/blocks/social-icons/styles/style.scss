@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  width: 100%;
   
   &.horizontal > div:not(:first-child) {
     margin-left: 10px;
@@ -47,13 +48,6 @@
     }
   }
 
-
-
-
-
-
-
-
   &.fill {
     a {
       background: #000;
@@ -61,6 +55,14 @@
 
       &:hover {
         color: #fff;
+      }
+    }
+
+    svg {
+      fill: #fff;
+
+      &:hover {
+        fill: #fff;
       }
     }
 

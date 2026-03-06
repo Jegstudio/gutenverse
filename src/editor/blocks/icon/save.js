@@ -2,23 +2,27 @@ import { compose } from '@wordpress/compose';
 import { useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { applyFilters } from '@wordpress/hooks';
-import { isEmpty } from 'lodash';
-import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
+import { withAnimationAdvanceScript, withMouseMoveEffectScript, withTooltipScript } from 'gutenverse-core/hoc';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { useAnimationAdvanceData } from 'gutenverse-core/hooks';
+import { isEmpty, renderIcon } from 'gutenverse-core/helper';
 
 const save = compose(
     withAnimationAdvanceScript('icon'),
-    withMouseMoveEffectScript
+    withMouseMoveEffectScript,
+    // withTooltipScript ? withTooltipScript('.guten-icon-wrapper') : (BlockElement) => (props) => <BlockElement {...props} />
 )((props) => {
     const {
-        attributes
+        attributes,
+        tooltipData = {},
     } = props;
 
     const {
         elementId,
         icon,
+        iconType,
+        iconSVG,
         url,
         ariaLabel,
         linkTarget,
@@ -56,15 +60,15 @@ const save = compose(
 
         const iconElement = !isEmpty(url) ?
             <a className={wrapperClass} href={href} target={ linkTarget } rel={ rel } aria-label={ariaLabel}>
-                <i className={`${icon}`}/>
+                {renderIcon(icon, iconType, iconSVG)}
             </a> : <span className={wrapperClass}>
-                <i className={`${icon}`}/>
+                {renderIcon(icon, iconType, iconSVG)}
             </span>;
 
         return iconElement;
     };
 
-    return <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+    return <div {...useBlockProps.save({ className, ...advanceAnimationData, ...tooltipData })}>
         <IconELement />
     </div>;
 });

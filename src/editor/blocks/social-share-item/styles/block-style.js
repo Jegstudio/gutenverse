@@ -3,7 +3,6 @@ import { applyFilters } from '@wordpress/hooks';
 import itemStyle from './panel-style/item-style';
 import spacingStyle from './panel-style/spacing-style';
 
-
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
 
@@ -11,18 +10,6 @@ const getBlockStyle = (elementId, attributes) => {
     data = spacingStyle(elementId, attributes, data);
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
-
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
         'id': 'border',
@@ -56,7 +43,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
+        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item`,
     });
 
     isNotEmpty(attributes['boxShadowHover']) && data.push({
@@ -68,7 +55,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
+        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item:hover`,
     });
 
     isNotEmpty(attributes['mask']) && data.push({
@@ -190,18 +177,18 @@ const getBlockStyle = (elementId, attributes) => {
         ],
         'selector': `.${elementId}.guten-element`,
     },
-        {
-            'type': 'positioning',
-            'id': 'positioningAlign',
-            'properties': [
-                {
-                    'name': 'vertical-align',
-                    'valueType': 'direct'
-                }
-            ],
-            'attributeType': 'align',
-            'selector': `.${elementId}.guten-element`,
-        });
+    {
+        'type': 'positioning',
+        'id': 'positioningAlign',
+        'properties': [
+            {
+                'name': 'vertical-align',
+                'valueType': 'direct'
+            }
+        ],
+        'attributeType': 'align',
+        'selector': `.${elementId}.guten-element`,
+    });
     isNotEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
         'type': 'plain',
         'id': 'positioningLocation',

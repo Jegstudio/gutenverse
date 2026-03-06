@@ -1,9 +1,11 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { backgroundStyle } from 'gutenverse-core/controls';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({ attributes, data, elementId });
     const device = getDeviceType();
 
     //panel content
@@ -105,27 +107,10 @@ const getBlockStyle = (elementId, attributes) => {
 
     isNotEmpty(attributes['inputWidth']) && isNotEmpty(attributes['inputWidth'][device]) && data.push(
         {
-            'type': '%' !== attributes['inputWidth'][device]['unit'] ? 'unitPoint' : 'plain',
-            'id': 'inputWidth',
-            'selector': `.${elementId} .gutenverse-search.gutenverse-search-input, .${elementId} .gutenverse-search-form .gutenverse-search-input, .${elementId} .search-input-container .gutenverse-search.gutenverse-search-input`,
-            'properties': '%' !== attributes['inputWidth'][device]['unit'] ?
-                [{
-                    'name': 'width',
-                    'valueType': 'direct',
-                    'important': true
-                }] :
-                [{
-                    'name': 'width',
-                    'valueType': 'pattern',
-                    'pattern': '100% !important',
-                }],
-            'responsive': true,
-        },
-        {
             'type': 'unitPoint',
             'id': 'inputWidth',
             'responsive': true,
-            'selector': `.${elementId} .search-input-container`,
+            'selector': `.${elementId} .search-input-container-outer`,
             'properties': [
                 {
                     'name': 'width',
@@ -152,7 +137,7 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'plain',
             'id': 'buttonWidth',
-            'selector': `.${elementId} .search-input-container`,
+            'selector': `.${elementId} .search-input-container-outer`,
             'properties': [
                 {
                     'name': 'max-width',
@@ -160,6 +145,7 @@ const getBlockStyle = (elementId, attributes) => {
                     'functionName': 'searchButtonContainerWidth',
                 }
             ],
+            'skip_device': ['Mobile'],
             'responsive': true,
         },
     );
@@ -216,7 +202,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input`,
     });
 
     isNotEmpty(attributes['inputMargin']) && data.push({
@@ -229,7 +215,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input`,
+        'selector': `.${elementId} .search-input-container-outer`,
     });
 
     isNotEmpty(attributes['placeholderColor']) && data.push({
@@ -256,7 +242,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'color',
         'id': 'inputColorNormal',
         'responsive': true,
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input`,
         'properties': [
             {
                 'name': 'color',
@@ -265,11 +251,25 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
+    isNotEmpty(attributes['inputColorNormal']) && data.push({
+        'type': 'color',
+        'id': 'inputColorNormal',
+        'responsive': true,
+        'selector': `.${elementId} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill`,
+        'properties': [
+            {
+                'name': '-webkit-text-fill-color',
+                'valueType': 'direct',
+                'important': true
+            }
+        ],
+    });
+
     isNotEmpty(attributes['inputBgColorNormal']) && data.push({
         'type': 'color',
         'id': 'inputBgColorNormal',
         'responsive': true,
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input`,
         'properties': [
             {
                 'name': 'background-color',
@@ -278,23 +278,39 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
+    isNotEmpty(attributes['inputBgColorNormal']) && data.push(
+        {
+            'type': 'plain',
+            'id': 'inputBgColorNormal',
+            'selector': `.${elementId} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill`,
+            'properties': [
+                {
+                    'name': 'box-shadow',
+                    'valueType': 'function',
+                    'functionName': 'handleInputAutofillBackgroundColor',
+                },
+            ],
+            'responsive': true,
+        },
+    );
+
     isNotEmpty(attributes['inputBorderNormal']) && data.push({
         'type': 'border',
         'id': 'inputBorderNormal',
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input`,
     });
 
     isNotEmpty(attributes['inputBorderNormalResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'inputBorderNormalResponsive',
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input`,
     });
 
     isNotEmpty(attributes['inputColorHover']) && data.push({
         'type': 'color',
         'id': 'inputColorHover',
         'responsive': true,
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:hover`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover`,
         'properties': [
             {
                 'name': 'color',
@@ -307,7 +323,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'color',
         'id': 'inputBgColorHover',
         'responsive': true,
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:hover`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover`,
         'properties': [
             {
                 'name': 'background-color',
@@ -319,20 +335,20 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['inputBorderHover']) && data.push({
         'type': 'border',
         'id': 'inputBorderHover',
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:hover`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover`,
     });
 
     isNotEmpty(attributes['inputBorderHoverResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'inputBorderHoverResponsive',
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:hover`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover`,
     });
 
     isNotEmpty(attributes['inputColorFocus']) && data.push({
         'type': 'color',
         'id': 'inputColorFocus',
         'responsive': true,
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:focus`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus`,
         'properties': [
             {
                 'name': 'color',
@@ -345,7 +361,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'color',
         'id': 'inputBgColorFocus',
         'responsive': true,
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:focus`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus`,
         'properties': [
             {
                 'name': 'background-color',
@@ -358,12 +374,12 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'border',
             'id': 'inputBorderFocus',
-            'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:focus`,
+            'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus`,
         },
         {
             'type': 'plain',
             'id': 'inputBorderFocus',
-            'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:focus-visible`,
+            'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus-visible`,
             'properties': [
                 {
                     'name': 'outline',
@@ -378,12 +394,12 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'borderResponsive',
             'id': 'inputBorderFocusResponsive',
-            'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:focus`,
+            'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus`,
         },
         {
             'type': 'plain',
             'id': 'inputBorderFocusResponsive',
-            'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:focus-visible`,
+            'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus-visible`,
             'properties': [
                 {
                     'name': 'outline',
@@ -403,7 +419,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input, .${elementId} .guten-button-wrapper .guten-button`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input, .${elementId} .guten-button-wrapper .guten-button`,
     });
 
     isNotEmpty(attributes['inputAreaBoxShadowHover']) && data.push({
@@ -415,7 +431,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:hover, .${elementId} .guten-button-wrapper .guten-button:hover`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover, .${elementId} .guten-button-wrapper .guten-button:hover`,
     });
 
     isNotEmpty(attributes['inputAreaBoxShadowFocus']) && data.push({
@@ -427,21 +443,10 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .gutenverse-search.gutenverse-search-input:hover, .${elementId} .guten-button-wrapper .guten-button:focus`,
+        'selector': `.${elementId} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover, .${elementId} .guten-button-wrapper .guten-button:focus`,
     });
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
 
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
@@ -706,6 +711,26 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ]
     });
+
+    isNotEmpty(attributes['closeIconSize']) && data.push({
+        'type': 'plain',
+        'id': 'closeIconSize',
+        'responsive': true,
+        'selector': `.${elementId} .gutenverse-search-form .search-input-container .close-icon svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
     isNotEmpty(attributes['closeIconRotate']) && data.push({
         'type': 'plain',
         'id': 'closeIconRotate',
@@ -760,6 +785,20 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ]
     });
+
+    isNotEmpty(attributes['closeIconColor']) && data.push({
+        'type': 'color',
+        'id': 'closeIconColor',
+        'responsive': true,
+        'selector': `.${elementId} .gutenverse-search-form .search-input-container .close-icon svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
     isNotEmpty(attributes['closeIconColorHover']) && data.push({
         'type': 'color',
         'id': 'closeIconColorHover',
@@ -772,6 +811,152 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ]
     });
+
+    isNotEmpty(attributes['closeIconColorHover']) && data.push({
+        'type': 'color',
+        'id': 'closeIconColorHover',
+        'responsive': true,
+        'selector': `.${elementId} .gutenverse-search-form .search-input-container:hover .close-icon svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct',
+            }
+        ]
+    });
+
+
+    /** Position Flex Item */
+    const selector = `.${elementId}.guten-element`;
+
+    // Flex Align Self
+    isNotEmpty(attributes['flexAlignSelf']) && data.push({
+        'type': 'plain',
+        'id': 'flexAlignSelf',
+        'responsive': true,
+        'selector': selector,
+        'properties': [
+            {
+                'name': 'align-self',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    // Flex Order - responsive handling
+    const flexOrder = attributes['flexOrder'];
+    const flexCustomOrder = attributes['flexCustomOrder'];
+    if (isNotEmpty(flexOrder)) {
+        data.push({
+            'type': 'plain',
+            'id': 'flexOrder',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'order',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'start') {
+                            return '-9999';
+                        }
+                        if (value === 'end') {
+                            return '9999';
+                        }
+                        return undefined; // Skip 'custom', let flexCustomOrder handle it
+                    }
+                }
+            ],
+        });
+        if (isNotEmpty(flexCustomOrder)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexCustomOrder',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'order',
+                        'valueType': 'function',
+                        'valueFunc': (value, deviceType) => {
+                            // Only apply custom order if flexOrder is 'custom' for this device
+                            if (flexOrder[deviceType] === 'custom') {
+                                return value;
+                            }
+                            return undefined;
+                        }
+                    }
+                ],
+            });
+        }
+    }
+
+    // Flex Size (grow/shrink) - responsive handling
+    const flexSize = attributes['flexSize'];
+    const flexSizeGrow = attributes['flexSizeGrow'];
+    const flexSizeShrink = attributes['flexSizeShrink'];
+    if (isNotEmpty(flexSize)) {
+        // Handle grow preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-grow',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'grow' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle shrink preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-shrink',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'shrink' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle custom grow
+        if (isNotEmpty(flexSizeGrow)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeGrow',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-grow',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+        // Handle custom shrink
+        if (isNotEmpty(flexSizeShrink)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeShrink',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-shrink',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+    }
+
+    /** End Position Flex Item */
     return [
         ...data,
         ...applyFilters(

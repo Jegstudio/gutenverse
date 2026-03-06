@@ -1,6 +1,6 @@
 .guten-social-icon {
   a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
@@ -16,8 +16,43 @@
       text-align: center;
     }
 
+    svg {
+      font-size: 22px;
+    }
+
     span {
       font-size: 16px;
+    }
+  }
+
+  .gutenverse-icon-svg {
+    display: none;
+    min-width: 1em;
+
+    svg {
+      height: 1em;
+      min-width: 1em;
+      width: fit-content;
+    }
+  }
+
+  &.svg {
+    .gutenverse-icon-svg {
+      display: flex;
+    }
+
+    i {
+      display: none;
+    }
+  }
+}
+
+@supports (background: -webkit-named-image(i)) {
+  .guten-social-icon {
+    .gutenverse-icon-svg {
+      svg {
+        width: unset;
+      }
     }
   }
 }

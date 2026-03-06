@@ -1,4 +1,4 @@
-import { useCallback, useState } from '@wordpress/element';
+import { useCallback } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 import { Image } from 'gutenverse-core/components';
@@ -12,20 +12,19 @@ import { URLToolbar } from 'gutenverse-core/toolbars';
 import { imagePlaceholder } from 'gutenverse-core/config';
 import { useEffect } from '@wordpress/element';
 import { useRef } from '@wordpress/element';
-import { isEmpty } from 'lodash';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
-import { isOnEditor } from 'gutenverse-core/helper';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
-import { useRichTextParameter } from 'gutenverse-core/helper';
+import { useRichTextParameter, isEmpty } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
 
 const NEW_TAB_REL = 'noreferrer noopener';
 
 export const ImageBoxFigure = attributes => {
-    const { imgSrc, altType, altOriginal, altCustom, lazyLoad } = attributes;
+    const { imgSrc, altType, altOriginal, altCustom, imageLoad, lazyLoad, fetchPriorityHigh = false } = attributes;
     const { media = {}, size } = imgSrc || {};
     const { imageId, sizes = {} } = media || {};
 
@@ -39,7 +38,7 @@ export const ImageBoxFigure = attributes => {
             imageAltText = altCustom;
             break;
     }
-    const imageLazyLoad = () => <img className="gutenverse-image-box-empty" src={imagePlaceholder} alt={imageAltText} {...(lazyLoad && { loading: 'lazy' })} />;
+    const imageLazyLoad = () => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} className="gutenverse-image-box-empty" src={imagePlaceholder} alt={imageAltText}  {...((imageLoad === 'lazy' || (imageLoad === '' && lazyLoad)) && { loading: 'lazy' })} />;
 
     // Handle if empty, pick the 'full' size. If 'full' size also not exist, return placeholder image.
 
@@ -58,7 +57,7 @@ export const ImageBoxFigure = attributes => {
     }
 
     if (imageId && imageSrc) {
-        return <img className="gutenverse-image-box-filled" src={imageSrc.url} height={imageSrc.height} width={imageSrc.width} alt={imageAltText} {...(lazyLoad && { loading: 'lazy' })} />;
+        return <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} className="gutenverse-image-box-filled" src={imageSrc.url} height={imageSrc.height} width={imageSrc.width} alt={imageAltText}  {...((imageLoad === 'lazy' || (imageLoad === '' && lazyLoad)) && { loading: 'lazy' })} />;
     }
 
     return imageLazyLoad();
@@ -133,6 +132,9 @@ const ImageBlock = compose(
         captionCustom,
         ariaLabel,
         dynamicUrl,
+        lazyLoad,
+        imageLoad = '',
+        fetchPriorityHigh = false,
     } = attributes;
 
     const {
@@ -148,11 +150,17 @@ const ImageBlock = compose(
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef(null);
-    const [dynamicHref, setDynamicHref] = useState();
+    const { dynamicHref } = useDynamicUrl(dynamicUrl);
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    useEffect(() => {
+        if ('' === imageLoad) {
+            setAttributes({ imageLoad: getImageLoadValue('', lazyLoad) });
+        }
+    }, []);
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -201,14 +209,14 @@ const ImageBlock = compose(
 
     const urlAriaLabel = () => {
         if (ariaLabel) {
-            return <a className="guten-image-wrapper" aria-label={ariaLabel} href={url} target={linkTarget} rel={rel} ><ImageBoxFigure {...attributes} /></a>;
+            return <a className="guten-image-wrapper" aria-label={ariaLabel} href="javascript:void(0);" target={linkTarget} rel={rel} ><ImageBoxFigure {...attributes} /></a>;
         } else {
-            return <a className="guten-image-wrapper" href={url} target={linkTarget} rel={rel}><ImageBoxFigure {...attributes} /></a>;
+            return <a className="guten-image-wrapper" href="javascript:void(0);" target={linkTarget} rel={rel}><ImageBoxFigure {...attributes} /></a>;
         }
     };
 
     const blockElement = <div {...blockProps}>
-        {!isEmpty(imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img src={defaultSrc} onClick={open} />}</ImagePicker>}
+        {!isEmpty(imgSrc) ? urlAriaLabel() : <ImagePicker {...props}>{({ open }) => <img {...(fetchPriorityHigh && { fetchPriority: 'high' })} src={defaultSrc} onClick={open} />}</ImagePicker>}
         {caption()}
     </div>;
 
@@ -218,21 +226,10 @@ const ImageBlock = compose(
     };
 
     useEffect(() => {
-        const dynamicUrlcontent = isEmpty(dynamicUrl) || !isOnEditor() ? dynamicUrl : applyFilters(
-            'gutenverse.dynamic.fetch-url',
-            dynamicUrl
-        );
-
-        (typeof dynamicUrlcontent.then === 'function') && !isEmpty(dynamicUrl) && dynamicUrlcontent
-            .then(result => {
-                if ((!Array.isArray(result) || result.length > 0) && result !== undefined && result !== dynamicHref) {
-                    setDynamicHref(result);
-                } else if (result !== dynamicHref) setDynamicHref(undefined);
-            }).catch(() => { });
         if (dynamicHref !== undefined) {
             setAttributes({ url: dynamicHref, isDynamic: true });
         } else { setAttributes({ url: url }); }
-    }, [dynamicUrl, dynamicHref]);
+    }, [dynamicHref]);
 
     useEffect(() => {
         if (elementRef) {
@@ -240,7 +237,7 @@ const ImageBlock = compose(
         }
     }, [elementRef]);
 
-    const ImageToolbar = () => {
+    const imageToolbar = () => {
         return applyFilters('gutenverse.button.url-toolbar',
             <URLToolbar
                 url={url}
@@ -256,15 +253,14 @@ const ImageBlock = compose(
                 panelIsClicked={panelIsClicked}
                 setPanelIsClicked={setPanelIsClicked}
             />,
-            props,
+            { ...props, setPanelState },
             imagePanelState
         );
     };
-
     return <>
         <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} panelState={panelState} setPanelIsClicked={setPanelIsClicked} />
-        {imgSrc && <BlockControls>
+        <BlockControls>
             <ToolbarGroup>
                 <ImagePicker {...props}>
                     {({ open }) => <ToolbarButton
@@ -274,10 +270,10 @@ const ImageBlock = compose(
                         onClick={open}
                     />}
                 </ImagePicker>
-                <ImageToolbar />
+                {imageToolbar()}
             </ToolbarGroup>
-        </BlockControls>}
-        {rootBlock && rootBlock.name === 'gutenverse/client-logo' ? <div id={elementId}>{blockElement}</div> : blockElement}
+        </BlockControls>
+        {rootBlock && rootBlock.name === 'gutenverse/logo-slider' ? <div id={elementId}>{blockElement}</div> : blockElement}
     </>;
 });
 

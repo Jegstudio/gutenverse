@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/post-terms",
 	"class_callback": "\\Gutenverse\\Block\\Post_Terms",
 	"title": "Post Terms",
@@ -21,48 +21,48 @@
 			"type": "string",
 			"default": "No Content"
 		},
-		"contentType":{
-			"type":"string",
+		"contentType": {
+			"type": "string",
 			"default": "string",
 			"copyStyle": true
 		},
-		"inlineDisplay":{
+		"inlineDisplay": {
 			"type": "boolean",
 			"copyStyle": true
 		},
-		"contentGap":{
+		"contentGap": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"termAlignment":{
-			"type":"object",
-			"copyStyle": true
-		},
-		"termPadding":{
+		"termAlignment": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"termBackground":{
+		"termPadding": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"termBackgroundHover":{
+		"termBackground": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"termBorder":{
+		"termBackgroundHover": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"termBorderHover":{
+		"termBorder": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"termBoxShadow":{
+		"termBorderHover": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"termBoxShadowHover":{
+		"termBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"termBoxShadowHover": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -76,7 +76,17 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "span"
+			"default": "span",
+			"enum": [
+				"span",
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"linkTo": {
 			"type": "string",
@@ -106,6 +116,10 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"colorItemHover": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"textShadowHover": {
 			"type": "object",
 			"default": {},
@@ -120,6 +134,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -225,6 +244,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"usesContext": [
@@ -233,13 +282,18 @@
 		"queryId"
 	],
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
+		"single",
 		"post",
 		"term",
 		"category",
 		"tag",
 		"taxonomy"
+	],
+	"style": [
+		"gutenverse-frontend-post-terms-style"
 	]
 }

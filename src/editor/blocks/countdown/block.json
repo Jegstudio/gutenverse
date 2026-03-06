@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/countdown",
 	"title": "Countdown",
 	"description": "Create a countdown block",
@@ -9,32 +9,32 @@
 		"elementId": {
 			"type": "string"
 		},
-		"column" :{
+		"column": {
 			"type": "object",
 			"copyStyle": true,
 			"default": {}
 		},
-		"rowGap" :{
+		"rowGap": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"dueDate" : {
+		"dueDate": {
 			"type": "array"
 		},
 		"showDivider": {
 			"type": "boolean",
 			"default": false
 		},
-		"dividerType":{
+		"dividerType": {
 			"type": "string",
 			"default": "",
 			"copyStyle": true
 		},
-		"dividerColor":{
+		"dividerColor": {
 			"type": "object",
 			"copyStyle": true
 		},
-		"dividerSize":{
+		"dividerSize": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -42,7 +42,7 @@
 			"type": "string",
 			"default": "bottom"
 		},
-		"labelSpacing":{
+		"labelSpacing": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -82,332 +82,332 @@
 			"type": "boolean",
 			"default": true
 		},
-		"oneForAllDigitColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllDigitTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllLabelColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllLabelTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllBackground":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllBackgroundHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllBorder":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllBorderHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllBoxShadow":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllBoxShadowHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllPadding":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllMargin":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllWidth":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllHeight":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"oneForAllVericalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"oneForAllHorizontalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"daysDigitColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysDigitTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysLabelColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"dayslabelTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysBackground":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysBackgroundHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysBorder":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysBorderHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysBoxShadow":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysBoxShadowHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysPadding":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysMargin":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysWidth":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysHeight":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"daysVericalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"daysHorizontalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"hoursDigitColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursDigitTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursLabelColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hourslabelTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursBackground":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursBackgroundHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursBorder":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursBorderHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursBoxShadow":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursBoxShadowHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursPadding":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursMargin":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursWidth":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursHeight":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"hoursVericalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"hoursHorizontalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"minutesDigitColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesDigitTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesLabelColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minuteslabelTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesBackground":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesBackgroundHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesBorder":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesBorderHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesBoxShadow":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesBoxShadowHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesPadding":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesMargin":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesWidth":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesHeight":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"minutesVericalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"minutesHorizontalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"secondsDigitColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsDigitTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsLabelColor":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondslabelTypography":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsBackground":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsBackgroundHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsBorder":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsBorderHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsBoxShadow":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsBoxShadowHover":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsPadding":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsMargin":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsWidth":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsHeight":{
-			"type" : "object",
-			"copyStyle" : true
-		},
-		"secondsVericalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"secondsHorizontalAlign":{
-			"type" : "string",
-			"copyStyle" : true
-		},
-		"expiredAction":{
-			"type" : "string",
+		"oneForAllDigitColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllDigitTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllLabelColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllLabelTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllBackgroundHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"oneForAllVericalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"oneForAllHorizontalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"daysDigitColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysDigitTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysLabelColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"dayslabelTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysBackgroundHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"daysVericalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"daysHorizontalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"hoursDigitColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursDigitTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursLabelColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hourslabelTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursBackgroundHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoursVericalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"hoursHorizontalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"minutesDigitColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesDigitTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesLabelColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minuteslabelTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesBackgroundHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"minutesVericalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"minutesHorizontalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"secondsDigitColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsDigitTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsLabelColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondslabelTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsBackgroundHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"secondsVericalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"secondsHorizontalAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"expiredAction": {
+			"type": "string",
 			"default": "none"
 		},
-		"expiredUrl":{
-			"type" : "string"
+		"expiredUrl": {
+			"type": "string"
 		},
 		"background": {
 			"type": "object",
@@ -418,6 +418,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -534,14 +539,54 @@
 		"mouseMoveEffect": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"html": false,
-		"innerBlocks": true
+		"innerBlocks": true,
+		"anchor": true
 	},
 	"keywords": [
-		"countdown"
+		"countdown",
+		"timer",
+		"due",
+		"number"
+	],
+	"viewScript": [
+		"gutenverse-frontend-countdown-script"
+	],
+	"style": [
+		"gutenverse-frontend-countdown-style"
 	]
 }

@@ -101,18 +101,21 @@ export const settingPanel = ({showSub}) => {
         {
             id: 'text',
             label: __('Main Text'),
-            component: TextControl
+            component: TextControl,
+            liveUpdate: true,
         },
         {
             id: 'focusText',
             label: __('Focus Text'),
-            component: TextControl
+            component: TextControl,
+            liveUpdate: true,
         },
         {
             id: 'subText',
             show: showSub && showSub !== 'none',
             label: __('Subtitle Text'),
-            component: TextControl
+            component: TextControl,
+            liveUpdate: true,
         },
         {
             id: 'showSub',

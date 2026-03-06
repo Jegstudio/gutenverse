@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/post-featured-image",
 	"class_callback": "\\Gutenverse\\Block\\Post_Featured_Image",
 	"title": "Post Featured Image",
@@ -51,10 +51,38 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"imageSize": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {
+				"label": "Full",
+				"value": "full"
+			}
+		},
+		"imageFit": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageRatio": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageRatioCustom": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imagePosition": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"imageLazy": {
 			"type": "boolean",
 			"default": false,
 			"copyStyle": true
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		},
 		"imageBorder": {
 			"type": "object",
@@ -68,7 +96,6 @@
 			},
 			"copyStyle": true
 		},
-		
 		"imageBoxShadow": {
 			"type": "object",
 			"copyStyle": true
@@ -82,6 +109,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -187,6 +219,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"usesContext": [
@@ -195,11 +257,16 @@
 		"queryId"
 	],
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
+		"single",
 		"post",
 		"featured",
 		"image"
+	],
+	"style": [
+		"gutenverse-frontend-post-featured-image-style"
 	]
 }

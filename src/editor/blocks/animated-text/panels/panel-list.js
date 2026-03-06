@@ -1,8 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import { advancePanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, mouseMoveEffectPanel, positioningPanel, responsivePanel, textClipPanel, textStrokePanel, transformPanel } from 'gutenverse-core/controls';
+import { advancePanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, mouseMoveEffectPanel, positioningPanel, responsivePanel, textClipPanel, transformPanel } from 'gutenverse-core/controls';
 import { settingPanel } from './panel-setting';
-import { stylePanel } from './panel-style';
+import { styleTextAnimatedPanel } from './panel-text-animated-style';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
+import { styleTextNormalPanel } from './panel-text-normal-style';
+import { styleHighlightPanel } from './panel-highlighted-style';
 
 export const panelList = () => {
     return [
@@ -12,10 +14,22 @@ export const panelList = () => {
             tabRole: TabSetting
         },
         {
-            title: __('Style', 'gutenverse'),
+            title: __('Normal Text', 'gutenverse'),
             initialOpen: false,
-            panelArray: stylePanel,
+            panelArray: styleTextNormalPanel,
             tabRole: TabStyle
+        },
+        {
+            title: __('Animated Text', 'gutenverse'),
+            initialOpen: false,
+            panelArray: styleTextAnimatedPanel,
+            tabRole: TabStyle
+        },
+        {
+            title: __('Highlight', 'gutenverse'),
+            initialOpen: false,
+            panelArray: styleHighlightPanel,
+            tabRole: TabStyle,
         },
         {
             title: __('Text Clip', 'gutenverse'),

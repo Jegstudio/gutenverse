@@ -139,6 +139,18 @@ export const readmorePanel = (props) => {
                             'valueType': 'direct',
                         }
                     ]
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'readmoreIconSize',
+                    'responsive': true,
+                    'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore .guten-readmore svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct',
+                        }
+                    ]
                 }
             ]
         },
@@ -233,6 +245,17 @@ export const readmorePanel = (props) => {
                             'valueType': 'direct'
                         }
                     ],
+                },
+                {
+                    'type': 'color',
+                    'id': 'readmoreColor',
+                    'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ],
                 }
             ]
         },
@@ -249,6 +272,17 @@ export const readmorePanel = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ],
+                },
+                {
+                    'type': 'color',
+                    'id': 'readmoreHoverColor',
+                    'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-readmore:hover svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ],

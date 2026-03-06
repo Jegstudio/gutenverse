@@ -21,14 +21,23 @@
     .fun-fact-inner {
         position: relative;
         z-index: 2;
-        >.icon {
-            margin-bottom: 15px;
-            padding: 15px;
-            font-size: 40px;
-            color: var(--guten-txt-color);
 
-            i {
-                display: block;
+        .icon-box {
+            display: inline-block;
+            vertical-align: middle;
+
+            .icon {
+                padding: 15px;
+                font-size: 40px;
+                color: var(--guten-txt-color);
+
+                svg {
+                    fill: var(--guten-txt-color);
+                }
+
+                i {
+                    display: block;
+                }
             }
         }
         .content {
@@ -44,6 +53,13 @@
                     color: var(--guten-txt-color);
                     position: relative;
                 }
+            }
+            &.block {
+                display: block;
+            }
+            &.inline-block {
+                display: inline-block;
+                vertical-align: middle;
             }
             .title {
                 margin: 0;

@@ -1,3 +1,8 @@
+@import "gutenverse-core/src/assets/mixin";
+@import "gutenverse-core/src/assets/variables";
+@import "gutenverse-core/src/assets/wp-fix";
+@import "../../../../assets/lib/_swiper.scss";
+
 .gutenverse-popup-gallery {
     position: fixed;
     height: 100%;
@@ -26,7 +31,7 @@
 
         svg {
             cursor: pointer;
-            color: var(--guten-border-color);
+            stroke: var(--guten-border-color);
             margin: 10px;
             stroke-width: 2;
         }
@@ -52,6 +57,10 @@
                 img {
                     max-height: 90vh;
                     max-width: 90vw;
+                }
+
+                .content-description-wrapper {
+                    color: white;
                 }
             }
         }
@@ -387,6 +396,10 @@
                             border-radius: 50%;
                             padding: 15px;
                             line-height: 0;
+
+                            svg {
+                                fill: var(--guten-element-bg-color);
+                            }
                         }
                     }
                 }
@@ -404,6 +417,10 @@
                             padding: 15px;
                             border-radius: 50%;
                             line-height: 0;
+
+                            svg {
+                                fill: var(--guten-element-bg-color);
+                            }
                         }
                     }
                     .item-hover-bg {
@@ -562,6 +579,10 @@
             .icon-position-before,
             .icon-position-after {
                 display: flex;
+
+                svg {
+                    fill: var(--guten-bg-color);
+                }
             }
         }
     }

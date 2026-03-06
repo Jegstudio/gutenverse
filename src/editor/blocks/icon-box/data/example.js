@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-icon-box',
         'align': { 'Desktop': null },
         'containerBackground': { 'type': 'default', 'color': { 'r': 255, 'g': 255, 'b': 255, 'a': 1 } },
         'background': {},

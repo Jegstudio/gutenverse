@@ -2,6 +2,20 @@
     transform: none!important;
 }
 
+.guten-post-content.guten-element {
+    .components-disabled {
+        .guten-popup-holder {
+            display: none;
+        }
+    }
+}
+
+.is-editing-disabled {
+    .guten-popup-holder {
+        display: none;
+    }
+}
+
 .guten-popup-holder {
     text-align: center;
     background: #ddd;

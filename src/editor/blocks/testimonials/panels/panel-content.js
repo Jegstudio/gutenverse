@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, IconControl, ImageRadioControl, SelectControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconSVGControl, ImageRadioControl, SelectControl } from 'gutenverse-core/controls';
 
 
 export const panelContent = ({ showQuote, contentType }) => {
@@ -90,20 +90,25 @@ export const panelContent = ({ showQuote, contentType }) => {
             component: CheckboxControl,
         },
         {
+            id: 'showClientImage',
+            label: __('Show Client Image', 'gutenverse'),
+            component: CheckboxControl,
+        },
+        {
             id: 'iconQuote',
             show: showQuote,
             label: __('Quote Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'iconRatingFull',
             label: __('Rating Icon Full', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'iconRatingHalf',
             label: __('Rating Icon Half', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
     ];
 };

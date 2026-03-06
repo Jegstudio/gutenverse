@@ -1,7 +1,8 @@
 .guten-accordions {
   * {
-    transition : background-color 0.3s ease 0s, border 0.3s ease 0s, border-radius 0.3s ease 0s, box-shadow 0.3s ease 0s, color 0s ease 0s, height 0.3s ease 0s;
+    transition: background-color 0.3s ease 0s, border 0.3s ease 0s, border-radius 0.3s ease 0s, box-shadow 0.3s ease 0s, color 0s ease 0s, height 0.3s ease 0s;
   }
+
   .accordion-item {
     border: 1px solid var(--guten-border-color);
     margin: 0;
@@ -21,7 +22,7 @@
         flex-grow: 1;
       }
 
-      > p {
+      >p {
         margin: 0;
       }
     }
@@ -36,4 +37,3 @@
     }
   }
 }
-

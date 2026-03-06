@@ -1,9 +1,17 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
+import { backgroundStyle } from 'gutenverse-core/controls';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({ attributes, data, elementId });
 
+    //tooltip
+    isNotEmpty(attributes['tooltip']) && attributes['tooltip']['enable'] && data.push({
+        'type': 'tooltip',
+        'id': 'tooltip',
+        'selector': `.guten-tooltip-${elementId}.guten-tooltip`,
+    });
     //panel icon
     isNotEmpty(attributes['iconAlign']) && data.push({
         'type': 'plain',
@@ -31,6 +39,19 @@ const getBlockStyle = (elementId, attributes) => {
         'responsive': true
     });
 
+    isNotEmpty(attributes['iconSize']) && data.push({
+        'type': 'unitPoint',
+        'id': 'iconSize',
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'direct'
+            }
+        ],
+        'selector': `.${elementId} .guten-icon-wrapper .gutenverse-icon-svg svg`,
+        'responsive': true
+    });
+
     isNotEmpty(attributes['iconPadding']) && data.push({
         'type': 'plain',
         'id': 'iconPadding',
@@ -54,7 +75,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'iconRotate',
         'responsive': true,
-        'selector': `.${elementId} .guten-icon-wrapper i`,
+        'selector': `.${elementId} .guten-icon-wrapper i, .${elementId} .guten-icon-wrapper svg`,
         'properties': [
             {
                 'name': 'transform',
@@ -68,6 +89,7 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
     });
+
 
     isNotEmpty(attributes['iconShape']) && isNotEmpty(attributes['iconBorderWidth']) && attributes['iconView'] === 'framed' && attributes['iconShape'] === 'custom' && data.push(
         {
@@ -143,6 +165,17 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'color',
             'id': 'iconColorOne',
+            'selector': `.${elementId} .guten-icon-wrapper.framed svg`,
+            'properties': [
+                {
+                    'name': 'fill',
+                    'valueType': 'direct'
+                }
+            ],
+        },
+        {
+            'type': 'color',
+            'id': 'iconColorOne',
             'selector': `.${elementId} .guten-icon-wrapper.framed`,
             'properties': [
                 {
@@ -179,6 +212,17 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'color',
             'id': 'iconColorTwo',
+            'selector': `.${elementId} .guten-icon-wrapper.stacked svg`,
+            'properties': [
+                {
+                    'name': 'fill',
+                    'valueType': 'direct'
+                }
+            ],
+        },
+        {
+            'type': 'color',
+            'id': 'iconColorTwo',
             'selector': `.${elementId} .guten-icon-wrapper.framed`,
             'properties': [
                 {
@@ -197,6 +241,17 @@ const getBlockStyle = (elementId, attributes) => {
             'properties': [
                 {
                     'name': 'color',
+                    'valueType': 'direct'
+                }
+            ],
+        },
+        {
+            'type': 'color',
+            'id': 'iconColorHoverOne',
+            'selector': `.${elementId} .guten-icon-wrapper.framed:hover svg`,
+            'properties': [
+                {
+                    'name': 'fill',
                     'valueType': 'direct'
                 }
             ],
@@ -240,6 +295,17 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'color',
             'id': 'iconColorHoverTwo',
+            'selector': `.${elementId} .guten-icon-wrapper.stacked:hover svg`,
+            'properties': [
+                {
+                    'name': 'fill',
+                    'valueType': 'direct'
+                }
+            ],
+        },
+        {
+            'type': 'color',
+            'id': 'iconColorHoverTwo',
             'selector': `.${elementId} .guten-icon-wrapper.framed:hover`,
             'properties': [
                 {
@@ -251,18 +317,6 @@ const getBlockStyle = (elementId, attributes) => {
     );
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
-
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
         'id': 'border',
@@ -506,6 +560,138 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId}.guten-element`,
         'attributeType': 'custom',
     });
+
+    /** Position Flex Item */
+    const selector = `.${elementId}.guten-element`;
+
+    // Flex Align Self
+    isNotEmpty(attributes['flexAlignSelf']) && data.push({
+        'type': 'plain',
+        'id': 'flexAlignSelf',
+        'responsive': true,
+        'selector': selector,
+        'properties': [
+            {
+                'name': 'align-self',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    // Flex Order - responsive handling
+    const flexOrder = attributes['flexOrder'];
+    const flexCustomOrder = attributes['flexCustomOrder'];
+    if (isNotEmpty(flexOrder)) {
+        data.push({
+            'type': 'plain',
+            'id': 'flexOrder',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'order',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'start') {
+                            return '-9999';
+                        }
+                        if (value === 'end') {
+                            return '9999';
+                        }
+                        return undefined; // Skip 'custom', let flexCustomOrder handle it
+                    }
+                }
+            ],
+        });
+        if (isNotEmpty(flexCustomOrder)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexCustomOrder',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'order',
+                        'valueType': 'function',
+                        'valueFunc': (value, deviceType) => {
+                            // Only apply custom order if flexOrder is 'custom' for this device
+                            if (flexOrder[deviceType] === 'custom') {
+                                return value;
+                            }
+                            return undefined;
+                        }
+                    }
+                ],
+            });
+        }
+    }
+
+    // Flex Size (grow/shrink) - responsive handling
+    const flexSize = attributes['flexSize'];
+    const flexSizeGrow = attributes['flexSizeGrow'];
+    const flexSizeShrink = attributes['flexSizeShrink'];
+    if (isNotEmpty(flexSize)) {
+        // Handle grow preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-grow',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'grow' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle shrink preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-shrink',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'shrink' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle custom grow
+        if (isNotEmpty(flexSizeGrow)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeGrow',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-grow',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+        // Handle custom shrink
+        if (isNotEmpty(flexSizeShrink)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeShrink',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-shrink',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+    }
+
+    /** End Position Flex Item */
     return [
         ...data,
         ...applyFilters(

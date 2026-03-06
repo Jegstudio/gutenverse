@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/testimonials",
 	"title": "Testimonials",
 	"description": "Showcase your client's or people's testimonals.",
@@ -58,6 +58,10 @@
 			"type": "boolean",
 			"default": false
 		},
+		"showClientImage": {
+			"type": "boolean",
+			"default": true
+		},
 		"showRating": {
 			"type": "boolean",
 			"default": false
@@ -66,13 +70,34 @@
 			"type": "string",
 			"default": "fas fa-quote-left"
 		},
+		"iconQuoteType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconQuoteSVG": {
+			"type": "string"
+		},
 		"iconRatingFull": {
 			"type": "string",
 			"default": "fas fa-star"
 		},
+		"iconRatingFullType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconRatingFullSVG": {
+			"type": "string"
+		},
 		"iconRatingHalf": {
 			"type": "string",
 			"default": "fas fa-star-half"
+		},
+		"iconRatingHalfType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconRatingHalfSVG": {
+			"type": "string"
 		},
 		"testimonialDataRichText": {
 			"type": "array",
@@ -452,6 +477,11 @@
 			"default": {},
 			"copyStyle": true
 		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
 		"border": {
 			"type": "object",
 			"copyStyle": true
@@ -580,13 +610,51 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"testimonial",
-		"review"
+		"review",
+		"feedback"
+	],
+	"viewScript": [
+		"gutenverse-frontend-testimonials-script"
+	],
+	"style": [
+		"gutenverse-frontend-testimonials-style"
 	]
 }

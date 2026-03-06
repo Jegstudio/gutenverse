@@ -10,6 +10,7 @@
 namespace Gutenverse\Block;
 
 use Gutenverse\Framework\Block\Block_Abstract;
+use Gutenverse\Framework\Options;
 
 /**
  * Class Post Featured Image Block
@@ -30,25 +31,25 @@ class Post_Featured_Image extends Block_Abstract {
 		$placeholder_img = ! empty( $this->attributes['placeholderImg'] ) ? $this->attributes['placeholderImg'] : false;
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
-		$post_url        = get_post_permalink( $post_id );
-		$post_featured   = get_the_post_thumbnail_url( $post_id, 'full' );
+		$post_url        = get_permalink( $post_id );
+		$image_size      = ! empty( $this->attributes['imageSize'] ) ? $this->attributes['imageSize'] : array(
+			'label' => 'full',
+			'value' => 'full',
+		);
+		$post_featured   = get_the_post_thumbnail_url( $post_id, $image_size['value'] );
 		$custom_classes  = $this->get_custom_classes();
 		$content         = '';
+		$lazy_load       = isset( $this->attributes['lazyLoad'] ) ? $this->attributes['lazyLoad'] : false;
+		$image_load      = Options::get_instance()->get_image_load( 'lazy', $lazy_load, $this->attributes['imageLoad'] );
 
 		if ( ! empty( $post_featured ) ) {
-			$content = '<img alt="" src="' . $post_featured . '"/>';
-			if ( $this->attributes['imageLazy'] ) {
-				$content = '<img alt="" src="' . $post_featured . '" loading="lazy" />';
-			}
+			$content = get_the_post_thumbnail( $post_id, $image_size['value'], array( 'loading' => $image_load ) );
 		} elseif ( ! empty( $placeholder_img ) ) {
-			$content = '<img alt="" src="' . esc_url( GUTENVERSE_URL . '/assets/img/img-placeholder.jpg' ) . '"/>';
-			if ( $this->attributes['imageLazy'] ) {
-				$content = '<img alt="" src="' . esc_url( GUTENVERSE_URL . '/assets/img/img-placeholder.jpg' ) . '" loading="lazy"/>';
-			}
+			$content = '<img loading="' . esc_attr( $image_load ) . '" alt="post thumbnail placeholder" src="' . esc_url( GUTENVERSE_URL . '/assets/img/img-placeholder.jpg' ) . '"/>';
 		}
 
 		if ( ! empty( $post_link ) && ! empty( $post_url ) ) {
-			$content = '<a href="' . $post_url . '" class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-element guten-post-featured-image">' . $content . '</a>';
+			$content = '<a href="' . esc_url( $post_url ) . '" class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-element guten-post-featured-image">' . $content . '</a>';
 		} else {
 			$content = '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-element guten-post-featured-image">' . $content . '</div>';
 		}

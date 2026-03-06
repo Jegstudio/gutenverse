@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/icon-box",
 	"title": "Icon Box",
 	"description": "Add an information section with icon box.",
@@ -21,7 +21,7 @@
 			"default": {}
 		},
 		"isDynamic": {
-			"type" : "boolean",
+			"type": "boolean",
 			"default": false
 		},
 		"separateButtonLink": {
@@ -40,11 +40,16 @@
 			"selector": "a",
 			"attribute": "rel"
 		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true,
+			"copyStyle": true
+		},
 		"title": {
 			"type": "string",
 			"default": "Icon Box"
 		},
-		"titleChilds":{
+		"titleChilds": {
 			"type": "array",
 			"default": []
 		},
@@ -52,11 +57,16 @@
 			"type": "string",
 			"default": "h2"
 		},
+		"showDesc": {
+			"type": "boolean",
+			"default": true,
+			"copyStyle": true
+		},
 		"description": {
 			"type": "string",
 			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		},
-		"descriptionChilds":{
+		"descriptionChilds": {
 			"type": "array",
 			"default": []
 		},
@@ -74,7 +84,11 @@
 		},
 		"dynamicAttributes": {
 			"type": "array",
-			"default": ["titleDynamicList", "descriptionDynamicList", "badgeDynamicList"]
+			"default": [
+				"titleDynamicList",
+				"descriptionDynamicList",
+				"badgeDynamicList"
+			]
 		},
 		"hasGlobalLink": {
 			"type": "boolean",
@@ -85,11 +99,11 @@
 		},
 		"dynamicTextContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"dynamicUrlContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"badgeShow": {
 			"type": "boolean",
@@ -101,7 +115,7 @@
 			"default": "BADGE",
 			"copyStyle": true
 		},
-		"badgeChilds":{
+		"badgeChilds": {
 			"type": "array",
 			"default": []
 		},
@@ -118,9 +132,19 @@
 			"type": "string",
 			"default": "far fa-map"
 		},
+		"watermarkIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"watermarkIconSVG": {
+			"type": "string"
+		},
 		"iconType": {
 			"type": "string",
 			"default": "icon"
+		},
+		"iconSVG": {
+			"type": "string"
 		},
 		"icon": {
 			"type": "string",
@@ -156,21 +180,25 @@
 			"copyStyle": true
 		},
 		"imageHeightResponsive": {
-			"type" : "object",
+			"type": "object",
 			"copyStyle": true
 		},
 		"imageWidthResponsive": {
-			"type" : "object",
+			"type": "object",
 			"copyStyle": true
 		},
 		"image": {
 			"type": "object"
 		},
+		"altType": {
+			"type": "string",
+			"default": "custom"
+		},
 		"imageAlt": {
 			"type": "string"
 		},
 		"imageFit": {
-			"type" : "string"
+			"type": "string"
 		},
 		"link": {
 			"type": "string"
@@ -185,6 +213,16 @@
 		},
 		"align": {
 			"type": "object",
+			"copyStyle": true
+		},
+		"height": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"heightControl": {
+			"type": "string",
+			"default": "default",
 			"copyStyle": true
 		},
 		"containerPadding": {
@@ -397,6 +435,11 @@
 			"default": {},
 			"copyStyle": true
 		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
 		"border": {
 			"type": "object",
 			"default": {},
@@ -506,32 +549,77 @@
 			"copyStyle": true
 		},
 		"lazyLoad": {
-			"type" : "boolean",
+			"type": "boolean",
 			"copyStyle": true
 		},
 		"condition": {
 			"type": "object",
 			"default": {}
 		},
-		"hoverWithParent":{
+		"hoverWithParent": {
 			"type": "boolean",
 			"default": false,
 			"copyStyle": true
 		},
-		"parentSelector":{
-			"type":"string",
+		"parentSelector": {
+			"type": "string",
 			"copyStyle": true
 		},
 		"hasInnerBlocks": {
-            "type": "boolean",
-            "default": false
-        }
+			"type": "boolean",
+			"default": false
+		},
+		"anchorAriaLabel": {
+			"type": "string",
+			"default": ""
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
+		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"icon",
-		"box"
+		"box",
+		"image",
+		"symbol",
+		"logo"
+	],
+	"style": [
+		"gutenverse-frontend-icon-box-style"
 	]
 }

@@ -69,6 +69,24 @@ export const metaPanel = (props) => {
                             }
                         }
                     ],
+                },
+                {
+                    'type': 'plain',
+                    'id': 'metaIconSize',
+                    'responsive': true,
+                    'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
                 }
             ]
         },
@@ -87,6 +105,24 @@ export const metaPanel = (props) => {
                     'id': 'metaIconSpacing',
                     'responsive': true,
                     'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists i`,
+                    'properties': [
+                        {
+                            'name': 'margin-right',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                },
+                {
+                    'type': 'plain',
+                    'id': 'metaIconSpacing',
+                    'responsive': true,
+                    'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists svg`,
                     'properties': [
                         {
                             'name': 'margin-right',
@@ -175,6 +211,17 @@ export const metaPanel = (props) => {
                         }
                     ],
                     'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists span`,
+                },
+                {
+                    'type': 'color',
+                    'id': 'metaColor',
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct',
+                        }
+                    ],
+                    'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists svg`,
                 }
             ]
         },
@@ -194,6 +241,17 @@ export const metaPanel = (props) => {
                         }
                     ],
                     'selector': `.${elementId} .guten-postlist .guten-post:hover a .meta-lists span`,
+                },
+                {
+                    'type': 'color',
+                    'id': 'metaColorHover',
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct',
+                        }
+                    ],
+                    'selector': `.${elementId} .guten-postlist .guten-post:hover a .meta-lists svg`,
                 }
             ]
         },

@@ -1,7 +1,9 @@
 import { __ } from '@wordpress/i18n';
-import { RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { IconSVGControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 
-export const progressPanel = () => {
+export const progressPanel = (props) => {
+    const { style } = props;
+
     return [
         {
             id: 'style',
@@ -52,13 +54,19 @@ export const progressPanel = () => {
             component: TextControl,
         },
         {
+            id: 'arrowIcon',
+            label: __('Progress Icon', 'gutenverse'),
+            component: IconSVGControl,
+            show: style === 'inner-content'
+        },
+        {
             id: 'percentage',
             label: __('Percentage', 'gutenverse'),
             component: RangeControl,
             min: 0,
             max: 100,
             step: 1,
-            isParseFloat : true,
+            isParseFloat: true,
             unit: '%',
         },
         {
@@ -68,7 +76,7 @@ export const progressPanel = () => {
             min: 100,
             max: 10000,
             step: 1,
-            isParseFloat : true,
+            isParseFloat: true,
             unit: 'ms',
         },
     ];

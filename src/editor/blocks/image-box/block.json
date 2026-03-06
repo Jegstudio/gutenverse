@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/image-box",
 	"title": "Image Box",
 	"description": "Add an information section with image box.",
@@ -14,7 +14,7 @@
 			"copyStyle": true
 		},
 		"includeButton": {
-			"type" : "boolean",
+			"type": "boolean",
 			"default": true
 		},
 		"url": {
@@ -25,16 +25,16 @@
 			"default": {}
 		},
 		"isDynamic": {
-			"type" : "boolean",
+			"type": "boolean",
 			"default": false
 		},
 		"dynamicTextContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"dynamicUrlContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"separateButtonLink": {
 			"type": "boolean",
@@ -59,9 +59,9 @@
 			"type": "string",
 			"default": "Image Box Heading"
 		},
-		"titleChilds":{
-			"type" : "array",
-			"default" : []
+		"titleChilds": {
+			"type": "array",
+			"default": []
 		},
 		"titleDynamicList": {
 			"type": "array",
@@ -69,11 +69,11 @@
 		},
 		"description": {
 			"type": "string",
-			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.​"
+			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.\u200b"
 		},
-		"descriptionChilds":{
-			"type" : "array",
-			"default" : []
+		"descriptionChilds": {
+			"type": "array",
+			"default": []
 		},
 		"descriptionDynamicList": {
 			"type": "array",
@@ -81,7 +81,10 @@
 		},
 		"dynamicAttributes": {
 			"type": "array",
-			"default": ["titleDynamicList", "descriptionDynamicList"]
+			"default": [
+				"titleDynamicList",
+				"descriptionDynamicList"
+			]
 		},
 		"hasGlobalLink": {
 			"type": "boolean",
@@ -89,6 +92,13 @@
 		},
 		"image": {
 			"type": "object"
+		},
+		"altType": {
+			"type": "string",
+			"default": "custom"
+		},
+		"altOriginal": {
+			"type": "string"
 		},
 		"imageAlt": {
 			"type": "string"
@@ -107,6 +117,13 @@
 			"default": "h3"
 		},
 		"titleIcon": {
+			"type": "string"
+		},
+		"titleIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"titleIconSVG": {
 			"type": "string"
 		},
 		"titleIconPosition": {
@@ -261,6 +278,11 @@
 			"default": {},
 			"copyStyle": true
 		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
 		"border": {
 			"type": "object",
 			"default": {},
@@ -390,11 +412,11 @@
 			"copyStyle": true
 		},
 		"lazyLoad": {
-			"type" : "boolean",
+			"type": "boolean",
 			"copyStyle": true
 		},
 		"ariaLabel": {
-			"type" : "string",
+			"type": "string",
 			"copyStyle": true
 		},
 		"condition": {
@@ -406,19 +428,59 @@
 			"copyStyle": true
 		},
 		"hasInnerBlocks": {
-            "type": "boolean",
-            "default": false
-        },
+			"type": "boolean",
+			"default": false
+		},
 		"buttonUrl": {
 			"type": "string",
 			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"image",
-		"box"
+		"box",
+		"symbol",
+		"logo"
+	],
+	"style": [
+		"gutenverse-frontend-image-box-style"
 	]
 }

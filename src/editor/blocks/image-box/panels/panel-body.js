@@ -1,7 +1,7 @@
 
 import { __ } from '@wordpress/i18n';
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
-import { CheckboxControl, ColorControl, IconControl, IconRadioControl, SelectControl, SizeControl } from 'gutenverse-core/controls';
+import { CheckboxControl, ColorControl, IconSVGControl, IconRadioControl, SelectControl, SizeControl } from 'gutenverse-core/controls';
 
 export const panelBody = props => {
     const {
@@ -45,7 +45,7 @@ export const panelBody = props => {
         {
             id: 'titleIcon',
             label: __('Title Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'titleIconPosition',

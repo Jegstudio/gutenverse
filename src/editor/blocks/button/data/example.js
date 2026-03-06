@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-button',
         'content': 'Gutenverse Button',
         'alignButton': {
             'Desktop': 'center'

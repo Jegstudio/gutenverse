@@ -21,7 +21,7 @@ class GutenverseAccordion extends Default {
         this._addClickEvents(items);
     }
 
-    _animate(accordions) {
+    _animate(accordions, setClosed = false) {
         accordions.map(item => {
             const accordion = u(item);
             const bodySize = accordion.find('.accordion-body .accordion-content').size();
@@ -39,12 +39,14 @@ class GutenverseAccordion extends Default {
                     bodyItem.attr('style', '');
                 });
             } else {
+                setClosed && bodyItem.addClass('closed');
                 anime({
                     targets: bodyItem.first(),
                     height: '0',
                     duration: 500,
                     easing: 'easeOutCubic',
                 }).finished.finally(() => {
+                    setClosed && bodyItem.removeClass('closed');
                     bodyItem.attr('style', '');
                 });
             }
@@ -54,7 +56,7 @@ class GutenverseAccordion extends Default {
     _addClickEvents({accordions, headingItems, bodyItems}) {
         const fn = this;
 
-        fn._animate(accordions);
+        fn._animate(accordions, false);
 
         u(headingItems).on('click', function (e) {
             const parent = u(e.currentTarget).parent();
@@ -75,9 +77,13 @@ class GutenverseAccordion extends Default {
                 return accordion.is(parent) && !accordion.hasClass('active') ? accordion.addClass('active') : accordion.removeClass('active');
             });
 
-            fn._animate(accordions);
+            fn._animate(accordions, true);
         });
     }
 }
 
-export default GutenverseAccordion;
+const selected = u('.guten-accordions');
+
+if (selected) {
+    new GutenverseAccordion(selected);
+}

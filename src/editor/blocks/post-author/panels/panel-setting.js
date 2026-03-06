@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, SelectControl, TextControl, IconRadioControl } from 'gutenverse-core/controls';
+import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'gutenverse-core/components';
 
 export const settingPanel = (props) => {
     const {
@@ -40,6 +41,10 @@ export const settingPanel = (props) => {
                     label: __('User Name'),
                     value: 'user_name'
                 },
+                {
+                    label: __('None'),
+                    value: 'none'
+                },
             ],
         },
         {
@@ -78,6 +83,54 @@ export const settingPanel = (props) => {
             ],
         },
         {
+            id: 'alignment',
+            label: __('Alignment', 'gutenverse'),
+            component: IconRadioControl,
+            allowDeviceControl: true,
+            options: [
+                {
+                    label: __('Align Left', 'gutenverse'),
+                    value: 'flex-start',
+                    icon: <AlignLeft />,
+                },
+                {
+                    label: __('Align Center', 'gutenverse'),
+                    value: 'center',
+                    icon: <AlignCenter />,
+                },
+                {
+                    label: __('Align Right', 'gutenverse'),
+                    value: 'flex-end',
+                    icon: <AlignRight />,
+                },
+                {
+                    label: __('Align Right', 'gutenverse'),
+                    value: 'space-between',
+                    icon: <AlignJustify />,
+                },
+            ],
+        },
+        {
+            id: 'verticalAlignment',
+            label: __('Vertical Alignment', 'gutenverse'),
+            component: SelectControl,
+            allowDeviceControl: true,
+            options: [
+                {
+                    label: __('Top', 'gutenverse'),
+                    value: 'start',
+                },
+                {
+                    label: __('Middle', 'gutenverse'),
+                    value: 'center',
+                },
+                {
+                    label: __('Bottom', 'gutenverse'),
+                    value: 'end',
+                },
+            ],
+        },
+        {
             id: 'authorAvatar',
             label: __('Show Avatar', 'gutenverse'),
             component: CheckboxControl,
@@ -85,6 +138,11 @@ export const settingPanel = (props) => {
         {
             id: 'authorLink',
             label: __('Make Author a Link', 'gutenverse'),
+            component: CheckboxControl,
+        },
+        {
+            id: 'authorBio',
+            label: __('Show Biography', 'gutenverse'),
             component: CheckboxControl,
         },
         {

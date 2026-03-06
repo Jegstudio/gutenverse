@@ -1,9 +1,11 @@
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
+import { backgroundStyle } from 'gutenverse-core/controls';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({ attributes, data, elementId });
     const device = getDeviceType();
 
     //panel button
@@ -66,7 +68,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'iconPosition',
         'responsive': true,
-        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i`,
+        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i, .editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button svg`,
         'properties': [
             {
                 'name': 'margin-right',
@@ -88,7 +90,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'iconPosition',
         'responsive': true,
-        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i`,
+        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i, .editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button svg`,
         'properties': [
             {
                 'name': 'margin-left',
@@ -116,6 +118,19 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
         'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i`,
+        'responsive': true
+    });
+
+    isNotEmpty(attributes['iconSize']) && isNotEmpty(attributes['showIcon']) && data.push({
+        'type': 'unitPoint',
+        'id': 'iconSize',
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'direct'
+            }
+        ],
+        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button svg`,
         'responsive': true
     });
 
@@ -170,53 +185,88 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
-    isNotEmpty(attributes['hoverTextColor']) && !attributes['hoverWithParent'] && data.push({
+    isNotEmpty(attributes['iconColor']) && data.push({
         'type': 'color',
-        'id': 'hoverTextColor',
-        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button:hover span`,
+        'id': 'iconColor',
+        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button svg`,
         'properties': [
             {
-                'name': 'color',
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ],
     });
 
-    isNotEmpty(attributes['hoverTextColor']) && attributes['hoverWithParent'] && data.push({
-        'type': 'color',
-        'id': 'hoverTextColor',
-        'selector': attributes['parentSelector'] + ` .${elementId}.guten-button-wrapper .guten-button span`,
-        'properties': [
-            {
-                'name': 'color',
-                'valueType': 'direct'
-            }
-        ],
-    });
-
-    isNotEmpty(attributes['hoverTextColor']) && !attributes['hoverWithParent'] && data.push({
-        'type': 'color',
-        'id': 'hoverTextColor',
-        'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button:hover i`,
-        'properties': [
-            {
-                'name': 'color',
-                'valueType': 'direct'
-            }
-        ],
-    });
-
-    isNotEmpty(attributes['hoverTextColor']) && attributes['hoverWithParent'] && data.push({
-        'type': 'color',
-        'id': 'hoverTextColor',
-        'selector': attributes['parentSelector'] + ` .${elementId}.guten-button-wrapper .guten-button i`,
-        'properties': [
-            {
-                'name': 'color',
-                'valueType': 'direct'
-            }
-        ],
-    });
+    // Hover
+    if (isNotEmpty(attributes['hoverWithParent'])) {
+        isNotEmpty(attributes['hoverTextColor']) && data.push({
+            'type': 'color',
+            'id': 'hoverTextColor',
+            'selector': attributes['parentSelector'] + ` .${elementId}.guten-button-wrapper .guten-button span`,
+            'properties': [
+                {
+                    'name': 'color',
+                    'valueType': 'direct'
+                }
+            ],
+        });
+        isNotEmpty(attributes['hoverIconColor']) && data.push({
+            'type': 'color',
+            'id': 'hoverIconColor',
+            'selector': attributes['parentSelector'] + ` .${elementId}.guten-button-wrapper .guten-button i` ,
+            'properties': [
+                {
+                    'name': 'color',
+                    'valueType': 'direct'
+                }
+            ],
+        });
+        isNotEmpty(attributes['hoverIconColor']) && data.push({
+            'type': 'color',
+            'id': 'hoverIconColor',
+            'selector': attributes['parentSelector'] + ` .${elementId}.guten-button-wrapper .guten-button svg` ,
+            'properties': [
+                {
+                    'name': 'fill',
+                    'valueType': 'direct'
+                }
+            ],
+        });
+    } else {
+        isNotEmpty(attributes['hoverTextColor']) && data.push({
+            'type': 'color',
+            'id': 'hoverTextColor',
+            'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button:hover span`,
+            'properties': [
+                {
+                    'name': 'color',
+                    'valueType': 'direct'
+                }
+            ],
+        });
+        isNotEmpty(attributes['hoverIconColor']) && data.push({
+            'type': 'color',
+            'id': 'hoverIconColor',
+            'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button:hover i`,
+            'properties': [
+                {
+                    'name': 'color',
+                    'valueType': 'direct'
+                }
+            ],
+        });
+        isNotEmpty(attributes['hoverIconColor']) && data.push({
+            'type': 'color',
+            'id': 'hoverIconColor',
+            'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button:hover svg`,
+            'properties': [
+                {
+                    'name': 'fill',
+                    'valueType': 'direct'
+                }
+            ],
+        });
+    }
 
     isNotEmpty(attributes['typography']) && data.push({
         'type': 'typography',
@@ -304,17 +354,6 @@ const getBlockStyle = (elementId, attributes) => {
     });
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
 
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
@@ -568,6 +607,138 @@ const getBlockStyle = (elementId, attributes) => {
         'attributeType': 'custom',
     });
 
+
+    /** Position Flex Item */
+    const selector = `.${elementId}.guten-element`;
+
+    // Flex Align Self
+    isNotEmpty(attributes['flexAlignSelf']) && data.push({
+        'type': 'plain',
+        'id': 'flexAlignSelf',
+        'responsive': true,
+        'selector': selector,
+        'properties': [
+            {
+                'name': 'align-self',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    // Flex Order - responsive handling
+    const flexOrder = attributes['flexOrder'];
+    const flexCustomOrder = attributes['flexCustomOrder'];
+    if (isNotEmpty(flexOrder)) {
+        data.push({
+            'type': 'plain',
+            'id': 'flexOrder',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'order',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'start') {
+                            return '-9999';
+                        }
+                        if (value === 'end') {
+                            return '9999';
+                        }
+                        return undefined; // Skip 'custom', let flexCustomOrder handle it
+                    }
+                }
+            ],
+        });
+        if (isNotEmpty(flexCustomOrder)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexCustomOrder',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'order',
+                        'valueType': 'function',
+                        'valueFunc': (value, deviceType) => {
+                            // Only apply custom order if flexOrder is 'custom' for this device
+                            if (flexOrder[deviceType] === 'custom') {
+                                return value;
+                            }
+                            return undefined;
+                        }
+                    }
+                ],
+            });
+        }
+    }
+
+    // Flex Size (grow/shrink) - responsive handling
+    const flexSize = attributes['flexSize'];
+    const flexSizeGrow = attributes['flexSizeGrow'];
+    const flexSizeShrink = attributes['flexSizeShrink'];
+    if (isNotEmpty(flexSize)) {
+        // Handle grow preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-grow',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'grow' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle shrink preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-shrink',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'shrink' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle custom grow
+        if (isNotEmpty(flexSizeGrow)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeGrow',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-grow',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+        // Handle custom shrink
+        if (isNotEmpty(flexSizeShrink)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeShrink',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-shrink',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+    }
+
+    /** End Position Flex Item */
     return [
         ...data,
         ...applyFilters(

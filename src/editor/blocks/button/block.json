@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/button",
 	"title": "Button",
 	"description": "Add beautiful and interactive action button.",
@@ -32,7 +32,7 @@
 			"default": {}
 		},
 		"isDynamic": {
-			"type" : "boolean",
+			"type": "boolean",
 			"default": false
 		},
 		"linkTarget": {
@@ -122,6 +122,13 @@
 			"default": "fab fa-wordpress",
 			"copyStyle": true
 		},
+		"iconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconSVG": {
+			"type": "string"
+		},
 		"iconPosition": {
 			"type": "string",
 			"default": "before",
@@ -144,6 +151,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -283,26 +295,66 @@
 			"type": "string",
 			"copyStyle": true
 		},
-        "condition": {
+		"condition": {
 			"type": "object",
 			"default": {}
 		},
-		"hoverWithParent":{
-			"type":"boolean",
+		"hoverWithParent": {
+			"type": "boolean",
 			"default": false,
 			"copyStyle": true
 		},
-		"parentSelector":{
-			"type":"string",
+		"parentSelector": {
+			"type": "string",
 			"copyStyle": true
 		},
 		"iconLineHeight": {
 			"type": "boolean",
 			"default": false
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
-	"keywords": ["button", "url", "action"]
+	"keywords": [
+		"button",
+		"url",
+		"action",
+		"click",
+		"link"
+	],
+	"style": [
+		"gutenverse-frontend-button-style"
+	]
 }

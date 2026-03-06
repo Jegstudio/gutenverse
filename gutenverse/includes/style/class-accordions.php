@@ -45,7 +45,7 @@ class Accordions extends Style_Abstract {
 				'border'      => null,
 				'positioning' => null,
 				'animation'   => null,
-				'advance'     => null,
+				'advance'     => ".{$this->element_id}",
 				'mask'        => null,
 			)
 		);
@@ -145,6 +145,17 @@ class Accordions extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item .accordion-icon svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['iconColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['iconActiveColor'] ) ) {
@@ -153,6 +164,17 @@ class Accordions extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .accordion-item.active .accordion-icon i",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['iconActiveColor'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item.active .accordion-icon svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['iconActiveColor'],
 					'device_control' => false,
@@ -192,6 +214,17 @@ class Accordions extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .accordion-item .accordion-icon",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['iconSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item .accordion-icon svg",
 					'property'       => function ( $value ) {
 						return "font-size: {$value}px;";
 					},
@@ -338,6 +371,44 @@ class Accordions extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['contentBackgroundColorClosed'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item .accordion-body.closed .accordion-content",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'background-color' );
+					},
+					'value'          => $this->attrs['contentBackgroundColorClosed'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentBackgroundColorHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item .accordion-body .accordion-content:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'background-color' );
+					},
+					'value'          => $this->attrs['contentBackgroundColorHover'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentBackgroundGradient'] ) ) {
+			$this->handle_background( ".{$this->element_id}.guten-accordions .accordion-item .accordion-content", $this->attrs['contentBackgroundGradient'] );
+		}
+
+		if ( isset( $this->attrs['contentBackgroundGradientClosed'] ) ) {
+			$this->handle_background( ".{$this->element_id}.guten-accordions .accordion-item .accordion-body.closed .accordion-content", $this->attrs['contentBackgroundGradientClosed'] );
+		}
+
+		if ( isset( $this->attrs['contentBackgroundGradientHover'] ) ) {
+			$this->handle_background( ".{$this->element_id}.guten-accordions .accordion-item .accordion-body .accordion-content:hover", $this->attrs['contentBackgroundGradientHover'] );
+		}
+
 		if ( isset( $this->attrs['contentTextColor'] ) ) {
 			$this->inject_style(
 				array(
@@ -346,6 +417,32 @@ class Accordions extends Style_Abstract {
 						return $this->handle_color( $value, 'color' );
 					},
 					'value'          => $this->attrs['contentTextColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentTextColorClosed'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item .accordion-body.closed .accordion-content",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['contentTextColorClosed'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['contentTextColorHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item .accordion-body .accordion-content:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['contentTextColorHover'],
 					'device_control' => false,
 				)
 			);
@@ -425,6 +522,17 @@ class Accordions extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .accordion-item.active .accordion-icon",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['iconActiveSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .accordion-item.active .accordion-icon svg",
 					'property'       => function ( $value ) {
 						return "font-size: {$value}px;";
 					},

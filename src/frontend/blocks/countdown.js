@@ -17,6 +17,7 @@ class GutenverseCountdown extends Default {
             try {
                 this.__handleTimer(blockElement, dueDate, intervalId);
             } catch (error) {
+                //eslint-disable-next-line no-console
                 console.error('Error during countdown:', error);
                 clearInterval(intervalId);
             }
@@ -40,10 +41,12 @@ class GutenverseCountdown extends Default {
                     if (validSchemes.includes(parsedUrl.protocol)) {
                         window.location.assign(url);
                     } else {
+                        //eslint-disable-next-line no-console
                         console.error('Invalid URL scheme detected. Redirection aborted.');
                         clearInterval(intervalId);
                     }
                 } catch (e) {
+                    //eslint-disable-next-line no-console
                     console.error('Invalid URL format. Redirection aborted:', e);
                     clearInterval(intervalId);
                 }
@@ -80,19 +83,19 @@ class GutenverseCountdown extends Default {
                     }
                 }
             }
-            if (day) {
+            if (day != null) {
                 const dayHTML = days.find('.countdown-value');
                 dayHTML.html(day);
             }
-            if (hour) {
+            if (hour != null) {
                 const hourHTML = hours.find('.countdown-value');
                 hourHTML.html(hour);
             }
-            if (minute) {
+            if (minute != null) {
                 const minuteHTML = minutes.find('.countdown-value');
                 minuteHTML.html(minute);
             }
-            if (second) {
+            if (second != null) {
                 const secondHTML = seconds.find('.countdown-value');
                 secondHTML.html(second);
             }
@@ -101,4 +104,8 @@ class GutenverseCountdown extends Default {
 
 }
 
-export default GutenverseCountdown;
+const selected = u('.guten-countdown');
+
+if (selected) {
+    new GutenverseCountdown(selected);
+}

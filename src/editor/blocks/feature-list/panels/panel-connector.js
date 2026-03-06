@@ -47,7 +47,7 @@ export const connectorPanel = (props) => {
                 {
                     'type': 'color',
                     'id': 'connectorColor',
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .connector`,
+                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .connector-top, .${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .connector-bottom`,
                     'properties': [
                         {
                             'name': 'border-color',
@@ -68,7 +68,7 @@ export const connectorPanel = (props) => {
                     'type': 'plain',
                     'id': 'connectorWidth',
                     'responsive': true,
-                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .connector`,
+                    'selector': `.${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .connector-top, .${elementId}.guten-feature-list .feature-list-wrapper .feature-list-item .connector-bottom`,
                     'properties': [
                         {
                             'name': 'border-width',

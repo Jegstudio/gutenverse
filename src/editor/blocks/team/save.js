@@ -13,7 +13,7 @@ const save = compose(
     withAnimationAdvanceScript('team'),
     withMouseMoveEffectScript
 )((props) => {
-    
+
     const {
         attributes,
         setAttributes,
@@ -42,14 +42,14 @@ const save = compose(
         displayClass,
     );
 
-    const socialComponent = <InnerBlocks.Content/>;
+    const socialComponent = <InnerBlocks.Content />;
 
     return (
         <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
-            <TeamProfile 
+            <TeamProfile
                 {...props}
                 frontEnd={true}
-                socialComponent={socialComponent}/>
+                socialComponent={socialComponent} />
             {addPopup && <div className="profile-popup"
                 data-name={name}
                 data-job={job}

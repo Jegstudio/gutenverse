@@ -1,0 +1,19 @@
+#wpadminbar #wp-admin-bar-gutenverse-adminbar-notification-default .gutenverse-page-content-notice,
+#gutenverse-dashboard .navigation-wrapper .dashboard-notifications .notification-list .gutenverse-notification .gutenverse-page-content-notice {
+    .gutenverse-upgrade-action {
+        margin-top: 10px;
+
+        .button-primary {
+            border-radius: 3px;
+            padding: 10px 8px;
+            background: #3B57F7;
+            font-family: Roboto;
+            font-weight: 500;
+            font-size: 11px;
+            color: #FFFFFF;
+            line-height: 1rem;
+            display: flex;
+        }
+
+    }
+}

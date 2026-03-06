@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-icon',
         'iconAlign': { 'Desktop': 'center' },
         'iconColorOne': {
             'r': 64,

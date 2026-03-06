@@ -13,11 +13,42 @@ const panelCommentStyle = (elementId, attributes, data) => {
         ],
     });
 
+    isNotEmpty(attributes['commentColor']) && data.push({
+        'type': 'color',
+        'id': 'commentColor',
+        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-comment svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
     isNotEmpty(attributes['commentSize']) && data.push({
         'type': 'plain',
         'id': 'commentSize',
         'responsive' : true,
         'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-comment a`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['commentSize']) && data.push({
+        'type': 'plain',
+        'id': 'commentSize',
+        'responsive' : true,
+        'selector': `.${elementId} .guten-postblock .guten-post .guten-postblock-content .guten-meta-comment svg`,
         'properties': [
             {
                 'name': 'font-size',

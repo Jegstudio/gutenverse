@@ -12,4 +12,18 @@
             margin-bottom: 0;
         }
     }
+
+    .guten-post-content.guten-element {
+        .components-disabled {
+            .search-input-text .placeholder-text{
+                display: none;
+            }
+        }
+    }
+
+    .is-editing-disabled {
+        .search-input-text .placeholder-text{
+            display: none;
+        }
+    }
 }

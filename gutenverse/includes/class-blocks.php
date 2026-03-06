@@ -77,6 +77,10 @@ class Blocks {
 		register_block_type( GUTENVERSE_DIR . './block/countdown/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/feature-list/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/portfolio-gallery/block.json' );
+		register_block_type( GUTENVERSE_DIR . './block/chart/block.json' );
+		register_block_type( GUTENVERSE_DIR . './block/popup-builder/block.json' );
+		register_block_type( GUTENVERSE_DIR . './block/google-maps/block.json' );
+		register_block_type( GUTENVERSE_DIR . './block/logo-slider/block.json' );
 
 		// Dynamic blocks.
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/post-author/block.json' );
@@ -93,6 +97,7 @@ class Blocks {
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/nav-menu/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/archive-title/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/taxonomy-list/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/breadcrumb/block.json' );
 
 		// Social Share Block.
 		$this->register_social_share_block( GUTENVERSE_DIR . './block/social-share-item/block.json' );

@@ -1,9 +1,16 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { backgroundStyle } from 'gutenverse-core/controls';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({
+        attributes,
+        data,
+        backgroundSelector: `.editor-styles-wrapper .is-root-container .${elementId}.guten-element.wp-block-gutenverse-nav-menu`,
+        backgroundHoverSelector: `.editor-styles-wrapper .is-root-container .${elementId}.guten-element.wp-block-gutenverse-nav-menu:hover`,
+    });
     const device = getDeviceType();
 
     //panel content
@@ -50,6 +57,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['mobileWrapperBackground']) && data.push({
         'type': 'color',
         'id': 'mobileWrapperBackground',
+        'responsive': true,
         'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .break-point-mobile.guten-nav-menu .gutenverse-menu-wrapper, .${elementId}.guten-element.wp-block-gutenverse-nav-menu .break-point-tablet.guten-nav-menu .gutenverse-menu-wrapper`,
         'properties': [
             {
@@ -240,6 +248,26 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
+    isNotEmpty(attributes['SubmenuIndicatorSize']) && data.push({
+        'type': 'plain',
+        'id': 'SubmenuIndicatorSize',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > li > a .gutenverse-icon-svg, .${elementId}.guten-element.wp-block-gutenverse-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > ul > li > a .gutenverse-icon-svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+
+                }
+            }
+        ],
+    });
+
     isNotEmpty(attributes['submenuIndicatorPadding']) && data.push({
         'type': 'dimension',
         'id': 'submenuIndicatorPadding',
@@ -250,7 +278,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a > i`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
     isNotEmpty(attributes['submenuIndicatorMargin']) && data.push({
@@ -263,19 +291,19 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
     isNotEmpty(attributes['submenuIndicatorBorder']) && data.push({
         'type': 'border',
         'id': 'submenuIndicatorBorder',
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
-    isNotEmpty(attributes['submenuIndicatorBorderResponsive']) && device !== 'Desktop' && data.push({
+    isNotEmpty(attributes['submenuIndicatorBorderResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'submenuIndicatorBorderResponsive',
-        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i`,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, .${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
     });
 
     isNotEmpty(attributes['submenuTypography']) && data.push({
@@ -336,6 +364,19 @@ const getBlockStyle = (elementId, attributes) => {
         ]
     });
 
+    isNotEmpty(attributes['submenuIndicatorColor']) && data.push({
+        'type': 'color',
+        'id': 'submenuIndicatorColor',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['submenuTextNormalBg']) && data.push({
         'type': 'background',
         'id': 'submenuTextNormalBg',
@@ -368,6 +409,19 @@ const getBlockStyle = (elementId, attributes) => {
         ]
     });
 
+    isNotEmpty(attributes['submenuIndicatorHoverColor']) && data.push({
+        'type': 'color',
+        'id': 'submenuIndicatorHoverColor',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children:hover > a .gutenverse-icon-svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['submenuTextNormalBg']) && data.push({
         'id': 'submenuTextHoverBg',
         'type': 'background',
@@ -395,6 +449,19 @@ const getBlockStyle = (elementId, attributes) => {
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['submenuIndicatorActiveColor']) && data.push({
+        'type': 'color',
+        'id': 'submenuIndicatorActiveColor',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children.current-menu-parent > a .gutenverse-icon-svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]
@@ -566,6 +633,26 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
+    isNotEmpty(attributes['hamburgerSize']) && data.push({
+        'type': 'plain',
+        'id': 'hamburgerSize',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-hamburger-menu svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+
+                }
+            }
+        ],
+    });
+
     isNotEmpty(attributes['hamburgerPadding']) && data.push({
         'type': 'dimension',
         'id': 'hamburgerPadding',
@@ -605,6 +692,19 @@ const getBlockStyle = (elementId, attributes) => {
         ]
     });
 
+    isNotEmpty(attributes['hamburgerColorNormal']) && data.push({
+        'type': 'color',
+        'id': 'hamburgerColorNormal',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-hamburger-menu svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['hamburgerBgNormal']) && data.push({
         'type': 'background',
         'id': 'hamburgerBgNormal',
@@ -631,6 +731,19 @@ const getBlockStyle = (elementId, attributes) => {
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['hamburgerColorHover']) && data.push({
+        'type': 'color',
+        'id': 'hamburgerColorHover',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-hamburger-menu:hover svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]
@@ -686,6 +799,27 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
     });
+
+    isNotEmpty(attributes['closeSize']) && data.push({
+        'type': 'plain',
+        'id': 'closeSize',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+
+                }
+            }
+        ],
+    });
+
     isNotEmpty(attributes['closePadding']) && data.push({
         'type': 'dimension',
         'id': 'closePadding',
@@ -725,6 +859,19 @@ const getBlockStyle = (elementId, attributes) => {
         ]
     });
 
+    isNotEmpty(attributes['closeColorNormal']) && data.push({
+        'type': 'color',
+        'id': 'closeColorNormal',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['closeBgNormal']) && data.push({
         'type': 'background',
         'id': 'closeBgNormal',
@@ -751,6 +898,19 @@ const getBlockStyle = (elementId, attributes) => {
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['closeColorHover']) && data.push({
+        'type': 'color',
+        'id': 'closeColorHover',
+        'responsive': true,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu:hover svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]
@@ -857,14 +1017,14 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['overlayBackground']) && data.push({
         'type': 'background',
         'id': 'overlayBackground',
-        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.mobile.tablet-breakpoint .guten-nav-menu .guten-nav-overlay,  .${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
     });
 
     isNotEmpty(attributes['overlayOpacity']) && data.push({
         'type': 'plain',
         'id': 'overlayOpacity',
         'responsive': true,
-        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.mobile.tablet-breakpoint .guten-nav-menu .guten-nav-overlay, .${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
         'properties': [
             {
                 'name': 'opacity',
@@ -883,7 +1043,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['overlayPointer']) && data.push({
         'type': 'plain',
         'id': 'overlayPointer',
-        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.mobile.tablet-breakpoint .guten-nav-menu .guten-nav-overlay, .${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
         'properties': [
             {
                 'name': 'pointer-events',
@@ -900,10 +1060,10 @@ const getBlockStyle = (elementId, attributes) => {
     });
 
     isNotEmpty(attributes['overlayBlur']) && data.push({
-        'type': 'overlayBlur',
-        'id': 'blur',
+        'type': 'plain',
+        'id': 'overlayBlur',
         'responsive': true,
-        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.mobile.tablet-breakpoint .guten-nav-menu .guten-nav-overlay, .${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
         'properties': [
             {
                 'name': '-webkit-backdrop-filter',
@@ -929,18 +1089,6 @@ const getBlockStyle = (elementId, attributes) => {
     });
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element.wp-block-gutenverse-nav-menu`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element.wp-block-gutenverse-nav-menu:hover`,
-    });
-
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
         'id': 'border',
@@ -1185,6 +1333,138 @@ const getBlockStyle = (elementId, attributes) => {
         'attributeType': 'custom',
     });
 
+
+    /** Position Flex Item */
+    const selector = `.${elementId}.guten-element`;
+
+    // Flex Align Self
+    isNotEmpty(attributes['flexAlignSelf']) && data.push({
+        'type': 'plain',
+        'id': 'flexAlignSelf',
+        'responsive': true,
+        'selector': selector,
+        'properties': [
+            {
+                'name': 'align-self',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    // Flex Order - responsive handling
+    const flexOrder = attributes['flexOrder'];
+    const flexCustomOrder = attributes['flexCustomOrder'];
+    if (isNotEmpty(flexOrder)) {
+        data.push({
+            'type': 'plain',
+            'id': 'flexOrder',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'order',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'start') {
+                            return '-9999';
+                        }
+                        if (value === 'end') {
+                            return '9999';
+                        }
+                        return undefined; // Skip 'custom', let flexCustomOrder handle it
+                    }
+                }
+            ],
+        });
+        if (isNotEmpty(flexCustomOrder)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexCustomOrder',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'order',
+                        'valueType': 'function',
+                        'valueFunc': (value, deviceType) => {
+                            // Only apply custom order if flexOrder is 'custom' for this device
+                            if (flexOrder[deviceType] === 'custom') {
+                                return value;
+                            }
+                            return undefined;
+                        }
+                    }
+                ],
+            });
+        }
+    }
+
+    // Flex Size (grow/shrink) - responsive handling
+    const flexSize = attributes['flexSize'];
+    const flexSizeGrow = attributes['flexSizeGrow'];
+    const flexSizeShrink = attributes['flexSizeShrink'];
+    if (isNotEmpty(flexSize)) {
+        // Handle grow preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-grow',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'grow' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle shrink preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-shrink',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'shrink' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle custom grow
+        if (isNotEmpty(flexSizeGrow)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeGrow',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-grow',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+        // Handle custom shrink
+        if (isNotEmpty(flexSizeShrink)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeShrink',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-shrink',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+    }
+
+    /** End Position Flex Item */
     return [
         ...data,
         ...applyFilters(

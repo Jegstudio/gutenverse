@@ -1,17 +1,25 @@
 .guten-post-author {
     display: flex;
+    align-items: flex-start;
+    flex-direction: row;
 
-    img {
+    .left-content {
         margin-right: 10px;
+
+        img {
+            display: block;
+            border-radius: 50%;
+        }
     }
 
-    h1, h2, h3, h4, h5, h6, p, span {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
+    .right-content {
+        display: flex;
+        flex-direction: column;
 
-    &.block-editor-block-list__block {
-        margin-top: 0;
-        margin-bottom: 0;
+        h1, h2, h3, h4, h5, h6, p, span {
+            margin: 0;
+            display: inline-block;
+            width: 100%;
+        }
     }
 }

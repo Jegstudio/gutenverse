@@ -1,10 +1,69 @@
 import { __ } from '@wordpress/i18n';
 
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
-import { CheckboxControl, IconRadioControl, SelectControl, SizeControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconRadioControl, RangeControl, RepeaterControl, SelectControl, SizeControl, TextControl } from 'gutenverse-core/controls';
 
-export const settingPanel = ({ elementId }) => {
+export const settingPanel = (props) => {
+    const {
+        elementId,
+        textType,
+        style,
+    } = props;
+
+    const showLetterSpeed = () => {
+        return ['typing', 'swirl', 'blinds', 'wave'].includes(style);
+    };
+
+    const animationStyles = () => {
+        const styles = [
+            { value: 'bend', label: __('Bend') },
+            { value: 'blinds', label: __('Blinds') },
+            { value: 'bounce', label: __('Bounce') },
+            { value: 'drop', label: __('Drop') },
+            { value: 'fade', label: __('Fade') },
+            { value: 'fall', label: __('Fall') },
+            { value: 'flip', label: __('Flip') },
+            { value: 'jump', label: __('Jump') },
+            { value: 'pop', label: __('Pop') },
+            { value: 'rising', label: __('Rising') },
+            { value: 'rubber-band', label: __('Rubber Band') },
+            { value: 'slide-down', label: __('Slide Down') },
+            { value: 'slide-left', label: __('Slide Left') },
+            { value: 'slide-right', label: __('Slide Right') },
+            { value: 'slide-up', label: __('Slide Up') },
+            { value: 'swing', label: __('Swing') },
+            { value: 'swirl', label: __('Swirl') },
+            { value: 'wave', label: __('Wave') },
+            { value: 'zoom', label: __('Zoom') },
+            { value: 'typing', label: __('Typing')},
+            // { value: 'clip', label: __('Typing')},
+        ];
+        if (textType == 'default') {
+            styles.unshift({ value: 'none', label: __('None') });
+        }
+        return styles;
+    };
+
     return [
+        {
+            id: 'textType',
+            label: __('Text Type', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: __('Default', 'none'),
+                    value: 'default',
+                },
+                {
+                    label: __('Rotation'),
+                    value: 'rotation',
+                },
+                {
+                    label: __('Highlighted'),
+                    value: 'highlighted',
+                },
+            ]
+        },
         {
             id: 'titleTag',
             label: __('Title Tag', 'gutenverse'),
@@ -42,64 +101,58 @@ export const settingPanel = ({ elementId }) => {
         },
         {
             id: 'style',
+            show: textType !== 'highlighted',
             label: __('Animation Style', 'gutenverse'),
             component: SelectControl,
+            options: animationStyles()
+        },
+        {
+            id: 'highlightedStyle',
+            show: textType === 'highlighted',
+            label: __('Highlighted Style', 'gutenverse'),
+            component: SelectControl,
             options: [
-                {
-                    value: 'none',
-                    label: __('None')
-                },
-                {
-                    value: 'zoom',
-                    label: __('Zoom')
-                },
-                {
-                    value: 'fade',
-                    label: __('Fade')
-                },
-                {
-                    value: 'jump',
-                    label: __('Jump')
-                },
-                {
-                    value: 'bend',
-                    label: __('Bend')
-                },
-                {
-                    value: 'drop',
-                    label: __('Drop')
-                },
-                {
-                    value: 'flip',
-                    label: __('Flip')
-                },
-                {
-                    value: 'pop',
-                    label: __('Pop')
-                },
-                {
-                    value: 'slide',
-                    label: __('Slide')
-                },
-                {
-                    value: 'rising',
-                    label: __('Rising')
-                },
-                {
-                    value: 'fall',
-                    label: __('Fall')
-                },
+                { label: __('Circle', 'gutenverse'), value: 'circle' },
+                { label: __('Curly', 'gutenverse'), value: 'curly' },
+                { label: __('Underline', 'gutenverse'), value: 'underline' },
+                { label: __('Double', 'gutenverse'), value: 'double' },
+                { label: __('Double Underline', 'gutenverse'), value: 'double-underline' },
+                { label: __('Underline Zigzag', 'gutenverse'), value: 'underline-zigzag' },
+                { label: __('Diagonal', 'gutenverse'), value: 'diagonal' },
+                { label: __('Strikethrough', 'gutenverse'), value: 'strikethrough' },
+                { label: __('X', 'gutenverse'), value: 'x' },
             ]
+
+        },
+        {
+            id: 'beforeTextAnimated',
+            label: __('Before Text Animated', 'gutenverse'),
+            component: TextControl,
         },
         {
             id: 'text',
-            label: __('Animated Text'),
+            show: (textType === 'default') || textType === 'highlighted',
+            label: __('Animated Text', 'gutenverse'),
             component: TextControl
         },
         {
-            id: 'splitByWord',
-            label: __('Split By Word', 'gutenverse'),
-            component: CheckboxControl
+            id: 'rotationTexts',
+            show: textType === 'rotation',
+            label: __('Text Rotation', 'gutenverse'),
+            component: RepeaterControl,
+            titleFormat: '<strong><%= value.rotationText%></strong>',
+            options: [
+                {
+                    id: 'rotationText',
+                    label: __('Title', 'gutenverse'),
+                    component: TextControl,
+                }
+            ]
+        },
+        {
+            id: 'afterTextAnimated',
+            label: __('After Text Animated', 'gutenverse'),
+            component: TextControl,
         },
         {
             id: 'alignText',
@@ -123,6 +176,42 @@ export const settingPanel = ({ elementId }) => {
                     icon: <AlignRight />,
                 },
             ],
+        },
+        {
+            id: 'displayDuration',
+            show: style !== 'none',
+            label: __('Display Duration', 'gutenverse'),
+            component: RangeControl,
+            min: 0,
+            max: 10000,
+            step: 100,
+            unit: 'ms',
+        },
+        {
+            id: 'animationDuration',
+            show: style !== 'none',
+            label: showLetterSpeed() && textType !== 'highlighted'? __('Letter Speed In') : __('Animation Duration', 'gutenverse'),
+            component: RangeControl,
+            min: 0,
+            max: 10000,
+            step: 100,
+            unit: 'ms',
+        },
+        {
+            id: 'transitionDuration',
+            show: style !== 'none',
+            label: showLetterSpeed() && textType !== 'highlighted'? __('Letter Speed Out') : __('Transition Duration', 'gutenverse'),
+            component: RangeControl,
+            min: 0,
+            max: 10000,
+            step: 100,
+            unit: 'ms',
+        },
+        {
+            id: 'splitByWord',
+            show: textType !== 'highlighted' && style !== 'typing',
+            label: __('Split By Word', 'gutenverse'),
+            component: CheckboxControl
         },
         {
             id: 'loop',

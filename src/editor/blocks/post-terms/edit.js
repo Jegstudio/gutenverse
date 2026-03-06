@@ -11,7 +11,7 @@ import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { PanelTutorial } from 'gutenverse-core/controls';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
@@ -98,19 +98,19 @@ const PostTermsBlock = compose(
                 }
             case 'string':
             default:
-                return <HtmlTag>
+                return <span>
                     {!isEmpty(terms) ? terms.map((term, index) => {
                         const name = term?.name;
                         const after = index < terms.length - 1 ? separator : '';
 
-                        return linkTo && linkTo !== 'none' ? <a href="#" onClick={e => e.preventDefault()}>{name + after}</a> : name + after;
-                    }) : linkTo && linkTo !== 'none' ? <a href="#" onClick={e => e.preventDefault()}>{'Post Terms'}</a> : 'Post Terms'}
-                </HtmlTag>;
+                        return linkTo && linkTo !== 'none' ? <><HtmlTag className="term-list"><a href="#" onClick={e => e.preventDefault()}>{name}</a></HtmlTag>{after}</> : <><HtmlTag className="term-list">{name}</HtmlTag>{after}</>;
+                    }) : linkTo && linkTo !== 'none' ? <a href="#" onClick={e => e.preventDefault()}>{'Post Terms'}</a> : <span className="term-item">Post Terms</span>}
+                </span>;
         }
     };
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <InspectorControls>
             <PanelTutorial
                 title={__('How Post Terms works?', 'gutenverse')}

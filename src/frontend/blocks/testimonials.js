@@ -1,4 +1,4 @@
-import { Default, u, applyFilters } from 'gutenverse-core-frontend';
+import { Default, u } from 'gutenverse-core-frontend';
 
 class GutenverseTestimonials extends Default {
     /* public */
@@ -49,24 +49,21 @@ class GutenverseTestimonials extends Default {
             breakpoints: this.swiperBreakpoint(JSON.parse(breakpoints))
         };
 
-        const settingsProps = {
-            id,
-            loop,
-            autoplay,
-            timeout,
-            nav,
-            arrow,
-            breakpoints
-        };
-
-        const settingsFilter = applyFilters(
-            'gutenverse.swiper.frontend',
-            settings,
-            settingsProps
-        );
-
-        new Swiper(`.${id} .swiper-container`, settingsFilter);
+        new Swiper(`.${id} .swiper-container`, settings);
     }
 }
 
-export default GutenverseTestimonials;
+const selected = u('.guten-testimonials');
+
+if (selected) {
+    new GutenverseTestimonials(selected);
+}
+
+const elementPlaceholder = u('[data-image-placeholder]');
+const { image_placeholder } = window['GutenverseFrontendConfig'];
+elementPlaceholder.nodes.map(element => {
+    const data = u(element).data('image-placeholder');
+    if('gutenverse-image-placeholder' === data){
+        u(element).attr('src', image_placeholder);
+    }
+});

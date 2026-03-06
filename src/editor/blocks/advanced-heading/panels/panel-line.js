@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { ColorControl, DimensionControl, RangeControl, SelectControl } from 'gutenverse-core/controls';
+import { ColorControl, DimensionControl, RangeControl, SelectControl, SizeControl } from 'gutenverse-core/controls';
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 export const linePanel = (props) => {
@@ -63,28 +63,32 @@ export const linePanel = (props) => {
             id: 'lineWidth',
             label: __('Line Width', 'gutenverse'),
             show: showLine && showLine !== 'none',
-            component: RangeControl,
+            component: SizeControl,
             allowDeviceControl: true,
-            unit: '%',
-            min: 0,
-            max: 100,
-            step: 1,
+            units: {
+                px: {
+                    text: 'px',
+                    min: 10,
+                    max: 100,
+                    step: 1
+                },
+                ['%']: {
+                    text: '%',
+                    min: 0,
+                    max: 100,
+                    step: 0.1
+                },
+            },
             liveStyle: [
                 isNotEmpty(showLine) && showLine !== 'none' && {
                     'id': 'lineWidth',
-                    'type': 'plain',
+                    'type': 'unitPoint',
                     'responsive': true,
                     'selector': `.editor-styles-wrapper .${elementId}.guten-advanced-heading .heading-line`,
                     'properties': [
                         {
                             'name': 'width',
-                            'valueType': 'pattern',
-                            'pattern': '{value}%',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct',
-                                }
-                            }
+                            'valueType': 'direct',
                         }
                     ]
                 }

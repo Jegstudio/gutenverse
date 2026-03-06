@@ -51,6 +51,8 @@ export const imagePanel = (props) => {
                     .${elementId} .profile-box .profile-card.card-default .profile-header img,
                     .${elementId} .profile-box .profile-card.card-overlay .profile-header img,
                     .${elementId} .profile-box .profile-card.card-hover .profile-header img,
+                    .${elementId} .profile-box .profile-card.card-title-social-horizontal img,
+                    .${elementId} .profile-box .profile-card.card-title-social-horizontal,
                     .${elementId} .profile-box .profile-card.card-overlay`,
                     'properties': [
                         {
@@ -99,6 +101,7 @@ export const imagePanel = (props) => {
                     .${elementId} .profile-box .profile-card.card-hover img,
                     .${elementId} .profile-box .profile-card.card-default .profile-header img,
                     .${elementId} .profile-box .profile-card.card-overlay .profile-header img,
+                    .${elementId} .profile-box .profile-card.card-title-social-horizontal img,
                     .${elementId} .profile-box .profile-card.card-hover .profile-header img`,
                     'properties': [
                         {
@@ -125,6 +128,7 @@ export const imagePanel = (props) => {
                     'responsive': true,
                     'selector': `.${elementId} .profile-box .profile-card.card-default img,
                     .${elementId} .profile-box .profile-card.card-overlay img,
+                    .${elementId} .profile-box .profile-card.card-title-social-horizontal img,
                     .${elementId} .profile-box .profile-card.card-hover img,
                     .${elementId} .profile-box .profile-card.card-default .profile-header img,
                     .${elementId} .profile-box .profile-card.card-overlay .profile-header img,

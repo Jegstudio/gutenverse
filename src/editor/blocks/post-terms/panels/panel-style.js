@@ -87,7 +87,7 @@ export const stylePanel = (props) => {
                     label: 'Hover'
                 }
             ],
-            onChange: ({__styleHover}) => setSwitcher({...switcher, styleHover: __styleHover})
+            onChange: ({ __styleHover }) => setSwitcher({ ...switcher, styleHover: __styleHover })
         },
         {
             id: 'color',
@@ -147,6 +147,25 @@ export const stylePanel = (props) => {
             ],
         },
         {
+            id: 'colorItemHover',
+            show: switcher.styleHover === 'hover',
+            label: __('Hover Item Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'colorItemHover',
+                    'selector': `.${elementId} h1.term-item:hover, .${elementId} h2.term-item:hover, .${elementId} h3.term-item:hover, .${elementId} h4.term-item:hover, .${elementId} h5.term-item:hover, .${elementId} h6.term-item:hover, .${elementId} span.term-item:hover, .${elementId} a.term-item:hover, .${elementId} .term-list:hover`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ],
+                }
+            ],
+        },
+        {
             id: 'textShadowHover',
             show: switcher.styleHover === 'hover',
             label: __('Hover Text Shadow', 'gutenverse'),
@@ -161,7 +180,7 @@ export const stylePanel = (props) => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector':  `.${elementId}:hover h1, .${elementId}:hover h2, .${elementId}:hover h3, .${elementId}:hover h4, .${elementId}:hover h5, .${elementId}:hover h6, .${elementId}:hover span`,
+                    'selector': `.${elementId}:hover h1, .${elementId}:hover h2, .${elementId}:hover h3, .${elementId}:hover h4, .${elementId}:hover h5, .${elementId}:hover h6, .${elementId}:hover span`,
                 }
             ],
         }

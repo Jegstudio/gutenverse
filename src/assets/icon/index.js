@@ -34,6 +34,8 @@ import IconFeatureList from './icon-features-list.svg';
 import IconFeatureListItem from './icon-features-list-item.svg';
 import IconPortfolioGallery from './icon-portfolio-gallery.svg';
 import IconCountdown from './icon-countdown.svg';
+import IconChart from './icon-chart.svg';
+import IconBreadcrumb from './icon-breadcrumb.svg';
 
 /** Social */
 import IconShareEmail from './icon-share-email.svg';
@@ -77,6 +79,7 @@ import IconTextMarque from './icon-text-marque.svg';
 import IconAdvanceTabs from './icon-advanced-tabs.svg';
 import IconAdvanceButton from './icon-advanced-button.svg';
 import IconImageMarquee from './icon-image-marquee.svg';
+import IconPostCarousel from './icon-post-carousel.svg';
 
 export const IconSearchResultTitleSVG = () => {
     return <IconSearchResultTitle />;
@@ -352,4 +355,16 @@ export const IconFeatureListItemSVG = () => {
 
 export const IconPortfolioGallerySVG = () => {
     return <IconPortfolioGallery />;
+};
+
+export const IconChartSVG = () => {
+    return <IconChart />;
+};
+
+export const IconPostCarouselSVG = () => {
+    return <IconPostCarousel />;
+};
+
+export const IconBreadcrumbSVG = () => {
+    return <IconBreadcrumb/>;
 };

@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/popup-builder",
 	"title": "Popup Builder",
 	"description": "Build Popup using gutenverse popup builder.",
@@ -111,6 +111,13 @@
 			"type": "string",
 			"default": "gtn gtn-x-line"
 		},
+		"closeIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"closeIconSVG": {
+			"type": "string"
+		},
 		"closePosition": {
 			"type": "string",
 			"default": "container",
@@ -216,6 +223,13 @@
 		"openMaxClick": {
 			"type": "integer"
 		},
+		"openInterval": {
+			"type": "object",
+			"default": {
+				"point": 5,
+				"unit": "m"
+			}
+		},
 		"transform": {
 			"type": "object",
 			"copyStyle": true
@@ -227,6 +241,71 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"exitAnimation": {
+			"type": "string",
+			"default": ""
+		},
+		"exitAnimationDuration": {
+			"type": "string",
+			"default": ""
+		},
+		"exitAnimationDelay": {
+			"type": "string",
+			"default": ""
+		},
+		"popupType": {
+			"type": "string",
+			"default": "default"
+		},
+		"popupVideoSrc": {
+			"type": "string"
+		},
+		"popupVideoStart": {
+			"type": "integer"
+		},
+		"popupVideoEnd": {
+			"type": "integer"
+		},
+		"popupVideoHideControls": {
+			"type": "boolean"
+		},
+		"popupVideoPauseOnClose": {
+			"type": "boolean"
+		},
+		"popupVideoResetOnClose": {
+			"type": "boolean"
+		},
+		"popupVideoMuted": {
+			"type": "boolean"
+		},
+		"popupVideoLoop": {
+			"type": "boolean"
+		},
+		"videoContainerBorder": {
+			"type": "object"
+		},
+		"videoContainerBorderResponsive": {
+			"type": "object"
+		},
+		"popupVideoWidth": {
+			"type": "object"
+		},
+		"popupVideoHeight": {
+			"type": "object"
+		},
+		"popupVideoContainerFixedHeight": {
+			"type": "object"
+		},
+		"videoContainerContentHorizontalAlign": {
+			"type": "object"
+		},
+		"videoContainerContentVerticalAlign": {
+			"type": "object"
+		},
+		"popupVideoPlayOn": {
+			"type": "string",
+			"default": "click"
 		}
 	},
 	"supports": {
@@ -235,5 +314,13 @@
 	"keywords": [
 		"popup",
 		"builder"
+	],
+	"viewScript": [
+		"gutenverse-frontend-popup-builder-script",
+		"gutenverse-frontend-video-script"
+	],
+	"style": [
+		"gutenverse-frontend-popup-builder-style",
+		"gutenverse-frontend-video-style"
 	]
 }

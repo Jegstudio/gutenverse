@@ -20,6 +20,25 @@ const panelCloseStyle = (elementId, attributes, data) => {
         'selector': `.${elementId}.guten-popup-builder .guten-popup-close i`,
     });
 
+    isNotEmpty(attributes['closeButtonSize']) && data.push({
+        'type': 'plain',
+        'id': 'closeButtonSize',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern' : '{value}px',
+                'patternValues' : {
+                    'value' : {
+                        'type' : 'direct'
+                    }
+                }
+            }
+        ],
+        'selector': `.${elementId}.guten-popup-builder .guten-popup-close svg`,
+    });
+
     isNotEmpty(attributes['closePositioningLeft']) && data.push({
         'type': 'unitPoint',
         'id': 'closePositioningLeft',
@@ -98,6 +117,19 @@ const panelCloseStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['closeButtonColor']) && data.push({
+        'type': 'color',
+        'id': 'closeButtonColor',
+        'responsive': true,
+        'selector': `.${elementId}.guten-popup-builder .guten-popup .guten-popup-close svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['closeButtonBgColor']) && data.push({
         'type': 'background',
         'id': 'closeButtonBgColor',
@@ -136,6 +168,19 @@ const panelCloseStyle = (elementId, attributes, data) => {
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['closeButtonColorHover']) && data.push({
+        'type': 'color',
+        'id': 'closeButtonColorHover',
+        'responsive': true,
+        'selector': `.${elementId}.guten-popup-builder .guten-popup .guten-popup-close:hover svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]

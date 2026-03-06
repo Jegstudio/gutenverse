@@ -100,6 +100,32 @@ const panelLogosStyle = (elementId, attributes, data) => {
         'selector': `.${elementId}.guten-client-logo .swiper-container .content-image .hover-image, .${elementId}.guten-client-logo .swiper-container .content-image .main-image`,
     });
 
+    isNotEmpty(attributes['filter']) && data.push({
+        'type': 'plain',
+        'id': 'filter',
+        'selector': `.${elementId}.guten-client-logo .swiper-container .content-image .main-image`,
+        'properties': [
+            {
+                'name': 'filter',
+                'valueType': 'function',
+                'functionName': 'handleFilterImage',
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['filterHover']) && data.push({
+        'type': 'plain',
+        'id': 'filterHover',
+        'selector': `.${elementId}.guten-client-logo .swiper-container .content-image .hover-image`,
+        'properties': [
+            {
+                'name': 'filter',
+                'valueType': 'function',
+                'functionName': 'handleFilterImage',
+            }
+        ],
+    });
+
     isNotEmpty(attributes['logoBackgroundNormal']) && data.push({
         'type': 'background',
         'id': 'logoBackgroundNormal',

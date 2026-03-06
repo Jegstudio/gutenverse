@@ -1,577 +1,632 @@
 {
-  "apiVersion": 2,
-  "name": "gutenverse/team",
-  "title": "Team",
-  "description": "Show your team details.",
-  "category": "gutenverse-element",
-  "allowCopyStyle": true,
-  "attributes": {
-    "elementId": {
-      "type": "string"
-    },
-    "mouseMoveEffect": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profileType": {
-      "type": "string",
-      "default": "default"
-    },
-    "overlayType": {
-      "type": "string",
-      "default": "default"
-    },
-    "overlayPosition": {
-      "type": "string",
-      "default": "center"
-    },
-    "overlayProfilePosition":{
-      "type": "object"
-    },
-    "src": {
-      "type": "object"
-    },
+	"apiVersion": 3,
+	"name": "gutenverse/team",
+	"title": "Team",
+	"description": "Show your team details.",
+	"category": "gutenverse-element",
+	"allowCopyStyle": true,
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"mouseMoveEffect": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profileType": {
+			"type": "string",
+			"default": "default"
+		},
+		"overlayType": {
+			"type": "string",
+			"default": "default"
+		},
+		"overlayPosition": {
+			"type": "string",
+			"default": "center"
+		},
+		"overlayProfilePosition": {
+			"type": "object"
+		},
+		"src": {
+			"type": "object"
+		},
+		"altType": {
+			"type": "string",
+			"default": "none"
+		},
+		"imageAlt": {
+			"type": "string"
+		},
 		"openDynamic": {
 			"type": "string"
 		},
-    "dynamicTextContent": {
+		"dynamicTextContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"dynamicUrlContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
-    "nameTag": {
-      "type": "string",
-      "default": "h3"
-    },
-    "lazy": {
-      "type": "boolean",
-      "default": false
-    },
-    "name": {
-      "type": "string",
-      "default": "John Doe"
-    },
-    "nameChilds":{
-      "type" : "array",
-      "default" : []
-    },
-    "nameDynamicList": {
+		"nameTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"lazy": {
+			"type": "string",
+			"default": "normal"
+		},
+		"name": {
+			"type": "string",
+			"default": "John Doe"
+		},
+		"nameChilds": {
 			"type": "array",
 			"default": []
 		},
-    "job": {
-      "type": "string",
-      "default": "Designer"
-    },
-    "jobChilds":{
-      "type" : "array",
-      "default" : []
-    },
-    "jobDynamicList": {
+		"nameDynamicList": {
 			"type": "array",
 			"default": []
 		},
-    "showDesc": {
-      "type": "boolean",
-      "default": false
-    },
-    "description": {
-      "type": "string",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget dignissim quam. Nam posuere velit vitae ultricies commodo."
-    },
-    "descriptionChilds":{
-      "type" : "array",
-      "default" : []
-    },
-    "descriptionDynamicList": {
+		"job": {
+			"type": "string",
+			"default": "Designer"
+		},
+		"jobChilds": {
 			"type": "array",
 			"default": []
 		},
-    "dynamicAttributes": {
+		"jobDynamicList": {
 			"type": "array",
-			"default": ["nameDynamicList", "jobDynamicList", "descriptionDynamicList"]
+			"default": []
 		},
-    "phone": {
-      "type": "string",
-      "default": "+12 345 678 90"
-    },
-    "email": {
-      "type": "string",
-      "default": "placeholder@email.com"
-    },
-    "addPopup": {
-      "type": "boolean",
-      "default": false
-    },
-    "showSocial": {
-      "type": "boolean",
-      "default": true
-    },
-    "nameColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "nameColorHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "nameTypography": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "nameTextShadow": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "jobColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "jobColorHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "jobTypography": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "jobTextShadow": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "descColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "descColorHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "descTypography": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "descTextShadow": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "alignment": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profilePadding": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "detailsPadding": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profileBorderRadius": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profileBorderRadiusResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "profileBorderRadius",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "background": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "backgroundHover": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "border": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "borderResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "border",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "boxShadow": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "borderHover": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "borderHoverResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "borderHover",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "boxShadowHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profileBackground": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "profileBackgroundHover": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "profileBorder": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profileBorderResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "profileBorder",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "profileBoxShadow": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profileBorderHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "profileBorderHoverResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "profileBorderHover",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "profileBoxShadowHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imageBackground": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imageBackgroundHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imageBorder": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imageBorderResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "imageBorder",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "imageBoxShadow": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imageBorderHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imageBorderHoverResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "imageBorderHover",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "imageBoxShadowHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "margin": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "padding": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "zIndex": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "animation": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "hideDesktop": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideTablet": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideMobile": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "imgWidth": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imgHeight": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imgRotate": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "imgSpacing": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverPadding": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverMargin": {
-      "type" : "object",
-      "copyStyle": true
-    },
-    "hoverBottom": {
-      "type": "boolean",
-      "default": false,
-      "copyStyle": true
-    },
-    "hoverBottomColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverBottomHeight": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverBottomDirection": {
-      "type": "string",
-      "default": "left",
-      "copyStyle": true
-    },
-    "positioningType": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningWidth": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningAlign": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningLocation": {
-      "type": "string",
-      "copyStyle": true
-    },
-    "positioningLeft": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningRight": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningTop": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningBottom": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverBgColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "nameSpace": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "jobSpace": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "descSpace": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverContentBgColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverContentBorder": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hoverContentBorderResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "hoverContentBorder",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "hoverContentShadow": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "advanceAnimation": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "transform": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "mask": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "condition": {
-        "type": "object",
-        "default": {}
-    },
-    "titleHorizontal": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    
-    "titleVertical": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "titleOpacity": {
-      "type": "string",
-      "copyStyle" : true
-    },
-    "titleHorizontalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    
-    "titleVerticalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "titleOpacityHover": {
-      "type": "string",
-      "copyStyle" : true
-    },
-    "descHorizontal": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "descVertical": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "descOpacity": {
-      "type": "string",
-      "copyStyle" : true
-    },
-    "descHorizontalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "descVerticalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "descOpacityHover": {
-      "type": "string",
-      "copyStyle" : true
-    },
-    "jobHorizontal": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "jobVertical": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "jobOpacity": {
-      "type": "string",
-      "copyStyle" : true
-    },
-    "jobHorizontalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "jobVerticalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "jobOpacityHover": {
-      "type": "string",
-      "copyStyle" : true
-    },
-    "socialHorizontal": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "socialVertical": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "socialOpacity": {
-      "type": "string",
-      "copyStyle" : true
-    },
-    "socialHorizontalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "socialVerticalHover": {
-      "type": "object",
-      "copyStyle" : true
-    },
-    "socialOpacityHover": {
-      "type": "string",
-      "copyStyle" : true
-    }
-  },
-  "supports": {},
-  "keywords": [
-    "team",
-    "member"
-  ]
+		"showDesc": {
+			"type": "boolean",
+			"default": false
+		},
+		"description": {
+			"type": "string",
+			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget dignissim quam. Nam posuere velit vitae ultricies commodo."
+		},
+		"descriptionChilds": {
+			"type": "array",
+			"default": []
+		},
+		"descriptionDynamicList": {
+			"type": "array",
+			"default": []
+		},
+		"dynamicAttributes": {
+			"type": "array",
+			"default": [
+				"nameDynamicList",
+				"jobDynamicList",
+				"descriptionDynamicList"
+			]
+		},
+		"phone": {
+			"type": "string",
+			"default": "+12 345 678 90"
+		},
+		"email": {
+			"type": "string",
+			"default": "placeholder@email.com"
+		},
+		"addPopup": {
+			"type": "boolean",
+			"default": false
+		},
+		"showSocial": {
+			"type": "boolean",
+			"default": true
+		},
+		"nameColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"nameColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"nameTypography": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"nameTextShadow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"jobColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"jobColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"jobTypography": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"jobTextShadow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"descColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"descColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"descTypography": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"descTextShadow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"alignment": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profilePadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"detailsPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profileBorderRadius": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profileBorderRadiusResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "profileBorderRadius",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"background": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"border": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"borderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "border",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"borderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "borderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profileBackground": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"profileBackgroundHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"profileBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profileBorderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "profileBorder",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"profileBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profileBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"profileBorderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "profileBorderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"profileBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageBackgroundHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageBorderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "imageBorder",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"imageBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageBorderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "imageBorderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"imageBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"margin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"padding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"zIndex": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"animation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"hideDesktop": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideTablet": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideMobile": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"imgWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imgHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imgRotate": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imgSpacing": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverBottom": {
+			"type": "boolean",
+			"default": false,
+			"copyStyle": true
+		},
+		"hoverBottomColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverBottomHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverBottomDirection": {
+			"type": "string",
+			"default": "left",
+			"copyStyle": true
+		},
+		"positioningType": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningLocation": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"positioningLeft": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningRight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningTop": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningBottom": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"nameSpace": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"jobSpace": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"descSpace": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverContentBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverContentBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hoverContentBorderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "hoverContentBorder",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"hoverContentShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"advanceAnimation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"transform": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
+			"type": "object",
+			"default": {}
+		},
+		"titleHorizontal": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"titleVertical": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"titleOpacity": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"titleHorizontalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"titleVerticalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"titleOpacityHover": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"descHorizontal": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"descVertical": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"descOpacity": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"descHorizontalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"descVerticalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"descOpacityHover": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"jobHorizontal": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"jobVertical": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"jobOpacity": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"jobHorizontalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"jobVerticalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"jobOpacityHover": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"socialHorizontal": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"socialVertical": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"socialOpacity": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"socialHorizontalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"socialVerticalHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"socialOpacityHover": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		}
+	},
+	"supports": {
+		"anchor": true
+	},
+	"keywords": [
+		"team",
+		"member",
+		"person",
+		"info",
+		"image"
+	],
+	"viewScript": [
+		"gutenverse-frontend-team-script"
+	],
+	"style": [
+		"gutenverse-frontend-team-style"
+	]
 }

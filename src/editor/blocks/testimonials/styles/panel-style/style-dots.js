@@ -97,7 +97,7 @@ const dotsStyle = (elementId, attributes, data) => {
         'selector': `.${elementId} .swiper-pagination-bullet`,
         'properties': [
             {
-                'name': 'color',
+                'name': 'background-color',
                 'valueType': 'direct',
             }
         ]
@@ -162,7 +162,7 @@ const dotsStyle = (elementId, attributes, data) => {
         'selector': `.${elementId} .swiper-pagination-bullet.swiper-pagination-bullet-active`,
         'properties': [
             {
-                'name': 'color',
+                'name': 'background-color',
                 'valueType': 'direct',
             }
         ]

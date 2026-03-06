@@ -8,7 +8,7 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { useEffect, useState, useRef, RawHTML } from '@wordpress/element';
 import { useDisplayEditor, useAnimationEditor } from 'gutenverse-core/hooks';
-import { dummyText, isOnEditor } from 'gutenverse-core/helper';
+import { dummyText, isOnEditor, renderIcon, svgAtob } from 'gutenverse-core/helper';
 import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -30,11 +30,15 @@ const IconListBlock = compose(
         sortBy,
         qty,
         icon,
+        iconType,
+        iconSVG,
         sortType,
         hideEmpty,
         showIcon,
         taxonomyType,
-        showDivider
+        showDivider,
+        showCount,
+        countBracket,
     } = attributes;
 
     const elementRef = useRef();
@@ -43,6 +47,7 @@ const IconListBlock = compose(
 
     const [loading, setLoading] = useState(true);
     const [response, setResponse] = useState(null);
+    const [safeResponse, setSafeResponse] = useState('');
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -69,9 +74,13 @@ const IconListBlock = compose(
                         includedCategory,
                         qty,
                         icon,
+                        iconType,
+                        iconSVG,
                         hideEmpty,
                         showIcon,
                         showDivider,
+                        showCount,
+                        countBracket,
                         taxonomyType
                     }
                 }),
@@ -83,20 +92,26 @@ const IconListBlock = compose(
         } else {
             setResponse(`<div class="taxonomy-list-wrapper">
                     <div class="taxonomy-list-item">
-						<a href="#">
-							<span class="icon-list"><i aria-hidden="true" class="${icon}"></i></span>
+						<a href="javascript:void(0)">
+							<span class="icon-list">
+                                ${renderIcon(icon, iconType, iconSVG)}
+                            </span>
 							<div class="taxonomy-list-content">${dummyText(5, 10)}</div>
 						</a>
 					</div>
                     <div class="taxonomy-list-item">
-						<a href="#">
-							<span class="icon-list"><i aria-hidden="true" class="${icon}"></i></span>
+						<a href="javascript:void(0)">
+							<span class="icon-list">
+                                ${renderIcon(icon, iconType, iconSVG)}
+                            </span>
 							<div class="taxonomy-list-content">${dummyText(5, 10)}</div>
 						</a>
 					</div>
                     <div class="taxonomy-list-item">
-						<a href="#">
-							<span class="icon-list"><i aria-hidden="true" class="${icon}"></i></span>
+						<a href="javascript:void(0)">
+							<span class="icon-list">
+                                ${renderIcon(icon, iconType, iconSVG)}
+                            </span>
 							<div class="taxonomy-list-content">${dummyText(5, 10)}</div>
 						</a>
 					</div>
@@ -111,10 +126,27 @@ const IconListBlock = compose(
         includedCategory,
         qty,
         icon,
+        iconType,
+        iconSVG,
         hideEmpty,
         showIcon,
+        showCount,
+        countBracket,
         taxonomyType
     ]);
+
+    useEffect(() => {
+        if (!response) return;
+
+        const temp = document.createElement('div');
+        temp.innerHTML = response;
+
+        temp.querySelectorAll('a').forEach(link => {
+            link.setAttribute('href', 'javascript:void(0)');
+        });
+
+        setSafeResponse(temp.innerHTML);
+    }, [response]);
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -124,7 +156,7 @@ const IconListBlock = compose(
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div  {...blockProps}>
             {!loading ? <RawHTML key="html" className="guten-raw-wrapper">
-                {response}
+                {safeResponse}
             </RawHTML> : <PostListSkeleton />}
         </div>
     </>;

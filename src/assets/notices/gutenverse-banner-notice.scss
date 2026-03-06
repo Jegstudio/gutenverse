@@ -1,0 +1,24 @@
+#wpadminbar #wp-admin-bar-gutenverse-adminbar-notification-default .gutenverse-banner-notice,
+#gutenverse-dashboard .navigation-wrapper .dashboard-notifications .notification-list .gutenverse-notification .gutenverse-banner-notice {
+    .gutenverse-notice-action {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        .gutenverse-notice-action-button {
+            border-radius: 3px;
+            padding: 8px 10px;
+            background: #3B57F7;
+            font-family: Roboto;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+            width: fit-content;
+            line-height: 1rem;
+            height: auto;
+        }
+    }
+
+}

@@ -6,6 +6,8 @@ import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenvers
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { useAnimationAdvanceData } from 'gutenverse-core/hooks';
+import { getImageLoadValue } from '../../helper';
+import { svgAtob } from 'gutenverse-core/helper';
 
 const save = compose(
     withAnimationAdvanceScript('icon-box'),
@@ -34,7 +36,10 @@ const save = compose(
         'guten-feature-list',
     );
 
-    const iconContent = (item) => {
+    const iconContent = (item, index) => {
+        const { imageLoad = '', lazyLoad = false } = item;
+        // console.log('debug from save');
+        // console.table(item);
         switch (item.type) {
             case 'icon':
                 return <div className="icon-wrapper">
@@ -48,10 +53,33 @@ const save = compose(
                         <img
                             src={getImageSrc(item.image)}
                             alt={item.title}
-                            {...(item.lazyLoad && { loading: 'lazy' })}
+                            loading={getImageLoadValue(imageLoad, lazyLoad)}
+                            width={item.image?.width}
+                            height={item.image?.height}
                         />
                     </div>
                 </div>;
+            case 'number':
+                return <div className="icon-wrapper">
+                    <div className="icon">
+                        <span className="icon-number">{typeof item.number === 'number' && !Number.isNaN(item.number) ? item.number : index + 1}</span>
+                    </div>
+                </div>;
+            case 'svg':
+                try {
+                    const svgData = svgAtob(item.svg);
+                    return <div className="icon-wrapper">
+                        <div className="icon">
+                            <div
+                                className="gutenverse-icon-svg"
+                                dangerouslySetInnerHTML={{ __html: svgData }}
+                            />
+                        </div>
+                    </div>;
+                } catch (error) {
+                    console.log(error);
+                    return null;
+                }
             default:
                 return null;
         }
@@ -62,10 +90,11 @@ const save = compose(
                 {
                     featureList.map((el, index) => {
                         return <div key={index} className={`icon-position-${iconPosition} feature-list-item`}>
-                            { showConnector && <span className={`connector icon-position-${iconPosition}`}></span>}
-                            {iconContent(el)}
+                            {showConnector && index != 0 && <span className={`connector-top icon-position-${iconPosition}`}></span>}
+                            {showConnector && index != featureList.length - 1 && <span className={`connector-bottom icon-position-${iconPosition}`}></span>}
+                            {iconContent(el, index)}
                             <div className="feature-list-content">
-                                { el.link ? <a href={el.link} target="_blank" rel="noreferrer" aria-label={el.title}><h2 className="feature-list-title">{el.title}</h2></a> : <h2 className="feature-list-title">{el.title}</h2>}
+                                {el.link ? <a href={el.link} target="_blank" rel="noreferrer" aria-label={el.title}><h2 className="feature-list-title">{el.title}</h2></a> : <h2 className="feature-list-title">{el.title}</h2>}
                                 <p className="feature-list-desc">{el.content}</p>
                             </div>
                         </div>;

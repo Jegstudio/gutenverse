@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { IconControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { IconSVGControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 
 export const settingPanel = ({ elementId, grid }) => {
     return [
@@ -97,7 +97,7 @@ export const settingPanel = ({ elementId, grid }) => {
                 {
                     'type': 'plain',
                     'id': 'height',
-                    'responsive' : true,
+                    'responsive': true,
                     'selector': `.${elementId}:not([data-grid="masonry"]) .gallery-items .gallery-item-wrap .thumbnail-wrap`,
                     'properties': [
                         {
@@ -130,6 +130,41 @@ export const settingPanel = ({ elementId, grid }) => {
             ]
         },
         {
+            id: 'titleHeadingType',
+            label: __('Title Heading Type', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: __('H1'),
+                    value: 'h1'
+                },
+                {
+                    label: __('H2'),
+                    value: 'h2'
+                },
+                {
+                    label: __('H3'),
+                    value: 'h3'
+                },
+                {
+                    label: __('H4'),
+                    value: 'h4'
+                },
+                {
+                    label: __('H5'),
+                    value: 'h5'
+                },
+                {
+                    label: __('H6'),
+                    value: 'h6'
+                },
+                {
+                    label: __('SPAN'),
+                    value: 'span'
+                },
+            ],
+        },
+        {
             id: 'hover',
             label: __('Hover Style', 'gutenverse'),
             component: SelectControl,
@@ -155,7 +190,7 @@ export const settingPanel = ({ elementId, grid }) => {
         {
             id: 'zoomIcon',
             label: __('Zoom Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'zoomText',
@@ -165,7 +200,7 @@ export const settingPanel = ({ elementId, grid }) => {
         {
             id: 'linkIcon',
             label: __('Link Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'linkText',

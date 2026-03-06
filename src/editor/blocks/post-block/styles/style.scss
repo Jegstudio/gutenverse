@@ -1,3 +1,7 @@
+@import "gutenverse-core/src/assets/mixin";
+@import "gutenverse-core/src/assets/variables";
+@import "gutenverse-core/src/assets/wp-fix";
+
 .guten-postblock {
     .guten-overlay {
         position: absolute;
@@ -20,6 +24,17 @@
         visibility: hidden;
         @include transform(false, translate3d(0, -15px, 0));
         @include transition(false, false, .25s ease);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        svg {
+            fill: var(--guten-txt-alt-color, #ffffff);
+            font-size: 10px;
+            height: 1em;
+            margin-right: 2px;
+            opacity: 0.6;
+        }
 
         i {
             margin-right: 2px;
@@ -28,18 +43,25 @@
     }
 
     .guten-post-category {
-        font-size: 0.75rem;
-        font-weight: bold;
-        letter-spacing: 0.04em;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
-        display: inline-block;
-        line-height: normal;
+        display: inline-flex;
+
+        span {
+            line-height: normal;
+            display: inherit;
+            align-items: center;
+        }
 
         a {
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.04em;
+            line-height: normal;
             color: var(--guten-txt-a-color);
         }
     }
+
 
     .guten-post-title {
         font-size: 1rem;
@@ -74,6 +96,13 @@
         margin-bottom: 0.5rem;
         color: var(--guten-txt-m-color, #96989B);
         font-size: 0.75rem;
+
+        >div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3px;
+        }
 
         a {
             color: var(--guten-txt-h-color, #181D23);
@@ -122,6 +151,7 @@
         @include userselect('none');
         @include transition(false, false, .2s ease);
     }
+
     .guten-readmore {
         i {
             transition: none !important;
@@ -130,6 +160,8 @@
 
     .guten-meta-comment a {
         color: var(--guten-txt-h-color, #181D23);
+        display: flex;
+        align-items: center;
     }
 
     .guten-posts {
@@ -140,18 +172,67 @@
     .guten-post {
         margin-bottom: 2rem;
 
+        .thumbnail-container {
+            img[loading="lazy"] {
+                opacity: 0;
+
+                &.lazyloaded {
+                    transition: opacity .4s ease;
+                    opacity: 1;
+                }
+            }
+        }
+
+        &.initial-hide {
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        &.loadmore-animation.has-delay {
+            --guten-post-block-loadmore-anim-delay: 300ms;
+            animation-delay: calc(var(--guten-post-block-loadmore-anim-delay-idx, 1) * var(--guten-post-block-loadmore-anim-delay, 1s));
+        }
+
         &:hover .guten-edit-post {
             @include transform(false, translate3d(0, 0, 0));
             opacity: 1;
             visibility: visible;
         }
 
-        .icon-position-before i {
-            margin-right: 5px;
+        .icon-position-before {
+            i {
+                margin-right: 5px;
+            }
+
+            .gutenverse-icon-svg {
+                display: flex;
+                margin-right: 5px;
+                vertical-align: sub;
+                justify-content: center;
+                align-items: center;
+
+                svg {
+                    fill: currentColor;
+                }
+            }
         }
 
-        .icon-position-after i {
-            margin-left: 5px;
+        .icon-position-after {
+            i {
+                margin-left: 5px;
+            }
+
+            .gutenverse-icon-svg {
+                display: flex;
+                margin-left: 5px;
+                vertical-align: sub;
+                justify-content: center;
+                align-items: center;
+
+                svg {
+                    fill: currentColor;
+                }
+            }
         }
     }
 
@@ -420,6 +501,15 @@
             i {
                 padding-top: 4px;
             }
+
+            .gutenverse-icon-svg {
+                display: inline-flex;
+                vertical-align: sub;
+
+                svg {
+                    fill: currentColor;
+                }
+            }
         }
     }
 
@@ -450,8 +540,13 @@
                 transition: none;
             }
 
-            i {
-                transition: none;
+            .gutenverse-icon-svg {
+                display: inline-flex;
+                vertical-align: sub;
+
+                svg {
+                    fill: currentColor;
+                }
             }
 
             &.disabled {
@@ -461,12 +556,13 @@
             }
 
             &.current {
-                background-color: var(--guten-btn-bg-color,#0058e6);
+                background-color: var(--guten-btn-bg-color, #0058e6);
                 color: var(--guten-btn-txt-color, #fff);
                 cursor: auto;
             }
 
-            &.next, &.prev {
+            &.next,
+            &.prev {
                 align-items: center;
                 display: inline-flex;
                 gap: 5px;

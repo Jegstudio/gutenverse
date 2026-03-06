@@ -26,6 +26,7 @@ export const stylePanel = (props) => {
             ],
             onChange: ({ __styleHover }) => setSwitcher({ ...switcher, styleHover: __styleHover })
         },
+        // Normal
         {
             id: 'color',
             show: !switcher.styleHover || switcher.styleHover === 'normal',
@@ -64,6 +65,7 @@ export const stylePanel = (props) => {
                 }
             ],
         },
+        // Hover
         {
             id: 'hoverTextColor',
             show: switcher.styleHover === 'hover',

@@ -2,7 +2,7 @@ import { getBlockType, registerBlockType } from '@wordpress/blocks';
 import { isBlockActive } from 'gutenverse-core/helper';
 import { updateBlockList } from 'gutenverse-core/editor-helper';
 import { addFilter } from '@wordpress/hooks';
-import { IconLottieSVG, IconMegaMenuSVG } from '../assets/icon';
+import { IconAdvanceButtonSVG, IconAdvanceTabsSVG, IconImageMarqueeSVG, IconLottieSVG, IconMegaMenuSVG, IconPostCarouselSVG, IconTextMarqueSVG } from '../assets/icon';
 import { plainGeneratorFunction } from './components/styling/generate-css';
 
 
@@ -19,6 +19,8 @@ addFilter(
                 icon: <IconLottieSVG />,
                 pro: true,
                 locked: true,
+                tier: ['professional', 'personal'],
+                min_tier: 'professional'
             },
             {
                 name: 'gutenverse/mega-menu',
@@ -27,38 +29,58 @@ addFilter(
                 icon: <IconMegaMenuSVG />,
                 pro: true,
                 locked: true,
+                tier: ['professional', 'personal'],
+                min_tier: 'professional'
             },
             {
                 name: 'gutenverse/advance-button',
                 title: 'Advance Button',
                 category: 'gutenverse-element',
-                icon: <IconMegaMenuSVG />,
+                icon: <IconAdvanceButtonSVG />,
                 pro: true,
                 locked: true,
+                tier: ['basic', 'professional', 'personal'],
+                min_tier: 'basic'
             },
             {
                 name: 'gutenverse-pro/advance-tabs',
                 title: 'Advance Tabs',
                 category: 'gutenverse-element',
-                icon: <IconMegaMenuSVG />,
+                icon: <IconAdvanceTabsSVG />,
                 pro: true,
                 locked: true,
+                tier: ['basic', 'professional', 'personal'],
+                min_tier: 'basic'
             },
             {
                 name: 'gutenverse/text-marque',
                 title: 'Text Marque',
                 category: 'gutenverse-element',
-                icon: <IconMegaMenuSVG />,
+                icon: <IconTextMarqueSVG />,
                 pro: true,
                 locked: true,
+                tier: ['professional', 'personal'],
+                min_tier: 'professional'
             },
             {
                 name: 'gutenverse/image-marque',
                 title: 'Image Marque',
                 category: 'gutenverse-element',
-                icon: <IconMegaMenuSVG />,
+                icon: <IconImageMarqueeSVG />,
                 pro: true,
                 locked: true,
+                tier: ['professional', 'personal'],
+                min_tier: 'professional'
+            },
+            {
+                name: 'gutenverse/post-carousel',
+                title: 'Post Carousel',
+                category: 'gutenverse-post',
+                icon: <IconPostCarouselSVG />,
+                pro: true,
+                locked: true,
+                tier: ['professional', 'personal'],
+                min_tier: 'professional'
             },
             ...list,
         ];

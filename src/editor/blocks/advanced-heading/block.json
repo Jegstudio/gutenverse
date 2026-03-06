@@ -1,321 +1,369 @@
 {
-    "apiVersion": 2,
-    "name": "gutenverse/advanced-heading",
-    "title": "Advanced Heading",
-    "description": "Create more Advanced Heading with multiple options.",
-    "category": "gutenverse-element",
-    "allowCopyStyle": true,
-    "attributes": {
-        "elementId": {
-            "type": "string"
-        },
-        "mouseMoveEffect": {
-          "type": "object",
-          "copyStyle": true
-        },
-        "alignText": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "titleTag": {
-            "type": "string",
-            "default": "h2"
-        },
-        "subTag": {
-            "type": "string",
-            "default": "span"
-        },
+	"apiVersion": 3,
+	"name": "gutenverse/advanced-heading",
+	"title": "Advanced Heading",
+	"description": "Create more Advanced Heading with multiple options.",
+	"category": "gutenverse-element",
+	"allowCopyStyle": true,
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"mouseMoveEffect": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"alignText": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "h2"
+		},
+		"subTag": {
+			"type": "string",
+			"default": "span"
+		},
 		"textDynamicList": {
 			"type": "array",
 			"default": []
 		},
-        "focusTextDynamicList": {
+		"focusTextDynamicList": {
 			"type": "array",
 			"default": []
 		},
-        "subTextDynamicList": {
+		"subTextDynamicList": {
 			"type": "array",
 			"default": []
 		},
-        "dynamicAttributes": {
+		"dynamicAttributes": {
 			"type": "array",
-			"default": ["textDynamicList", "focusTextDynamicList", "subTextDynamicList"]
+			"default": [
+				"textDynamicList",
+				"focusTextDynamicList",
+				"subTextDynamicList"
+			]
 		},
 		"openDynamic": {
 			"type": "string"
 		},
-        "dynamicTextContent": {
+		"dynamicTextContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"dynamicUrlContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
-        "text": {
-            "type": "string",
-            "default": "Heading "
-        },
-        "textChilds":{
-            "type":"array",
-            "default":[]
-        },
-        "focusText": {
-            "type": "string",
-            "default": "Focused"
-        },
-        "focusTextChilds":{
-            "type": "array",
-            "default":[]
-        },
-        "subText": {
-            "type": "string",
-            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-        },
-        "subTextChilds":{
-            "type": "array",
-            "default":[]
-        },
-        "showSub": {
-            "type": "string",
-            "default": "bottom",
-            "copyStyle": true
-        },
-        "showLine": {
-            "type": "string",
-            "default": "before",
-            "copyStyle": true
-        },
-        "lineWidth": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "lineHeight": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "lineStyle": {
-            "type": "string",
-            "default": "solid",
-            "copyStyle": true
-        },
-        "lineMargin": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mainColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mainTypography": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mainTextStroke":{
-            "type": "object",
-            "copyStyle": true
-        },
-        "mainBackground": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mainMargin": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mainPadding": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "focusColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "focusTypography": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "focusTextStroke":{
-            "type": "object",
-            "copyStyle": true
-        },
-        "focusBackground": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "focusMargin": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "focusPadding": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "subColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "subTypography": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "subBackground": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "subMargin": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "subPadding": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mainTextClip": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "focusTextClip": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "lineColor": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "background": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "backgroundHover": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "border": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "borderResponsive": {
-            "type": "object",
-            "migrate": {
-                "attr": "border",
-                "type": "border"
-            },
-            "copyStyle": true
-        },
-        "boxShadow": {
-            "type": "object",
-            "default": {
-                "position": "outline"
-            },
-            "copyStyle": true
-        },
-        "borderHover": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "borderHoverResponsive": {
-            "type": "object",
-            "migrate": {
-                "attr": "borderHover",
-                "type": "border"
-            },
-            "copyStyle": true
-        },
-        "boxShadowHover": {
-            "type": "object",
-            "default": {
-                "position": "outline"
-            },
-            "copyStyle": true
-        },
-        "margin": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "padding": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "zIndex": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "animation": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "hideDesktop": {
-            "type": "boolean",
-            "copyStyle": true
-        },
-        "hideTablet": {
-            "type": "boolean",
-            "copyStyle": true
-        },
-        "hideMobile": {
-            "type": "boolean",
-            "copyStyle": true
-        },
-        "positioningType": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "positioningWidth": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "positioningAlign": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "positioningLocation": {
-            "type": "string",
-            "copyStyle": true
-        },
-        "positioningLeft": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "positioningRight": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "positioningTop": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "positioningBottom": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "advanceAnimation": {
-            "type": "object",
-            "default": {},
-            "copyStyle": true
-        },
-        "transform": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "mask": {
-            "type": "object",
-            "copyStyle": true
-        },
-        "condition": {
+		"text": {
+			"type": "string",
+			"default": "Heading "
+		},
+		"textChilds": {
+			"type": "array",
+			"default": []
+		},
+		"focusText": {
+			"type": "string",
+			"default": "Focused"
+		},
+		"focusTextChilds": {
+			"type": "array",
+			"default": []
+		},
+		"subText": {
+			"type": "string",
+			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+		},
+		"subTextChilds": {
+			"type": "array",
+			"default": []
+		},
+		"showSub": {
+			"type": "string",
+			"default": "bottom",
+			"copyStyle": true
+		},
+		"showLine": {
+			"type": "string",
+			"default": "before",
+			"copyStyle": true
+		},
+		"lineWidth": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {
+				"Desktop": {
+					"unit": "%",
+					"point": "30"
+				}
+			}
+		},
+		"lineHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"lineStyle": {
+			"type": "string",
+			"default": "solid",
+			"copyStyle": true
+		},
+		"lineMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mainColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mainTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mainTextStroke": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mainBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mainMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mainPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"focusColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"focusTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"focusTextStroke": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"focusBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"focusMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"focusPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"subColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"subTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"subBackground": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"subMargin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"subPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mainTextClip": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"focusTextClip": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"lineColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"background": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundHover": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"border": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "border",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "borderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"margin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"padding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"zIndex": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"animation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"hideDesktop": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideTablet": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideMobile": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"positioningType": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningLocation": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"positioningLeft": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningRight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningTop": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningBottom": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"advanceAnimation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"transform": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
-    },
-    "supports": {
-        "className": false
-    },
-    "keywords": []
+	},
+	"supports": {
+		"className": false,
+		"anchor": true
+	},
+	"keywords": [
+		"advanced",
+		"heading",
+		"title",
+		"subtitle",
+		"multiple",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-advanced-heading-style"
+	]
 }

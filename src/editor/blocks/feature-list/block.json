@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/feature-list",
 	"title": "Feature List",
 	"description": "Add an information section with icon box.",
@@ -61,6 +61,18 @@
 			"copyStyle": true
 		},
 		"connectorWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"numberTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"numberColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"numberColorHover": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -145,6 +157,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -274,13 +291,56 @@
 		"hasInnerBlocks": {
 			"type": "boolean",
 			"default": false
+		},
+		"iconWrapperHorizontalAlignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"iconWrapperVerticalAlignment": {
+			"type": "string",
+			"default": "middle"
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"feature",
-		"list"
+		"list",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-feature-list-style"
 	]
 }

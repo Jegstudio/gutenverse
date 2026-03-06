@@ -5,7 +5,7 @@ import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 import { isOnEditor } from 'gutenverse-core/helper';
 
-export const settingPanel = () => {
+export const settingPanel = ({showCount}) => {
     const searchCategory =  isOnEditor() ? input => new Promise(resolve => {
         apiFetch({
             path: addQueryArgs('/wp/v2/categories', {
@@ -135,6 +135,47 @@ export const settingPanel = () => {
             id: 'showDivider',
             label: __('Show Divider', 'gutenverse'),
             component: CheckboxControl
-        }
+        },
+        {
+            id: 'showCount',
+            label: __('Show Count', 'gutenverse'),
+            component: CheckboxControl
+        },
+        {
+            id: 'countBracket',
+            show: showCount,
+            label: __('Count Bracket', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: __('None', 'gutenverse'),
+                    value: 'none'
+                },
+                {
+                    label: __('Parentheses ()', 'gutenverse'),
+                    value: 'parentheses'
+                },
+                {
+                    label: __('Braces {}', 'gutenverse'),
+                    value: 'braces'
+                },
+                {
+                    label: __('Square []', 'gutenverse'),
+                    value: 'square'
+                },
+                {
+                    label: __('Angle brackets <>', 'gutenverse'),
+                    value: 'angle'
+                },
+                {
+                    label: __('Double quotes ""', 'gutenverse'),
+                    value: 'double-quotes'
+                },
+                {
+                    label: __('Single quotes \'\'', 'gutenverse'),
+                    value: 'single-quotes'
+                },
+            ],
+        },
     ];
 };

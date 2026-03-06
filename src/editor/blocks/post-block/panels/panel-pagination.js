@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { IconControl, NumberControl, RangeControl, SelectControl, TextControl, CheckboxControl } from 'gutenverse-core/controls';
+import { IconSVGControl, NumberControl, RangeControl, SelectControl, TextControl, CheckboxControl } from 'gutenverse-core/controls';
 import { paginationSwitcher } from '../data/data';
 
 export const paginationPanel = (props) => {
@@ -8,7 +8,9 @@ export const paginationPanel = (props) => {
         paginationPrevNextText,
         setSwitcher,
         switcher,
-        setAttributes
+        setAttributes,
+        paginationLoadmoreAnimation,
+        paginationLoadmoreAnimationSequence,
     } = props;
 
     return [
@@ -23,19 +25,27 @@ export const paginationPanel = (props) => {
                     value: 'disable'
                 },
                 {
-                    label: __('Load More'),
+                    label: __('Normal Prev Next (Best for SEO)'),
+                    value: 'normal-prevnext'
+                },
+                {
+                    label: __('Normal Number (Best for SEO)'),
+                    value: 'normal-number'
+                },
+                {
+                    label: __('Load More (Ajax)'),
                     value: 'loadmore'
                 },
                 {
-                    label: __('Auto Load on Scroll'),
+                    label: __('Auto Load on Scroll (Ajax)'),
                     value: 'scrollload'
                 },
                 {
-                    label: __('Prev Next'),
+                    label: __('Prev Next (Ajax)'),
                     value: 'prevnext'
                 },
                 {
-                    label: __('Number'),
+                    label: __('Number (Ajax)'),
                     value: 'number'
                 },
             ],
@@ -50,31 +60,31 @@ export const paginationPanel = (props) => {
         },
         {
             id: 'paginationPrevNextText',
-            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext'),
+            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext' || paginationMode === 'normal-prevnext' || paginationMode === 'normal-number'),
             label: __('Show Text', 'gutenverse'),
             component: CheckboxControl
         },
         {
             id: 'paginationPrevText',
-            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext') && paginationPrevNextText,
+            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext' || paginationMode === 'normal-prevnext' || paginationMode === 'normal-number') && paginationPrevNextText,
             label: __('"Previous" Text', 'gutenverse'),
             component: TextControl
         },
         {
             id: 'paginationNextText',
-            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext') && paginationPrevNextText,
+            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext' || paginationMode === 'normal-prevnext' || paginationMode === 'normal-number') && paginationPrevNextText,
             label: __('"Next" Text', 'gutenverse'),
             component: TextControl
         },
         {
             id: 'paginationPrevIcon',
-            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext'),
-            component: IconControl
+            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext' || paginationMode === 'normal-prevnext' || paginationMode === 'normal-number'),
+            component: IconSVGControl
         },
         {
             id: 'paginationNextIcon',
-            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext'),
-            component: IconControl
+            show: paginationMode && (paginationMode === 'number' || paginationMode === 'prevnext' || paginationMode === 'normal-prevnext' || paginationMode === 'normal-number'),
+            component: IconSVGControl
         },
         {
             id: 'paginationLoadmoreText',
@@ -112,7 +122,7 @@ export const paginationPanel = (props) => {
         {
             id: 'paginationIcon',
             show: paginationMode && (paginationMode === 'loadmore' || paginationMode === 'scrollload'),
-            component: IconControl
+            component: IconSVGControl
         },
         {
             id: 'paginationIconPosition',
@@ -128,6 +138,63 @@ export const paginationPanel = (props) => {
                     value: 'after'
                 }
             ]
+        },
+        {
+            id: 'paginationLoadmoreAnimation',
+            show: paginationMode && (paginationMode === 'loadmore' || paginationMode === 'scrollload'),
+            label: __('Load Animation', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: 'None',
+                    value: 'none'
+                },
+                {
+                    label: 'Fade In',
+                    value: 'fadeIn'
+                },
+                {
+                    label: 'Fade In Left',
+                    value: 'fadeInLeft'
+                },
+                {
+                    label: 'Fade In Down',
+                    value: 'fadeInDown'
+                },
+                {
+                    label: 'Fade In Right',
+                    value: 'fadeInRight'
+                },
+                {
+                    label: 'Fade In Up',
+                    value: 'fadeInUp'
+                },
+            ]
+        },
+        {
+            id: 'paginationLoadmoreAnimationSequence',
+            show: paginationMode && (paginationMode === 'loadmore' || paginationMode === 'scrollload') && (paginationLoadmoreAnimation && paginationLoadmoreAnimation !== 'none'),
+            label: __('Load Animation Sequence', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: 'All',
+                    value: 'all'
+                },
+                {
+                    label: 'Sequential',
+                    value: 'sequential'
+                },
+            ]
+        },
+        {
+            id: 'paginationLoadmoreAnimationSequenceDelay',
+            show: paginationMode && (paginationMode === 'loadmore' || paginationMode === 'scrollload') && paginationLoadmoreAnimationSequence === 'sequential' && (paginationLoadmoreAnimation && paginationLoadmoreAnimation !== 'none'),
+            label: __('Delay (ms)', 'gutenverse'),
+            component: NumberControl,
+            description: __('Input in miliseconds (ms). Later will be converted into second (s)', 'gutenverse'),
+            min: 0,
+            step: 100
         },
     ];
 };

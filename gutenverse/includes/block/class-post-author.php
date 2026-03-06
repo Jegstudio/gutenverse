@@ -25,13 +25,9 @@ class Post_Author extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $post_id ) {
-		$type        = esc_html( $this->attributes['authorType'] );
-		$html_tag    = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'p' ) );
-		$avatar      = ! empty( $this->attributes['authorAvatar'] ) ? $this->attributes['authorAvatar'] : false;
-		$author_link = ! empty( $this->attributes['authorLink'] ) ? $this->attributes['authorLink'] : false;
-		$link_target = ! empty( $this->attributes['authorLinkTarget'] ) ? '_blank' : '_self';
-		$link_rel    = ! empty( $this->attributes['authorLinkRel'] ) ? esc_attr( $this->attributes['authorLinkRel'] ) : 'noreferrer';
-		$content     = '';
+		$type    = esc_html( $this->attributes['authorType'] );
+		$avatar  = ! empty( $this->attributes['authorAvatar'] ) ? $this->attributes['authorAvatar'] : false;
+		$content = '';
 
 		if ( ! empty( $post_id ) ) {
 			$post = get_post( $post_id );
@@ -39,17 +35,12 @@ class Post_Author extends Block_Abstract {
 			if ( ! empty( $post ) ) {
 				$author_name = $this->get_author_name( $post, $type );
 
-				if ( ! empty( $author_name ) ) {
+				if ( ! empty( $author_name ) || 'none' === $type ) {
 					if ( $avatar ) {
 						$content .= get_avatar( get_the_author_meta( 'email', $post->post_author ), 48 );
 					}
 
-					if ( $author_link ) {
-						$author_url  = get_author_posts_url( $post->post_author );
-						$author_name = "<a href='{$author_url}' target='{$link_target}' rel='{$link_rel}'>{$author_name}</a>";
-					}
-
-					$content .= "<{$html_tag}>{$author_name}</{$html_tag}>";
+					$content .= $this->right_content( $post, $author_name );
 				}
 			}
 		}
@@ -90,12 +81,15 @@ class Post_Author extends Block_Abstract {
 			case 'user_name':
 				$author_name = get_the_author_meta( 'user_login', $post->post_author );
 				break;
+			case 'none':
+				$author_name = '';
+				break;
 			default:
 				$author_name = esc_html__( 'Post Author', 'gutenverse' );
 				break;
 		}
 
-		if ( empty( $author_name ) ) {
+		if ( empty( $author_name ) && 'none' !== $type ) {
 			$author_name = get_the_author_meta( 'display_name', $post->post_author );
 		}
 
@@ -119,6 +113,44 @@ class Post_Author extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-post-author guten-element">' . $this->render_content( $post_id ) . '</div>';
+		return '<div class="'
+			. $element_id
+			. $display_classes
+			. $animation_class
+			. $custom_classes
+			. ' guten-post-author guten-element">'
+				. $this->render_content( $post_id )
+			. '</div>';
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param mixed $post post.
+	 * @param mixed $author_name author_name.
+	 *
+	 * @return string
+	 */
+	private function right_content( $post, $author_name ) {
+		$author_link = ! empty( $this->attributes['authorLink'] ) ? $this->attributes['authorLink'] : false;
+		$html_tag    = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'p' ) );
+		$link_target = ! empty( $this->attributes['authorLinkTarget'] ) ? '_blank' : '_self';
+		$link_rel    = ! empty( $this->attributes['authorLinkRel'] ) ? esc_attr( $this->attributes['authorLinkRel'] ) : 'noreferrer';
+		$author_bio  = isset( $this->attributes['authorBio'] ) ? $this->attributes['authorBio'] : false;
+		$class_name  = '"author-name"';
+
+		if ( $author_link ) {
+			$author_url  = get_author_posts_url( $post->post_author );
+			$author_name = "<a href='{$author_url}' target='{$link_target}' rel='{$link_rel}'>{$author_name}</a>";
+		}
+
+		$component  = '<div class="right-content">';
+		$component .= "<{$html_tag} class={$class_name}>{$author_name}</{$html_tag}>";
+		if ( $author_bio ) {
+			$component .= '<span class="author-bio">' . esc_html( get_the_author_meta( 'description', $post->post_author ) ) . '</span>';
+		}
+		$component .= '</div>';
+
+		return $component;
 	}
 }

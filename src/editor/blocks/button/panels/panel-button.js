@@ -1,13 +1,16 @@
 import { __ } from '@wordpress/i18n';
 
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
-import { CheckboxControl, DimensionControl, IconRadioControl, RangeControl, SelectControl, SizeControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, DimensionControl, IconRadioControl, RangeControl, SelectControl, SizeControl, TextControl, IconSVGControl } from 'gutenverse-core/controls';
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 export const buttonPanel = (props) => {
     const {
         elementId,
         showIcon,
+        icon,
+        iconType,
+        iconSVG,
         iconPosition,
         iconSpacing,
         role,
@@ -55,7 +58,6 @@ export const buttonPanel = (props) => {
         {
             id: 'ariaLabel',
             label: __('Aria Label', 'gutenverse'),
-            show: role === 'link',
             component: TextControl,
         },
         {
@@ -136,7 +138,6 @@ export const buttonPanel = (props) => {
                                     'type': 'direct',
                                     'key': 'buttonWidth',
                                 },
-            
                             }
                         }
                     ],
@@ -180,6 +181,12 @@ export const buttonPanel = (props) => {
             component: CheckboxControl,
         },
         {
+            id: 'icon',
+            label: __('Icon', 'gutenverse'),
+            component: IconSVGControl,
+            show: showIcon,
+        },
+        {
             id: 'iconPosition',
             label: __('Icon Position'),
             show: showIcon,
@@ -210,7 +217,7 @@ export const buttonPanel = (props) => {
                     'type': 'plain',
                     'id': 'iconSpacing',
                     'responsive': true,
-                    'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i`,
+                    'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i, .editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button svg`,
                     'properties': [
                         {
                             'name': iconPosition === 'after' ? 'margin-left' : 'margin-right',
@@ -252,6 +259,18 @@ export const buttonPanel = (props) => {
                     'id': 'iconSize',
                     'responsive': true,
                     'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button i`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button svg`,
                     'properties': [
                         {
                             'name': 'font-size',

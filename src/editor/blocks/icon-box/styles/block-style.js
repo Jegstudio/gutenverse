@@ -1,9 +1,11 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { backgroundStyle } from 'gutenverse-core/controls';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({ attributes, data, elementId });
     const device = getDeviceType();
     //panel general
     isNotEmpty(attributes['iconPositionResponsive']) && device !== 'Desktop' && attributes['iconPositionResponsive'][device] === 'left' && data.push(
@@ -69,7 +71,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconPositionResponsive']) && device !== 'Desktop' && attributes['iconPositionResponsive'][device] === 'left' && data.push({
         'type': 'plain',
         'id': 'iconPositionResponsive',
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
+        'selector': `.guten-icon-box.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
         'responsive': true,
         'properties': [
             {
@@ -83,7 +85,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconPositionResponsive']) && device !== 'Desktop' && attributes['iconPositionResponsive'][device] === 'right' && data.push({
         'type': 'plain',
         'id': 'iconPositionResponsive',
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
+        'selector': `.guten-icon-box.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
         'responsive': true,
         'properties': [
             {
@@ -97,7 +99,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconPositionResponsive']) && device !== 'Desktop' && attributes['iconPositionResponsive'][device] === 'top' && attributes['iconPositionResponsive'][device] === 'bottom' && data.push({
         'type': 'plain',
         'id': 'iconPositionResponsive',
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
+        'selector': `.guten-icon-box.${elementId} .guten-icon-box-wrapper .icon-box.icon-box-header`,
         'responsive': true,
         'properties': [
             {
@@ -126,12 +128,72 @@ const getBlockStyle = (elementId, attributes) => {
         'responsive': true,
     });
 
+    isNotEmpty(attributes['heightControl']) && attributes['heightControl'] === 'fit' && data.push({
+        'type': 'plain',
+        'id': 'heightControl',
+        'selector': `.guten-icon-box.${elementId}`,
+        'properties': [
+            {
+                'name': 'height',
+                'valueType': 'pattern',
+                'pattern': '100%',
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['heightControl']) && attributes['heightControl'] === 'fit' && data.push({
+        'type': 'plain',
+        'id': 'heightControl',
+        'selector': `.guten-icon-box.${elementId} .guten-icon-box-wrapper`,
+        'properties': [
+            {
+                'name': 'height',
+                'valueType': 'pattern',
+                'pattern': '100%',
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['heightControl']) && attributes['heightControl'] === 'min' && data.push({
+        'type': 'unitPoint',
+        'id': 'height',
+        'responsive': true,
+        'selector': `.guten-icon-box.${elementId} .guten-icon-box-wrapper`,
+        'properties': [
+            {
+                'name': 'min-height',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
     //panel icon
 
     isNotEmpty(attributes['iconType']) && attributes['iconType'] === 'icon' && data.push({
         'type': 'plain',
         'id': 'iconType',
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon i`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon i`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                        'key': 'iconSize',
+                    },
+
+                }
+            }
+        ],
+        'multiAttr': { 'iconSize': attributes['iconSize'][device] }
+    });
+
+    isNotEmpty(attributes['iconType']) && attributes['iconType'] === 'svg' && data.push({
+        'type': 'plain',
+        'id': 'iconType',
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon svg`,
         'properties': [
             {
                 'name': 'font-size',
@@ -153,7 +215,7 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'plain',
             'id': 'iconType',
-            'selector': `.${elementId} .guten-icon-box-wrapper .icon-box .icon `,
+            'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box .icon `,
             'properties': [
                 {
                     'name': 'width',
@@ -173,7 +235,7 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'plain',
             'id': 'iconType',
-            'selector': `.${elementId} .guten-icon-box-wrapper .icon-box .icon `,
+            'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box .icon `,
             'properties': [
                 {
                     'name': 'height',
@@ -196,7 +258,27 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'iconSize',
         'responsive': true,
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon i`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon i`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+
+                }
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['iconSize']) && isNotEmpty(attributes['iconType']) && attributes['iconType'] === 'svg' && data.push({
+        'type': 'plain',
+        'id': 'iconSize',
+        'responsive': true,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon svg`,
         'properties': [
             {
                 'name': 'font-size',
@@ -215,7 +297,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['imageFit']) && isNotEmpty(attributes['iconType']) && attributes['iconType'] === 'image' && data.push({
         'type': 'plain',
         'id': 'imageFit',
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box .icon img`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box .icon img`,
         'properties': [
             {
                 'name': 'object-fit',
@@ -228,7 +310,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'imageWidthResponsive',
         'responsive': true,
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
         'properties': [
             {
                 'name': 'width',
@@ -248,7 +330,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'imageHeightResponsive',
         'responsive': true,
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
         'properties': [
             {
                 'name': 'height',
@@ -267,7 +349,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['imageWidth']) && isNotEmpty(attributes['iconType']) && device === 'Desktop' && attributes['iconType'] === 'image' && data.push({
         'type': 'plain',
         'id': 'imageWidth',
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
         'properties': [
             {
                 'name': 'width',
@@ -286,7 +368,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['imageHeight']) && isNotEmpty(attributes['iconType']) && device === 'Desktop' && attributes['iconType'] === 'image' && data.push({
         'type': 'plain',
         'id': 'imageHeight',
-        'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper .icon-box-header.icon-box .icon`,
         'properties': [
             {
                 'name': 'height',
@@ -386,14 +468,38 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}:hover .guten-icon-box-wrapper`,
+        'selector': `.guten-icon-box.${elementId}:hover .guten-icon-box-wrapper`,
     });
 
     //panel icon style
     isNotEmpty(attributes['iconColor']) && data.push({
         'type': 'color',
         'id': 'iconColor',
-        'selector': `.${elementId} .icon-box.icon-box-header .icon i`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon i`,
+        'properties': [
+            {
+                'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['iconColor']) && data.push({
+        'type': 'color',
+        'id': 'iconColor',
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['iconHoverColor']) && data.push({
+        'type': 'color',
+        'id': 'iconHoverColor',
+        'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon i`,
         'properties': [
             {
                 'name': 'color',
@@ -405,10 +511,10 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconHoverColor']) && data.push({
         'type': 'color',
         'id': 'iconHoverColor',
-        'selector': `.${elementId}:hover .icon-box.icon-box-header .icon i`,
+        'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon svg`,
         'properties': [
             {
-                'name': 'color',
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]
@@ -417,7 +523,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconBgColor']) && data.push({
         'type': 'color',
         'id': 'iconBgColor',
-        'selector': `.${elementId} .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon`,
         'properties': [
             {
                 'name': 'background-color',
@@ -429,7 +535,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconHoverBgColor']) && data.push({
         'type': 'color',
         'id': 'iconHoverBgColor',
-        'selector': `.${elementId}:hover .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon`,
         'properties': [
             {
                 'name': 'background-color',
@@ -449,6 +555,32 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
         'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon .icon-style-gradient`,
+    });
+
+    isNotEmpty(attributes['iconGradient']) && data.push({
+        'type': 'plain',
+        'id': 'iconGradient',
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'pattern',
+                'pattern': `url(#iconGradient-${elementId})`
+            }
+        ],
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon .gutenverse-icon-svg svg`,
+    });
+
+    isNotEmpty(attributes['iconGradientHover']) && data.push({
+        'type': 'plain',
+        'id': 'iconGradientHover',
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'pattern',
+                'pattern': `url(#iconGradientHover-${elementId})`
+            }
+        ],
+        'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon .gutenverse-icon-svg svg`,
     });
 
     isNotEmpty(attributes['iconGradientHover']) && data.push({
@@ -494,13 +626,13 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconBorder']) && data.push({
         'type': 'border',
         'id': 'iconBorder',
-        'selector': `.${elementId} .icon-box.icon-box-header .icon `,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon `,
     });
 
     isNotEmpty(attributes['iconBorderResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'iconBorderResponsive',
-        'selector': `.${elementId} .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon`,
     });
 
     isNotEmpty(attributes['iconBoxShadow']) && data.push({
@@ -512,19 +644,19 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon`,
     });
 
     isNotEmpty(attributes['iconBorderHover']) && data.push({
         'type': 'border',
         'id': 'iconBorderHover',
-        'selector': `.${elementId}:hover .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon`,
     });
 
     isNotEmpty(attributes['iconBorderHoverResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'iconBorderHoverResponsive',
-        'selector': `.${elementId}:hover .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon`,
     });
 
     isNotEmpty(attributes['iconBoxShadowHover']) && data.push({
@@ -536,7 +668,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}:hover .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon`,
     });
 
     isNotEmpty(attributes['iconPadding']) && data.push({
@@ -549,7 +681,7 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon`,
     });
 
     isNotEmpty(attributes['iconMargin']) && data.push({
@@ -562,14 +694,14 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon`,
     });
 
     isNotEmpty(attributes['iconRotate']) && data.push({
         'type': 'plain',
         'id': 'iconRotate',
         'responsive': true,
-        'selector': `.${elementId} .icon-box.icon-box-header .icon`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon`,
         'properties': [
             {
                 'name': 'transform',
@@ -681,16 +813,28 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['descTypography']) && data.push({
         'type': 'typography',
         'id': 'descTypography',
-        'selector': `.${elementId} .icon-box.icon-box-body .icon-box-description`,
+        'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-body .icon-box-description`,
     });
 
     isNotEmpty(attributes['watermarkColor']) && data.push({
         'type': 'color',
         'id': 'watermarkColor',
-        'selector': `.${elementId} .hover-watermark i`,
+        'selector': `.guten-icon-box.${elementId} .hover-watermark i`,
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['watermarkColor']) && data.push({
+        'type': 'color',
+        'id': 'watermarkColor',
+        'selector': `.guten-icon-box.${elementId} .hover-watermark svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]
@@ -701,6 +845,26 @@ const getBlockStyle = (elementId, attributes) => {
         'id': 'watermarkSize',
         'responsive': true,
         'selector': `.guten-icon-box.${elementId} .hover-watermark i`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+
+                }
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['watermarkSize']) && data.push({
+        'type': 'plain',
+        'id': 'watermarkSize',
+        'responsive': true,
+        'selector': `.guten-icon-box.${elementId} .hover-watermark svg`,
         'properties': [
             {
                 'name': 'font-size',
@@ -798,28 +962,61 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['iconBoxOverlay']) && data.push({
         'type': 'background',
         'id': 'iconBoxOverlay',
-        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper::before`,
     });
 
     isNotEmpty(attributes['iconBoxHoverOverlay']) && data.push({
         'type': 'background',
         'id': 'iconBoxHoverOverlay',
-        'selector': `.${elementId} .guten-icon-box-wrapper::before`,
+        'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper::before`,
     });
 
+    isNotEmpty(attributes['iconBoxHoverOverlay']) && undefined !== attributes['iconBoxHoverOverlay'] && data.push(
+        {
+            'type': 'plain',
+            'id': 'iconBoxHoverOverlay',
+            'properties': [
+                {
+                    'name': 'overflow',
+                    'valueType': 'pattern',
+                    'pattern': 'hidden',
+                }
+            ],
+            'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper`,
+        }
+    );
+
+    isNotEmpty(attributes['iconBoxOverlay']) && undefined !== attributes['iconBoxOverlay'] && data.push(
+        {
+            'type': 'plain',
+            'id': 'iconBoxOverlay',
+            'properties': [
+                {
+                    'name': 'overflow',
+                    'valueType': 'pattern',
+                    'pattern': 'hidden',
+                }
+            ],
+            'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper`,
+        }
+    );
+
+    (isNotEmpty(attributes['watermarkShow']) && attributes['watermarkShow']) && data.push(
+        {
+            'type': 'plain',
+            'id': 'watermarkShow',
+            'properties': [
+                {
+                    'name': 'overflow',
+                    'valueType': 'pattern',
+                    'pattern': 'hidden',
+                }
+            ],
+            'selector': `.${elementId}.guten-icon-box .guten-icon-box-wrapper`,
+        }
+    );
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
 
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
@@ -1065,6 +1262,138 @@ const getBlockStyle = (elementId, attributes) => {
         'attributeType': 'custom',
     });
 
+
+    /** Position Flex Item */
+    const selector = `.${elementId}.guten-element`;
+
+    // Flex Align Self
+    isNotEmpty(attributes['flexAlignSelf']) && data.push({
+        'type': 'plain',
+        'id': 'flexAlignSelf',
+        'responsive': true,
+        'selector': selector,
+        'properties': [
+            {
+                'name': 'align-self',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    // Flex Order - responsive handling
+    const flexOrder = attributes['flexOrder'];
+    const flexCustomOrder = attributes['flexCustomOrder'];
+    if (isNotEmpty(flexOrder)) {
+        data.push({
+            'type': 'plain',
+            'id': 'flexOrder',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'order',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'start') {
+                            return '-9999';
+                        }
+                        if (value === 'end') {
+                            return '9999';
+                        }
+                        return undefined; // Skip 'custom', let flexCustomOrder handle it
+                    }
+                }
+            ],
+        });
+        if (isNotEmpty(flexCustomOrder)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexCustomOrder',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'order',
+                        'valueType': 'function',
+                        'valueFunc': (value, deviceType) => {
+                            // Only apply custom order if flexOrder is 'custom' for this device
+                            if (flexOrder[deviceType] === 'custom') {
+                                return value;
+                            }
+                            return undefined;
+                        }
+                    }
+                ],
+            });
+        }
+    }
+
+    // Flex Size (grow/shrink) - responsive handling
+    const flexSize = attributes['flexSize'];
+    const flexSizeGrow = attributes['flexSizeGrow'];
+    const flexSizeShrink = attributes['flexSizeShrink'];
+    if (isNotEmpty(flexSize)) {
+        // Handle grow preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-grow',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'grow' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle shrink preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-shrink',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'shrink' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle custom grow
+        if (isNotEmpty(flexSizeGrow)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeGrow',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-grow',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+        // Handle custom shrink
+        if (isNotEmpty(flexSizeShrink)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeShrink',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-shrink',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+    }
+
+    /** End Position Flex Item */
     return [
         ...data,
         ...applyFilters(

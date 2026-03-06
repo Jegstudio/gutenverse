@@ -22,6 +22,17 @@ export const panelIcon = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColor',
+                    'selector': `.${elementId}.guten-icon-list .guten-icon-list-item svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -37,6 +48,17 @@ export const panelIcon = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColorHover',
+                    'selector': `.${elementId} .guten-icon-list-item:hover svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]
@@ -57,7 +79,7 @@ export const panelIcon = (props) => {
                     'type': 'plain',
                     'id': 'iconSize',
                     'responsive': true,
-                    'selector': `.${elementId} .guten-icon-list-item i`,
+                    'selector': `.${elementId} .guten-icon-list-item i, .${elementId}.guten-icon-list .guten-icon-list-item svg`,
                     'properties': [
                         {
                             'name': 'font-size',
@@ -68,27 +90,7 @@ export const panelIcon = (props) => {
                                     'type': 'direct'
                                 }
                             }
-                        },
-                        {
-                            'name': 'width',
-                            'valueType': 'pattern',
-                            'pattern': '{value}px',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        },
-                        {
-                            'name': 'height',
-                            'valueType': 'pattern',
-                            'pattern': '{value}px',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        },
+                        }
                     ]
                 },
             ]

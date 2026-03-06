@@ -1,8 +1,16 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
+import { backgroundStyle } from 'gutenverse-core/controls';
+import { nameStyle } from './styePanels/name-style';
+import { biographyStyle } from './styePanels/biography-style';
+import { avatarStyle } from './styePanels/avatar-style';
 
 const getBlockStyle = (elementId, attributes) => {
     let data = [];
+    data = backgroundStyle({ attributes, data, elementId });
+    data = nameStyle(elementId, attributes, data);
+    data = biographyStyle(elementId, attributes, data);
+    data = avatarStyle(elementId, attributes, data);
 
     //panel style
     isNotEmpty(attributes['alignment']) && data.push({
@@ -17,169 +25,20 @@ const getBlockStyle = (elementId, attributes) => {
             }
         ],
     });
-
-    isNotEmpty(attributes['typography']) && data.push({
-        'type': 'typography',
-        'id': 'typography',
-        'selector': `.${elementId} h1, .${elementId} h2, .${elementId} h3, .${elementId} h4, .${elementId} h5, .${elementId} h6, .${elementId} span, .${elementId} a`,
-    });
-
-    isNotEmpty(attributes['color']) && data.push({
-        'type': 'color',
-        'id': 'color',
-        'selector': `.${elementId} h1, .${elementId} h2, .${elementId} h3, .${elementId} h4, .${elementId} h5, .${elementId} h6, .${elementId} span, .${elementId} a`,
-        'properties': [
-            {
-                'name': 'color',
-                'valueType': 'direct'
-            }
-        ],
-    });
-
-    isNotEmpty(attributes['textShadow']) && data.push({
-        'type': 'textShadow',
-        'id': 'textShadow',
-        'properties': [
-            {
-                'name': 'text-shadow',
-                'valueType': 'direct'
-            }
-        ],
-        'selector': `.${elementId} h1, .${elementId} h2, .${elementId} h3, .${elementId} h4, .${elementId} h5, .${elementId} h6, .${elementId} span, .${elementId} a`,
-    });
-
-    isNotEmpty(attributes['colorHover']) && data.push({
-        'type': 'color',
-        'id': 'colorHover',
-        'selector': `.${elementId}:hover h1, .${elementId}:hover h2, .${elementId}:hover h3, .${elementId}:hover h4, .${elementId}:hover h5, .${elementId}:hover h6, .${elementId}:hover span, .${elementId}:hover a`,
-        'properties': [
-            {
-                'name': 'color',
-                'valueType': 'direct'
-            }
-        ],
-    });
-
-    isNotEmpty(attributes['textShadowHover']) && data.push({
-        'type': 'textShadow',
-        'id': 'textShadowHover',
-        'properties': [
-            {
-                'name': 'text-shadow',
-                'valueType': 'direct'
-            }
-        ],
-        'selector': `.${elementId}:hover h1, .${elementId}:hover h2, .${elementId}:hover h3, .${elementId}:hover h4, .${elementId}:hover h5, .${elementId}:hover h6, .${elementId}:hover span, .${elementId}:hover a`,
-    });
-
-    isNotEmpty(attributes['size']) && attributes['authorAvatar'] && data.push({
-        'type': 'unitPoint',
-        'id': 'size',
-        'responsive': true,
-        'selector': `.${elementId} img`,
-        'properties': [
-            {
-                'name': 'width',
-                'valueType': 'direct'
-            }
-        ],
-    });
-
-    isNotEmpty(attributes['avatarGap']) && attributes['authorAvatar'] && data.push({
+    isNotEmpty(attributes['verticalAlignment']) && data.push({
         'type': 'plain',
-        'id': 'avatarGap',
+        'id': 'verticalAlignment',
         'responsive': true,
+        'selector': `.${elementId}`,
         'properties': [
             {
-                'name': 'margin-right',
-                'valueType': 'pattern',
-                'pattern': '{value}px',
-                'patternValues': {
-                    'value': {
-                        'type': 'direct'
-                    }
-                }
+                'name': 'align-items',
+                'valueType': 'direct',
             }
         ],
-        'selector': `.${elementId} img`,
-    });
-
-    isNotEmpty(attributes['opacity']) && attributes['authorAvatar'] && data.push({
-        'type': 'plain',
-        'id': 'opacity',
-        'selector': `.${elementId} img`,
-        'responsive': true,
-        'properties': [
-            {
-                'name': 'opacity',
-                'valueType': 'pattern',
-                'pattern': 'calc({value}/100)',
-                'patternValues': {
-                    'value': {
-                        'type': 'direct',
-                    },
-
-                }
-            }
-        ],
-    });
-
-    isNotEmpty(attributes['rotate']) && attributes['authorAvatar'] && data.push({
-        'type': 'plain',
-        'id': 'rotate',
-        'selector': `.${elementId} img`,
-        'responsive': true,
-        'properties': [
-            {
-                'name': 'transform',
-                'valueType': 'pattern',
-                'pattern': 'rotate({value}deg)',
-                'patternValues': {
-                    'value': {
-                        'type': 'direct',
-                    },
-
-                }
-            }
-        ],
-    });
-
-    isNotEmpty(attributes['authorBorder']) && attributes['authorAvatar'] && data.push({
-        'type': 'border',
-        'id': 'authorBorder',
-        'selector': `.${elementId} img`,
-    });
-
-    isNotEmpty(attributes['authorBorderResponsive']) && attributes['authorAvatar'] && data.push({
-        'type': 'borderResponsive',
-        'id': 'authorBorderResponsive',
-        'selector': `.${elementId} img`,
-    });
-
-    isNotEmpty(attributes['authorBoxShadow']) && attributes['authorAvatar'] && data.push({
-        'type': 'boxShadow',
-        'id': 'authorBoxShadow',
-        'properties': [
-            {
-                'name': 'box-shadow',
-                'valueType': 'direct'
-            }
-        ],
-        'selector': `.${elementId} img`,
     });
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
 
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
@@ -424,6 +283,138 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId}.guten-element`,
         'attributeType': 'custom',
     });
+
+    /** Position Flex Item */
+    const selector = `.${elementId}.guten-element`;
+
+    // Flex Align Self
+    isNotEmpty(attributes['flexAlignSelf']) && data.push({
+        'type': 'plain',
+        'id': 'flexAlignSelf',
+        'responsive': true,
+        'selector': selector,
+        'properties': [
+            {
+                'name': 'align-self',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    // Flex Order - responsive handling
+    const flexOrder = attributes['flexOrder'];
+    const flexCustomOrder = attributes['flexCustomOrder'];
+    if (isNotEmpty(flexOrder)) {
+        data.push({
+            'type': 'plain',
+            'id': 'flexOrder',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'order',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'start') {
+                            return '-9999';
+                        }
+                        if (value === 'end') {
+                            return '9999';
+                        }
+                        return undefined; // Skip 'custom', let flexCustomOrder handle it
+                    }
+                }
+            ],
+        });
+        if (isNotEmpty(flexCustomOrder)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexCustomOrder',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'order',
+                        'valueType': 'function',
+                        'valueFunc': (value, deviceType) => {
+                            // Only apply custom order if flexOrder is 'custom' for this device
+                            if (flexOrder[deviceType] === 'custom') {
+                                return value;
+                            }
+                            return undefined;
+                        }
+                    }
+                ],
+            });
+        }
+    }
+
+    // Flex Size (grow/shrink) - responsive handling
+    const flexSize = attributes['flexSize'];
+    const flexSizeGrow = attributes['flexSizeGrow'];
+    const flexSizeShrink = attributes['flexSizeShrink'];
+    if (isNotEmpty(flexSize)) {
+        // Handle grow preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-grow',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'grow' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle shrink preset
+        data.push({
+            'type': 'plain',
+            'id': 'flexSize',
+            'responsive': true,
+            'selector': selector,
+            'properties': [
+                {
+                    'name': 'flex-shrink',
+                    'valueType': 'function',
+                    'valueFunc': (value) => value === 'shrink' ? '1' : undefined
+                }
+            ],
+        });
+        // Handle custom grow
+        if (isNotEmpty(flexSizeGrow)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeGrow',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-grow',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+        // Handle custom shrink
+        if (isNotEmpty(flexSizeShrink)) {
+            data.push({
+                'type': 'plain',
+                'id': 'flexSizeShrink',
+                'responsive': true,
+                'selector': selector,
+                'properties': [
+                    {
+                        'name': 'flex-shrink',
+                        'valueType': 'direct'
+                    }
+                ],
+            });
+        }
+    }
+
+    /** End Position Flex Item */
     return [
         ...data,
         ...applyFilters(

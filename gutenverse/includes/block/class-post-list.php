@@ -10,6 +10,7 @@
 namespace Gutenverse\Block;
 
 use Gutenverse\Framework\Block\Post_Abstract;
+use Gutenverse\Framework\Options;
 
 /**
  * Class Post List Block
@@ -38,7 +39,9 @@ class Post_List extends Post_Abstract {
 			$content = str_replace( 'href', 'href="javascript:void(0);" data-href', $content );
 		}
 
-		if ( $this->attributes['lazyLoad'] ) {
+		$image_load = Options::get_instance()->get_image_load( 'lazy', $this->attributes['lazyLoad'], $this->attributes['imageLoad'] );
+
+		if ( 'lazy' === $image_load ) {
 			$content = preg_replace( '/<img(.*?)>/', '<img loading="lazy" $1>', $content );
 		} else {
 			$content = preg_replace( '/<img(.*?)>/', '<img loading="eager" $1>', $content );
@@ -144,13 +147,16 @@ class Post_List extends Post_Abstract {
 
 		if ( $this->attr_is_true( $this->attributes['metaEnabled'] ) ) {
 			if ( $this->attr_is_true( $this->attributes['metaDateEnabled'] ) ) {
-				$date_icon = $this->attributes['metaDateIcon'];
-				$date      = esc_attr( $this->format_date( $post ) );
+				$date_icon      = $this->attributes['metaDateIcon'];
+				$date_icon_type = isset( $this->attributes['metaDateIconType'] ) ? esc_attr( $this->attributes['metaDateIconType'] ) : 'icon';
+				$date_icon_svg  = isset( $this->attributes['metaDateIconSVG'] ) ? $this->attributes['metaDateIconSVG'] : '';
+
+				$date = esc_attr( $this->format_date( $post ) );
 
 				if ( $date_icon || $date ) {
 					$meta_date = $date;
 					if ( $date_icon ) {
-						$icon_html = '<i aria-hidden="true" class="' . esc_attr( $date_icon ) . '"></i>';
+						$icon_html = $this->render_icon( $date_icon_type, $date_icon, $date_icon_svg );
 					} else {
 						$icon_html = '';
 					}
@@ -170,11 +176,14 @@ class Post_List extends Post_Abstract {
 			}
 
 			if ( $this->attr_is_true( $this->attributes['metaCategoryEnabled'] ) ) {
-				$category_icon = $this->attributes['metaCategoryIcon'];
+				$category_icon      = $this->attributes['metaCategoryIcon'];
+				$category_icon_type = isset( $this->attributes['metaCategoryIconType'] ) ? esc_attr( $this->attributes['metaCategoryIconType'] ) : 'icon';
+				$category_icon_svg  = isset( $this->attributes['metaCategoryIconSVG'] ) ? $this->attributes['metaCategoryIconSVG'] : '';
+
 				$category      = get_category( $this->get_primary_category( $post->ID ) );
 				$meta_category = isset( $category->name ) ? $category->name : '';
 				if ( $category_icon ) {
-					$icon_html = '<i aria-hidden="true" class="' . esc_attr( $category_icon ) . '"></i>';
+					$icon_html = $this->render_icon( $category_icon_type, $category_icon, $category_icon_svg );
 				} else {
 					$icon_html = '';
 				}
@@ -213,10 +222,12 @@ class Post_List extends Post_Abstract {
 			if ( $this->attr_is_true( $this->attributes['imageEnabled'] ) ) {
 				$thumbnail = get_the_post_thumbnail( $post->ID, $image_size );
 			} elseif ( $this->attr_is_true( $this->attributes['iconEnabled'] ) ) {
-				$icon = $this->attributes['icon'];
+				$icon      = isset( $this->attributes['icon'] ) ? $this->attributes['icon'] : '';
+				$icon_type = isset( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
+				$icon_svg  = isset( $this->attributes['iconSVG'] ) ? $this->attributes['iconSVG'] : '';
 
 				if ( $icon ) {
-					$thumbnail = '<span class="icon-list"><i aria-hidden="true" class="' . esc_attr( $icon ) . '"></i></span>';
+					$thumbnail = '<span class="icon-list">' . $this->render_icon( $icon_type, $icon, $icon_svg ) . '</span>';
 				}
 			}
 

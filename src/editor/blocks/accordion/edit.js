@@ -1,8 +1,9 @@
 import { __ } from '@wordpress/i18n';
+import anime from 'animejs';
 import { useEffect, useRef } from '@wordpress/element';
 import { panelList } from './panels/panel-list';
 import { useInnerBlocksProps, useBlockProps, BlockControls, InspectorControls } from '@wordpress/block-editor';
-import { RichTextComponent, classnames } from 'gutenverse-core/components';
+import { RichTextComponent, classnames, u } from 'gutenverse-core/components';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { Check, X } from 'gutenverse-core/components';
 import { dispatch, useSelect } from '@wordpress/data';
@@ -11,16 +12,16 @@ import { BlockPanelController, PanelTutorial } from 'gutenverse-core/controls';
 import { HighLightToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
-import { useRichTextParameter } from 'gutenverse-core/helper';
+import { useRichTextParameter, renderIcon } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 
-export const AccordionIcon = ({ iconOpen, iconClosed }) => {
+export const AccordionIcon = ({ iconOpen, iconOpenType, iconOpenSVG, iconClosed, iconClosedType, iconClosedSVG }) => {
     return <div className={'accordion-icon'}>
         <span className={'accordion-icon-open'}>
-            <i className={iconOpen} />
+            {renderIcon(iconOpen, iconOpenType, iconOpenSVG)}
         </span>
         <span className={'accordion-icon-closed'}>
-            <i className={iconClosed} />
+            {renderIcon(iconClosed, iconClosedType, iconClosedSVG)}
         </span>
     </div>;
 };
@@ -47,7 +48,11 @@ const Accordion = props => {
     const {
         iconPosition,
         iconOpen,
+        iconOpenType,
+        iconOpenSVG,
         iconClosed,
+        iconClosedType,
+        iconClosedSVG,
         titleTag,
         first,
         elementId
@@ -80,11 +85,43 @@ const Accordion = props => {
         template: [['core/paragraph']]
     });
 
+    const animate = (accordionBodies, setClosed = false) => {
+        for (let i = 0; i < accordionBodies.length; i++) {
+            const item = accordionBodies[i];
+            const body = u(item);
+            const bodySize = body.find('.accordion-content').size();
+            const isActive = body.hasClass('active');
+            if(isActive) {
+                anime({
+                    targets: body.first(),
+                    height: bodySize.height,
+                    duration: 500,
+                    easing: 'easeOutCubic',
+                }).finished.finally(() => {
+                    body.attr('style', '');
+                });
+            } else {
+                setClosed && body.addClass('closed');
+                anime({
+                    targets: body.first(),
+                    height: '0',
+                    duration: 500,
+                    easing: 'easeOutCubic',
+                }).finished.finally(() => {
+                    setClosed && body.removeClass('closed');
+                    body.attr('style', '');
+                });
+            }
+        }
+    };
+
     const setFirstActive = () => {
         // Remove Active.
         const parent = elementRef.current.parentElement;
         const headings = parent.getElementsByClassName('accordion-heading');
         const bodies = parent.getElementsByClassName('accordion-body');
+
+        animate(bodies, false);
 
         for (let i = 0; i < headings.length; i++) {
             headings[i].classList.remove('active');
@@ -99,6 +136,8 @@ const Accordion = props => {
             heading[0].classList.add('active');
             body[0].classList.add('active');
         }
+
+        animate(bodies, true);
 
         // Commit to attribute.
         setTimeout(() => {
@@ -130,14 +169,22 @@ const Accordion = props => {
 
         let {
             iconOpen,
+            iconOpenType,
+            iconOpenSVG,
             iconClosed,
+            iconClosedType,
+            iconClosedSVG,
             iconPosition,
             titleTag,
         } = attributes;
 
         setAttributes({
             iconOpen,
+            iconOpenType,
+            iconOpenSVG,
             iconClosed,
+            iconClosedType,
+            iconClosedSVG,
             iconPosition,
             titleTag
         });
@@ -147,7 +194,11 @@ const Accordion = props => {
             parent = null;
             attributes = null;
             iconOpen = null;
+            iconOpenType = null;
+            iconOpenSVG = null;
             iconClosed = null;
+            iconClosedType = null;
+            iconClosedSVG = null;
             iconPosition = null;
             titleTag = null;
         };
@@ -189,7 +240,7 @@ const Accordion = props => {
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} panelState={panelState} />
         <div {...blockProps}>
             <div className="accordion-heading" onClick={setFirstActive}>
-                {iconPosition === 'left' && <AccordionIcon iconClosed={iconClosed} iconOpen={iconOpen} />}
+                {iconPosition === 'left' && <AccordionIcon iconClosed={iconClosed} iconClosedType={iconClosedType} iconClosedSVG={iconClosedSVG} iconOpen={iconOpen} iconOpenType={iconOpenType} iconOpenSVG={iconOpenSVG} />}
                 <RichTextComponent
                     classNames={'accordion-text'}
                     tagName={titleTag}
@@ -209,7 +260,7 @@ const Accordion = props => {
                     isUseDinamic={true}
                     isUseHighlight={true}
                 />
-                {iconPosition === 'right' && <AccordionIcon iconClosed={iconClosed} iconOpen={iconOpen} />}
+                {iconPosition === 'right' && <AccordionIcon iconClosed={iconClosed} iconClosedType={iconClosedType} iconClosedSVG={iconClosedSVG} iconOpen={iconOpen} iconOpenType={iconOpenType} iconOpenSVG={iconOpenSVG} />}
             </div>
             <div className="accordion-body">
                 <div {...innerBlocksProps} />

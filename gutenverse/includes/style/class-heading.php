@@ -178,5 +178,18 @@ class Heading extends Style_Abstract {
 				)
 			);
 		}
+
+		if ( isset( $this->attrs['textWritingMode'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-element",
+					'property'       => function ( $value ) {
+						return "writing-mode: {$value};";
+					},
+					'value'          => $this->attrs['textWritingMode'],
+					'device_control' => true,
+				)
+			);
+		}
 	}
 }

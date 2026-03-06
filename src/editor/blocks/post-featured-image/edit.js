@@ -29,14 +29,15 @@ const PostFeaturedImageBlock = compose(
         elementId,
         postLink,
         placeholderImg,
+        imageSize
     } = attributes;
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const elementRef = useRef();
 
-    const [ featuredImage ] = useEntityProp( 'postType', postType, 'featured_media', postId );
-    const [ link ] = useEntityProp( 'postType', postType, 'link', postId );
+    const [featuredImage] = useEntityProp('postType', postType, 'featured_media', postId);
+    const [link] = useEntityProp('postType', postType, 'link', postId);
 
     const { media } = useSelect(
         (select) => {
@@ -52,7 +53,7 @@ const PostFeaturedImageBlock = compose(
         },
         [featuredImage, postType]
     );
-    const mediaUrl = media?.source_url;
+    const mediaUrl = media?.media_details?.sizes?.[imageSize.value]?.source_url;
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -66,7 +67,7 @@ const PostFeaturedImageBlock = compose(
         ref: elementRef
     });
 
-    let content = mediaUrl ? <img src={mediaUrl}/> : placeholderImg ? <img src={imagePlaceholder}/> : __('Post Featured Image', 'gutenverse');
+    let content = mediaUrl ? <img src={mediaUrl} /> : placeholderImg ? <img src={imagePlaceholder} /> : __('Post Featured Image', 'gutenverse');
 
     content = postLink && link ? <a href={link} onClick={e => e.preventDefault()}>{content}</a> : content;
 
@@ -74,7 +75,7 @@ const PostFeaturedImageBlock = compose(
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <InspectorControls>
             <PanelTutorial
                 title={__('How Post Featured Image works?', 'gutenverse')}

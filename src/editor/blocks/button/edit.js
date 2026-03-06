@@ -4,24 +4,18 @@ import { withPartialRender, withPassRef, withAnimationAdvanceV2, withMouseMoveEf
 import { useBlockProps, RichText, BlockControls } from '@wordpress/block-editor';
 import { classnames, link } from 'gutenverse-core/components';
 import { __ } from '@wordpress/i18n';
-import { IconLibrary } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
-import { createPortal } from 'react-dom';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { URLToolbar } from 'gutenverse-core/toolbars';
-import { displayShortcut } from '@wordpress/keycodes';
-import { gutenverseRoot } from 'gutenverse-core/helper';
-import { LogoCircleColor24SVG } from 'gutenverse-core/icons';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicContent, useDynamicUrl } from 'gutenverse-core/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
-import isEmpty from 'lodash/isEmpty';
-import { isOnEditor } from 'gutenverse-core/helper';
 import getBlockStyle from './styles/block-style';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { useRichTextParameter } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { renderIcon } from './render-icon';
 
 const NEW_TAB_REL = 'noreferrer noopener';
 
@@ -58,6 +52,8 @@ const ButtonBlock = compose(
         buttonSize,
         showIcon,
         icon,
+        iconType,
+        iconSVG,
         url,
         rel,
         linkTarget,
@@ -93,13 +89,11 @@ const ButtonBlock = compose(
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
 
-    const [openIconLibrary, setOpenIconLibrary] = useState(false);
+    useDynamicScript(elementRef);
     const placeholder = showIcon ? '' : __('Button Text...');
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
     const [allowLink, setAllowLink] = useState(true);
-    const [dynamicText, setDynamicText] = useState();
-    const [dynamicHref, setDynamicHref] = useState();
 
     const blockProps = useBlockProps({
         className: classnames(
@@ -108,6 +102,7 @@ const ButtonBlock = compose(
             'no-margin',
             elementId,
             displayClass,
+            animationClass,
         ),
         ref: elementRef
     });
@@ -115,7 +110,6 @@ const ButtonBlock = compose(
     const buttonProps = {
         className: classnames(
             'guten-button',
-            animationClass,
             {
                 [`guten-button-${buttonType}`]: buttonType && buttonType !== 'default',
                 [`guten-button-${buttonSize}`]: buttonSize,
@@ -193,7 +187,7 @@ const ButtonBlock = compose(
     };
 
     const buttonText = <>
-        {showIcon && iconPosition === 'before' && <i className={`fa-lg ${icon}`} onClick={() => setOpenIconLibrary(true)} />}
+        {showIcon && iconPosition === 'before' && renderIcon(icon, iconType, iconSVG)}
         <RichText
             tagName={'span'}
             value={content}
@@ -204,7 +198,7 @@ const ButtonBlock = compose(
             identifier="content"
             ref={textRef}
         />
-        {showIcon && iconPosition === 'after' && <i className={`fa-lg ${icon}`} onClick={() => setOpenIconLibrary(true)} />}
+        {showIcon && iconPosition === 'after' && renderIcon(icon, iconType, iconSVG)}
     </>;
 
     const ButtonURLToolbar = () => {
@@ -223,52 +217,27 @@ const ButtonBlock = compose(
         />;
     };
 
+    const { dynamicText } = useDynamicContent(dynamicContent);
+    const { dynamicHref } = useDynamicUrl(dynamicUrl);
+
     useEffect(() => {
-        const dynamicUrlcontent = isEmpty(dynamicUrl) || !isOnEditor() ? dynamicUrl : applyFilters(
-            'gutenverse.dynamic.fetch-url',
-            dynamicUrl
-        );
-
-        const dynamicTextContent = isEmpty(dynamicContent) || !isOnEditor() ? dynamicContent : applyFilters(
-            'gutenverse.dynamic.fetch-text',
-            dynamicContent
-        );
-
-        (typeof dynamicUrlcontent.then === 'function') && !isEmpty(dynamicUrl) && dynamicUrlcontent
-            .then(result => {
-                if ((!Array.isArray(result) || result.length > 0) && result !== undefined && result !== dynamicHref) {
-                    setDynamicHref(result);
-                } else if (result !== dynamicHref) setDynamicHref(undefined);
-            }).catch(() => { });
         if (dynamicHref !== undefined) {
             setAttributes({ url: dynamicHref, isDynamic: true });
-        } else { setAttributes({ url: url }); }
+        } else {
+            setAttributes({ url: url });
+        }
 
-        (typeof dynamicTextContent.then === 'function') && !isEmpty(dynamicContent) && dynamicTextContent
-            .then(result => {
-                if ((!Array.isArray(result) || result.length > 0) && result !== undefined && result !== dynamicText) {
-                    setDynamicText(result);
-                }
-            }).catch(() => { });
         if (dynamicText !== undefined) {
             setAttributes({ content: dynamicText });
         }
-    }, [dynamicContent, dynamicUrl, dynamicText, dynamicHref]);
+    }, [dynamicText, dynamicHref]);
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <BlockPanelController props={props} panelList={panelList} elementRef={elementRef} panelState={panelState} setPanelIsClicked={setPanelIsClicked} />
-        {openIconLibrary && createPortal(
-            <IconLibrary
-                closeLibrary={() => setOpenIconLibrary(false)}
-                value={icon}
-                onChange={icon => setAttributes({ icon })}
-            />,
-            gutenverseRoot
-        )}
         <BlockControls>
             <ToolbarGroup>
-                {applyFilters('gutenverse.button.url-toolbar', <ButtonURLToolbar />, props, buttonPanelState)}
+                {applyFilters('gutenverse.button.url-toolbar', <ButtonURLToolbar />, { ...props, setPanelState }, buttonPanelState)}
                 {!allowLink && <ToolbarButton
                     name="link"
                     icon={link}
@@ -278,13 +247,7 @@ const ButtonBlock = compose(
                         selectBlock(rootId);
                     }}
                 />}
-                <ToolbarButton
-                    name="icon"
-                    icon={<LogoCircleColor24SVG />}
-                    title={__('Choose Icon', 'gutenverse')}
-                    shortcut={displayShortcut.primary('i')}
-                    onClick={() => setOpenIconLibrary(true)}
-                />
+
             </ToolbarGroup>
         </BlockControls>
         <span ref={elementRef} style={{ display: 'none' }}></span>

@@ -2,13 +2,14 @@
     -ms-word-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
+    margin-block: 0px;
 
-    & > *:not(div.section-wrapper):not(.guten-element) {
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    // & > *:not(div.section-wrapper):not(.guten-element) {
+    //     margin-top: 0;
+    //     margin-bottom: 0;
+    //     margin-left: auto;
+    //     margin-right: auto;
+    // }
 
     .guten-post-password-form {
         & > * {

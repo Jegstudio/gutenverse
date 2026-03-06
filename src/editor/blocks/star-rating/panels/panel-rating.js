@@ -52,12 +52,12 @@ export const panelRating = () => {
                     value: 'fill'
                 },
                 {
-                    label: 'Rounded',
-                    value: 'rounded'
+                    label: 'Sharp',
+                    value: 'sharp'
                 },
                 {
-                    label: 'Rounded Fill',
-                    value: 'rounded-fill'
+                    label: 'Sharp Fill',
+                    value: 'sharp-fill'
                 },
                 {
                     label: 'Thumbs Up',

@@ -74,20 +74,6 @@ export const linkPanel = (props) => {
             },
         },
         {
-            id: 'linkBackground',
-            label: __('Link Background', 'gutenverse'),
-            component: BackgroundControl,
-            allowDeviceControl: true,
-            options: ['default', 'gradient'],
-            liveStyle: [
-                {
-                    'type': 'background',
-                    'id': 'linkBackground',
-                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a`,
-                }
-            ]
-        },
-        {
             id: 'linkBorder',
             label: __('Link Border', 'gutenverse'),
             component: BorderResponsiveControl,
@@ -188,6 +174,18 @@ export const linkPanel = (props) => {
                         }
                     ],
                     'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a i`,
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'linkIconSize',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct',
+                        }
+                    ],
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a svg`,
                 }
             ]
         },
@@ -205,6 +203,21 @@ export const linkPanel = (props) => {
                 }
             ],
             onChange: ({ __hoverSwitch }) => setSwitcher({ ...switcher, hoverSwitch: __hoverSwitch })
+        },
+        {
+            id: 'linkBackground',
+            label: __('Link Background', 'gutenverse'),
+            component: BackgroundControl,
+            allowDeviceControl: true,
+            show: switcher.hoverSwitch === 'normal' || !switcher.hoverSwitch,
+            options: ['default', 'gradient'],
+            liveStyle: [
+                {
+                    'type': 'background',
+                    'id': 'linkBackground',
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a`,
+                }
+            ]
         },
         {
             id: 'linkColor',
@@ -241,6 +254,17 @@ export const linkPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'linkIconColor',
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -264,6 +288,21 @@ export const linkPanel = (props) => {
             ]
         },
         {
+            id: 'linkBackgroundHover',
+            label: __('Link Background', 'gutenverse'),
+            component: BackgroundControl,
+            allowDeviceControl: true,
+            show: switcher.hoverSwitch === 'hover',
+            options: ['default', 'gradient'],
+            liveStyle: [
+                {
+                    'type': 'background',
+                    'id': 'linkBackground',
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover`,
+                }
+            ]
+        },
+        {
             id: 'linkColorHover',
             label: __('Link Color', 'gutenverse'),
             show: switcher.hoverSwitch === 'hover',
@@ -272,7 +311,7 @@ export const linkPanel = (props) => {
                 {
                     'type': 'color',
                     'id': 'linkColorHover',
-                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper:hover a`,
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover`,
                     'properties': [
                         {
                             'name': 'color',
@@ -291,10 +330,21 @@ export const linkPanel = (props) => {
                 {
                     'type': 'color',
                     'id': 'linkIconColorHover',
-                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper:hover a i`,
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover i`,
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'linkIconColorHover',
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]
@@ -316,7 +366,7 @@ export const linkPanel = (props) => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper:hover a`,
+                    'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover`,
                 }
             ]
         }

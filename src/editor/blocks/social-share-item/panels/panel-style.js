@@ -5,7 +5,8 @@ import {
     SwitchControl,
     TypographyControl,
     BorderControl,
-    BorderResponsiveControl
+    BorderResponsiveControl,
+    BoxShadowControl
 } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
@@ -285,5 +286,43 @@ export const panelStyle = props => {
                 }
             ]
         },
+        {
+            id: 'boxShadow',
+            show: !switcher.socialHover || switcher.socialHover === 'normal',
+            label: __('Box Shadow', '--gctd--'),
+            component: BoxShadowControl,
+            liveStyle: [
+                {
+                    'type': 'boxShadow',
+                    'id': 'boxShadow',
+                    'properties': [
+                        {
+                            'name': 'box-shadow',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item`,
+                }
+            ]
+        },
+        {
+            id: 'boxShadowHover',
+            show: switcher.socialHover === 'hover',
+            label: __('Box Shadow', '--gctd--'),
+            component: BoxShadowControl,
+            liveStyle: [
+                {
+                    'type': 'boxShadow',
+                    'id': 'boxShadowHover',
+                    'properties': [
+                        {
+                            'name': 'box-shadow',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item:hover`,
+                }
+            ]
+        }
     ];
 };

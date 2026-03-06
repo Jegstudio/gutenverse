@@ -18,6 +18,47 @@ export const panelContent = (props) => {
             component: CheckboxControl
         },
         {
+            id: 'textIndent',
+            label: __('Text Indent', 'gutenverse'),
+            component: SizeControl,
+            units: {
+                px: {
+                    text: 'px',
+                    min: 1,
+                    max: 200,
+                    step: 1
+                },
+                ['%']: {
+                    text: '%',
+                    min: 1,
+                    max: 100,
+                    step: 1,
+                    unit: '%',
+                },
+                em: {
+                    text: 'em',
+                    min: 0.1,
+                    max: 3,
+                    step: 0.1
+                },
+            },
+            allowDeviceControl: true,
+            liveStyle: [
+                {
+                    'type': 'unitPoint',
+                    'id': 'textIndent',
+                    'responsive': true,
+                    'selector': `.${elementId}:not(.dropcap) p, .${elementId}.dropcap p:not(:first-child)`,
+                    'properties': [
+                        {
+                            'name': 'text-indent',
+                            'valueType': 'direct',
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'columns',
             label: __('Columns', 'gutenverse'),
             component: RangeControl,

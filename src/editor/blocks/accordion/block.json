@@ -1,12 +1,10 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/accordion",
 	"title": "Accordion Item",
 	"description": "Create content inside an accordion element.",
 	"category": "gutenverse-element",
-	"parent": [
-		"gutenverse/accordions"
-	],
+	"parent": ["gutenverse/accordions"],
 	"attributes": {
 		"elementId": {
 			"type": "string"
@@ -17,7 +15,7 @@
 			"selector": ".accordion-heading .accordion-text",
 			"default": ""
 		},
-		"titleChilds":{
+		"titleChilds": {
 			"type": "array",
 			"default": []
 		},
@@ -29,11 +27,24 @@
 			"type": "string",
 			"default": "fas fa-minus"
 		},
+		"iconOpenType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconOpenSVG": {
+			"type": "string"
+		},
 		"iconClosed": {
 			"type": "string",
 			"default": "fas fa-plus"
 		},
-
+		"iconClosedType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconClosedSVG": {
+			"type": "string"
+		},
 		"dynamicDataList": {
 			"type": "array",
 			"default": []
@@ -43,11 +54,11 @@
 		},
 		"dynamicTextContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"dynamicUrlContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"iconPosition": {
 			"type": "string",
@@ -60,16 +71,50 @@
 		"advanceAnimation": {
 			"type": "object",
 			"default": {}
+		},
+		"contentBackgroundColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBackgroundColorClosed": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBackgroundColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentTextColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentTextColorClosed": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentTextColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBackgroundGradient": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBackgroundGradientClosed": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentBackgroundGradientHover": {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"html": false,
-		"innerBlocks": true
+		"innerBlocks": true,
+		"anchor": true
 	},
-	"keywords": [
-		"tabs",
-		"accordion",
-		"gutenverse"
-	]
+	"keywords": ["tabs", "accordions", "dropdown", "expand", "panels"],
+	"style": ["gutenverse-frontend-accordion-style"]
 }

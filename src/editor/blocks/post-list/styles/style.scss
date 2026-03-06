@@ -1,3 +1,7 @@
+@import "gutenverse-core/src/assets/mixin";
+@import "gutenverse-core/src/assets/variables";
+@import "gutenverse-core/src/assets/wp-fix";
+
 .guten-post-list {
     article {
         overflow: hidden;
@@ -5,6 +9,10 @@
         -ms-word-wrap: break-word;
         word-wrap: break-word;
         word-break: break-word;
+
+        .gutenverse-icon-svg svg {
+            fill: currentColor !important;
+        }
 
         a {
             display: flex;
@@ -23,6 +31,7 @@
                 position: relative;
                 line-height: 0;
                 width: 200px;
+                aspect-ratio: 1;
             }
 
             svg {
@@ -39,21 +48,35 @@
                 margin-bottom: 0;
             }
 
-            .meta-lists span {
-                color: var(--guten-txt-m-color);
-                font-size: 12px;
-                display: inline-block;
-                @include transition(false, false, all .4s ease);
+            .meta-lists {
+                display: flex;
 
-                svg {
-                    fill: var(--guten-txt-m-color);
-                    width: 12px;
+                span {
+                    color: var(--guten-txt-m-color);
+                    font-size: 12px;
+                    display: inline-block;
+                    @include transition(false, false, all .4s ease);
+
+                    svg {
+                        fill: var(--guten-txt-m-color);
+                    }
                 }
             }
 
             .icon-list {
                 text-align: center;
             }
+        }
+
+        .guten-meta-date {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .meta-category {
+            display: inline-flex !important;
+            align-items: center;
         }
     }
 
@@ -95,6 +118,7 @@
         .guten-block-loadmore {
             display: flex;
             justify-content: center;
+            align-items: center;
             cursor: pointer;
             border: 1px solid var(--guten-border-color, #eaeaeb);
             @include boxshadow(0 2px 4px rgba(0, 0, 0, 0.08));
@@ -106,7 +130,9 @@
             color: var(--guten-txt-color);
 
             span {
-                display: block;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             a {
@@ -117,12 +143,12 @@
     }
 
     .guten_block_nav {
-        text-align: center;
+        display: flex;
+        justify-content: center;
 
         .btn-pagination {
             color: #212121;
             padding: 0 10px;
-            display: inline-block;
             border: 1px solid #eee;
             text-align: center;
             min-width: 30px;
@@ -130,6 +156,9 @@
             font-size: 13px;
             font-weight: 700;
             transition: .2s ease;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
 
             i {
                 transition: none;
@@ -142,7 +171,7 @@
             }
 
             &.current {
-                background-color: var(--guten-btn-bg-color,#0058e6);
+                background-color: var(--guten-btn-bg-color, #0058e6);
                 color: var(--guten-btn-txt-color, #fff);
                 cursor: auto;
             }

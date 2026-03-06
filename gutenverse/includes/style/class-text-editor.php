@@ -82,6 +82,19 @@ class Text_Editor extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['textIndent'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}:not(.dropcap) p, .{$this->element_id}.dropcap p:not(:first-child)",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'text-indent' );
+					},
+					'value'          => $this->attrs['textIndent'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['alignment'] ) ) {
 			$this->inject_style(
 				array(

@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-gallery',
         'images': [
             {
                 'id': 'One',

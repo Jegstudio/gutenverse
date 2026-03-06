@@ -1,7 +1,10 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-animated-text',
         'style': 'zoom',
         'text': 'Gutenverse Animated Text',
+        'beforeTextAnimated': '',
+        'afterTextAnimated': '',
         'alignText': {
             'Desktop': 'center'
         },

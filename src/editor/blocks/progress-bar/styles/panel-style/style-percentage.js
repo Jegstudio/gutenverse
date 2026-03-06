@@ -12,6 +12,7 @@ const percentageStyle = (elementId, attributes, data) => {
         ],
         'selector': `.${elementId} .progress-group[class*="tooltip-"] .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper,
                     .${elementId} .progress-group.ribbon .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper,
+                    .${elementId} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before,
                     .${elementId} .progress-group[class*="tooltip-"]:not(.tooltip-style) .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper:before`,
     });
 
@@ -72,6 +73,41 @@ const percentageStyle = (elementId, attributes, data) => {
         ],
         'selector': `.${elementId} .progress-group .progress-skill-bar .number-percentage, .${elementId} .progress-group .number-percentage`,
     });
+
+    if(isNotEmpty(attributes['style']) && 'switch' === attributes['style']) {
+        isNotEmpty(attributes['percentSwitchBorder']) && data.push({
+            'type': 'border',
+            'id': 'percentSwitchBorder',
+            'selector': `.${elementId} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before`,
+        });
+        isNotEmpty(attributes['percentSwitchBoxShadow']) && data.push({
+            'type': 'boxShadow',
+            'id': 'percentSwitchBoxShadow',
+            'properties': [
+                {
+                    'name': 'box-shadow',
+                    'valueType': 'direct'
+                }
+            ],
+            'selector': `.${elementId} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before`,
+        });
+        isNotEmpty(attributes['percentSwitchSize']) && data.push({
+            'type': 'unitPoint',
+            'id': 'percentSwitchSize',
+            'properties': [
+                {
+                    'name': 'width',
+                    'valueType': 'direct'
+                },
+                {
+                    'name': 'height',
+                    'valueType': 'direct'
+                }
+            ],
+            'selector': `.${elementId} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before`,
+        });
+    }
+
     return data;
 };
 

@@ -12,6 +12,18 @@ const colorStyle = (elementId, attributes, data) => {
             }
         ]
     });
+
+    isNotEmpty(attributes['iconColor']) && data.push({
+        'type': 'color',
+        'id': 'iconColor',
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId} svg, .guten-social-icons.border .guten-social-icon #${elementId} svg, .guten-social-icons.custom .guten-social-icon #${elementId} svg`,
+        'properties' : [
+            {
+                'name' : 'fill',
+                'valueType' : 'direct'
+            }
+        ]
+    });
     isNotEmpty(attributes['iconColor']) && data.push({
         'type': 'color',
         'id': 'iconColor',
@@ -43,6 +55,18 @@ const colorStyle = (elementId, attributes, data) => {
         'properties' : [
             {
                 'name' : 'color',
+                'valueType' : 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['hoverIconColor']) && data.push({
+        'type': 'color',
+        'id': 'hoverIconColor',
+        'selector': `.guten-social-icons.fill .guten-social-icon #${elementId}:hover svg, .guten-social-icons.border .guten-social-icon #${elementId}:hover svg, .guten-social-icons.custom .guten-social-icon #${elementId}:hover svg`,
+        'properties' : [
+            {
+                'name' : 'fill',
                 'valueType' : 'direct'
             }
         ]

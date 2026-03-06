@@ -1,6 +1,7 @@
 const example = {
     viewportWidth: 750,
     attributes: {
+        'elementId': 'guten-preview-testimonials',
         'autoplay': true,
         'itemShowed':{'Desktop':'2'},
         'containerBackground':{'type':'default','color':{'r':255,'g':255,'b':255,'a':1}},

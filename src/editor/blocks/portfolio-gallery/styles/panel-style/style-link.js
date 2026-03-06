@@ -36,11 +36,6 @@ const panelLinkStyle = (elementId, attributes, data) => {
         ],
         'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a`,
     });
-    isNotEmpty(attributes['linkBackground']) && data.push({
-        'type': 'background',
-        'id': 'linkBackground',
-        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a`,
-    });
     isNotEmpty(attributes['linkBorder']) && data.push({
         'type': 'borderResponsive',
         'id': 'linkBorder',
@@ -79,6 +74,25 @@ const panelLinkStyle = (elementId, attributes, data) => {
         'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a i`,
     });
 
+    isNotEmpty(attributes['linkIconSize']) && data.push({
+        'type': 'unitPoint',
+        'id': 'linkIconSize',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'direct',
+            }
+        ],
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a svg`,
+    });
+
+    isNotEmpty(attributes['linkBackground']) && data.push({
+        'type': 'background',
+        'id': 'linkBackground',
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a`,
+    });
+
     isNotEmpty(attributes['linkColor']) && data.push({
         'type': 'color',
         'id': 'linkColor',
@@ -103,6 +117,18 @@ const panelLinkStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['linkIconColor']) && data.push({
+        'type': 'color',
+        'id': 'linkIconColor',
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['linkTextShadow']) && data.push({
         'type': 'textShadow',
         'id': 'linkTextShadow',
@@ -115,10 +141,16 @@ const panelLinkStyle = (elementId, attributes, data) => {
         'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a`,
     });
 
+    isNotEmpty(attributes['linkBackgroundHover']) && data.push({
+        'type': 'background',
+        'id': 'linkBackgroundHover',
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover`,
+    });
+
     isNotEmpty(attributes['linkColorHover']) && data.push({
         'type': 'color',
         'id': 'linkColorHover',
-        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper:hover a`,
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover`,
         'properties': [
             {
                 'name': 'color',
@@ -130,10 +162,22 @@ const panelLinkStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['linkIconColorHover']) && data.push({
         'type': 'color',
         'id': 'linkIconColorHover',
-        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper:hover a i`,
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover i`,
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['linkIconColorHover']) && data.push({
+        'type': 'color',
+        'id': 'linkIconColorHover',
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]
@@ -148,7 +192,7 @@ const panelLinkStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper:hover a`,
+        'selector': `.${elementId}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover`,
     });
     return data;
 };

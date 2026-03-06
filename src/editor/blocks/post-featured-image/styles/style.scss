@@ -4,5 +4,7 @@
 
     img {
         width: 100%;
+        display: flex;
+        object-fit: cover;
     }
 }

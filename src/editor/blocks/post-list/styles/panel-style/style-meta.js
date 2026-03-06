@@ -40,11 +40,49 @@ const metaStyle = (elementId, attributes, data) => {
         ],
     });
 
+    isNotEmpty(attributes['metaIconSize']) && data.push({
+        'type': 'plain',
+        'id': 'metaIconSize',
+        'responsive': true,
+        'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern' : '{value}px',
+                'patternValues' : {
+                    'value' : {
+                        'type' : 'direct'
+                    }
+                }
+            }
+        ],
+    });
+
     isNotEmpty(attributes['metaIconSpacing']) && data.push({
         'type': 'plain',
         'id': 'metaIconSpacing',
         'responsive': true,
         'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists i`,
+        'properties': [
+            {
+                'name': 'margin-right',
+                'valueType': 'pattern',
+                'pattern' : '{value}px',
+                'patternValues' : {
+                    'value' : {
+                        'type' : 'direct'
+                    }
+                }
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['metaIconSpacing']) && data.push({
+        'type': 'plain',
+        'id': 'metaIconSpacing',
+        'responsive': true,
+        'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists svg`,
         'properties': [
             {
                 'name': 'margin-right',
@@ -97,6 +135,18 @@ const metaStyle = (elementId, attributes, data) => {
         'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists span`,
     });
 
+    isNotEmpty(attributes['metaColor']) && data.push({
+        'type': 'color',
+        'id': 'metaColor',
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct',
+            }
+        ],
+        'selector': `.${elementId} .guten-postlist .guten-post a .meta-lists svg`,
+    });
+
     isNotEmpty(attributes['metaColorHover']) && data.push({
         'type': 'color',
         'id': 'metaColorHover',
@@ -107,6 +157,18 @@ const metaStyle = (elementId, attributes, data) => {
             }
         ],
         'selector': `.${elementId} .guten-postlist .guten-post:hover a .meta-lists span`,
+    });
+
+    isNotEmpty(attributes['metaColorHover']) && data.push({
+        'type': 'color',
+        'id': 'metaColorHover',
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct',
+            }
+        ],
+        'selector': `.${elementId} .guten-postlist .guten-post:hover a .meta-lists svg`,
     });
 
     isNotEmpty(attributes['metaBackground']) && data.push({

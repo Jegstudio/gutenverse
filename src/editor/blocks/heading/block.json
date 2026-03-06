@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/heading",
 	"title": "Heading",
 	"description": "Create Title/Heading on your page.",
@@ -28,11 +28,11 @@
 		},
 		"dynamicTextContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"dynamicUrlContent": {
 			"type": "array",
-			"copyStyle" : true
+			"copyStyle": true
 		},
 		"type": {
 			"type": "number",
@@ -50,8 +50,8 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"containsAnchorTag" : {
-			"type" : "boolean",
+		"containsAnchorTag": {
+			"type": "boolean",
 			"copyStyle": true
 		},
 		"linkColor": {
@@ -99,6 +99,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -206,14 +211,13 @@
 			"type": "array",
 			"default": []
 		},
-		"openChild":{
-			"type":"string"
+		"openChild": {
+			"type": "string"
 		},
 		"mask": {
 			"type": "object",
 			"copyStyle": true
 		},
-		
 		"textClip": {
 			"type": "object",
 			"default": {},
@@ -222,6 +226,41 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"textWritingMode": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
@@ -229,5 +268,12 @@
 		"reusable": false,
 		"html": false
 	},
-	"keywords": ["heading", "text", "title"]
+	"keywords": [
+		"heading",
+		"texts",
+		"title"
+	],
+	"style": [
+		"gutenverse-frontend-heading-style"
+	]
 }

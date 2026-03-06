@@ -3,7 +3,12 @@ import { __ } from '@wordpress/i18n';
 import { CheckboxControl, ColorControl, IconRadioControl, SelectControl } from 'gutenverse-core/controls';
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
 
-export const generalPanel = ({ elementId, hoverBottom }) => {
+export const generalPanel = (props) => {
+    const {
+        elementId,
+        hoverBottom,
+    } = props;
+
     return [
         {
             id: 'alignButtons',
@@ -27,6 +32,30 @@ export const generalPanel = ({ elementId, hoverBottom }) => {
                     icon: <AlignRight />,
                 },
             ],
+        },
+        {
+            id: 'iconPosition',
+            label: __('Icon Position', 'gutenverse'),
+            component: SelectControl,
+            allowDeviceControl: true,
+            options: [
+                {
+                    value: 'top',
+                    label: 'Top'
+                },
+                {
+                    value: 'left',
+                    label: 'Left'
+                },
+                {
+                    value: 'right',
+                    label: 'Right'
+                },
+                {
+                    value: 'bottom',
+                    label: 'Bottom'
+                },
+            ]
         },
         {
             id: 'titleTag',

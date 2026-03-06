@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/post-author",
 	"class_callback": "\\Gutenverse\\Block\\Post_Author",
 	"title": "Post Author",
@@ -27,13 +27,27 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "span"
+			"default": "span",
+			"enum": [
+				"span",
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"authorAvatar": {
 			"type": "boolean"
 		},
 		"authorLink": {
 			"type": "boolean"
+		},
+		"authorBio": {
+			"type": "boolean",
+			"default": false
 		},
 		"authorLinkTarget": {
 			"type": "boolean"
@@ -49,6 +63,10 @@
 			"type": "string"
 		},
 		"alignment": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"verticalAlignment": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -72,6 +90,29 @@
 		"textShadowHover": {
 			"type": "object",
 			"default": {},
+			"copyStyle": true
+		},
+		"biographyTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"biographyMargintop": {
+			"type": "object"
+		},
+		"biographyColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"biographyTextShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"biographyColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"biographyTextShadowHover": {
+			"type": "object",
 			"copyStyle": true
 		},
 		"size": {
@@ -113,6 +154,11 @@
 		"backgroundHover": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -217,6 +263,36 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"usesContext": [
@@ -225,10 +301,15 @@
 		"queryId"
 	],
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
+		"single",
 		"post",
 		"author"
+	],
+	"style": [
+		"gutenverse-frontend-post-author-style"
 	]
 }

@@ -1,6 +1,7 @@
 const example = {
     viewportWidth: 800,
     attributes: {
+        elementId: 'guten-preview-tabs',
         tabs: [
             {
                 tabId: 'tab-a',

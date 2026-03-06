@@ -1,6 +1,7 @@
 
 
 import { RichText } from '@wordpress/block-editor';
+import { renderIcon } from 'gutenverse-core/helper';
 
 const ContentItem = (data) => {
     let {
@@ -12,46 +13,56 @@ const ContentItem = (data) => {
         rating,
         contentType,
         showQuote,
+        showClientImage,
         iconQuote,
+        iconQuoteType,
+        iconQuoteSVG,
         quoteOverride,
         contentPosition,
         showRating,
         iconRatingFull,
+        iconRatingFullType,
+        iconRatingFullSVG,
         iconRatingHalf,
+        iconRatingHalfType,
+        iconRatingHalfSVG,
         starPosition,
         frontEnd,
         setAttributes,
         index,
-        testimonialData
+        testimonialData,
+        imgDetail = {},
     } = data;
+
+    const { width = 900, height = 497 } = imgDetail;
 
     const overrideQuote = quoteOverride ? 'quote-override' : '';
 
     const contentRichText = (value, tag, className, identifier, index) => {
-        if(frontEnd){
+        if (frontEnd) {
             return <RichText.Content
                 className={className}
                 tagName={tag}
                 value={value}
             />;
-        }else{
+        } else {
             return <RichText
                 className={className}
                 tagName={tag}
                 value={value}
                 onChange={value => {
                     const testimoniData = [...testimonialData];
-                    testimoniData[index][identifier]= value;
-                    setAttributes({ testimonialData : testimoniData});
+                    testimoniData[index][identifier] = value;
+                    setAttributes({ testimonialData: testimoniData });
                 }}
             />;
         }
     };
     const content = () => {
-        const commentContent = <div className="comment-content">{contentRichText(comment, 'p', 'profile-comment','comment', index )}</div>;
+        const commentContent = <div className="comment-content">{contentRichText(comment, 'p', 'profile-comment', 'comment', index)}</div>;
         const starRating = showRating && <>
-            {Array.from({ length: rating }, (i) => <li key={i}><i className={iconRatingFull}></i></li>)}
-            {parseFloat(rating) !== Math.floor(rating) ? <li><i className={iconRatingHalf}></i></li> : null}
+            {Array.from({ length: rating }, (i) => <li key={i}>{renderIcon(iconRatingFull, iconRatingFullType, iconRatingFullSVG)}</li>)}
+            {parseFloat(rating) !== Math.floor(rating) ? <li>{renderIcon(iconRatingHalf, iconRatingHalfType, iconRatingHalfSVG)}</li> : null}
         </>;
 
         switch (contentType) {
@@ -59,19 +70,19 @@ const ContentItem = (data) => {
                 return <div className="testimonial-slider hover-from-left testimonial-content" >
                     <div className="comment-bio">
                         <div className="profile-image">
-                            {lazy ? <img loading="lazy" src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' } /> : <img src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' }/>}
+                            {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                         </div>
                         <ul className="rating-stars">{starRating}</ul>
                         <span className="profile-info">
-                            {contentRichText(name, 'strong', 'profile-name','name', index )}
-                            {contentRichText(description, 'p', 'profile-des','description', index )}
+                            {contentRichText(name, 'strong', 'profile-name', 'name', index)}
+                            {contentRichText(description, 'p', 'profile-des', 'description', index)}
                         </span>
                     </div>
                     <div className="comment-content">
                         {showQuote && <div className={`${overrideQuote} icon-content`}>
-                            <i aria-hidden="true" className={`${iconQuote}`}></i>
+                            {renderIcon(iconQuote, iconQuoteType, iconQuoteSVG, true)}
                         </div>}
-                        {contentRichText(comment, 'p', 'profile-comment','comment', index )}
+                        {contentRichText(comment, 'p', 'profile-comment', 'comment', index)}
                     </div>
                 </div>;
             case 2:
@@ -81,51 +92,51 @@ const ContentItem = (data) => {
                     <div className="comment-bio">
                         <div className="bio-details">
                             <div className="profile-image">
-                                {lazy ? <img loading="lazy" src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' }/> : <img src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' } />}
+                                {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                             </div>
                             <span className="profile-info">
-                                {contentRichText(name, 'strong', 'profile-name','name', index )}
-                                {contentRichText(description, 'p', 'profile-des','description', index )}
+                                {contentRichText(name, 'strong', 'profile-name', 'name', index)}
+                                {contentRichText(description, 'p', 'profile-des', 'description', index)}
                             </span>
                         </div>
-                        {showQuote && <div className={`${overrideQuote} icon-content`}><i aria-hidden="true" className={`${iconQuote}`}></i></div>}
+                        {showQuote && <div className={`${overrideQuote} icon-content`}>{renderIcon(iconQuote, iconQuoteType, iconQuoteSVG, true)}</div>}
                     </div>
                     {(contentPosition === undefined || contentPosition === 'below-image') && commentContent}
                     {starPosition !== undefined && starPosition === 'below-image' && <div className="comment-header"><ul className="rating-stars">{starRating}</ul></div>}
                 </div>;
             case 3:
                 return <div className="testimonial-content" >
-                    {showQuote && <div className={`${overrideQuote} icon-content`}><i aria-hidden="true" className={`${iconQuote}`}></i></div>}
+                    {showQuote && <div className={`${overrideQuote} icon-content`}>{renderIcon(iconQuote, iconQuoteType, iconQuoteSVG, true)}</div>}
                     {contentPosition !== undefined && contentPosition === 'above-image' && commentContent}
                     {starPosition !== undefined && starPosition === 'above-image' && <ul className="rating-stars">{starRating}</ul>}
                     <div className="comment-bio">
                         <div className="bio-details">
                             <div className="profile-image">
-                                {lazy ? <img loading="lazy" src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' }/> : <img src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' }/>}
+                                {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                             </div>
                         </div>
                     </div>
                     {(starPosition === undefined || starPosition === 'below-image') && <ul className="rating-stars">{starRating}</ul>}
                     {(contentPosition === undefined || contentPosition === 'below-image') && commentContent}
                     <span className="profile-info">
-                        {contentRichText(name, 'strong', 'profile-name','name', index )}
-                        {contentRichText(description, 'p', 'profile-des','description', index )}
+                        {contentRichText(name, 'strong', 'profile-name', 'name', index)}
+                        {contentRichText(description, 'p', 'profile-des', 'description', index)}
                     </span>
                 </div>;
             case 4:
                 return <div className="testimonial-content" >
-                    {showQuote && <div className={`${overrideQuote} icon-content`}><i aria-hidden="true" className={`${iconQuote}`}></i></div>}
+                    {showQuote && <div className={`${overrideQuote} icon-content`}>{renderIcon(iconQuote, iconQuoteType, iconQuoteSVG, true)}</div>}
                     {contentPosition !== undefined && contentPosition === 'above-image' && commentContent}
                     <div className="comment-bio">
                         <div className="bio-details">
                             {starPosition !== undefined && starPosition === 'above-image' && <ul className="rating-stars">{starRating}</ul>}
                             <div className="profile-image">
-                                {lazy ? <img loading="lazy" src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' }/> : <img src={src} alt={name} data-image-placeholder={ !src && 'gutenverse-image-placeholder' }/>}
+                                {showClientImage ? lazy === 'lazy' ? <img width={width} height={height} loading="lazy" src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : <img width={width} height={height} src={src} alt={name} data-image-placeholder={!src && 'gutenverse-image-placeholder'} /> : null}
                             </div>
                             {(starPosition === undefined || starPosition === 'below-image') && <ul className="rating-stars">{starRating}</ul>}
                             <span className="profile-info">
-                                {contentRichText(name, 'strong', 'profile-name','name', index )}
-                                {contentRichText(description, 'p', 'profile-des','description', index )}
+                                {contentRichText(name, 'strong', 'profile-name', 'name', index)}
+                                {contentRichText(description, 'p', 'profile-des', 'description', index)}
                             </span>
                         </div>
                     </div>

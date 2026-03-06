@@ -80,7 +80,7 @@ class Social_Share_Item extends Style_Abstract {
 		if ( isset( $this->attrs['iconColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.gutenverse-share-item .gutenverse-share-icon i",
+					'selector'       => "#{$this->element_id}.gutenverse-share-item .gutenverse-share-icon svg",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -152,7 +152,7 @@ class Social_Share_Item extends Style_Abstract {
 		if ( isset( $this->attrs['iconColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.gutenverse-share-item:hover .gutenverse-share-icon i",
+					'selector'       => "#{$this->element_id}.gutenverse-share-item:hover .gutenverse-share-icon svg",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -235,7 +235,7 @@ class Social_Share_Item extends Style_Abstract {
 		if ( isset( $this->attrs['iconSize'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.gutenverse-share-item i",
+					'selector'       => "#{$this->element_id}.gutenverse-share-item svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'font-size' );
 					},
@@ -246,12 +246,38 @@ class Social_Share_Item extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.gutenverse-share-item i",
+					'selector'       => "#{$this->element_id}.gutenverse-share-item svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'width' );
 					},
 					'value'          => $this->attrs['iconSize'],
 					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['boxShadow'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.gutenverse-share-item",
+					'property'       => function ( $value ) {
+						return $this->handle_box_shadow( $value );
+					},
+					'value'          => $this->attrs['boxShadow'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['boxShadowHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.gutenverse-share-item:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_box_shadow( $value );
+					},
+					'value'          => $this->attrs['boxShadowHover'],
+					'device_control' => false,
 				)
 			);
 		}

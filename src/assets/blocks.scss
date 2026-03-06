@@ -6,7 +6,7 @@
 // Swiper JS
 @import "./lib/swiper";
 
-// Element
+// Blocks Editor
 @import "../editor/blocks/heading/styles/editor";
 @import "../editor/blocks/button/styles/editor";
 @import "../editor/blocks/buttons/styles/editor";
@@ -57,5 +57,61 @@
 @import "../editor/blocks/feature-list/styles/editor.scss";
 @import "../editor/blocks/portfolio-gallery/styles/editor.scss";
 @import "../editor/blocks/archive-title/styles/editor.scss";
+@import "../editor/blocks/chart/styles/editor.scss";
+@import "../editor/blocks/breadcrumb/styles/editor.scss";
+
+// Blocks Frontend
+@import "../editor/blocks/heading/styles/style";
+@import "../editor/blocks/button/styles/style";
+@import "../editor/blocks/buttons/styles/style";
+@import "../editor/blocks/social-icon/styles/style";
+@import "../editor/blocks/social-icons/styles/style";
+@import "../editor/blocks/divider/styles/style";
+@import "../editor/blocks/tabs/styles/style";
+@import "../editor/blocks/accordions/styles/style";
+@import "../editor/blocks/accordion/styles/style";
+@import "../editor/blocks/icon/styles/style";
+@import "../editor/blocks/image/styles/style";
+@import "../editor/blocks/spacer/styles/style";
+@import "../editor/blocks/team/styles/style";
+@import "../editor/blocks/social-share/styles/style";
+@import "../editor/blocks/social-share-item/styles/style";
+@import "../editor/blocks/google-maps/styles/style";
+@import "../editor/blocks/progress-bar/styles/style";
+@import "../editor/blocks/fun-fact/styles/style";
+@import "../editor/blocks/icon-box/styles/style";
+@import "../editor/blocks/text-editor/styles/style";
+@import "../editor/blocks/icon-list/styles/style";
+@import "../editor/blocks/icon-list-item/styles/style";
+@import "../editor/blocks/star-rating/styles/style";
+@import "../editor/blocks/image-box/styles/style";
+@import "../editor/blocks/nav-menu/styles/style";
+@import "../editor/blocks/testimonials/styles/style";
+@import "../editor/blocks/video/styles/style";
+@import "../editor/blocks/logo-slider/styles/style";
+@import "../editor/blocks/gallery/styles/style";
+@import "../editor/blocks/animated-text/styles/style";
+@import "../editor/blocks/post-title/styles/style";
+@import "../editor/blocks/post-featured-image/styles/style";
+@import "../editor/blocks/post-excerpt/styles/style";
+@import "../editor/blocks/post-date/styles/style";
+@import "../editor/blocks/post-author/styles/style";
+@import "../editor/blocks/post-terms/styles/style";
+@import "../editor/blocks/post-comment/styles/style";
+@import "../editor/blocks/post-content/styles/style";
+@import "../editor/blocks/post-block/styles/style";
+@import "../editor/blocks/post-list/styles/style";
+@import "../editor/blocks/advanced-heading/styles/style";
+@import "../editor/blocks/popup-builder/styles/style";
+@import "../editor/blocks/search/styles/style";
+@import "../editor/blocks/countdown/styles/style";
+@import "../editor/blocks/taxonomy-list/styles/style";
+@import "../editor/blocks/search-result-title/styles/style";
+@import "../editor/blocks/feature-list/styles/style.scss";
+@import "../editor/blocks/portfolio-gallery/styles/style";
+@import "../editor/blocks/archive-title/styles/style";
+@import "../editor/blocks/text-paragraph/styles/style";
+@import "../editor/blocks/chart/styles/style";
+@import "../editor/blocks/breadcrumb/styles/style";
 
 /* reserved line for script, don't delete */

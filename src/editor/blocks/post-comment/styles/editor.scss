@@ -1,0 +1,21 @@
+.commentlist {
+    li {
+        border-bottom: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.guten-post-content.guten-element {
+    .components-disabled {
+        .guten-comment-example-warning{
+            display: none;
+        }
+    }
+}
+
+.is-editing-disabled {
+    .guten-comment-example-warning{
+        display: none;
+    }
+}

@@ -39,6 +39,24 @@ export const iconStylePanel = (props) => {
                             }
                         }
                     ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -147,6 +165,18 @@ export const iconStylePanel = (props) => {
                             'valueType': 'direct',
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct',
+                        }
+                    ]
                 }
             ]
         },
@@ -213,6 +243,18 @@ export const iconStylePanel = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct',
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColorHover',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-fun-fact .fun-fact-inner:hover .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct',
                         }
                     ]

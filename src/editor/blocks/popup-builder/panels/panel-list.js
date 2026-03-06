@@ -5,6 +5,7 @@ import { overlayPanel } from './panel-overlay';
 import { closePanel } from './panel-close';
 import { containerPanel } from './panel-container';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
+import { exitAnimationPanel } from './panel-exit-animation';
 
 export const panelList = () => {
     return [
@@ -40,6 +41,12 @@ export const panelList = () => {
                 ...props,
                 styleId: 'popup-builder-animation'
             }),
+            tabRole: TabSetting
+        },
+        {
+            title: __('Animation Exit', 'gutenverse'),
+            initialOpen: false,
+            panelArray: exitAnimationPanel,
             tabRole: TabSetting
         },
         {

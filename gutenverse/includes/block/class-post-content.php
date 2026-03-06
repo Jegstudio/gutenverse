@@ -94,6 +94,6 @@ class Post_Content extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-post-content guten-element">' . $this->render_content( $post_id ) . '</div>';
+		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' entry-content is-layout-constrained guten-post-content guten-element">' . $this->render_content( $post_id ) . '</div>';
 	}
 }

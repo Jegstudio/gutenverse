@@ -4,7 +4,8 @@ import { ColorControl, DimensionControl, SwitchControl, TypographyControl } from
 export const panelDescriptionStyle = props => {
     const {
         elementId,
-        __descriptionHover,
+        switcher,
+        setSwitcher,
     } = props;
 
     return [
@@ -47,10 +48,11 @@ export const panelDescriptionStyle = props => {
                     label: 'Hover'
                 }
             ],
+            onChange: ({ __descriptionHover }) => setSwitcher({ ...switcher, descriptionHover: __descriptionHover })
         },
         {
             id: 'descriptionNormalColor',
-            show: !__descriptionHover || __descriptionHover === 'normal',
+            show: !switcher.descriptionHover || switcher.descriptionHover === 'normal',
             label: __('Description Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -69,7 +71,7 @@ export const panelDescriptionStyle = props => {
         },
         {
             id: 'descriptionHoverColor',
-            show: __descriptionHover === 'hover',
+            show: switcher.descriptionHover === 'hover',
             label: __('Description Hover Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [

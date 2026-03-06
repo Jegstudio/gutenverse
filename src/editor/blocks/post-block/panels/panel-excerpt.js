@@ -4,6 +4,7 @@ import { ColorControl, DimensionControl, TypographyControl, CheckboxControl } fr
 export const excerptPanel = (props) => {
     const {
         elementId,
+        excerptInline
     } = props;
 
     return [
@@ -56,6 +57,9 @@ export const excerptPanel = (props) => {
             label: __('Set Inline Excerpt', 'gutenverse'),
             component: CheckboxControl,
             allowDeviceControl: true,
+            deviceValues: excerptInline,
+            usePreviousDeviceValue: true,
+            usePreviousDevice: true,
         },
     ];
 };

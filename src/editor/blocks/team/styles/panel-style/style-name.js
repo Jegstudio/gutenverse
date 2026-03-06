@@ -23,8 +23,8 @@ const nameStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['nameColor']) && data.push({
         'type': 'color',
         'id': 'nameColor',
-        'selector': `.${elementId} .profile-title, #${elementId} .profile-title, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title,
-                    .${elementId} .profile-title> a, #${elementId} .profile-title> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title> a`,
+        'selector': `.${elementId} .profile-title, #${elementId} .profile-title, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title, .${elementId} .profile-box .profile-card.card-title-social-horizontal .profile-body .profile-title,
+                    .${elementId} .profile-title> a, #${elementId} .profile-title> a, .${elementId} .profile-box .profile-card.card-overlay .profile-body .profile-title> a, .${elementId} .profile-box .profile-card.card-title-social-horizontal .profile-body .profile-title> a`,
         'properties': [
             {
                 'name': 'color',
@@ -36,8 +36,8 @@ const nameStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['nameColorHover']) && data.push({
         'type': 'color',
         'id': 'nameColorHover',
-        'selector': `.${elementId}:hover .profile-title, #${elementId}:hover .profile-title, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title,
-                    .${elementId}:hover .profile-title> a, #${elementId}:hover .profile-title> a, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title> a`,
+        'selector': `.${elementId}:hover .profile-title, #${elementId}:hover .profile-title, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title, .${elementId}:hover .profile-box .profile-card.card-title-social-horizontal .profile-body .profile-title,
+                    .${elementId}:hover .profile-title> a, #${elementId}:hover .profile-title> a, .${elementId}:hover .profile-box .profile-card.card-overlay .profile-body .profile-title> a, .${elementId}:hover .profile-box .profile-card.card-title-social-horizontal .profile-body .profile-title> a`,
         'properties': [
             {
                 'name': 'color',

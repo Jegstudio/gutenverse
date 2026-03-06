@@ -4,7 +4,8 @@ import { BoxShadowControl, DimensionControl, ImageFilterControl, RangeControl, S
 export const panelImageStyle = props => {
     const {
         elementId,
-        __imageHover
+        switcher,
+        setSwitcher,
     } = props;
 
     return [
@@ -158,10 +159,11 @@ export const panelImageStyle = props => {
                     label: 'Hover'
                 }
             ],
+            onChange: ({ __imageHover }) => setSwitcher({ ...switcher, imageHover: __imageHover })
         },
         {
             id: 'imageOpacity',
-            show: !__imageHover || __imageHover === 'normal',
+            show: !switcher.imageHover || switcher.imageHover === 'normal',
             label: __('Image Opacity', 'gutenverse'),
             component: RangeControl,
             min: 0.1,
@@ -186,7 +188,7 @@ export const panelImageStyle = props => {
         },
         {
             id: 'imageHoverOpacity',
-            show: __imageHover === 'hover',
+            show: switcher.imageHover === 'hover',
             label: __('Image Hover Opacity', 'gutenverse'),
             component: RangeControl,
             min: 0.1,
@@ -211,7 +213,7 @@ export const panelImageStyle = props => {
         },
         {
             id: 'imageHoverScale',
-            show: __imageHover === 'hover',
+            show: switcher.imageHover === 'hover',
             label: __('Image Hover Scale', 'gutenverse'),
             component: RangeControl,
             min: 1,
@@ -246,7 +248,7 @@ export const panelImageStyle = props => {
         {
             id: 'imageFilter',
             label: __('Image Filter', 'gutenverse'),
-            show: !__imageHover || __imageHover === 'normal',
+            show: !switcher.imageHover || switcher.imageHover === 'normal',
             component: ImageFilterControl,
             liveStyle: [
                 {
@@ -265,8 +267,8 @@ export const panelImageStyle = props => {
         },
         {
             id: 'imageFilterHover',
-            label: __('Image Filter', 'gutenverse'),
-            show: __imageHover === 'hover',
+            label: __('Image Hover Filter', 'gutenverse'),
+            show: switcher.imageHover === 'hover',
             component: ImageFilterControl,
             liveStyle: [
                 {

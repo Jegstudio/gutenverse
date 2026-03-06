@@ -77,11 +77,11 @@ class Post_Terms extends Block_Abstract {
 						$content .= sprintf( '%1$s  <%2$s class="term-list">%3$s</%2$s>', $separator, $html_tag, $term );
 					}
 
-					$content = sprintf( '<span class="%2$s guten-post-terms">%1$s</span>', $content, $element_id );
+					$content = sprintf( '<span>%1$s</span>', $content, $element_id );
 
 					return $content;
 				}
-				return "<span class='guten-post-terms'>example, category, and, terms</span>";
+				return "<span class='guten-post-terms'><span class=\"term-item\">example</span>, <span class=\"term-item\">category</span>, <span class=\"term-item\">and</span>, <span class=\"term-item\">terms</span></span>";
 
 			}
 		}

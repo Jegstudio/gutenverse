@@ -1,7 +1,7 @@
 
 import { classnames } from 'gutenverse-core/components';
 import { compose } from '@wordpress/compose';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { useAnimationAdvanceData, useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -40,7 +40,7 @@ const save = compose(
         displayClass,
     );
 
-    return <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-duedate={JSON.stringify(dueDate)} data-expired={JSON.stringify({action: expiredAction, url: expiredUrl })}>
+    return <div className={className} {...advanceAnimationData} data-duedate={JSON.stringify(dueDate)} data-expired={JSON.stringify({action: expiredAction, url: expiredUrl })}>
         <div className="guten-countdown-wrapper">
             {showDays && <>
                 <div className="time-container days-wrapper">

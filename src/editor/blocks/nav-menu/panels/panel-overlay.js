@@ -21,15 +21,12 @@ export const overlayPanel = (props) => {
             component: BackgroundControl,
             label: __('Overlay Background', 'gutenverse'),
             show: mobileEnableOverlay,
-            allowDeviceControl: true,
             options: ['default', 'gradient'],
             liveStyle: [
                 {
                     'id': 'overlayBackground',
                     'type': 'background',
-                    'responsive': true,
-                    'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.mobile.tablet-breakpoint .guten-nav-menu .guten-nav-overlay, 
-                    .${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
+                    'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
                 }
             ],
         },
@@ -48,8 +45,7 @@ export const overlayPanel = (props) => {
                         'type': 'plain',
                         'id': 'overlayOpacity',
                         'responsive': true,
-                        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.mobile.tablet-breakpoint .guten-nav-menu .guten-nav-overlay, 
-                    .${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
+                        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
                         'properties': [
                             {
                                 'name': 'opacity',
@@ -103,8 +99,7 @@ export const overlayPanel = (props) => {
                         'type': 'plain',
                         'id': 'overlayBlur',
                         'responsive': true,
-                        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.mobile.tablet-breakpoint .guten-nav-menu .guten-nav-overlay, 
-                    .${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
+                        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu.tablet-breakpoint .guten-nav-menu .guten-nav-overlay`,
                         'properties': [
                             {
                                 'name': '-webkit-backdrop-filter',

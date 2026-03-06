@@ -8,6 +8,7 @@ import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenvers
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { useAnimationAdvanceData } from 'gutenverse-core/hooks';
+import { svgAtob } from 'gutenverse-core/helper';
 
 const save = compose(
     withAnimationAdvanceScript('gallery'),
@@ -31,12 +32,17 @@ const save = compose(
         layout,
         enableLoadText,
         enableLoadIcon,
+        enableLoadIconType,
+        enableLoadIconSVG,
         enableLoadIconPosition,
         filterSearchIcon,
+        filterSearchIconSVG,
+        filterSearchIconType,
         filterSearchIconPosition,
         filterSearchFormText,
         itemsPerLoad,
         zoomOptions,
+        titleHeadingType: HtmlTag = 'h5'
     } = attributes;
     const advanceAnimationData = useAnimationAdvanceData(attributes);
     const animationClass = useAnimationFrontend(attributes);
@@ -53,7 +59,10 @@ const save = compose(
         [`grid-tablet-${column && column['Tablet'] ? column['Tablet'] : 2}`],
         [`grid-mobile-${column && column['Mobile'] ? column['Mobile'] : 2}`],
     );
-    const imageCondition = (image) => <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...(image.lazyLoad ? { loading: 'lazy' } : {})} />;
+    const imageCondition = (image) => {
+        const { imageLoad = '' } = image;
+        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })}/>;
+    };
 
     return (
         <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-grid={grid}>
@@ -73,9 +82,15 @@ const save = compose(
                     <div className="images">
                         <div id={elementId} className="swiper-container">
                             <div className="swiper-wrapper">
-                                {images.map((image, index) => <div className="swiper-slide image-list" key={index}>
+                                {images.map((image, index) => <div className={`swiper-slide image-list image-list-${index}`} data-filter={image.id} data-title={image.title} data-category={image.category} data-content={image.content} data-index={index} key={index}>
                                     <div className="content-image swiper-zoom-container">
                                         {image && imageCondition(image)}
+                                        {image?.lightboxDescription ? <div className="content-description-wrapper">
+                                            <HtmlTag className="content-title">{image.title}</HtmlTag>
+                                            <div className="content-description">
+                                                <p>{image.content}</p>
+                                            </div>
+                                        </div> : null}
                                     </div>
                                 </div>)}
                             </div>
@@ -88,20 +103,26 @@ const save = compose(
             {filter && (
                 filterType === 'tab' ? <div className="filter-controls">
                     <ul>
-                        <li className={'guten-gallery-control active'}>{filterAll}</li>
+                        <li className={'guten-gallery-control active'} data-flag-all={true} data-filter={filterAll}>{filterAll}</li>
                         {filterList && filterList.map((filterItem, index) => {
                             return filterItem.name && <li key={index} className={'guten-gallery-control'} data-filter={filterItem.name}>{filterItem.name}</li>;
                         })}
                     </ul>
                 </div> : <div className="search-filters-wrap">
                     <div className="filter-wrap">
-                        <button id="search-filter-trigger" className={`search-filter-trigger icon-position-${filterSearchIconPosition}`}>
-                            {filterSearchIconPosition === 'before' && <i aria-hidden="true" className={filterSearchIcon}></i>}
+                        <button id="search-filter-trigger" data-flag-all={true} className={`search-filter-trigger icon-position-${filterSearchIconPosition}`}>
+                            {filterSearchIconPosition === 'before' && (filterSearchIconSVG && filterSearchIconType === 'svg' ? <div
+                                className="gutenverse-icon-svg"
+                                dangerouslySetInnerHTML={{ __html: svgAtob(filterSearchIconSVG) }}
+                            /> : <i aria-hidden="true" className={filterSearchIcon}></i>)}
                             <span>{filterAll}</span>
-                            {filterSearchIconPosition === 'after' && <i aria-hidden="true" className={filterSearchIcon}></i>}
+                            {filterSearchIconPosition === 'after' && (filterSearchIconSVG && filterSearchIconType === 'svg' ? <div
+                                className="gutenverse-icon-svg"
+                                dangerouslySetInnerHTML={{ __html: svgAtob(filterSearchIconSVG) }}
+                            /> : <i aria-hidden="true" className={filterSearchIcon}></i>)}
                         </button>
                         <ul className={'search-filter-controls'}>
-                            <li className={'guten-gallery-control active'}>{filterAll}</li>
+                            <li className={'guten-gallery-control active'} data-flag-all={true} data-filter={filterAll}>{filterAll}</li>
                             {filterList && filterList.map((filterItem, index) => {
                                 return filterItem.name && <li key={index} className={'guten-gallery-control'} data-filter={filterItem.name}>{filterItem.name}</li>;
                             })}
@@ -123,13 +144,27 @@ const save = compose(
             </div>
             {enableLoadMore && (showed < images.length) && <div className="load-more-items">
                 <div className="guten-gallery-loadmore">
-                    <a href="#" className="guten-gallery-load-more">
+                    <a aria-label="Load more" href="#" className="guten-gallery-load-more">
                         {enableLoadIcon && enableLoadIconPosition === 'before' && <span className="load-more-icon icon-position-before" aria-hidden="true">
-                            <i className={enableLoadIcon}></i>
+                            {enableLoadIconType === 'svg' && enableLoadIconSVG ? (
+                                <div
+                                    className="gutenverse-icon-svg"
+                                    dangerouslySetInnerHTML={{ __html: svgAtob(enableLoadIconSVG) }}
+                                />
+                            ) : (
+                                <i className={enableLoadIcon}></i>
+                            )}
                         </span>}
                         <span className="load-more-text">{enableLoadText}</span>
                         {enableLoadIcon && enableLoadIconPosition === 'after' && <span className="load-more-icon icon-position-after" aria-hidden="true">
-                            <i className={enableLoadIcon}></i>
+                            {enableLoadIconType === 'svg' && enableLoadIconSVG ? (
+                                <div
+                                    className="gutenverse-icon-svg"
+                                    dangerouslySetInnerHTML={{ __html: svgAtob(enableLoadIconSVG) }}
+                                />
+                            ) : (
+                                <i className={enableLoadIcon}></i>
+                            )}
                         </span>}
                     </a>
                 </div>

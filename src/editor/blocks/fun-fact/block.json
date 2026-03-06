@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/fun-fact",
 	"title": "Fun Fact",
 	"description": "Create an interesting fact about your website or something you achieved.",
@@ -17,9 +17,31 @@
 			"type": "string",
 			"default": "icon"
 		},
+		"iconPosition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {
+				"Desktop": "top"
+			}
+		},
+		"topIconContent": {
+			"type": "boolean",
+			"default": true
+		},
+		"bottomIconContent": {
+			"type": "boolean",
+			"default": false
+		},
+		"contentDisplay": {
+			"type": "string",
+			"default": "block"
+		},
 		"icon": {
 			"type": "string",
 			"default": "fas fa-grip-horizontal"
+		},
+		"iconSVG": {
+			"type": "string"
 		},
 		"iconColor": {
 			"type": "object",
@@ -87,7 +109,7 @@
 			"type": "integer",
 			"default": 150
 		},
-		"imageSizeResponsive":{
+		"imageSizeResponsive": {
 			"type": "object",
 			"migrate": {
 				"attr": "imageSizeResponsive",
@@ -101,11 +123,23 @@
 		},
 		"number": {
 			"type": "string",
-			"default": "789"
+			"default": ""
+		},
+		"safeNumber": {
+			"type": "string",
+			"migrate": {
+				"attr": "number",
+				"type": "string"
+			},
+			"default": ""
 		},
 		"suffix": {
 			"type": "string",
 			"default": "M"
+		},
+		"numberFormat": {
+			"type": "string",
+			"default": ""
 		},
 		"title": {
 			"type": "string",
@@ -191,6 +225,11 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
 		},
 		"border": {
 			"type": "object",
@@ -314,22 +353,83 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"lazyLoad":{
+		"lazyLoad": {
 			"type": "boolean",
+			"copyStyle": true
+		},
+		"prefixColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"suffixColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"prefixTypography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"suffixTypography": {
+			"type": "object",
 			"copyStyle": true
 		},
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"imageLoad": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"fun",
 		"fact",
 		"count",
-		"number"
+		"number",
+		"stats",
+		"statistic",
+		"data",
+		"info"
+	],
+	"viewScript": [
+		"gutenverse-frontend-fun-fact-script"
+	],
+	"style": [
+		"gutenverse-frontend-fun-fact-style"
 	]
 }

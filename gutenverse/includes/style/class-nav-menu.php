@@ -31,8 +31,6 @@ class Nav_Menu extends Style_Abstract {
 	 */
 	protected $name = 'nav-menu';
 
-
-
 	/**
 	 * Constructor
 	 *
@@ -385,6 +383,17 @@ class Nav_Menu extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['submenuIndicatorColor'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['SubmenuIndicatorSize'] ) ) {
@@ -392,6 +401,18 @@ class Nav_Menu extends Style_Abstract {
 				array(
 					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > li > a > i,
 						#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu> ul > li > a > i",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['SubmenuIndicatorSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu > li > a .gutenverse-icon-svg,
+						#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu> ul > li > a .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return "font-size: {$value}px;";
 					},
@@ -412,6 +433,17 @@ class Nav_Menu extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children:hover > a .gutenverse-icon-svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['submenuIndicatorHoverColor'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['submenuIndicatorActiveColor'] ) ) {
@@ -425,12 +457,23 @@ class Nav_Menu extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children.current-menu-parent > a .gutenverse-icon-svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['submenuIndicatorActiveColor'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['submenuIndicatorMargin'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i",
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, #{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'margin' );
 					},
@@ -443,7 +486,7 @@ class Nav_Menu extends Style_Abstract {
 		if ( isset( $this->attrs['submenuIndicatorPadding'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i",
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, #{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'padding' );
 					},
@@ -455,12 +498,13 @@ class Nav_Menu extends Style_Abstract {
 
 		if ( isset( $this->attrs['submenuIndicatorBorder'] ) ) {
 			$this->handle_border( 'submenuIndicatorBorder', "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i" );
+			$this->handle_border( 'submenuIndicatorBorder', "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg" );
 		}
 
 		if ( isset( $this->attrs['submenuIndicatorBorderResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i",
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i, #{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},
@@ -732,6 +776,17 @@ class Nav_Menu extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-hamburger-menu svg",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['hamburgerSize'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['hamburgerPadding'] ) ) {
@@ -766,6 +821,17 @@ class Nav_Menu extends Style_Abstract {
 					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-hamburger-menu",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['hamburgerColorNormal'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-hamburger-menu svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['hamburgerColorNormal'],
 					'device_control' => true,
@@ -808,6 +874,17 @@ class Nav_Menu extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-hamburger-menu:hover svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['hamburgerColorHover'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['hamburgerBgHover'] ) ) {
@@ -833,6 +910,235 @@ class Nav_Menu extends Style_Abstract {
 				)
 			);
 		}
+		$tablet_breakpoint = gutenverse_breakpoint( 'Tablet' );
+		$mobile_breakpoint = gutenverse_breakpoint( 'Mobile' );
+		$md_min = $tablet_breakpoint;
+		$sm_max = $tablet_breakpoint + 1;
+		$sm_min = $mobile_breakpoint;
+		$xs_max = $mobile_breakpoint + 1;
+
+		$custom_css = "
+			@media screen and (max-width: {$md_min}px) {
+				.guten-nav-menu.break-point-tablet .gutenverse-hamburger-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper {
+					width: 100%;
+					max-width: 360px;
+					border-radius: 0px 0px 0px 0px;
+					background-color: #f7f7f7;
+					width: 100%;
+					position: fixed;
+					top: 0;
+					left: -110%;
+					height: 100%;
+					overflow-y: auto;
+					overflow-x: hidden;
+					display: flex;
+					flex-direction: column-reverse;
+					justify-content: flex-end;
+					-webkit-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-moz-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-o-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper.active {
+					left: 0;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu-container {
+					overflow-y: scroll;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-nav-identity-panel {
+					padding: 10px 0px 10px 0px;
+					display: block;
+					position: relative;
+					z-index: 5;
+					width: 100%;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-nav-site-title {
+					display: inline-block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu, 
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu > ul {
+					display: block;
+					overflow-y: auto;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i,
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg {
+					margin-left: auto;
+					padding: 4px 15px;
+					border: 1px solid var(--guten-border-color);
+					border-radius: 3px;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children .sub-menu {
+					position: inherit;
+					box-shadow: none!important;
+					background: none;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li {
+					display: block;
+					width: 100%;
+					position: inherit;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu {
+					display: none;
+					max-height: 2500px;
+					opacity: 0;
+					visibility: hidden;
+					transition: max-height 5s ease-out;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu.dropdown-open {
+					display: block;
+					opacity: 1;
+					visibility: visible;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li a {
+					display: block;
+				}
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li a i, .guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu li a .gutenverse-icon-svg {
+					float: right;
+				}
+				.guten-nav-menu.break-point-tablet .guten-nav-overlay {
+					position: fixed;
+					background-color: rgba(0, 0, 0, 0.2);
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					z-index: 999;
+					transform: translateX(-100%);
+					transition: transform 0s ease-in-out;
+				}
+				.guten-nav-menu.break-point-tablet .guten-nav-overlay.active {
+					animation: slideLeftToRight .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+				.guten-nav-menu.break-point-tablet .guten-nav-overlay.exiting {
+					animation: slideRightToLeft .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+			}
+
+			@media screen and (min-width: {$sm_max}px) {
+				.guten-nav-menu.break-point-tablet .gutenverse-menu-wrapper .gutenverse-menu-container {
+					height: auto;
+				}
+			}
+
+			@media screen and (max-width: {$sm_min}px) {
+				.guten-nav-menu.break-point-mobile .gutenverse-hamburger-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper {
+					width: 100%;
+					max-width: 360px;
+					border-radius: 0px 0px 0px 0px;
+					background-color: #f7f7f7;
+					position: fixed;
+					top: 0;
+					left: -110%;
+					height: 100% !important;
+					overflow-y: auto;
+					overflow-x: hidden;
+					display: flex;
+					flex-direction: column-reverse;
+					justify-content: flex-end;
+					-webkit-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-moz-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					-o-transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+					transition: left 0.6s cubic-bezier(0.6, 0.1, 0.68, 0.53);
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper.active {
+					left: 0;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu-container {
+					overflow-y: scroll;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-nav-identity-panel {
+					padding: 10px 0px 10px 0px;
+					display: block;
+					position: relative;
+					z-index: 5;
+					width: 100%;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-nav-site-title {
+					display: inline-block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu {
+					display: block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu, 
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu > ul {
+					display: block;
+					overflow-y: auto;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a i,
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children > a .gutenverse-icon-svg {
+					margin-left: auto;
+					padding: 4px 15px;
+					border: 1px solid var(--guten-border-color);
+					border-radius: 3px;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li.menu-item-has-children .sub-menu {
+					position: inherit;
+					box-shadow: none;
+					background: none;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li {
+					display: block;
+					width: 100%;
+					position: inherit;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu {
+					display: none;
+					max-height: 2500px;
+					opacity: 0;
+					visibility: hidden;
+					transition: max-height 5s ease-out;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li .sub-menu.dropdown-open {
+					display: block;
+					opacity: 1;
+					visibility: visible;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li a {
+					display: block;
+				}
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li a i, .guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu li a .gutenverse-icon-svg {
+					float: right;
+				}
+				.guten-nav-menu.break-point-mobile .guten-nav-overlay {
+					position: fixed;
+					background-color: rgba(0, 0, 0, 0.2);
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					z-index: 999;
+					transform: translateX(-100%);
+					transition: transform 0s ease-in-out;
+				}
+				.guten-nav-menu.break-point-mobile .guten-nav-overlay.active {
+					animation: slideLeftToRight .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+				.guten-nav-menu.break-point-mobile .guten-nav-overlay.exiting {
+					animation: slideRightToLeft .5s ease-in-out forwards;
+					transition: transform .5s ease-in-out;
+				}
+			}
+
+			@media screen and (min-width: {$xs_max}px) {
+				.guten-nav-menu.break-point-mobile .gutenverse-menu-wrapper .gutenverse-menu-container {
+					height: auto;
+				}
+			}
+		";
+
+		$this->push_additional_style( $custom_css );
 
 		if ( isset( $this->attrs['closeWidth'] ) ) {
 			$this->inject_style(
@@ -851,6 +1157,17 @@ class Nav_Menu extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu i",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['closeSize'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu svg",
 					'property'       => function ( $value ) {
 						return "font-size: {$value}px;";
 					},
@@ -897,6 +1214,17 @@ class Nav_Menu extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['closeColorNormal'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['closeBgNormal'] ) ) {
@@ -929,6 +1257,17 @@ class Nav_Menu extends Style_Abstract {
 					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['closeColorHover'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-close-menu:hover svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['closeColorHover'],
 					'device_control' => true,

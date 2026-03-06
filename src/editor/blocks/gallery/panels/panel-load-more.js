@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
-import { CheckboxControl, IconControl, IconRadioControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconSVGControl, IconRadioControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 
 export const loadMorePanel = (props) => {
     const {
@@ -34,7 +34,7 @@ export const loadMorePanel = (props) => {
             id: 'enableLoadIcon',
             show: enableLoadMore,
             label: __('Button Icon', 'gutenverse'),
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'enableLoadIconPosition',

@@ -14,6 +14,13 @@
         color: var(--guten-bg-color);
     }
 
+    .gutenverse-icon-svg {
+        svg {
+            font-size: 50px;
+            fill: var(--guten-bg-color);
+        }
+    }
+
     &.rounded {
         border-radius: 10%;
     }
@@ -32,6 +39,10 @@
 
         i {
             color: var(--guten-wp-color);
+        }
+
+        svg {
+            fill: var(--guten-wp-color);
         }
     }
 }

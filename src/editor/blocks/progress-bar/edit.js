@@ -79,7 +79,7 @@ const ProgressBarBlock = compose(
             skillTrack.remove();
             numPercentage.remove();
         };
-    }, [percentage, duration]);
+    }, [percentage, duration, style]);
 
     useEffect(() => {
         if (elementRef) {

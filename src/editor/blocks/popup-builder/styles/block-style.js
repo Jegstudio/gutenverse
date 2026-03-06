@@ -13,16 +13,63 @@ const getBlockStyle = (elementId, attributes) => {
     data = panelPopupStyle(elementId, attributes, data);
 
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
+
+    isNotEmpty(attributes['exitAnimation']) && data.push({
+        'type': 'plain',
+        'id': 'exitAnimation',
+        'properties': [
+            {
+                'name': 'animation-name',
+                'valueType': 'direct',
+            },
+            {
+                'name': 'animation-direction',
+                'valueType': 'static',
+                'staticValue': 'reverse',
+            },
+            {
+                'name': 'animation-delay',
+                'valueType': 'static',
+                'staticValue': '0s',
+            },
+        ],
+        'selector': `.${elementId}.guten-element .guten-popup .guten-popup-content.exit`,
     });
 
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
+    isNotEmpty(attributes['exitAnimationDuration']) && data.push({
+        'type': 'plain',
+        'id': 'exitAnimationDuration',
+        'properties': [
+            {
+                'name': 'animation-duration',
+                'valueType': 'pattern',
+                'pattern': '{value}ms',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+                }
+            },
+        ],
+        'selector': `.${elementId}.guten-element .guten-popup .guten-popup-content.exit`,
+    });
+
+    isNotEmpty(attributes['exitAnimationDelay']) && data.push({
+        'type': 'plain',
+        'id': 'exitAnimationDelay',
+        'properties': [
+            {
+                'name': 'animation-delay',
+                'valueType': 'pattern',
+                'pattern': '{value}ms',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+                }
+            },
+        ],
+        'selector': `.${elementId}.guten-element .guten-popup .guten-popup-content.exit`,
     });
 
     isNotEmpty(attributes['border']) && data.push({

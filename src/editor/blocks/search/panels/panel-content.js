@@ -105,27 +105,10 @@ export const contentPanel = props => {
             },
             liveStyle: [
                 {
-                    'type': isNotEmpty(inputWidth) && '%' !== inputWidthDevice['unit'] ? 'unitPoint' : 'plain',
-                    'id': 'inputWidth',
-                    'selector': `.${elementId} .gutenverse-search.gutenverse-search-input, .${elementId} .gutenverse-search-form .gutenverse-search-input, .${elementId} .search-input-container .gutenverse-search.gutenverse-search-input`,
-                    'properties': isNotEmpty(inputWidth) && '%' !== inputWidthDevice['unit'] ? 
-                        [{
-                            'name': 'width',
-                            'valueType': 'direct',
-                            'important': true
-                        }] :
-                        [{
-                            'name': 'width',
-                            'valueType': 'pattern',
-                            'pattern': '100% !important',
-                        }],
-                    'responsive': true,
-                },
-                {
                     'type': 'unitPoint',
                     'id': 'inputWidth',
                     'responsive': true,
-                    'selector': `.${elementId} .search-input-container`,
+                    'selector': `.${elementId} .search-input-container-outer`,
                     'properties': [
                         {
                             'name': 'width',
@@ -181,7 +164,7 @@ export const contentPanel = props => {
                 {
                     'type': 'plain',
                     'id': 'buttonWidth',
-                    'selector': `.${elementId} .search-input-container`,
+                    'selector': `.${elementId} .search-input-container-outer`,
                     'properties': [
                         {
                             'name': 'max-width',
@@ -189,6 +172,7 @@ export const contentPanel = props => {
                             'functionName': 'searchButtonContainerWidth',
                         }
                     ],
+                    'skip_device': ['Mobile'],
                     'responsive': true,
                 },
             ]

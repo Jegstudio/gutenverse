@@ -19,7 +19,7 @@ class Editor_Assets {
 	 * Init constructor.
 	 */
 	public function __construct() {
-		add_filter( 'gutenverse_block_config', array( $this, 'block_config' ) );
+		add_filter( 'gutenverse_block_config', array( $this, 'block_config' ), 9 );
 		add_action( 'gutenverse_include_block', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -73,7 +73,7 @@ class Editor_Assets {
 			'name'           => GUTENVERSE_NAME,
 			'version'        => GUTENVERSE_VERSION,
 			'currentNotice'  => GUTENVERSE_NOTICE_VERSION,
-			'noticeVersions' => array( '3.0.0', '2.0.0', '1.8.0', '1.7.0', '1.6.0' ),
+			'noticeVersions' => array( '3.2.0' ),
 		);
 
 		return $config;

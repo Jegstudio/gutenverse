@@ -39,11 +39,30 @@ const panelTitleStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['titleIconSize']) && data.push({
+        'type': 'plain',
+        'id': 'titleIconSize',
+        'responsive': true,
+        'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title svg`,
+        'properties': [
+            {
+                'name': 'font-size',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
     isNotEmpty(attributes['titleIconSpacing']) && data.push({
         'type': 'plain',
         'id': 'titleIconSpacing',
         'responsive': true,
-        'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-before i`,
+        'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-before i, .${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-before .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'margin-right',
@@ -62,7 +81,7 @@ const panelTitleStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'titleIconSpacing',
         'responsive': true,
-        'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-after i`,
+        'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-after i, .${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-after .gutenverse-icon-svg`,
         'properties': [
             {
                 'name': 'margin-left',
@@ -101,6 +120,18 @@ const panelTitleStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['titleNormalIconColor']) && data.push({
+        'type': 'color',
+        'id': 'titleNormalIconColor',
+        'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title svg`,
+        'properties': [
+            {
+                'name': 'fill',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['titleHoverColor']) && data.push({
         'type': 'color',
         'id': 'titleHoverColor',
@@ -120,6 +151,18 @@ const panelTitleStyle = (elementId, attributes, data) => {
         'properties': [
             {
                 'name': 'color',
+                'valueType': 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['titleHoverIconColor']) && data.push({
+        'type': 'color',
+        'id': 'titleHoverIconColor',
+        'selector': `.${elementId}.gutenverse-image-box:hover .inner-container .image-box-body .body-title svg`,
+        'properties': [
+            {
+                'name': 'fill',
                 'valueType': 'direct'
             }
         ]

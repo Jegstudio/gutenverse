@@ -8,40 +8,29 @@ const getBlockStyle = (elementId, attributes) => {
     data = colorStyle(elementId, attributes, data);
     data = contentStyle(elementId, attributes, data);
     /**Panel List */
-    isNotEmpty(attributes['background']) && data.push({
-        'type': 'background',
-        'id': 'background',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
-    });
-
-    isNotEmpty(attributes['backgroundHover']) && data.push({
-        'type': 'background',
-        'id': 'backgroundHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
-    });
 
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
         'id': 'border',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
+        'selector': `.editor-styles-wrapper .is-root-container #${elementId}`,
     });
 
     isNotEmpty(attributes['borderHover']) && data.push({
         'type': 'border',
         'id': 'borderHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
+        'selector': `.editor-styles-wrapper .is-root-container #${elementId}:hover`,
     });
 
     isNotEmpty(attributes['borderResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'borderResponsive',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element`,
+        'selector': `.editor-styles-wrapper .is-root-container #${elementId}`,
     });
 
     isNotEmpty(attributes['borderResponsiveHover']) && data.push({
         'type': 'borderResponsive',
         'id': 'borderResponsiveHover',
-        'selector': `.editor-styles-wrapper .is-root-container .${elementId}.guten-element:hover`,
+        'selector': `.editor-styles-wrapper .is-root-container #${elementId}:hover`,
     });
 
     isNotEmpty(attributes['boxShadow']) && data.push({
@@ -187,18 +176,18 @@ const getBlockStyle = (elementId, attributes) => {
         ],
         'selector': `.${elementId}.guten-element`,
     },
-        {
-            'type': 'positioning',
-            'id': 'positioningAlign',
-            'properties': [
-                {
-                    'name': 'vertical-align',
-                    'valueType': 'direct'
-                }
-            ],
-            'attributeType': 'align',
-            'selector': `.${elementId}.guten-element`,
-        });
+    {
+        'type': 'positioning',
+        'id': 'positioningAlign',
+        'properties': [
+            {
+                'name': 'vertical-align',
+                'valueType': 'direct'
+            }
+        ],
+        'attributeType': 'align',
+        'selector': `.${elementId}.guten-element`,
+    });
     isNotEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
         'type': 'plain',
         'id': 'positioningLocation',

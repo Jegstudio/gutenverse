@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-accordions',
         'iconColor': {
             'r': 255,
             'g': 255,

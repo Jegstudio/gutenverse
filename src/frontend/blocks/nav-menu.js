@@ -19,6 +19,7 @@ class GutenverseNavMenu extends Default {
             menuDropdown: wrapper.find('li.menu-item-has-children > a'),
             singleMenu: wrapper.find('li.menu-item:not(.menu-item-has-children)'),
             overlay: wrapper.find('.guten-nav-overlay'),
+            hasChildren: wrapper.find('li.menu-item-has-children'),
         };
         this.__handleAnchor(element);
         this._firstLoad(item);
@@ -36,13 +37,56 @@ class GutenverseNavMenu extends Default {
 
     _addDropdownIcon(item) {
         const indicator = item.wrapper.data('item-indicator');
+        const indicatorType = item.wrapper.data('item-indicator-type');
+        const indicatorSvg = item.wrapper.data('item-indicator-svg');
+
         item.menuDropdown.each(node => {
             u(node).find('i').remove();
-            u(node).append(`<i class='${indicator}'></i>`);
+            u(node).find('svg').remove();
+
+            if (indicatorType === 'svg' && indicatorSvg) {
+                try {
+                    const svgContent = atob(indicatorSvg);
+                    u(node).append(`<div class='gutenverse-icon-svg'>${svgContent}</div>`);
+                } catch (e) {
+                    u(node).append(`<i class='${indicator}'></i>`);
+                }
+            } else {
+                u(node).append(`<i class='${indicator}'></i>`);
+            }
+        });
+    }
+
+    _handleSubMenusOverflow(submenus) {
+        const viewportWidth = window.innerWidth;
+        const updates = [];
+
+        submenus.forEach(submenu => {
+            const rect = submenu.getBoundingClientRect();
+            if (rect.right > viewportWidth) {
+                const leftVal = window.getComputedStyle(submenu).left;
+                updates.push({ submenu, leftVal });
+            }
+        });
+
+        updates.forEach(({ submenu, leftVal }) => {
+            if (leftVal === '0px') {
+                u(submenu).attr('style', 'left: -120%;');
+            } else {
+                u(submenu).attr('style', 'left: auto; right: 100%;');
+            }
         });
     }
 
     _toggleMenu(item) {
+        const submenus = [];
+        item.hasChildren.each((node) => {
+            const submenu = u(node).find('.sub-menu').first();
+            if (submenu) {
+                submenus.push(submenu);
+            }
+        });
+        this._handleSubMenusOverflow(submenus);
         item.openToggle.off('click').on('click', function () {
             if (item.container.hasClass('active')) {
                 item.container.removeClass('active');
@@ -61,12 +105,12 @@ class GutenverseNavMenu extends Default {
 
         item.closeToggle.on('click', function () {
             item.container.removeClass('active');
-            
+
             if (item.overlay.hasClass('active')) {
                 item.overlay.addClass('exiting');
             }
             item.overlay.removeClass('active');
-            
+
         });
 
         if (item.wrapper.hasClass('submenu-click-title')) {
@@ -81,7 +125,7 @@ class GutenverseNavMenu extends Default {
             });
         }
 
-        const dropdownToggle = item.wrapper.find('li.menu-item-has-children > a i');
+        const dropdownToggle = item.wrapper.find('li.menu-item-has-children > a i, li.menu-item-has-children > a .gutenverse-icon-svg');
         dropdownToggle.on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -92,34 +136,41 @@ class GutenverseNavMenu extends Default {
             submenu.toggleClass('dropdown-open');
         }
 
-        if ( parseInt( item.wrapper.data('close-on-click') ) === 1 ) {
+        if (parseInt(item.wrapper.data('close-on-click')) === 1) {
             item.singleMenu.on('click', function () {
                 item.container.removeClass('active');
                 item.overlay.removeClass('active');
             });
         }
     }
-    __normalizeUrl(url){
+    __normalizeUrl(url) {
         return url.endsWith('/') ? url.slice(0, -1) : url;
     }
-    __removingClass(element, currentUrl){
+    __removingClass(element, currentUrl) {
         let menuLinks = u(element).find('.gutenverse-menu a');
         menuLinks.each(link => {
             const parentLi = u(link).closest('li');
             if (this.__normalizeUrl(link.href) !== currentUrl) {
                 parentLi.removeClass('current-menu-item');
-            }else{
+            } else {
                 parentLi.addClass('current-menu-item');
             }
         });
     }
-    __handleAnchor(element){
+    __handleAnchor(element) {
         let currentUrl = this.__normalizeUrl(window.location.href);
         this.__removingClass(element, currentUrl);
-        window.addEventListener('popstate', (event) => {
+        window.addEventListener('popstate', () => {
             currentUrl = this.__normalizeUrl(window.location.href);
             this.__removingClass(element, currentUrl);
         });
     }
 }
+
+const selected = u('.guten-nav-menu');
+
+if (selected) {
+    new GutenverseNavMenu(selected);
+}
+
 export default GutenverseNavMenu;

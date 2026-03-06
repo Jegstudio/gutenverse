@@ -242,7 +242,7 @@ class Progress_Bar extends Style_Abstract {
 		if ( isset( $this->attrs['percentBgColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .progress-group[class*='tooltip-'] .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper,.{$this->element_id} .progress-group.ribbon .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper,.{$this->element_id} .progress-group[class*='tooltip-']:not(.tooltip-style) .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper:before",
+					'selector'       => ".{$this->element_id} .progress-group[class*='tooltip-'] .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper,.{$this->element_id} .progress-group.ribbon .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper,.{$this->element_id} .progress-group[class*='tooltip-']:not(.tooltip-style) .progress-skill-bar .skill-bar .skill-track .number-percentage-wrapper:before,.{$this->element_id} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -322,6 +322,45 @@ class Progress_Bar extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+		}
+		if ( isset( $this->attrs['style'] ) && 'switch' === $this->attrs['style'] ) {
+			if ( isset( $this->attrs['percentSwitchBorder'] ) ) {
+				$this->handle_border( 'percentSwitchBorder', ".{$this->element_id} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before" );
+			}
+			if ( isset( $this->attrs['percentSwitchBoxShadow'] ) ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before",
+						'property'       => function ( $value ) {
+							return $this->handle_box_shadow( $value );
+						},
+						'value'          => $this->attrs['percentSwitchBoxShadow'],
+						'device_control' => false,
+					)
+				);
+			}
+			if ( isset( $this->attrs['percentSwitchSize'] ) ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before",
+						'property'       => function ( $value ) {
+							return $this->handle_unit_point( $value, 'width' );
+						},
+						'value'          => $this->attrs['percentSwitchSize'],
+						'device_control' => false,
+					)
+				);
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id} .progress-group.switch .progress-skill-bar .skill-bar .skill-track:before",
+						'property'       => function ( $value ) {
+							return $this->handle_unit_point( $value, 'height' );
+						},
+						'value'          => $this->attrs['percentSwitchSize'],
+						'device_control' => false,
+					)
+				);
+			}
 		}
 	}
 }

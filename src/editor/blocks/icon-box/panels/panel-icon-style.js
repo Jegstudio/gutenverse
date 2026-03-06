@@ -1,8 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { BackgroundControl, BorderControl, BorderResponsiveControl, BoxShadowControl, ColorControl, DimensionControl, RangeControl, SelectControl, SwitchControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { handleColor, handleDimension, handleBorderResponsive, elementVar, normalAppender, allowRenderBoxShadow, handleBorder } from 'gutenverse-core/styling';
-import { handleBoxShadow } from 'gutenverse-core/styling';
 
 export const panelIconStyle = (props) => {
     const {
@@ -13,37 +11,6 @@ export const panelIconStyle = (props) => {
     } = props;
 
     const device = getDeviceType();
-
-    /**
-     * This is custom to prevent older saved values causing errors because BackgroundControl is used instead of GradientControl
-     */
-    const customHandleBackground = (background) => {
-        const elementStyle = elementVar();
-        const {
-            gradientColor,
-            gradientType = 'linear',
-            gradientAngle = 180,
-            gradientRadial = 'center center'
-        } = background;
-
-        if (gradientColor !== undefined) {
-            const colors = gradientColor.map(gradient => `${gradient.color} ${gradient.offset * 100}%`);
-
-            if (gradientType === 'radial') {
-                normalAppender({
-                    style: `background-image: radial-gradient(at ${gradientRadial}, ${colors.join(',')});`,
-                    elementStyle
-                });
-            } else {
-                normalAppender({
-                    style: `background-image: linear-gradient(${gradientAngle}deg, ${colors.join(',')});`,
-                    elementStyle
-                });
-            }
-        }
-
-        return elementStyle;
-    };
 
     return [
         {
@@ -86,10 +53,21 @@ export const panelIconStyle = (props) => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
-                    'selector': `.${elementId} .icon-box.icon-box-header .icon i`,
+                    'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon i`,
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ],
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconColor',
+                    'selector': `.guten-icon-box.${elementId} .icon-box.icon-box-header .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ],
@@ -105,10 +83,21 @@ export const panelIconStyle = (props) => {
                 {
                     'type': 'color',
                     'id': 'iconHoverColor',
-                    'selector': `.${elementId}:hover .icon-box.icon-box-header .icon i`,
+                    'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon i`,
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ],
+                },
+                {
+                    'type': 'color',
+                    'id': 'iconHoverColor',
+                    'selector': `.guten-icon-box.${elementId}:hover .icon-box.icon-box-header .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ],
@@ -159,6 +148,7 @@ export const panelIconStyle = (props) => {
             id: 'iconGradient',
             show: (!switcher.icon || switcher.icon === 'normal') && iconStyleMode === 'gradient',
             component: BackgroundControl,
+            type: 'Gradient Color',
             options: ['gradient'],
             liveStyle: [
                 {
@@ -179,6 +169,7 @@ export const panelIconStyle = (props) => {
             id: 'iconGradientHover',
             show: switcher.icon === 'hover' && iconStyleMode === 'gradient',
             component: BackgroundControl,
+            type: 'Hover Gradient Color',
             options: ['gradient'],
             liveStyle: [
                 {
@@ -201,6 +192,7 @@ export const panelIconStyle = (props) => {
             show: (!switcher.icon || switcher.icon === 'normal') && iconStyleMode === 'gradient',
             component: BackgroundControl,
             options: ['gradient'],
+            type: 'Gradient Background Color',
             liveStyle: [
                 {
                     'type': 'plain',
@@ -221,6 +213,7 @@ export const panelIconStyle = (props) => {
             show: switcher.icon === 'hover' && iconStyleMode === 'gradient',
             component: BackgroundControl,
             options: ['gradient'],
+            type: 'Hover Gradient Background Color',
             liveStyle: [
                 {
                     'type': 'plain',

@@ -56,6 +56,16 @@ const panelContainerStyle = (elementId, attributes, data) => {
         ],
         'selector': `.${elementId}.guten-popup-builder .guten-popup .guten-popup-content`,
     });
+    isNotEmpty(attributes['videoContainerBorder']) && data.push({
+        'type': 'border',
+        'id': 'videoContainerBorder',
+        'selector': `.${elementId}.guten-popup-builder .guten-popup .guten-popup-content .guten-popup-video-container`,
+    });
+    isNotEmpty(attributes['videoContainerBorderResponsive']) && data.push({
+        'type': 'borderResponsive',
+        'id': 'videoContainerBorderResponsive',
+        'selector': `.${elementId}.guten-popup-builder .guten-popup .guten-popup-content .guten-popup-video-container`,
+    });
     return data;
 };
 

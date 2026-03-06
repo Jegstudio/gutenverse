@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-logo-slider',
         'autoplay': true,
         'itemShowed': { 'Desktop': '4' },
         'spacing': { 'Desktop': '30' },

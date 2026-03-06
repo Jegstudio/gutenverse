@@ -15,6 +15,17 @@ const colorStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['iconColor']) && data.push({
         'type': 'color',
         'id': 'iconColor',
+        'selector': `.${elementId}.fill .guten-social-icon a svg, .${elementId}.border .guten-social-icon a svg, .${elementId}.custom .guten-social-icon a svg`,
+        'properties' : [
+            {
+                'name' : 'fill',
+                'valueType' : 'direct'
+            }
+        ]
+    });
+    isNotEmpty(attributes['iconColor']) && data.push({
+        'type': 'color',
+        'id': 'iconColor',
         'selector': `.${elementId}.border .guten-social-icon a`,
         'properties' : [
             {
@@ -47,6 +58,19 @@ const colorStyle = (elementId, attributes, data) => {
             }
         ]
     });
+
+    isNotEmpty(attributes['hoverIconColor']) && data.push({
+        'type': 'color',
+        'id': 'hoverIconColor',
+        'selector': `.${elementId}.fill .guten-social-icon a:hover svg, .${elementId}.border .guten-social-icon a:hover svg, .${elementId}.custom .guten-social-icon a:hover svg`,
+        'properties' : [
+            {
+                'name' : 'fill',
+                'valueType' : 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['hoverIconColor']) && data.push({
         'type': 'color',
         'id': 'hoverIconColor',

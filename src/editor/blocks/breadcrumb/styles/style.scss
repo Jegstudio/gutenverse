@@ -1,0 +1,55 @@
+.guten-element.guten-breadcrumb {
+    display: flex;
+
+    nav.breadcrumb-nav {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        ol {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            li {
+                display: flex;
+                align-items: center;
+
+                a {
+                    text-decoration: none;
+                    color: #333;
+                }
+
+                span {
+                    display: flex;
+                    transition: color 0.2s;
+                }
+
+                &.separator {
+                    margin: 0 8px;
+                    color: #aaa;
+                    display: flex;
+                    align-items: center;
+
+                    i {
+                        &.fab {
+                            font-family: 'Font Awesome 6 Brands' !important;
+                        }
+
+                        &:not(.gtn):not(.fab) {
+                            font-family: 'Font Awesome 6 Free' !important;
+                        }
+                    }
+
+                    svg {
+                        fill: #aaa;
+                    }
+                }
+            }
+        }
+    }
+}

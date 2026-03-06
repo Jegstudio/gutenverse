@@ -1,53 +1,22 @@
 import { compose } from '@wordpress/compose';
 import { useState } from '@wordpress/element';
 import { InspectorControls, MediaUpload, MediaUploadCheck, RichText, useBlockProps } from '@wordpress/block-editor';
-import { classnames } from 'gutenverse-core/components';
+import { classnames, VideoPreviewer } from 'gutenverse-core/components';
 import { __ } from '@wordpress/i18n';
 import { ArrowLeft } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { Button } from '@wordpress/components';
-import { ReactPlayer } from 'gutenverse-core/components';
 import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
-import { isEmpty } from 'lodash';
-import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { isEmpty } from 'gutenverse-core/helper';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
 import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
 import { AlertControl } from 'gutenverse-core/controls';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
-
-const VideoContainer = ({ videoSrc, start, end, videoType, hideControls, playing, loop, muted, width, height }) => {
-    const playerStyle = {};
-    const playerConfig = {
-        youtube: {
-            playerVars: {
-                start,
-                end
-            }
-        }
-    };
-
-    const deviceType = getDeviceType();
-
-    return videoType && videoSrc ? (
-        <ReactPlayer
-            className="guten-video-background"
-            url={videoSrc}
-            controls={!hideControls}
-            width={width && width[deviceType] ? `${width[deviceType]}%` : '100%'}
-            height={height && height[deviceType] ? `${height[deviceType]}px` : '500px'}
-            playing={playing}
-            muted={muted}
-            loop={loop}
-            playsinline={true}
-            style={playerStyle}
-            config={playerConfig}
-        />
-    ) : null;
-};
+import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 const VideoPicker = (props) => {
     const {
@@ -102,6 +71,8 @@ const VideoBlock = compose(
         playing,
         loop,
         muted,
+        width,
+        height
     } = attributes;
 
     const animationClass = useAnimationEditor(attributes);
@@ -139,10 +110,22 @@ const VideoBlock = compose(
         }
     };
 
+    const wrapperStyles = [
+        '.guten-video-background{margin: 0 auto;}'
+    ];
+
     const videoRender = () => {
+        const deviceType = getDeviceType();
         switch (videoType) {
             case 'externalLink':
-                return <VideoContainer {...attributes} />;
+                const resolvedWidth = width?.[deviceType]
+                    ? `${width[deviceType]}%`
+                    : '100%';
+
+                const resolvedHeight = height?.[deviceType]
+                    ? `${height[deviceType]}px`
+                    : '500px';
+                return <VideoPreviewer {...attributes} wrapperStyles={wrapperStyles} width={resolvedWidth} height={resolvedHeight} classNames={'guten-video-background'} />;
             default:
                 return <video controls={!hideControls} src={videoSrc} autoPlay={playing} muted={muted} loop={loop} />;
         }
@@ -155,6 +138,35 @@ const VideoBlock = compose(
             setBlockRef(elementRef);
         }
     }, [elementRef]);
+
+    useEffect(() => {
+        if (!elementRef.current) return;
+
+        const applyReferrerPolicy = () => {
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach((iframe) => {
+                if (!iframe.hasAttribute('referrerpolicy')) {
+                    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+                }
+            });
+        };
+
+        // Initial check for any existing iframes
+        applyReferrerPolicy();
+
+        // Observe for new iframes being added asynchronously
+        const observer = new MutationObserver(() => {
+            applyReferrerPolicy();
+        });
+
+        observer.observe(elementRef.current, {
+            childList: true,
+            subtree: true,
+        });
+
+        // Cleanup on unmount
+        return () => observer.disconnect();
+    }, []);
 
     const selectType = () => {
         switch (videoType) {
@@ -195,7 +207,7 @@ const VideoBlock = compose(
     };
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <InspectorControls>
             <div className={'header-control'}>
                 <AlertControl type={'warning'}>

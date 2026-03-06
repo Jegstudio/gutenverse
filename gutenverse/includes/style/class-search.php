@@ -58,7 +58,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputPadding'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input",
+					'selector'       => ".{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input, .{$this->element_id}:not(:has(.search-input-container-outer)) .search-input-container .gutenverse-search.gutenverse-search-input",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'padding' );
 					},
@@ -71,7 +71,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputMargin'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input",
+					'selector'       => ".{$this->element_id} .search-input-container-outer, .{$this->element_id}:not(:has(.search-input-container-outer)) .search-input-container",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'margin' );
 					},
@@ -108,9 +108,22 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputColorNormal'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['inputColorNormal'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['inputColorNormal'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill",
+					'property'       => function ( $value ) {
+						return '-webkit-text-fill-color: ' . $this->get_color( $value ) . ' !important;';
 					},
 					'value'          => $this->attrs['inputColorNormal'],
 					'device_control' => true,
@@ -121,7 +134,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputBgColorNormal'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -131,14 +144,27 @@ class Search extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['inputBgColorNormal'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill",
+					'property'       => function ( $value ) {
+						return 'box-shadow: 0 0 0 100vmax ' . $this->get_color( $value ) . ' inset !important;';
+					},
+					'value'          => $this->attrs['inputBgColorNormal'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['inputBorderNormal'] ) ) {
-			$this->handle_border( 'inputBorderNormal', ".{$this->element_id} .gutenverse-search.gutenverse-search-input" );
+			$this->handle_border( 'inputBorderNormal', ".{$this->element_id} .gutenverse-search.gutenverse-search-input, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input" );
 		}
 
 		if ( isset( $this->attrs['inputBorderNormalResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},
@@ -154,7 +180,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -167,7 +193,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputBgColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -178,13 +204,13 @@ class Search extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['inputBorderHover'] ) ) {
-			$this->handle_border( 'inputBorderHover', ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover" );
+			$this->handle_border( 'inputBorderHover', ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover" );
 		}
 
 		if ( isset( $this->attrs['inputBorderHoverResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:hover, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},
@@ -200,7 +226,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputColorFocus'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -213,7 +239,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputBgColorFocus'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -224,11 +250,11 @@ class Search extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['inputBorderFocus'] ) ) {
-			$this->handle_border( 'inputBorderFocus', ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus" );
+			$this->handle_border( 'inputBorderFocus', ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus" );
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus",
 					'property'       => function () {
 						return 'outline: none !important;';
 					},
@@ -241,7 +267,7 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputBorderFocusResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},
@@ -255,7 +281,7 @@ class Search extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus",
+					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input:focus, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input:focus",
 					'property'       => function () {
 						return 'outline: none !important;';
 					},
@@ -266,18 +292,6 @@ class Search extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['formStyle'] ) ) {
-			$this->inject_style(
-				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search-form .guten-button-wrapper",
-					'property'       => function ( $value ) {
-						if ( '100%' === $value ) {
-							return "width: {$value} !important;";
-						}
-					},
-					'value'          => $this->attrs['formStyle'],
-					'device_control' => true,
-				)
-			);
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .search-input-container",
@@ -307,9 +321,9 @@ class Search extends Style_Abstract {
 		if ( isset( $this->attrs['inputWidth'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input,
-						.{$this->element_id} .gutenverse-search-form .gutenverse-search-input,
-						.{$this->element_id} .search-input-container .gutenverse-search.gutenverse-search-input",
+					'selector'       => ".{$this->element_id}:not(:has(.search-input-container-outer)) .gutenverse-search.gutenverse-search-input,
+			.{$this->element_id}:not(:has(.search-input-container-outer)) .gutenverse-search-form .gutenverse-search-input,
+			.{$this->element_id}:not(:has(.search-input-container-outer)) .search-input-container .gutenverse-search.gutenverse-search-input",
 					'property'       => function ( $value ) {
 						if ( is_array( $value ) && isset( $value['unit'] ) && '%' === $value['unit'] ) {
 							return 'width: 100%;';
@@ -320,9 +334,10 @@ class Search extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .search-input-container",
+					'selector'       => ".{$this->element_id} .search-input-container-outer, .{$this->element_id}:not(:has(.search-input-container-outer)) .search-input-container ",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'width' );
 					},
@@ -330,27 +345,32 @@ class Search extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
 		}
 
 		if ( isset( $this->attrs['buttonWidth'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-search-form .guten-button-wrapper",
-					'property'       => function ( $value ) {
-						return $this->handle_unit_point( $value, 'width' );
+					'selector'       => ".{$this->element_id} .search-input-container-outer, .{$this->element_id}:not(:has(.search-input-container-outer)) .search-input-container ",
+					'property'       => function ( $value, $device ) {
+						if ( 'Mobile' === $device ) {
+							return 'max-width: 100% !important;';
+						}
+						$point = isset( $value['point'] ) ? (int) $value['point'] : 0;
+						$unit = $value['unit'];
+						$diff = 'px' === $unit ? 2 : ( '%' === $unit ? 0.2 : 0.12 );
+						return 'max-width: calc(100% - ' . ( $point + $diff ) . $unit . ');';
 					},
 					'value'          => $this->attrs['buttonWidth'],
 					'device_control' => true,
 				)
 			);
+
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .search-input-container",
+					'selector'       => ".{$this->element_id} .guten-search-button-wrapper ",
 					'property'       => function ( $value ) {
-						$point = (int) $value['point'];
-						$unit = $value['unit'];
-						$diff = 'px' === $unit ? 2 : ( '%' === $unit ? 0.2 : 0.12 );
-						return 'max-width: calc(100% - ' . ( $point + $diff ) . $unit . ');';
+						return $this->handle_unit_point( $value, 'width' );
 					},
 					'value'          => $this->attrs['buttonWidth'],
 					'device_control' => true,
@@ -431,6 +451,17 @@ class Search extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container .close-icon svg",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['closeIconSize'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['closeIconRotate'] ) ) {
@@ -483,6 +514,17 @@ class Search extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container .close-icon svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['closeIconColor'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['closeIconColorHover'] ) ) {
@@ -491,6 +533,17 @@ class Search extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container:hover .close-icon",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['closeIconColorHover'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container:hover .close-icon svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['closeIconColorHover'],
 					'device_control' => true,

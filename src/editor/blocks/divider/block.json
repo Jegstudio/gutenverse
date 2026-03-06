@@ -1,195 +1,241 @@
 {
-  "apiVersion": 2,
-  "name": "gutenverse/divider",
-  "title": "Divider",
-  "description": "Split your content with a customizable divider.",
-  "category": "gutenverse-element",
-  "allowCopyStyle": true,
-  "attributes": {
-    "elementId": {
-      "type": "string"
-    },
-    "mouseMoveEffect": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "type": {
-      "type": "string",
-      "default": "default",
-      "copyStyle": true
-    },
-    "width": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "content": {
-      "type": "string",
-      "default": "none"
-    },
-    "dividerColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "size": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "gap": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "text": {
-      "type": "string"
-    },
-    "contentColor": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "contentSpacing": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "typography": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "icon": {
-      "type": "string",
-      "default": "fab fa-wordpress"
-    },
-    "iconSize": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "dividerAlign": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "contentAlign": {
-      "type": "string",
-      "copyStyle": true
-    },
-    "background": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "backgroundHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "border": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "borderResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "border",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "boxShadow": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "borderHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "borderHoverResponsive": {
-      "type": "object",
-      "migrate": {
-        "attr": "borderHover",
-        "type": "border"
-      },
-      "copyStyle": true
-    },
-    "boxShadowHover": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "margin": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "padding": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "zIndex": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "animation": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "hideDesktop": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideTablet": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "hideMobile": {
-      "type": "boolean",
-      "copyStyle": true
-    },
-    "positioningType": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningWidth": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningAlign": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningLocation": {
-      "type": "string",
-      "copyStyle": true
-    },
-    "positioningLeft": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningRight": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningTop": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "positioningBottom": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "advanceAnimation": {
-      "type": "object",
-      "default": {},
-      "copyStyle": true
-    },
-    "transform": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "mask": {
-      "type": "object",
-      "copyStyle": true
-    },
-    "condition": {
-        "type": "object",
-        "default": {}
-    }
-  },
-  "keywords": [
-    "divider",
-    "line",
-    "separator"
-  ]
+	"apiVersion": 3,
+	"name": "gutenverse/divider",
+	"title": "Divider",
+	"description": "Split your content with a customizable divider.",
+	"category": "gutenverse-element",
+	"allowCopyStyle": true,
+	"attributes": {
+		"elementId": {
+			"type": "string"
+		},
+		"mouseMoveEffect": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"type": {
+			"type": "string",
+			"default": "default",
+			"copyStyle": true
+		},
+		"width": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"content": {
+			"type": "string",
+			"default": "none"
+		},
+		"dividerColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"size": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"gap": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"text": {
+			"type": "string"
+		},
+		"contentColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentSpacing": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"typography": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"icon": {
+			"type": "string",
+			"default": "fab fa-wordpress"
+		},
+		"iconSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"iconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"iconSVG": {
+			"type": "string"
+		},
+		"dividerAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"contentAlign": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"background": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"backgroundHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
+		"border": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "border",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"borderHoverResponsive": {
+			"type": "object",
+			"migrate": {
+				"attr": "borderHover",
+				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"boxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"margin": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"padding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"zIndex": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"animation": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"hideDesktop": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideTablet": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"hideMobile": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"positioningType": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningAlign": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningLocation": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"positioningLeft": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningRight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningTop": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"positioningBottom": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"advanceAnimation": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"transform": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"mask": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"condition": {
+			"type": "object",
+			"default": {},
+			"anchor": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		}
+	},
+	"keywords": [
+		"divider",
+		"line",
+		"separator"
+	],
+	"style": [
+		"gutenverse-frontend-divider-style"
+	]
 }

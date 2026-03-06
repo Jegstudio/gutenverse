@@ -6,6 +6,8 @@ import { settingsPanel } from './panel-settings';
 import { connectorPanel } from './panel-connector';
 import { iconPanel } from './panel-icon';
 import { contentPanel } from './panel-content';
+import { iconWrapperPanel } from './panel-icon-wrapper';
+import { numberPanel } from './panel-number';
 
 export const panelList = () => {
     return [
@@ -22,9 +24,21 @@ export const panelList = () => {
             tabRole: TabStyle
         },
         {
+            title: __('Icon Wrapper Style', 'gutenverse'),
+            initialOpen: false,
+            panelArray: iconWrapperPanel,
+            tabRole: TabStyle
+        },
+        {
             title: __('Icon/Image Style', 'gutenverse'),
             initialOpen: false,
             panelArray: iconPanel,
+            tabRole: TabStyle
+        },
+        {
+            title: __('Number Style', 'gutenverse'),
+            initialOpen: false,
+            panelArray: numberPanel,
             tabRole: TabStyle
         },
         {

@@ -4,6 +4,7 @@ import { ColorControl, DimensionControl, RangeControl, TypographyControl, Checkb
 export const postmetaPanel = (props) => {
     const {
         elementId,
+        postMetaInline
     } = props;
 
     return [
@@ -29,6 +30,83 @@ export const postmetaPanel = (props) => {
                     ],
                 }
             ]
+        },
+        {
+            id: 'metaColorIcon',
+            label: __('Icon color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'metaColorIcon',
+                    'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta i`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ],
+                },
+                {
+                    'type': 'color',
+                    'id': 'metaColorIcon',
+                    'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ],
+                }
+            ]
+        },
+        {
+            id: 'metaSizeIcon',
+            label: __('Icon Size', 'gutenverse'),
+            component: RangeControl,
+            min: 1,
+            max: 100,
+            step: 1,
+            allowDeviceControl: true,
+            unit: 'px',
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'metaSizeIcon',
+                    'responsive' : true,
+                    'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta i`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'metaSizeIcon',
+                    'responsive' : true,
+                    'selector': `.${elementId} .guten-postblock .guten-postblock-content .guten-post-meta svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
         },
         {
             id: 'metaAuthorTypography',
@@ -175,6 +253,9 @@ export const postmetaPanel = (props) => {
             label: __('Set Inline Post Meta', 'gutenverse'),
             component: CheckboxControl,
             allowDeviceControl: true,
+            deviceValues: postMetaInline,
+            usePreviousDeviceValue: true,
+            usePreviousDevice: true,
         },
     ];
 };

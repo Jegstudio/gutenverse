@@ -2,7 +2,7 @@
 import { classnames } from 'gutenverse-core/components';
 import { swiperData } from 'gutenverse-core/helper';
 import { oldImagePlaceholder } from 'gutenverse-core/config';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withMouseMoveEffectScript } from 'gutenverse-core/hoc';

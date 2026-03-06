@@ -111,10 +111,10 @@ const HeadingBlock = compose(
         if (newContainsAnchorTag !== attributes.containsAnchorTag) {
             setAttributes({ containsAnchorTag: newContainsAnchorTag });
         }
-    }, [content])
+    }, [content]);
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <HeadingInspection {...props} elementRef={elementRef} panelState={panelState} />
         <HeadingBlockControl {...props} />
         <span ref={elementRef} style={{ display: 'none' }}></span>

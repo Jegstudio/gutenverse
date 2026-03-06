@@ -44,6 +44,23 @@ const panelTextStyle = (elementId, attributes, data) => {
         ]
     });
 
+    isNotEmpty(attributes['textTypography']) && isNotEmpty(attributes['textTypography'].lineHeight) && data.push({
+        'type': 'unitPoint',
+        'id': 'placeholderUnitPoint', //only to match unit point attributes
+        'responsive': true,
+        'selector': `.${elementId} .guten-icon-list-item i`,
+        'properties': [
+            {
+                'name': 'line-height',
+                'valueType': 'function',
+                'functionName' : 'handleUseOtherAttribute'
+            }
+        ],
+        'otherAttribute' : {
+            'theAttribute' : attributes['textTypography'].lineHeight,
+        },
+    });
+
     isNotEmpty(attributes['textTypography']) && data.push({
         'type': 'typography',
         'id': 'textTypography',

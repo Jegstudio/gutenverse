@@ -8,7 +8,6 @@ export const popupPanel = (props) => {
         position,
         openTrigger,
     } = props;
-
     const {
         gutenverseImgDir
     } = window['GutenverseConfig'];
@@ -84,6 +83,12 @@ export const popupPanel = (props) => {
                     text: '%',
                     min: 1,
                     max: 100,
+                    step: 1
+                },
+                px: {
+                    text: 'px',
+                    min: 100,
+                    max: 2000,
                     step: 1
                 },
             },
@@ -198,6 +203,12 @@ export const popupPanel = (props) => {
                     pro: true,
                     description: __('Pop-ups that appear on exit intent are a type of pop-up that is triggered when a user attempts to leave a web page.', 'gutenverse')
                 },
+                {
+                    label: __('Inactivity', 'gutenverse'),
+                    value: 'inactivity',
+                    pro: true,
+                    description: __('A popup automatically appears when a user has been inactive on the page for a specified period.', 'gutenverse')
+                }
             ],
         },
         {

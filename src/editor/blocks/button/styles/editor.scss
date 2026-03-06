@@ -73,3 +73,17 @@
         background-color: var(--guten-btn-bg-danger);
     }
 }
+
+.guten-post-content.guten-element {
+    .components-disabled {
+        .guten-button-wrapper .guten-button span:empty {
+            height: 15px;
+        }
+    }
+}
+
+.is-editing-disabled {
+    .guten-button-wrapper .guten-button span:empty {
+        height: 15px;
+    }
+}

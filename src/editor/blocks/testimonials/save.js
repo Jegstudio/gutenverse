@@ -8,10 +8,10 @@ import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 import { compose } from '@wordpress/compose';
 
-const getImageSrc = ( src ) => {
-    if( src && src.image ){
+const getImageSrc = (src) => {
+    if (src && src.image) {
         return src.image;
-    }else{
+    } else {
         return '';
     }
 };
@@ -27,12 +27,19 @@ const save = compose(
         showNav,
         showArrow,
         showQuote,
+        showClientImage,
         iconQuote,
+        iconQuoteType,
+        iconQuoteSVG,
         quoteOverride,
         contentPosition,
         showRating,
         iconRatingHalf,
+        iconRatingHalfType,
+        iconRatingHalfSVG,
         iconRatingFull,
+        iconRatingFullType,
+        iconRatingFullSVG,
         starPosition
     } = attributes;
 
@@ -47,7 +54,7 @@ const save = compose(
         `style-${contentType}`,
         'quote-override',
     );
-    
+
     return (
         <div {...useBlockProps.save({ className })}>
             <div className="testimonials-list">
@@ -58,15 +65,23 @@ const save = compose(
                                 contentType={contentType}
                                 showQuote={showQuote}
                                 iconQuote={iconQuote}
+                                iconQuoteType={iconQuoteType}
+                                iconQuoteSVG={iconQuoteSVG}
                                 quoteOverride={quoteOverride}
                                 contentPosition={contentPosition}
                                 showRating={showRating}
+                                showClientImage={showClientImage}
                                 iconRatingFull={iconRatingFull}
+                                iconRatingFullType={iconRatingFullType}
+                                iconRatingFullSVG={iconRatingFullSVG}
                                 iconRatingHalf={iconRatingHalf}
+                                iconRatingHalfType={iconRatingHalfType}
+                                iconRatingHalfSVG={iconRatingHalfSVG}
                                 starPosition={starPosition}
                                 frontEnd={true}
                                 index={index}
                                 src={getImageSrc(data.src)}
+                                imgDetail={data.src}
                             />
                         </div>)}
                     </div>

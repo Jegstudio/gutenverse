@@ -4,7 +4,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
-import { gutenverseRoot } from 'gutenverse-core/helper';
+import { gutenverseRoot, renderIcon } from 'gutenverse-core/helper';
 import { createPortal } from 'react-dom';
 import GalleryPopup from './components/gallery-popup';
 import GalleryItem from './components/gallery-item';
@@ -16,6 +16,7 @@ import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenve
 import getBlockStyle from './styles/block-style';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { getImageLoadValue } from '../../helper';
 
 const GalleryBlock = compose(
     withPartialRender,
@@ -27,6 +28,7 @@ const GalleryBlock = compose(
         attributes,
         clientId,
         setBlockRef,
+        setAttributes
     } = props;
 
     const {
@@ -45,11 +47,37 @@ const GalleryBlock = compose(
         itemsPerLoad,
         enableLoadText,
         enableLoadIcon,
+        enableLoadIconType,
+        enableLoadIconSVG,
         enableLoadIconPosition,
         filterSearchIcon,
+        filterSearchIconType,
+        filterSearchIconSVG,
         filterSearchIconPosition,
         filterSearchFormText,
+        titleHeadingType = 'h5'
     } = attributes;
+
+    /* set image load attribute from calculating the lazyload attribute and dashboard image load attribut on first load block on editor */
+    useEffect(() => {
+        let newImages = [];
+        let changes = 0;
+        images.forEach((image) => {
+            const { lazyLoad = false, imageLoad = '' } = image;
+            if ('' === imageLoad) {
+                changes++;
+                newImages.push({
+                    ...image,
+                    imageLoad: getImageLoadValue('', lazyLoad)
+                });
+            } else {
+                newImages.push(image);
+            }
+        });
+        if (changes > 0) {
+            setAttributes({ images: newImages });
+        }
+    }, [images]);
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
@@ -57,6 +85,7 @@ const GalleryBlock = compose(
     const [activeIndex, setActiveIndex] = useState(0);
     const [showFilter, setShowFilter] = useState(false);
     const [currentFilter, setCurrentFilter] = useState('All');
+    const [currentSearch, setCurrentSearch] = useState('');
     const [showedItems, setShowedItems] = useState(showed);
     const elementRef = useRef(null);
     const shuffleInstance = useRef(null);
@@ -70,7 +99,8 @@ const GalleryBlock = compose(
         grid,
         height,
         column,
-        layout
+        layout,
+        images,
     });
 
     useGenerateElementId(clientId, elementId, elementRef);
@@ -96,6 +126,7 @@ const GalleryBlock = compose(
 
     const onSearch = (value) => {
         const searchValue = value.toLowerCase();
+        setCurrentSearch(searchValue);
 
         const isValid = (item) => {
             const element = u(item);
@@ -128,19 +159,35 @@ const GalleryBlock = compose(
 
     // Initialize Shuffle.js
     const initializeShuffle = () => {
-        shuffleInstance.current = new Shuffle(elementRef.current.querySelector('.gallery-items'), {
-            itemSelector: `.${elementId} .gallery-item-wrap`,
-            sizer: `.${elementId} .gallery-sizer-element`,
-            speed: 500
-        });
+        if (shuffleInstance.current) {
+            shuffleInstance.current.update();
+        } else {
+            shuffleInstance.current = new Shuffle(elementRef.current.querySelector('.gallery-items'), {
+                itemSelector: `.${elementId} .gallery-item-wrap`,
+                sizer: `.${elementId} .gallery-sizer-element`,
+                speed: 500
+            });
+        }
     };
 
     // Wait for images to load
     const waitForImages = (images) => Promise.all(
         images.map((img) =>
-            img.complete
-                ? Promise.resolve()
-                : new Promise((resolve) => (img.onload = img.onerror = resolve))
+            new Promise((resolve) => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    resolve(img);
+                    return;
+                }
+                img.onload = () => resolve(img);
+                img.onerror = () => resolve(img);
+                if (img.src) {
+                    const src = img.src;
+                    img.src = '';
+                    img.src = src;
+                } else {
+                    resolve(img);
+                }
+            })
         )
     );
 
@@ -166,12 +213,13 @@ const GalleryBlock = compose(
     useEffect(() => {
         setLiveAttr({
             ...liveAttr,
-            showedItems
+            showedItems,
+            images
         });
-    }, [showedItems]);
+    }, [showedItems, images]);
 
     useEffect(() => {
-        if (elementRef.current) {
+        if (elementRef.current && elementId) {
             // Ensure images are loaded first, then observe changes
             const images = Array.from(elementRef.current.querySelectorAll('img'));
             waitForImages(images).then(observeResizeGalleryItems);
@@ -182,7 +230,7 @@ const GalleryBlock = compose(
             shuffleInstance.current = null;
             observerRef.current = null;
         };
-    }, [liveAttr]);
+    }, [liveAttr, elementId]);
 
     useEffect(() => {
         if (elementRef) {
@@ -191,27 +239,27 @@ const GalleryBlock = compose(
     }, [elementRef]);
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} liveAttr={liveAttr} setLiveAttr={setLiveAttr} />
-        {showPopup && createPortal(<GalleryPopup activeIndex={activeIndex} {...attributes} onClose={() => setShowPop(false)} />, gutenverseRoot)}
+        {showPopup && createPortal(<GalleryPopup titleHeadingType={titleHeadingType} elementId={elementId} currentSearch={currentSearch} currentFilter={currentFilter} activeIndex={activeIndex} {...attributes} onClose={() => setShowPop(false)} />, gutenverseRoot)}
         <div  {...blockProps} data-grid={grid}>
             {filter && (
                 filterType === 'tab' ? <div className="filter-controls">
                     <ul>
-                        <li className={`guten-gallery-control ${'All' === currentFilter ? 'active' : ''}`} onClick={() => changeFilter('All')}>{filterAll}</li>
+                        <li className={`guten-gallery-control ${'All' === currentFilter ? 'active' : ''}`} data-flag-all={true} data-filter={filterAll} onClick={() => changeFilter('All')}>{filterAll}</li>
                         {filterList && filterList.map((filterItem, index) => {
                             return filterItem.name && <li key={index} className={`guten-gallery-control ${filterItem.name === currentFilter ? 'active' : ''}`} data-filter={filterItem.name} onClick={() => changeFilter(filterItem.name)}>{filterItem.name}</li>;
                         })}
                     </ul>
                 </div> : <div className="search-filters-wrap">
                     <div className="filter-wrap">
-                        <button id="search-filter-trigger" className={`search-filter-trigger icon-position-${filterSearchIconPosition}`} onClick={() => setShowFilter(!showFilter)}>
-                            {filterSearchIconPosition === 'before' && <i aria-hidden="true" className={filterSearchIcon}></i>}
-                            <span>{currentFilter}</span>
-                            {filterSearchIconPosition === 'after' && <i aria-hidden="true" className={filterSearchIcon}></i>}
+                        <button id="search-filter-trigger" data-flag-all={currentFilter === 'All'} className={`search-filter-trigger icon-position-${filterSearchIconPosition}`} onClick={() => setShowFilter(!showFilter)}>
+                            {filterSearchIconPosition === 'before' && renderIcon(filterSearchIcon, filterSearchIconType, filterSearchIconSVG)}
+                            <span>{currentFilter === 'All' ? filterAll : currentFilter}</span>
+                            {filterSearchIconPosition === 'after' && renderIcon(filterSearchIcon, filterSearchIconType, filterSearchIconSVG)}
                         </button>
                         <ul className={`search-filter-controls ${showFilter ? 'open-controls' : ''}`}>
-                            <li className={`guten-gallery-control ${'All' === currentFilter ? 'active' : ''}`} onClick={() => changeFilter('All')}>{filterAll}</li>
+                            <li className={`guten-gallery-control ${'All' === currentFilter ? 'active' : ''}`} data-flag-all={true} data-filter={filterAll} onClick={() => changeFilter('All')}>{filterAll}</li>
                             {filterList && filterList.map((filterItem, index) => {
                                 return filterItem.name && <li key={index} className={`guten-gallery-control ${filterItem.name === currentFilter ? 'active' : ''}`} data-filter={filterItem.name} onClick={() => changeFilter(filterItem.name)}>{filterItem.name}</li>;
                             })}
@@ -237,16 +285,16 @@ const GalleryBlock = compose(
             <div className="gallery-sizer-element" ref={sizerRef}></div>
             {enableLoadMore && (showedItems < images.length) && <div className="load-more-items">
                 <div className="guten-gallery-loadmore">
-                    <a href="#" className="guten-gallery-load-more" onClick={(e) => {
+                    <a aria-label="Load more" href="#" className="guten-gallery-load-more" onClick={(e) => {
                         e.preventDefault();
                         setShowedItems(parseInt(showedItems) + parseInt(itemsPerLoad));
                     }}>
                         {enableLoadIcon && enableLoadIconPosition === 'before' && <span className="load-more-icon icon-position-before" aria-hidden="true">
-                            <i className={enableLoadIcon}></i>
+                            {renderIcon(enableLoadIcon, enableLoadIconType, enableLoadIconSVG)}
                         </span>}
                         <span className="load-more-text">{enableLoadText}</span>
                         {enableLoadIcon && enableLoadIconPosition === 'after' && <span className="load-more-icon icon-position-after" aria-hidden="true">
-                            <i className={enableLoadIcon}></i>
+                            {renderIcon(enableLoadIcon, enableLoadIconType, enableLoadIconSVG)}
                         </span>}
                     </a>
                 </div>

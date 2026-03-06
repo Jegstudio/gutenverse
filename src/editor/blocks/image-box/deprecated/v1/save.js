@@ -7,7 +7,7 @@ import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { useAnimationAdvanceData } from 'gutenverse-core/hooks';
 import { oldImagePlaceholder } from 'gutenverse-core/config';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 
 const ImageBoxFigure = attributes => {
     const { image, imageAlt, lazyLoad } = attributes;

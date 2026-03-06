@@ -10,4 +10,10 @@
             flex-grow: 1;
         }
     }
+    @media (max-width: 768px) {
+        .search-input-container-outer {
+            max-width: 100% !important;
+        }
+        
+    }
 }

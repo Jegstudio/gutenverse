@@ -4,7 +4,8 @@ import { ColorControl, DimensionControl, RangeControl, SwitchControl, Typography
 export const panelTitleStyle = props => {
     const {
         elementId,
-        __titleHover,
+        switcher,
+        setSwitcher,
     } = props;
 
     return [
@@ -61,6 +62,24 @@ export const panelTitleStyle = props => {
                             }
                         }
                     ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'titleIconSize',
+                    'responsive': true,
+                    'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -78,7 +97,7 @@ export const panelTitleStyle = props => {
                     'type': 'plain',
                     'id': 'titleIconSpacing',
                     'responsive': true,
-                    'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-before i`,
+                    'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-before i, .${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-before .gutenverse-icon-svg`,
                     'properties': [
                         {
                             'name': 'margin-right',
@@ -96,7 +115,7 @@ export const panelTitleStyle = props => {
                     'type': 'plain',
                     'id': 'titleIconSpacing',
                     'responsive': true,
-                    'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-after i`,
+                    'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-after i, .${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title.icon-position-after .gutenverse-icon-svg`,
                     'properties': [
                         {
                             'name': 'margin-left',
@@ -125,10 +144,11 @@ export const panelTitleStyle = props => {
                     label: 'Hover'
                 }
             ],
+            onChange: ({ __titleHover }) => setSwitcher({ ...switcher, titleHover: __titleHover })
         },
         {
             id: 'titleNormalColor',
-            show: !__titleHover || __titleHover === 'normal',
+            show: !switcher.titleHover || switcher.titleHover === 'normal',
             label: __('Title Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -147,7 +167,7 @@ export const panelTitleStyle = props => {
         },
         {
             id: 'titleNormalIconColor',
-            show: !__titleHover || __titleHover === 'normal',
+            show: !switcher.titleHover || switcher.titleHover === 'normal',
             label: __('Icon Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -161,12 +181,23 @@ export const panelTitleStyle = props => {
                             'valueType': 'direct'
                         }
                     ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'titleNormalIconColor',
+                    'selector': `.${elementId}.gutenverse-image-box .inner-container .image-box-body .body-title svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
         {
             id: 'titleHoverColor',
-            show: __titleHover === 'hover',
+            show: switcher.titleHover === 'hover',
             label: __('Title Hover Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -185,7 +216,7 @@ export const panelTitleStyle = props => {
         },
         {
             id: 'titleHoverIconColor',
-            show: __titleHover === 'hover',
+            show: switcher.titleHover === 'hover',
             label: __('Icon Hover Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -196,6 +227,17 @@ export const panelTitleStyle = props => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'titleHoverIconColor',
+                    'selector': `.${elementId}.gutenverse-image-box:hover .inner-container .image-box-body .body-title svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]

@@ -1,5 +1,6 @@
 const example = {
     attributes: {
+        'elementId': 'guten-preview-image-box',
         'image': {
             'media': {
                 'imageId': 1,

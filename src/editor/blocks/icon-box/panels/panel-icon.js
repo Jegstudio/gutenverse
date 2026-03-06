@@ -1,16 +1,19 @@
 import { __ } from '@wordpress/i18n';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { CheckboxControl, ImageControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { ImageControl, RangeControl, SelectControl, TextControl, IconSVGControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoad } from "../../../helper";
 
 export const panelIcon = (props) => {
     const {
         elementId,
         iconType,
-        removeStyle,
-        iconSize,
-        imageWidth,
-        imageHeight
+        altType,
+        imageLoad,
+        lazyLoad,
     } = props;
+    const defaultImageLoad = getDefaultImageLoad(imageLoad, lazyLoad);
+
+
     const deviceType = getDeviceType();
 
     return [
@@ -31,21 +34,21 @@ export const panelIcon = (props) => {
                     value: 'image',
                     label: 'Image'
                 },
+                {
+                    value: 'svg',
+                    label: 'SVG'
+                },
             ],
-            onChange: ({ iconShape }) => {
-                if ('icon' !== iconShape) {
-                    removeStyle('iconSize-style-0');
-                }
-
-                if ('image' !== iconShape) {
-                    removeStyle('imageWidth-style-0');
-                    removeStyle('imageHeight-style-0');
-                }
-            },
+        },
+        {
+            id: 'icon',
+            label: __('Icon', 'gutenverse'),
+            component: IconSVGControl,
+            show: iconType && (iconType === 'icon' || iconType === 'svg'),
         },
         {
             id: 'iconSize',
-            show: iconType && iconType === 'icon',
+            show: iconType && (iconType === 'icon' || iconType === 'svg'),
             label: __('Icon Size', 'gutenverse'),
             component: RangeControl,
             allowDeviceControl: true,
@@ -57,8 +60,8 @@ export const panelIcon = (props) => {
                 {
                     'type': 'plain',
                     'id': 'iconSize',
-                    'selector': `.${elementId} .guten-icon-box-wrapper .icon-box .icon i`,
                     'responsive': true,
+                    'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon i`,
                     'properties': [
                         {
                             'name': 'font-size',
@@ -66,11 +69,31 @@ export const panelIcon = (props) => {
                             'pattern': '{value}px',
                             'patternValues': {
                                 'value': {
-                                    'type': 'direct'
-                                }
+                                    'type': 'direct',
+                                },
+
                             }
                         }
-                    ]
+                    ],
+                },
+                {
+                    'type': 'plain',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'selector': `.${elementId} .guten-icon-box-wrapper .icon-box-header.icon-box .icon svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct',
+                                },
+
+                            }
+                        }
+                    ],
                 }
             ],
         },
@@ -81,14 +104,44 @@ export const panelIcon = (props) => {
             component: ImageControl,
         },
         {
-            id: 'lazyLoad',
+            id: 'imageLoad',
+            label: __('Image Load', 'gutenverse'),
+            component: SelectControl,
+            defaultValue: defaultImageLoad,
             show: iconType && iconType === 'image',
-            label: __('Set Lazy Load', 'gutenverse'),
-            component: CheckboxControl,
+            options: [
+                {
+                    label: __('Normal Load', 'gutenverse'),
+                    value: 'eager'
+                },
+                {
+                    label: __('Lazy Load', 'gutenverse'),
+                    value: 'lazy'
+                },
+            ],
+        },
+        {
+            id: 'altType',
+            label: __('Alt Type', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: 'None',
+                    value: 'none'
+                },
+                {
+                    label: 'Alt from Image',
+                    value: 'original'
+                },
+                {
+                    label: 'Custom Alt',
+                    value: 'custom'
+                },
+            ]
         },
         {
             id: 'imageAlt',
-            show: iconType && iconType === 'image',
+            show: iconType && iconType === 'image' && altType === 'custom',
             label: __('Image Alt', 'gutenverse'),
             component: TextControl,
         },

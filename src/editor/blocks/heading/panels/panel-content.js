@@ -69,5 +69,37 @@ export const contentPanel = () => {
                 },
             ]
         },
+        {
+            id: 'textWritingMode',
+            label: __('Writing Mode', 'gutenverse'),
+            component: SelectControl,
+            allowDeviceControl: true,
+            options: [
+                {
+                    label: __('Default', 'gutenverse'),
+                    value: 'unset',
+                },
+                {
+                    label: __('Horizontal Top to Bottom', 'gutenverse'),
+                    value: 'horizontal-tb',
+                },
+                {
+                    label: __('Vertical Left to Right', 'gutenverse'),
+                    value: 'vertical-lr',
+                },
+                {
+                    label: __('Vertical Right to Left', 'gutenverse'),
+                    value: 'vertical-rl',
+                },
+                {
+                    label: __('Sideways Left to Right', 'gutenverse'),
+                    value: 'sideways-lr',
+                },
+                {
+                    label: __('Sideways Right to Left', 'gutenverse'),
+                    value: 'sideways-rl',
+                },
+            ],
+        }
     ];
 };

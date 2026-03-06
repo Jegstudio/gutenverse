@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/search",
 	"title": "Search",
 	"description": "Gutenverse Search",
@@ -65,6 +65,11 @@
 		},
 		"backgroundHover": {
 			"type": "object",
+			"default": {}
+		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
 			"default": {}
 		},
 		"border": {
@@ -157,8 +162,8 @@
 			"type": "object",
 			"default": {
 				"Desktop": {
-					"point":"350",
-					"unit":"px"
+					"point": "350",
+					"unit": "px"
 				}
 			}
 		},
@@ -242,6 +247,13 @@
 			"type": "string",
 			"default": "gtn gtn-x-line"
 		},
+		"closeIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"closeIconSVG": {
+			"type": "string"
+		},
 		"closeIconColor": {
 			"type": "object",
 			"copyStyle": true,
@@ -269,14 +281,53 @@
 		"closeIconMargin": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"search",
 		"gutenverse"
 	],
-	"example": {}
+	"example": {
+		"elementId": "guten-preview-search"
+	},
+	"viewScript": [
+		"gutenverse-frontend-search-script"
+	],
+	"style": [
+		"gutenverse-frontend-search-style"
+	]
 }

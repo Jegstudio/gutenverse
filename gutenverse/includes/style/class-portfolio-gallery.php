@@ -163,7 +163,7 @@ class Portfolio_Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['contentPadding'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-item-info",
+					'selector'       => ".guten-portfolio-gallery.{$this->element_id} .portfolio-gallery-container .row-item .row-item-info",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'padding' );
 					},
@@ -346,10 +346,6 @@ class Portfolio_Gallery extends Style_Abstract {
 			);
 		}
 
-		if ( isset( $this->attrs['linkBackground'] ) ) {
-			$this->handle_background( ".{$this->element_id}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a", $this->attrs['linkBackground'] );
-		}
-
 		if ( isset( $this->attrs['linkBorder'] ) ) {
 			$this->inject_style(
 				array(
@@ -398,6 +394,21 @@ class Portfolio_Gallery extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a svg",
+					'property'       => function ( $value ) {
+						return $this->handle_unit_point( $value, 'font-size' );
+					},
+					'value'          => $this->attrs['linkIconSize'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['linkBackground'] ) ) {
+			$this->handle_background( ".{$this->element_id}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a", $this->attrs['linkBackground'] );
 		}
 
 		if ( isset( $this->attrs['linkColor'] ) ) {
@@ -424,6 +435,17 @@ class Portfolio_Gallery extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper a svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['linkIconColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['linkTextShadow'] ) ) {
@@ -439,10 +461,14 @@ class Portfolio_Gallery extends Style_Abstract {
 			);
 		}
 
-        if ( isset( $this->attrs['linkColorHover'] ) ) {
+		if ( isset( $this->attrs['linkBackgroundHover'] ) ) {
+			$this->handle_background( ".{$this->element_id}.guten-portfolio-gallery .portfolio-gallery-container .row-item .row-link-wrapper a:hover", $this->attrs['linkBackgroundHover'] );
+		}
+
+		if ( isset( $this->attrs['linkColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper:hover a",
+					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper a:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -455,9 +481,20 @@ class Portfolio_Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['linkIconColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper:hover a i",
+					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper a:hover i",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['linkIconColorHover'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper a:hover svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['linkIconColorHover'],
 					'device_control' => false,
@@ -468,7 +505,7 @@ class Portfolio_Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['linkTextShadowHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper:hover a",
+					'selector'       => ".{$this->element_id} .portfolio-gallery-container .row-item .row-link-wrapper a:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_text_shadow( $value );
 					},

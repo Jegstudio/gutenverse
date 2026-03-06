@@ -255,7 +255,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['fitlerSearchIconSpacing'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-after i",
+					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-after i, .{$this->element_id} .search-filter-trigger.icon-position-after .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'margin-left' );
 					},
@@ -266,7 +266,7 @@ class Gallery extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-before i",
+					'selector'       => ".{$this->element_id} .search-filter-trigger.icon-position-before i, .{$this->element_id} .search-filter-trigger.icon-position-before .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'margin-right' );
 					},
@@ -572,12 +572,32 @@ class Gallery extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .caption-button .item-buttons .gallery-link span svg, .{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .caption-wrap .item-caption-over .item-buttons .gallery-link span svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['iconColor'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['iconSize'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .caption-button .item-buttons .gallery-link span, .{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .caption-wrap .item-caption-over .item-buttons .gallery-link span",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['iconSize'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .caption-button .item-buttons .gallery-link span svg, .{$this->element_id}.guten-gallery .gallery-items .gallery-item-wrap .grid-item .caption-wrap .item-caption-over .item-buttons .gallery-link span svg",
 					'property'       => function ( $value ) {
 						return "font-size: {$value}px;";
 					},
@@ -1094,6 +1114,16 @@ class Gallery extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .load-more-items .load-more-icon svg",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['loadMoreIconSize'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['loadMoreIconSpacing'] ) ) {
@@ -1161,6 +1191,17 @@ class Gallery extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .load-more-items .guten-gallery-load-more",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['loadMoreTextColor'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .load-more-items .guten-gallery-load-more svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['loadMoreTextColor'],
 					'device_control' => true,
@@ -1687,6 +1728,147 @@ class Gallery extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+		}
+		if ( isset( $this->attrs['itemLightboxTextMargin'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'margin' );
+					},
+					'value'          => $this->attrs['itemLightboxTextMargin'],
+					'device_control' => true,
+				)
+			);
+		}
+		if ( isset( $this->attrs['itemLightboxTextPadding'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper",
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'padding' );
+					},
+					'value'          => $this->attrs['itemLightboxTextPadding'],
+					'device_control' => true,
+				)
+			);
+		}
+		if ( isset( $this->attrs['itemLightboxTitleColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-title",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['itemLightboxTitleColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['itemLightboxTitleTypography'] ) ) {
+			$this->inject_typography(
+				array(
+					'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-title",
+					'value'    => $this->attrs['itemLightboxTitleTypography'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['itemLightboxDescriptionColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-description",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['itemLightboxDescriptionColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['itemLightboxDescriptionTypography'] ) ) {
+			$this->inject_typography(
+				array(
+					'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-description",
+					'value'    => $this->attrs['itemLightboxDescriptionTypography'],
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['images'] ) ) {
+			$lists = $this->attrs['images'];
+
+			foreach ( $lists as $index => $list ) {
+				if ( isset( $list['itemLightboxTextMargin'] ) ) {
+					$this->inject_style(
+						array(
+							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper",
+							'property'       => function ( $value ) {
+								return $this->handle_dimension( $value, 'margin' );
+							},
+							'value'          => $list['itemLightboxTextMargin'],
+							'device_control' => true,
+						)
+					);
+				}
+				if ( isset( $list['itemLightboxTextPadding'] ) ) {
+					$this->inject_style(
+						array(
+							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper",
+							'property'       => function ( $value ) {
+								return $this->handle_dimension( $value, 'padding' );
+							},
+							'value'          => $list['itemLightboxTextPadding'],
+							'device_control' => true,
+						)
+					);
+				}
+				if ( isset( $list['itemLightboxTitleColor'] ) ) {
+					$this->inject_style(
+						array(
+							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-title",
+							'property'       => function ( $value ) {
+								return $this->handle_color( $value, 'color' );
+							},
+							'value'          => $list['itemLightboxTitleColor'],
+							'device_control' => false,
+						)
+					);
+				}
+
+				if ( isset( $list['itemLightboxTitleTypography'] ) ) {
+					$this->inject_typography(
+						array(
+							'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-title",
+							'value'    => $list['itemLightboxTitleTypography'],
+						)
+					);
+				}
+
+				if ( isset( $list['itemLightboxDescriptionColor'] ) ) {
+					$this->inject_style(
+						array(
+							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-description",
+							'property'       => function ( $value ) {
+								return $this->handle_color( $value, 'color' );
+							},
+							'value'          => $list['itemLightboxDescriptionColor'],
+							'device_control' => false,
+						)
+					);
+				}
+
+				if ( isset( $list['itemLightboxDescriptionTypography'] ) ) {
+					$this->inject_typography(
+						array(
+							'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-description",
+							'value'    => $list['itemLightboxDescriptionTypography'],
+						)
+					);
+				}
+			}
 		}
 	}
 }

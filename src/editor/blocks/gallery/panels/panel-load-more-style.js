@@ -69,6 +69,24 @@ export const loadMoreStylePanel = (props) => {
                             }
                         }
                     ]
+                },
+                {
+                    'type': 'plain',
+                    'id': 'loadMoreIconSize',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-gallery .load-more-items .load-more-icon svg`,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -194,6 +212,18 @@ export const loadMoreStylePanel = (props) => {
                     'properties': [
                         {
                             'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                },
+                {
+                    'type': 'color',
+                    'id': 'loadMoreTextColor',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-gallery .load-more-items .guten-gallery-load-more svg`,
+                    'properties': [
+                        {
+                            'name': 'fill',
                             'valueType': 'direct'
                         }
                     ]

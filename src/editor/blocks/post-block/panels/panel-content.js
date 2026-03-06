@@ -1,9 +1,12 @@
 import { __ } from '@wordpress/i18n';
 
 import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
-import { CheckboxControl, IconControl, IconRadioControl, ImageRadioControl, RangeControl, SelectControl, SelectSortableControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconSVGControl, IconRadioControl, ImageRadioControl, RangeControl, SelectControl, SelectSortableControl, TextControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoad } from "../../../helper";
 
 export const contentPanel = (props) => {
+
+
     const {
         elementId,
         postblockType,
@@ -14,8 +17,11 @@ export const contentPanel = (props) => {
         metaEnabled,
         metaAuthorEnabled,
         metaDateEnabled,
-        metaDateFormat
+        metaDateFormat,
+        imageLoad,
+        lazyLoad
     } = props;
+    const defaultImageLoad = getDefaultImageLoad(imageLoad, lazyLoad);
 
     const {
         gutenverseImgDir
@@ -218,7 +224,7 @@ export const contentPanel = (props) => {
         {
             id: 'readmoreIcon',
             show: readmoreEnabled,
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'readmoreIconPosition',
@@ -248,7 +254,7 @@ export const contentPanel = (props) => {
         {
             id: 'commentIcon',
             show: commentEnabled,
-            component: IconControl,
+            component: IconSVGControl,
         },
         {
             id: 'commentIconPosition',
@@ -285,7 +291,7 @@ export const contentPanel = (props) => {
         {
             id: 'metaAuthorIcon',
             show: metaEnabled && metaAuthorEnabled,
-            component: IconControl
+            component: IconSVGControl
         },
         {
             id: 'metaAuthorIconPosition',
@@ -357,7 +363,7 @@ export const contentPanel = (props) => {
         {
             id: 'metaDateIcon',
             show: metaEnabled && metaDateEnabled,
-            component: IconControl
+            component: IconSVGControl
         },
         {
             id: 'metaDateIconPosition',
@@ -375,9 +381,20 @@ export const contentPanel = (props) => {
             ]
         },
         {
-            id: 'lazyLoad',
-            label: __('Set Lazy Load', 'gutenverse'),
-            component: CheckboxControl,
+            id: 'imageLoad',
+            label: __('Image Load', 'gutenverse'),
+            component: SelectControl,
+            defaultValue: defaultImageLoad,
+            options: [
+                {
+                    label: __('Normal Load', 'gutenverse'),
+                    value: 'eager'
+                },
+                {
+                    label: __('Lazy Load', 'gutenverse'),
+                    value: 'lazy'
+                },
+            ],
         },
     ];
 };

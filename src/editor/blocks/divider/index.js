@@ -11,7 +11,7 @@ export { metadata, name };
 
 export const settings = {
     icon: <IconDividerSVG />,
-    example: example,
+    example,
     edit,
     save,
 };

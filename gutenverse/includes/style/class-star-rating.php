@@ -116,12 +116,34 @@ class Star_Rating extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .rating-icons svg",
+					'property'       => function ( $value ) {
+						return "font-size: {$value}px;";
+					},
+					'value'          => $this->attrs['iconSize'],
+					'device_control' => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['iconGap'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .rating-icons i",
+					'property'       => function ( $value ) {
+						return "margin-right: {$value}px;";
+					},
+					'value'          => $this->attrs['iconGap'],
+					'device_control' => true,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .rating-icons svg",
 					'property'       => function ( $value ) {
 						return "margin-right: {$value}px;";
 					},
@@ -142,6 +164,17 @@ class Star_Rating extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-icon-svg.full svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
+					},
+					'value'          => $this->attrs['iconColorMarked'],
+					'device_control' => false,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['iconColorUnmarked'] ) ) {
@@ -150,6 +183,17 @@ class Star_Rating extends Style_Abstract {
 					'selector'       => ".{$this->element_id} .rating-icons i.empty",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['iconColorUnmarked'],
+					'device_control' => false,
+				)
+			);
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-icon-svg.empty svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'fill' );
 					},
 					'value'          => $this->attrs['iconColorUnmarked'],
 					'device_control' => false,

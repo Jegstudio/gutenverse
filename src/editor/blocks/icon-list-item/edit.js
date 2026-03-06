@@ -9,14 +9,12 @@ import { displayShortcut } from '@wordpress/keycodes';
 import { createPortal } from 'react-dom';
 import { IconLibrary } from 'gutenverse-core/controls';
 import { HighLightToolbar, URLToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
-import { gutenverseRoot } from 'gutenverse-core/helper';
+import { gutenverseRoot, renderIcon } from 'gutenverse-core/helper';
 import { LogoCircleColor24SVG } from 'gutenverse-core/icons';
 import { SelectParent } from 'gutenverse-core/components';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
-import { useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
-import isEmpty from 'lodash/isEmpty';
-import { isOnEditor } from 'gutenverse-core/helper';
+
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { useRichTextParameter } from 'gutenverse-core/helper';
@@ -37,11 +35,14 @@ const IconListItemBlock = (props) => {
     const {
         elementId,
         icon,
+        iconType,
+        iconSVG,
         rel,
         url,
         linkTarget,
         hideIcon,
         dynamicUrl,
+        ariaLabel,
     } = attributes;
 
     const {
@@ -54,7 +55,7 @@ const IconListItemBlock = (props) => {
     const elementRef = useRef(null);
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
-    const [dynamicHref, setDynamicHref] = useState();
+    const { dynamicHref } = useDynamicUrl(dynamicUrl);
     const isGlobalLinkSet = url !== undefined && url !== '';
 
     useGenerateElementId(clientId, elementId, elementRef);
@@ -104,21 +105,10 @@ const IconListItemBlock = (props) => {
     };
 
     useEffect(() => {
-        const dynamicUrlcontent = isEmpty(dynamicUrl) || !isOnEditor() ? dynamicUrl : applyFilters(
-            'gutenverse.dynamic.fetch-url',
-            dynamicUrl
-        );
-
-        (typeof dynamicUrlcontent.then === 'function') && !isEmpty(dynamicUrl) && dynamicUrlcontent
-            .then(result => {
-                if ((!Array.isArray(result) || result.length > 0) && result !== undefined && result !== dynamicHref) {
-                    setDynamicHref(result);
-                } else if (result !== dynamicHref) setDynamicHref(undefined);
-            }).catch(() => { });
         if (dynamicHref !== undefined) {
             setAttributes({ url: dynamicHref, isDynamic: true });
         } else { setAttributes({ url: url }); }
-    }, [dynamicUrl, dynamicHref]);
+    }, [dynamicHref]);
 
     return <>
         <CopyElementToolbar {...props}/>
@@ -150,7 +140,7 @@ const IconListItemBlock = (props) => {
                         panelIsClicked={panelIsClicked}
                         setPanelIsClicked={setPanelIsClicked}
                     />,
-                    props,
+                    {...props, setPanelState},
                     iconListItemPanelState
                 )}
                 <ToolbarButton
@@ -164,8 +154,8 @@ const IconListItemBlock = (props) => {
         </BlockControls>
         <li {...blockProps}>
             <div className="list-divider"></div>
-            <a id={elementId}>
-                {!hideIcon && <i className={icon} />}
+            <a id={elementId} aria-label={ariaLabel}>
+                {!hideIcon && renderIcon(icon, iconType, iconSVG)}
                 <RichTextComponent
                     classNames={`list-text ${hideIcon ? 'no-icon' : ''}`}
                     tagName={'span'}

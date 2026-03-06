@@ -1,11 +1,16 @@
 
 import { __ } from '@wordpress/i18n';
 import { AlignLeft, AlignRight, AlignCenter } from 'gutenverse-core/components';
-import { DimensionControl, IconRadioControl, RangeControl, SelectControl, SizeControl, TextControl } from 'gutenverse-core/controls';
+import { DimensionControl, IconSVGControl, IconRadioControl, RangeControl, SelectControl, SizeControl, TextControl } from 'gutenverse-core/controls';
 import { handleDimension, handleUnitPoint } from 'gutenverse-core/styling';
 
 export const iconPanel = ({ elementId, iconView, iconBorderWidth, iconBorderRadius, iconShape, removeStyle }) => {
     return [
+        {
+            id: 'icon',
+            label: __('Icon', 'gutenverse'),
+            component: IconSVGControl,
+        },
         {
             id: 'iconAlign',
             label: __('Icon Alignment', 'gutenverse'),
@@ -60,6 +65,18 @@ export const iconPanel = ({ elementId, iconView, iconBorderWidth, iconBorderRadi
                         }
                     ],
                     'selector': `.${elementId} i`,
+                },
+                {
+                    'type': 'unitPoint',
+                    'id': 'iconSize',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'font-size',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.${elementId} .guten-icon-wrapper .gutenverse-icon-svg svg`,
                 }
             ]
         },
@@ -119,7 +136,7 @@ export const iconPanel = ({ elementId, iconView, iconBorderWidth, iconBorderRadi
                             }
                         }
                     ],
-                    'selector': `.${elementId} .guten-icon-wrapper i`,
+                    'selector': `.${elementId} .guten-icon-wrapper i, .${elementId} .guten-icon-wrapper svg`,
                 }
             ],
         },

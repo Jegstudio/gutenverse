@@ -1,8 +1,7 @@
 import { compose } from '@wordpress/compose';
-import { useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { applyFilters } from '@wordpress/hooks';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'gutenverse-core/helper';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
@@ -63,7 +62,7 @@ const save = compose(
 
         return iconElement;
     };
-    return <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+    return <div className={className} {...advanceAnimationData}>
         <IconELement />
     </div>;
 });

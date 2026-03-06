@@ -12,14 +12,14 @@ export { metadata, name };
 
 export const settings = {
     icon: <IconListSVG />,
-    example: example,
+    example,
     edit,
     save,
-    deprecated : [
+    deprecated: [
         {
-            attributes : attributes,
+            attributes: attributes,
             supports,
-            save : saveV1,
+            save: saveV1,
         }
     ]
 };

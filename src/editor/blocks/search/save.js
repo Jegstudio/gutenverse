@@ -4,6 +4,7 @@ import { useAnimationAdvanceData, useAnimationFrontend, useDisplayFrontend } fro
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 import { compose } from '@wordpress/compose';
 import { classnames } from 'gutenverse-core/components';
+import { renderIcon } from 'gutenverse-core/helper';
 
 const save = compose(
     withAnimationAdvanceScript('icon'),
@@ -18,6 +19,8 @@ const save = compose(
         elementId,
         showButton,
         closeIcon,
+        closeIconType,
+        closeIconSVG,
     } = attributes;
     const advanceAnimationData = useAnimationAdvanceData(attributes);
     const animationClass = useAnimationFrontend(attributes);
@@ -33,24 +36,24 @@ const save = compose(
 
     return (
         <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
-            <form
-                className="gutenverse-search-form"
-            >
-                <div className="search-input-container">
-                    <input type="text"
-                        placeholder={inputPlaceholder}
-                        name="s"
-                        className={classnames(
-                            'gutenverse-search',
-                            'gutenverse-search-input',
-                        )}
-                    />
-                    <div className="close-icon">
-                        <i className={closeIcon}></i>
+            <form className="gutenverse-search-form">
+                <div className={'search-input-container-outer'}>
+                    <div className="search-input-container">
+                        <input type="text"
+                            placeholder={inputPlaceholder}
+                            name="s"
+                            className={classnames(
+                                'gutenverse-search',
+                                'gutenverse-search-input',
+                            )}
+                        />
+                        <div className="close-icon">
+                            {renderIcon(closeIcon, closeIconType, closeIconSVG)}
+                        </div>
                     </div>
                 </div>
                 {
-                    showButton && <InnerBlocks.Content className="gutenverse-search-button" />
+                    showButton && <div className="guten-search-button-wrapper"><InnerBlocks.Content /></div>
                 }
             </form>
         </div>

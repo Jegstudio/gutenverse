@@ -1,5 +1,7 @@
-import { Default, u, addQueryArgs, apiFetch } from 'gutenverse-core-frontend';
+import { Default, u } from 'gutenverse-core-frontend';
 import isEmpty from 'lodash/isEmpty';
+import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
 
 class GutenversePostlist extends Default {
     /* public */
@@ -58,7 +60,7 @@ class GutenversePostlist extends Default {
             qApi  = true;
         }
 
-        element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`)
+        element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`);
 
         apiFetch({
             path: addQueryArgs('/gutenverse-client/v1/postlist/data', {
@@ -244,4 +246,9 @@ class GutenversePostlist extends Default {
     }
 }
 
+const selected = u('.guten-post-list');
+
+if (selected) {
+    new GutenversePostlist(selected);
+}
 export default GutenversePostlist;

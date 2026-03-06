@@ -1,7 +1,11 @@
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl, ImageSizeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { ImageSizeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { getDefaultImageLoad } from '../../../helper';
 
-export const panelImage = () => {
+export const panelImage = (props) => {
+    const { altType, imageLoad, lazyLoad } = props;
+    const defaultImageLoad = getDefaultImageLoad(imageLoad, lazyLoad);
+
     return [
         {
             id: 'image',
@@ -9,13 +13,44 @@ export const panelImage = () => {
             component: ImageSizeControl
         },
         {
-            id: 'lazyLoad',
-            label: __('Set Lazy Load', 'gutenverse'),
-            component: CheckboxControl,
+            id: 'imageLoad',
+            label: __('Image Load', 'gutenverse'),
+            component: SelectControl,
+            defaultValue: defaultImageLoad,
+            options: [
+                {
+                    label: __('Normal Load', 'gutenverse'),
+                    value: 'eager'
+                },
+                {
+                    label: __('Lazy Load', 'gutenverse'),
+                    value: 'lazy'
+                },
+            ],
+        },
+        {
+            id: 'altType',
+            label: __('Alt Type', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: 'None',
+                    value: 'none'
+                },
+                {
+                    label: 'Alt from Image',
+                    value: 'original'
+                },
+                {
+                    label: 'Custom Alt',
+                    value: 'custom'
+                },
+            ]
         },
         {
             id: 'imageAlt',
-            label: __('Image Alt', 'gutenverse'),
+            show: altType === 'custom',
+            label: __('Custom Caption', 'gutenverse'),
             component: TextControl,
         },
         {

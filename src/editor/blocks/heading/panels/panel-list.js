@@ -101,12 +101,6 @@ export const panelList = () => {
             pro: true
         },
         {
-            title: __('Positioning', 'gutenverse'),
-            initialOpen: false,
-            panelArray: positioningPanel,
-            tabRole: TabSetting
-        },
-        {
             title: __('Transform', 'gutenverse'),
             initialOpen: false,
             panelArray: transformPanel,

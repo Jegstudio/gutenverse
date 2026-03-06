@@ -1,5 +1,5 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenverse/icon-list",
 	"title": "Icon List",
 	"description": "Create a list with icons",
@@ -28,6 +28,10 @@
 		},
 		"verticalAlign": {
 			"type": "string",
+			"copyStyle": true
+		},
+		"adjustVerticalAlign": {
+			"type": "object",
 			"copyStyle": true
 		},
 		"iconColor": {
@@ -68,6 +72,11 @@
 			"default": {},
 			"copyStyle": true
 		},
+		"backgroundTransition": {
+			"type": "object",
+			"copyStyle": true,
+			"default": {}
+		},
 		"border": {
 			"type": "object",
 			"default": {},
@@ -95,6 +104,21 @@
 			"migrate": {
 				"attr": "borderHover",
 				"type": "border"
+			},
+			"copyStyle": true
+		},
+		"placeholderUnitPoint": {
+			"type": "object",
+			"default": {
+				"Desktop": {
+					"point": 1
+				},
+				"Tablet": {
+					"point": 1
+				},
+				"Mobile": {
+					"point": 1
+				}
 			},
 			"copyStyle": true
 		},
@@ -176,7 +200,7 @@
 			"type": "object",
 			"copyStyle": true
 		},
-		"spaceDivider":{
+		"spaceDivider": {
 			"type": "object",
 			"copyStyle": true
 		},
@@ -203,13 +227,51 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
-		"className": false
+		"className": false,
+		"anchor": true
 	},
 	"keywords": [
 		"icon",
-		"list"
+		"list",
+		"image",
+		"symbol",
+		"logo",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-icon-list-style"
 	]
 }

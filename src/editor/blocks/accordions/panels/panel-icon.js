@@ -7,7 +7,7 @@ export const panelIcon = (props) => {
     const {
         iconPosition,
         elementId,
-        iconSpacing
+        iconSpacing,
     } = props;
 
     return [

@@ -1,12 +1,11 @@
 import { __ } from '@wordpress/i18n';
-
 import { BorderControl, BorderResponsiveControl, BoxShadowControl, IconRadioControl, RangeControl, SizeControl } from 'gutenverse-core/controls';
 import { AlignCenter, AlignLeft, AlignRight } from 'react-feather';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 export const stylePanel = (props) => {
     const {
-        elementId,
+        elementId
     } = props;
 
     const device = getDeviceType();
@@ -178,7 +177,7 @@ export const stylePanel = (props) => {
                     'selector': `.${elementId} img`,
                 }
             ],
-        }
+        },
     ];
 };
 
