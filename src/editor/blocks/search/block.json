@@ -329,5 +329,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-search-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

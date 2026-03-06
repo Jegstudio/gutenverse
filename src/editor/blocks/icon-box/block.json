@@ -621,5 +621,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-icon-box-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

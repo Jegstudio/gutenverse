@@ -367,5 +367,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-animated-text-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

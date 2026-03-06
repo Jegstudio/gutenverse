@@ -273,5 +273,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-text-editor-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

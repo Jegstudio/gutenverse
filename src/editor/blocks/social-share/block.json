@@ -300,5 +300,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-social-share-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

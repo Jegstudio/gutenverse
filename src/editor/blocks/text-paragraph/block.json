@@ -255,5 +255,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-text-paragraph-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

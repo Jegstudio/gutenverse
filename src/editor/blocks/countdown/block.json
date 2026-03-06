@@ -588,5 +588,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-countdown-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

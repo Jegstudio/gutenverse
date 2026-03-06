@@ -692,5 +692,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-post-list-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

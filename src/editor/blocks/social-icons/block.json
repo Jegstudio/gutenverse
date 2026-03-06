@@ -315,5 +315,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-social-icons-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

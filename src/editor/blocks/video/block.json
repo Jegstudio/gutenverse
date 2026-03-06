@@ -240,5 +240,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-video-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

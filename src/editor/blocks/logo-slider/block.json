@@ -444,5 +444,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-logo-slider-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

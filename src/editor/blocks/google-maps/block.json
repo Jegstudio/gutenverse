@@ -208,5 +208,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-google-maps-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

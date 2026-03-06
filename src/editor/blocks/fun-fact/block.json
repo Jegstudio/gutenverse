@@ -431,5 +431,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-fun-fact-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

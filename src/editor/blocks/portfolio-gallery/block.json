@@ -370,5 +370,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-portfolio-gallery-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

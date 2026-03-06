@@ -217,5 +217,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-buttons-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

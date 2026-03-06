@@ -342,5 +342,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-feature-list-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

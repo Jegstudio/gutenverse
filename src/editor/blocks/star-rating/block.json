@@ -228,5 +228,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-star-rating-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

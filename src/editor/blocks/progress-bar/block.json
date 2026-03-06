@@ -305,5 +305,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-progress-bar-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

@@ -238,7 +238,8 @@
 	"usesContext": [
 		"postId",
 		"postType",
-		"queryId"
+		"queryId",
+		"gutenverse/flexDirection"
 	],
 	"supports": {
 		"className": false,

@@ -174,5 +174,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-spacer-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

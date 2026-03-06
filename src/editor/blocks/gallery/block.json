@@ -1002,5 +1002,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-gallery-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

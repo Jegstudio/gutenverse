@@ -311,5 +311,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-image-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

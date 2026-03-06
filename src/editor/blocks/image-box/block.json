@@ -482,5 +482,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-image-box-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

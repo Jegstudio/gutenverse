@@ -356,5 +356,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-button-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

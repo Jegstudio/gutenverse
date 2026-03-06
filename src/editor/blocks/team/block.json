@@ -628,5 +628,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-team-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

@@ -237,5 +237,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-divider-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

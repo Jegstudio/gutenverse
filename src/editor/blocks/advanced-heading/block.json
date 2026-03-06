@@ -365,5 +365,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-advanced-heading-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

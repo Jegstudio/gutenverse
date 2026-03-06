@@ -656,5 +656,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-testimonials-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

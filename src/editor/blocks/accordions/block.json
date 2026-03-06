@@ -451,5 +451,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-accordions-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

@@ -232,5 +232,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-tabs-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }
