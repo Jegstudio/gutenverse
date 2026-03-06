@@ -64,9 +64,9 @@ const IconBlock = compose(
     const { dynamicIco } = useDynamicIcon({ ...dynamicIcon, context });
 
     const resolvedIcon = !isEmpty(dynamicIco) ? {
-        icon: dynamicIco.type === 'icon' ? dynamicIco.value : icon,
+        icon: dynamicIco.icon || icon,
         iconType: dynamicIco.type,
-        iconSVG: dynamicIco.type === 'svg' ? dynamicIco.value : iconSVG,
+        iconSVG: dynamicIco.type === 'svg' ? dynamicIco.svg : iconSVG,
     } : { icon, iconType, iconSVG };
 
     const blockProps = useBlockProps({

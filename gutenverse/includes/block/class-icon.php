@@ -36,19 +36,18 @@ class Icon extends Block_Abstract {
 		// Dynamic icon.
 		$dynamic_icon = isset( $this->attributes['dynamicIcon'] ) ? $this->attributes['dynamicIcon'] : array();
 		$default_icon = array(
-			'type'  => $icon_type,
-			'value' => 'icon' === $icon_type ? $icon : $icon_svg,
+			'type' => $icon_type,
+			'icon' => $icon,
+			'svg'  => $icon_svg,
 		);
 		$resolved     = apply_filters( 'gutenverse_dynamic_generate_icon', $default_icon, $dynamic_icon );
 
 		if ( ! empty( $resolved ) && is_array( $resolved ) ) {
 			$icon_type = isset( $resolved['type'] ) ? $resolved['type'] : $icon_type;
 			if ( 'icon' === $icon_type ) {
-				if ( ! is_array( $resolved['value'] ) ) {
-					$icon = isset( $resolved['value'] ) ? $resolved['value'] : $icon;
-				}
+				$icon = isset( $resolved['icon'] ) ? $resolved['icon'] : $icon;
 			} else {
-				$icon_svg = isset( $resolved['value'] ) ? $resolved['value'] : $icon_svg;
+				$icon_svg = isset( $resolved['svg'] ) ? $resolved['svg'] : $icon_svg;
 			}
 		}
 
