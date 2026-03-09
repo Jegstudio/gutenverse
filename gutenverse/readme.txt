@@ -307,6 +307,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * fix issue with icon box when adding aria label
 * fix animated text issue with special character
 * fix post block pagination load more keeps loading issue
+* fix vulnerability issue
 
 = 3.4.7 =
 ##### Bug Fixes
@@ -318,6 +319,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * fix item gallery copy icon
 * fix lazyload option into dropdown
 * fix hover button transition
+* fix vulnerability issue
 
 = 3.4.6 =
 ##### New & Improvements
