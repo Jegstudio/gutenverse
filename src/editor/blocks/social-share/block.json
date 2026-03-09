@@ -268,7 +268,6 @@
 	"variations": [
 		{
 			"name": "social-share-horizontal",
-			"isDefault": true,
 			"title": "Horizontal",
 			"description": "Social share shown in a row.",
 			"attributes": {
