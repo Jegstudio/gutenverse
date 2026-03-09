@@ -16,7 +16,7 @@ const MenuControl = (props) => {
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
-        if ( !isOnEditor() ) return;
+        if (!isOnEditor()) return;
         apiFetch({
             path: addQueryArgs('/gutenverse-client/v1/menu'),
         }).then((data) => {
@@ -29,8 +29,9 @@ const MenuControl = (props) => {
     };
 
     const customStyles = {
-        input: () => {
+        input: (provided) => {
             return {
+                ...provided,
                 padding: 0,
                 margin: 0,
             };

@@ -36,7 +36,6 @@ const ButtonsBlock = compose(
 
     const blockProps = useBlockProps({
         className: classnames(
-            elementId,
             'guten-element',
             'guten-buttons',
             `${orientation}`,
@@ -45,6 +44,7 @@ const ButtonsBlock = compose(
     });
 
     const wrapperClassName = classnames(
+        elementId,
         'guten-element',
         'guten-buttons-wrapper',
         'no-margin',

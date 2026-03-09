@@ -169,11 +169,11 @@ class Post_Block extends Post_Abstract {
 		$category = '';
 
 		if ( $this->attr_is_true( $this->attributes['categoryEnabled'] ) && $cat_id ) {
-			$category = get_category( $cat_id );
-			$position = 'type-3' === $this->attributes['postblockType'] ? 'position-' . esc_attr( $this->attributes['categoryPosition'] ) : '';
-			$class    = 'class="category-' . esc_attr( $category->slug ) . '"';
+			$category            = get_category( $cat_id );
+			$position            = 'type-3' === $this->attributes['postblockType'] ? 'position-' . esc_attr( $this->attributes['categoryPosition'] ) : '';
+			$class               = 'class="category-' . esc_attr( $category->slug ) . '"';
 			$category_aria_label = sprintf( __( 'View all posts in %s', 'gutenverse' ), $category->name );
-			$category = '<div class="guten-post-category ' . $position . '"><span><a href="' . esc_url( get_category_link( $cat_id ) ) . '" aria-label="' . esc_attr( $category_aria_label ) . '" ' . $class . '>' . esc_attr( $category->name ) . '</a></span></div>';
+			$category            = '<div class="guten-post-category ' . $position . '"><span><a href="' . esc_url( get_category_link( $cat_id ) ) . '" aria-label="' . esc_attr( $category_aria_label ) . '" ' . $class . '>' . esc_attr( $category->name ) . '</a></span></div>';
 			if ( 'type-5' === $this->attributes['postblockType'] ) {
 				$category = '<div class="post-category-container">' . $category . '</div>';
 			}
