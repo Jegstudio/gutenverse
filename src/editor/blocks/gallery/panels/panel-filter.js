@@ -43,11 +43,5 @@ export const filterPanel = ({ filter }) => {
                 },
             ],
         },
-        {
-            id: 'filterRemoveAnimation',
-            label: __('Remove Animation', 'gutenverse'),
-            component: CheckboxControl,
-            description: __('If this option is enabled, the gallery items will not have any animation when the filter is applied.', 'gutenverse'),
-        }
     ];
 };
