@@ -71,7 +71,16 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "h3"
+			"default": "h3",
+			"enum": [
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"categoryEnabled": {
 			"type": "boolean",
@@ -915,13 +924,53 @@
 		"paginationLoadmoreAnimationSequenceDelay": {
 			"type": "string",
 			"default": ""
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["post", "block"],
-	"viewScript": ["gutenverse-frontend-postblock-script"],
-	"style": ["gutenverse-frontend-post-block-style"]
+	"keywords": [
+		"post",
+		"block"
+	],
+	"viewScript": [
+		"gutenverse-frontend-postblock-script"
+	],
+	"style": [
+		"gutenverse-frontend-post-block-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	]
 }

@@ -4,149 +4,121 @@
 @import "./notices/gutenverse-form-entries-notice.scss";
 
 #gutenverse-dashboard {
-    .gutenverse-340 {
-        h2 {
-            font-weight: 500;
-        }
+	.gutenverse-340, .gutenverse-350 {
+		h2 {
+			font-weight: 500;
+		}
 
-        .upgrade-notice-head > div {
-            border-radius: 20px;
-        }
-        
-        .upgrade-notice-head > div > .upgrade-notice-title {
-            color: #011627;
-            text-align: center;
-            font-family: "Roboto", sans-serif;
-            font-size: 48px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-            letter-spacing: -0.64px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+		.upgrade-notice-head > div {
+			border-radius: 20px;
+		}
+		
+		.upgrade-notice-head > div > .upgrade-notice-title {
+			color: #011627;
+			text-align: center;
+			font-family: "Roboto", sans-serif;
+			font-size: 48px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: normal;
+			letter-spacing: -0.64px;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			position: relative;
+			z-index: 2;
 
-            svg {
-                margin-top: -10px;
-            }
-        }
-        
-        .upgrade-notice-head > div > .upgrade-notice-title > span {
-            background: -webkit-linear-gradient(45deg, #a245ff, #4569FF, #68E4F4);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    } 
+			svg {
+				margin-top: -10px;
+			}
+		}
+		
+		.upgrade-notice-head > div > .upgrade-notice-title > span {
+			background: -webkit-linear-gradient(45deg, #a245ff, #4569FF, #68E4F4);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	} 
 
-    .gutenverse-340 {
-        .custom-notice-header {
-            position: relative;
+	.gutenverse-350 {
+		.custom-notice-header {
+			position: relative;
+			overflow: hidden;
+			border-radius: 20px;
+			min-height: 200px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
-            img {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-            }
+			img {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100% !important;
+				height: 100% !important;
+				object-fit: cover;
+				object-position: center;
+				z-index: 1;
+				display: block;
+			}
+		}
 
-            .upgrade-notice-title {
-                z-index: 1;
-            }
-        }
+		.inner-content {
+			padding: 40px;
+			max-width: 980px;
+			margin: 0 auto;
 
-        .inner-content {
-            padding: 0 40px 60px;
-            max-width: 980px;
-            margin: 0 auto;
+			h4 {
+				display: flex;
+				align-items: center;
+				color: #011627 !important;
+				font-family: "Roboto", sans-serif;
+				font-size: 24px;
+				font-weight: 600;
+				line-height: 1.4;
+				margin: 40px 0 20px;
 
-            .intro-section {
-                text-align: left;
-                margin-bottom: 60px;
+				img {
+					border-radius: 6px;
+					margin: 0 12px 0 0;
+					width: 32px;
+					height: 32px;
+				}
+			}
 
-                .hero-image {
-                    width: 100%;
-                    height: auto;
-                    border-radius: 20px;
-                    margin-bottom: 30px;
-                    margin-top: 60px;
-                    display: block;
-                }
+			p {
+				color: #40505D !important;
+				font-family: "Roboto", sans-serif;
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 1.5em;
+				margin-bottom: 20px;
+			}
 
-                h2 {
-                    color: #011627;
-                    font-family: "Roboto", sans-serif;
-                    font-size: 28px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: normal;
-                    margin-bottom: 15px;
-                }
+			ul {
+				margin-bottom: 30px;
+				padding-left: 20px;
+				list-style-type: disc;
 
-                p {
-                    color: #40505D;
-                    font-family: "Roboto", sans-serif;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 24px; 
-                    margin: 0;
-                }
-            }
+				li {
+					color: #40505D !important;
+					font-family: "Roboto", sans-serif;
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 1.5em;
+					margin-bottom: 10px;
+				}
+			}
 
-            .feature-section {
-                display: flex;
-                align-items: center;
-                gap: 50px;
-                margin-top: 60px;
+			img {
+				border-radius: 20px;
+				width: 100%;
+				height: auto;
+				display: block;
+				margin-bottom: 40px;
+			}
+		}
+	}
 
-                .feature-image {
-                    flex: 1;
-                    
-                    img {
-                        width: 100%;
-                        height: auto;
-                        border-radius: 20px;
-                        display: block;
-                        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.05); /* Optional refinement */
-                    }
-                }
-
-                .feature-text {
-                    flex: 1;
-
-                    h3 {
-                        color: #011627;
-                        font-family: "Roboto", sans-serif;
-                        font-size: 24px;
-                        font-style: normal;
-                        font-weight: 500;
-                        line-height: normal;
-                        margin-bottom: 15px;
-                    }
-
-                    p {
-                        color: #40505D;
-                        font-family: "Roboto", sans-serif;
-                        font-size: 16px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 22px;
-                        margin: 0;
-                    }
-                }
-
-                @media (max-width: 768px) {
-                    flex-direction: column;
-                    gap: 30px;
-                    text-align: center;
-
-                    &.image-right {
-                        flex-direction: column-reverse;
-                    }
-                }
-            }
-        }
-    }
 }

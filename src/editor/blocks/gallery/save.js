@@ -61,8 +61,16 @@ const save = compose(
         [`grid-mobile-${column && column['Mobile'] ? column['Mobile'] : 2}`],
     );
     const imageCondition = (image) => {
-        const { imageLoad = '' } = image;
-        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} alt={image.title} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })} />;
+        const { imageLoad = '', imageAlt = '', imageCustomAlt = '' } = image;
+        let renderedAlt = image?.title;
+        if (imageAlt === 'original') {
+            renderedAlt = image?.src?.altOriginal;
+        } else if (imageAlt === 'custom') {
+            renderedAlt = imageCustomAlt;
+        } else if (imageAlt === 'none') {
+            renderedAlt = false;
+        }
+        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} {...(renderedAlt === false || renderedAlt === undefined ? {} : { alt: renderedAlt })} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })} />;
     };
 
     return (

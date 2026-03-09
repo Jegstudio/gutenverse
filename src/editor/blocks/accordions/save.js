@@ -22,12 +22,12 @@ export const save = compose(
         'guten-element',
         'guten-accordions-wrapper',
         animationClass,
-        displayClass
+        displayClass,
+        elementId,
     );
 
     const className = classnames(
         'guten-accordions',
-        elementId,
     );
 
     return <div className={wrapperClassName} {...advanceAnimationData}>

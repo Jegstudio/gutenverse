@@ -10,7 +10,7 @@ import saveV4 from './deprecated/v4/save';
 import saveV5 from './deprecated/v5/save';
 import { IconTestimonialSVG } from '../../../assets/icon/index';
 
-const { name, attributes } = metadata;
+const { name, attributes, supports } = metadata;
 
 export { metadata, name };
 
@@ -22,18 +22,22 @@ export const settings = {
     deprecated: [
         {
             attributes,
+            supports,
             save: saveV1
         },
         {
             attributes,
+            supports,
             save: saveV2
         },
         {
             attributes,
+            supports,
             save: saveV3
         },
         {
             attributes,
+            supports,
             save: saveV4
         },
         {
@@ -49,6 +53,7 @@ export const settings = {
                     }
                 }
             },
+            supports,
             migrate: (attributes) => {
                 return {
                     ...attributes,
@@ -60,7 +65,7 @@ export const settings = {
                     })
                 };
             },
-            save: saveV5
+            save: saveV5,
         },
     ]
 };
