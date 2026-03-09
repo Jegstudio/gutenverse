@@ -302,6 +302,9 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 = 3.5.0 =
 ##### New & Improvements
 * add new container block
+* add image alt type in gallery
+* add toggle on/off gallery animation
+* add styling for search block suggestion
 
 ##### Bug Fixes
 * fix issue with icon box when adding aria label
