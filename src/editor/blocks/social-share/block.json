@@ -233,18 +233,49 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"variations": [
 		{
 			"name": "social-share-horizontal",
-			"isDefault": true,
 			"title": "Horizontal",
 			"description": "Social share shown in a row.",
 			"attributes": {
 				"orientation": "horizontal"
 			},
-			"scope": ["transform"]
+			"scope": [
+				"transform"
+			]
 		},
 		{
 			"name": "social-share-vertical",
@@ -253,12 +284,23 @@
 			"attributes": {
 				"orientation": "vertical"
 			},
-			"scope": ["transform"]
+			"scope": [
+				"transform"
+			]
 		}
 	],
 	"supports": {
 		"className": false
 	},
-	"keywords": ["social", "share", "link"],
-	"style": ["gutenverse-frontend-social-share-style"]
+	"keywords": [
+		"social",
+		"share",
+		"link"
+	],
+	"style": [
+		"gutenverse-frontend-social-share-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	]
 }

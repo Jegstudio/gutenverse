@@ -23,10 +23,10 @@ const save = compose(
         'guten-element',
         'guten-buttons',
         `${orientation}`,
-        elementId,
     );
 
     const wrapperClassName = classnames(
+        elementId,
         'guten-element',
         'guten-buttons-wrapper',
         animationClass,

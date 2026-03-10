@@ -23,7 +23,16 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "h1"
+			"default": "h1",
+			"enum": [
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"postLink": {
 			"type": "boolean"
@@ -194,13 +203,55 @@
 		"condition": {
 			"type": "object",
 			"default": {}
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
-	"usesContext": ["postId", "postType", "queryId"],
+	"usesContext": [
+		"postId",
+		"postType",
+		"queryId",
+		"gutenverse/flexDirection"
+	],
 	"supports": {
 		"className": false,
 		"anchor": true
 	},
-	"keywords": ["single", "post", "title", "texts"],
-	"style": ["gutenverse-frontend-post-title-style"]
+	"keywords": [
+		"single",
+		"post",
+		"title",
+		"texts"
+	],
+	"style": [
+		"gutenverse-frontend-post-title-style"
+	]
 }

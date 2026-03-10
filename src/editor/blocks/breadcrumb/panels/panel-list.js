@@ -3,6 +3,8 @@ import {
     backgroundPanel,
     borderPanel,
     conditionPanel,
+    positioningPanel,
+    responsivePanel,
     TabSetting,
     TabStyle,
 } from 'gutenverse-core/controls';
@@ -48,6 +50,18 @@ export const panelList = () => {
             initialOpen: false,
             panelArray: borderPanel,
             tabRole: TabStyle
+        },
+        {
+            title: __('Display', 'gutenverse'),
+            initialOpen: false,
+            panelArray: responsivePanel,
+            tabRole: TabSetting
+        },
+        {
+            title: __('Positioning', 'gutenverse'),
+            initialOpen: false,
+            panelArray: positioningPanel,
+            tabRole: TabSetting
         },
         {
             title: __('Condition', 'gutenverse'),

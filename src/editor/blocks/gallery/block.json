@@ -954,6 +954,41 @@
 			"type": "string",
 			"default": "h5",
 			"copyStyle": true
+		},
+		"filterRemoveAnimation": {
+			"type": "boolean",
+			"default": false,
+			"copyStyle": true
+		},
+		"flexAlignSelf": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexCustomOrder": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSize": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeGrow": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
+		},
+		"flexSizeShrink": {
+			"type": "object",
+			"default": {},
+			"copyStyle": true
 		}
 	},
 	"supports": {
@@ -972,5 +1007,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-gallery-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

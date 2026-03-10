@@ -84,7 +84,6 @@ const Accordions = compose(
     const innerBlocksProps = useInnerBlocksProps({
         className: classnames(
             'guten-accordions',
-            elementId,
         )
     }, {
         template: [['gutenverse/accordion']],
@@ -100,7 +99,8 @@ const Accordions = compose(
             'guten-accordions-wrapper',
             'no-margin',
             animationClass,
-            displayClass
+            displayClass,
+            elementId,
         ),
         ref: elementRef
     });

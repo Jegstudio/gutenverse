@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl, RepeaterControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 
-export const filterPanel = ({filter}) => {
+export const filterPanel = ({ filter }) => {
     return [
         {
             id: 'filter',

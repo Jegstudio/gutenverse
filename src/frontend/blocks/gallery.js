@@ -18,14 +18,14 @@ class GutenverseGallery extends Default {
 
                     Swiper.use([Navigation, Pagination, Zoom]);
 
-                    $this._loadGallery({Shuffle, Swiper});
+                    $this._loadGallery({ Shuffle, Swiper });
                 });
         }
     }
 
     /* private */
 
-    _loadGallery({Shuffle, Swiper}) {
+    _loadGallery({ Shuffle, Swiper }) {
         const $this = this;
         $this._elements.map(element => {
             const promiseImages = u(element).find('.gallery-item-wrap:not(.item-hidden) img').nodes.map((img) =>
@@ -88,7 +88,7 @@ class GutenverseGallery extends Default {
         if (searchElement.length > 0) {
             searchValue = searchElement.first().value.toLowerCase();
             filterText = thisElement.find('.search-filter-trigger span').text().toLowerCase();
-            if(thisElement.find('.search-filter-trigger').attr('data-flag-all')) {
+            if (thisElement.find('.search-filter-trigger').attr('data-flag-all')) {
                 filterText = 'all';
             }
         } else {
@@ -101,7 +101,7 @@ class GutenverseGallery extends Default {
             }
         }
         const filterValue = filterText === 'all' ? '' : filterText;
-        return {searchValue, filterValue};
+        return { searchValue, filterValue };
     }
 
     _addSliderEffect(element, Swiper) {
@@ -218,10 +218,11 @@ class GutenverseGallery extends Default {
         const thisElement = u(element);
         const filterPopup = thisElement.find('.search-filter-controls');
         const elementClassNames = thisElement.nodes[0].className;
+        const removeAnimation = thisElement.data('remove-animation') === 'true';
         const shuffle = new Shuffle(thisElement.find('.gallery-items').first(), {
             itemSelector: '.gallery-item-wrap',
             sizer: '.gallery-sizer-element',
-            speed: 500
+            speed: removeAnimation ? 0 : 500
         });
         const onSearch = (shuffle, elementClassNames) => {
             const { searchValue, filterValue } = $this._getFilterSearchValue(elementClassNames);
@@ -254,7 +255,7 @@ class GutenverseGallery extends Default {
             const gallery = thisElement.find('.gallery-items');
             const loaded = parseInt(gallery.data('loaded'));
             let more = parseInt(gallery.data('more'));
-            if( !more ){
+            if (!more) {
                 more = 2;
             }
             const max = parseInt(gallery.data('max'));
