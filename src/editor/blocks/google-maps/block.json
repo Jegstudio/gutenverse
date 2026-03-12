@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/google-maps",
+	"class_callback": "\\Gutenverse\\Block\\Google_Maps",
 	"title": "Google Maps",
 	"description": "Display a location you want to share to your website visitor.",
 	"category": "gutenverse-element",
