@@ -11,30 +11,31 @@ const { name, attributes } = metadata;
 
 export { metadata, name };
 
+// OLD Attributes with sources for deprecations
 const v3Attributes = {
     ...attributes,
     url: {
         type: 'string',
         source: 'attribute',
         selector: 'a',
-        attribute: 'href',
+        attribute: 'href'
     },
     linkTarget: {
         type: 'string',
         source: 'attribute',
         selector: 'a',
-        attribute: 'target',
+        attribute: 'target'
     },
     rel: {
         type: 'string',
         source: 'attribute',
         selector: 'a',
-        attribute: 'rel',
+        attribute: 'rel'
     },
     text: {
         type: 'string',
         source: 'html',
-        selector: 'span',
+        selector: 'span'
     },
 };
 

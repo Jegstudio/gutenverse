@@ -3,8 +3,8 @@
 	"name": "gutenverse/social-icons",
 	"title": "Social Icons",
 	"description": "Show social networks link to your website visitors",
-	"category": "gutenverse-element",
 	"class_callback": "\\Gutenverse\\Block\\Social_Icons",
+	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
 		"elementId": {
