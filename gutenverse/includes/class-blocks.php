@@ -70,7 +70,7 @@ class Blocks {
 		register_block_type( GUTENVERSE_DIR . './block/spacer/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/star-rating/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/text-editor/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/team/block.json' );
+
 		register_block_type( GUTENVERSE_DIR . './block/social-share/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/search/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/text-paragraph/block.json' );
@@ -98,6 +98,7 @@ class Blocks {
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/archive-title/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/taxonomy-list/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/breadcrumb/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/team/block.json' );
 
 		// Social Share Block.
 		$this->register_social_share_block( GUTENVERSE_DIR . './block/social-share-item/block.json' );

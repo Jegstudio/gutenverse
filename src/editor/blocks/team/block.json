@@ -4,6 +4,7 @@
 	"title": "Team",
 	"description": "Show your team details.",
 	"category": "gutenverse-element",
+	"class_callback": "\\Gutenverse\\Block\\Team",
 	"allowCopyStyle": true,
 	"attributes": {
 		"elementId": {
