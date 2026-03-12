@@ -5,14 +5,16 @@
 	"parent": ["gutenverse/social-icons"],
 	"description": "Show social networks link to your website visitors.",
 	"category": "gutenverse-element",
-	"class_callback": "\\Gutenverse\\Block\\Social_Icon",
 	"allowCopyStyle": true,
 	"attributes": {
 		"elementId": {
 			"type": "string"
 		},
 		"url": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "href"
 		},
 		"dynamicUrl": {
 			"type": "object",
@@ -23,10 +25,16 @@
 			"default": false
 		},
 		"linkTarget": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "target"
 		},
 		"rel": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "rel"
 		},
 		"ariaLabel": {
 			"type": "string",
@@ -44,7 +52,9 @@
 			"type": "string"
 		},
 		"text": {
-			"type": "string"
+			"type": "string",
+			"source": "html",
+			"selector": "span"
 		},
 		"iconColor": {
 			"type": "object",
