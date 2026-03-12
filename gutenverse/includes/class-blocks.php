@@ -44,8 +44,6 @@ class Blocks {
 	 */
 	public function register_blocks() {
 		// Static block.
-		register_block_type( GUTENVERSE_DIR . './block/accordion/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/accordions/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/divider/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/animated-text/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/tab/block.json' );
@@ -100,6 +98,8 @@ class Blocks {
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/social-icons/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/social-icon/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/google-maps/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/accordion/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/accordions/block.json' );
 
 		// Social Share Block.
 		$this->register_social_share_block( GUTENVERSE_DIR . './block/social-share-item/block.json' );
