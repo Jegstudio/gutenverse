@@ -5,6 +5,7 @@
 	"description": "Create text with beautiful animation flow.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
+	"class_callback": "\\Gutenverse\\Block\\Animated_Text",
 	"attributes": {
 		"elementId": {
 			"type": "string"
