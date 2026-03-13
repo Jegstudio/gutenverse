@@ -48,17 +48,12 @@ class Blocks {
 		register_block_type( GUTENVERSE_DIR . './block/tab/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/tabs/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/video/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/fun-fact/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/heading/block.json' );
 
 		register_block_type( GUTENVERSE_DIR . './block/buttons/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/icon/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/icon-box/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/gallery/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/icon-list/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/icon-list-item/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/image/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/image-box/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/testimonials/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/progress-bar/block.json' );
 
@@ -78,6 +73,7 @@ class Blocks {
 
 		// Dynamic blocks.
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/post-author/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/fun-fact/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/post-comment/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/post-date/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/post-excerpt/block.json' );
@@ -101,6 +97,10 @@ class Blocks {
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/advanced-heading/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/button/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/animated-text/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/image-box/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/image/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/icon/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/icon-box/block.json' );
 
 		// Social Share Block.
 		$this->register_social_share_block( GUTENVERSE_DIR . './block/social-share-item/block.json' );

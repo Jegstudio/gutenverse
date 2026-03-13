@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/icon",
+	"class_callback": "\\Gutenverse\\Block\\Icon",
 	"title": "Icon",
 	"description": "Add a beautiful icon with more than 100 icon options",
 	"category": "gutenverse-element",

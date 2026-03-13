@@ -4,6 +4,7 @@
 	"title": "Fun Fact",
 	"description": "Create an interesting fact about your website or something you achieved.",
 	"category": "gutenverse-element",
+	"class_callback": "\\Gutenverse\\Block\\Fun_Fact",
 	"allowCopyStyle": true,
 	"attributes": {
 		"elementId": {

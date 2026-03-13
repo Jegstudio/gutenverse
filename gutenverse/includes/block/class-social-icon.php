@@ -25,7 +25,10 @@ class Social_Icon extends Block_Abstract {
 	 *
 	 * @return string
 	 */
-	private function get_social_type( $icon ) {
+	private function get_social_type( $icon = '' ) {
+		if ( ! is_string( $icon ) ) {
+			return 'default';
+		}
 		$socials = array(
 			'facebook'    => 'facebook',
 			'twitter'     => 'twitter',
@@ -66,14 +69,14 @@ class Social_Icon extends Block_Abstract {
 	 */
 	public function render_content() {
 		$element_id  = $this->get_element_id();
-		$icon        = isset( $this->attributes['icon'] ) ? $this->attributes['icon'] : 'fab fa-wordpress';
-		$icon_type   = isset( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
-		$icon_svg    = isset( $this->attributes['iconSVG'] ) ? $this->attributes['iconSVG'] : '';
-		$text        = isset( $this->attributes['text'] ) ? $this->attributes['text'] : '';
-		$url         = isset( $this->attributes['url'] ) ? $this->attributes['url'] : '';
-		$link_target = isset( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '';
-		$rel         = isset( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
-		$aria_label  = isset( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
+		$icon        = ! empty( $this->attributes['icon'] ) ? $this->attributes['icon'] : 'fab fa-wordpress';
+		$icon_type   = ! empty( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
+		$icon_svg    = ! empty( $this->attributes['iconSVG'] ) ? $this->attributes['iconSVG'] : '';
+		$text        = ! empty( $this->attributes['text'] ) ? $this->attributes['text'] : '';
+		$url         = ! empty( $this->attributes['url'] ) ? $this->attributes['url'] : '';
+		$link_target = ! empty( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '';
+		$rel         = ! empty( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
+		$aria_label  = ! empty( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
 
 		$href = apply_filters(
 			'gutenverse_dynamic_generate_url',
@@ -85,7 +88,7 @@ class Social_Icon extends Block_Abstract {
 
 		$icon_html = $this->render_icon( $icon_type, $icon, $icon_svg );
 
-		$output  = '<a id="' . $element_id . '" href="' . esc_url( $href ) . '" target="' . esc_attr( $link_target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">';
+		$output  = '<a id="' . $element_id . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $link_target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">';
 		$output .= $icon_html;
 
 		if ( ! empty( $text ) ) {
@@ -111,8 +114,8 @@ class Social_Icon extends Block_Abstract {
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
-		$icon            = isset( $this->attributes['icon'] ) ? $this->attributes['icon'] : 'fab fa-wordpress';
-		$icon_type       = isset( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
+		$icon            = ! empty( $this->attributes['icon'] ) ? $this->attributes['icon'] : 'fab fa-wordpress';
+		$icon_type       = ! empty( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
 		$social_type     = $this->get_social_type( $icon );
 		$icon_class      = ( 'svg' === $icon_type ) ? 'svg' : '';
 
