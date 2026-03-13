@@ -438,6 +438,7 @@
 	"supports": {
 		"className": false,
 		"html": false,
+		"innerBlocks": true,
 		"anchor": true
 	},
 	"keywords": [

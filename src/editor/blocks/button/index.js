@@ -6,6 +6,7 @@ import { IconButtonSVG } from '../../../assets/icon/index';
 import example from './data/example';
 import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
+import saveV3 from './deprecated/v3/save';
 
 const { name, attributes } = metadata;
 
@@ -24,6 +25,10 @@ export const settings = {
         {
             attributes: attributes,
             save: saveV2
+        },
+        {
+            attributes: attributes,
+            save: saveV3
         },
     ],
     usesContext: ['hoverWithParent', 'parentSelector'],

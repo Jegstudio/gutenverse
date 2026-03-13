@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/button",
+	"class_callback": "\\Gutenverse\\Block\\Button",
 	"title": "Button",
 	"description": "Add beautiful and interactive action button.",
 	"category": "gutenverse-element",
@@ -36,16 +37,10 @@
 			"default": false
 		},
 		"linkTarget": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "target"
+			"type": "string"
 		},
 		"rel": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "rel"
+			"type": "string"
 		},
 		"buttonType": {
 			"type": "string",
