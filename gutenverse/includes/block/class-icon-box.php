@@ -26,10 +26,10 @@ class Icon_Box extends Block_Abstract {
 	 * @return string
 	 */
 	private function wrap_href( $content, $css_class = '' ) {
-		$url        = isset( $this->attributes['url'] ) ? $this->attributes['url'] : '';
-		$target     = isset( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '';
-		$rel        = isset( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
-		$aria_label = isset( $this->attributes['anchorAriaLabel'] ) ? $this->attributes['anchorAriaLabel'] : '';
+		$url        = ! empty( $this->attributes['url'] ) ? $this->attributes['url'] : '';
+		$target     = ! empty( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '';
+		$rel        = ! empty( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
+		$aria_label = ! empty( $this->attributes['anchorAriaLabel'] ) ? $this->attributes['anchorAriaLabel'] : '';
 
 		if ( ! empty( $url ) ) {
 			$href = apply_filters(
@@ -39,7 +39,8 @@ class Icon_Box extends Block_Abstract {
 				$this->attributes,
 				$this->get_element_id()
 			);
-			return '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( $href ) . '" target="' . esc_attr( $target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">' . $content . '</a>';
+
+			return '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">' . $content . '</a>';
 		}
 
 		return $content;
