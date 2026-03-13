@@ -22,7 +22,7 @@
 			"default": "post"
 		},
 		"numberPost": {
-			"type": "number",
+			"type": "string",
 			"default": 3
 		},
 		"postOffset": {
