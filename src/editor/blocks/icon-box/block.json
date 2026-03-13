@@ -3,6 +3,7 @@
 	"name": "gutenverse/icon-box",
 	"title": "Icon Box",
 	"description": "Add an information section with icon box.",
+	"class_callback": "\\Gutenverse\\Block\\Icon_Box",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
@@ -29,16 +30,10 @@
 			"default": true
 		},
 		"linkTarget": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "target"
+			"type": "string"
 		},
 		"rel": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "rel"
+			"type": "string"
 		},
 		"showTitle": {
 			"type": "boolean",
