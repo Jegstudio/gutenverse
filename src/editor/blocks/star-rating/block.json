@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/star-rating",
+	"class_callback": "\\Gutenverse\\Block\\Star_Rating",
 	"title": "Star Rating",
 	"description": "Showcase ratings of anything you want to share.",
 	"category": "gutenverse-element",
