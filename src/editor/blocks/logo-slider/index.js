@@ -5,11 +5,12 @@ import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
 import saveV4 from './deprecated/v4/save';
+import saveV5 from './deprecated/v5/save';
 import metadata from './block.json';
 import { IconClientLogoSVG } from '../../../assets/icon/index';
 import example from './data/example';
 
-const { name, attributes } = metadata;
+const { name, attributes, supports } = metadata;
 
 export { metadata, name };
 
@@ -19,6 +20,11 @@ export const settings = {
     edit,
     save,
     deprecated: [
+        {
+            attributes,
+            supports,
+            save: saveV5
+        },
         {
             attributes,
             save: saveV1

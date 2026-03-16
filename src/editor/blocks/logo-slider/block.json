@@ -2,6 +2,7 @@
 	"apiVersion": 3,
 	"name": "gutenverse/logo-slider",
 	"title": "Logo Slider",
+	"class_callback": "\\Gutenverse\\Block\\Logo_Slider",
 	"description": "Showcase your clients, sponsors, or a list of images on your website.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
