@@ -3,6 +3,7 @@
 	"name": "gutenverse/video",
 	"title": "Video",
 	"description": "Embed a video you want to share.",
+	"class_callback": "\\Gutenverse\\Block\\Video",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
