@@ -40,7 +40,7 @@ class Button extends Block_Abstract {
 		$element_id    = $this->get_element_id();
 
 		$href = apply_filters(
-			'gutenverse_dynamic_generate_url',
+			'gutenverse_dynamic_generate_dynamic_pattern_link',
 			$url,
 			'dynamicUrl',
 			$this->attributes,
@@ -48,7 +48,7 @@ class Button extends Block_Abstract {
 		);
 
 		$title = apply_filters(
-			'gutenverse_dynamic_generate_content',
+			'gutenverse_dynamic_generate_dynamic_pattern_content',
 			$content,
 			'dynamicContent',
 			$this->attributes,
@@ -117,21 +117,11 @@ class Button extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		$data_id = '';
-		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
-			$id_parts = explode( '-', $element_id );
-			if ( count( $id_parts ) > 1 ) {
-				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
-			}
-		}
-
 		$class_name = 'guten-element guten-button-wrapper ' . $element_id . $display_classes . $animation_class . $custom_classes;
+		$content    = '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
+		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'button' );
 
-		return sprintf(
-			'<div class="%1$s"%2$s>%3$s</div>',
-			esc_attr( trim( $class_name ) ),
-			$data_id,
-			$this->render_content()
-		);
+		return $content;
 	}
 }

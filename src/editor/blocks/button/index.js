@@ -8,9 +8,25 @@ import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
 
-const { name, attributes } = metadata;
+const { name, attributes, supports } = metadata;
 
 export { metadata, name };
+
+const attrUntilV3 = {
+    ...attributes,
+    linkTarget: {
+        type: 'string',
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'target'
+    },
+    rel: {
+        type: 'string',
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'rel'
+    },
+};
 
 export const settings = {
     icon: <IconButtonSVG />,
@@ -19,15 +35,18 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes: attributes,
+            attributes: attrUntilV3,
+            supports: supports,
             save: saveV1
         },
         {
-            attributes: attributes,
+            attributes: attrUntilV3,
+            supports: supports,
             save: saveV2
         },
         {
-            attributes: attributes,
+            attributes: attrUntilV3,
+            supports: supports,
             save: saveV3
         },
     ],
