@@ -2,6 +2,7 @@
 	"apiVersion": 3,
 	"name": "gutenverse/progress-bar",
 	"title": "Progress Bar",
+	"class_callback": "\\Gutenverse\\Block\\Progress_Bar",
 	"description": "Create a progress bar of your achivement or something you want to share.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
