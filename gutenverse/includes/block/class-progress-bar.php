@@ -93,9 +93,18 @@ class Progress_Bar extends Block_Abstract {
 		$custom_classes  = $this->get_custom_classes();
 		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$anchor_attr     = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
 		$class_name      = trim( "guten-element guten-progress-bar no-margin $element_id $animation_class $display_classes $custom_classes" );
 
-		$content = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '">' . $this->render_content() . '</div>';
+		$content = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'progress-bar' );
 

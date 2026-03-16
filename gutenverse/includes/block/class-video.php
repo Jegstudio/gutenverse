@@ -107,8 +107,20 @@ class Video extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
 		$class_name = trim( "wp-block-gutenverse-video guten-element guten-video $element_id $display_classes $animation_class $custom_classes" );
 
-		return '<figure class="' . esc_attr( $class_name ) . '">' . $this->render_content() . '</figure>';
+		$content = '<figure class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</figure>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'video' );
+
+		return $content;
 	}
 }

@@ -46,8 +46,20 @@ class Social_Icons extends Block_Abstract {
 		$color           = isset( $this->attributes['color'] ) ? $this->attributes['color'] : 'fill';
 		$show_text       = ( isset( $this->attributes['showText'] ) && $this->attributes['showText'] ) ? 'show-text' : '';
 
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
 		$class_name = 'guten-element guten-social-icons ' . $element_id . ' ' . $shape . ' ' . $orientation . ' ' . $color . $display_classes . $animation_class . $custom_classes . ' ' . $show_text;
 
-		return '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
+		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'social-icons' );
+
+		return $content;
 	}
 }
