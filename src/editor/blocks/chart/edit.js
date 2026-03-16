@@ -1,24 +1,17 @@
 import anime from 'animejs';
 import { __ } from '@wordpress/i18n';
-import { createPortal } from 'react-dom';
 import { compose } from '@wordpress/compose';
 import { panelList } from './panels/panel-list';
-import { applyFilters } from '@wordpress/hooks';
 import generateChart from './data/generateChart';
 import getBlockStyle from './styles/block-style';
-import { getColor } from 'gutenverse-core/styling';
-import { displayShortcut } from '@wordpress/keycodes';
-import { gutenverseRoot, renderIcon } from 'gutenverse-core/helper';
-import { LogoCircleColor24SVG } from 'gutenverse-core/icons';
+import { renderIcon } from 'gutenverse-core/helper';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { useBlockProps, BlockControls } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import { RichTextComponent, classnames } from 'gutenverse-core/components';
 import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
-import { IconLibrary, BlockPanelController } from 'gutenverse-core/controls';
-import { useEffect, useState, useRef, useCallback } from '@wordpress/element';
+import { BlockPanelController } from 'gutenverse-core/controls';
+import { useEffect, useRef } from '@wordpress/element';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
-import { HighLightToolbar, URLToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
 import { withPassRef, withMouseMoveEffect, withPartialRender, withCopyElementToolbar } from 'gutenverse-core/hoc';
 
 //commented code is for integrating with dynamic and text highlight
@@ -51,17 +44,11 @@ const ChartBlock = compose(
     const {
         clientId,
         attributes,
-        isSelected,
         setBlockRef,
-        setPanelState,
         setAttributes,
-        panelIsClicked,
-        setPanelIsClicked
     } = props;
 
     const {
-        url,
-        rel,
         icon,
         iconType,
         iconSVG,
@@ -69,7 +56,6 @@ const ChartBlock = compose(
         minValue,
         elementId,
         chartType,
-        linkTarget,
         chartItems,
         totalValue,
         contentType,
@@ -94,10 +80,6 @@ const ChartBlock = compose(
     const titleRef = useRef();
     const descRef = useRef();
     const canvasRef = useRef();
-    // const panelState = {
-    //     panel: 'setting',
-    //     section: 2,
-    // };
 
     const blockProps = useBlockProps({
         ref: elementRef,
@@ -110,25 +92,6 @@ const ChartBlock = compose(
             flipClasses(contentType)
         ),
     });
-
-    // const onToggleOpenInNewTab = useCallback(
-    //     (value) => {
-    //         const newLinkTarget = value ? '_blank' : undefined;
-
-    //         let updatedRel = rel;
-    //         if (newLinkTarget && !rel) {
-    //             updatedRel = NEW_TAB_REL;
-    //         } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-    //             updatedRel = undefined;
-    //         }
-
-    //         setAttributes({
-    //             linkTarget: newLinkTarget,
-    //             rel: updatedRel,
-    //         });
-    //     },
-    //     [rel, setAttributes]
-    // );
 
     useEffect(() => {
         if (elementRef.current) {
@@ -209,9 +172,6 @@ const ChartBlock = compose(
         return () => animation.pause();
     }, [chartItems, animationDuration, chartContent, totalValue, chartType]);
 
-    // FilterDynamic(props);
-    // HighLightToolbar(props);
-
     const insideChart = <div className={`chart-inside type-${chartType}`}>
         {
             'percentage' === chartContent || 'number' === chartContent ?
@@ -240,14 +200,6 @@ const ChartBlock = compose(
                         attributes={attributes}
                         clientId={clientId}
                         contentAttribute={'title'}
-                    // panelDynamic={{ panel: 'setting', section: 3 }}
-                    // panelPosition={{ panel: 'style', section: 1 }}
-                    // setPanelState={setPanelState}
-                    // textChilds={'titleChilds'}
-                    // dynamicList={'titleDynamicList'}
-                    // isUseDinamic={true}
-                    // isUseHighlight={true}
-                    // parentHasLink={isGlobalLinkSet}
                     />
                     {'doughnut' !== chartType && 'none' !== chartContent ? insideChart : ''}
                     <RichTextComponent
@@ -262,14 +214,6 @@ const ChartBlock = compose(
                         attributes={attributes}
                         clientId={clientId}
                         contentAttribute={'description'}
-                    // panelDynamic={{ panel: 'setting', section: 3 }}
-                    // panelPosition={{ panel: 'style', section: 1 }}
-                    // setPanelState={setPanelState}
-                    // textChilds={'descriptionChilds'}
-                    // dynamicList={'descriptionDynamicList'}
-                    // isUseDinamic={true}
-                    // isUseHighlight={true}
-                    // parentHasLink={isGlobalLinkSet}
                     />
                 </div>}
                 <div className="chart-content content-chart">
