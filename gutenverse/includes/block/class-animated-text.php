@@ -95,6 +95,8 @@ class Animated_Text extends Block_Abstract {
 			$class_name .= ' style-' . $style;
 		}
 
-		return '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
+		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		return $content;
 	}
 }
