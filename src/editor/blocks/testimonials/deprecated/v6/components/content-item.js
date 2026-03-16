@@ -1,5 +1,4 @@
 
-
 import { RichText } from '@wordpress/block-editor';
 import { renderIcon } from 'gutenverse-core/helper';
 
