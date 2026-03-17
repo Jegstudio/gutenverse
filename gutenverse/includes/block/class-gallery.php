@@ -442,8 +442,15 @@ class Gallery extends Block_Abstract {
 		$col_mobile  = isset( $column['Mobile'] ) ? $column['Mobile'] : 2;
 
 		$class_name = trim( "guten-element guten-gallery $element_id $animation_class $display_classes layout-$layout grid-desktop-$col_desktop grid-tablet-$col_tablet grid-mobile-$col_mobile $custom_classes" );
+		$data_id       = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
 
-		$output = '<div class="' . esc_attr( $class_name ) . '" data-grid="' . esc_attr( $grid ) . '"' . ( $filter_remove_animation ? ' data-remove-animation="true"' : '' ) . '>';
+		$output = '<div class="' . esc_attr( $class_name ) . '" data-grid="' . esc_attr( $grid ) . '"' . ( $filter_remove_animation ? ' data-remove-animation="true"' : '' ) . $data_id . '>';
 		$output .= $this->render_content(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		$output .= '</div>';
 

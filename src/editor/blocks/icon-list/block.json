@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/icon-list",
+	"class_callback": "\\Gutenverse\\Block\\Icon_List",
 	"title": "Icon List",
 	"description": "Create a list with icons",
 	"category": "gutenverse-element",

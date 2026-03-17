@@ -111,7 +111,15 @@ class Feature_List extends Block_Abstract {
 
 		$class_name = trim( "guten-element $element_id $animation_class $display_classes guten-feature-list icon-position-$icon_pos $custom_classes" );
 
-		$content = '<div class="' . esc_attr( $class_name ) . '">' . $this->render_content() . '</div>';
+		$data_id       = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
+		$content = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'feature-list' );
 

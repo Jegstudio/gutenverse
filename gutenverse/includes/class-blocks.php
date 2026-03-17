@@ -48,7 +48,6 @@ class Blocks {
 		register_block_type( GUTENVERSE_DIR . './block/tab/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/tabs/block.json' );
 
-		register_block_type( GUTENVERSE_DIR . './block/icon-list/block.json' );
 
 		register_block_type( GUTENVERSE_DIR . './block/spacer/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/text-editor/block.json' );
@@ -66,6 +65,7 @@ class Blocks {
 		// Dynamic blocks.
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/heading/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/icon-list-item/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/icon-list/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/star-rating/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/testimonials/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/post-author/block.json' );
