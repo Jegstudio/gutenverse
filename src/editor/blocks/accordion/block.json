@@ -12,6 +12,8 @@
 		},
 		"title": {
 			"type": "string",
+			"source": "html",
+			"selector": ".accordion-heading .accordion-text",
 			"default": ""
 		},
 		"titleChilds": {

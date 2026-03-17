@@ -37,10 +37,16 @@
 			"default": false
 		},
 		"linkTarget": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "target"
 		},
 		"rel": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "rel"
 		},
 		"buttonType": {
 			"type": "string",

@@ -12,7 +12,10 @@
 			"type": "string"
 		},
 		"url": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "href"
 		},
 		"dynamicUrl": {
 			"type": "object",
@@ -42,10 +45,16 @@
 			"type": "string"
 		},
 		"linkTarget": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "target"
 		},
 		"rel": {
-			"type": "string"
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "rel"
 		},
 		"ariaLabel": {
 			"type": "string",

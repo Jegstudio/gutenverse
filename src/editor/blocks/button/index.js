@@ -12,22 +12,6 @@ const { name, attributes, supports } = metadata;
 
 export { metadata, name };
 
-const attrUntilV3 = {
-    ...attributes,
-    linkTarget: {
-        type: 'string',
-        source: 'attribute',
-        selector: 'a',
-        attribute: 'target'
-    },
-    rel: {
-        type: 'string',
-        source: 'attribute',
-        selector: 'a',
-        attribute: 'rel'
-    },
-};
-
 export const settings = {
     icon: <IconButtonSVG />,
     example,
@@ -35,17 +19,17 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes: attrUntilV3,
+            attributes,
             supports: supports,
             save: saveV1
         },
         {
-            attributes: attrUntilV3,
+            attributes,
             supports: supports,
             save: saveV2
         },
         {
-            attributes: attrUntilV3,
+            attributes,
             supports: supports,
             save: saveV3
         },

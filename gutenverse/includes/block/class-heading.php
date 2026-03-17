@@ -45,14 +45,13 @@ class Heading extends Block_Abstract {
 		$content         = isset( $this->attributes['content'] ) ? $this->attributes['content'] : '';
 
 		$class_name = trim( 'guten-element ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . ' ' . $custom_classes );
-		$data_id       = '';
+		$data_id    = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
 			$id_parts = explode( '-', $element_id );
 			if ( count( $id_parts ) > 1 ) {
 				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
 			}
 		}
-
 		$content = '<' . $this->get_tag_name() . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $content . '</' . $this->get_tag_name() . '>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'heading' );
