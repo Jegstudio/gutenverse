@@ -1,10 +1,10 @@
 
 import edit from './edit';
-import saveV1 from './save';
+import save from './save';
 import metadata from './block.json';
 import { IconPortfolioGallerySVG } from '../../../assets/icon/index';
 import example from './data/example';
-import save from './deprecated/v1/save';
+import saveV1 from './deprecated/v1/save';
 
 const { name, attributes, supports } = metadata;
 
