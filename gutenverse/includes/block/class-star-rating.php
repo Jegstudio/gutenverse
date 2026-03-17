@@ -145,8 +145,20 @@ class Star_Rating extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
 		$class_name = trim( "guten-element guten-star-rating $element_id $animation_class $display_classes $custom_classes" );
 
-		return '<div class="' . esc_attr( $class_name ) . '">' . $this->render_content() . '</div>';
+		$content = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'star-rating' );
+
+		return $content;
 	}
 }

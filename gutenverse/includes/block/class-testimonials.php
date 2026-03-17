@@ -273,7 +273,19 @@ class Testimonials extends Block_Abstract {
 		$custom_classes  = $this->get_custom_classes();
 		$content_type    = isset( $this->attributes['contentType'] ) ? (int) $this->attributes['contentType'] : 1;
 
-		$anchor = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
-		return '<div id="' . esc_attr( $anchor ) . '" class="' . esc_attr( $element_id . $display_classes . $animation_class . $custom_classes ) . ' style-' . esc_attr( $content_type ) . ' guten-testimonials guten-element no-margin quote-override">' . $this->render_content() . '</div>';
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
+		$anchor  = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$content = '<div id="' . esc_attr( $anchor ) . '" class="' . esc_attr( $element_id . $display_classes . $animation_class . $custom_classes ) . ' style-' . esc_attr( $content_type ) . ' guten-testimonials guten-element no-margin quote-override" ' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'testimonials' );
+
+		return $content;
 	}
 }

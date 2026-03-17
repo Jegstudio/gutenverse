@@ -60,9 +60,9 @@ class Blocks {
 		register_block_type( GUTENVERSE_DIR . './block/portfolio-gallery/block.json' );
 
 		register_block_type( GUTENVERSE_DIR . './block/popup-builder/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/logo-slider/block.json' );
 
 		// Dynamic blocks.
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/logo-slider/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/heading/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/icon-list-item/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/icon-list/block.json' );
