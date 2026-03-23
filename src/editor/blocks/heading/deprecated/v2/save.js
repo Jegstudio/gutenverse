@@ -30,6 +30,7 @@ const save = compose(
 
     const TagName = 'h' + type;
     const className = classnames(
+        'wp-block-gutenverse-heading',
         'guten-element',
         elementId,
         animationClass,

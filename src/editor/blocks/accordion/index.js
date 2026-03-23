@@ -15,12 +15,28 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes,
+            attributes: {
+                ...attributes,
+                title: {
+                    'type': 'string',
+                    'source': 'html',
+                    'selector': '.accordion-heading .accordion-text',
+                    'default': ''
+                }
+            },
             supports,
             save: saveV1
         },
         {
-            attributes,
+            attributes: {
+                ...attributes,
+                title: {
+                    'type': 'string',
+                    'source': 'html',
+                    'selector': '.accordion-heading .accordion-text',
+                    'default': ''
+                }
+            },
             supports,
             save: saveV2
         }
