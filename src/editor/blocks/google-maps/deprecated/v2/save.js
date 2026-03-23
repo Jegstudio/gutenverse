@@ -52,7 +52,7 @@ const save = compose(
     };
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-src={`https://maps.google.com/maps?${encodeDataToURL(parameter)}`}>
+        <div className={className} {...advanceAnimationData} data-src={`https://maps.google.com/maps?${encodeDataToURL(parameter)}`}>
             <iframe {...iframeParam}/>
         </div>
     );

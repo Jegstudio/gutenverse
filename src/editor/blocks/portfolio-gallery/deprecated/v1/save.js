@@ -39,7 +39,7 @@ const save = compose(
     );
 
     return (
-        <div {...useBlockProps.save({ className })} data-behavior={behavior}>
+        <div className={className} data-behavior={behavior}>
             <div className={`portfolio-gallery-container ${behavior}`}>
                 <div className="content-items">
                     {

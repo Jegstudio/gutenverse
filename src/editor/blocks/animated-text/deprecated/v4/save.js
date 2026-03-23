@@ -57,7 +57,7 @@ const save = compose(
         transitionDuration: parseInt(attributes.transitionDuration),
     };
 
-    return <div {...useBlockProps.save({ className })} data-animation={JSON.stringify(animationProps)}>
+    return <div className={className} data-animation={JSON.stringify(animationProps)}>
         <TitleTag>
             <span className={'non-animated-text before-text'}>{beforeTextAnimated}</span>
             <span className="text-content">

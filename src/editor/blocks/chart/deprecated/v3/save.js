@@ -73,7 +73,7 @@ const save = compose(
     </div>;
 
     return (
-        <div {...useBlockProps.save({ className })} >
+        <div className={className} >
             <div className="guten-chart-wrapper">
                 <div className="chart-content content-card">
                     <RichText.Content

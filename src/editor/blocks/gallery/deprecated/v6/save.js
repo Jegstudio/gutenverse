@@ -74,7 +74,7 @@ const save = compose(
     };
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })} data-grid={grid} {...(filterRemoveAnimation ? { 'data-remove-animation': true } : {})}>
+        <div className={className} {...advanceAnimationData} data-grid={grid} {...(filterRemoveAnimation ? { 'data-remove-animation': true } : {})}>
             <div className="gutenverse-popup-gallery hidden">
                 <div className="gallery-header">
                     <div className="left-header">

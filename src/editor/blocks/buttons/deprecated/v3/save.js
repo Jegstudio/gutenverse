@@ -35,7 +35,7 @@ const save = compose(
 
     return (
         <div className={wrapperClassName}>
-            <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+            <div className={className} {...advanceAnimationData}>
                 <InnerBlocks.Content />
             </div>
         </div>

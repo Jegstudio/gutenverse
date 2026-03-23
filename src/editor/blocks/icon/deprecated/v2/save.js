@@ -68,7 +68,7 @@ const save = compose(
         return iconElement;
     };
 
-    return <div {...useBlockProps.save({ className, ...advanceAnimationData, ...tooltipData })}>
+    return <div className={className} {...advanceAnimationData} {...tooltipData}>
         <IconELement />
     </div>;
 });

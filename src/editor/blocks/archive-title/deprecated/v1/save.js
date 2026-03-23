@@ -22,7 +22,7 @@ const save = ({ attributes })=> {
         displayClass
     );
     return (
-        <div {...useBlockProps.save({ className })}>
+        <div className={className}>
             {/* Block content */}
         </div>
     );

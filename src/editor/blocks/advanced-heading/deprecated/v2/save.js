@@ -46,7 +46,7 @@ const save = compose(
         />;
     };
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+        <div className={className} {...advanceAnimationData}>
             {showLine === 'top' && <div className="heading-line top"></div>}
             {showSub === 'top' && richTextContent(subText, SubTag, 'heading-subtitle')}
             {showSub === 'top' && showLine === 'between' && <div className="heading-line between"></div>}

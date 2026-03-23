@@ -21,7 +21,7 @@ const BreadcrumbBlock = ({ attributes }) => {
     );
 
     return (
-        <div {...useBlockProps.save({ className })}>
+        <div className={className}>
             {/* Block content */}
         </div>
     );

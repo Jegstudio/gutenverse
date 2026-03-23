@@ -44,7 +44,7 @@ const save = compose(
     const socialComponent = <InnerBlocks.Content />;
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+        <div className={className} {...advanceAnimationData}>
             <TeamProfile
                 {...props}
                 frontEnd={true}

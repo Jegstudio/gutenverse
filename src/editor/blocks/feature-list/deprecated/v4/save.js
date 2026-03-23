@@ -84,7 +84,7 @@ const save = compose(
         }
     };
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })} >
+        <div className={className} {...advanceAnimationData} >
             <div className="feature-list-wrapper">
                 {
                     featureList.map((el, index) => {

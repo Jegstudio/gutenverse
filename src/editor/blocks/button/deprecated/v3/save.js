@@ -78,7 +78,7 @@ const save = compose(
     };
 
     return (
-        <div {...useBlockProps.save({ className, ...advanceAnimationData })}>
+        <div className={className} {...advanceAnimationData}>
             <ButtonElement>
                 {showIcon && iconPosition === 'before' && renderIcon(icon, iconType, iconSVG)}
                 <ButtonTitle>{content}</ButtonTitle>
