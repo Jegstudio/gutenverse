@@ -7,10 +7,11 @@ import save from './save';
 import saveV1 from './deprecated/v1/save';
 import attrV1 from './deprecated/v1/attributes.json';
 import saveV2 from './deprecated/v2/save';
+import attrV2 from './deprecated/attrV2/attributes.json';
 import metadata from './block.json';
 import example from './data/example';
 
-const { name, attributes, supports } = metadata;
+const { name, supports } = metadata;
 
 export { metadata, name };
 
@@ -26,15 +27,7 @@ export const settings = {
             save: saveV1
         },
         {
-            attributes: {
-                ...attributes,
-                content: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'h1, h2, h3, h4, h5, h6',
-                    default: ''
-                }
-            },
+            attributes: attrV2,
             supports: supports,
             save: saveV2
         }
