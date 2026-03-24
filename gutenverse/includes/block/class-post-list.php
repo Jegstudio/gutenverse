@@ -264,6 +264,9 @@ class Post_List extends Post_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' layout-' . $layout . ' guten-post-list guten-element">' . $this->render_content() . '</div>';
+		$content = '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' layout-' . $layout . ' guten-post-list guten-element">' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+
+		return $content;
 	}
 }
