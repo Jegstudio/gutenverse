@@ -20,10 +20,6 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes,
-            save: saveV4,
-        },
-        {
             attributes: {
                 ...attributes,
                 overlayType: {
@@ -72,6 +68,10 @@ export const settings = {
                 },
             },
             save: saveV3
-        }
+        },
+        {
+            attributes,
+            save: saveV4,
+        },
     ]
 };
