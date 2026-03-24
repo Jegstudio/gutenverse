@@ -109,6 +109,18 @@ class Icon extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-icon guten-element">' . $this->render_content( $post_id ) . '</div>';
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
+		$content = '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-icon guten-element"' . $data_id . '>' . $this->render_content( $post_id ) . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'icon' );
+
+		return $content;
 	}
 }

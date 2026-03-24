@@ -75,8 +75,12 @@ class Google_Maps extends Block_Abstract {
 			}
 		}
 
-		return '<div class="' . esc_attr( $element_id . $display_classes . $animation_class . $custom_classes ) . ' guten-element gutenverse-maps guten-maps" data-src="' . esc_url( $url ) . '"' . $data_id . '>
+		$content = '<div class="' . esc_attr( $element_id . $display_classes . $animation_class . $custom_classes ) . ' guten-element gutenverse-maps guten-maps" data-src="' . esc_url( $url ) . '"' . $data_id . '>
 					' . $this->render_content( 0 ) . '
 				</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'google-maps' );
+
+		return $content;
 	}
 }
