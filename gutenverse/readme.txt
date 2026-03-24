@@ -299,9 +299,6 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 == Changelog ==
 = 3.5.1 =
-##### New & Improvements
-* add option to create global style from panel
-
 ##### Bug Fixes
 * fix button border responsive styling
 * fix social icon block issue when on vertical mode
