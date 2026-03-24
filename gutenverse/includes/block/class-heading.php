@@ -47,7 +47,7 @@ class Heading extends Block_Abstract {
 		$custom_classes  = $this->get_custom_classes();
 		$content         = isset( $this->attributes['content'] ) ? $this->attributes['content'] : '';
 
-		$class_name = trim( 'guten-element ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . ' ' . $custom_classes );
+		$class_name = trim( 'wp-block-gutenverse-heading guten-element ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . ' ' . $custom_classes );
 		$data_id    = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
 			$id_parts = explode( '-', $element_id );

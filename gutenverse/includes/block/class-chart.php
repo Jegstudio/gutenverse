@@ -58,7 +58,7 @@ class Chart extends Block_Abstract {
 			'animationDuration' => $animation_duration,
 			'cutout'            => $cutout,
 			'barThickness'      => $bar_thickness,
-			'cutout_background' => $cutout_background,
+			'cutoutBackground'  => $cutout_background,
 			'multiValue'        => $multi_value,
 			'chartSize'         => $chart_size,
 			'elementId'         => $element_id,

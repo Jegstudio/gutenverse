@@ -106,9 +106,10 @@ class Taxonomy_List extends Block_Abstract {
 			}
 		}
 
-		$content = '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-taxonomy-list guten-element" ' . $data_id . '>' . $this->render_content( $this->attributes['qty'], $this->attributes['includedCategory'], $this->attributes['sortType'], $this->attributes['hideEmpty'], $this->attributes['sortBy'] ) . '</div>';
-		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'taxonomy-list' );
+		$class_name = trim( 'guten-element guten-taxonomy-list ' . $element_id . $display_classes . $animation_class . $custom_classes );
+		$content    = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content( $this->attributes['qty'], $this->attributes['includedCategory'], $this->attributes['sortType'], $this->attributes['hideEmpty'], $this->attributes['sortBy'] ) . '</div>';
+		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'taxonomy-list' );
 
 		return $content;
 	}

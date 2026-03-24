@@ -284,10 +284,12 @@ class Testimonials extends Block_Abstract {
 			}
 		}
 
-		$anchor  = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
-		$content = '<div id="' . esc_attr( $anchor ) . '" class="' . esc_attr( $element_id . $display_classes . $animation_class . $custom_classes ) . ' style-' . esc_attr( $content_type ) . ' guten-testimonials guten-element no-margin quote-override" ' . $data_id . '>' . $this->render_content() . '</div>';
-		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'testimonials' );
+		$anchor      = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$anchor_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+		$class_name  = trim( 'guten-element guten-testimonials no-margin ' . $element_id . $animation_class . $display_classes . $custom_classes . ' style-' . $content_type . ' quote-override' );
+		$content     = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content     = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content     = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'testimonials' );
 
 		return $content;
 	}

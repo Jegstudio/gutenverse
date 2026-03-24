@@ -22,14 +22,15 @@ class Buttons extends Block_Abstract {
 	 * Render content
 	 *
 	 * @param string $content .
+	 * @param string $data_id .
 	 * @return string
 	 */
-	public function render_content( $content ) {
+	public function render_content( $content, $data_id = '' ) {
 		$orientation = isset( $this->attributes['orientation'] ) ? $this->attributes['orientation'] : 'horizontal';
 
 		$class_name = 'guten-element guten-buttons ' . $orientation;
 
-		return '<div class="' . esc_attr( $class_name ) . '">' . $content . '</div>';
+		return '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $content . '</div>';
 	}
 
 	/**
@@ -57,7 +58,7 @@ class Buttons extends Block_Abstract {
 			}
 		}
 
-		$content = '<div class="' . esc_attr( trim( $wrapper_class ) ) . '"' . $data_id . '>' . $this->render_content( $this->content ) . '</div>';
+		$content = '<div class="' . esc_attr( trim( $wrapper_class ) ) . '">' . $this->render_content( $this->content, $data_id ) . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'buttons' );
 

@@ -253,7 +253,7 @@ class Gallery extends Block_Abstract {
 			$output .= '<div class="caption-wrap style-card">';
 			$output .= '<div class="item-caption-over">';
 			$output .= '<' . $title_tag . ' class="item-title">' . wp_kses_post( $item['title'] ) . '</' . $title_tag . '>';
-			$output .= '<div class="item-content"><p>' . wp_kses_post( isset( $item['content'] ) ? $item['content'] : '' ) . '</p></div>';
+			$output .= '<div class="item-content">' . wp_kses_post( isset( $item['content'] ) ? $item['content'] : '' ) . '</div>';
 			$output .= '</div>';
 			$output .= '</div>';
 		}
@@ -388,7 +388,7 @@ class Gallery extends Block_Abstract {
 
 		<?php if ( $enable_loadmore && ( $showed < count( $images ) ) ) : ?>
 			<div class="load-more-items">
-				<div class="gutenverse-gallery-loadmore">
+				<div class="guten-gallery-loadmore">
 					<a aria-label="Load more" href="#" class="guten-gallery-load-more">
 						<?php if ( $enable_loadicon && 'before' === $enable_loadicon_pos ) : ?>
 							<span class="load-more-icon icon-position-before" aria-hidden="true">
@@ -445,7 +445,7 @@ class Gallery extends Block_Abstract {
 		$col_mobile  = isset( $column['Mobile'] ) ? $column['Mobile'] : 2;
 
 		$class_name = trim( "guten-element guten-gallery $element_id $animation_class $display_classes layout-$layout grid-desktop-$col_desktop grid-tablet-$col_tablet grid-mobile-$col_mobile $custom_classes" );
-		$data_id       = '';
+		$data_id    = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
 			$id_parts = explode( '-', $element_id );
 			if ( count( $id_parts ) > 1 ) {
@@ -453,7 +453,7 @@ class Gallery extends Block_Abstract {
 			}
 		}
 
-		$output = '<div class="' . esc_attr( $class_name ) . '" data-grid="' . esc_attr( $grid ) . '"' . ( $filter_remove_animation ? ' data-remove-animation="true"' : '' ) . $data_id . '>';
+		$output  = '<div class="' . esc_attr( $class_name ) . '" data-grid="' . esc_attr( $grid ) . '"' . ( $filter_remove_animation ? ' data-remove-animation="true"' : '' ) . $data_id . '>';
 		$output .= $this->render_content(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		$output .= '</div>';
 

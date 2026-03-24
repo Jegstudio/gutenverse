@@ -189,9 +189,10 @@ class Image extends Block_Abstract {
 			}
 		}
 
-		$content = '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-image guten-element"' . $data_id . '>' . $this->render_content( $post_id ) . '</div>';
-		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'image' );
+		$class_name = trim( 'wp-block-gutenverse-image guten-element guten-image ' . $element_id . $animation_class . $display_classes . $custom_classes );
+		$content    = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content( $post_id ) . '</div>';
+		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'image' );
 
 		return $content;
 	}
