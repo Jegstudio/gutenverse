@@ -24,13 +24,35 @@ class Animated_Text extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content() {
-		$style                = isset( $this->attributes['style'] ) ? $this->attributes['style'] : 'zoom';
 		$text                 = isset( $this->attributes['text'] ) ? $this->attributes['text'] : 'Placeholder Text';
 		$title_tag            = isset( $this->attributes['titleTag'] ) ? $this->attributes['titleTag'] : 'h2';
-		$loop                 = isset( $this->attributes['loop'] ) ? $this->attributes['loop'] : true;
-		$split_by_word        = isset( $this->attributes['splitByWord'] ) ? $this->attributes['splitByWord'] : false;
 		$before_text_animated = isset( $this->attributes['beforeTextAnimated'] ) ? $this->attributes['beforeTextAnimated'] : 'Before ';
 		$after_text_animated  = isset( $this->attributes['afterTextAnimated'] ) ? $this->attributes['afterTextAnimated'] : ' After';
+
+		$output  = '<' . esc_attr( $title_tag ) . '>';
+		$output .= '<span class="non-animated-text before-text">' . wp_kses_post( $before_text_animated ) . '</span>';
+		$output .= '<span class="text-content">';
+		$output .= '<span class="text-wrapper">';
+		$output .= '<span class="letter">' . wp_kses_post( $text ) . '</span>';
+		$output .= '</span>';
+		$output .= '<span class="highlighted"></span>';
+		$output .= '</span>';
+		$output .= '<span class="non-animated-text after-text">' . wp_kses_post( $after_text_animated ) . '</span>';
+		$output .= '</' . esc_attr( $title_tag ) . '>';
+
+		return $output;
+	}
+
+	/**
+	 * Get animation props
+	 *
+	 * @return array
+	 */
+	private function get_animation_props() {
+		$style                = isset( $this->attributes['style'] ) ? $this->attributes['style'] : 'zoom';
+		$text                 = isset( $this->attributes['text'] ) ? $this->attributes['text'] : 'Placeholder Text';
+		$loop                 = isset( $this->attributes['loop'] ) ? $this->attributes['loop'] : true;
+		$split_by_word        = isset( $this->attributes['splitByWord'] ) ? $this->attributes['splitByWord'] : false;
 		$text_type            = isset( $this->attributes['textType'] ) ? $this->attributes['textType'] : 'default';
 		$rotation_texts       = isset( $this->attributes['rotationTexts'] ) ? $this->attributes['rotationTexts'] : array();
 		$highlighted_style    = isset( $this->attributes['highlightedStyle'] ) ? $this->attributes['highlightedStyle'] : 'circle';
@@ -41,7 +63,7 @@ class Animated_Text extends Block_Abstract {
 		$display_duration     = isset( $this->attributes['displayDuration'] ) ? (int) $this->attributes['displayDuration'] : 1000;
 		$transition_duration  = isset( $this->attributes['transitionDuration'] ) ? (int) $this->attributes['transitionDuration'] : 500;
 
-		$animation_props = array(
+		return array(
 			'loop'               => $loop,
 			'splitByWord'        => $split_by_word,
 			'style'              => $style,
@@ -57,19 +79,6 @@ class Animated_Text extends Block_Abstract {
 			'displayDuration'    => $display_duration,
 			'transitionDuration' => $transition_duration,
 		);
-
-		$output = '<' . esc_attr( $title_tag ) . ' data-animation=\'' . wp_json_encode( $animation_props ) . '\'>';
-		$output .= '<span class="non-animated-text before-text">' . wp_kses_post( $before_text_animated ) . '</span>';
-		$output .= '<span class="text-content">';
-		$output .= '<span class="text-wrapper">';
-		$output .= '<span class="letter">' . wp_kses_post( $text ) . '</span>';
-		$output .= '</span>';
-		$output .= '<span class="highlighted"></span>';
-		$output .= '</span>';
-		$output .= '<span class="non-animated-text after-text">' . wp_kses_post( $after_text_animated ) . '</span>';
-		$output .= '</' . esc_attr( $title_tag ) . '>';
-
-		return $output;
 	}
 
 	/**
@@ -103,9 +112,10 @@ class Animated_Text extends Block_Abstract {
 			$class_name .= ' style-' . $style;
 		}
 
-		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
-		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'animated-text' );
+		$data_animation = ' data-animation=\'' . wp_json_encode( $this->get_animation_props() ) . '\'';
+		$content        = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . $data_animation . '>' . $this->render_content() . '</div>';
+		$content        = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content        = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'animated-text' );
 
 		return $content;
 	}
