@@ -110,6 +110,9 @@ class Social_Icon extends Block_Abstract {
 	 * Render view in frontend
 	 */
 	public function render_frontend() {
+		if ( ! empty( $this->content ) && apply_filters( 'gutenverse_static_to_dinamic_toggle', false ) ) {
+			return $this->content;
+		}
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
