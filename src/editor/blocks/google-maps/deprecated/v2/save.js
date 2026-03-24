@@ -1,6 +1,5 @@
 import { compose } from '@wordpress/compose';
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps } from '@wordpress/block-editor';
 import { encodeDataToURL } from 'gutenverse-core/helper';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';

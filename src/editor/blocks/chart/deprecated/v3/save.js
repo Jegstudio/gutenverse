@@ -1,6 +1,6 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { withMouseMoveEffectScript } from 'gutenverse-core/hoc';
