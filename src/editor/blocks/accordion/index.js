@@ -18,11 +18,23 @@ export const settings = {
         {
             attributes: attrV1,
             supports,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    title: attributes.title
+                };
+            },
             save: saveV1
         },
         {
             attributes: attrV1,
             supports,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    title: attributes.title
+                };
+            },
             save: saveV2
         }
     ]

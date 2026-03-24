@@ -23,11 +23,23 @@ export const settings = {
     deprecated: [
         {
             attributes: attrV1,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    content: attributes.content
+                };
+            },
             supports: supports,
             save: saveV1
         },
         {
             attributes: attrV2,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    content: attributes.content
+                };
+            },
             supports: supports,
             save: saveV2
         }

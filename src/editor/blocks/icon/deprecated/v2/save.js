@@ -37,6 +37,7 @@ const save = compose(
 
     const className = classnames(
         'guten-element',
+        'wp-block-gutenverse-icon',
         elementId,
         'guten-icon',
         animationClass,

@@ -22,16 +22,37 @@ export const settings = {
         {
             attributes: attrV1,
             supports: supports,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    linkTarget: attributes.linkTarget,
+                    rel: attributes.rel,
+                };
+            },
             save: saveV1
         },
         {
             attributes: attrV1,
             supports: supports,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    linkTarget: attributes.linkTarget,
+                    rel: attributes.rel,
+                };
+            },
             save: saveV2
         },
         {
             attributes: attrV1,
             supports: supports,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    linkTarget: attributes.linkTarget,
+                    rel: attributes.rel,
+                };
+            },
             save: saveV3
         },
     ],
