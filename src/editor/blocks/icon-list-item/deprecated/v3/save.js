@@ -1,6 +1,6 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
 import { renderIcon } from 'gutenverse-core/helper';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';

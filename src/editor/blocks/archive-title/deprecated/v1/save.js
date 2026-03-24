@@ -3,7 +3,6 @@
 import { classnames } from 'gutenverse-core/components';
 
 /* WordPress dependencies */
-import { useBlockProps } from '@wordpress/block-editor';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 
