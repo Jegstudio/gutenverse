@@ -133,7 +133,7 @@ const PostBlockBlock = compose(
                     dummyPosts.push({
                         id: i,
                         title: `Post ${i + 1}`,
-                        url: 'javascript:void(0);',
+                        url: '#',
                         thumbnail: {
                             url: `https://picsum.photos/400/400?random=${i + 1}`,
                             width: 400,
@@ -141,15 +141,15 @@ const PostBlockBlock = compose(
                         },
                         excerpt: 'Lorem ipsum dolor sit amet...',
                         author_name: 'gutenverse',
-                        author_url: 'javascript:void(0);',
+                        author_url: '#',
                         date_formatted: 'January 1, 2024',
                         date_ago: '3 days ago',
                         comment_count: 0,
-                        comment_url: 'javascript:void(0);',
+                        comment_url: '#',
                         primary_category: {
                             name: 'category',
                             slug: 'category',
-                            url: 'javascript:void(0);'
+                            url: '#'
                         }
                     });
                 }

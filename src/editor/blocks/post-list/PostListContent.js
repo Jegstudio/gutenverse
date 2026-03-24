@@ -87,7 +87,7 @@ const PostListContent = (props) => {
 
         return (
             <article key={post?.id || index} className="guten-post post-list-item">
-                <a href="javascript:void(0);" style={bgStyle}>
+                <a href="#" style={bgStyle}>
                     {thumbnail}
                     <div className="guten-postlist-content">
                         {metaPosition === 'top' && renderMeta(post)}
