@@ -63,7 +63,7 @@ class Icon_Box extends Block_Abstract {
 			$alt_text = isset( $image['altOriginal'] ) ? $image['altOriginal'] : '';
 		}
 
-		$url    = isset( $image['url'] ) ? $image['url'] : '';
+		$url    = isset( $image['image'] ) ? $image['image'] : '';
 		$height = isset( $image['height'] ) ? $image['height'] : '';
 		$width  = isset( $image['width'] ) ? $image['width'] : '';
 
