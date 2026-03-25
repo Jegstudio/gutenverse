@@ -40,19 +40,16 @@ class Image extends Block_Abstract {
 		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
 		$href        = apply_filters( 'gutenverse_dynamic_generate_url', $url, $dynamic_url, $element_id );
 
-		if ( ! empty( $href ) ) {
-			$link_attr     = array(
-				'class'      => 'guten-image-wrapper',
-				'href'       => $href,
-				'target'     => $link_target,
-				'rel'        => $rel,
-				'aria-label' => $aria_label,
-			);
-			$link_attr_str = '';
-			foreach ( $link_attr as $key => $val ) {
-				if ( ! empty( $val ) ) {
-					$link_attr_str .= ' ' . esc_attr( $key ) . '="' . esc_attr( $val ) . '"';
-				}
+		if ( ! empty( $url ) ) {
+			$link_attr_str = ' class="guten-image-wrapper" href="' . esc_url( $href ) . '"';
+			if ( ! empty( $link_target ) ) {
+				$link_attr_str .= ' target="' . esc_attr( $link_target ) . '"';
+			}
+			if ( ! empty( $rel ) ) {
+				$link_attr_str .= ' rel="' . esc_attr( $rel ) . '"';
+			}
+			if ( ! empty( $aria_label ) ) {
+				$link_attr_str .= ' aria-label="' . esc_attr( $aria_label ) . '"';
 			}
 			$image_wrapper = '<a' . $link_attr_str . '>' . $img_html . '</a>';
 		} else {
@@ -63,10 +60,12 @@ class Image extends Block_Abstract {
 		$caption_html = '';
 		switch ( $caption_type ) {
 			case 'original':
-				$caption_html = '<span class="guten-caption">' . esc_html( $caption_original ) . '</span>';
+				$caption_text = ! empty( $caption_original ) ? esc_html( $caption_original ) : '';
+				$caption_html = '<span class="guten-caption">' . $caption_text . '</span>';
 				break;
 			case 'custom':
-				$caption_html = '<span class="guten-caption">' . esc_html( $caption_custom ) . '</span>';
+				$caption_text = ! empty( $caption_custom ) ? esc_html( $caption_custom ) : '';
+				$caption_html = '<span class="guten-caption">' . $caption_text . '</span>';
 				break;
 		}
 
@@ -99,7 +98,7 @@ class Image extends Block_Abstract {
 		$alt_original     = $image_id ? get_post_meta( $image_id, '_wp_attachment_image_alt', true ) : '';
 		$caption_original = $image_id ? get_post_field( 'post_excerpt', $image_id ) : '';
 
-		$image_alt_text = '';
+		$image_alt_text = null;
 		switch ( $alt_type ) {
 			case 'original':
 				$image_alt_text = $alt_original;
@@ -130,8 +129,11 @@ class Image extends Block_Abstract {
 		$img_attr = array(
 			'class' => 'gutenverse-image-box-filled',
 			'src'   => $src,
-			'alt'   => $image_alt_text,
 		);
+
+		if ( null !== $image_alt_text ) {
+			$img_attr['alt'] = $image_alt_text;
+		}
 
 		if ( ! empty( $width ) ) {
 			$img_attr['width'] = $width;

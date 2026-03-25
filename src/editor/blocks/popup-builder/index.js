@@ -19,35 +19,9 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes: {
-                ...attributes,
-                openWaitTime: {
-                    type: 'int',
-                    deprecated: true,
-                },
-                openScrollDistance: {
-                    type: 'int',
-                    deprecated: true,
-                },
-                openMaxClick: {
-                    type: 'int',
-                    deprecated: true,
-                },
-            },
-            migrate: (attributes) => {
-                const { openWaitTime, openScrollDistance, openMaxClick } = attributes;
-                const newAttributes = {
-                    ...attributes,
-                    openWaitTime: parseInt(openWaitTime),
-                    openScrollDistance: parseInt(openScrollDistance),
-                    openMaxClick: parseInt(openMaxClick)
-                };
-
-                return [
-                    newAttributes
-                ];
-            },
-            save: saveV1
+            attributes,
+            supports,
+            save: saveV3
         },
         {
             attributes: {
@@ -81,9 +55,35 @@ export const settings = {
             save: saveV2
         },
         {
-            attributes,
-            supports,
-            save: saveV3
+            attributes: {
+                ...attributes,
+                openWaitTime: {
+                    type: 'int',
+                    deprecated: true,
+                },
+                openScrollDistance: {
+                    type: 'int',
+                    deprecated: true,
+                },
+                openMaxClick: {
+                    type: 'int',
+                    deprecated: true,
+                },
+            },
+            migrate: (attributes) => {
+                const { openWaitTime, openScrollDistance, openMaxClick } = attributes;
+                const newAttributes = {
+                    ...attributes,
+                    openWaitTime: parseInt(openWaitTime),
+                    openScrollDistance: parseInt(openScrollDistance),
+                    openMaxClick: parseInt(openMaxClick)
+                };
+
+                return [
+                    newAttributes
+                ];
+            },
+            save: saveV1
         }
     ]
 };

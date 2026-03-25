@@ -19,6 +19,26 @@ use Gutenverse\Framework\Block\Block_Abstract;
 class Icon_Box extends Block_Abstract {
 
 	/**
+	 * Render icon without aria-hidden attribute, matching JS renderIcon default behavior.
+	 *
+	 * @param string $type Icon type ('icon' or 'svg').
+	 * @param string $icon Icon class name.
+	 * @param string $svg  SVG data.
+	 * @return string
+	 */
+	private function render_icon_no_aria( $type, $icon, $svg ) {
+		if ( 'svg' === $type && ! empty( $svg ) ) {
+			return $this->render_icon( $type, $icon, $svg );
+		}
+
+		if ( ! empty( $icon ) ) {
+			return '<i class="' . esc_attr( $icon ) . '"></i>';
+		}
+
+		return '';
+	}
+
+	/**
 	 * Wrap element in an anchor tag if URL is set.
 	 *
 	 * @param string $content   Element content.
@@ -40,7 +60,9 @@ class Icon_Box extends Block_Abstract {
 				$this->get_element_id()
 			);
 
-			return '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">' . $content . '</a>';
+			$aria_attr = ! empty( $aria_label ) ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
+
+			return '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $target ) . '" rel="' . esc_attr( $rel ) . '"' . $aria_attr . '>' . $content . '</a>';
 		}
 
 		return $content;
@@ -68,7 +90,9 @@ class Icon_Box extends Block_Abstract {
 		$width  = isset( $image['width'] ) ? $image['width'] : '';
 
 		if ( ! empty( $url ) ) {
-			return '<img src="' . esc_url( $url ) . '" height="' . esc_attr( $height ) . '" width="' . esc_attr( $width ) . '" alt="' . esc_attr( $alt_text ) . '"' . $lazy_attr . ' />';
+			$height_attr = ! empty( $height ) ? ' height="' . esc_attr( $height ) . '"' : '';
+			$width_attr  = ! empty( $width ) ? ' width="' . esc_attr( $width ) . '"' : '';
+			return '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $alt_text ) . '"' . $lazy_attr . $height_attr . $width_attr . ' />';
 		}
 
 		return '';
@@ -130,9 +154,8 @@ class Icon_Box extends Block_Abstract {
 		$badge_show     = isset( $this->attributes['badgeShow'] ) && $this->attributes['badgeShow'];
 		$watermark_show = isset( $this->attributes['watermarkShow'] ) && $this->attributes['watermarkShow'];
 		$has_inner      = isset( $this->attributes['hasInnerBlocks'] ) && $this->attributes['hasInnerBlocks'];
-
-		$icon_html = $this->render_icon_content();
-		$output    = '<div class="guten-icon-box-wrapper hover-from-' . esc_attr( $overlay_dir ) . '">';
+		$icon_html      = $this->render_icon_content();
+		$output         = '<div class="guten-icon-box-wrapper hover-from-' . esc_attr( $overlay_dir ) . '">';
 
 		// Top/Side icons.
 		if ( 'bottom' !== $icon_position ) {
@@ -140,7 +163,7 @@ class Icon_Box extends Block_Abstract {
 		}
 
 		// Body content.
-		if ( ! empty( $title ) || ! empty( $description ) || $has_inner ) {
+		if ( ! empty( $title ) || ! empty( $description ) ) {
 			$output .= '<div class="icon-box icon-box-body">';
 
 			if ( $show_title && ! empty( $title ) ) {
@@ -179,7 +202,7 @@ class Icon_Box extends Block_Abstract {
 			$w_icon  = isset( $this->attributes['watermarkIcon'] ) ? $this->attributes['watermarkIcon'] : 'far fa-map';
 			$w_type  = isset( $this->attributes['watermarkIconType'] ) ? $this->attributes['watermarkIconType'] : 'icon';
 			$w_svg   = isset( $this->attributes['watermarkIconSVG'] ) ? $this->attributes['watermarkIconSVG'] : '';
-			$w_html  = '<div class="hover-watermark">' . $this->render_icon( $w_type, $w_icon, $w_svg ) . '</div>';
+			$w_html  = '<div class="hover-watermark">' . $this->render_icon_no_aria( $w_type, $w_icon, $w_svg ) . '</div>';
 			$output .= $this->wrap_href( $w_html );
 		}
 

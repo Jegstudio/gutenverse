@@ -22,6 +22,17 @@ export const settings = {
     save,
     deprecated: [
         {
+            attributes: attrV2,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    content: attributes.content
+                };
+            },
+            supports: supports,
+            save: saveV2
+        },
+        {
             attributes: attrV1,
             migrate: (attributes) => {
                 return {
@@ -32,16 +43,5 @@ export const settings = {
             supports: supports,
             save: saveV1
         },
-        {
-            attributes: attrV2,
-            migrate: (attributes) => {
-                return {
-                    ...attributes,
-                    content: attributes.content
-                };
-            },
-            supports: supports,
-            save: saveV2
-        }
     ]
 };

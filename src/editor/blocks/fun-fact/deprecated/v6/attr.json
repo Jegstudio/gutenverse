@@ -1,0 +1,373 @@
+{
+	"elementId": {
+		"type": "string"
+	},
+	"mouseMoveEffect": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconType": {
+		"type": "string",
+		"default": "icon"
+	},
+	"iconPosition": {
+		"type": "object",
+		"copyStyle": true,
+		"default": {
+			"Desktop": "top"
+		}
+	},
+	"topIconContent": {
+		"type": "boolean",
+		"default": true
+	},
+	"bottomIconContent": {
+		"type": "boolean",
+		"default": false
+	},
+	"contentDisplay": {
+		"type": "string",
+		"default": "block"
+	},
+	"icon": {
+		"type": "string",
+		"default": "fas fa-grip-horizontal"
+	},
+	"iconSVG": {
+		"type": "string"
+	},
+	"iconColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconBgColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconBorder": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconBorderResponsive": {
+		"type": "object",
+		"migrate": {
+			"attr": "iconBorder",
+			"type": "border"
+		},
+		"copyStyle": true
+	},
+	"iconColorHover": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconBgColorHover": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconBorderHover": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconBorderHoverResponsive": {
+		"type": "object",
+		"migrate": {
+			"attr": "iconBorderHover",
+			"type": "border"
+		},
+		"copyStyle": true
+	},
+	"iconSize": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconRotate": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconPadding": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"iconMargin": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"image": {
+		"type": "object"
+	},
+	"imageAlt": {
+		"type": "string"
+	},
+	"imageSize": {
+		"type": "integer",
+		"default": 150
+	},
+	"imageSizeResponsive": {
+		"type": "object",
+		"migrate": {
+			"attr": "imageSizeResponsive",
+			"type": "size"
+		},
+		"copyStyle": true
+	},
+	"prefix": {
+		"type": "string",
+		"default": "$"
+	},
+	"number": {
+		"type": "string",
+		"default": ""
+	},
+	"safeNumber": {
+		"type": "string",
+		"migrate": {
+			"attr": "number",
+			"type": "string"
+		},
+		"default": ""
+	},
+	"suffix": {
+		"type": "string",
+		"default": "M"
+	},
+	"numberFormat": {
+		"type": "string",
+		"default": ""
+	},
+	"title": {
+		"type": "string",
+		"default": "Fun Fact"
+	},
+	"titleTag": {
+		"type": "string",
+		"default": "span"
+	},
+	"showSupper": {
+		"type": "boolean",
+		"default": false
+	},
+	"supper": {
+		"type": "string",
+		"default": "+"
+	},
+	"superColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"superTypography": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"superTop": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"superSpace": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"superAlign": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"alignButtons": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"duration": {
+		"type": "integer",
+		"default": 3500
+	},
+	"numberColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"titleColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"numberTypography": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"titleTypography": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"numberBottomSpace": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"titleBottomSpace": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"numberRightSpace": {
+		"type": "object"
+	},
+	"contentPadding": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"background": {
+		"type": "object",
+		"default": {},
+		"copyStyle": true
+	},
+	"backgroundHover": {
+		"type": "object",
+		"default": {},
+		"copyStyle": true
+	},
+	"backgroundTransition": {
+		"type": "object",
+		"copyStyle": true,
+		"default": {}
+	},
+	"border": {
+		"type": "object",
+		"default": {},
+		"copyStyle": true
+	},
+	"borderResponsive": {
+		"type": "object",
+		"migrate": {
+			"attr": "border",
+			"type": "border"
+		},
+		"copyStyle": true
+	},
+	"boxShadow": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"borderHover": {
+		"type": "object",
+		"default": {},
+		"copyStyle": true
+	},
+	"borderHoverResponsive": {
+		"type": "object",
+		"migrate": {
+			"attr": "borderHover",
+			"type": "border"
+		},
+		"copyStyle": true
+	},
+	"boxShadowHover": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"margin": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"padding": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"zIndex": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"animation": {
+		"type": "object",
+		"default": {},
+		"copyStyle": true
+	},
+	"hideDesktop": {
+		"type": "boolean",
+		"copyStyle": true
+	},
+	"hideTablet": {
+		"type": "boolean",
+		"copyStyle": true
+	},
+	"hideMobile": {
+		"type": "boolean",
+		"copyStyle": true
+	},
+	"hoverBottom": {
+		"type": "boolean",
+		"default": false,
+		"copyStyle": true
+	},
+	"hoverBottomColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"hoverBottomDirection": {
+		"type": "string",
+		"default": "left",
+		"copyStyle": true
+	},
+	"positioningType": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"positioningWidth": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"positioningAlign": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"positioningLocation": {
+		"type": "string",
+		"copyStyle": true
+	},
+	"positioningLeft": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"positioningRight": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"positioningTop": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"positioningBottom": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"advanceAnimation": {
+		"type": "object",
+		"default": {},
+		"copyStyle": true
+	},
+	"transform": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"mask": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"lazyLoad": {
+		"type": "boolean",
+		"copyStyle": true
+	},
+	"prefixColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"suffixColor": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"prefixTypography": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"suffixTypography": {
+		"type": "object",
+		"copyStyle": true
+	},
+	"condition": {
+		"type": "object",
+		"default": {}
+	}
+}

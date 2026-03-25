@@ -88,7 +88,17 @@ class Social_Icon extends Block_Abstract {
 
 		$icon_html = $this->render_icon( $icon_type, $icon, $icon_svg );
 
-		$output  = '<a id="' . $element_id . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $link_target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">';
+		$link_attr_str = ' id="' . esc_attr( $element_id ) . '" href="' . esc_url( (string) $href ) . '"';
+		if ( ! empty( $link_target ) ) {
+			$link_attr_str .= ' target="' . esc_attr( $link_target ) . '"';
+		}
+		if ( ! empty( $rel ) ) {
+			$link_attr_str .= ' rel="' . esc_attr( $rel ) . '"';
+		}
+		if ( ! empty( $aria_label ) ) {
+			$link_attr_str .= ' aria-label="' . esc_attr( $aria_label ) . '"';
+		}
+		$output  = '<a' . $link_attr_str . '>';
 		$output .= $icon_html;
 
 		if ( ! empty( $text ) ) {
@@ -122,8 +132,19 @@ class Social_Icon extends Block_Abstract {
 		$social_type     = $this->get_social_type( $icon );
 		$icon_class      = ( 'svg' === $icon_type ) ? 'svg' : '';
 
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
 		$class_name = 'guten-element guten-social-icon ' . $element_id . ' ' . $social_type . ' ' . $icon_class . $display_classes . $animation_class . $custom_classes;
 
-		return '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
+		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'social-icon' );
+
+		return $content;
 	}
 }

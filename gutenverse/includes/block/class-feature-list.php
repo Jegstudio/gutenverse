@@ -80,7 +80,7 @@ class Feature_List extends Block_Abstract {
 				$title_html = '<h2 class="feature-list-title">' . wp_kses_post( $title_html ) . '</h2>';
 			}
 
-			$content_html = isset( $item['content'] ) ? '<p class="feature-list-desc">' . wp_kses_post( $item['content'] ) . '</p>' : '';
+			$content_html = '<p class="feature-list-desc">' . ( isset( $item['content'] ) ? wp_kses_post( $item['content'] ) : '' ) . '</p>';
 
 			$output .= '<div class="icon-position-' . esc_attr( $icon_position ) . ' feature-list-item">' .
 						$connector_top . $connector_bottom . $icon_content .
@@ -110,9 +110,8 @@ class Feature_List extends Block_Abstract {
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
-		$icon_pos        = isset( $this->attributes['iconPosition'] ) ? $this->attributes['iconPosition'] : '';
 
-		$class_name = trim( "guten-element $element_id $animation_class $display_classes guten-feature-list icon-position-$icon_pos $custom_classes" );
+		$class_name = trim( "guten-element $element_id $animation_class $display_classes guten-feature-list $custom_classes" );
 
 		$data_id       = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {

@@ -24,7 +24,7 @@ export const settings = {
                     title: attributes.title
                 };
             },
-            save: saveV1
+            save: saveV2
         },
         {
             attributes: attrV1,
@@ -35,7 +35,7 @@ export const settings = {
                     title: attributes.title
                 };
             },
-            save: saveV2
-        }
+            save: saveV1
+        },
     ]
 };

@@ -17,8 +17,9 @@ export const settings = {
     save,
     deprecated: [
         {
+            support,
             attributes,
-            save: saveV1
+            save: saveV3,
         },
         {
             support,
@@ -26,9 +27,8 @@ export const settings = {
             save: saveV2,
         },
         {
-            support,
             attributes,
-            save: saveV3,
+            save: saveV1
         }
     ]
 };

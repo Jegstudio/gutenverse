@@ -22,9 +22,10 @@ class Gallery extends Block_Abstract {
 	 * Get Image Condition
 	 *
 	 * @param array $image Image data.
+	 * @param bool  $include_main_class Whether to include main-image class.
 	 * @return string
 	 */
-	private function image_condition( $image ) {
+	private function image_condition( $image, $include_main_class = true ) {
 		$image_load       = isset( $image['imageLoad'] ) ? $image['imageLoad'] : '';
 		$image_alt_type   = isset( $image['imageAlt'] ) ? $image['imageAlt'] : '';
 		$image_custom_alt = isset( $image['imageCustomAlt'] ) ? $image['imageCustomAlt'] : '';
@@ -52,7 +53,9 @@ class Gallery extends Block_Abstract {
 			$dimension_attr .= ' width="' . esc_attr( $width ) . '"';
 		}
 
-		return '<img class="main-image" src="' . esc_url( $src ) . '"' . $alt_attr . $loading_attr . $dimension_attr . ' />';
+		$class_attr = $include_main_class ? ' class="main-image"' : '';
+
+		return '<img' . $class_attr . ' src="' . esc_url( $src ) . '"' . $alt_attr . $loading_attr . $dimension_attr . ' />';
 	}
 
 	/**
@@ -62,7 +65,7 @@ class Gallery extends Block_Abstract {
 	 * @return string
 	 */
 	private function rating_items( $rating ) {
-		$output = '<ul>';
+		$output = '';
 		$j      = 0;
 		$arr    = array();
 		for ( $i = 0; $i < $rating * 2; ++$i ) {
@@ -81,7 +84,6 @@ class Gallery extends Block_Abstract {
 				$output .= '<li><i class="fas fa-star-half"></i></li>';
 			}
 		}
-		$output .= '</ul>';
 		return $output;
 	}
 
@@ -101,7 +103,9 @@ class Gallery extends Block_Abstract {
 		$link_icon_type = isset( $this->attributes['linkIconType'] ) ? $this->attributes['linkIconType'] : 'icon';
 		$link_icon_svg  = isset( $this->attributes['linkIconSVG'] ) ? $this->attributes['linkIconSVG'] : '';
 		$zoom_text      = isset( $this->attributes['zoomText'] ) ? $this->attributes['zoomText'] : '';
+		$zoom_text_set  = isset( $this->attributes['zoomText'] );
 		$link_text      = isset( $this->attributes['linkText'] ) ? $this->attributes['linkText'] : '';
+		$link_text_set  = isset( $this->attributes['linkText'] );
 		$zoom_options   = isset( $this->attributes['zoomOptions'] ) ? $this->attributes['zoomOptions'] : 'item';
 		$title_tag      = isset( $this->attributes['titleHeadingType'] ) ? $this->attributes['titleHeadingType'] : 'h5';
 		$title_tag      = $this->check_tag( $title_tag, 'h5' );
@@ -129,10 +133,10 @@ class Gallery extends Block_Abstract {
 				$output .= '<div class="item-content">' . wp_kses_post( isset( $item['content'] ) ? $item['content'] : '' ) . '</div>';
 
 				$output .= '<div class="item-buttons">';
-				if ( 'disable' !== $zoom_options && ( $zoom_icon || ! empty( $zoom_text ) ) ) {
-					$zoom_text_class = ( 'none' !== $zoom_text && ! empty( $zoom_text ) ) ? 'with-text' : '';
+				if ( 'disable' !== $zoom_options && ( $zoom_icon || $zoom_text_set ) ) {
+					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					$output         .= '<div class="gallery-link zoom ' . esc_attr( $zoom_text_class ) . '">';
-					if ( ! empty( $zoom_text ) && 'none' !== $zoom_text ) {
+					if ( $zoom_text_set ) {
 						$output .= '<p class="item-icon-text zoom-text">' . esc_html( $zoom_text ) . '</p>';
 					}
 					if ( $zoom_icon ) {
@@ -148,12 +152,12 @@ class Gallery extends Block_Abstract {
 					$output .= '</div>';
 				}
 
-				if ( empty( $item['disableLink'] ) && ( $link_icon || ! empty( $link_text ) ) ) {
+				if ( empty( $item['disableLink'] ) && ( $link_icon || $link_text_set ) ) {
 					$link_url        = isset( $item['link'] ) ? $item['link'] : '';
-					$zoom_text_class = ( 'none' !== $zoom_text && ! empty( $zoom_text ) ) ? 'with-text' : '';
+					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					/* translators: %s: Item title */
 					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), $item['title'] ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
-					if ( ! empty( $link_text ) && 'none' !== $link_text ) {
+					if ( $link_text_set ) {
 						$output .= '<p class="item-icon-text link-text">' . esc_html( $link_text ) . '</p>';
 					}
 					if ( $link_icon ) {
@@ -203,9 +207,9 @@ class Gallery extends Block_Abstract {
 				$output .= '<div class="caption-button">';
 				$output .= '<div class="item-buttons">';
 				if ( 'disable' !== $zoom_options && $zoom_icon ) {
-					$zoom_text_class = ( 'none' !== $zoom_text && ! empty( $zoom_text ) ) ? 'with-text' : '';
+					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					$output         .= '<div class="gallery-link zoom ' . esc_attr( $zoom_text_class ) . '">';
-					if ( ! empty( $zoom_text ) && 'none' !== $zoom_text ) {
+					if ( $zoom_text_set ) {
 						$output .= '<p class="item-icon-text zoom-text">' . esc_html( $zoom_text ) . '</p>';
 					}
 					$output .= '<span class="item-icon-inner">';
@@ -221,10 +225,10 @@ class Gallery extends Block_Abstract {
 
 				if ( empty( $item['disableLink'] ) && $link_icon ) {
 					$link_url        = isset( $item['link'] ) ? $item['link'] : '';
-					$zoom_text_class = ( 'none' !== $zoom_text && ! empty( $zoom_text ) ) ? 'with-text' : '';
+					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					/* translators: %s: Item title */
 					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), $item['title'] ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
-					if ( ! empty( $link_text ) && 'none' !== $link_text ) {
+					if ( $link_text_set ) {
 						$output .= '<p class="item-icon-text link-text">' . esc_html( $link_text ) . '</p>';
 					}
 					$output .= '<span class="item-icon-inner">';
@@ -253,7 +257,7 @@ class Gallery extends Block_Abstract {
 			$output .= '<div class="caption-wrap style-card">';
 			$output .= '<div class="item-caption-over">';
 			$output .= '<' . $title_tag . ' class="item-title">' . wp_kses_post( $item['title'] ) . '</' . $title_tag . '>';
-			$output .= '<div class="item-content">' . wp_kses_post( isset( $item['content'] ) ? $item['content'] : '' ) . '</div>';
+			$output .= '<div class="item-content"><p>' . wp_kses_post( isset( $item['content'] ) ? $item['content'] : '' ) . '</p></div>';
 			$output .= '</div>';
 			$output .= '</div>';
 		}
@@ -297,10 +301,10 @@ class Gallery extends Block_Abstract {
 			<div class="gallery-header">
 				<div class="left-header"></div>
 				<div class="right-header">
-					<i class="icon-fullscreen fas fa-expand"></i>
-					<i class="icon-minimize fas fa-compress hidden"></i>
-					<i class="icon-zoom fas fa-search-plus"></i>
-					<i class="icon-close fas fa-times"></i>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-fullscreen"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-minimize hidden"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-zoom"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
 				</div>
 			</div>
 			<div class="gallery-body">

@@ -98,27 +98,17 @@ class Animated_Text extends Block_Abstract {
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
-		$custom_classes  = $this->get_custom_classes();
 		$style           = isset( $this->attributes['style'] ) ? $this->attributes['style'] : 'zoom';
 
-		$data_id = '';
-		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
-			$id_parts = explode( '-', $element_id );
-			if ( count( $id_parts ) > 1 ) {
-				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
-			}
-		}
-
-		$class_name = 'guten-element guten-animated-text ' . $element_id . $display_classes . $animation_class . $custom_classes;
+		$class_name = 'guten-element guten-animated-text ' . $element_id . $display_classes . $animation_class;
 
 		if ( ! empty( $style ) && 'none' !== $style ) {
 			$class_name .= ' style-' . $style;
 		}
 
 		$data_animation = ' data-animation=\'' . wp_json_encode( $this->get_animation_props() ) . '\'';
-		$content        = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . $data_animation . '>' . $this->render_content() . '</div>';
+		$content        = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_animation . '>' . $this->render_content() . '</div>';
 		$content        = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content        = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'animated-text' );
 
 		return $content;
 	}

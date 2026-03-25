@@ -22,12 +22,7 @@ export const settings = {
         {
             attributes,
             supports,
-            save: saveV1
-        },
-        {
-            attributes,
-            supports,
-            save: saveV2
+            save: saveV4
         },
         {
             attributes,
@@ -37,7 +32,12 @@ export const settings = {
         {
             attributes,
             supports,
-            save: saveV4
-        }
+            save: saveV2
+        },
+        {
+            attributes,
+            supports,
+            save: saveV1
+        },
     ]
 };

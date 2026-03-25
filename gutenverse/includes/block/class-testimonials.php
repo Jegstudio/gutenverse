@@ -54,39 +54,29 @@ class Testimonials extends Block_Abstract {
 
 		$override_quote = $quote_override ? 'quote-override' : '';
 
-		$star_rating = '';
+		$star_items = '';
 		if ( $show_rating ) {
-			$star_rating .= '<ul class="rating-stars">';
 			$floor_rating = min( 100, (int) floor( $rating ) );
 			for ( $i = 0; $i < $floor_rating; $i++ ) {
-				$star_rating .= '<li>' . $this->render_icon( $icon_rating_full_type, $icon_rating_full, $icon_rating_full_svg ) . '</li>';
+				$star_items .= '<li>' . $this->render_icon( $icon_rating_full_type, $icon_rating_full, $icon_rating_full_svg ) . '</li>';
 			}
 			if ( $rating !== (float) $floor_rating ) {
-				$star_rating .= '<li>' . $this->render_icon( $icon_rating_half_type, $icon_rating_half, $icon_rating_half_svg ) . '</li>';
+				$star_items .= '<li>' . $this->render_icon( $icon_rating_half_type, $icon_rating_half, $icon_rating_half_svg ) . '</li>';
 			}
-			$star_rating .= '</ul>';
 		}
+		$star_rating = '<ul class="rating-stars">' . $star_items . '</ul>';
 
 		$profile_info = '<span class="profile-info">';
-		if ( ! empty( $name ) ) {
-			$profile_info .= '<strong class="profile-name">' . wp_kses_post( $name ) . '</strong>';
-		}
-		if ( ! empty( $description ) ) {
-			$profile_info .= '<p class="profile-des">' . wp_kses_post( $description ) . '</p>';
-		}
+		$profile_info .= '<strong class="profile-name">' . wp_kses_post( $name ) . '</strong>';
+		$profile_info .= '<p class="profile-des">' . wp_kses_post( $description ) . '</p>';
 		$profile_info .= '</span>';
 
-		$comment_content = '';
-		if ( ! empty( $comment ) ) {
-			$comment_content = '<div class="comment-content"><p class="profile-comment">' . wp_kses_post( $comment ) . '</p></div>';
-		}
+		$comment_content = '<div class="comment-content"><p class="profile-comment">' . wp_kses_post( $comment ) . '</p></div>';
 
-		$profile_image = '';
-		if ( $show_client_image ) {
-			$placeholder   = ! $src ? ' data-image-placeholder="gutenverse-image-placeholder"' : '';
-			$loading_attr  = 'lazy' === $lazy ? ' loading="lazy"' : '';
-			$profile_image = '<div class="profile-image"><img width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '" src="' . esc_url( $src ) . '" alt="' . esc_attr( $name ) . '"' . $loading_attr . $placeholder . '></div>';
-		}
+		$placeholder   = ! $src ? ' data-image-placeholder="gutenverse-image-placeholder"' : ' data-image-placeholder="false"';
+		$loading_attr  = 'lazy' === $lazy ? ' loading="lazy"' : '';
+		$img_html      = $show_client_image ? '<img width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '"' . $loading_attr . ' src="' . esc_url( $src ) . '" alt="' . esc_attr( $name ) . '"' . $placeholder . '>' : '';
+		$profile_image = '<div class="profile-image">' . $img_html . '</div>';
 
 		$quote_html = '';
 		if ( $show_quote ) {
@@ -105,7 +95,7 @@ class Testimonials extends Block_Abstract {
                     </div>
                     <div class="comment-content">
                         ' . $quote_html . '
-                        ' . $comment_content . '
+                        <p class="profile-comment">' . wp_kses_post( $comment ) . '</p>
                     </div>
                 </div>';
 				break;
@@ -228,14 +218,14 @@ class Testimonials extends Block_Abstract {
 			$slides .= '<div class="swiper-slide">' . $this->render_content_item( $item, $index ) . '</div>';
 		}
 
-		$navigation = '';
-		if ( $show_arrow ) {
-			$navigation = '<div class="swiper-button-next"></div><div class="swiper-button-prev"></div>';
-		}
-
 		$pagination = '';
 		if ( $show_nav ) {
 			$pagination = '<div class="swiper-pagination"></div>';
+		}
+
+		$navigation = '';
+		if ( $show_arrow ) {
+			$navigation = '<div class="swiper-button-prev"></div><div class="swiper-button-next"></div>';
 		}
 
 		$element_id  = $this->get_element_id();
@@ -246,8 +236,8 @@ class Testimonials extends Block_Abstract {
                 <div class="swiper-wrapper">
                     ' . $slides . '
                 </div>
-                ' . $navigation . '
                 ' . $pagination . '
+                ' . $navigation . '
             </div>
         </div>';
 	}
@@ -276,20 +266,10 @@ class Testimonials extends Block_Abstract {
 		$custom_classes  = $this->get_custom_classes();
 		$content_type    = isset( $this->attributes['contentType'] ) ? (int) $this->attributes['contentType'] : 1;
 
-		$data_id = '';
-		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
-			$id_parts = explode( '-', $element_id );
-			if ( count( $id_parts ) > 1 ) {
-				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
-			}
-		}
-
 		$anchor      = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$anchor_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 		$class_name  = trim( 'guten-element guten-testimonials no-margin ' . $element_id . $animation_class . $display_classes . $custom_classes . ' style-' . $content_type . ' quote-override' );
-		$content     = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
-		$content     = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content     = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'testimonials' );
+		$content     = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '">' . $this->render_content() . '</div>';
 
 		return $content;
 	}

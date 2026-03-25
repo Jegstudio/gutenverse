@@ -62,10 +62,11 @@ class Team extends Block_Abstract {
 	 * @param string $tag          HTML tag name.
 	 * @param string $identifier   Attribute key (name/job/description).
 	 * @param bool   $show_desc    Whether showDesc is enabled.
+	 * @param string $aria_label   Optional aria-label attribute value.
 	 *
 	 * @return string
 	 */
-	private function render_text_field( $class_name, $tag, $identifier, $show_desc ) {
+	private function render_text_field( $class_name, $tag, $identifier, $show_desc, $aria_label = '' ) {
 		$value = isset( $this->attributes[ $identifier ] ) ? $this->attributes[ $identifier ] : '';
 
 		if ( 'description' === $identifier && ! $show_desc ) {
@@ -74,7 +75,12 @@ class Team extends Block_Abstract {
 
 		$tag = $this->check_tag( $tag, 'p' );
 
-		return '<' . $tag . ' class="' . esc_attr( $class_name ) . '">' . wp_kses_post( $value ) . '</' . $tag . '>';
+		$aria_attr = '';
+		if ( ! empty( $aria_label ) ) {
+			$aria_attr = ' aria-label="' . esc_attr( $aria_label ) . '"';
+		}
+
+		return '<' . $tag . ' class="' . esc_attr( $class_name ) . '"' . $aria_attr . '>' . wp_kses_post( $value ) . '</' . $tag . '>';
 	}
 
 	/**
@@ -128,14 +134,27 @@ class Team extends Block_Abstract {
 		$phone       = isset( $this->attributes['phone'] ) ? $this->attributes['phone'] : '';
 		$email       = isset( $this->attributes['email'] ) ? $this->attributes['email'] : '';
 
-		return '<div class="profile-popup"
-			data-name="' . esc_attr( $name ) . '"
-			data-job="' . esc_attr( $job ) . '"
-			data-img="' . esc_url( $img_url ) . '"
-			data-desc="' . esc_attr( $description ) . '"
-			data-phone="' . esc_attr( $phone ) . '"
-			data-email="' . esc_attr( $email ) . '"
-		></div>';
+		$data_attrs = '';
+		if ( ! empty( $name ) ) {
+			$data_attrs .= ' data-name="' . esc_attr( $name ) . '"';
+		}
+		if ( ! empty( $job ) ) {
+			$data_attrs .= ' data-job="' . esc_attr( $job ) . '"';
+		}
+		if ( ! empty( $img_url ) ) {
+			$data_attrs .= ' data-img="' . esc_url( $img_url ) . '"';
+		}
+		if ( ! empty( $description ) ) {
+			$data_attrs .= ' data-desc="' . esc_attr( $description ) . '"';
+		}
+		if ( ! empty( $phone ) ) {
+			$data_attrs .= ' data-phone="' . esc_attr( $phone ) . '"';
+		}
+		if ( ! empty( $email ) ) {
+			$data_attrs .= ' data-email="' . esc_attr( $email ) . '"';
+		}
+
+		return '<div class="profile-popup"' . $data_attrs . '></div>';
 	}
 
 	/**
@@ -155,9 +174,10 @@ class Team extends Block_Abstract {
 		$img          = $this->render_image();
 		$socials      = $this->render_socials();
 		$hover_bottom = $this->render_hover_bottom();
-		$title        = $this->render_text_field( 'profile-title' . $popup_class, $name_tag, 'name', $show_desc );
-		$sub          = $this->render_text_field( 'profile-sub', 'p', 'job', $show_desc );
-		$desc         = $this->render_text_field( 'profile-desc', 'p', 'description', $show_desc );
+		$title_class  = 'profile-title ' . ( $add_popup ? 'popup' : '' );
+		$title        = $this->render_text_field( $title_class, $name_tag, 'name', $show_desc, 'Profile Name' );
+		$sub          = $this->render_text_field( 'profile-sub', 'p', 'job', $show_desc, 'Profile Job' );
+		$desc         = $this->render_text_field( 'profile-desc', 'p', 'description', $show_desc, 'Team Description' );
 
 		switch ( $profile_type ) {
 			case 'overlay':
@@ -233,7 +253,7 @@ class Team extends Block_Abstract {
 			}
 		}
 
-		$class_name = trim( 'guten-element guten-team ' . $element_id . $animation_class . $display_classes . $custom_classes );
+		$class_name = trim( 'wp-block-gutenverse-team guten-element guten-team ' . $element_id . $animation_class . $display_classes . $custom_classes );
 		$content    = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'team' );

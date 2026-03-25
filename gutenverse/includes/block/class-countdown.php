@@ -137,7 +137,7 @@ class Countdown extends Block_Abstract {
 			}
 		}
 
-		$class_name = 'guten-element guten-countdown ' . $element_id . $display_classes . $animation_class . $custom_classes;
+		$class_name = 'guten-element guten-countdown ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . $custom_classes;
 
 		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '" data-duedate="' . esc_attr( wp_json_encode( $due_date ) ) . '" data-expired="' . esc_attr(
 			wp_json_encode(

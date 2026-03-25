@@ -28,7 +28,7 @@ class Icon extends Block_Abstract {
 		$icon_svg    = isset( $this->attributes['iconSVG'] ) ? $this->attributes['iconSVG'] : '';
 		$url         = isset( $this->attributes['url'] ) ? $this->attributes['url'] : '';
 		$aria_label  = isset( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
-		$link_target = isset( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '_self';
+		$link_target = isset( $this->attributes['linkTarget'] ) ? $this->attributes['linkTarget'] : '';
 		$rel         = isset( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
 		$icon_shape  = isset( $this->attributes['iconShape'] ) ? $this->attributes['iconShape'] : 'rounded';
 		$icon_view   = isset( $this->attributes['iconView'] ) ? $this->attributes['iconView'] : 'stacked';
@@ -70,7 +70,7 @@ class Icon extends Block_Abstract {
 			$wrapper_class .= ' ' . $icon_view;
 		}
 
-		if ( ! empty( $href ) ) {
+		if ( ! empty( $url ) ) {
 			$link_attr     = array(
 				'class'      => $wrapper_class,
 				'href'       => $href,

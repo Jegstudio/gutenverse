@@ -27,26 +27,6 @@ export const settings = {
             save: saveV6
         },
         {
-            attributes,
-            supports,
-            save: saveV1
-        },
-        {
-            attributes,
-            supports,
-            save: saveV2
-        },
-        {
-            attributes,
-            supports,
-            save: saveV3
-        },
-        {
-            attributes,
-            supports,
-            save: saveV4
-        },
-        {
             attributes: {
                 ...attributes,
                 testimonialData: {
@@ -72,6 +52,26 @@ export const settings = {
                 };
             },
             save: saveV5,
+        },
+        {
+            attributes,
+            supports,
+            save: saveV4
+        },
+        {
+            attributes,
+            supports,
+            save: saveV3
+        },
+        {
+            attributes,
+            supports,
+            save: saveV2
+        },
+        {
+            attributes,
+            supports,
+            save: saveV1
         },
     ]
 };
