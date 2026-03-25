@@ -4,6 +4,7 @@
 	"title": "Tabs",
 	"description": "Create content inside a tab block.",
 	"category": "gutenverse-element",
+	"class_callback": "\\Gutenverse\\Block\\Tabs",
 	"allowCopyStyle": true,
 	"attributes": {
 		"elementId": {
@@ -60,21 +61,7 @@
 			"copyStyle": true
 		},
 		"tabs": {
-			"type": "array",
-			"source": "query",
-			"selector": ".tab-heading-item",
-			"query": {
-				"tabId": {
-					"type": "string",
-					"source": "attribute",
-					"attribute": "data-id"
-				},
-				"text": {
-					"type": "string",
-					"source": "html",
-					"selector": "span"
-				}
-			}
+			"type": "array"
 		},
 		"border": {
 			"type": "object",
