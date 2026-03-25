@@ -4,6 +4,7 @@
 	"title": "Search",
 	"description": "Gutenverse Search",
 	"category": "gutenverse-element",
+	"class_callback": "\\Gutenverse\\Block\\Search",
 	"attributes": {
 		"elementId": {
 			"type": "string"

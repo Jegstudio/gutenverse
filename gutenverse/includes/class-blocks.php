@@ -45,19 +45,18 @@ class Blocks {
 	public function register_blocks() {
 		// Static block.
 		register_block_type( GUTENVERSE_DIR . './block/divider/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/tab/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/tabs/block.json' );
-
 
 		register_block_type( GUTENVERSE_DIR . './block/spacer/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/text-editor/block.json' );
 
 		register_block_type( GUTENVERSE_DIR . './block/social-share/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/search/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/text-paragraph/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/popup-builder/block.json' );
 
 		// Dynamic blocks.
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/search/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/tab/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/tabs/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/text-paragraph/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/logo-slider/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/heading/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/icon-list-item/block.json' );

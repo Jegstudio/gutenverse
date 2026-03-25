@@ -4,10 +4,11 @@ import save from './save';
 import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
+import saveV4 from './deprecated/v4/save';
 import metadata from './block.json';
 import { IconSearchSVG } from '../../../assets/icon/index';
 
-const { name, attributes, support } = metadata;
+const { name, attributes, supports } = metadata;
 
 export { metadata, name };
 
@@ -17,17 +18,23 @@ export const settings = {
     save,
     deprecated: [
         {
-            support,
+            attributes,
+            supports,
+            save: saveV4,
+        },
+        {
+            supports,
             attributes,
             save: saveV3,
         },
         {
-            support,
             attributes,
+            supports,
             save: saveV2,
         },
         {
             attributes,
+            supports,
             save: saveV1
         }
     ]
