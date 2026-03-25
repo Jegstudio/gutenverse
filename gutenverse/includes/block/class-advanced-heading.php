@@ -92,7 +92,7 @@ class Advanced_Heading extends Block_Abstract {
 	 * Render view in frontend
 	 */
 	public function render_frontend() {
-		if ( ! empty( $this->content ) && apply_filters( 'gutenverse_static_to_dinamic_toggle', false ) ) {
+		if ( ! empty( trim( $this->block_data->inner_html ) ) && apply_filters( 'gutenverse_force_dynamic', false ) ) {
 			return $this->content;
 		}
 		$element_id      = $this->get_element_id();
