@@ -37,7 +37,7 @@ class Accordion extends Block_Abstract {
 		$icon_open_html   = $this->render_icon( $icon_open_type, $icon_open, $icon_open_svg );
 		$icon_closed_html = $this->render_icon( $icon_closed_type, $icon_closed, $icon_closed_svg );
 
-		$icon_html = '<div class="accordion-icon">';
+		$icon_html  = '<div class="accordion-icon">';
 		$icon_html .= '<span class="accordion-icon-open">' . $icon_open_html . '</span>';
 		$icon_html .= '<span class="accordion-icon-closed">' . $icon_closed_html . '</span>';
 		$icon_html .= '</div>';
@@ -76,6 +76,10 @@ class Accordion extends Block_Abstract {
 	 * Render view in frontend
 	 */
 	public function render_frontend() {
+		if ( ! empty( trim( $this->block_data->inner_html ) ) && apply_filters( 'gutenverse_static_to_dinamic_toggle', false ) ) {
+			return $this->content;
+		}
+
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
