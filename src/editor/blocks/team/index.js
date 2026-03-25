@@ -1,13 +1,13 @@
 
 import edit from './edit';
-import save from './save';
+import saveV4 from './save';
 import metadata from './block.json';
 import example from './data/example';
 import { IconTeamSVG } from '../../../assets/icon/index';
 import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
-import saveV4 from './deprecated/v4/save';
+import save from './deprecated/v4/save';
 
 const { name, attributes } = metadata;
 
@@ -20,33 +20,8 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes: {
-                ...attributes,
-                overlayType: {
-                    type: 'string',
-                    deprecated: true,
-                },
-                overlayPosition: {
-                    type: 'string',
-                    deprecated: true,
-                },
-            },
-            migrate: (attributes) => {
-                const { overlayType, overlayPosition } = attributes;
-                const newAttributes = {
-                    ...attributes,
-                    overlayType: overlayType === undefined ? 'default' : overlayType,
-                    overlayPosition: overlayPosition === undefined ? 'center' : overlayPosition,
-                };
-                return [
-                    newAttributes
-                ];
-            },
-            save: saveV1
-        },
-        {
             attributes,
-            save: saveV2
+            save: saveV4,
         },
         {
             attributes: {
@@ -71,7 +46,32 @@ export const settings = {
         },
         {
             attributes,
-            save: saveV4,
+            save: saveV2
+        },
+        {
+            attributes: {
+                ...attributes,
+                overlayType: {
+                    type: 'string',
+                    deprecated: true,
+                },
+                overlayPosition: {
+                    type: 'string',
+                    deprecated: true,
+                },
+            },
+            migrate: (attributes) => {
+                const { overlayType, overlayPosition } = attributes;
+                const newAttributes = {
+                    ...attributes,
+                    overlayType: overlayType === undefined ? 'default' : overlayType,
+                    overlayPosition: overlayPosition === undefined ? 'center' : overlayPosition,
+                };
+                return [
+                    newAttributes
+                ];
+            },
+            save: saveV1
         },
     ]
 };

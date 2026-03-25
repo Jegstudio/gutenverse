@@ -42,7 +42,8 @@ class Fun_Fact extends Block_Abstract {
 				$url       = isset( $image['url'] ) ? $image['url'] : '';
 				$lazy_attr = ( 'lazy' === $image_load ) ? ' loading="lazy"' : '';
 				if ( ! empty( $url ) ) {
-					$inner_content = '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $image_alt ) . '"' . $lazy_attr . ' />';
+					$alt_attr = ! empty( $image_alt ) ? ' alt="' . esc_attr( $image_alt ) . '"' : '';
+					$inner_content = '<img src="' . esc_url( $url ) . '"' . $alt_attr . $lazy_attr . ' />';
 				}
 				break;
 		}
@@ -87,7 +88,8 @@ class Fun_Fact extends Block_Abstract {
 		$output .= '<div class="content ' . esc_attr( $content_display ) . '">';
 		$output .= '<div class="number-wrapper">';
 		$output .= '<span class="prefix">' . esc_html( $prefix ) . '</span>';
-		$output .= '<span class="number loaded" data-number-format="' . esc_attr( $number_format ) . '" data-safe="' . esc_attr( $safe_number ) . '" data-number="' . esc_attr( $number ) . '" data-duration="' . esc_attr( $duration ) . '" data-number-spaces="' . esc_attr( wp_json_encode( $number_right_space ) ) . '"></span>';
+		$number_spaces_attr = ( null !== $number_right_space ) ? ' data-number-spaces="' . esc_attr( wp_json_encode( $number_right_space ) ) . '"' : '';
+		$output .= '<span class="number loaded" data-number-format="' . esc_attr( $number_format ) . '" data-safe="' . esc_attr( $safe_number ) . '" data-number="' . esc_attr( $number ) . '" data-duration="' . esc_attr( $duration ) . '"' . $number_spaces_attr . '></span>';
 		$output .= '<span class="suffix">' . esc_html( $suffix ) . '</span>';
 		if ( $show_supper ) {
 			$output .= '<sup class="super">' . esc_html( $supper ) . '</sup>';

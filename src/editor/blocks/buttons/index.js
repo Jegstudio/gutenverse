@@ -21,7 +21,7 @@ export const settings = {
         {
             attributes: attributes,
             supports,
-            save: saveV1
+            save: saveV3
         },
         {
             attributes: attributes,
@@ -31,7 +31,7 @@ export const settings = {
         {
             attributes: attributes,
             supports,
-            save: saveV3
+            save: saveV1
         },
     ],
 };

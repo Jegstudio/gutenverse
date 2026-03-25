@@ -51,10 +51,12 @@ class Image_Box extends Block_Abstract {
 		}
 
 		if ( $image_id && ! empty( $image_src ) ) {
-			$url    = isset( $image_src['url'] ) ? $image_src['url'] : '';
-			$height = isset( $image_src['height'] ) ? $image_src['height'] : '';
-			$width  = isset( $image_src['width'] ) ? $image_src['width'] : '';
-			return '<img class="gutenverse-image-box-filled" src="' . esc_url( $url ) . '" height="' . esc_attr( $height ) . '" width="' . esc_attr( $width ) . '" alt="' . esc_attr( $alt_text ) . '"' . $lazy_attr . ' />';
+			$url         = isset( $image_src['url'] ) ? $image_src['url'] : '';
+			$height      = isset( $image_src['height'] ) ? $image_src['height'] : '';
+			$width       = isset( $image_src['width'] ) ? $image_src['width'] : '';
+			$height_attr = ! empty( $height ) ? ' height="' . esc_attr( $height ) . '"' : '';
+			$width_attr  = ! empty( $width ) ? ' width="' . esc_attr( $width ) . '"' : '';
+			return '<img class="gutenverse-image-box-filled" src="' . esc_url( $url ) . '"' . $height_attr . $width_attr . ' alt="' . esc_attr( $alt_text ) . '"' . $lazy_attr . ' />';
 		}
 
 		return '<img class="gutenverse-image-box-empty" src=""' . $lazy_attr . ' alt="' . esc_attr( $alt_text ) . '" />';
@@ -82,7 +84,9 @@ class Image_Box extends Block_Abstract {
 				$this->get_element_id()
 			);
 
-			return '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $link_target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">' . $content . '</a>';
+			$aria_attr = ! empty( $aria_label ) ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
+
+			return '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $link_target ) . '"' . $aria_attr . ' rel="' . esc_attr( $rel ) . '">' . $content . '</a>';
 		}
 
 		return $content;

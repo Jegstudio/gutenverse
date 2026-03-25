@@ -21,6 +21,21 @@ export const settings = {
     save,
     deprecated: [
         {
+            attributes: attributes,
+            supports: supports,
+            save: saveV6
+        },
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV5
+        },
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV4
+        },
+        {
             attributes: {
                 ...attributes,
                 showed: {
@@ -39,18 +54,7 @@ export const settings = {
                     deprecated: true,
                 },
             },
-            migrate: (attributes) => {
-                const { showed } = attributes;
-                const newAttributes = {
-                    ...attributes,
-                    showed: parseInt(showed),
-                };
-
-                return [
-                    newAttributes
-                ];
-            },
-            save: saveV1
+            save: saveV3,
         },
         {
             attributes: {
@@ -110,22 +114,19 @@ export const settings = {
                     deprecated: true,
                 },
             },
-            save: saveV3,
+            migrate: (attributes) => {
+                const { showed } = attributes;
+                const newAttributes = {
+                    ...attributes,
+                    showed: parseInt(showed),
+                };
+
+                return [
+                    newAttributes
+                ];
+            },
+            save: saveV1
         },
-        {
-            attributes: attributes,
-            supports: supports,
-            save: saveV4
-        },
-        {
-            attributes: attributes,
-            supports: supports,
-            save: saveV5
-        },
-        {
-            attributes: attributes,
-            supports: supports,
-            save: saveV6
-        }
+        
     ]
 };

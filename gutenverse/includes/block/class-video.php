@@ -77,15 +77,10 @@ class Video extends Block_Abstract {
 		}
 
 		// Caption.
-		$caption_text = '';
 		if ( 'original' === $caption_type ) {
-			$caption_text = $caption_orig;
+			$output .= '<span class="guten-caption">' . wp_kses_post( $caption_orig ) . '</span>';
 		} elseif ( 'custom' === $caption_type ) {
-			$caption_text = $caption_custom;
-		}
-
-		if ( ! empty( $caption_text ) ) {
-			$output .= '<span class="guten-caption">' . wp_kses_post( $caption_text ) . '</span>';
+			$output .= '<span class="guten-caption">' . wp_kses_post( $caption_custom ) . '</span>';
 		}
 
 		return $output;
@@ -118,7 +113,7 @@ class Video extends Block_Abstract {
 			}
 		}
 
-		$class_name = trim( "wp-block-gutenverse-video guten-element guten-video $element_id $display_classes $animation_class $custom_classes" );
+		$class_name = trim( "guten-element guten-video $element_id $animation_class $display_classes $custom_classes" );
 
 		$content = '<figure class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</figure>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );

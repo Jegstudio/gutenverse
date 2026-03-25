@@ -101,7 +101,7 @@ class Portfolio_Gallery extends Block_Abstract {
 			}
 		}
 
-		$class_name = 'guten-element guten-portfolio-gallery ' . $element_id . $display_classes . $animation_class . $custom_classes;
+		$class_name = 'guten-element guten-portfolio-gallery ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . $custom_classes;
 
 		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '" data-behavior="' . esc_attr( $behavior ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );

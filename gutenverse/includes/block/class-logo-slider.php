@@ -47,12 +47,23 @@ class Logo_Slider extends Block_Abstract {
 			),
 		);
 
-		return ' data-loop="' . esc_attr( $loop ? 'true' : 'false' ) . '"' .
-			' data-autoplay="' . esc_attr( $autoplay ? 'true' : 'false' ) . '"' .
-			' data-timeout="' . esc_attr( $autoplay_timeout ) . '"' .
-			' data-nav="' . esc_attr( $show_nav ? 'true' : 'false' ) . '"' .
-			' data-arrow="' . esc_attr( $show_arrow ? 'true' : 'false' ) . '"' .
-			' data-breakpoints="' . esc_attr( wp_json_encode( $breakpoints ) ) . '"';
+		$data_str = '';
+		if ( $loop ) {
+			$data_str .= ' data-loop="true"';
+		}
+		if ( $autoplay ) {
+			$data_str .= ' data-autoplay="true"';
+		}
+		$data_str .= ' data-timeout="' . esc_attr( $autoplay_timeout ) . '"';
+		if ( $show_nav ) {
+			$data_str .= ' data-nav="true"';
+		}
+		if ( $show_arrow ) {
+			$data_str .= ' data-arrow="true"';
+		}
+		$data_str .= ' data-breakpoints="' . esc_attr( wp_json_encode( $breakpoints ) ) . '"';
+
+		return $data_str;
 	}
 
 	/**
@@ -152,19 +163,10 @@ class Logo_Slider extends Block_Abstract {
 		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$anchor_attr     = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
-		$data_id = '';
-		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
-			$id_parts = explode( '-', $element_id );
-			if ( count( $id_parts ) > 1 ) {
-				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
-			}
-		}
+		$class_name = trim( "guten-element guten-client-logo grid-desktop-3 $element_id $animation_class $display_classes $custom_classes arrow-$arrow_position" );
 
-		$class_name = trim( "guten-element guten-client-logo grid-desktop-3 no-margin $element_id $animation_class $display_classes $custom_classes arrow-$arrow_position" );
-
-		$content = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '">' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'logo-slider' );
 
 		return $content;
 	}

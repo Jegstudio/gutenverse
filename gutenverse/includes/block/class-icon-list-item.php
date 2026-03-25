@@ -33,11 +33,7 @@ class Icon_List_Item extends Block_Abstract {
 		$icon_type   = isset( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
 		$icon_svg    = isset( $this->attributes['iconSVG'] ) ? $this->attributes['iconSVG'] : '';
 		$hide_icon   = isset( $this->attributes['hideIcon'] ) ? $this->attributes['hideIcon'] : false;
-		$text        = isset( $this->attributes['content'] ) ? $this->attributes['content'] : '';
-
-		if ( empty( $text ) ) {
-			$text = isset( $this->attributes['text'] ) ? $this->attributes['text'] : '';
-		}
+		$text        = isset( $this->attributes['text'] ) ? $this->attributes['text'] : '';
 
 		$href = apply_filters(
 			'gutenverse_dynamic_generate_dynamic_pattern_link',
@@ -53,14 +49,18 @@ class Icon_List_Item extends Block_Abstract {
 				// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped
 				$icon_html = '<div class="gutenverse-icon-svg">' . base64_decode( $icon_svg ) . '</div>';
 			} elseif ( $icon ) {
-				$icon_html = '<i class="' . esc_attr( $icon ) . '" aria-hidden="true"></i>';
+				$icon_html = '<i class="' . esc_attr( $icon ) . '"></i>';
 			}
 		}
 
 		$text_class = 'list-text' . ( $hide_icon ? ' no-icon' : '' );
 
+		$target_attr     = ! empty( $link_target ) ? ' target="' . esc_attr( $link_target ) . '"' : '';
+		$rel_attr        = ! empty( $rel ) ? ' rel="' . esc_attr( $rel ) . '"' : '';
+		$aria_label_attr = ! empty( $aria_label ) ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
+
 		$content  = '<div class="list-divider"></div>';
-		$content .= '<a id="' . esc_attr( $element_id ) . '" href="' . esc_url( $href ) . '" target="' . esc_attr( $link_target ) . '" rel="' . esc_attr( $rel ) . '" aria-label="' . esc_attr( $aria_label ) . '">';
+		$content .= '<a id="' . esc_attr( $element_id ) . '" href="' . esc_url( $href ) . '"' . $target_attr . $rel_attr . $aria_label_attr . '>';
 		$content .= $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		$content .= '<span class="' . esc_attr( $text_class ) . '">' . $text . '</span>';
 		$content .= '</a>';

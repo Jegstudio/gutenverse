@@ -65,11 +65,7 @@ class Button extends Block_Abstract {
 
 		$icon_html = '';
 		if ( $show_icon ) {
-			if ( 'icon' === $icon_type ) {
-				$icon_html = '<i aria-hidden="true" class="fa-lg ' . esc_attr( $icon ) . '"></i>';
-			} else {
-				$icon_html = $this->render_icon( $icon_type, $icon, $icon_svg );
-			}
+			$icon_html = $this->render_icon( $icon_type, $icon, $icon_svg );
 		}
 
 		$content_html = '<span>' . wp_kses_post( $title ) . '</span>';
@@ -82,22 +78,15 @@ class Button extends Block_Abstract {
 		}
 
 		if ( 'link' === $role ) {
-			return sprintf(
-				'<a class="%1$s" href="%2$s" target="%3$s" rel="%4$s" aria-label="%5$s">%6$s</a>',
-				esc_attr( $button_class ),
-				esc_url( $href ),
-				esc_attr( $link_target ),
-				esc_attr( $rel ),
-				esc_attr( $aria_label ),
-				$inner_html
-			);
+			$target_attr     = $link_target ? ' target="' . esc_attr( $link_target ) . '"' : '';
+			$aria_label_attr = $aria_label ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
+			$rel_attr        = $rel ? ' rel="' . esc_attr( $rel ) . '"' : '';
+
+			return '<a class="' . esc_attr( $button_class ) . '" href="' . esc_url( $href ) . '"' . $target_attr . $aria_label_attr . $rel_attr . '>' . $inner_html . '</a>';
 		} else {
-			return sprintf(
-				'<button class="%1$s" type="submit" aria-label="%2$s">%3$s</button>',
-				esc_attr( $button_class ),
-				esc_attr( $aria_label ),
-				$inner_html
-			);
+			$aria_label_attr = $aria_label ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
+
+			return '<button class="' . esc_attr( $button_class ) . '"' . $aria_label_attr . ' type="submit">' . $inner_html . '</button>';
 		}
 	}
 
@@ -118,19 +107,18 @@ class Button extends Block_Abstract {
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
-		$custom_classes  = $this->get_custom_classes();
 
-		$data_id       = '';
+		$data_id = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
 			$id_parts = explode( '-', $element_id );
 			if ( count( $id_parts ) > 1 ) {
 				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
 			}
 		}
-		$class_name = 'guten-element guten-button-wrapper ' . $element_id . $display_classes . $animation_class . $custom_classes;
+		$class_name = 'guten-element guten-button-wrapper ' . $element_id . $display_classes . $animation_class;
 		$content    = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
-		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'button' );
+		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'buttons' );
 
 		return $content;
 	}

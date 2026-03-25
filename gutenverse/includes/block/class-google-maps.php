@@ -78,7 +78,7 @@ class Google_Maps extends Block_Abstract {
 			}
 		}
 
-		$content = '<div class="' . esc_attr( 'guten-element gutenverse-maps guten-maps ' . $element_id . $display_classes . $animation_class . $custom_classes ) . '" data-src="' . esc_url( $url ) . '"' . $data_id . '>
+		$content = '<div class="' . esc_attr( trim( 'guten-element gutenverse-maps guten-maps ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . $custom_classes ) ) . '" data-src="' . esc_url( $url ) . '"' . $data_id . '>
 					' . $this->render_content( 0 ) . '
 				</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );

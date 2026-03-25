@@ -28,34 +28,28 @@ export const settings = {
     },
     deprecated: [
         {
-            attributes: {
-                ...attributes,
-                imageWidth: {
-                    type: 'int',
-                    default: 150,
-                    copyStyle: true,
-                    deprecated: true,
-                },
-                imageHeight: {
-                    type: 'int',
-                    default: 150,
-                    copyStyle: true,
-                    deprecated: true,
-                },
-            },
-            migrate: (attributes) => {
-                const { imageWidth, imageHeight } = attributes;
-                const newAttributes = {
-                    ...attributes,
-                    imageHeight: parseInt(imageHeight),
-                    imageWidth: parseInt(imageWidth),
-                };
-
-                return [
-                    newAttributes
-                ];
-            },
-            save: saveV1
+            attributes,
+            save: saveV9
+        },
+        {
+            attributes,
+            save: saveV8
+        },
+        {
+            attributes,
+            save: saveV7
+        },
+        {
+            attributes,
+            save: saveV5
+        },
+        {
+            attributes,
+            save: saveV4
+        },
+        {
+            attributes,
+            save: saveV3
         },
         {
             attributes: {
@@ -88,28 +82,34 @@ export const settings = {
             save: saveV2
         },
         {
-            attributes,
-            save: saveV3
-        },
-        {
-            attributes,
-            save: saveV4
-        },
-        {
-            attributes,
-            save: saveV5
-        },
-        {
-            attributes,
-            save: saveV7
-        },
-        {
-            attributes,
-            save: saveV8
-        },
-        {
-            attributes,
-            save: saveV9
+            attributes: {
+                ...attributes,
+                imageWidth: {
+                    type: 'int',
+                    default: 150,
+                    copyStyle: true,
+                    deprecated: true,
+                },
+                imageHeight: {
+                    type: 'int',
+                    default: 150,
+                    copyStyle: true,
+                    deprecated: true,
+                },
+            },
+            migrate: (attributes) => {
+                const { imageWidth, imageHeight } = attributes;
+                const newAttributes = {
+                    ...attributes,
+                    imageHeight: parseInt(imageHeight),
+                    imageWidth: parseInt(imageWidth),
+                };
+
+                return [
+                    newAttributes
+                ];
+            },
+            save: saveV1
         }
     ]
 };

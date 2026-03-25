@@ -81,16 +81,12 @@ class Accordion extends Block_Abstract {
 		}
 
 		$element_id      = $this->get_element_id();
-		$display_classes = $this->set_display_classes();
-		$animation_class = $this->set_animation_classes();
-		$custom_classes  = $this->get_custom_classes();
 		$first           = isset( $this->attributes['first'] ) ? $this->attributes['first'] : false;
 
 		$class_name = 'accordion-item ' . $element_id;
 		if ( $first ) {
 			$class_name .= ' active';
 		}
-		$class_name .= $display_classes . $animation_class . $custom_classes;
 
 		return '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
 	}

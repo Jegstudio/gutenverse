@@ -29,7 +29,7 @@ export const settings = {
                     rel: attributes.rel,
                 };
             },
-            save: saveV1
+            save: saveV3
         },
         {
             attributes: attrV1,
@@ -53,7 +53,7 @@ export const settings = {
                     rel: attributes.rel,
                 };
             },
-            save: saveV3
+            save: saveV1
         },
     ],
     usesContext: ['hoverWithParent', 'parentSelector'],

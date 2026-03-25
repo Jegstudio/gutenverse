@@ -47,9 +47,8 @@ class Buttons extends Block_Abstract {
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
-		$custom_classes  = $this->get_custom_classes();
 
-		$wrapper_class = 'guten-element guten-buttons-wrapper ' . $element_id . $display_classes . $animation_class . $custom_classes;
+		$wrapper_class = 'guten-element guten-buttons-wrapper ' . $element_id . $display_classes . $animation_class;
 		$data_id       = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
 			$id_parts = explode( '-', $element_id );
