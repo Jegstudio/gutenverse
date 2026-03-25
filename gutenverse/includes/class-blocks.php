@@ -50,10 +50,10 @@ class Blocks {
 		register_block_type( GUTENVERSE_DIR . './block/text-editor/block.json' );
 
 		register_block_type( GUTENVERSE_DIR . './block/social-share/block.json' );
-		register_block_type( GUTENVERSE_DIR . './block/search/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/popup-builder/block.json' );
 
 		// Dynamic blocks.
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/search/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/tab/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/tabs/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/text-paragraph/block.json' );
