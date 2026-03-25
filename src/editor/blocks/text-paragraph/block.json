@@ -4,6 +4,7 @@
 	"title": "Text Paragraph",
 	"description": "Paragraph Block Gutenverse ",
 	"category": "gutenverse-element",
+	"class_callback": "\\Gutenverse\\Block\\Text_Paragraph",
 	"allowCopyStyle": true,
 	"attributes": {
 		"elementId": {
