@@ -89,7 +89,7 @@ class Team extends Block_Abstract {
 			return '';
 		}
 
-		return '<div class="socials-wrapper">' . $this->content . '</div>';
+		return '<div class="socials-wrapper">' . $this->render_inner_blocks() . '</div>';
 	}
 
 	/**

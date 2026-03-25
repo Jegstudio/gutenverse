@@ -154,10 +154,8 @@ class Icon_Box extends Block_Abstract {
 				$output   .= $this->wrap_href( $desc_html );
 			}
 
-			if ( $has_inner && ! empty( $this->block_data ) && ! empty( $this->block_data->inner_blocks ) ) {
-				foreach ( $this->block_data->inner_blocks as $inner_block ) {
-					$output .= $inner_block->render();
-				}
+			if ( $has_inner ) {
+				$output .= $this->render_inner_blocks();
 			}
 
 			$output .= '</div>';

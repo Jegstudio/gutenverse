@@ -152,7 +152,7 @@ class Image_Box extends Block_Abstract {
 		}
 
 		if ( $include_button ) {
-			$output .= $this->content;
+			$output .= $this->render_inner_blocks();
 		}
 
 		if ( $hover_bottom ) {
