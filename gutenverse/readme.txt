@@ -300,7 +300,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 == Changelog ==
 = 3.5.2 =
 ##### Bug Fixes
-* fix issue with global style
+* fix issue with global style causing error
 
 = 3.5.1 =
 ##### Bug Fixes
