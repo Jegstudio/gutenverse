@@ -80,6 +80,12 @@ class Team extends Block_Abstract {
 			$aria_attr = ' aria-label="' . esc_attr( $aria_label ) . '"';
 		}
 
+		$value = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_parse_list_php',
+			$value,
+			$this->attributes[$identifier . 'DynamicList'] ?? array()
+		);
+
 		return '<' . $tag . ' class="' . esc_attr( $class_name ) . '"' . $aria_attr . '>' . wp_kses_post( $value ) . '</' . $tag . '>';
 	}
 

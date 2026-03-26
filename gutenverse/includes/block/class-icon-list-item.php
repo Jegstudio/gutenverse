@@ -35,6 +35,12 @@ class Icon_List_Item extends Block_Abstract {
 		$hide_icon   = isset( $this->attributes['hideIcon'] ) ? $this->attributes['hideIcon'] : false;
 		$text        = isset( $this->attributes['text'] ) ? $this->attributes['text'] : '';
 
+		$text = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_parse_list_php',
+			$text,
+			$this->attributes['dynamicDataList'] ?? array()
+		);
+
 		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
 		$href        = apply_filters(
 			'gutenverse_dynamic_generate_url',

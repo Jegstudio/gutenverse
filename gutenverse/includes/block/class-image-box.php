@@ -142,6 +142,12 @@ class Image_Box extends Block_Abstract {
 		$output .= '<div class="body-inner">';
 
 		if ( ! empty( $title ) ) {
+			$title        = apply_filters(
+				'gutenverse_dynamic_generate_dynamic_parse_list_php',
+				$title,
+				$this->attributes['titleDynamicList'] ?? array()
+			);
+
 			$title_class  = 'body-title icon-position-' . esc_attr( $title_icon_position );
 			$title_inner  = $this->render_title_icon( 'before' );
 			$title_inner .= '<span>' . wp_kses_post( $title ) . '</span>';
@@ -151,6 +157,12 @@ class Image_Box extends Block_Abstract {
 		}
 
 		if ( ! empty( $description ) ) {
+			$description = apply_filters(
+				'gutenverse_dynamic_generate_dynamic_parse_list_php',
+				$description,
+				$this->attributes['descriptionDynamicList'] ?? array()
+			);
+
 			$desc_html = '<p class="body-description">' . wp_kses_post( $description ) . '</p>';
 			$output   .= $this->wrap_href( $desc_html );
 		}

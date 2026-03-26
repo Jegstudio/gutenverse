@@ -29,7 +29,7 @@ class Text_Paragraph extends Block_Abstract {
 		$content = apply_filters(
 			'gutenverse_dynamic_generate_dynamic_parse_list_php',
 			$paragraph,
-			$this->attributes
+			$this->attributes['dynamicDataList'] ?? array()
 		);
 
 		$content   = wp_kses_post( $content );
