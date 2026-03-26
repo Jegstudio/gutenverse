@@ -25,8 +25,15 @@ class Text_Paragraph extends Block_Abstract {
 	 */
 	public function render_content() {
 		$paragraph = isset( $this->attributes['paragraph'] ) ? $this->attributes['paragraph'] : '';
+		$content   = wp_kses_post( $paragraph );
 
-		return wp_kses_post( $paragraph );
+		$content = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_pattern_php',
+			$content,
+			$this->attributes
+		);
+
+		return $content;
 	}
 
 	/**
