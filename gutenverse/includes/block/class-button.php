@@ -39,19 +39,20 @@ class Button extends Block_Abstract {
 		$aria_label    = isset( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
 		$element_id    = $this->get_element_id();
 
+		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
 		$href = apply_filters(
-			'gutenverse_dynamic_generate_dynamic_pattern_link',
+			'gutenverse_dynamic_generate_url',
 			$url,
-			'dynamicUrl',
-			$this->attributes,
+			$dynamic_url,
 			$element_id
 		);
 
+		$dynamic_content = isset( $this->attributes['dynamicContent'] ) ? $this->attributes['dynamicContent'] : array();
+
 		$title = apply_filters(
-			'gutenverse_dynamic_generate_dynamic_pattern_content',
+			'gutenverse_dynamic_generate_content',
 			$content,
-			'dynamicContent',
-			$this->attributes,
+			$dynamic_content,
 			$element_id
 		);
 

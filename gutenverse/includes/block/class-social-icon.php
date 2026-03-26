@@ -78,12 +78,12 @@ class Social_Icon extends Block_Abstract {
 		$rel         = ! empty( $this->attributes['rel'] ) ? $this->attributes['rel'] : '';
 		$aria_label  = ! empty( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
 
-		$href = apply_filters(
+		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
+		$href        = apply_filters(
 			'gutenverse_dynamic_generate_url',
 			$url,
-			'dynamicUrl',
-			$this->attributes,
-			$element_id
+			$dynamic_url,
+			$this->get_element_id()
 		);
 
 		$icon_html = $this->render_icon( $icon_type, $icon, $icon_svg );

@@ -52,11 +52,11 @@ class Icon_Box extends Block_Abstract {
 		$aria_label = ! empty( $this->attributes['anchorAriaLabel'] ) ? $this->attributes['anchorAriaLabel'] : '';
 
 		if ( ! empty( $url ) ) {
-			$href = apply_filters(
+			$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
+			$href        = apply_filters(
 				'gutenverse_dynamic_generate_url',
 				$url,
-				'dynamicUrl',
-				$this->attributes,
+				$dynamic_url,
 				$this->get_element_id()
 			);
 

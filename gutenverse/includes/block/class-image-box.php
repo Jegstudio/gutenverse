@@ -76,11 +76,11 @@ class Image_Box extends Block_Abstract {
 		$aria_label  = ! empty( $this->attributes['ariaLabel'] ) ? $this->attributes['ariaLabel'] : '';
 
 		if ( ! empty( $url ) ) {
-			$href = apply_filters(
+			$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
+			$href        = apply_filters(
 				'gutenverse_dynamic_generate_url',
 				$url,
-				'dynamicUrl',
-				$this->attributes,
+				$dynamic_url,
 				$this->get_element_id()
 			);
 
