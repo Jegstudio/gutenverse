@@ -129,7 +129,7 @@ class Gallery extends Block_Abstract {
 
 			if ( 'overlay' === $layout ) {
 				$output .= '<div class="item-caption-over">';
-				$output .= '<' . $title_tag . ' class="item-title">' . wp_kses_post( $item['title'] ) . '</' . $title_tag . '>';
+				$output .= '<' . $title_tag . ' class="item-title">' . wp_kses_post( isset( $item['title'] ) ? $item['title'] : '' ) . '</' . $title_tag . '>';
 				$output .= '<div class="item-content">' . wp_kses_post( isset( $item['content'] ) ? $item['content'] : '' ) . '</div>';
 
 				$output .= '<div class="item-buttons">';
@@ -256,7 +256,7 @@ class Gallery extends Block_Abstract {
 		if ( 'card' === $layout ) {
 			$output .= '<div class="caption-wrap style-card">';
 			$output .= '<div class="item-caption-over">';
-			$output .= '<' . $title_tag . ' class="item-title">' . wp_kses_post( $item['title'] ) . '</' . $title_tag . '>';
+			$output .= '<' . $title_tag . ' class="item-title">' . wp_kses_post( isset( $item['title'] ) ? $item['title'] : '' ) . '</' . $title_tag . '>';
 			$output .= '<div class="item-content"><p>' . wp_kses_post( isset( $item['content'] ) ? $item['content'] : '' ) . '</p></div>';
 			$output .= '</div>';
 			$output .= '</div>';
