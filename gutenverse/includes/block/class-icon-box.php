@@ -167,24 +167,30 @@ class Icon_Box extends Block_Abstract {
 			$output .= '<div class="icon-box icon-box-body">';
 
 			if ( $show_title && ! empty( $title ) ) {
-				$title        = apply_filters(
+				$title              = wp_kses_post( $title );
+				$title_dynamic_list = isset( $this->attributes['titleDynamicList'] ) ? $this->attributes['titleDynamicList'] : array();
+
+				$title      = apply_filters(
 					'gutenverse_dynamic_generate_dynamic_parse_list_php',
 					$title,
-					$this->attributes['titleDynamicList'] ?? array()
+					$title_dynamic_list
 				);
 				$tag        = $this->check_tag( $title_tag, 'h2' );
-				$title_html = '<' . $tag . ' class="title">' . wp_kses_post( $title ) . '</' . $tag . '>';
+				$title_html = '<' . $tag . ' class="title">' . $title . '</' . $tag . '>';
 				$output    .= $this->wrap_href( $title_html );
 			}
 
 			if ( $show_desc && ! empty( $description ) ) {
+				$description              = wp_kses_post( $description );
+				$description_dynamic_list = isset( $this->attributes['descriptionDynamicList'] ) ? $this->attributes['descriptionDynamicList'] : array();
+
 				$description = apply_filters(
 					'gutenverse_dynamic_generate_dynamic_parse_list_php',
 					$description,
-					$this->attributes['descriptionDynamicList'] ?? array()
+					$description_dynamic_list
 				);
-				$desc_html = '<p class="icon-box-description">' . wp_kses_post( $description ) . '</p>';
-				$output   .= $this->wrap_href( $desc_html );
+				$desc_html   = '<p class="icon-box-description">' . $description . '</p>';
+				$output     .= $this->wrap_href( $desc_html );
 			}
 
 			if ( $has_inner ) {
@@ -201,14 +207,17 @@ class Icon_Box extends Block_Abstract {
 
 		// Badge.
 		if ( $badge_show ) {
+			$badge_text              = isset( $this->attributes['badge'] ) ? $this->attributes['badge'] : '';
+			$badge_text              = wp_kses_post( $badge_text );
+			$badge_text_dynamic_list = isset( $this->attributes['badgeDynamicList'] ) ? $this->attributes['badgeDynamicList'] : array();
+
 			$badge_text = apply_filters(
 				'gutenverse_dynamic_generate_dynamic_parse_list_php',
-				isset( $this->attributes['badge'] ) ? $this->attributes['badge'] : '',
-				$this->attributes['badgeDynamicList'] ?? array()
+				$badge_text,
+				$badge_text_dynamic_list
 			);
-			$badge_text = isset( $this->attributes['badge'] ) ? $this->attributes['badge'] : '';
 			$badge_pos  = isset( $this->attributes['badgePosition'] ) ? $this->attributes['badgePosition'] : 'bottomcenter';
-			$badge_html = '<div class="icon-box-badge ' . esc_attr( $badge_pos ) . '"><span class="badge-text">' . wp_kses_post( $badge_text ) . '</span></div>';
+			$badge_html = '<div class="icon-box-badge ' . esc_attr( $badge_pos ) . '"><span class="badge-text">' . $badge_text . '</span></div>';
 			$output    .= $this->wrap_href( $badge_html );
 		}
 

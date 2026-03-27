@@ -38,8 +38,16 @@ class Advanced_Heading extends Block_Abstract {
 			$output .= '<div class="heading-line top"></div>';
 		}
 
+		$sub_text              = wp_kses_post( $sub_text );
+		$sub_text_dynamic_list = isset( $this->attributes['subTextDynamicList'] ) ? $this->attributes['subTextDynamicList'] : array();
+
+		$sub_text = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_parse_list_php',
+			$sub_text,
+			$sub_text_dynamic_list
+		);
 		if ( 'top' === $show_sub ) {
-			$output .= '<' . esc_attr( $sub_tag ) . ' class="heading-subtitle">' . wp_kses_post( $sub_text ) . '</' . esc_attr( $sub_tag ) . '>';
+			$output .= '<' . esc_attr( $sub_tag ) . ' class="heading-subtitle">' . $sub_text . '</' . esc_attr( $sub_tag ) . '>';
 		}
 
 		if ( 'top' === $show_sub && 'between' === $show_line ) {
@@ -57,8 +65,27 @@ class Advanced_Heading extends Block_Abstract {
 		}
 
 		$output .= '<' . esc_attr( $title_tag ) . ' class="heading-title">';
-		$output .= '<span class="heading-title">' . wp_kses_post( $text ) . '</span>';
-		$output .= '<span class="heading-focus">' . wp_kses_post( $focus_text ) . '</span>';
+
+		$text              = wp_kses_post( $text );
+		$text_dynamic_list = isset( $this->attributes['textDynamicList'] ) ? $this->attributes['textDynamicList'] : array();
+
+		$text = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_parse_list_php',
+			$text,
+			$text_dynamic_list
+		);
+
+		$focus_text              = wp_kses_post( $focus_text );
+		$focus_text_dynamic_list = isset( $this->attributes['focusTextDynamicList'] ) ? $this->attributes['focusTextDynamicList'] : array();
+
+		$focus_text = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_parse_list_php',
+			$focus_text,
+			$focus_text_dynamic_list
+		);
+
+		$output .= '<span class="heading-title">' . $text . '</span>';
+		$output .= '<span class="heading-focus">' . $focus_text . '</span>';
 		$output .= '</' . esc_attr( $title_tag ) . '>';
 
 		if ( 'after' === $show_line ) {
@@ -71,7 +98,7 @@ class Advanced_Heading extends Block_Abstract {
 		}
 
 		if ( 'bottom' === $show_sub ) {
-			$output .= '<' . esc_attr( $sub_tag ) . ' class="heading-subtitle">' . wp_kses_post( $sub_text ) . '</' . esc_attr( $sub_tag ) . '>';
+			$output .= '<' . esc_attr( $sub_tag ) . ' class="heading-subtitle">' . $sub_text . '</' . esc_attr( $sub_tag ) . '>';
 		}
 
 		if ( 'bottom' === $show_line ) {

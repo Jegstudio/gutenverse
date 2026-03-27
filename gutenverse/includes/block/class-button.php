@@ -40,7 +40,7 @@ class Button extends Block_Abstract {
 		$element_id    = $this->get_element_id();
 
 		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
-		$href = apply_filters(
+		$href        = apply_filters(
 			'gutenverse_dynamic_generate_url',
 			$url,
 			$dynamic_url,

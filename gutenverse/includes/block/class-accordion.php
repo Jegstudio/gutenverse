@@ -37,6 +37,16 @@ class Accordion extends Block_Abstract {
 		$icon_open_html   = $this->render_icon( $icon_open_type, $icon_open, $icon_open_svg );
 		$icon_closed_html = $this->render_icon( $icon_closed_type, $icon_closed, $icon_closed_svg );
 
+		$title = wp_kses_post( $title );
+		$title              = wp_kses_post( $title );
+		$title_dynamic_list = isset( $this->attributes['dynamicDataList'] ) ? $this->attributes['dynamicDataList'] : array();
+
+		$title = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_parse_list_php',
+			$title,
+			$title_dynamic_list
+		);
+
 		$icon_html  = '<div class="accordion-icon">';
 		$icon_html .= '<span class="accordion-icon-open">' . $icon_open_html . '</span>';
 		$icon_html .= '<span class="accordion-icon-closed">' . $icon_closed_html . '</span>';
@@ -48,7 +58,7 @@ class Accordion extends Block_Abstract {
 		}
 
 		$output .= '<' . esc_attr( $title_tag ) . ' class="accordion-text">';
-		$output .= wp_kses_post( $title );
+		$output .= $title;
 		$output .= '</' . esc_attr( $title_tag ) . '>';
 
 		if ( 'right' === $icon_position ) {
@@ -80,8 +90,8 @@ class Accordion extends Block_Abstract {
 			return $this->content;
 		}
 
-		$element_id      = $this->get_element_id();
-		$first           = isset( $this->attributes['first'] ) ? $this->attributes['first'] : false;
+		$element_id = $this->get_element_id();
+		$first      = isset( $this->attributes['first'] ) ? $this->attributes['first'] : false;
 
 		$class_name = 'accordion-item ' . $element_id;
 		if ( $first ) {

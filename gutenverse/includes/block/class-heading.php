@@ -41,11 +41,19 @@ class Heading extends Block_Abstract {
 		if ( ! empty( trim( $this->block_data->inner_html ) ) && apply_filters( 'gutenverse_force_dynamic', false ) ) {
 			return $this->content;
 		}
-		$element_id      = $this->get_element_id();
-		$display_classes = $this->set_display_classes();
-		$animation_class = $this->set_animation_classes();
-		$custom_classes  = $this->get_custom_classes();
-		$content         = isset( $this->attributes['content'] ) ? $this->attributes['content'] : '';
+		$element_id           = $this->get_element_id();
+		$display_classes      = $this->set_display_classes();
+		$animation_class      = $this->set_animation_classes();
+		$custom_classes       = $this->get_custom_classes();
+		$content              = isset( $this->attributes['content'] ) ? $this->attributes['content'] : '';
+		$content              = wp_kses_post( $content );
+		$content_dynamic_list = isset( $this->attributes['dynamicDataList'] ) ? $this->attributes['dynamicDataList'] : array();
+
+		$content = apply_filters(
+			'gutenverse_dynamic_generate_dynamic_parse_list_php',
+			$content,
+			$content_dynamic_list
+		);
 
 		$class_name = trim( 'wp-block-gutenverse-heading guten-element ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . ' ' . $custom_classes );
 		$data_id    = '';
