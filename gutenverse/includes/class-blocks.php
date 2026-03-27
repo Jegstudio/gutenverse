@@ -46,7 +46,6 @@ class Blocks {
 		// Static block.
 		register_block_type( GUTENVERSE_DIR . './block/divider/block.json' );
 
-		register_block_type( GUTENVERSE_DIR . './block/spacer/block.json' );
 		register_block_type( GUTENVERSE_DIR . './block/text-editor/block.json' );
 
 		register_block_type( GUTENVERSE_DIR . './block/social-share/block.json' );
@@ -100,6 +99,7 @@ class Blocks {
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/feature-list/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/progress-bar/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/portfolio-gallery/block.json' );
+		$this->register_dynamic_block( GUTENVERSE_DIR . './block/spacer/block.json' );
 		$this->register_dynamic_block( GUTENVERSE_DIR . './block/countdown/block.json' );
 
 		// Social Share Block.
