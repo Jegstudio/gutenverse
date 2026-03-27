@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/text-editor",
+	"class_callback": "\\Gutenverse\\Block\\Text_Editor",
 	"title": "Text Editor",
 	"description": "A place to create a text content.",
 	"category": "gutenverse-element",
