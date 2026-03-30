@@ -1,5 +1,6 @@
 # Folders to ignore
 .idea
+.claude
 build
 release
 node_modules
