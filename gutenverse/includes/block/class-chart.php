@@ -140,10 +140,12 @@ class Chart extends Block_Abstract {
 		$custom_classes  = $this->get_custom_classes();
 		$content_type    = isset( $this->attributes['contentType'] ) ? $this->attributes['contentType'] : array();
 		$flip_classes    = $this->get_flip_classes( $content_type );
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr         = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
 		$class_name = 'guten-element guten-chart ' . $element_id . $display_classes . $animation_class . $custom_classes . ' ' . $flip_classes;
 
-		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
+		$content = '<div' . $id_attr . ' class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 
 		return $content;

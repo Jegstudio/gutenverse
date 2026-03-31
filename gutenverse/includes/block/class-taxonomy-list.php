@@ -98,6 +98,9 @@ class Taxonomy_List extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
+		$anchor  = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
 		$data_id = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
 			$id_parts = explode( '-', $element_id );
@@ -107,7 +110,7 @@ class Taxonomy_List extends Block_Abstract {
 		}
 
 		$class_name = trim( 'guten-element guten-taxonomy-list ' . $element_id . $display_classes . $animation_class . $custom_classes );
-		$content    = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content( $this->attributes['qty'], $this->attributes['includedCategory'], $this->attributes['sortType'], $this->attributes['hideEmpty'], $this->attributes['sortBy'] ) . '</div>';
+		$content    = '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content( $this->attributes['qty'], $this->attributes['includedCategory'], $this->attributes['sortType'], $this->attributes['hideEmpty'], $this->attributes['sortBy'] ) . '</div>';
 		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'taxonomy-list' );
 

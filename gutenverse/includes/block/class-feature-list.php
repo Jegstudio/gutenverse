@@ -110,6 +110,7 @@ class Feature_List extends Block_Abstract {
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 
 		$class_name = trim( "guten-element $element_id $animation_class $display_classes guten-feature-list $custom_classes" );
 
@@ -121,7 +122,9 @@ class Feature_List extends Block_Abstract {
 			}
 		}
 
-		$content = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$content = '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'feature-list' );
 

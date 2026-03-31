@@ -91,6 +91,7 @@ class Accordion extends Block_Abstract {
 		}
 
 		$element_id = $this->get_element_id();
+		$anchor     = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$first      = isset( $this->attributes['first'] ) ? $this->attributes['first'] : false;
 
 		$class_name = 'accordion-item ' . $element_id;
@@ -98,6 +99,8 @@ class Accordion extends Block_Abstract {
 			$class_name .= ' active';
 		}
 
-		return '<div class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		return '<div' . $id_attr . ' class="' . esc_attr( trim( $class_name ) ) . '">' . $this->render_content() . '</div>';
 	}
 }

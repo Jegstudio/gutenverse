@@ -448,6 +448,7 @@ class Gallery extends Block_Abstract {
 		$col_tablet  = isset( $column['Tablet'] ) ? $column['Tablet'] : 2;
 		$col_mobile  = isset( $column['Mobile'] ) ? $column['Mobile'] : 2;
 
+		$anchor     = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$class_name = trim( "guten-element guten-gallery $element_id $animation_class $display_classes layout-$layout grid-desktop-$col_desktop grid-tablet-$col_tablet grid-mobile-$col_mobile $custom_classes" );
 		$data_id    = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
@@ -457,7 +458,8 @@ class Gallery extends Block_Abstract {
 			}
 		}
 
-		$output  = '<div class="' . esc_attr( $class_name ) . '" data-grid="' . esc_attr( $grid ) . '"' . ( $filter_remove_animation ? ' data-remove-animation="true"' : '' ) . $data_id . '>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+		$output  = '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '" data-grid="' . esc_attr( $grid ) . '"' . ( $filter_remove_animation ? ' data-remove-animation="true"' : '' ) . $data_id . '>';
 		$output .= $this->render_content(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		$output .= '</div>';
 

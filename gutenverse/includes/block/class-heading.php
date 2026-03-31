@@ -55,6 +55,7 @@ class Heading extends Block_Abstract {
 			$content_dynamic_list
 		);
 
+		$anchor     = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$class_name = trim( 'wp-block-gutenverse-heading guten-element ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . ' ' . $custom_classes );
 		$data_id    = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
@@ -63,7 +64,8 @@ class Heading extends Block_Abstract {
 				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
 			}
 		}
-		$content = '<' . $this->get_tag_name() . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $content . '</' . $this->get_tag_name() . '>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+		$content = '<' . $this->get_tag_name() . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $content . '</' . $this->get_tag_name() . '>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'heading' );
 

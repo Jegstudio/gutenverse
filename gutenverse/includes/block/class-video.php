@@ -101,9 +101,12 @@ class Video extends Block_Abstract {
 			return $this->content;
 		}
 		$element_id      = $this->get_element_id();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
+
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
 		$data_id = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
@@ -115,7 +118,7 @@ class Video extends Block_Abstract {
 
 		$class_name = trim( "guten-element guten-video $element_id $animation_class $display_classes $custom_classes" );
 
-		$content = '<figure class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</figure>';
+		$content = '<figure' . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</figure>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'video' );
 

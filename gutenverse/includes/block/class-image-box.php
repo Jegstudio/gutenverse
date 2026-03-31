@@ -194,10 +194,13 @@ class Image_Box extends Block_Abstract {
 	 */
 	public function render_frontend() {
 		$element_id      = $this->get_element_id();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 		$content_style   = isset( $this->attributes['contentStyle'] ) ? $this->attributes['contentStyle'] : 'default';
+
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
 		$data_id = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
@@ -209,7 +212,7 @@ class Image_Box extends Block_Abstract {
 
 		$class_name = $element_id . ' guten-image-box guten-element style-' . $content_style . $display_classes . $animation_class . $custom_classes;
 
-		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = '<div' . $id_attr . ' class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'image-box' );
 

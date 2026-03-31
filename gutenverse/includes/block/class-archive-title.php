@@ -72,7 +72,9 @@ class Archive_Title extends Block_Abstract {
 			$category_url = get_author_posts_url( $author->ID );
 		}
 
+		$anchor     = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr    = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 		$class_name = trim( 'guten-element guten-archive-title ' . $element_id . $animation_class . $display_classes . $custom_classes );
-		return '<div class="' . esc_attr( $class_name ) . '">' . $this->render_content( $title, $category_url ) . '</div>';
+		return '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '">' . $this->render_content( $title, $category_url ) . '</div>';
 	}
 }

@@ -128,6 +128,7 @@ class Countdown extends Block_Abstract {
 		$due_date        = isset( $this->attributes['dueDate'] ) ? $this->attributes['dueDate'] : array();
 		$expired_action  = isset( $this->attributes['expiredAction'] ) ? $this->attributes['expiredAction'] : 'none';
 		$expired_url     = isset( $this->attributes['expiredUrl'] ) ? $this->attributes['expiredUrl'] : '';
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 
 		$data_id = '';
 		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
@@ -139,7 +140,9 @@ class Countdown extends Block_Abstract {
 
 		$class_name = 'guten-element guten-countdown ' . $element_id . ' ' . $animation_class . ' ' . $display_classes . $custom_classes;
 
-		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '" data-duedate="' . esc_attr( wp_json_encode( $due_date ) ) . '" data-expired="' . esc_attr(
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$content = '<div' . $id_attr . ' class="' . esc_attr( trim( $class_name ) ) . '" data-duedate="' . esc_attr( wp_json_encode( $due_date ) ) . '" data-expired="' . esc_attr(
 			wp_json_encode(
 				array(
 					'action' => $expired_action,

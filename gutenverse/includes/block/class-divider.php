@@ -148,6 +148,7 @@ class Divider extends Block_Abstract {
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 
 		$tribal_types = array( 'fir', 'halfrounds', 'leaves', 'stripes', 'squares', 'trees', 'tribal', 'x' );
 		$is_tribal    = in_array( $type, $tribal_types, true );
@@ -165,7 +166,9 @@ class Divider extends Block_Abstract {
 			$class_name .= ' guten-divider-tribal';
 		}
 
-		$content = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$content = '<div' . $id_attr . ' class="' . esc_attr( trim( $class_name ) ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'divider' );
 

@@ -99,6 +99,7 @@ class Animated_Text extends Block_Abstract {
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$style           = isset( $this->attributes['style'] ) ? $this->attributes['style'] : 'zoom';
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 
 		$class_name = 'guten-element guten-animated-text ' . $element_id . $display_classes . $animation_class;
 
@@ -106,8 +107,9 @@ class Animated_Text extends Block_Abstract {
 			$class_name .= ' style-' . $style;
 		}
 
+		$id_attr        = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 		$data_animation = ' data-animation=\'' . wp_json_encode( $this->get_animation_props() ) . '\'';
-		$content        = '<div class="' . esc_attr( trim( $class_name ) ) . '"' . $data_animation . '>' . $this->render_content() . '</div>';
+		$content        = '<div' . $id_attr . ' class="' . esc_attr( trim( $class_name ) ) . '"' . $data_animation . '>' . $this->render_content() . '</div>';
 		$content        = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 
 		return $content;

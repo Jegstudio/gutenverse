@@ -251,6 +251,7 @@ class Icon_Box extends Block_Abstract {
 		}
 
 		$element_id    = $this->get_element_id();
+		$anchor        = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$display_class = $this->set_display_classes();
 		$anim_class    = $this->set_animation_classes();
 		$custom_class  = $this->get_custom_classes();
@@ -264,9 +265,10 @@ class Icon_Box extends Block_Abstract {
 			}
 		}
 
+		$id_attr    = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 		$class_name = trim( "guten-element $element_id $anim_class $display_class guten-icon-box icon-position-$icon_pos $custom_class" );
 
-		$content = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'icon-box' );
 

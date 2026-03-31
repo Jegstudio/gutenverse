@@ -51,9 +51,11 @@ class Breadcrumb extends Block_Abstract {
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr         = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
 		$class_name = trim( 'guten-element guten-breadcrumb ' . $element_id . $animation_class . $display_classes . $custom_classes );
-		return '<div class="' . esc_attr( $class_name ) . '">'
+		return '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '">'
 							. $this->render_content( $post_id ) .
 				'</div>';
 	}

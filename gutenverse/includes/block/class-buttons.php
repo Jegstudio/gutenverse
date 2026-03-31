@@ -47,6 +47,7 @@ class Buttons extends Block_Abstract {
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 
 		$wrapper_class = 'guten-element guten-buttons-wrapper ' . $element_id . $display_classes . $animation_class;
 		$data_id       = '';
@@ -57,7 +58,9 @@ class Buttons extends Block_Abstract {
 			}
 		}
 
-		$content = '<div class="' . esc_attr( trim( $wrapper_class ) ) . '">' . $this->render_content( $this->render_inner_blocks(), $data_id ) . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$content = '<div' . $id_attr . ' class="' . esc_attr( trim( $wrapper_class ) ) . '">' . $this->render_content( $this->render_inner_blocks(), $data_id ) . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'buttons' );
 
