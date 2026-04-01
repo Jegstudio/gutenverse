@@ -30,7 +30,7 @@ export const settings = {
     deprecated: [
         {
             attributes,
-            supports,
+            supports: { ...supports, className: true },
             save: saveV10
         },
         {

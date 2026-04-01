@@ -69,7 +69,8 @@ const save = compose(
         showDesc,
         iconGradient,
         iconGradientHover,
-        imageLoad = ''
+        imageLoad = '',
+        className,
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
@@ -86,14 +87,14 @@ const save = compose(
             break;
     }
 
-    const className = classnames(
+    const classNames = classnames(
         'guten-element',
         elementId,
         animationClass,
         displayClass,
         'guten-icon-box',
         `icon-position-${iconPosition}`,
-        'guten-data'
+        className
     );
 
     const imageLazyLoad = () => {
@@ -182,7 +183,7 @@ const save = compose(
         </div>
     );
     return (
-        <div className={className} {...advanceAnimationData} >
+        <div className={classNames} {...advanceAnimationData} >
             <ContentBody />
         </div>
     );
