@@ -93,6 +93,7 @@ const save = compose(
         displayClass,
         'guten-icon-box',
         `icon-position-${iconPosition}`,
+        'guten-data'
     );
 
     const imageLazyLoad = () => {

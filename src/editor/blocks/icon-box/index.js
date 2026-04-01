@@ -9,11 +9,12 @@ import saveV5 from './deprecated/v5/save';
 import saveV7 from './deprecated/v7/save';
 import saveV8 from './deprecated/v8/save';
 import saveV9 from './deprecated/v9/save';
+import saveV10 from './deprecated/v10/save';
 import metadata from './block.json';
 import { IconBoxSVG } from '../../../assets/icon/index';
 import example from './data/example';
 
-const { name, attributes } = metadata;
+const { name, attributes, supports } = metadata;
 
 export { metadata, name };
 
@@ -29,6 +30,12 @@ export const settings = {
     deprecated: [
         {
             attributes,
+            supports,
+            save: saveV10
+        },
+        {
+            attributes,
+            supports,
             save: saveV9
         },
         {
