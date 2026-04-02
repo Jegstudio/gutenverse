@@ -28,6 +28,7 @@ const save = compose(
         rel,
         iconShape,
         iconView,
+        anchor
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
@@ -35,6 +36,7 @@ const save = compose(
     const displayClass = useDisplayFrontend(attributes);
 
     const className = classnames(
+        'wp-block-gutenverse-icon',
         'guten-element',
         'wp-block-gutenverse-icon',
         elementId,
@@ -68,7 +70,7 @@ const save = compose(
         return iconElement;
     };
 
-    return <div className={className} {...advanceAnimationData} {...tooltipData}>
+    return <div className={className} {...advanceAnimationData} {...tooltipData} id={anchor}>
         <IconELement />
     </div>;
 });
