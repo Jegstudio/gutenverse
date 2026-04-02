@@ -56,7 +56,7 @@ const panelCategoryStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['categoryBackground']) && data.push({
         'type': 'color',
         'id': 'categoryBackground',
-        'selector': `.${elementId}:not(.postblock-type-5) .guten-postblock .guten-post-category,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
         .${elementId}.postblock-type-5 .guten-post-category > span a`,
         'properties': [
             {
@@ -76,7 +76,7 @@ const panelCategoryStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}:not(.postblock-type-5) .guten-postblock .guten-post-category,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
         .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
@@ -90,21 +90,21 @@ const panelCategoryStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}:not(.postblock-type-5) .guten-postblock .guten-post-category,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
         .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
     isNotEmpty(attributes['categoryBorder']) && data.push({
         'type': 'border',
         'id': 'categoryBorder',
-        'selector': `.${elementId}:not(.postblock-type-5) .guten-postblock .guten-post-category,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
         .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
     isNotEmpty(attributes['categoryBorderResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'categoryBorderResponsive',
-        'selector': `.${elementId}:not(.postblock-type-5) .guten-postblock .guten-post-category,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
         .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
@@ -117,7 +117,7 @@ const panelCategoryStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId}:not(.postblock-type-5) .guten-postblock .guten-post-category,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
         .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
