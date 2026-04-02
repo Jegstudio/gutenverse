@@ -1,4 +1,5 @@
 # Folders to ignore
+.claude
 .idea
 build
 release
