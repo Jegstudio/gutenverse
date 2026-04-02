@@ -52,8 +52,11 @@ class Icon_List_Item extends Block_Abstract {
 		$icon_html = '';
 		if ( ! $hide_icon ) {
 			if ( 'svg' === $icon_type && $icon_svg ) {
-				// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped
-				$icon_html = '<div class="gutenverse-icon-svg">' . base64_decode( $icon_svg ) . '</div>';
+				// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+				$svg_data = base64_decode( $icon_svg );
+				if ( gutenverse_is_svg_safe( $svg_data ) ) {
+					$icon_html = '<div class="gutenverse-icon-svg">' . $svg_data . '</div>';
+				}
 			} elseif ( $icon ) {
 				$icon_html = '<i class="' . esc_attr( $icon ) . '"></i>';
 			}

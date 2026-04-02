@@ -142,8 +142,11 @@ class Gallery extends Block_Abstract {
 					if ( $zoom_icon ) {
 						$output .= '<span class="item-icon-inner">';
 						if ( 'svg' === $zoom_icon_type && $zoom_icon_svg ) {
-							// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped
-							$output .= '<div class="gutenverse-icon-svg">' . base64_decode( $zoom_icon_svg ) . '</div>';
+							// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+							$svg_data = base64_decode( $zoom_icon_svg );
+							if ( gutenverse_is_svg_safe( $svg_data ) ) {
+								$output .= '<div class="gutenverse-icon-svg">' . $svg_data . '</div>';
+							}
 						} else {
 							$output .= '<i class="' . esc_attr( $zoom_icon ) . '" aria-hidden="true"></i>';
 						}
@@ -163,8 +166,11 @@ class Gallery extends Block_Abstract {
 					if ( $link_icon ) {
 						$output .= '<span class="item-icon-inner">';
 						if ( 'svg' === $link_icon_type && $link_icon_svg ) {
-							// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped
-							$output .= '<div class="gutenverse-icon-svg">' . base64_decode( $link_icon_svg ) . '</div>';
+							// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+							$svg_data = base64_decode( $link_icon_svg );
+							if ( gutenverse_is_svg_safe( $svg_data ) ) {
+								$output .= '<div class="gutenverse-icon-svg">' . $svg_data . '</div>';
+							}
 						} else {
 							$output .= '<i class="' . esc_attr( $link_icon ) . '" aria-hidden="true"></i>';
 						}
@@ -214,8 +220,11 @@ class Gallery extends Block_Abstract {
 					}
 					$output .= '<span class="item-icon-inner">';
 					if ( 'svg' === $zoom_icon_type && $zoom_icon_svg ) {
-						// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped
-						$output .= '<div class="gutenverse-icon-svg">' . base64_decode( $zoom_icon_svg ) . '</div>';
+						// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+						$svg_data = base64_decode( $zoom_icon_svg );
+						if ( gutenverse_is_svg_safe( $svg_data ) ) {
+							$output .= '<div class="gutenverse-icon-svg">' . $svg_data . '</div>';
+						}
 					} else {
 						$output .= '<i class="' . esc_attr( $zoom_icon ) . '" aria-hidden="true"></i>';
 					}
@@ -233,8 +242,11 @@ class Gallery extends Block_Abstract {
 					}
 					$output .= '<span class="item-icon-inner">';
 					if ( 'svg' === $link_icon_type && $link_icon_svg ) {
-						// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped
-						$output .= '<div class="gutenverse-icon-svg">' . base64_decode( $link_icon_svg ) . '</div>';
+						// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+						$svg_data = base64_decode( $link_icon_svg );
+						if ( gutenverse_is_svg_safe( $svg_data ) ) {
+							$output .= '<div class="gutenverse-icon-svg">' . $svg_data . '</div>';
+						}
 					} else {
 						$output .= '<i class="' . esc_attr( $link_icon ) . '" aria-hidden="true"></i>';
 					}
@@ -352,7 +364,13 @@ class Gallery extends Block_Abstract {
 						<button id="search-filter-trigger" data-flag-all="true" class="search-filter-trigger icon-position-<?php echo esc_attr( $filter_search_icon_pos ); ?>">
 							<?php if ( 'before' === $filter_search_icon_pos ) : ?>
 								<?php if ( 'svg' === $filter_search_icon_type && $filter_search_icon_svg ) : ?>
-									<div class="gutenverse-icon-svg"><?php echo base64_decode( $filter_search_icon_svg ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode ?></div>
+									<?php
+									// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+									$svg_data = base64_decode( $filter_search_icon_svg );
+									if ( gutenverse_is_svg_safe( $svg_data ) ) :
+									?>
+									<div class="gutenverse-icon-svg"><?php echo $svg_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized by gutenverse_is_svg_safe ?></div>
+									<?php endif; ?>
 								<?php else : ?>
 									<i aria-hidden="true" class="<?php echo esc_attr( $filter_search_icon ); ?>"></i>
 								<?php endif; ?>
@@ -360,7 +378,13 @@ class Gallery extends Block_Abstract {
 							<span><?php echo esc_html( $filter_all ); ?></span>
 							<?php if ( 'after' === $filter_search_icon_pos ) : ?>
 								<?php if ( 'svg' === $filter_search_icon_type && $filter_search_icon_svg ) : ?>
-									<div class="gutenverse-icon-svg"><?php echo base64_decode( $filter_search_icon_svg ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+									<?php
+									// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+									$svg_data = base64_decode( $filter_search_icon_svg );
+									if ( gutenverse_is_svg_safe( $svg_data ) ) :
+									?>
+									<div class="gutenverse-icon-svg"><?php echo $svg_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized by gutenverse_is_svg_safe ?></div>
+									<?php endif; ?>
 								<?php else : ?>
 									<i aria-hidden="true" class="<?php echo esc_attr( $filter_search_icon ); ?>"></i>
 								<?php endif; ?>
@@ -397,7 +421,13 @@ class Gallery extends Block_Abstract {
 						<?php if ( $enable_loadicon && 'before' === $enable_loadicon_pos ) : ?>
 							<span class="load-more-icon icon-position-before" aria-hidden="true">
 								<?php if ( 'svg' === $enable_loadicon_type && $enable_loadicon_svg ) : ?>
-									<div class="gutenverse-icon-svg"><?php echo base64_decode( $enable_loadicon_svg ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+									<?php
+									// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+									$svg_data = base64_decode( $enable_loadicon_svg );
+									if ( gutenverse_is_svg_safe( $svg_data ) ) :
+									?>
+									<div class="gutenverse-icon-svg"><?php echo $svg_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized by gutenverse_is_svg_safe ?></div>
+									<?php endif; ?>
 								<?php else : ?>
 									<i class="<?php echo esc_attr( $enable_loadicon ); ?>"></i>
 								<?php endif; ?>
@@ -407,7 +437,13 @@ class Gallery extends Block_Abstract {
 						<?php if ( $enable_loadicon && 'after' === $enable_loadicon_pos ) : ?>
 							<span class="load-more-icon icon-position-after" aria-hidden="true">
 								<?php if ( 'svg' === $enable_loadicon_type && $enable_loadicon_svg ) : ?>
-									<div class="gutenverse-icon-svg"><?php echo base64_decode( $enable_loadicon_svg ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode, WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+									<?php
+									// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+									$svg_data = base64_decode( $enable_loadicon_svg );
+									if ( gutenverse_is_svg_safe( $svg_data ) ) :
+									?>
+									<div class="gutenverse-icon-svg"><?php echo $svg_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized by gutenverse_is_svg_safe ?></div>
+									<?php endif; ?>
 								<?php else : ?>
 									<i class="<?php echo esc_attr( $enable_loadicon ); ?>"></i>
 								<?php endif; ?>
