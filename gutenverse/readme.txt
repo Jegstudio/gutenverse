@@ -305,6 +305,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 ##### Bug Fixes
 * fix issue with block data when multiple blocks are moved together
 * fix issue with video player settings
+* fix vulnerability issue. credit: Wordfence.
 
 = 3.5.2 =
 ##### Bug Fixes
