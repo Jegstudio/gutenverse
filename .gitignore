@@ -1,4 +1,5 @@
 # Folders to ignore
+.claude
 .idea
 .claude
 build

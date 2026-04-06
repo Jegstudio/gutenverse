@@ -213,10 +213,12 @@ class Post_List extends Post_Abstract {
 			$thumbnail = null;
 			$bg        = null;
 
+			$title = esc_attr( get_the_title( $post ) );
+
 			if ( 'top' === $this->attributes['metaPosition'] ) {
-				$content = $this->post_meta( $post ) . '<span class="guten-postlist-title">' . esc_attr( get_the_title( $post ) ) . '</span>';
+				$content = $this->post_meta( $post ) . '<span class="guten-postlist-title">' . $title . '</span>';
 			} else {
-				$content = '<span class="guten-postlist-title">' . esc_attr( get_the_title( $post ) ) . '</span>' . $this->post_meta( $post );
+				$content = '<span class="guten-postlist-title">' . $title . '</span>' . $this->post_meta( $post );
 			}
 
 			if ( $this->attr_is_true( $this->attributes['imageEnabled'] ) ) {
@@ -237,7 +239,7 @@ class Post_List extends Post_Abstract {
 
 			$block .=
 			'<article class="guten-post post-list-item">
-                <a href="' . esc_url( get_the_permalink( $post ) ) . '" ' . $bg . '>
+                <a aria-label="' . $title . '" href="' . esc_url( get_the_permalink( $post ) ) . '" ' . $bg . '>
                     ' . $thumbnail . '
                     <div class="guten-postlist-content">' . $content . '</div>
                 </a>
