@@ -22,7 +22,7 @@ const panelCategoryStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'responsive': true,
         'id': 'categoryVerticalAlign',
-        'selector': `.${elementId} .guten-postblock .guten-block-container .guten-postblock-content .post-category-container`,
+        'selector': `.${elementId} .guten-postblock .guten-block-container .guten-postblock-content .guten-post-category > span a`,
         'properties': [
             {
                 'name': 'align-self',
@@ -56,7 +56,8 @@ const panelCategoryStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['categoryBackground']) && data.push({
         'type': 'color',
         'id': 'categoryBackground',
-        'selector': `.${elementId} .guten-postblock .guten-post-category`,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
+        .${elementId}.postblock-type-5 .guten-post-category > span a`,
         'properties': [
             {
                 'name': 'background-color',
@@ -75,7 +76,8 @@ const panelCategoryStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-postblock .guten-post-category`,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
+        .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
     isNotEmpty(attributes['categoryPadding']) && data.push({
@@ -88,19 +90,22 @@ const panelCategoryStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-postblock .guten-post-category`,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
+        .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
     isNotEmpty(attributes['categoryBorder']) && data.push({
         'type': 'border',
         'id': 'categoryBorder',
-        'selector': `.${elementId} .guten-postblock .guten-post-category`,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
+        .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
     isNotEmpty(attributes['categoryBorderResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'categoryBorderResponsive',
-        'selector': `.${elementId} .guten-postblock .guten-post-category`,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
+        .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
     isNotEmpty(attributes['categoryShadow']) && data.push({
@@ -112,7 +117,8 @@ const panelCategoryStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.${elementId} .guten-postblock .guten-post-category`,
+        'selector': `.${elementId} .guten-postblock:not(.postblock-type-5) .guten-post-category,
+        .${elementId}.postblock-type-5 .guten-post-category > span a`,
     });
 
     return data;

@@ -296,10 +296,11 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button`,
     });
 
-    isNotEmpty(attributes['buttonBorderResponsive']) && device !== 'Desktop' && data.push({
-        'type': 'border',
+    isNotEmpty(attributes['buttonBorderResponsive']) && data.push({
+        'type': 'borderResponsive',
         'id': 'buttonBorderResponsive',
         'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button`,
+        'responsive': true
     });
 
     isNotEmpty(attributes['buttonBorderHover']) && data.push({
