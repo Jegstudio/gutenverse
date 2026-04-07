@@ -1,6 +1,6 @@
 import { compose } from '@wordpress/compose';
 import { classnames } from 'gutenverse-core/components';
-import GalleryItem from '../../components/gallery-item';
+import GalleryItem from './components/gallery-item';
 import { Maximize, Minimize, X, ZoomIn } from 'gutenverse-core/components';
 import { imagePlaceholder } from 'gutenverse-core/config';
 import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
@@ -60,7 +60,7 @@ const save = compose(
         [`grid-mobile-${column && column['Mobile'] ? column['Mobile'] : 2}`],
     );
     const imageCondition = (image) => {
-        const { imageLoad = '', imageAlt = '', imageCustomAlt = '' } = image;
+        const { imageAlt = '', imageCustomAlt = '' } = image;
         let renderedAlt = image?.title;
         if (imageAlt === 'original') {
             renderedAlt = image?.src?.altOriginal;
@@ -69,7 +69,7 @@ const save = compose(
         } else if (imageAlt === 'none') {
             renderedAlt = false;
         }
-        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} {...(renderedAlt === false || renderedAlt === undefined ? {} : { alt: renderedAlt })} {...('lazy' === imageLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })} />;
+        return <img className="main-image" src={image.src ? image.src.image : imagePlaceholder} {...(renderedAlt === false || renderedAlt === undefined ? {} : { alt: renderedAlt })} {...(image.lazyLoad ? { loading: 'lazy' } : {})} {...(image?.src?.height && { height: image?.src?.height })} {...(image?.src?.width && { width: image?.src?.width })} />;
     };
 
     return (
