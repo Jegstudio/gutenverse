@@ -309,7 +309,7 @@ class Gallery extends Block_Abstract {
 
 		ob_start();
 		?>
-		<div class="gutenverse-popup-gallery hidden">
+		<div class="gutenverse-popup-gallery hidden popup-<?php echo $element_id ?>">
 			<div class="gallery-header">
 				<div class="left-header"></div>
 				<div class="right-header">
