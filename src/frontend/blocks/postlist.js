@@ -114,10 +114,9 @@ class GutenversePostlist extends Default {
 
         fetch(fetchUrl).then(res => res.json()).then((data) => {
             element.replace(data.rendered);
-            element.find('.guten-block-loadmore').text(paginationLoadmoreText);
 
-            if (paginationMode === 'scrollload' && this._shouldItBeLoading(element, settings)) {
-                const newElement = u(`.${elementId}.guten-post-list`);
+            const newElement = u(`.${elementId}.guten-post-list`);
+            if (paginationMode === 'scrollload' && this._shouldItBeLoading(newElement, settings)) {
                 const newSettings = JSON.parse(newElement.find('.guten-postlist').data('settings'));
                 this._loadMore(newElement, newSettings);
             } else {
@@ -157,7 +156,7 @@ class GutenversePostlist extends Default {
                 }
             }
         } else {
-            currentPage = direction;
+            currentPage = parseInt(direction, 10);
         }
 
         let query = null;
