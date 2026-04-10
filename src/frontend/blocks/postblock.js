@@ -207,10 +207,9 @@ class GutenversePostblock extends Default {
                 })
             }).then(res => res.json()).then((data) => {
                 element.replace(data.rendered);
-                element.find('.guten-block-loadmore').text(paginationLoadmoreText);
 
-                if (paginationMode === 'scrollload' && this._shouldItBeLoading(element, settings)) {
-                    const newElement = u(`.${elementId}.guten-post-block`);
+                const newElement = u(`.${elementId}.guten-post-block`);
+                if (paginationMode === 'scrollload' && this._shouldItBeLoading(newElement, settings)) {
                     const newSettings = JSON.parse(newElement.find('.guten-postblock').data('settings'));
                     this._loadMore(newElement, newSettings);
                 } else {
@@ -255,7 +254,7 @@ class GutenversePostblock extends Default {
                 }
             }
         } else {
-            currentPage = direction;
+            currentPage = parseInt(direction, 10);
         }
 
         let query = null;
