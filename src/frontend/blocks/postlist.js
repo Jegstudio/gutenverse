@@ -1,7 +1,7 @@
 import { Default, u } from 'gutenverse-core-frontend';
 import isEmpty from 'lodash/isEmpty';
-import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
+
 
 class GutenversePostlist extends Default {
     /* public */
@@ -53,63 +53,66 @@ class GutenversePostlist extends Default {
         } = settings;
 
         let query = null;
-        let qApi  = false;
+        let qApi = false;
 
         if (window['GutenverseData'] && !isEmpty(window['GutenverseData']['query'])) {
             query = window['GutenverseData']['query'];
-            qApi  = true;
+            qApi = true;
         }
 
         element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`);
 
-        apiFetch({
-            path: addQueryArgs('/gutenverse-client/v1/postlist/data', {
-                context: 'edit',
-                attributes: {
-                    elementId,
-                    postId,
-                    inheritQuery,
-                    postType,
-                    postOffset,
-                    numberPost: parseInt(numberPost) + parseInt(paginationNumberPost),
-                    includePost,
-                    excludePost,
-                    includeCategory,
-                    excludeCategory,
-                    includeAuthor,
-                    includeTag,
-                    excludeTag,
-                    sortBy,
-                    layout,
-                    imageEnabled,
-                    backgroundImageEnabled,
-                    iconEnabled,
-                    icon,
-                    metaEnabled,
-                    metaDateEnabled,
-                    metaDateType,
-                    metaDateFormat,
-                    metaDateFormatCustom,
-                    metaDateIcon,
-                    metaDateIconPosition,
-                    metaCategoryEnabled,
-                    metaCategoryIcon,
-                    metaPosition,
-                    paginationMode,
-                    paginationLoadmoreText,
-                    paginationLoadingText,
-                    paginationNumberPost,
-                    paginationScrollLimit,
-                    paginationIcon,
-                    paginationIconPosition,
-                    qApi,
-                    qSearch: query && query['q_search'],
-                    qCategory: query && query['q_category_name'],
-                    qTag: query && query['q_tag'],
-                    qAuthor: query && query['q_author'],
-                },
-            }),
-        }).then((data) => {
+        const restRoot = (window.wpApiSettings && window.wpApiSettings.root)
+            ? window.wpApiSettings.root
+            : '/wp-json/';
+        const fetchUrl = restRoot + addQueryArgs('gutenverse-client/v1/postlist/data', {
+            context: 'edit',
+            attributes: {
+                elementId,
+                postId,
+                inheritQuery,
+                postType,
+                postOffset,
+                numberPost: parseInt(numberPost) + parseInt(paginationNumberPost),
+                includePost,
+                excludePost,
+                includeCategory,
+                excludeCategory,
+                includeAuthor,
+                includeTag,
+                excludeTag,
+                sortBy,
+                layout,
+                imageEnabled,
+                backgroundImageEnabled,
+                iconEnabled,
+                icon,
+                metaEnabled,
+                metaDateEnabled,
+                metaDateType,
+                metaDateFormat,
+                metaDateFormatCustom,
+                metaDateIcon,
+                metaDateIconPosition,
+                metaCategoryEnabled,
+                metaCategoryIcon,
+                metaPosition,
+                paginationMode,
+                paginationLoadmoreText,
+                paginationLoadingText,
+                paginationNumberPost,
+                paginationScrollLimit,
+                paginationIcon,
+                paginationIconPosition,
+                qApi,
+                qSearch: query && query['q_search'],
+                qCategory: query && query['q_category_name'],
+                qTag: query && query['q_tag'],
+                qAuthor: query && query['q_author'],
+            },
+        });
+
+        fetch(fetchUrl).then(res => res.json()).then((data) => {
             element.replace(data.rendered);
             element.find('.guten-block-loadmore').text(paginationLoadmoreText);
 
@@ -120,7 +123,7 @@ class GutenversePostlist extends Default {
             } else {
                 this._tabItems(`.${elementId}.guten-post-list`);
             }
-        }).catch(() => {});
+        }).catch(() => { });
     }
 
     _shouldItBeLoading(element, settings) {
@@ -130,7 +133,7 @@ class GutenversePostlist extends Default {
         if (button.length > 0) {
             const position = button.first().getBoundingClientRect();
 
-            if ( position.y < ( window.screen.height/2 ) ) {
+            if (position.y < (window.screen.height / 2)) {
                 if (parseInt(paginationScrollLimit) >= parseInt(numberPost) || parseInt(paginationScrollLimit) === 0) {
                     return true;
                 }
@@ -165,21 +168,24 @@ class GutenversePostlist extends Default {
             qApi = true;
         }
 
-        apiFetch({
-            path: addQueryArgs('/gutenverse-client/v1/postlist/data', {
-                attributes: {
-                    ...settings,
-                    paged: currentPage,
-                    numberPost: postsPerPage,
-                    paginationNumberPost: postsPerPage,
-                    qApi,
-                    qSearch: query && query['q_search'],
-                    qCategory: query && query['q_category_name'],
-                    qTag: query && query['q_tag'],
-                    qAuthor: query && query['q_author'],
-                },
-            }),
-        }).then((data) => {
+        const restRoot = (window.wpApiSettings && window.wpApiSettings.root)
+            ? window.wpApiSettings.root
+            : '/wp-json/';
+        const fetchUrl = restRoot + addQueryArgs('gutenverse-client/v1/postlist/data', {
+            attributes: {
+                ...settings,
+                paged: currentPage,
+                numberPost: postsPerPage,
+                paginationNumberPost: postsPerPage,
+                qApi,
+                qSearch: query && query['q_search'],
+                qCategory: query && query['q_category_name'],
+                qTag: query && query['q_tag'],
+                qAuthor: query && query['q_author'],
+            },
+        });
+
+        fetch(fetchUrl).then(res => res.json()).then((data) => {
             element.html(data.rendered);
             this._tabItems(`.${elementId}.guten-post-list`);
         }).catch(() => {
@@ -224,18 +230,16 @@ class GutenversePostlist extends Default {
             });
 
             if (paginationMode === 'number') {
-                if (paginationMode === 'number') {
-                    const numberedButtons = document.querySelectorAll('.guten_block_nav .btn-pagination');
-                    numberedButtons.forEach(button => {
-                        const page = button.getAttribute('data-page');
-                        if (page && !isNaN(page)) {
-                            button.addEventListener('click', (event) => {
-                                event.preventDefault();
-                                this._paginatePosts(blockElement, settings, page);
-                            });
-                        }
-                    });
-                }
+                const numberedButtons = blockElement.first().querySelectorAll('.guten_block_nav .btn-pagination');
+                numberedButtons.forEach(button => {
+                    const page = button.getAttribute('data-page');
+                    if (page && !isNaN(page)) {
+                        button.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            this._paginatePosts(blockElement, settings, page);
+                        });
+                    }
+                });
             }
 
         }
