@@ -298,6 +298,18 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+= 3.5.4-dev =
+##### New & Improvements
+* update block rendering mechanism
+
+##### Bug Fixes
+* fix gallery image size different when zoomed in on frontend vs editor
+* fix global style select when the data is empty
+* fix issue with container block content cannot be clicked
+* fix issue with container setting UI
+* fix issue with post block pagination
+* fix vulnerability issue. credit: Wordfence.
+
 = 3.5.3 =
 ##### New & Improvements
 * add aria label to post list block
