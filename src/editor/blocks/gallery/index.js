@@ -11,6 +11,7 @@ import saveV3b from './deprecated/v3b/save';
 import saveV4 from './deprecated/v4/save';
 import saveV5 from './deprecated/v5/save';
 import saveV6 from './deprecated/v6/save';
+import saveV7 from './deprecated/v7/save';
 
 const { name, attributes, supports } = metadata;
 
@@ -21,6 +22,11 @@ export const settings = {
     edit,
     save,
     deprecated: [
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV7
+        },
         {
             attributes: attributes,
             supports: supports,
