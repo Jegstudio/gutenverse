@@ -34,6 +34,7 @@
             stroke: var(--guten-border-color);
             margin: 10px;
             stroke-width: 2;
+            pointer-events: auto !important;
         }
     }
 
