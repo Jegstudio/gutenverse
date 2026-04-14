@@ -37,7 +37,7 @@ class Dashboard {
 			'gutenverse-blocks',
 			GUTENVERSE_URL . '/assets/js/blocks.js',
 			$include,
-			GUTENVERSE_VERSION,
+			gutenverse_asset_version( '/assets/js/blocks.js' ),
 			true
 		);
 
@@ -47,7 +47,7 @@ class Dashboard {
 			'gutenverse-dashboard',
 			GUTENVERSE_URL . '/assets/js/dashboard.js',
 			$include,
-			GUTENVERSE_VERSION,
+			gutenverse_asset_version( '/assets/js/dashboard.js' ),
 			true
 		);
 
@@ -55,7 +55,7 @@ class Dashboard {
 			'gutenverse-dashboard',
 			GUTENVERSE_URL . '/assets/css/update-notice.css',
 			array(),
-			GUTENVERSE_VERSION
+			gutenverse_asset_version( '/assets/css/update-notice.css' )
 		);
 	}
 

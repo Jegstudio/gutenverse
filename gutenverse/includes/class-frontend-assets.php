@@ -290,7 +290,7 @@ class Frontend_Assets {
 				'gutenverse-frontend-' . $block . '-script',
 				GUTENVERSE_URL . '/assets/js/frontend/' . $block . '.js',
 				$include,
-				GUTENVERSE_VERSION,
+				gutenverse_asset_version( '/assets/js/frontend/' . $block . '.js' ),
 				true
 			);
 		}
@@ -362,7 +362,7 @@ class Frontend_Assets {
 			'gutenverse-frontend',
 			GUTENVERSE_URL . '/assets/css/frontend.css',
 			array(),
-			GUTENVERSE_VERSION
+			gutenverse_asset_version( '/assets/css/frontend.css' )
 		);
 
 		foreach ( $blocks as $block ) {
@@ -370,7 +370,7 @@ class Frontend_Assets {
 				'gutenverse-frontend-' . $block . '-style',
 				GUTENVERSE_URL . '/assets/css/frontend/' . $block . '.css',
 				array( 'gutenverse-frontend' ),
-				GUTENVERSE_VERSION
+				gutenverse_asset_version( '/assets/css/frontend/' . $block . '.css' )
 			);
 		}
 	}

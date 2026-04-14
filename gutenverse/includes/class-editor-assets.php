@@ -31,14 +31,14 @@ class Editor_Assets {
 			'gutenverse-blocks',
 			GUTENVERSE_URL . '/assets/css/blocks.css',
 			array( 'wp-edit-blocks', 'fontawesome-gutenverse' ),
-			GUTENVERSE_VERSION
+			gutenverse_asset_version( '/assets/css/blocks.css' )
 		);
 
 		wp_enqueue_style(
 			'gutenverse-frontend',
 			GUTENVERSE_URL . '/assets/css/frontend.css',
 			array( 'gutenverse-iconlist', 'fontawesome-gutenverse' ),
-			GUTENVERSE_VERSION
+			gutenverse_asset_version( '/assets/css/frontend.css' )
 		);
 
 		wp_enqueue_script( 'gutenverse-frontend-event' );
@@ -49,7 +49,7 @@ class Editor_Assets {
 			'gutenverse-blocks',
 			GUTENVERSE_URL . '/assets/js/blocks.js',
 			$include,
-			GUTENVERSE_VERSION,
+			gutenverse_asset_version( '/assets/js/blocks.js' ),
 			true
 		);
 
