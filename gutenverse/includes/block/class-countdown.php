@@ -111,7 +111,7 @@ class Countdown extends Block_Abstract {
 		$output .= '</div>';
 
 		if ( 'section' === $expired_action ) {
-			$output .= '<div class="countdown-expired-wrapper">' . $this->render_inner_blocks() . '</div>';
+			$output .= '<div class="countdown-expired-wrapper">' . $this->get_inner_blocks_content() . '</div>';
 		}
 
 		return $output;

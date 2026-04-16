@@ -506,7 +506,7 @@ class Post_Block extends Post_Abstract {
 	 *
 	 * @param bool $include_animation_classes Using animation class.
 	 */
-	public function render_frontend( $include_animation_classes = true ) {
+	public function render_frontend( $include_animation_classes = true ) {		
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $include_animation_classes ? $this->set_animation_classes() : '';

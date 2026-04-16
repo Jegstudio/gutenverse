@@ -49,7 +49,7 @@ class Search extends Block_Abstract {
 		$output .= '</div>';
 
 		if ( $show_button ) {
-			$output .= '<div class="guten-search-button-wrapper">' . $this->render_inner_blocks() . '</div>';
+			$output .= '<div class="guten-search-button-wrapper">' . $this->get_inner_blocks_content() . '</div>';
 		}
 
 		$output .= '</form>';

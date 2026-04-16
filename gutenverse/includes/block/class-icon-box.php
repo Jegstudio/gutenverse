@@ -194,7 +194,7 @@ class Icon_Box extends Block_Abstract {
 			}
 
 			if ( $has_inner ) {
-				$output .= $this->render_inner_blocks();
+				$output .= $this->get_inner_blocks_content();
 			}
 
 			$output .= '</div>';

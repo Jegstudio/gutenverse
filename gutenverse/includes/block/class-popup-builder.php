@@ -90,7 +90,7 @@ class Popup_Builder extends Block_Abstract {
 			return $this->render_video_content();
 		}
 
-		return '<div class="guten-popup-container">' . $this->render_inner_blocks() . '</div>';
+		return '<div class="guten-popup-container">' . $this->get_inner_blocks_content() . '</div>';
 	}
 
 	/**

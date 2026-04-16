@@ -24,7 +24,7 @@ class Popup_Container extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content() {
-		return '<div class="guten-popup-content-wrapper">' . $this->render_inner_blocks() . '</div>';
+		return '<div class="guten-popup-content-wrapper">' . $this->get_inner_blocks_content() . '</div>';
 	}
 
 	/**

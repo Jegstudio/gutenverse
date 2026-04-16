@@ -24,7 +24,7 @@ class Text_Editor extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content() {
-		return '<div class="text-content-inner">' . $this->render_inner_blocks() . '</div>';
+		return '<div class="text-content-inner">' . $this->get_inner_blocks_content() . '</div>';
 	}
 
 	/**

@@ -25,7 +25,7 @@ class Icon_List extends Block_Abstract {
 	 */
 	public function render_content() {
 		$display_inline = isset( $this->attributes['displayInline'] ) ? $this->attributes['displayInline'] : false;
-		return '<div class=" list-wrapper ' . ( $display_inline ? 'inline-icon-list' : '' ) . '">' . $this->render_inner_blocks() . '</div>';
+		return '<div class=" list-wrapper ' . ( $display_inline ? 'inline-icon-list' : '' ) . '">' . $this->get_inner_blocks_content() . '</div>';
 	}
 
 	/**

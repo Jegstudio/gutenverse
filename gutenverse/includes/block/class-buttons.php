@@ -60,7 +60,7 @@ class Buttons extends Block_Abstract {
 
 		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
-		$content = '<div' . $id_attr . ' class="' . esc_attr( trim( $wrapper_class ) ) . '">' . $this->render_content( $this->render_inner_blocks(), $data_id ) . '</div>';
+		$content = '<div' . $id_attr . ' class="' . esc_attr( trim( $wrapper_class ) ) . '">' . $this->render_content( $this->get_inner_blocks_content(), $data_id ) . '</div>';
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'buttons' );
 

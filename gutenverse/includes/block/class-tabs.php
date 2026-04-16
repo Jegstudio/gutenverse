@@ -100,7 +100,7 @@ class Tabs extends Block_Abstract {
 	public function render_content() {
 		$output  = $this->render_tab_heading();
 		$output .= $this->render_tab_heading_mobile();
-		$output .= '<div class="tab-body">' . $this->render_inner_blocks() . '</div>';
+		$output .= '<div class="tab-body">' . $this->get_inner_blocks_content() . '</div>';
 
 		return $output;
 	}

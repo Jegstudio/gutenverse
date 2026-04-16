@@ -101,7 +101,7 @@ class Team extends Block_Abstract {
 			return '';
 		}
 
-		return '<div class="socials-wrapper">' . $this->render_inner_blocks() . '</div>';
+		return '<div class="socials-wrapper">' . $this->get_inner_blocks_content() . '</div>';
 	}
 
 	/**

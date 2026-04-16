@@ -24,7 +24,7 @@ class Accordions extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content() {
-		return '<div class="guten-accordions">' . $this->render_inner_blocks() . '</div>';
+		return '<div class="guten-accordions">' . $this->get_inner_blocks_content() . '</div>';
 	}
 
 	/**

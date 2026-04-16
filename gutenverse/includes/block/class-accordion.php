@@ -68,7 +68,7 @@ class Accordion extends Block_Abstract {
 
 		$output .= '<div class="accordion-body">';
 		$output .= '<div class="accordion-content">';
-		$output .= $this->render_inner_blocks();
+		$output .= $this->get_inner_blocks_content();
 		$output .= '</div>';
 		$output .= '</div>';
 

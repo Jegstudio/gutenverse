@@ -168,7 +168,7 @@ class Image_Box extends Block_Abstract {
 		}
 
 		if ( $include_button ) {
-			$output .= $this->render_inner_blocks();
+			$output .= $this->get_inner_blocks_content();
 		}
 
 		if ( $hover_bottom ) {
