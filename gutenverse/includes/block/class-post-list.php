@@ -261,11 +261,17 @@ class Post_List extends Post_Abstract {
 	 */
 	public function render_frontend() {
 		$element_id      = $this->get_element_id();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$layout          = esc_attr( $this->attributes['layout'] );
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' layout-' . $layout . ' guten-post-list guten-element">' . $this->render_content() . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$content = '<div' . $id_attr . ' class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' layout-' . $layout . ' guten-post-list guten-element">' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+
+		return $content;
 	}
 }

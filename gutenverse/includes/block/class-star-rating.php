@@ -1,0 +1,167 @@
+<?php
+/**
+ * Star Rating Block class
+ *
+ * @author Jegstudio
+ * @since 1.0.0
+ * @package gutenverse\block
+ */
+
+namespace Gutenverse\Block;
+
+use Gutenverse\Framework\Block\Block_Abstract;
+
+/**
+ * Class Star Rating Block
+ *
+ * @package gutenverse\block
+ */
+class Star_Rating extends Block_Abstract {
+	/**
+	 * Get FA icon HTML
+	 *
+	 * @param string  $star_icon Icon type.
+	 * @param boolean $active    Active state.
+	 * @return string
+	 */
+	private function get_fa_icon( $star_icon, $active = false ) {
+		switch ( $star_icon ) {
+			case 'sharp':
+				return $active ? '<i class="full unicode-sharp"></i>' : '<i class="empty unicode-sharp-hollow"></i>';
+			case 'sharp-fill':
+				return $active ? '<i class="full unicode-sharp"></i>' : '<i class="empty unicode-sharp"></i>';
+			case 'fill':
+				if ( $active ) {
+					return '<div class="gutenverse-icon-svg full">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                        </svg>
+                    </div>';
+				} else {
+					return '<div class="gutenverse-icon-svg empty">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                        </svg>
+                    </div>';
+				}
+			case 'smile-2':
+				if ( $active ) {
+					return '<div class="gutenverse-icon-svg full">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM164.1 325.5C182 346.2 212.6 368 256 368s74-21.8 91.9-42.5c5.8-6.7 15.9-7.4 22.6-1.6s7.4 15.9 1.6 22.6C349.8 372.1 311.1 400 256 400s-93.8-27.9-116.1-53.5c-5.8-6.7-5.1-16.8 1.6-22.6s16.8-5.1 22.6 1.6zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                        </svg>
+                    </div>';
+				} else {
+					return '<div class="gutenverse-icon-svg empty">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                        </svg>
+                    </div>';
+				}
+			case 'thumbs':
+				if ( $active ) {
+					return '<div class="gutenverse-icon-svg full">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z" />
+                        </svg>
+                    </div>';
+				} else {
+					return '<div class="gutenverse-icon-svg empty thumbs-down">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M313.4 479.1c26-5.2 42.9-30.5 37.7-56.5l-2.3-11.4c-5.3-26.7-15.1-52.1-28.8-75.2H464c26.5 0 48-21.5 48-48c0-18.5-10.5-34.6-25.9-42.6C497 236.6 504 223.1 504 208c0-23.4-16.8-42.9-38.9-47.1c4.4-7.3 6.9-15.8 6.9-24.9c0-21.3-13.9-39.4-33.1-45.6c.7-3.3 1.1-6.8 1.1-10.4c0-26.5-21.5-48-48-48H294.5c-19 0-37.5 5.6-53.3 16.1L202.7 73.8C176 91.6 160 121.6 160 153.7V192v48 24.9c0 29.2 13.3 56.7 36 75l7.4 5.9c26.5 21.2 44.6 51 51.2 84.2l2.3 11.4c5.2 26 30.5 42.9 56.5 37.7zM32 384H96c17.7 0 32-14.3 32-32V128c0-17.7-14.3-32-32-32H32C14.3 96 0 110.3 0 128V352c0 17.7 14.3 32 32 32z" />
+                        </svg>
+                    </div>';
+				}
+			default:
+				if ( $active ) {
+					return '<div class="gutenverse-icon-svg full">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                        </svg>
+                    </div>';
+				} else {
+					return '<div class="gutenverse-icon-svg empty">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.7 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z" />
+                        </svg>
+                    </div>';
+				}
+		}
+	}
+
+	/**
+	 * Render rating icons
+	 *
+	 * @return string
+	 */
+	protected function render_rating_icons() {
+		$star_icon = isset( $this->attributes['starIcon'] ) ? $this->attributes['starIcon'] : 'default';
+		$rating    = isset( $this->attributes['rating'] ) ? floatval( $this->attributes['rating'] ) : 7;
+		$total     = isset( $this->attributes['total'] ) ? floatval( $this->attributes['total'] ) : 10;
+
+		// Security: Cap total stars to prevent DoS.
+		$total = min( 100, max( 0, $total ) );
+
+		$output = '<div class="rating-icons">';
+
+		for ( $i = 0; $i < $total; $i++ ) {
+			$output .= $this->get_fa_icon( $star_icon, $i < $rating );
+		}
+
+		$output .= '</div>';
+
+		return $output;
+	}
+
+	/**
+	 * Render content logic.
+	 *
+	 * @return string
+	 */
+	public function render_content() {
+		$title = isset( $this->attributes['title'] ) ? $this->attributes['title'] : 'Lorem Ipsum';
+
+		$output  = '<div class="rating-wrapper">';
+		$output .= '<span class="rating-title">' . wp_kses_post( $title ) . '</span>';
+		$output .= $this->render_rating_icons();
+		$output .= '</div>';
+
+		return $output;
+	}
+
+	/**
+	 * Render view in editor.
+	 */
+	public function render_gutenberg() {
+		return $this->render_content();
+	}
+
+	/**
+	 * Render view in frontend.
+	 */
+	public function render_frontend() {
+		if ( ! empty( trim( $this->block_data->inner_html ) ) && apply_filters( 'gutenverse_force_dynamic', false ) ) {
+			return $this->content;
+		}
+		$element_id      = $this->get_element_id();
+		$display_classes = $this->set_display_classes();
+		$animation_class = $this->set_animation_classes();
+		$custom_classes  = $this->get_custom_classes();
+
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
+		$class_name = trim( "guten-element guten-star-rating $element_id $animation_class $display_classes $custom_classes" );
+
+		$content = '<div class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'star-rating' );
+
+		return $content;
+	}
+}

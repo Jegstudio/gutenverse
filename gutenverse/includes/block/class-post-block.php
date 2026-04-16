@@ -506,12 +506,17 @@ class Post_Block extends Post_Abstract {
 	 *
 	 * @param bool $include_animation_classes Using animation class.
 	 */
-	public function render_frontend( $include_animation_classes = true ) {
+	public function render_frontend( $include_animation_classes = true ) {		
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $include_animation_classes ? $this->set_animation_classes() : '';
 		$custom_classes  = $this->get_custom_classes();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr         = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-post-block guten-element">' . $this->render_content( false, $this->attributes['excludeCurrentPost'] ) . '</div>';
+		$content = '<div' . $id_attr . ' class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-post-block guten-element">' . $this->render_content( false, $this->attributes['excludeCurrentPost'] ) . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+
+		return $content;
 	}
 }

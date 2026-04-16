@@ -5,6 +5,7 @@
 	"description": "A vertically stacked list of expandable/collapsable item.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
+	"class_callback": "\\Gutenverse\\Block\\Accordions",
 	"attributes": {
 		"elementId": {
 			"type": "string"
@@ -437,6 +438,7 @@
 	"supports": {
 		"className": false,
 		"html": false,
+		"innerBlocks": true,
 		"anchor": true
 	},
 	"keywords": [

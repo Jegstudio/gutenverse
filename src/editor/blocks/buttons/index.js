@@ -6,8 +6,9 @@ import { IconDualButtonSVG } from '../../../assets/icon/index';
 import example from './data/example';
 import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
+import saveV3 from './deprecated/v3/save';
 
-const { name, attributes } = metadata;
+const { name, attributes, supports } = metadata;
 
 export { metadata, name };
 
@@ -15,15 +16,22 @@ export const settings = {
     icon: <IconDualButtonSVG />,
     example,
     edit,
+    save,
     deprecated: [
         {
             attributes: attributes,
-            save: saveV1
+            supports,
+            save: saveV3
         },
         {
             attributes: attributes,
+            supports,
             save: saveV2
         },
+        {
+            attributes: attributes,
+            supports,
+            save: saveV1
+        },
     ],
-    save,
 };

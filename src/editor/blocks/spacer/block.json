@@ -2,6 +2,7 @@
 	"apiVersion": 3,
 	"name": "gutenverse/spacer",
 	"title": "Spacer",
+	"class_callback": "\\Gutenverse\\Block\\Spacer",
 	"description": "Create a spacer to give a gap between content",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,

@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/image",
+	"class_callback": "\\Gutenverse\\Block\\Image",
 	"title": "Image",
 	"description": "Edit, crop, and showcase your image.",
 	"category": "gutenverse-element",

@@ -6,6 +6,9 @@ import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
 import saveV4 from './deprecated/v4/save';
 import saveV5 from './deprecated/v5/save';
+import saveV6 from './deprecated/v6/save';
+import attrV6 from './deprecated/v6/attr.json';
+import saveV7 from './deprecated/v7/save';
 import metadata from './block.json';
 import { IconFunFactSVG } from '../../../assets/icon/index';
 import example from './data/example';
@@ -20,6 +23,16 @@ export const settings = {
     edit,
     save,
     deprecated: [
+        {
+            attributes,
+            supports,
+            save: saveV7,
+        },
+        {
+            attributes : attrV6,
+            supports,
+            save: saveV6,
+        },
         {
             attributes,
             supports,

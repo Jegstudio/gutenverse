@@ -5,6 +5,7 @@
 	"description": "Create more Advanced Heading with multiple options.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
+	"class_callback": "\\Gutenverse\\Block\\Advanced_Heading",
 	"attributes": {
 		"elementId": {
 			"type": "string"
@@ -92,13 +93,7 @@
 		},
 		"lineWidth": {
 			"type": "object",
-			"copyStyle": true,
-			"default": {
-				"Desktop": {
-					"unit": "%",
-					"point": "30"
-				}
-			}
+			"copyStyle": true
 		},
 		"lineHeight": {
 			"type": "object",

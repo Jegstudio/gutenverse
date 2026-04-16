@@ -7,6 +7,8 @@ import { IconTeamSVG } from '../../../assets/icon/index';
 import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
+import saveV4 from './deprecated/v4/save';
+import saveV4BooleanLazy from './deprecated/v4/save-boolean-lazy';
 
 const { name, attributes } = metadata;
 
@@ -18,6 +20,56 @@ export const settings = {
     edit,
     save,
     deprecated: [
+        {
+            attributes,
+            save: saveV4,
+        },
+        {
+            attributes: {
+                ...attributes,
+                lazy: {
+                    type: 'boolean',
+                    default: false,
+                    deprecated: true,
+                },
+            },
+            migrate: (attributes) => {
+                const { lazy } = attributes;
+                const newAttributes = {
+                    ...attributes,
+                    lazy: lazy === true ? 'lazy' : 'normal',
+                };
+                return [
+                    newAttributes
+                ];
+            },
+            save: saveV4BooleanLazy,
+        },
+        {
+            attributes: {
+                ...attributes,
+                lazy: {
+                    type: 'boolean',
+                    default: false,
+                    deprecated: true,
+                },
+                migrate: (attributes) => {
+                    const { lazy } = attributes;
+                    const newAttributes = {
+                        ...attributes,
+                        lazy: lazy === true ? 'lazy' : 'normal',
+                    };
+                    return [
+                        newAttributes
+                    ];
+                },
+            },
+            save: saveV3
+        },
+        {
+            attributes,
+            save: saveV2
+        },
         {
             attributes: {
                 ...attributes,
@@ -43,30 +95,5 @@ export const settings = {
             },
             save: saveV1
         },
-        {
-            attributes,
-            save: saveV2
-        },
-        {
-            attributes: {
-                ...attributes,
-                lazy: {
-                    type: 'boolean',
-                    default: false,
-                    deprecated: true,
-                },
-                migrate: (attributes) => {
-                    const { lazy } = attributes;
-                    const newAttributes = {
-                        ...attributes,
-                        lazy: lazy === true ? 'lazy' : 'normal',
-                    };
-                    return [
-                        newAttributes
-                    ];
-                },
-            },
-            save: saveV3
-        }
     ]
 };

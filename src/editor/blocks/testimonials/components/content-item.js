@@ -61,7 +61,7 @@ const ContentItem = (data) => {
     const content = () => {
         const commentContent = <div className="comment-content">{contentRichText(comment, 'p', 'profile-comment', 'comment', index)}</div>;
         const starRating = showRating && <>
-            {Array.from({ length: rating }, (i) => <li key={i}>{renderIcon(iconRatingFull, iconRatingFullType, iconRatingFullSVG)}</li>)}
+            {Array.from({ length: rating }, (_, i) => <li key={i}>{renderIcon(iconRatingFull, iconRatingFullType, iconRatingFullSVG)}</li>)}
             {parseFloat(rating) !== Math.floor(rating) ? <li>{renderIcon(iconRatingHalf, iconRatingHalfType, iconRatingHalfSVG)}</li> : null}
         </>;
 

@@ -1,7 +1,6 @@
 import { Default, u } from 'gutenverse-core-frontend';
 import isEmpty from 'lodash/isEmpty';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
+
 
 class GutenversePostblock extends Default {
     /* static attributes */
@@ -126,11 +125,14 @@ class GutenversePostblock extends Default {
         }
 
         element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`);
+        const restUrl = (window.wpApiSettings && window.wpApiSettings.root)
+            ? window.wpApiSettings.root + 'gutenverse-client/v1/postblock/data'
+            : '/wp-json/gutenverse-client/v1/postblock/data';
         setTimeout(() => {
-            apiFetch({
-                path: 'gutenverse-client/v1/postblock/data',
+            fetch(restUrl, {
                 method: 'POST',
-                data: {
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
                     attributes: {
                         postItemMargin,
                         postItemPadding,
@@ -202,13 +204,12 @@ class GutenversePostblock extends Default {
                         qAuthor: query && query['q_author'],
                         contentOrder
                     }
-                }
-            }).then((data) => {
+                })
+            }).then(res => res.json()).then((data) => {
                 element.replace(data.rendered);
-                element.find('.guten-block-loadmore').text(paginationLoadmoreText);
 
-                if (paginationMode === 'scrollload' && this._shouldItBeLoading(element, settings)) {
-                    const newElement = u(`.${elementId}.guten-post-block`);
+                const newElement = u(`.${elementId}.guten-post-block`);
+                if (paginationMode === 'scrollload' && this._shouldItBeLoading(newElement, settings)) {
                     const newSettings = JSON.parse(newElement.find('.guten-postblock').data('settings'));
                     this._loadMore(newElement, newSettings);
                 } else {
@@ -253,7 +254,7 @@ class GutenversePostblock extends Default {
                 }
             }
         } else {
-            currentPage = direction;
+            currentPage = parseInt(direction, 10);
         }
 
         let query = null;
@@ -264,10 +265,14 @@ class GutenversePostblock extends Default {
             qApi = true;
         }
 
-        apiFetch({
-            path: 'gutenverse-client/v1/postblock/data',
+        const restUrl = (window.wpApiSettings && window.wpApiSettings.root)
+            ? window.wpApiSettings.root + 'gutenverse-client/v1/postblock/data'
+            : '/wp-json/gutenverse-client/v1/postblock/data';
+
+        fetch(restUrl, {
             method: 'POST',
-            data: {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
                 attributes: {
                     ...settings,
                     paged: currentPage,
@@ -279,8 +284,8 @@ class GutenversePostblock extends Default {
                     qTag: query && query['q_tag'],
                     qAuthor: query && query['q_author'],
                 }
-            }
-        }).then((data) => {
+            })
+        }).then(res => res.json()).then((data) => {
             element.html(data.rendered);
             this._tabItems(`.${elementId}.guten-post-block`);
         }).catch(() => {
@@ -325,18 +330,16 @@ class GutenversePostblock extends Default {
             });
 
             if (paginationMode === 'number') {
-                if (paginationMode === 'number') {
-                    const numberedButtons = document.querySelectorAll('.guten_block_nav .btn-pagination');
-                    numberedButtons.forEach(button => {
-                        const page = button.getAttribute('data-page');
-                        if (page && !isNaN(page)) {
-                            button.addEventListener('click', (event) => {
-                                event.preventDefault();
-                                this._paginatePosts(blockElement, settings, page);
-                            });
-                        }
-                    });
-                }
+                const numberedButtons = blockElement.first().querySelectorAll('.guten_block_nav .btn-pagination');
+                numberedButtons.forEach(button => {
+                    const page = button.getAttribute('data-page');
+                    if (page && !isNaN(page)) {
+                        button.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            this._paginatePosts(blockElement, settings, page);
+                        });
+                    }
+                });
             }
 
         }

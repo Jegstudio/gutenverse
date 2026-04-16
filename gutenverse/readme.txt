@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.5.3
+Stable tag: 3.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,6 +298,18 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+= 3.6.0 =
+##### New & Improvements
+* update block rendering mechanism
+
+##### Bug Fixes
+* fix gallery image size different when zoomed in on frontend vs editor
+* fix global style select when the data is empty
+* fix issue with container block content cannot be clicked
+* fix issue with container setting UI
+* fix issue with post block pagination
+* fix vulnerability issue. credit: Wordfence.
+
 = 3.5.3 =
 ##### New & Improvements
 * add aria label to post list block
@@ -305,6 +317,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 ##### Bug Fixes
 * fix issue with block data when multiple blocks are moved together
 * fix issue with video player settings
+* fix vulnerability issue. credit: Wordfence.
 
 = 3.5.2 =
 ##### Bug Fixes

@@ -211,6 +211,8 @@ class GutenverseGallery extends Default {
             popupMinimize.addClass('hidden');
             $this._exitFullscreen();
         });
+
+        document.body.appendChild(galleryPopup.first());
     }
 
     _addEvents(element, Shuffle) {

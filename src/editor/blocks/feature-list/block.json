@@ -345,5 +345,6 @@
 	],
 	"usesContext": [
 		"gutenverse/flexDirection"
-	]
+	],
+	"class_callback": "\\Gutenverse\\Block\\Feature_List"
 }

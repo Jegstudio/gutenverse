@@ -5,6 +5,7 @@
 	"description": "Create a countdown block",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
+	"class_callback": "\\Gutenverse\\Block\\Countdown",
 	"attributes": {
 		"elementId": {
 			"type": "string"

@@ -126,9 +126,9 @@ const NavMenuBlock = compose(
                 <div class="gutenverse-menu-wrapper">
                     <div class="gutenverse-menu">
                         <ul>
-                            <li class="page_item"><a href="javascript:void(0);">Menu 1</a></li>
-                            <li class="page_item"><a href="javascript:void(0);">Menu 2</a></li>
-                            <li class="menu-item"><a href="javascript:void(0);">Menu 3<i class="gtn gtn-angle-down-solid"></i></a></li>
+                            <li class="page_item"><a href="#">Menu 1</a></li>
+                            <li class="page_item"><a href="#">Menu 2</a></li>
+                            <li class="menu-item"><a href="#">Menu 3<i class="gtn gtn-angle-down-solid"></i></a></li>
                         </ul>
                     </div>
                 </div>

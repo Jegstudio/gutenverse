@@ -90,16 +90,39 @@ class Taxonomy_List extends Block_Abstract {
 	 * Render view in frontend
 	 */
 	public function render_frontend() {
+		if ( ! empty( trim( $this->block_data->inner_html ) ) && apply_filters( 'gutenverse_force_dynamic', false ) ) {
+			return $this->content;
+		}
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-taxonomy-list guten-element">' . $this->render_content( $this->attributes['qty'], $this->attributes['includedCategory'], $this->attributes['sortType'], $this->attributes['hideEmpty'], $this->attributes['sortBy'] ) . '</div>';
+		$anchor  = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
+		$class_name = trim( 'guten-element guten-taxonomy-list ' . $element_id . $display_classes . $animation_class . $custom_classes );
+		$content    = '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content( $this->attributes['qty'], $this->attributes['includedCategory'], $this->attributes['sortType'], $this->attributes['hideEmpty'], $this->attributes['sortBy'] ) . '</div>';
+		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'taxonomy-list' );
+
+		return $content;
 	}
 
 	/**
-	 * use count bracket
+	 * Gutenverse Wrap Count
+	 *
+	 * @param int    $count   Count.
+	 * @param string $bracket Bracket type.
+	 * @return string
 	 */
 	public function gutenverse_wrap_count( $count, $bracket ) {
 		switch ( $bracket ) {

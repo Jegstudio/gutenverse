@@ -2,6 +2,7 @@
 	"apiVersion": 3,
 	"name": "gutenverse/heading",
 	"title": "Heading",
+	"class_callback": "\\Gutenverse\\Block\\Heading",
 	"description": "Create Title/Heading on your page.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
@@ -15,8 +16,6 @@
 		},
 		"content": {
 			"type": "string",
-			"source": "html",
-			"selector": "h1,h2,h3,h4,h5,h6",
 			"default": ""
 		},
 		"dynamicDataList": {

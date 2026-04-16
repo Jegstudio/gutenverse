@@ -1,6 +1,7 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/divider",
+	"class_callback": "\\Gutenverse\\Block\\Divider",
 	"title": "Divider",
 	"description": "Split your content with a customizable divider.",
 	"category": "gutenverse-element",

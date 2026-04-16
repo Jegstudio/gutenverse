@@ -1,0 +1,258 @@
+{
+    "elementId": {
+        "type": "string"
+    },
+    "mouseMoveEffect": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "content": {
+        "type": "string",
+        "source": "html",
+        "selector": "h1, h2, h3, h4, h5, h6",
+        "default": ""
+    },
+    "dynamicDataList": {
+        "type": "array",
+        "default": []
+    },
+    "openDynamic": {
+        "type": "string"
+    },
+    "dynamicTextContent": {
+        "type": "array",
+        "copyStyle": true
+    },
+    "dynamicUrlContent": {
+        "type": "array",
+        "copyStyle": true
+    },
+    "type": {
+        "type": "number",
+        "default": 2
+    },
+    "textAlign": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "color": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "typography": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "containsAnchorTag": {
+        "type": "boolean",
+        "copyStyle": true
+    },
+    "linkColor": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "linkTypography": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "linkColorHover": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "linkTypographyHover": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "textShadow": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "textStroke": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "overflowWrap": {
+        "type": "object",
+        "default": {
+            "Desktop": "break-word"
+        },
+        "copyStyle": true
+    },
+    "useStyleInLink": {
+        "type": "boolean",
+        "copyStyle": true
+    },
+    "background": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "backgroundHover": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "backgroundTransition": {
+        "type": "object",
+        "copyStyle": true,
+        "default": {}
+    },
+    "border": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "borderResponsive": {
+        "type": "object",
+        "migrate": {
+            "attr": "border",
+            "type": "border"
+        },
+        "copyStyle": true
+    },
+    "boxShadow": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "borderHover": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "borderHoverResponsive": {
+        "type": "object",
+        "migrate": {
+            "attr": "borderHover",
+            "type": "border"
+        },
+        "copyStyle": true
+    },
+    "boxShadowHover": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "margin": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "padding": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "zIndex": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "animation": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "hideDesktop": {
+        "type": "boolean",
+        "copyStyle": true
+    },
+    "hideTablet": {
+        "type": "boolean",
+        "copyStyle": true
+    },
+    "hideMobile": {
+        "type": "boolean",
+        "copyStyle": true
+    },
+    "positioningType": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "positioningWidth": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "positioningAlign": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "positioningLocation": {
+        "type": "string",
+        "copyStyle": true
+    },
+    "positioningLeft": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "positioningRight": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "positioningTop": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "positioningBottom": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "advanceAnimation": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "transform": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "textChilds": {
+        "type": "array",
+        "default": []
+    },
+    "openChild": {
+        "type": "string"
+    },
+    "mask": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "textClip": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "condition": {
+        "type": "object",
+        "default": {}
+    },
+    "textWritingMode": {
+        "type": "object",
+        "copyStyle": true,
+        "default": {}
+    },
+    "flexAlignSelf": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "flexOrder": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "flexCustomOrder": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "flexSize": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "flexSizeGrow": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    },
+    "flexSizeShrink": {
+        "type": "object",
+        "default": {},
+        "copyStyle": true
+    }
+}
