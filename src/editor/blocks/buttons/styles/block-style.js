@@ -10,7 +10,7 @@ const getBlockStyle = (elementId, attributes) => {
         'type': 'plain',
         'id': 'alignButtons',
         'responsive': true,
-        'selector': `.${elementId}, .${elementId} .guten-button-wrapper`,
+        'selector': `.${elementId} .guten-buttons, .${elementId} .guten-button-wrapper`,
         'properties': [
             {
                 'name': 'justify-content',
