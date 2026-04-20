@@ -169,11 +169,11 @@ class Post_Block extends Post_Abstract {
 		$category = '';
 
 		if ( $this->attr_is_true( $this->attributes['categoryEnabled'] ) && $cat_id ) {
-			$category = get_category( $cat_id );
-			$position = 'type-3' === $this->attributes['postblockType'] ? 'position-' . esc_attr( $this->attributes['categoryPosition'] ) : '';
-			$class    = 'class="category-' . esc_attr( $category->slug ) . '"';
+			$category            = get_category( $cat_id );
+			$position            = 'type-3' === $this->attributes['postblockType'] ? 'position-' . esc_attr( $this->attributes['categoryPosition'] ) : '';
+			$class               = 'class="category-' . esc_attr( $category->slug ) . '"';
 			$category_aria_label = sprintf( __( 'View all posts in %s', 'gutenverse' ), $category->name );
-			$category = '<div class="guten-post-category ' . $position . '"><span><a href="' . esc_url( get_category_link( $cat_id ) ) . '" aria-label="' . esc_attr( $category_aria_label ) . '" ' . $class . '>' . esc_attr( $category->name ) . '</a></span></div>';
+			$category            = '<div class="guten-post-category ' . $position . '"><span><a href="' . esc_url( get_category_link( $cat_id ) ) . '" aria-label="' . esc_attr( $category_aria_label ) . '" ' . $class . '>' . esc_attr( $category->name ) . '</a></span></div>';
 			if ( 'type-5' === $this->attributes['postblockType'] ) {
 				$category = '<div class="post-category-container">' . $category . '</div>';
 			}
@@ -506,12 +506,17 @@ class Post_Block extends Post_Abstract {
 	 *
 	 * @param bool $include_animation_classes Using animation class.
 	 */
-	public function render_frontend( $include_animation_classes = true ) {
+	public function render_frontend( $include_animation_classes = true ) {		
 		$element_id      = $this->get_element_id();
 		$display_classes = $this->set_display_classes();
 		$animation_class = $include_animation_classes ? $this->set_animation_classes() : '';
 		$custom_classes  = $this->get_custom_classes();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr         = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-post-block guten-element">' . $this->render_content( false, $this->attributes['excludeCurrentPost'] ) . '</div>';
+		$content = '<div' . $id_attr . ' class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-post-block guten-element">' . $this->render_content( false, $this->attributes['excludeCurrentPost'] ) . '</div>';
+		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+
+		return $content;
 	}
 }

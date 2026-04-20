@@ -1,6 +1,9 @@
 .editor-styles-wrapper .guten-advanced-heading {
-    display: flex;
-    flex-wrap: wrap;
+    /**
+        delete this if there is no other bug. Fix bug advance heading inside container row.
+        display: flex;
+        flex-wrap: wrap;
+    */
 
     h1, h2, h3, h4, h5, h6, p, span {
         margin-top: 0;

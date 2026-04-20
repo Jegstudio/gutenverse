@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.4.7-dev
+Stable tag: 3.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,7 +298,52 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
-= 3.4.7-dev =
+= 3.6.0 =
+##### New & Improvements
+* update block rendering mechanism
+
+##### Bug Fixes
+* fix gallery image size different when zoomed in on frontend vs editor
+* fix global style select when the data is empty
+* fix issue with container block content cannot be clicked
+* fix issue with container setting UI
+* fix issue with post block pagination
+* fix vulnerability issue. credit: Wordfence.
+
+= 3.5.3 =
+##### New & Improvements
+* add aria label to post list block
+
+##### Bug Fixes
+* fix issue with block data when multiple blocks are moved together
+* fix issue with video player settings
+* fix vulnerability issue. credit: Wordfence.
+
+= 3.5.2 =
+##### Bug Fixes
+* fix issue with global style causing error
+
+= 3.5.1 =
+##### Bug Fixes
+* fix button border responsive styling
+* fix social icon block issue when on vertical mode
+* fix template library filter
+* fix styling cache
+
+= 3.5.0 =
+##### New & Improvements
+* add new container block
+* add image alt type in gallery
+* add toggle on/off gallery animation
+* add styling for search block suggestion
+
+##### Bug Fixes
+* fix issue with icon box when adding aria label
+* fix animated text issue with special character
+* fix post block pagination load more keeps loading issue
+* fix vulnerability issue
+
+= 3.4.7 =
 ##### Bug Fixes
 * fix breadcrumb warning
 * fix icon type svg in feature list block
@@ -308,6 +353,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * fix item gallery copy icon
 * fix lazyload option into dropdown
 * fix hover button transition
+* fix vulnerability issue
 
 = 3.4.6 =
 ##### New & Improvements

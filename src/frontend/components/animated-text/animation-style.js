@@ -75,11 +75,14 @@ export class AnimationStyle {
     };
 
     _generateText = (wrapper, text) => {
-        wrapper.text(text);
+        const div = document.createElement('div');
+        div.textContent = text;
+        const escapedText = div.innerHTML;
+        
         wrapper.html(
-            wrapper.text().replace(
-                this.splitByWord ? /\b\w+\b/g : /\S/g,
-                (word) => `<span class='letter'>${word}</span>`
+            escapedText.replace(
+                this.splitByWord ? /&[a-z0-9]+;|\b\w+\b/gi : /&[a-z0-9]+;|\S/gi,
+                (match) => `<span class='letter'>${match}</span>`
             )
         );
     }

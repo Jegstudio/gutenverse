@@ -67,6 +67,18 @@ class Advanced_Heading extends Style_Abstract {
 				)
 			);
 		}
+		if ( isset( $this->attrs['alignText'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .heading-line",
+					'property'       => function ( $value ) {
+						return "justify-self: {$value};";
+					},
+					'value'          => $this->attrs['alignText'],
+					'device_control' => true,
+				)
+			);
+		}
 
 		if ( isset( $this->attrs['lineWidth'] ) && isset( $this->attrs['showLine'] ) && 'none' !== $this->attrs['showLine'] ) {
 			$this->inject_style(

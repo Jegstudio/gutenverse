@@ -40,19 +40,16 @@ class Image extends Block_Abstract {
 		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
 		$href        = apply_filters( 'gutenverse_dynamic_generate_url', $url, $dynamic_url, $element_id );
 
-		if ( ! empty( $href ) ) {
-			$link_attr     = array(
-				'class'      => 'guten-image-wrapper',
-				'href'       => $href,
-				'target'     => $link_target,
-				'rel'        => $rel,
-				'aria-label' => $aria_label,
-			);
-			$link_attr_str = '';
-			foreach ( $link_attr as $key => $val ) {
-				if ( ! empty( $val ) ) {
-					$link_attr_str .= ' ' . esc_attr( $key ) . '="' . esc_attr( $val ) . '"';
-				}
+		if ( ! empty( $url ) ) {
+			$link_attr_str = ' class="guten-image-wrapper" href="' . esc_url( $href ) . '"';
+			if ( ! empty( $link_target ) ) {
+				$link_attr_str .= ' target="' . esc_attr( $link_target ) . '"';
+			}
+			if ( ! empty( $rel ) ) {
+				$link_attr_str .= ' rel="' . esc_attr( $rel ) . '"';
+			}
+			if ( ! empty( $aria_label ) ) {
+				$link_attr_str .= ' aria-label="' . esc_attr( $aria_label ) . '"';
 			}
 			$image_wrapper = '<a' . $link_attr_str . '>' . $img_html . '</a>';
 		} else {
@@ -63,10 +60,12 @@ class Image extends Block_Abstract {
 		$caption_html = '';
 		switch ( $caption_type ) {
 			case 'original':
-				$caption_html = '<span class="guten-caption">' . esc_html( $caption_original ) . '</span>';
+				$caption_text = ! empty( $caption_original ) ? esc_html( $caption_original ) : '';
+				$caption_html = '<span class="guten-caption">' . $caption_text . '</span>';
 				break;
 			case 'custom':
-				$caption_html = '<span class="guten-caption">' . esc_html( $caption_custom ) . '</span>';
+				$caption_text = ! empty( $caption_custom ) ? esc_html( $caption_custom ) : '';
+				$caption_html = '<span class="guten-caption">' . $caption_text . '</span>';
 				break;
 		}
 
@@ -130,8 +129,11 @@ class Image extends Block_Abstract {
 		$img_attr = array(
 			'class' => 'gutenverse-image-box-filled',
 			'src'   => $src,
-			'alt'   => $image_alt_text,
 		);
+
+		if ( null !== $image_alt_text ) {
+			$img_attr['alt'] = $image_alt_text;
+		}
 
 		if ( ! empty( $width ) ) {
 			$img_attr['width'] = $width;
@@ -172,12 +174,31 @@ class Image extends Block_Abstract {
 	 * Render view in frontend
 	 */
 	public function render_frontend() {
+		if ( ! empty( trim( $this->block_data->inner_html ) ) && apply_filters( 'gutenverse_force_dynamic', false ) ) {
+			return $this->content;
+		}
 		$post_id         = ! empty( $this->context['postId'] ) ? esc_html( $this->context['postId'] ) : get_the_ID();
 		$element_id      = $this->get_element_id();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-image guten-element">' . $this->render_content( $post_id ) . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		$data_id = '';
+		if ( isset( $this->attributes['advanceAnimation']['type'] ) && ! empty( $this->attributes['advanceAnimation']['type'] ) ) {
+			$id_parts = explode( '-', $element_id );
+			if ( count( $id_parts ) > 1 ) {
+				$data_id = ' data-id="' . esc_attr( $id_parts[1] ) . '"';
+			}
+		}
+
+		$class_name = trim( 'wp-block-gutenverse-image guten-element guten-image ' . $element_id . $animation_class . $display_classes . $custom_classes );
+		$content    = '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content( $post_id ) . '</div>';
+		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'image' );
+
+		return $content;
 	}
 }

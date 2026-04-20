@@ -92,7 +92,7 @@ const IconListBlock = compose(
         } else {
             setResponse(`<div class="taxonomy-list-wrapper">
                     <div class="taxonomy-list-item">
-						<a href="javascript:void(0)">
+						<a href="#">
 							<span class="icon-list">
                                 ${renderIcon(icon, iconType, iconSVG)}
                             </span>
@@ -100,7 +100,7 @@ const IconListBlock = compose(
 						</a>
 					</div>
                     <div class="taxonomy-list-item">
-						<a href="javascript:void(0)">
+						<a href="#">
 							<span class="icon-list">
                                 ${renderIcon(icon, iconType, iconSVG)}
                             </span>
@@ -108,7 +108,7 @@ const IconListBlock = compose(
 						</a>
 					</div>
                     <div class="taxonomy-list-item">
-						<a href="javascript:void(0)">
+						<a href="#">
 							<span class="icon-list">
                                 ${renderIcon(icon, iconType, iconSVG)}
                             </span>

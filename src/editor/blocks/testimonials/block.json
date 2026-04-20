@@ -2,6 +2,7 @@
 	"apiVersion": 3,
 	"name": "gutenverse/testimonials",
 	"title": "Testimonials",
+	"class_callback": "\\Gutenverse\\Block\\Testimonials",
 	"description": "Showcase your client's or people's testimonals.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
@@ -656,5 +657,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-testimonials-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

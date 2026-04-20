@@ -43,7 +43,7 @@ const save = ({ attributes }) => {
         <div className={className}>
             <div className="list-divider"></div>
             <a id={elementId} href={href} target={linkTarget} rel={rel} aria-label={ariaLabel}>
-                {!hideIcon && renderIcon(icon, iconType, iconSVG)}
+                {!hideIcon && <i className={icon} />}
                 <RichText.Content
                     className={`list-text ${hideIcon ? 'no-icon' : ''}`}
                     value={text}

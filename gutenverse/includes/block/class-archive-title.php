@@ -31,8 +31,10 @@ class Archive_Title extends Block_Abstract {
 		$link_target  = ! empty( $this->attributes['archiveLinkTarget'] ) ? '_blank' : '_self';
 		$link_rel     = ! empty( $this->attributes['archiveLinkRel'] ) ? esc_attr( $this->attributes['archiveLinkRel'] ) : 'noreferrer';
 
+		$archive_title = esc_html( $archive_title );
+
 		if ( $category_url ) {
-			$archive_title = "<a href='{$category_url}' target='{$link_target}' rel='{$link_rel}'>{$archive_title}</a>";
+			$archive_title = "<a href='" . esc_url( $category_url ) . "' target='{$link_target}' rel='{$link_rel}'>{$archive_title}</a>";
 		}
 
 		return "<{$html_tag}>{$archive_title}</{$html_tag}>";
@@ -70,6 +72,9 @@ class Archive_Title extends Block_Abstract {
 			$category_url = get_author_posts_url( $author->ID );
 		}
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-archive-title guten-element">' . $this->render_content( $title, $category_url ) . '</div>';
+		$anchor     = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr    = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+		$class_name = trim( 'guten-element guten-archive-title ' . $element_id . $animation_class . $display_classes . $custom_classes );
+		return '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '">' . $this->render_content( $title, $category_url ) . '</div>';
 	}
 }

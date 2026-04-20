@@ -296,10 +296,11 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button`,
     });
 
-    isNotEmpty(attributes['buttonBorderResponsive']) && device !== 'Desktop' && data.push({
-        'type': 'border',
+    isNotEmpty(attributes['buttonBorderResponsive']) && data.push({
+        'type': 'borderResponsive',
         'id': 'buttonBorderResponsive',
         'selector': `.editor-styles-wrapper .${elementId}.guten-button-wrapper .guten-button`,
+        'responsive': true
     });
 
     isNotEmpty(attributes['buttonBorderHover']) && data.push({
@@ -607,7 +608,7 @@ const getBlockStyle = (elementId, attributes) => {
         'attributeType': 'custom',
     });
 
-    
+
     /** Position Flex Item */
     const selector = `.${elementId}.guten-element`;
 
@@ -739,7 +740,7 @@ const getBlockStyle = (elementId, attributes) => {
     }
 
     /** End Position Flex Item */
-return [
+    return [
         ...data,
         ...applyFilters(
             'gutenverse.button.blockStyle',

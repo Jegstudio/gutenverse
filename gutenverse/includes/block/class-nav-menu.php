@@ -107,7 +107,7 @@ class Nav_Menu extends Block_Abstract {
 			$src        = '';
 			$width      = '';
 			$height     = '';
-			$loading    = $lazy ? 'lazy' : 'eager';
+			$loading    = ( 'lazy' === $lazy || true === $lazy ) ? 'lazy' : 'eager';
 
 			if ( ! empty( $media['sizes'][ $size ]['url'] ) ) {
 				$src = $media['sizes'][ $size ]['url'];
@@ -142,6 +142,10 @@ class Nav_Menu extends Block_Abstract {
 	 * Render view in frontend
 	 */
 	public function render_frontend() {
-		return $this->render_content();
+		$element_id = $this->get_element_id();
+		$content    = $this->render_content();
+		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
+
+		return $content;
 	}
 }

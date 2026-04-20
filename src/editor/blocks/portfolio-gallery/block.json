@@ -370,5 +370,9 @@
 	],
 	"style": [
 		"gutenverse-frontend-portfolio-gallery-style"
-	]
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	],
+	"class_callback": "\\Gutenverse\\Block\\Portfolio_Gallery"
 }

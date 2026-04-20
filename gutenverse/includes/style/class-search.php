@@ -118,12 +118,38 @@ class Search extends Style_Abstract {
 			);
 		}
 
+		if ( isset( $this->attrs['inputColorNormal'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill",
+					'property'       => function ( $value ) {
+						return '-webkit-text-fill-color: ' . $this->get_color( $value ) . ' !important;';
+					},
+					'value'          => $this->attrs['inputColorNormal'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['inputBgColorNormal'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .gutenverse-search.gutenverse-search-input, .{$this->element_id} .search-input-container-outer .search-input-container .gutenverse-search.gutenverse-search-input",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
+					},
+					'value'          => $this->attrs['inputBgColorNormal'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['inputBgColorNormal'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .gutenverse-search-form .search-input-container-outer .search-input-container  input:autofill",
+					'property'       => function ( $value ) {
+						return 'box-shadow: 0 0 0 100vmax ' . $this->get_color( $value ) . ' inset !important;';
 					},
 					'value'          => $this->attrs['inputBgColorNormal'],
 					'device_control' => true,

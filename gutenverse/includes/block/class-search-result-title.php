@@ -25,8 +25,8 @@ class Search_Result_Title extends Block_Abstract {
 	 */
 	public function render_content() {
 		$html_tag     = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'h2' ) );
-		$search_input = get_query_var( 's' );
-		$static_text  = $this->attributes['staticText'] ? $this->attributes['staticText'] : 'Search Result For:';
+		$search_input = esc_html( get_query_var( 's' ) );
+		$static_text  = esc_html( $this->attributes['staticText'] ? $this->attributes['staticText'] : 'Search Result For:' );
 		return "<{$html_tag}>{$static_text} <span class='search-input-text'>{$search_input}</span></{$html_tag}>";
 	}
 
@@ -44,10 +44,13 @@ class Search_Result_Title extends Block_Abstract {
 	 */
 	public function render_frontend() {
 		$element_id      = $this->get_element_id();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-search-result-title guten-element">' . $this->render_content() . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		return '<div' . $id_attr . ' class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-search-result-title guten-element">' . $this->render_content() . '</div>';
 	}
 }

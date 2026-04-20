@@ -297,7 +297,7 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId}.guten-element.guten-postblock .guten-post.loadmore-animation.has-delay`,
     });
 
-    
+
     /** Position Flex Item */
     const selector = `.${elementId}.guten-element`;
 
@@ -429,7 +429,7 @@ const getBlockStyle = (elementId, attributes) => {
     }
 
     /** End Position Flex Item */
-return [
+    return [
         ...data,
         ...applyFilters(
             'gutenverse.post-block.blockStyle',

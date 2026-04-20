@@ -47,11 +47,11 @@ export const teamPanel = (props) => {
             component: SelectControl,
             options: [
                 {
-                    value: false,
+                    value: 'normal',
                     label: __('Normal Load', 'gutenverse')
                 },
                 {
-                    value: true,
+                    value: 'lazy',
                     label: __('Lazy Load', 'gutenverse')
                 },
             ]

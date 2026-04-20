@@ -217,5 +217,9 @@
 	],
 	"style": [
 		"gutenverse-frontend-buttons-style"
-	]
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	],
+	"class_callback": "\\Gutenverse\\Block\\Buttons"
 }

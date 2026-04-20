@@ -289,5 +289,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-icon-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

@@ -178,5 +178,8 @@
 		"animation",
 		"text"
 	],
-	"style": ["gutenverse-frontend-breadcrumb-style"]
+	"style": ["gutenverse-frontend-breadcrumb-style"],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	]
 }

@@ -30,6 +30,7 @@ export class TypingStyle {
             loop: this.loop,
             showCursor: true,
             smartBackspace: true,
+            contentType: 'text',
         });
     }
 

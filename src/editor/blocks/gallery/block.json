@@ -955,6 +955,11 @@
 			"default": "h5",
 			"copyStyle": true
 		},
+		"filterRemoveAnimation": {
+			"type": "boolean",
+			"default": false,
+			"copyStyle": true
+		},
 		"flexAlignSelf": {
 			"type": "object",
 			"default": {},
@@ -1002,5 +1007,9 @@
 	],
 	"style": [
 		"gutenverse-frontend-gallery-style"
-	]
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	],
+	"class_callback": "\\Gutenverse\\Block\\Gallery"
 }

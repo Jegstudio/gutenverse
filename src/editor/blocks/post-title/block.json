@@ -23,7 +23,16 @@
 		},
 		"htmlTag": {
 			"type": "string",
-			"default": "h1"
+			"default": "h1",
+			"enum": [
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p"
+			]
 		},
 		"postLink": {
 			"type": "boolean"
@@ -229,7 +238,8 @@
 	"usesContext": [
 		"postId",
 		"postType",
-		"queryId"
+		"queryId",
+		"gutenverse/flexDirection"
 	],
 	"supports": {
 		"className": false,

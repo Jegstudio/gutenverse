@@ -300,10 +300,16 @@
 			"default": false
 		}
 	},
-	"usesContext": ["postId", "postType", "meta"],
+	"usesContext": ["postId", "postType", "meta", "gutenverse/flexDirection"],
 	"supports": {
 		"anchor": true
 	},
-	"keywords": ["image", "symbol", "logo"],
-	"style": ["gutenverse-frontend-image-style"]
+	"keywords": [
+		"image",
+		"symbol",
+		"logo"
+	],
+	"style": [
+		"gutenverse-frontend-image-style"
+	]
 }

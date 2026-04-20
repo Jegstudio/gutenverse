@@ -1732,7 +1732,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['itemLightboxTextMargin'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper",
+					'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'margin' );
 					},
@@ -1744,7 +1744,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['itemLightboxTextPadding'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper",
+					'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper",
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'padding' );
 					},
@@ -1756,7 +1756,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['itemLightboxTitleColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-title",
+					'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-title",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -1769,7 +1769,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['itemLightboxTitleTypography'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-title",
+					'selector' => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-title",
 					'value'    => $this->attrs['itemLightboxTitleTypography'],
 				)
 			);
@@ -1778,7 +1778,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['itemLightboxDescriptionColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-description",
+					'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-description",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -1791,7 +1791,7 @@ class Gallery extends Style_Abstract {
 		if ( isset( $this->attrs['itemLightboxDescriptionTypography'] ) ) {
 			$this->inject_typography(
 				array(
-					'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-description",
+					'selector' => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list .content-image .content-description-wrapper .content-description",
 					'value'    => $this->attrs['itemLightboxDescriptionTypography'],
 				)
 			);
@@ -1804,7 +1804,7 @@ class Gallery extends Style_Abstract {
 				if ( isset( $list['itemLightboxTextMargin'] ) ) {
 					$this->inject_style(
 						array(
-							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper",
+							'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper",
 							'property'       => function ( $value ) {
 								return $this->handle_dimension( $value, 'margin' );
 							},
@@ -1816,7 +1816,7 @@ class Gallery extends Style_Abstract {
 				if ( isset( $list['itemLightboxTextPadding'] ) ) {
 					$this->inject_style(
 						array(
-							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper",
+							'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper",
 							'property'       => function ( $value ) {
 								return $this->handle_dimension( $value, 'padding' );
 							},
@@ -1828,7 +1828,7 @@ class Gallery extends Style_Abstract {
 				if ( isset( $list['itemLightboxTitleColor'] ) ) {
 					$this->inject_style(
 						array(
-							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-title",
+							'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-title",
 							'property'       => function ( $value ) {
 								return $this->handle_color( $value, 'color' );
 							},
@@ -1841,7 +1841,7 @@ class Gallery extends Style_Abstract {
 				if ( isset( $list['itemLightboxTitleTypography'] ) ) {
 					$this->inject_typography(
 						array(
-							'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-title",
+							'selector' => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-title",
 							'value'    => $list['itemLightboxTitleTypography'],
 						)
 					);
@@ -1850,7 +1850,7 @@ class Gallery extends Style_Abstract {
 				if ( isset( $list['itemLightboxDescriptionColor'] ) ) {
 					$this->inject_style(
 						array(
-							'selector'       => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-description",
+							'selector'       => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-description",
 							'property'       => function ( $value ) {
 								return $this->handle_color( $value, 'color' );
 							},
@@ -1863,7 +1863,7 @@ class Gallery extends Style_Abstract {
 				if ( isset( $list['itemLightboxDescriptionTypography'] ) ) {
 					$this->inject_typography(
 						array(
-							'selector' => ".{$this->element_id} .gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-description",
+							'selector' => ".popup-{$this->element_id}.gutenverse-popup-gallery .images .image-list.image-list-{$index} .content-image .content-description-wrapper .content-description",
 							'value'    => $list['itemLightboxDescriptionTypography'],
 						)
 					);

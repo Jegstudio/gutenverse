@@ -13,6 +13,7 @@ use Gutenverse\Block\Dynamic_Field;
 use Gutenverse\Block\Post_Block;
 use Gutenverse\Block\Post_List;
 use Gutenverse\Framework\Init;
+use WP_REST_Response;
 
 /**
  * Class Api
@@ -67,7 +68,7 @@ class Api {
 			self::ENDPOINT,
 			'postblock/data',
 			array(
-				'methods'             => 'GET',
+				'methods'             => 'POST',
 				'callback'            => array( $this, 'post_block_data' ),
 				'permission_callback' => '__return_true',
 			)
@@ -313,10 +314,10 @@ class Api {
 	/**
 	 * Get Post Block Pagination Data
 	 *
-	 * @param object $request .
+	 * @param WP_REST_Request $request .
 	 */
 	public function post_block_data( $request ) {
-		$attributes = $request['attributes'];
+		$attributes = $request->get_param( 'attributes' );
 		$post_data  = new Post_Block();
 
 		if ( is_array( $attributes ) ) {
@@ -327,8 +328,11 @@ class Api {
 
 		$render = $post_data->render_frontend( false );
 
-		return array(
-			'rendered' => $render,
+		return new WP_REST_Response(
+			array(
+				'rendered' => $render,
+			),
+			200
 		);
 	}
 

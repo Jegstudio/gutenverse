@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { IconSVGControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
+import { CheckboxControl, IconSVGControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 
 export const settingPanel = ({ elementId, grid }) => {
     return [
@@ -207,5 +207,11 @@ export const settingPanel = ({ elementId, grid }) => {
             label: __('Link Text', 'gutenverse'),
             component: TextControl,
         },
+        {
+            id: 'filterRemoveAnimation',
+            label: __('Remove Animation', 'gutenverse'),
+            component: CheckboxControl,
+            description: __('If this option is enabled, the gallery items will not have any animation when the filter is applied.', 'gutenverse'),
+        }
     ];
 };

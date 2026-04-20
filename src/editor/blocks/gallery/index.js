@@ -7,10 +7,13 @@ import example from './data/example';
 import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
+import saveV3b from './deprecated/v3b/save';
 import saveV4 from './deprecated/v4/save';
 import saveV5 from './deprecated/v5/save';
+import saveV6 from './deprecated/v6/save';
+import saveV7 from './deprecated/v7/save';
 
-const { name, attributes } = metadata;
+const { name, attributes, supports } = metadata;
 
 export { metadata, name };
 export const settings = {
@@ -19,6 +22,31 @@ export const settings = {
     edit,
     save,
     deprecated: [
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV7
+        },
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV6
+        },
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV5
+        },
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV4
+        },
+        {
+            attributes: attributes,
+            supports: supports,
+            save: saveV3b
+        },
         {
             attributes: {
                 ...attributes,
@@ -38,18 +66,7 @@ export const settings = {
                     deprecated: true,
                 },
             },
-            migrate: (attributes) => {
-                const { showed } = attributes;
-                const newAttributes = {
-                    ...attributes,
-                    showed: parseInt(showed),
-                };
-
-                return [
-                    newAttributes
-                ];
-            },
-            save: saveV1
+            save: saveV3,
         },
         {
             attributes: {
@@ -109,15 +126,19 @@ export const settings = {
                     deprecated: true,
                 },
             },
-            save: saveV3,
+            migrate: (attributes) => {
+                const { showed } = attributes;
+                const newAttributes = {
+                    ...attributes,
+                    showed: parseInt(showed),
+                };
+
+                return [
+                    newAttributes
+                ];
+            },
+            save: saveV1
         },
-        {
-            attributes: attributes,
-            save: saveV4
-        },
-        {
-            attributes: attributes,
-            save: saveV5
-        },
+        
     ]
 };

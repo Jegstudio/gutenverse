@@ -1,7 +1,7 @@
 import { compose } from '@wordpress/compose';
 import { classnames } from 'gutenverse-core/components';
 import { applyFilters } from '@wordpress/hooks';
-import { withAnimationAdvanceScript, withMouseMoveEffectScript } from 'gutenverse-core/hoc';
+import { withAnimationAdvanceScript, withMouseMoveEffectScript, withTooltipScript } from 'gutenverse-core/hoc';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
 import { useDisplayFrontend } from 'gutenverse-core/hooks';
 import { useAnimationAdvanceData } from 'gutenverse-core/hooks';
@@ -10,7 +10,7 @@ import { isEmpty, renderIcon } from 'gutenverse-core/helper';
 const save = compose(
     withAnimationAdvanceScript('icon'),
     withMouseMoveEffectScript,
-    // withTooltipScript ? withTooltipScript('.guten-icon-wrapper') : (BlockElement) => (props) => <BlockElement {...props} />,
+    // withTooltipScript ? withTooltipScript('.guten-icon-wrapper') : (BlockElement) => (props) => <BlockElement {...props} />
 )((props) => {
     const {
         attributes,
@@ -28,6 +28,7 @@ const save = compose(
         rel,
         iconShape,
         iconView,
+        anchor
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
@@ -35,7 +36,9 @@ const save = compose(
     const displayClass = useDisplayFrontend(attributes);
 
     const className = classnames(
+        'wp-block-gutenverse-icon',
         'guten-element',
+        'wp-block-gutenverse-icon',
         elementId,
         'guten-icon',
         animationClass,
@@ -58,7 +61,7 @@ const save = compose(
         );
 
         const iconElement = !isEmpty(url) ?
-            <a className={wrapperClass} href={href} target={linkTarget} rel={rel} aria-label={ariaLabel}>
+            <a className={wrapperClass} href={href} target={ linkTarget } rel={ rel } aria-label={ariaLabel}>
                 {renderIcon(icon, iconType, iconSVG)}
             </a> : <span className={wrapperClass}>
                 {renderIcon(icon, iconType, iconSVG)}
@@ -67,7 +70,7 @@ const save = compose(
         return iconElement;
     };
 
-    return <div className={className} {...advanceAnimationData} {...tooltipData}>
+    return <div className={className} {...advanceAnimationData} {...tooltipData} id={anchor}>
         <IconELement />
     </div>;
 });

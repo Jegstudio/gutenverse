@@ -56,7 +56,7 @@ class Icon_List_Item extends Style_Abstract {
 				array(
 					'selector'       => ".{$this->element_id} i, .{$this->element_id} .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
-						return "line-height: {$value}px;";
+						return "line-height: {$value}px; height: unset !important;";
 					},
 					'value'          => $this->attrs['iconLineHeight'],
 					'device_control' => true,

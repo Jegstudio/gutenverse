@@ -4,6 +4,8 @@ import save from './save';
 import metadata from './block.json';
 import { IconAccordionSVG } from '../../../assets/icon/index';
 import saveV1 from './deprecated/v1/save';
+import saveV2 from './deprecated/v2/save';
+import attrV1 from './deprecated/attrV1/attributes.json';
 
 const { name, attributes, supports } = metadata;
 export { metadata, name };
@@ -14,8 +16,25 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes,
+            attributes: attrV1,
             supports,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    title: attributes.title
+                };
+            },
+            save: saveV2
+        },
+        {
+            attributes: attrV1,
+            supports,
+            migrate: (attributes) => {
+                return {
+                    ...attributes,
+                    title: attributes.title
+                };
+            },
             save: saveV1
         },
     ]

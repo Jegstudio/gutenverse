@@ -72,13 +72,16 @@ const save = compose(
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
 
-    const className = classnames(
-        'guten-element',
-        'guten-image',
-        elementId,
-        animationClass,
-        displayClass,
-    );
+    const blockProps = useBlockProps.save({
+        ...advanceAnimationData,
+        className: classnames(
+            'guten-element',
+            'guten-image',
+            elementId,
+            animationClass,
+            displayClass,
+        ),
+    });
 
     const caption = () => {
         switch (captionType) {
@@ -107,7 +110,7 @@ const save = compose(
             <ImageBoxFigure {...attributes} />
         </div>;
 
-    return <div className={className} {...advanceAnimationData}>
+    return <div {...blockProps}>
         {imageWrapper}
         {caption()}
     </div>;

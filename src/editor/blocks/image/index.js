@@ -8,6 +8,7 @@ import metadata from './block.json';
 import { IconImageSVG } from '../../../assets/icon/index';
 import example from './data/example';
 
+
 const { name, attributes } = metadata;
 
 export { metadata, name };
