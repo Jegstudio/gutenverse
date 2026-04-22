@@ -1,6 +1,63 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const arrowStyle = (elementId, attributes, data) => {
+    isNotEmpty(attributes['arrowOffsetX']) && data.push({
+        'type': 'plain',
+        'id': 'arrowOffsetX',
+        'responsive': true,
+        'selector': `.${elementId}.guten-testimonials`,
+        'properties': [
+            {
+                'name': '--guten-testimonial-arrow-offset-x',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['arrowOffsetY']) && data.push({
+        'type': 'plain',
+        'id': 'arrowOffsetY',
+        'responsive': true,
+        'selector': `.${elementId}.guten-testimonials`,
+        'properties': [
+            {
+                'name': '--guten-testimonial-arrow-offset-y',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['arrowGap']) && data.push({
+        'type': 'plain',
+        'id': 'arrowGap',
+        'responsive': true,
+        'selector': `.${elementId}.guten-testimonials`,
+        'properties': [
+            {
+                'name': '--guten-testimonial-arrow-gap',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ]
+    });
+
     isNotEmpty(attributes['arrowFontSize']) && data.push({
         'type': 'plain',
         'id': 'arrowFontSize',
