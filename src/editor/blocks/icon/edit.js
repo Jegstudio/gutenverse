@@ -25,7 +25,7 @@ const IconBlock = compose(
     withPassRef,
     withAnimationAdvanceV2('icon'),
     withMouseMoveEffect,
-    // withTooltip ? withTooltip('.guten-icon-wrapper') : (BlockElement) => (props) => <BlockElement {...props} />,
+    withTooltip ? withTooltip('.guten-icon-wrapper') : (BlockElement) => (props) => <BlockElement {...props} />,
 )((props) => {
     const {
         attributes,

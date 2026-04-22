@@ -121,9 +121,16 @@ class Icon extends Block_Abstract {
 			}
 		}
 
-		$id_attr    = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+		$id_attr         = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+		$tooltip_attr    = apply_filters(
+			'gutenverse_tooltip_script',
+			'',
+			isset( $this->attributes['tooltip'] ) ? $this->attributes['tooltip']  : array(),
+			'.guten-icon-wrapper',
+			$element_id
+		);
 		$class_name = trim( 'guten-element wp-block-gutenverse-icon ' . $element_id . ' guten-icon' . $animation_class . $display_classes . $custom_classes );
-		$content    = '<div' . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
+		$content    = '<div' . $tooltip_attr . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $this->render_content() . '</div>';
 		$content    = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content    = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'icon' );
 
