@@ -301,6 +301,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 = 3.6.1 =
 ##### New & Improvements
 * add option to be able to add global color/font through panel
+* add option to adjust slider arrow position
 
 ##### Bug Fixes
 * fix issue with icon svg on frontend
