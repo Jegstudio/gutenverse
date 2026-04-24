@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.6.0
+Stable tag: 3.6.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,6 +298,18 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+= 3.6.1 =
+##### New & Improvements
+* add option to be able to add global color/font through panel
+* add option to adjust slider arrow position
+
+##### Bug Fixes
+* fix issue with heading block recovery
+* fix issue with icon svg on frontend
+* fix issue with global font when there is no font weight or line height
+* fix multi buttons alignment and variation bug
+* fix taxonomy list horizontal layout frontend and editor different
+
 = 3.6.0 =
 ##### New & Improvements
 * update block rendering mechanism

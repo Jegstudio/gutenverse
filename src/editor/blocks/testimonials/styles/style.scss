@@ -4,6 +4,9 @@
 @import "../../../../assets/lib/_swiper.scss";
 
 .guten-testimonials {
+    --guten-testimonial-arrow-offset-x: 0px;
+    --guten-testimonial-arrow-offset-y: 0px;
+    --guten-testimonial-arrow-gap: 12px;
     line-height: 1.4em;
 
     /** Fix testimonial in container*/
@@ -13,6 +16,7 @@
         padding: 20px 5px;
         width: 100%;
         overflow: hidden;
+        position: relative;
     }
 
     .swiper-wrapper {
@@ -60,6 +64,121 @@
 
         i {
             @include transition(false, false, all .25s ease);
+        }
+    }
+
+    &.arrow-layout-split {
+        .swiper-button-prev {
+            margin-top: 0;
+            left: var(--guten-testimonial-arrow-offset-x);
+        }
+
+        .swiper-button-next {
+            margin-top: 0;
+            right: var(--guten-testimonial-arrow-offset-x);
+        }
+    }
+
+    &.arrow-layout-split.arrow-position-default {
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: calc(50% + var(--guten-testimonial-arrow-offset-y));
+            @include transform(false, translateY(-50%));
+        }
+    }
+
+    &.arrow-layout-split.arrow-position-top {
+        .swiper-button-prev {
+            top: var(--guten-testimonial-arrow-offset-y);
+            @include transform(false, none);
+        }
+
+        .swiper-button-next {
+            top: var(--guten-testimonial-arrow-offset-y);
+            @include transform(false, none);
+        }
+    }
+
+    &.arrow-layout-split.arrow-position-bottom {
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: 100%;
+            @include transform(false, translateY(calc(-100% + var(--guten-testimonial-arrow-offset-y))));
+        }
+    }
+
+    &.arrow-layout-grouped {
+        .swiper-navigation-wrapper {
+            position: absolute;
+            z-index: 11;
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            gap: var(--guten-testimonial-arrow-gap);
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            position: static;
+            top: auto;
+            right: auto;
+            left: auto;
+            margin-top: 0;
+            @include transform(false, none);
+        }
+
+        &.arrow-group-position-top-left .swiper-navigation-wrapper {
+            top: 0;
+            left: 0;
+            @include transform(false, translate(var(--guten-testimonial-arrow-offset-x), var(--guten-testimonial-arrow-offset-y)));
+        }
+
+        &.arrow-group-position-top-center .swiper-navigation-wrapper {
+            top: 0;
+            left: 50%;
+            @include transform(false, translate(calc(-50% + var(--guten-testimonial-arrow-offset-x)), var(--guten-testimonial-arrow-offset-y)));
+        }
+
+        &.arrow-group-position-top-right .swiper-navigation-wrapper {
+            top: 0;
+            left: 100%;
+            @include transform(false, translate(calc(-100% + var(--guten-testimonial-arrow-offset-x)), var(--guten-testimonial-arrow-offset-y)));
+        }
+
+        &.arrow-group-position-middle-left .swiper-navigation-wrapper {
+            top: 50%;
+            left: 0;
+            @include transform(false, translate(var(--guten-testimonial-arrow-offset-x), calc(-50% + var(--guten-testimonial-arrow-offset-y))));
+        }
+
+        &.arrow-group-position-middle-center .swiper-navigation-wrapper {
+            top: 50%;
+            left: 50%;
+            @include transform(false, translate(calc(-50% + var(--guten-testimonial-arrow-offset-x)), calc(-50% + var(--guten-testimonial-arrow-offset-y))));
+        }
+
+        &.arrow-group-position-middle-right .swiper-navigation-wrapper {
+            top: 50%;
+            left: 100%;
+            @include transform(false, translate(calc(-100% + var(--guten-testimonial-arrow-offset-x)), calc(-50% + var(--guten-testimonial-arrow-offset-y))));
+        }
+
+        &.arrow-group-position-bottom-left .swiper-navigation-wrapper {
+            top: 100%;
+            left: 0;
+            @include transform(false, translate(var(--guten-testimonial-arrow-offset-x), calc(-100% + var(--guten-testimonial-arrow-offset-y))));
+        }
+
+        &.arrow-group-position-bottom-center .swiper-navigation-wrapper {
+            top: 100%;
+            left: 50%;
+            @include transform(false, translate(calc(-50% + var(--guten-testimonial-arrow-offset-x)), calc(-100% + var(--guten-testimonial-arrow-offset-y))));
+        }
+
+        &.arrow-group-position-bottom-right .swiper-navigation-wrapper {
+            top: 100%;
+            left: 100%;
+            @include transform(false, translate(calc(-100% + var(--guten-testimonial-arrow-offset-x)), calc(-100% + var(--guten-testimonial-arrow-offset-y))));
         }
     }
 

@@ -22,6 +22,7 @@ const save = compose(
         elementId,
         content,
         type,
+        legacyClassName,
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
@@ -29,7 +30,7 @@ const save = compose(
     const displayClass = useDisplayFrontend(attributes);
 
     const TagName = 'h' + type;
-    const className = classnames(
+    const className = legacyClassName || classnames(
         'wp-block-gutenverse-heading',
         'guten-element',
         elementId,

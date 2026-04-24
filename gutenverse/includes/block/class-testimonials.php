@@ -225,7 +225,7 @@ class Testimonials extends Block_Abstract {
 
 		$navigation = '';
 		if ( $show_arrow ) {
-			$navigation = '<div class="swiper-button-prev"></div><div class="swiper-button-next"></div>';
+			$navigation = '<div class="swiper-navigation-wrapper"><div class="swiper-button-next"></div><div class="swiper-button-prev"></div></div>';
 		}
 
 		$element_id  = $this->get_element_id();
@@ -265,10 +265,13 @@ class Testimonials extends Block_Abstract {
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 		$content_type    = isset( $this->attributes['contentType'] ) ? (int) $this->attributes['contentType'] : 1;
+		$arrow_layout    = $this->attributes['arrowLayout'] ?? 'split';
+		$arrow_position  = $this->attributes['arrowPosition'] ?? 'default';
+		$arrow_group_position = $this->attributes['arrowGroupPosition'] ?? 'bottom-center';
 
 		$anchor      = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$anchor_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
-		$class_name  = trim( 'guten-element guten-testimonials no-margin ' . $element_id . $animation_class . $display_classes . $custom_classes . ' style-' . $content_type . ' quote-override' );
+		$class_name  = trim( 'guten-element guten-testimonials no-margin ' . $element_id . $animation_class . $display_classes . $custom_classes . ' style-' . $content_type . ' quote-override arrow-layout-' . $arrow_layout . ' arrow-position-' . $arrow_position . ' arrow-group-position-' . $arrow_group_position );
 		$content     = '<div' . $anchor_attr . ' class="' . esc_attr( $class_name ) . '">' . $this->render_content() . '</div>';
 
 		return $content;

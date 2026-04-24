@@ -55,6 +55,33 @@
 			"type": "boolean",
 			"default": false
 		},
+		"arrowLayout": {
+			"type": "string",
+			"default": "split",
+			"copyStyle": true
+		},
+		"arrowPosition": {
+			"type": "string",
+			"default": "default",
+			"copyStyle": true
+		},
+		"arrowGroupPosition": {
+			"type": "string",
+			"default": "bottom-center",
+			"copyStyle": true
+		},
+		"arrowOffsetX": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"arrowOffsetY": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"arrowGap": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"showQuote": {
 			"type": "boolean",
 			"default": false

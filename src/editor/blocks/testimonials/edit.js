@@ -56,6 +56,9 @@ const TestimonialsBlock = compose(
         loop,
         showNav,
         showArrow,
+        arrowLayout,
+        arrowPosition,
+        arrowGroupPosition,
         autoplay,
         autoplayTimeout
     } = attributes;
@@ -85,6 +88,9 @@ const TestimonialsBlock = compose(
             displayClass,
             `style-${contentType}`,
             'quote-override',
+            `arrow-layout-${arrowLayout || 'split'}`,
+            `arrow-position-${arrowPosition || 'default'}`,
+            `arrow-group-position-${arrowGroupPosition || 'bottom-center'}`,
         ),
         ref: elementRef
     });
