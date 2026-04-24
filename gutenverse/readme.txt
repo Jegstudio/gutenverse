@@ -304,6 +304,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * add option to adjust slider arrow position
 
 ##### Bug Fixes
+* fix issue with heading block recovery
 * fix issue with icon svg on frontend
 * fix issue with global font when there is no font weight or line height
 * fix multi buttons alignment and variation bug
