@@ -291,7 +291,10 @@ class Frontend_Assets {
 				GUTENVERSE_URL . '/assets/js/frontend/' . $block . '.js',
 				$include,
 				GUTENVERSE_VERSION,
-				true
+				array(
+					'in_footer' => true,
+					'strategy'  => 'defer',
+				)
 			);
 		}
 	}
@@ -365,12 +368,26 @@ class Frontend_Assets {
 			GUTENVERSE_VERSION
 		);
 
+		wp_style_add_data(
+			'gutenverse-frontend',
+			'path',
+			GUTENVERSE_DIR . '/assets/css/frontend.css'
+		);
+
 		foreach ( $blocks as $block ) {
+			$handle = 'gutenverse-frontend-' . $block . '-style';
+
 			wp_register_style(
-				'gutenverse-frontend-' . $block . '-style',
+				$handle,
 				GUTENVERSE_URL . '/assets/css/frontend/' . $block . '.css',
 				array( 'gutenverse-frontend' ),
 				GUTENVERSE_VERSION
+			);
+
+			wp_style_add_data(
+				$handle,
+				'path',
+				GUTENVERSE_DIR . '/assets/css/frontend/' . $block . '.css'
 			);
 		}
 	}
