@@ -9,7 +9,7 @@ import * as divider from './data/divider-style';
 import { renderIcon } from 'gutenverse-core/helper';
 import { useRef } from '@wordpress/element';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
@@ -61,6 +61,7 @@ const DividerBlock = compose(
     const {
         attributes,
         clientId,
+        setAttributes,
         setBlockRef
     } = props;
 
@@ -81,6 +82,15 @@ const DividerBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
 
     const blockProps = useBlockProps({
         className: classnames(

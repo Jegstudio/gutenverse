@@ -8,7 +8,7 @@ import WPSwiper from '../../components/swiper/wp-swiper';
 import ContentItem from './components/content-item';
 import { swiperSettings } from '../../components/swiper/helper';
 import { useEffect, useRef, useState } from '@wordpress/element';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { dispatch } from '@wordpress/data';
 import { getImageSrc } from 'gutenverse-core/editor-helper';
@@ -120,6 +120,17 @@ const TestimonialsBlock = compose(
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconQuoteType', svg: 'iconQuoteSVG' },
+            { type: 'iconRatingFullType', svg: 'iconRatingFullSVG' },
+            { type: 'iconRatingHalfType', svg: 'iconRatingHalfSVG' },
+        ],
+    });
 
     return <>
         <CopyElementToolbar {...props} />

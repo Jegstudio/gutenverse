@@ -11,7 +11,7 @@ import GalleryItem from './components/gallery-item';
 import { u } from 'gutenverse-core/components';
 import Shuffle from 'shufflejs';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
@@ -108,6 +108,18 @@ const GalleryBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'zoomIconType', svg: 'zoomIconSVG' },
+            { type: 'linkIconType', svg: 'linkIconSVG' },
+            { type: 'enableLoadIconType', svg: 'enableLoadIconSVG' },
+            { type: 'filterSearchIconType', svg: 'filterSearchIconSVG' },
+        ],
+    });
 
     const blockProps = useBlockProps({
         className: classnames(

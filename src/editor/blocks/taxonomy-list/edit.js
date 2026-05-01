@@ -7,7 +7,7 @@ import { classnames, PostListSkeleton } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { useEffect, useState, useRef, RawHTML } from '@wordpress/element';
-import { useDisplayEditor, useAnimationEditor } from 'gutenverse-core/hooks';
+import { useDisplayEditor, useAnimationEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { dummyText, isOnEditor, renderIcon, svgAtob } from 'gutenverse-core/helper';
 import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
@@ -21,6 +21,7 @@ const IconListBlock = compose(
 )((props) => {
     const {
         attributes,
+        setAttributes,
         clientId
     } = props;
 
@@ -150,6 +151,15 @@ const IconListBlock = compose(
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
 
     return <>
         <CopyElementToolbar {...props}/>

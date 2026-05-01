@@ -7,7 +7,7 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { isOnEditor } from 'gutenverse-core/helper';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
@@ -72,6 +72,21 @@ const PostBlockBlock = compose(
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'readmoreIconType', svg: 'readmoreIconSVG' },
+            { type: 'commentIconType', svg: 'commentIconSVG' },
+            { type: 'metaAuthorIconType', svg: 'metaAuthorIconSVG' },
+            { type: 'metaDateIconType', svg: 'metaDateIconSVG' },
+            { type: 'paginationIconType', svg: 'paginationIconSVG' },
+            { type: 'paginationPrevIconType', svg: 'paginationPrevIconSVG' },
+            { type: 'paginationNextIconType', svg: 'paginationNextIconSVG' },
+        ],
+    });
 
     useEffect(() => {
         if (numberPost <= 0) {

@@ -13,6 +13,7 @@ import { HighLightToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { useRichTextParameter, renderIcon } from 'gutenverse-core/helper';
+import { useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 
 export const AccordionIcon = ({ iconOpen, iconOpenType, iconOpenSVG, iconClosed, iconClosedType, iconClosedSVG }) => {
@@ -67,6 +68,16 @@ const Accordion = props => {
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconOpenType', svg: 'iconOpenSVG' },
+            { type: 'iconClosedType', svg: 'iconClosedSVG' },
+        ],
+    });
 
     const accordionClass = classnames('accordion-content');
 

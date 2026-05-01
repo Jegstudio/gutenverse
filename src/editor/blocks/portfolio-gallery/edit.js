@@ -3,7 +3,7 @@ import { classnames } from 'gutenverse-core/components';
 import { useBlockProps } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { panelList } from './panels/panel-list';
 import { getImageSrc } from 'gutenverse-core/editor-helper';
 import { BlockPanelController } from 'gutenverse-core/controls';
@@ -45,6 +45,15 @@ const PortfolioGalleryBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'linkIconType', svg: 'linkIconSVG' },
+        ],
+    });
 
     const [current, setCurrent] = useState(0);
 

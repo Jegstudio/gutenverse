@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 import { panelList } from './panels/panel-list';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { URLToolbar } from 'gutenverse-core/toolbars';
-import { useAnimationEditor, useDisplayEditor, useDynamicContent, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicContent, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import getBlockStyle from './styles/block-style';
@@ -88,6 +88,15 @@ const ButtonBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
 
     useDynamicScript(elementRef);
     const placeholder = showIcon ? '' : __('Button Text...');

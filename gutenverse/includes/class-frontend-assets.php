@@ -90,9 +90,9 @@ class Frontend_Assets {
 	/**
 	 * Load the font icon
 	 *
-	 * @param mixed  $conditions The value from the attributes array.
-	 * @param string $attrs The comparison operator (e.g., '===', '!==').
-	 * @param mixed  $block_name The value to compare against.
+	 * @param array $conditions Value of data need to be loaded.
+	 * @param array $attrs The value from the attributes array.
+	 * @param mixed $block_name The value to compare against.
 	 *
 	 * @since 3.3.0
 	 */

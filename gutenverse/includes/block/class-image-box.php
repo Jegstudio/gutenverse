@@ -104,14 +104,14 @@ class Image_Box extends Block_Abstract {
 		$title_icon_svg      = isset( $this->attributes['titleIconSVG'] ) ? $this->attributes['titleIconSVG'] : '';
 		$title_icon_position = isset( $this->attributes['titleIconPosition'] ) ? $this->attributes['titleIconPosition'] : 'before';
 
-		if ( $title_icon_position !== $position || empty( $title_icon ) ) {
+		if ( $title_icon_position !== $position || ( empty( $title_icon ) && empty( $title_icon_svg ) ) ) {
 			return '';
 		}
 
 		$pos_class = 'icon-position-' . $position;
 
 		if ( 'svg' === $title_icon_type && ! empty( $title_icon_svg ) ) {
-			return '<span class="image-box-icon ' . esc_attr( $pos_class ) . '">' . $title_icon_svg . '</span>';
+			return '<span class="image-box-icon ' . esc_attr( $pos_class ) . '">' . $this->render_icon( $title_icon_type, $title_icon, $title_icon_svg ) . '</span>';
 		}
 
 		return '<span class="image-box-icon ' . esc_attr( $pos_class ) . '"><i class="' . esc_attr( $title_icon ) . '"></i></span>';

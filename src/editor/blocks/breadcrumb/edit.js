@@ -5,7 +5,7 @@ import { classnames } from 'gutenverse-core/components';
 import { BlockPanelController, PanelTutorial } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { withPartialRender } from 'gutenverse-core/hoc';
-import { useDisplayEditor } from 'gutenverse-core/hooks';
+import { useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
@@ -17,6 +17,7 @@ const BreadcrumbBlock = compose(
 )((props) => {
     const {
         attributes,
+        setAttributes,
         clientId
     } = props;
 
@@ -32,6 +33,15 @@ const BreadcrumbBlock = compose(
     const displayClass = useDisplayEditor(attributes);
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'separatorIconType', svg: 'separatorIconSVG' },
+        ],
+    });
 
     const blockProps = useBlockProps({
         className: classnames(

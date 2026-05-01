@@ -3,7 +3,7 @@ import { withMouseMoveEffect, withPartialRender } from 'gutenverse-core/hoc';
 import { panelList } from './panels/panel-list';
 import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
 import { useRef, useState } from '@wordpress/element';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { classnames } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -17,6 +17,7 @@ const SearchBlock = compose(
 )(props => {
     const {
         attributes,
+        setAttributes,
         clientId
     } = props;
     const {
@@ -69,6 +70,15 @@ const SearchBlock = compose(
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'closeIconType', svg: 'closeIconSVG' },
+        ],
+    });
 
     if (closeIconRef.current) {
         closeIconRef.current.style.visibility = inputValue !== '' ? 'visible' : 'hidden';

@@ -11,7 +11,7 @@ import { renderIcon } from 'gutenverse-core/helper';
 import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef, withTooltip } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 import getBlockStyle from './styles/block-style';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -107,6 +107,15 @@ const IconBlock = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
 
     useEffect(() => {
         if (dynamicHref !== undefined) {

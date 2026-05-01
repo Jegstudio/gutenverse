@@ -10,7 +10,7 @@ import { useRef } from '@wordpress/element';
 import { RawHTML } from '@wordpress/element';
 import GutenverseNavMenu from '../../../frontend/blocks/nav-menu';
 import { NavSkeleton, classnames } from 'gutenverse-core/components';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { isOnEditor } from 'gutenverse-core/helper';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -23,6 +23,7 @@ const NavMenuBlock = compose(
 )((props) => {
     const {
         attributes,
+        setAttributes,
         deviceType,
         clientId
     } = props;
@@ -194,6 +195,17 @@ const NavMenuBlock = compose(
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'mobileIconType', svg: 'mobileIconSVG' },
+            { type: 'mobileCloseIconType', svg: 'mobileCloseIconSVG' },
+            { type: 'submenuItemIndicatorType', svg: 'submenuItemIndicatorSVG' },
+        ],
+    });
 
     return <>
         <CopyElementToolbar {...props} />

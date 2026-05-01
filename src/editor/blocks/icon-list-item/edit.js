@@ -11,7 +11,7 @@ import { HighLightToolbar, URLToolbar, FilterDynamic } from 'gutenverse-core/too
 import { gutenverseRoot, renderIcon } from 'gutenverse-core/helper';
 import { LogoCircleColor24SVG } from 'gutenverse-core/icons';
 import { SelectParent } from 'gutenverse-core/components';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -59,6 +59,15 @@ const IconListItemBlock = (props) => {
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
 
     useEffect(() => {
         setAttributes({

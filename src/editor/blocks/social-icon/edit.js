@@ -15,7 +15,7 @@ import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
 import { withAnimationAdvanceV2, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
 import { SelectParent } from 'gutenverse-core/components';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -107,6 +107,15 @@ const SocialIcon = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
 
     useEffect(() => {
         if (dynamicHref !== undefined) {
