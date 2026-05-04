@@ -4,7 +4,7 @@ Contributors: Jegstudio
 Tags: blocks, editor, gutenberg, gutenberg blocks, page builder
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.6.1
+Stable tag: 3.6.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,6 +298,15 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 
 
 == Changelog ==
+
+= 3.6.2 =
+##### New & Improvements
+* improve background color to be able to be responsive
+
+##### Bug Fixes
+* fix issue with breadcrumb block on pages
+* fix post terms block container sizing
+
 = 3.6.1 =
 ##### New & Improvements
 * add option to be able to add global color/font through panel
