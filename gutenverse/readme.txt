@@ -304,6 +304,7 @@ Spectra - WordPress Gutenberg Blocks, Otter – Gutenberg Blocks – Page Builde
 * improve background color to be able to be responsive
 
 ##### Bug Fixes
+* fix youtube video url issue
 * fix issue with breadcrumb block on pages
 * fix post terms block container sizing
 
