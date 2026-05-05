@@ -40,9 +40,14 @@ class GutenverseVideo extends Default {
     _normalizeVideoUrl(url) {
         if (!url) return url;
 
+        let videoProvider = 'www.youtube.com';
+        if (url.includes('www.youtube-nocookie.com')) {
+            videoProvider = 'www.youtube-nocookie.com';
+        }
+
         const videoId = this._getYouTubeVideoId(url);
         if (videoId) {
-            return `https://www.youtube.com/embed/${videoId}`;
+            return `https://${videoProvider}/embed/${videoId}`;
         }
 
         return url;

@@ -288,6 +288,11 @@ class Breadcrumb extends Block_Abstract {
 				'url'  => get_permalink( $ancestor_id ),
 			);
 		}
+
+		$initial_data[] = array(
+			'name' => get_the_title( $post->ID ),
+			'url'  => get_permalink( $post->ID ),
+		);
 		return $initial_data;
 	}
 
