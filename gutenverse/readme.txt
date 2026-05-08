@@ -30,7 +30,7 @@ Use Gutenverse when you want a lightweight WordPress page builder and website bu
 
 = Key Features =
 
-* 59 Gutenberg blocks and WordPress blocks
+* 55+ Gutenberg blocks and WordPress blocks
 * 600+ ready-to-import templates and sections
 * WordPress Site Editor and block theme support
 * Page builder controls inside the native Block Editor
@@ -51,7 +51,7 @@ Block categories include:
 
 * Layout and wrapper blocks: Container, Section, Column, Flexible Wrapper, and Popup Builder
 * Content and design blocks: Heading, Button, Image, Gallery, Tabs, Accordion, Icon Box, Team, Testimonials, Google Maps, and more
-* Post and site blocks: Query Loop, Post Block, Post Template, Post Title, Post Content, Post Featured Image, Archive Title, and Search Result Title
+* Post and site blocks: Post Block, Post Title, Post Content, Post Featured Image, Archive Title, and Search Result Title
 
 Explore the full block list at [Gutenverse Blocks](https://gutenverse.com/blocks/).
 
