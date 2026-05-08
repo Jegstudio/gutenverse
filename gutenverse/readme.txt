@@ -1,6 +1,6 @@
-=== Gutenverse - Gutenberg Blocks, Site Editor & Page Builder ===
+=== Gutenverse - WordPress Blocks, Page Builder & Site Editor ===
 Contributors: Jegstudio
-Tags: blocks, gutenberg, block editor, page builder, site editor
+Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 6.9
 Requires PHP: 7.0
@@ -8,30 +8,31 @@ Stable tag: 3.6.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Gutenberg blocks and WordPress page builder controls for the Block Editor, Site Editor templates, popup builder, and block themes.
+WordPress blocks, page builder, and website builder for the Block Editor and Site Editor with templates, popups, and block themes.
 
 == Description ==
 
-Gutenverse is a WordPress Gutenberg blocks plugin, block editor addon, and Site Editor page builder for creating fast, responsive websites without code. It includes 59 WordPress blocks, 600+ templates, global styles, responsive controls, popup builder tools, and block theme support.
+Gutenverse is a WordPress blocks plugin, page builder, and website builder for the native Block Editor and Site Editor. Create fast, responsive websites without code using 57 blocks, 600+ templates, global styles, responsive controls, popup builder tools, and block theme support.
 
-Build landing pages, business websites, blogs, portfolios, headers, footers, archive templates, single post templates, popups, and full site designs with Gutenberg blocks in the native WordPress Block Editor and Site Editor.
+Build landing pages, business websites, blogs, portfolios, headers, footers, archive templates, single post templates, popups, and full site designs with WordPress blocks in the native Block Editor and Site Editor.
 
-Use Gutenverse when you want a lightweight WordPress page builder and website builder that extends Gutenberg instead of replacing the editor.
+Use Gutenverse when you want a lightweight page builder experience that extends WordPress, Gutenberg, and the Site Editor instead of replacing the editor.
 
 = Why Choose Gutenverse =
 
-* Build websites inside the native WordPress Block Editor
+* Build pages and websites with WordPress blocks
+* Use page builder controls inside the native Block Editor
 * Create full site layouts with the WordPress Site Editor
-* Use Gutenberg blocks with block themes and Full Site Editing (FSE)
-* Import ready-made templates and sections
+* Start from 600+ starter templates, sections, and layouts
+* Use block themes and Full Site Editing (FSE)
 * Design responsive pages for desktop, tablet, and mobile
 * Build popups, landing pages, headers, footers, and post templates
 * Keep the editing workflow close to WordPress core
 
 = Key Features =
 
-* 55+ Gutenberg blocks and WordPress blocks
-* 600+ ready-to-import templates and sections
+* 57 WordPress blocks for the Block Editor
+* 600+ ready-to-import starter templates and sections
 * WordPress Site Editor and block theme support
 * Page builder controls inside the native Block Editor
 * Popup builder tools
@@ -43,7 +44,7 @@ Use Gutenverse when you want a lightweight WordPress page builder and website bu
 * Advanced styling controls for spacing, background, border, typography, visibility, and animation
 * Lightweight, performance-focused website building experience
 
-= Gutenberg Blocks Included =
+= WordPress Blocks Included =
 
 Gutenverse includes layout blocks, content blocks, design blocks, post blocks, and site building blocks for WordPress.
 
@@ -57,19 +58,19 @@ Explore the full block list at [Gutenverse Blocks](https://gutenverse.com/blocks
 
 = Template Library =
 
-Gutenverse includes 600+ templates and sections for faster website creation. Start from prebuilt layouts, then customize each section with Gutenberg blocks, responsive controls, global colors, and global fonts.
+Gutenverse includes 600+ starter templates, layouts, and sections for faster website creation. Start from prebuilt designs, then customize each section with WordPress blocks, responsive controls, global colors, and global fonts.
 
 Template types include landing pages, business websites, portfolio layouts, content sections, headers, footers, archive layouts, single post layouts, and full site templates.
 
 = Built For The WordPress Site Editor =
 
-Gutenverse works with the WordPress Site Editor, block themes, and Full Site Editing. You can create and customize site parts such as headers, footers, archive pages, and single post templates using Gutenberg blocks.
+Gutenverse works with the WordPress Site Editor, block themes, and Full Site Editing. You can create and customize site parts such as headers, footers, archive pages, and single post templates using WordPress blocks.
 
 For a ready-made block theme, try [Unibiz](https://wordpress.org/themes/unibiz/).
 
 = Free And Pro Features =
 
-The free version of Gutenverse includes the core Gutenberg blocks, template library access, responsive controls, global styles, layout tools, and popup builder features needed to build a complete WordPress website.
+The free version of Gutenverse includes the core WordPress blocks, template library access, responsive controls, global styles, layout tools, and popup builder features needed to build a complete WordPress website.
 
 Gutenverse Pro adds advanced blocks, templates, form builder tools, popup options, dynamic data, display conditions, custom fonts, premium templates, and advanced site building features.
 
@@ -102,7 +103,11 @@ Yes. Gutenverse works as a WordPress page builder built on top of Gutenberg and 
 
 = Can I build a full website with Gutenverse? =
 
-Yes. Gutenverse can be used as a WordPress website builder for block themes and Full Site Editing. You can build pages, templates, site parts, content sections, and responsive layouts with Gutenberg blocks.
+Yes. Gutenverse can be used as a WordPress website builder for block themes and Full Site Editing. You can build pages, templates, site parts, content sections, and responsive layouts with WordPress blocks.
+
+= Is Gutenverse a WordPress blocks plugin? =
+
+Yes. Gutenverse adds WordPress blocks for layout, content, design, posts, popups, templates, and full site editing inside the native Block Editor.
 
 = Does Gutenverse work with the WordPress Site Editor? =
 
@@ -120,6 +125,10 @@ Gutenverse works best with block themes that support the WordPress Site Editor. 
 
 Yes. Gutenverse is designed to work inside the native WordPress Block Editor and should work alongside most well-coded Gutenberg block plugins.
 
+= Does Gutenverse include starter templates? =
+
+Yes. Gutenverse includes 600+ starter templates, layouts, and sections that you can import and customize with WordPress blocks.
+
 = How do I find Gutenverse blocks in the editor? =
 
 Open the block inserter in the WordPress editor and search for "Gutenverse". You can also search for a specific block, such as "Gutenverse Accordion", "Gutenverse Gallery", or "Gutenverse Button".
@@ -134,7 +143,7 @@ After some updates, WordPress may show an "Attempt Block Recovery" button for bl
 
 == Screenshots ==
 
-1. Animation Effects - Add animation effects to Gutenberg blocks.
+1. Animation Effects - Add animation effects to WordPress blocks.
 2. Drag And Drop Blocks - Search for Gutenverse blocks and start building pages.
 3. Font Styles - Customize typography with flexible font controls.
 4. Full Site Editing - Build with Gutenverse blocks in the WordPress Site Editor.
