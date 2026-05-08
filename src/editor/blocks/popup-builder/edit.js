@@ -54,9 +54,6 @@ const PopupBuilder = (props) => {
 
     const videoRef = useRef();
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -65,6 +62,9 @@ const PopupBuilder = (props) => {
             { type: 'closeIconType', svg: 'closeIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     const innerBlocksProps = useInnerBlocksProps({
         className: classnames('guten-popup-container')
     }, {

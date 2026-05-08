@@ -66,9 +66,6 @@ const Accordion = props => {
 
     const elementRef = useRef(null);
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -78,6 +75,9 @@ const Accordion = props => {
             { type: 'iconClosedType', svg: 'iconClosedSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     const accordionClass = classnames('accordion-content');
 

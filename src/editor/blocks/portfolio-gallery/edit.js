@@ -42,10 +42,6 @@ const PortfolioGalleryBlock = compose(
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -54,6 +50,10 @@ const PortfolioGalleryBlock = compose(
             { type: 'linkIconType', svg: 'linkIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
 
     const [current, setCurrent] = useState(0);
 

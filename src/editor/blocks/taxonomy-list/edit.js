@@ -149,9 +149,6 @@ const IconListBlock = compose(
         setSafeResponse(temp.innerHTML);
     }, [response]);
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -160,6 +157,9 @@ const IconListBlock = compose(
             { type: 'iconType', svg: 'iconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
         <CopyElementToolbar {...props}/>

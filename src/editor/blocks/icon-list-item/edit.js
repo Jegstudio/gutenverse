@@ -57,9 +57,6 @@ const IconListItemBlock = (props) => {
     const { dynamicHref } = useDynamicUrl(dynamicUrl);
     const isGlobalLinkSet = url !== undefined && url !== '';
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -68,6 +65,9 @@ const IconListItemBlock = (props) => {
             { type: 'iconType', svg: 'iconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     useEffect(() => {
         setAttributes({

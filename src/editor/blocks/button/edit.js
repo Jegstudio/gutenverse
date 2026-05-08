@@ -85,9 +85,6 @@ const ButtonBlock = compose(
 
     const textRef = useRef();
     const elementRef = useRef(null);
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
 
     useInitializeIconToSvg({
         elementId,
@@ -97,6 +94,10 @@ const ButtonBlock = compose(
             { type: 'iconType', svg: 'iconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
 
     useDynamicScript(elementRef);
     const placeholder = showIcon ? '' : __('Button Text...');

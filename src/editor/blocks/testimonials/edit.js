@@ -118,9 +118,6 @@ const TestimonialsBlock = compose(
         autoplayTimeout
     ]);
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -131,6 +128,9 @@ const TestimonialsBlock = compose(
             { type: 'iconRatingHalfType', svg: 'iconRatingHalfSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
         <CopyElementToolbar {...props} />

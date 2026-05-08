@@ -55,10 +55,6 @@ const Accordions = compose(
 
     const elementRef = useRef(null);
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -68,6 +64,10 @@ const Accordions = compose(
             { type: 'iconClosedType', svg: 'iconClosedSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
 

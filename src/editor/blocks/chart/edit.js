@@ -180,9 +180,6 @@ const ChartBlock = compose(
         }
     </div>;
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -191,6 +188,9 @@ const ChartBlock = compose(
             { type: 'iconType', svg: 'iconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />

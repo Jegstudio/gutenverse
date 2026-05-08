@@ -22,17 +22,21 @@ class Frontend_Assets {
 		add_filter( 'gutenverse_include_frontend', array( $this, 'load_conditional_scripts' ) );
 		add_filter( 'gutenverse_include_frontend', array( $this, 'load_conditional_styles' ) );
 		add_filter( 'gutenverse_conditional_script_attributes', array( $this, 'font_icon_conditional_load' ), null, 3 );
-		add_action( 'gutenverse_loop_blocks', array( $this, 'enqueue_frontend_style' ) );
+		add_action( 'gutenverse_loop_blocks', array( $this, 'enqueue_frontend_style' ), 10, 3 );
 	}
 
 	/**
 	 * Queue the base frontend style when Gutenverse blocks exist so WordPress can inline it.
 	 *
-	 * @param array $block Parsed block data.
+	 * @param array  $block Parsed block data.
+	 * @param string $style Generated style.
+	 * @param mixed  $generator Frontend generator instance.
 	 */
-	public function enqueue_frontend_style( $block ) {
+	public function enqueue_frontend_style( $block, $style = null, $generator = null ) {
 		if ( isset( $block['blockName'] ) && 0 === strpos( $block['blockName'], 'gutenverse/' ) ) {
 			wp_enqueue_style( 'gutenverse-frontend' );
+
+			$generator->add_script( array( 'style' => 'gutenverse-frontend' ) );
 		}
 	}
 

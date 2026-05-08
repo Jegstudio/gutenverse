@@ -31,8 +31,6 @@ const BreadcrumbBlock = compose(
 
     const elementRef = useRef(null);
     const displayClass = useDisplayEditor(attributes);
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     useInitializeIconToSvg({
         elementId,
@@ -42,6 +40,9 @@ const BreadcrumbBlock = compose(
             { type: 'separatorIconType', svg: 'separatorIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     const blockProps = useBlockProps({
         className: classnames(

@@ -277,10 +277,6 @@ const ImageBoxBlock = compose(
         'gutenverse.pro.dynamic.toolbar',
     );
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -289,6 +285,10 @@ const ImageBoxBlock = compose(
             { type: 'titleIconType', svg: 'titleIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
 
     const blockProps = useBlockProps({
         className: classnames(

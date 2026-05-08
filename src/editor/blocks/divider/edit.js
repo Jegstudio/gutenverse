@@ -79,10 +79,6 @@ const DividerBlock = compose(
     const isRegular = ['default', 'double', 'dotted', 'dashed'].includes(type);
     const isTribal = ['fir', 'halfrounds', 'leaves', 'stripes', 'squares', 'trees', 'tribal', 'x'].includes(type);
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -91,6 +87,10 @@ const DividerBlock = compose(
             { type: 'iconType', svg: 'iconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
 
     const blockProps = useBlockProps({
         className: classnames(

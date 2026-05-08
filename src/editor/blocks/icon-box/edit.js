@@ -179,10 +179,6 @@ const IconBoxBlock = compose(
         }
     };
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -192,6 +188,10 @@ const IconBoxBlock = compose(
             { type: 'watermarkIconType', svg: 'watermarkIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
 
     const innerBlockProps = useInnerBlocksProps(
         {},

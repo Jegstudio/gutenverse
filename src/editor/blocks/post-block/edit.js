@@ -70,9 +70,6 @@ const PostBlockBlock = compose(
     const [totalPages, setTotalPages] = useState(1);
     const elementRef = useRef();
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -87,6 +84,9 @@ const PostBlockBlock = compose(
             { type: 'paginationNextIconType', svg: 'paginationNextIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     useEffect(() => {
         if (numberPost <= 0) {

@@ -69,10 +69,6 @@ const FunFactBlock = compose(
     const displayClass = useDisplayEditor(attributes);
     const deviceType = getDeviceType();
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -81,6 +77,10 @@ const FunFactBlock = compose(
             { type: 'iconType', svg: 'iconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
 
     useEffect(() => {
         if (elementRef.current) {

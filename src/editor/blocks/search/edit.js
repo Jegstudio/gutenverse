@@ -68,9 +68,6 @@ const SearchBlock = compose(
         }
     );
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -79,6 +76,9 @@ const SearchBlock = compose(
             { type: 'closeIconType', svg: 'closeIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     if (closeIconRef.current) {
         closeIconRef.current.style.visibility = inputValue !== '' ? 'visible' : 'hidden';

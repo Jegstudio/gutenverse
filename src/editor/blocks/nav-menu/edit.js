@@ -193,9 +193,6 @@ const NavMenuBlock = compose(
         ['data-item-indicator-svg']: submenuItemIndicatorSVG,
     });
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -206,6 +203,9 @@ const NavMenuBlock = compose(
             { type: 'submenuItemIndicatorType', svg: 'submenuItemIndicatorSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
         <CopyElementToolbar {...props} />

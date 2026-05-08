@@ -56,10 +56,6 @@ const ProgressBarBlock = compose(
         }
     );
 
-    useGenerateElementId(clientId, elementId, elementRef);
-    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
-    useDynamicScript(elementRef);
-
     useInitializeIconToSvg({
         elementId,
         attributes,
@@ -68,6 +64,10 @@ const ProgressBarBlock = compose(
             { type: 'arrowIconType', svg: 'arrowIconSVG' },
         ],
     });
+
+    useGenerateElementId(clientId, elementId, elementRef);
+    useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useDynamicScript(elementRef);
 
     useEffect(() => {
         const skillTrack = anime({
