@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.6.2
+Stable tag: 3.6.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -189,6 +189,12 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
+= 3.6.3 =
+
+Bug fixes:
+
+* Fixed frontend animation rendering issue.
+
 = 3.6.2 =
 
 New and improved:
@@ -202,9 +208,3 @@ Bug fixes:
 * Fixed post terms block container sizing.
 
 For full changelog history, please visit the [Gutenverse GitHub repository](https://github.com/Jegstudio/gutenverse).
-
-== Upgrade Notice ==
-
-= 3.6.2 =
-
-Improves responsive background color controls and fixes YouTube video URL, breadcrumb, and post terms block sizing issues.
