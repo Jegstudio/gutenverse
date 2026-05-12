@@ -7,6 +7,9 @@
 	"allowCopyStyle": true,
 	"class_callback": "\\Gutenverse\\Block\\Advanced_Heading",
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},

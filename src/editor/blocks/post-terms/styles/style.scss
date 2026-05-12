@@ -19,6 +19,7 @@
         gap: 10px;
         &.inline-display{
             flex-direction: row;
+            flex-wrap: wrap;
         }
     }
 }

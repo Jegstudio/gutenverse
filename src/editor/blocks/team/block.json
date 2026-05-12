@@ -7,6 +7,9 @@
 	"class_callback": "\\Gutenverse\\Block\\Team",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
