@@ -87,22 +87,19 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
-    if ('custom' === attributes['imageRatio']) {
-        isNotEmpty(attributes['imageRatioCustom']) && data.push({
-            'type': 'plain',
-            'id': 'imageRatioCustom',
-            'selector': `.${elementId} img`,
-            'responsive': true,
-            'properties': [
-                {
-                    'name': 'aspect-ratio',
-                    'valueType': 'function',
-                    'functionName': 'handleImageRatio'
-                }
-            ],
-        });
-    }
-
+    isNotEmpty(attributes['imageRatioCustom']) && data.push({
+        'type': 'plain',
+        'id': 'imageRatioCustom',
+        'selector': `.${elementId} img`,
+        'responsive': true,
+        'properties': [
+            {
+                'name': 'aspect-ratio',
+                'valueType': 'function',
+                'functionName': 'handleImageRatio'
+            }
+        ],
+    });
 
     isNotEmpty(attributes['imageFit']) && data.push({
         'type': 'plain',
