@@ -3,6 +3,7 @@ claude
 .claude
 .idea
 .claude
+.serena
 build
 release
 node_modules

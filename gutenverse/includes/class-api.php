@@ -119,7 +119,7 @@ class Api {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'license_check' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'is_user_logged_in' ),
 			)
 		);
 
@@ -151,6 +151,21 @@ class Api {
 	 */
 	public function can_install_plugin() {
 		if ( ! current_user_can( 'install_plugins' ) ) {
+			return new \WP_Error(
+				'forbidden_permission',
+				esc_html__( 'Forbidden Access', 'gutenverse' ),
+				array( 'status' => 403 )
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Only for logged in users.
+	 */
+	public function is_user_logged_in() {
+		if ( ! is_user_logged_in() ) {
 			return new \WP_Error(
 				'forbidden_permission',
 				esc_html__( 'Forbidden Access', 'gutenverse' ),
