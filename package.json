@@ -17,11 +17,12 @@
 		"format:js": "wp-scripts format-js",
 		"fix": "npx eslint --fix ./src || echo \"Formatting done! Please fix the remaining warnings and errors\"",
 		"fix-pkg": "npx eslint --fix ./gutenverse-core || echo \"Formatting done! Please fix the remaining warnings and errors\"",
+		"composer:config": "pnpm --filter gutenverse-core composer:config",
 		"create": "node ./scripts/create-block.js",
 		"new": "node ./scripts/new-block.js",
 		"pot": "wp i18n make-pot ./release/gutenverse ./release/gutenverse/languages/gutenverse.pot --domain=gutenverse",
 		"jsonpot": "wp i18n make-json ./release/gutenverse/languages/",
-		"clean:package": "rm -rf node_modules package-lock.json pnpm-lock.yaml gutenverse-core/node_modules gutenverse-core/package-lock.json gutenverse-core/pnpm-lock.yaml"
+		"clean:package": "rm -rf node_modules package-lock.json pnpm-lock.yaml gutenverse-core/node_modules gutenverse-core/package-lock.json gutenverse-core/pnpm-lock.yaml "
 	},
 	"repository": {
 		"type": "git",

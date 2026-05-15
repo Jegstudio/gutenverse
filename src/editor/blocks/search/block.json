@@ -6,6 +6,9 @@
 	"category": "gutenverse-element",
 	"class_callback": "\\Gutenverse\\Block\\Search",
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},

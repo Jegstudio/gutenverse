@@ -7,6 +7,9 @@
 	"parent": ["gutenverse/accordions"],
 	"class_callback": "\\Gutenverse\\Block\\Accordion",
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},

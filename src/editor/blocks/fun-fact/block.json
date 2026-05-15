@@ -7,6 +7,9 @@
 	"class_callback": "\\Gutenverse\\Block\\Fun_Fact",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},

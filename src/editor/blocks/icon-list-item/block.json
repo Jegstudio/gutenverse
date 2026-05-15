@@ -8,6 +8,9 @@
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
