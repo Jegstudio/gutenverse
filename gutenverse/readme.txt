@@ -200,6 +200,7 @@ Bug fixes:
 * Fixed accordion block issue on iOS.
 * Fixed background image preload fetch priority.
 * Fixed color option bug with hex input.
+* Fixed testimonial block default data issue.
 
 = 3.7.0 =
 
