@@ -55,7 +55,7 @@ const save = ({ attributes }) => {
             <div className="testimonials-list">
                 <div id={elementId} className="swiper-container" {...swiperData(attributes)}>
                     <div className="swiper-wrapper">
-                        {testimonialData.map((data, index) => <div key={index} className="swiper-slide">
+                        {testimonialData?.map((data, index) => <div key={index} className="swiper-slide">
                             <ContentItem {...data}
                                 contentType={contentType}
                                 showQuote={showQuote}
