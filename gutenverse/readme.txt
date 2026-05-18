@@ -191,6 +191,9 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 = 3.7.1 =
 
+New and improved:
+* Add responsive option for background color
+
 Bug fixes:
 
 * Fixed featured image block width and height options visibility when using custom option.
