@@ -201,6 +201,8 @@ Bug fixes:
 * Fixed background image preload fetch priority.
 * Fixed color option bug with hex input.
 * Fixed testimonial block default data issue.
+* Fixed video background issue.
+* Fixed template library only load two layouts initially.
 
 = 3.7.0 =
 
