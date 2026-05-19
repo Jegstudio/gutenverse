@@ -147,6 +147,7 @@ class Image_Box extends Block_Abstract {
 				$title,
 				$this->attributes['titleDynamicList'] ?? array()
 			);
+			$title = apply_filters( 'gutenverse_highlight_text', $title );
 
 			$title_class  = 'body-title icon-position-' . esc_attr( $title_icon_position );
 			$title_inner  = $this->render_title_icon( 'before' );
@@ -162,6 +163,7 @@ class Image_Box extends Block_Abstract {
 				$description,
 				$this->attributes['descriptionDynamicList'] ?? array()
 			);
+			$description = apply_filters( 'gutenverse_highlight_text', $description );
 
 			$desc_html = '<p class="body-description">' . wp_kses_post( $description ) . '</p>';
 			$output   .= $this->wrap_href( $desc_html );

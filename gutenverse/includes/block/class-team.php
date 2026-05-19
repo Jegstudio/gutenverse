@@ -40,7 +40,7 @@ class Team extends Block_Abstract {
 				$alt = isset( $this->attributes['imageAlt'] ) ? $this->attributes['imageAlt'] : $name;
 				break;
 			default:
-				$alt = $name;
+				$alt = wp_strip_all_tags( $name );
 		}
 
 		$loading = 'lazy' === $lazy ? ' loading="lazy"' : '';
@@ -85,6 +85,7 @@ class Team extends Block_Abstract {
 			$value,
 			$this->attributes[$identifier . 'DynamicList'] ?? array()
 		);
+		$value = apply_filters( 'gutenverse_highlight_text', $value );
 
 		return '<' . $tag . ' class="' . esc_attr( $class_name ) . '"' . $aria_attr . '>' . wp_kses_post( $value ) . '</' . $tag . '>';
 	}
@@ -142,7 +143,7 @@ class Team extends Block_Abstract {
 
 		$data_attrs = '';
 		if ( ! empty( $name ) ) {
-			$data_attrs .= ' data-name="' . esc_attr( $name ) . '"';
+			$data_attrs .= ' data-name="' . esc_attr( wp_strip_all_tags( $name ) ) . '"';
 		}
 		if ( ! empty( $job ) ) {
 			$data_attrs .= ' data-job="' . esc_attr( $job ) . '"';

@@ -40,6 +40,7 @@ class Icon_List_Item extends Block_Abstract {
 			$text,
 			$this->attributes['dynamicDataList'] ?? array()
 		);
+		$text = apply_filters( 'gutenverse_highlight_text', $text );
 
 		$dynamic_url = isset( $this->attributes['dynamicUrl'] ) ? $this->attributes['dynamicUrl'] : array();
 		$href        = apply_filters(

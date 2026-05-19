@@ -47,6 +47,8 @@ class Accordion extends Block_Abstract {
 			$title_dynamic_list
 		);
 
+		$title = apply_filters( 'gutenverse_highlight_text', $title );
+
 		$icon_html  = '<div class="accordion-icon">';
 		$icon_html .= '<span class="accordion-icon-open">' . $icon_open_html . '</span>';
 		$icon_html .= '<span class="accordion-icon-closed">' . $icon_closed_html . '</span>';

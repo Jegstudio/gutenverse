@@ -66,6 +66,7 @@ class Heading extends Block_Abstract {
 		}
 		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 		$content = '<' . $this->get_tag_name() . $id_attr . ' class="' . esc_attr( $class_name ) . '"' . $data_id . '>' . $content . '</' . $this->get_tag_name() . '>';
+		$content = apply_filters( 'gutenverse_highlight_text', $content );
 		$content = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 		$content = apply_filters( 'gutenverse_advance_animation_script', $content, $this->attributes, $element_id, 'heading' );
 

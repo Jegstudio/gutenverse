@@ -75,6 +75,8 @@ class Advanced_Heading extends Block_Abstract {
 			$text_dynamic_list
 		);
 
+		$text = apply_filters( 'gutenverse_highlight_text', $text );
+
 		$focus_text              = wp_kses_post( $focus_text );
 		$focus_text_dynamic_list = isset( $this->attributes['focusTextDynamicList'] ) ? $this->attributes['focusTextDynamicList'] : array();
 
@@ -83,6 +85,8 @@ class Advanced_Heading extends Block_Abstract {
 			$focus_text,
 			$focus_text_dynamic_list
 		);
+
+		$focus_text = apply_filters( 'gutenverse_highlight_text', $focus_text );
 
 		$output .= '<span class="heading-title">' . $text . '</span>';
 		$output .= '<span class="heading-focus">' . $focus_text . '</span>';

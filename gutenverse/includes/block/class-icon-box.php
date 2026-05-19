@@ -175,6 +175,7 @@ class Icon_Box extends Block_Abstract {
 					$title,
 					$title_dynamic_list
 				);
+				$title      = apply_filters( 'gutenverse_highlight_text', $title );
 				$tag        = $this->check_tag( $title_tag, 'h2' );
 				$title_html = '<' . $tag . ' class="title">' . $title . '</' . $tag . '>';
 				$output    .= $this->wrap_href( $title_html );
@@ -189,6 +190,7 @@ class Icon_Box extends Block_Abstract {
 					$description,
 					$description_dynamic_list
 				);
+				$description = apply_filters( 'gutenverse_highlight_text', $description );
 				$desc_html   = '<p class="icon-box-description">' . $description . '</p>';
 				$output     .= $this->wrap_href( $desc_html );
 			}
@@ -216,6 +218,7 @@ class Icon_Box extends Block_Abstract {
 				$badge_text,
 				$badge_text_dynamic_list
 			);
+			$badge_text = apply_filters( 'gutenverse_highlight_text', $badge_text );
 			$badge_pos  = isset( $this->attributes['badgePosition'] ) ? $this->attributes['badgePosition'] : 'bottomcenter';
 			$badge_html = '<div class="icon-box-badge ' . esc_attr( $badge_pos ) . '"><span class="badge-text">' . $badge_text . '</span></div>';
 			$output    .= $this->wrap_href( $badge_html );

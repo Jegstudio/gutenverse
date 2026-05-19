@@ -31,8 +31,8 @@ class Text_Paragraph extends Block_Abstract {
 			$paragraph,
 			$this->attributes['dynamicDataList'] ?? array()
 		);
-
-		$content   = wp_kses_post( $content );
+		$content = apply_filters( 'gutenverse_highlight_text', $content );
+		$content = wp_kses_post( $content );
 
 		return $content;
 	}

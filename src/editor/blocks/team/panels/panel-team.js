@@ -201,27 +201,27 @@ export const teamPanel = (props) => {
                 }
             ]
         },
-        {
-            id: 'name',
-            label: __('Name', 'gutenverse'),
-            component: TextControl
-        },
-        {
-            id: 'job',
-            label: __('Job', 'gutenverse'),
-            component: TextControl
-        },
+        // {
+        //     id: 'name',
+        //     label: __('Name', 'gutenverse'),
+        //     component: TextControl
+        // },
+        // {
+        //     id: 'job',
+        //     label: __('Job', 'gutenverse'),
+        //     component: TextControl
+        // },
         {
             id: 'showDesc',
             label: __('Show Description', 'gutenverse'),
             component: CheckboxControl
         },
-        {
-            id: 'description',
-            show: showDesc,
-            label: __('Description', 'gutenverse'),
-            component: TextareaControl
-        },
+        // {
+        //     id: 'description',
+        //     show: showDesc,
+        //     label: __('Description', 'gutenverse'),
+        //     component: TextareaControl
+        // },
         {
             id: 'titleSocialSeparator',
             component: HeadingControl,
