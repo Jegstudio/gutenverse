@@ -159,7 +159,7 @@ class Gallery extends Block_Abstract {
 					$link_url        = isset( $item['link'] ) ? $item['link'] : '';
 					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					/* translators: %s: Item title */
-					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), $item['title'] ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
+					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), isset( $item['title'] ) ? $item['title'] : '' ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
 					if ( $link_text_set ) {
 						$output .= '<p class="item-icon-text link-text">' . esc_html( $link_text ) . '</p>';
 					}
@@ -236,7 +236,7 @@ class Gallery extends Block_Abstract {
 					$link_url        = isset( $item['link'] ) ? $item['link'] : '';
 					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					/* translators: %s: Item title */
-					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), $item['title'] ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
+					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), isset( $item['title'] ) ? $item['title'] : '' ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
 					if ( $link_text_set ) {
 						$output .= '<p class="item-icon-text link-text">' . esc_html( $link_text ) . '</p>';
 					}
@@ -329,7 +329,7 @@ class Gallery extends Block_Abstract {
 										<?php echo $this->image_condition( $image ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 										<?php if ( ! empty( $image['lightboxDescription'] ) ) : ?>
 											<div class="content-description-wrapper">
-												<<?php echo esc_attr( $title_tag ); ?> class="content-title"><?php echo esc_html( $image['title'] ); ?></<?php echo esc_attr( $title_tag ); ?>>
+												<<?php echo esc_attr( $title_tag ); ?> class="content-title"><?php echo esc_html( isset( $image['title'] ) ? $image['title'] : '' ); ?></<?php echo esc_attr( $title_tag ); ?>>
 												<div class="content-description">
 													<p><?php echo wp_kses_post( isset( $image['content'] ) ? $image['content'] : '' ); ?></p>
 												</div>
