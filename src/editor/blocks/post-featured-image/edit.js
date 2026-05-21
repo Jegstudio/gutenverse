@@ -8,7 +8,7 @@ import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
 import { useRef, useEffect, useState } from '@wordpress/element';
 import { withPartialRender } from 'gutenverse-core/hoc';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { imagePlaceholder } from 'gutenverse-core/config';
 import { __ } from '@wordpress/i18n';
@@ -25,6 +25,7 @@ const PostFeaturedImageBlock = compose(
     const {
         attributes,
         clientId,
+        setAttributes,
         context: { postId, postType }
     } = props;
 
@@ -93,6 +94,15 @@ const PostFeaturedImageBlock = compose(
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'galleryNextButtonIconType', svg: 'galleryNextButtonIconSVG' },
+            { type: 'galleryPrevButtonIconType', svg: 'galleryPrevButtonIconSVG' },
+        ],
+    });
 
     return <>
         <CopyElementToolbar {...props} />
