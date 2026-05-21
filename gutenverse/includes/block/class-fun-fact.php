@@ -39,10 +39,17 @@ class Fun_Fact extends Block_Abstract {
 				$inner_content = $this->render_icon( $icon_type, $icon, $icon_svg );
 				break;
 			case 'image':
-				$url       = isset( $image['url'] ) ? $image['url'] : '';
-				$lazy_attr = ( 'lazy' === $image_load ) ? ' loading="lazy"' : '';
+				$url = isset( $image['url'] ) ? $image['url'] : '';
+				if ( '' === $url && isset( $image['image'] ) ) {
+					$url = $image['image'];
+				}
+
+				$lazy_attr  = ( 'lazy' === $image_load ) ? ' loading="lazy"' : '';
+				$lazy_attr .= isset( $image['width'] ) ? " width=\"{$image['width']}\"" : '';
+				$lazy_attr .= isset( $image['height'] ) ? " height=\"{$image['height']}\"" : '';
+
 				if ( ! empty( $url ) ) {
-					$alt_attr = ! empty( $image_alt ) ? ' alt="' . esc_attr( $image_alt ) . '"' : '';
+					$alt_attr      = ! empty( $image_alt ) ? ' alt="' . esc_attr( $image_alt ) . '"' : '';
 					$inner_content = '<img src="' . esc_url( $url ) . '"' . $alt_attr . $lazy_attr . ' />';
 				}
 				break;
@@ -85,12 +92,12 @@ class Fun_Fact extends Block_Abstract {
 			$output .= $header_html;
 		}
 
-		$output .= '<div class="content ' . esc_attr( $content_display ) . '">';
-		$output .= '<div class="number-wrapper">';
-		$output .= '<span class="prefix">' . esc_html( $prefix ) . '</span>';
+		$output            .= '<div class="content ' . esc_attr( $content_display ) . '">';
+		$output            .= '<div class="number-wrapper">';
+		$output            .= '<span class="prefix">' . esc_html( $prefix ) . '</span>';
 		$number_spaces_attr = ( null !== $number_right_space ) ? ' data-number-spaces="' . esc_attr( wp_json_encode( $number_right_space ) ) . '"' : '';
-		$output .= '<span class="number loaded" data-number-format="' . esc_attr( $number_format ) . '" data-safe="' . esc_attr( $safe_number ) . '" data-number="' . esc_attr( $number ) . '" data-duration="' . esc_attr( $duration ) . '"' . $number_spaces_attr . '></span>';
-		$output .= '<span class="suffix">' . esc_html( $suffix ) . '</span>';
+		$output            .= '<span class="number loaded" data-number-format="' . esc_attr( $number_format ) . '" data-safe="' . esc_attr( $safe_number ) . '" data-number="' . esc_attr( $number ) . '" data-duration="' . esc_attr( $duration ) . '"' . $number_spaces_attr . '></span>';
+		$output            .= '<span class="suffix">' . esc_html( $suffix ) . '</span>';
 		if ( $show_supper ) {
 			$output .= '<sup class="super">' . esc_html( $supper ) . '</sup>';
 		}
