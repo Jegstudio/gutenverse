@@ -300,7 +300,7 @@ class Gutenverse {
 
 		/**If loop done and there is no plugin that has bigger framework version then check arr_equal_var */
 		if ( ! $is_using_other_framework && ! empty( $arr_equal_ver ) ) {
-			/**add self plugin then sort */
+			/**Add self plugin then sort */
 			$arr_equal_ver[] = 'gutenverse';
 			sort( $arr_equal_ver );
 
