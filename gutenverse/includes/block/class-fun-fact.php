@@ -39,11 +39,15 @@ class Fun_Fact extends Block_Abstract {
 				$inner_content = $this->render_icon( $icon_type, $icon, $icon_svg );
 				break;
 			case 'image':
-				$url       = isset( $image['url'] ) ? $image['url'] : '';
+				$url       = isset( $image['image'] ) ? $image['image'] : ( isset( $image['url'] ) ? $image['url'] : '' );
+				$height    = isset( $image['height'] ) ? $image['height'] : '';
+				$width     = isset( $image['width'] ) ? $image['width'] : '';
 				$lazy_attr = ( 'lazy' === $image_load ) ? ' loading="lazy"' : '';
 				if ( ! empty( $url ) ) {
 					$alt_attr = ! empty( $image_alt ) ? ' alt="' . esc_attr( $image_alt ) . '"' : '';
-					$inner_content = '<img src="' . esc_url( $url ) . '"' . $alt_attr . $lazy_attr . ' />';
+					$height_attr   = ! empty( $height ) ? ' height="' . esc_attr( $height ) . '"' : '';
+					$width_attr    = ! empty( $width ) ? ' width="' . esc_attr( $width ) . '"' : '';
+					$inner_content = '<img src="' . esc_url( $url ) . '"' . $alt_attr . $lazy_attr . $height_attr . $width_attr . ' />';
 				}
 				break;
 		}
