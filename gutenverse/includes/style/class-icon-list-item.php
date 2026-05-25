@@ -54,7 +54,7 @@ class Icon_List_Item extends Style_Abstract {
 		if ( isset( $this->attrs['iconLineHeight'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} i, .{$this->element_id} .gutenverse-icon-svg",
+					'selector'       => ".{$this->element_id} i",
 					'property'       => function ( $value ) {
 						return "line-height: {$value}px; height: unset !important;";
 					},
@@ -67,7 +67,7 @@ class Icon_List_Item extends Style_Abstract {
 				array(
 					'selector'       => ".{$this->element_id} .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
-						return "height: {$value}px;";
+						return "line-height: {$value}px; height: {$value}px;";
 					},
 					'value'          => $this->attrs['iconLineHeight'],
 					'device_control' => true,
