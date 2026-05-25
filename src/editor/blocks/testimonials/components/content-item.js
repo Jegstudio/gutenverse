@@ -3,6 +3,7 @@
 import { RichText } from '@wordpress/block-editor';
 import { renderIcon } from 'gutenverse-core/helper';
 
+
 const ContentItem = (data) => {
     let {
         src,
@@ -51,8 +52,14 @@ const ContentItem = (data) => {
                 tagName={tag}
                 value={value}
                 onChange={value => {
-                    const testimoniData = [...testimonialData];
+                    const testimoniData = Array.isArray(testimonialData) ? [...testimonialData] : [];
+                    const currentItem = testimoniData[index] || {};
+
+                    testimoniData[index] = {
+                        ...currentItem,
+                    };
                     testimoniData[index][identifier] = value;
+
                     setAttributes({ testimonialData: testimoniData });
                 }}
             />;

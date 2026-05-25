@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.7.0
+Stable tag: 3.7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -188,6 +188,21 @@ Terms of Service: https://policies.google.com/terms
 If you use social sharing blocks, visitors may open external social sharing URLs when they click a share button.
 
 == Changelog ==
+
+= 3.7.1 =
+
+New and improved:
+* Add responsive option for background color
+
+Bug fixes:
+
+* Fixed featured image block width and height options visibility when using custom option.
+* Fixed accordion block issue on iOS.
+* Fixed background image preload fetch priority.
+* Fixed color option bug with hex input.
+* Fixed testimonial block default data issue.
+* Fixed video background issue.
+* Fixed template library only load two layouts initially.
 
 = 3.7.0 =
 

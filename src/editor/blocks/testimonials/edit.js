@@ -141,7 +141,7 @@ const TestimonialsBlock = compose(
                     {...swiperSettings(liveAttr)}
                     shouldSwiperUpdate={true}
                     rebuildOnUpdate={true}>
-                    {testimonialData.map((data, index) => <div key={index} >
+                    {testimonialData?.map((data, index) => <div key={index} >
                         <ContentItem {...data}
                             contentType={contentType}
                             showQuote={showQuote}

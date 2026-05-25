@@ -125,7 +125,7 @@ class Post_Featured_Image extends Style_Abstract {
 			);
 		}
 
-		if ( isset( $this->attrs['imageRatio'] ) && 'custom' === $this->attrs['imageRatio'] && isset( $this->attrs['imageRatioCustom'] ) ) {
+		if ( isset( $this->attrs['imageRatioCustom'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} img",

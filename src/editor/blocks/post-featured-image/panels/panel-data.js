@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { RangeControl, SelectControl, SelectSearchControl } from 'gutenverse-core/controls';
-import { isOnEditor } from 'gutenverse-core/helper';
+import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { isNotEmpty, isOnEditor } from 'gutenverse-core/helper';
 import { fetchImageSizes } from 'gutenverse-core/requests';
 
 export const dataPanel = (props) => {
@@ -8,6 +9,17 @@ export const dataPanel = (props) => {
         elementId,
         imageRatio
     } = props;
+
+    const getFallbackImageRatio = () => {
+        const device = getDeviceType();
+        if (isNotEmpty(imageRatio?.['Mobile']) && 'Mobile' === device) {
+            return imageRatio?.['Mobile'];
+        }
+        if (isNotEmpty(imageRatio?.['Tablet']) && ('Tablet' === device || 'Mobile' === device)) {
+            return imageRatio?.['Tablet'];
+        }
+        return imageRatio?.['Desktop'];
+    };
 
     const imageSize = isOnEditor() ? fetchImageSizes :
         () => {
@@ -77,7 +89,7 @@ export const dataPanel = (props) => {
             label: __('Custom Image Ratio', 'gutenverse'),
             component: RangeControl,
             allowDeviceControl: true,
-            show: imageRatio === 'custom',
+            show: getFallbackImageRatio() === 'custom',
             min: 0,
             max: 5,
             step: 0.1,
