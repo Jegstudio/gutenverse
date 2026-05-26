@@ -280,7 +280,7 @@ class Taxonomy_List extends Style_Abstract {
 					array(
 						'selector'       => ".{$this->element_id} .taxonomy-list-wrapper .taxonomy-list-item",
 						'property'       => function ( $value, $device ) {
-							if ( 'custom' === $this->attrs['itemWidth'][ $device ] ) {
+							if ( isset( $this->attrs['itemWidth'][ $device ] ) && 'custom' === $this->attrs['itemWidth'][ $device ] ) {
 								return $this->handle_unit_point( $value, 'width' );
 							}
 						},
