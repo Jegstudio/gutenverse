@@ -16,7 +16,6 @@
 
         .image-box-header {
             @include transition(false, false, all .4s ease);
-            aspect-ratio: var(--guten-image-box-ratio, 900 / 497);
             position: relative;
             overflow: hidden;
             line-height: 0;
