@@ -12,6 +12,7 @@
     }
 
     img {
+        aspect-ratio: var(--guten-image-ratio, 900 / 497);
         max-width: 100%;
         display: block;
         transition: all .3s;
