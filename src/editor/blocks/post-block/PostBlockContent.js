@@ -223,7 +223,7 @@ const PostBlockContent = (props) => {
         return (
             <article key={post?.id || index} className={postClasses}>
                 <div className="guten-thumb">
-                    <a aria-label={parseUnicode(post?.title) || ''} href="#">
+                    <a aria-label={parseUnicode(post?.title) || ''} href="#" onClick={e => e.preventDefault()}>
                         <div className="thumbnail-container">
                             <img
                                 loading="eager"
