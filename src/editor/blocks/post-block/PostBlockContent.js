@@ -66,7 +66,7 @@ const PostBlockContent = (props) => {
                     <div className={`guten-meta-author icon-position-${metaAuthorIconPosition}`}>
                         {metaAuthorIconPosition === 'before' && renderIcon(metaAuthorIcon, metaAuthorIconType, metaAuthorIconSVG)}
                         <span className="by">{metaAuthorByText}</span>{' '}
-                        <a href="#">
+                        <a href="javascript:void(0);">
                             {post?.author_name || 'gutenverse'}
                         </a>
                         {metaAuthorIconPosition === 'after' && renderIcon(metaAuthorIcon, metaAuthorIconType, metaAuthorIconSVG)}
@@ -104,7 +104,7 @@ const PostBlockContent = (props) => {
             <div className="guten-post-meta-bottom">
                 {readmoreEnabled && (
                     <div className={`guten-meta-readmore icon-position-${readmoreIconPosition}`}>
-                        <a href="#" aria-label={`Read more about ${parseUnicode(post?.title)}`} className="guten-readmore">
+                        <a href="javascript:void(0);" aria-label={`Read more about ${parseUnicode(post?.title)}`} className="guten-readmore">
                             {readmoreIconPosition === 'before' && renderIcon(readmoreIcon, readmoreIconType, readmoreIconSVG)}
                             {readmoreText}
                             {readmoreIconPosition === 'after' && renderIcon(readmoreIcon, readmoreIconType, readmoreIconSVG)}
@@ -113,7 +113,7 @@ const PostBlockContent = (props) => {
                 )}
                 {commentEnabled && (
                     <div className={`guten-meta-comment icon-position-${commentIconPosition}`}>
-                        <a href="#" data-href={post?.comment_url || 'dummy-data'}>
+                        <a href="javascript:void(0);" data-href={post?.comment_url || 'dummy-data'}>
                             {commentIconPosition === 'before' && (
                                 <>
                                     {renderIcon(commentIcon, commentIconType, commentIconSVG)}
@@ -142,7 +142,7 @@ const PostBlockContent = (props) => {
         return (
             <div className={`guten-post-category ${position}`}>
                 <span>
-                    <a href="#" className={`category-${category.slug}`}>
+                    <a href="javascript:void(0);" className={`category-${category.slug}`}>
                         {parseUnicode(category.name)}
                     </a>
                 </span>
@@ -158,7 +158,7 @@ const PostBlockContent = (props) => {
                 const HtmlTag = htmlTag;
                 content.push(
                     <HtmlTag key={`title-${index}`} className="guten-post-title">
-                        <a aria-label={parseUnicode(post?.title)} href="#">
+                        <a aria-label={parseUnicode(post?.title)} href="javascript:void(0);">
                             {parseUnicode(post?.title) || dummyText(5, 10)}
                         </a>
                     </HtmlTag>
@@ -223,7 +223,7 @@ const PostBlockContent = (props) => {
         return (
             <article key={post?.id || index} className={postClasses}>
                 <div className="guten-thumb">
-                    <a aria-label={parseUnicode(post?.title) || ''} href="#" onClick={e => e.preventDefault()}>
+                    <a aria-label={parseUnicode(post?.title) || ''} href="javascript:void(0);" >
                         <div className="thumbnail-container">
                             <img
                                 loading="eager"
