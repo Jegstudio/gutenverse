@@ -68,7 +68,6 @@ class Fun_Fact extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content() {
-		$content_display     = isset( $this->attributes['contentDisplay'] ) ? $this->attributes['contentDisplay'] : 'block';
 		$prefix              = isset( $this->attributes['prefix'] ) ? $this->attributes['prefix'] : '$';
 		$suffix              = isset( $this->attributes['suffix'] ) ? $this->attributes['suffix'] : 'M';
 		$number              = isset( $this->attributes['number'] ) ? $this->attributes['number'] : '';
@@ -87,12 +86,10 @@ class Fun_Fact extends Block_Abstract {
 
 		$header_html = $this->render_header_content();
 
-		$output = '<div class="fun-fact-inner">';
-		if ( $top_icon_content ) {
-			$output .= $header_html;
-		}
+		$output  = '<div class="fun-fact-inner">';
+		$output .= $header_html;
 
-		$output            .= '<div class="content ' . esc_attr( $content_display ) . '">';
+		$output            .= '<div class="content">';
 		$output            .= '<div class="number-wrapper">';
 		$output            .= '<span class="prefix">' . esc_html( $prefix ) . '</span>';
 		$number_spaces_attr = ( null !== $number_right_space ) ? ' data-number-spaces="' . esc_attr( wp_json_encode( $number_right_space ) ) . '"' : '';
@@ -107,9 +104,6 @@ class Fun_Fact extends Block_Abstract {
 		$output .= '<' . $tag . ' class="title">' . wp_kses_post( $title ) . '</' . $tag . '>';
 		$output .= '</div>';
 
-		if ( $bottom_icon_content ) {
-			$output .= $header_html;
-		}
 		$output .= '</div>';
 
 		if ( $hover_bottom ) {

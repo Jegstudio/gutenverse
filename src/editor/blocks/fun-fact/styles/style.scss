@@ -21,6 +21,15 @@
     .fun-fact-inner {
         position: relative;
         z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+
+        &> * {
+            flex-grow: 0;
+        }
 
         .icon-box {
             display: inline-block;

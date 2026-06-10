@@ -28,18 +28,6 @@
 				"Desktop": "top"
 			}
 		},
-		"topIconContent": {
-			"type": "boolean",
-			"default": true
-		},
-		"bottomIconContent": {
-			"type": "boolean",
-			"default": false
-		},
-		"contentDisplay": {
-			"type": "string",
-			"default": "block"
-		},
 		"icon": {
 			"type": "string",
 			"default": "fas fa-grip-horizontal"
