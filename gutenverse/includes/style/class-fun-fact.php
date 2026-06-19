@@ -64,7 +64,7 @@ class Fun_Fact extends Style_Abstract {
 						if ( 'left' === $value || 'right' === $value ) {
 							return 'flex-direction: row;';
 						}
-						return '';
+						return 'flex-direction: column;';
 					},
 					'value'          => $this->attrs['iconPosition'],
 					'device_control' => true,

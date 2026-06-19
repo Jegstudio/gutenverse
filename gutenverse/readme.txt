@@ -196,6 +196,26 @@ New and improved:
 * Improve Speed Performance Frontend
 
 
+= 3.8.1 =
+
+New and improved:
+
+* Add background fallback for video background type.
+* Add image fallback for background slider.
+* Improved icon list icon line height.
+
+
+Bug fixes:
+
+* Fixed WP 7.0 video editor issue.
+* Fixed image fetch priority remaining high when normal load is set with fetch priority high disabled.
+* Fixed font global vulnerability.
+* Fixed section slider not working when the page has multiple section sliders.
+* Fixed fun fact block icon type image not showing on frontend.
+* Fixed funfact icon position on responsive.
+* Fixed post block nesting redirect to its own editor when clicked in editor.
+* Fixed taxonomy list warning array Tablet when exporting theme and installing on local.
+
 = 3.8.0 =
 
 New and improved:

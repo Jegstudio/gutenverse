@@ -20,7 +20,7 @@ const getBlockStyle = (elementId, attributes) => {
                         if (value === 'left' || value === 'right') {
                             return 'row';
                         }
-                        return undefined; // Skip it
+                        return 'column';
                     }
                 }
             ]
