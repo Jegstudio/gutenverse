@@ -189,6 +189,11 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
+= 3.8.2 =
+
+Bug fixes:
+* Fix issue with font slug name
+
 = 3.8.1 =
 
 New and improved:
