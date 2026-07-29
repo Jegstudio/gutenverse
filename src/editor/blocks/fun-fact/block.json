@@ -4,8 +4,12 @@
 	"title": "Fun Fact",
 	"description": "Create an interesting fact about your website or something you achieved.",
 	"category": "gutenverse-element",
+	"class_callback": "\\Gutenverse\\Block\\Fun_Fact",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -23,18 +27,6 @@
 			"default": {
 				"Desktop": "top"
 			}
-		},
-		"topIconContent": {
-			"type": "boolean",
-			"default": true
-		},
-		"bottomIconContent": {
-			"type": "boolean",
-			"default": false
-		},
-		"contentDisplay": {
-			"type": "string",
-			"default": "block"
 		},
 		"icon": {
 			"type": "string",
@@ -431,5 +423,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-fun-fact-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

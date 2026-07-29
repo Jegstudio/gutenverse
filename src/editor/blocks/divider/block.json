@@ -1,11 +1,15 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/divider",
+	"class_callback": "\\Gutenverse\\Block\\Divider",
 	"title": "Divider",
 	"description": "Split your content with a customizable divider.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -237,5 +241,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-divider-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

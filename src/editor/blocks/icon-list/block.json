@@ -1,11 +1,15 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/icon-list",
+	"class_callback": "\\Gutenverse\\Block\\Icon_List",
 	"title": "Icon List",
 	"description": "Create a list with icons",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -273,5 +277,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-icon-list-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

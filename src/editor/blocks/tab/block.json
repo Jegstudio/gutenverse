@@ -4,6 +4,7 @@
 	"title": "Tab Item",
 	"description": "Create content inside a tab element",
 	"category": "gutenverse-element",
+	"class_callback": "\\Gutenverse\\Block\\Tab",
 	"parent": ["gutenverse/tabs"],
 	"example": {},
 	"attributes": {

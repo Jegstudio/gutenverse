@@ -22,7 +22,8 @@ const save = compose(
         elementId,
         content,
         type,
-        anchor
+        anchor,
+        legacyClassName
     } = attributes;
 
     const advanceAnimationData = useAnimationAdvanceData(attributes);
@@ -30,7 +31,7 @@ const save = compose(
     const displayClass = useDisplayFrontend(attributes);
 
     const TagName = 'h' + type;
-    const className = classnames(
+    const className = legacyClassName || classnames(
         'guten-element',
         elementId,
         animationClass,

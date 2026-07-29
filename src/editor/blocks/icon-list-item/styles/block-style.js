@@ -21,6 +21,11 @@ const getBlockStyle = (elementId, attributes) => {
                         'type': 'direct'
                     }
                 }
+            },
+            {
+                'name': 'height',
+                'valueType': 'pattern',
+                'pattern': 'unset !important',
             }
         ],
         'selector': `.${elementId} i`,

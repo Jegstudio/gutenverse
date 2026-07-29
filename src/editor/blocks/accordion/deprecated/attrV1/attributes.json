@@ -1,0 +1,104 @@
+{
+    "elementId": {
+        "type": "string"
+    },
+    "title": {
+        "type": "string",
+        "source": "html",
+        "selector": ".accordion-heading .accordion-text",
+        "default": ""
+    },
+    "titleChilds": {
+        "type": "array",
+        "default": []
+    },
+    "first": {
+        "type": "boolean",
+        "default": false
+    },
+    "iconOpen": {
+        "type": "string",
+        "default": "fas fa-minus"
+    },
+    "iconOpenType": {
+        "type": "string",
+        "default": "icon"
+    },
+    "iconOpenSVG": {
+        "type": "string"
+    },
+    "iconClosed": {
+        "type": "string",
+        "default": "fas fa-plus"
+    },
+    "iconClosedType": {
+        "type": "string",
+        "default": "icon"
+    },
+    "iconClosedSVG": {
+        "type": "string"
+    },
+    "dynamicDataList": {
+        "type": "array",
+        "default": []
+    },
+    "openDynamic": {
+        "type": "string"
+    },
+    "dynamicTextContent": {
+        "type": "array",
+        "copyStyle": true
+    },
+    "dynamicUrlContent": {
+        "type": "array",
+        "copyStyle": true
+    },
+    "iconPosition": {
+        "type": "string",
+        "default": "left"
+    },
+    "titleTag": {
+        "type": "string",
+        "default": "span"
+    },
+    "advanceAnimation": {
+        "type": "object",
+        "default": {}
+    },
+    "contentBackgroundColor": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentBackgroundColorClosed": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentBackgroundColorHover": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentTextColor": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentTextColorClosed": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentTextColorHover": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentBackgroundGradient": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentBackgroundGradientClosed": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "contentBackgroundGradientHover": {
+        "type": "object",
+        "copyStyle": true
+    }
+}

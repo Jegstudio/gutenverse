@@ -59,9 +59,22 @@ class Social_Icons extends Style_Abstract {
 		if ( isset( $this->attrs['alignment'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}",
+					'selector'       => ".{$this->element_id}.horizontal",
 					'property'       => function ( $value ) {
 						return "justify-content: {$value};";
+					},
+					'value'          => $this->attrs['alignment'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['alignment'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.vertical",
+					'property'       => function ( $value ) {
+						return "align-items: {$value};";
 					},
 					'value'          => $this->attrs['alignment'],
 					'device_control' => true,

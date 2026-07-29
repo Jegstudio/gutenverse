@@ -3,6 +3,7 @@
 import { RichText } from '@wordpress/block-editor';
 import { renderIcon } from 'gutenverse-core/helper';
 
+
 const ContentItem = (data) => {
     let {
         src,
@@ -51,8 +52,14 @@ const ContentItem = (data) => {
                 tagName={tag}
                 value={value}
                 onChange={value => {
-                    const testimoniData = [...testimonialData];
+                    const testimoniData = Array.isArray(testimonialData) ? [...testimonialData] : [];
+                    const currentItem = testimoniData[index] || {};
+
+                    testimoniData[index] = {
+                        ...currentItem,
+                    };
                     testimoniData[index][identifier] = value;
+
                     setAttributes({ testimonialData: testimoniData });
                 }}
             />;
@@ -61,7 +68,7 @@ const ContentItem = (data) => {
     const content = () => {
         const commentContent = <div className="comment-content">{contentRichText(comment, 'p', 'profile-comment', 'comment', index)}</div>;
         const starRating = showRating && <>
-            {Array.from({ length: rating }, (i) => <li key={i}>{renderIcon(iconRatingFull, iconRatingFullType, iconRatingFullSVG)}</li>)}
+            {Array.from({ length: rating }, (_, i) => <li key={i}>{renderIcon(iconRatingFull, iconRatingFullType, iconRatingFullSVG)}</li>)}
             {parseFloat(rating) !== Math.floor(rating) ? <li>{renderIcon(iconRatingHalf, iconRatingHalfType, iconRatingHalfSVG)}</li> : null}
         </>;
 

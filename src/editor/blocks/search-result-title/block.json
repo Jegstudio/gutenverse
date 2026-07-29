@@ -7,6 +7,9 @@
 	"category": "gutenverse-post",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},

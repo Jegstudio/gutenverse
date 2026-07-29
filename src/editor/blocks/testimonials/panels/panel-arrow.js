@@ -1,10 +1,12 @@
 import { __ } from '@wordpress/i18n';
-import { BorderControl, BorderResponsiveControl, BoxShadowControl, ColorControl, DimensionControl, RangeControl, SwitchControl } from 'gutenverse-core/controls';
+import { BorderControl, BorderResponsiveControl, BoxShadowControl, ColorControl, DimensionControl, RangeControl, SelectControl, SwitchControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
 export const arrowPanel = (props) => {
     const {
         elementId,
+        showArrow,
+        arrowLayout,
         switcher,
         setSwitcher
     } = props;
@@ -12,6 +14,158 @@ export const arrowPanel = (props) => {
     const device = getDeviceType();
 
     return [
+        {
+            id: 'arrowLayout',
+            show: showArrow,
+            label: __('Arrow Arrangement', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    value: 'split',
+                    label: __('Split', 'gutenverse')
+                },
+                {
+                    value: 'grouped',
+                    label: __('Grouped', 'gutenverse')
+                }
+            ]
+        },
+        {
+            id: 'arrowPosition',
+            show: showArrow && arrowLayout === 'split',
+            label: __('Arrow Position', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    value: 'default',
+                    label: __('Default', 'gutenverse')
+                },
+                {
+                    value: 'top',
+                    label: __('Top', 'gutenverse')
+                },
+                {
+                    value: 'bottom',
+                    label: __('Bottom', 'gutenverse')
+                }
+            ]
+        },
+        {
+            id: 'arrowGroupPosition',
+            show: showArrow && arrowLayout === 'grouped',
+            label: __('Group Position', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                { value: 'top-left', label: __('Top Left', 'gutenverse') },
+                { value: 'top-center', label: __('Top Center', 'gutenverse') },
+                { value: 'top-right', label: __('Top Right', 'gutenverse') },
+                { value: 'middle-left', label: __('Middle Left', 'gutenverse') },
+                { value: 'middle-center', label: __('Center', 'gutenverse') },
+                { value: 'middle-right', label: __('Middle Right', 'gutenverse') },
+                { value: 'bottom-left', label: __('Bottom Left', 'gutenverse') },
+                { value: 'bottom-center', label: __('Bottom Center', 'gutenverse') },
+                { value: 'bottom-right', label: __('Bottom Right', 'gutenverse') }
+            ]
+        },
+        {
+            id: 'arrowOffsetX',
+            show: showArrow && (
+                arrowLayout === 'grouped' ||
+                arrowLayout === 'split'
+            ),
+            label: __('Horizontal Offset', 'gutenverse'),
+            component: RangeControl,
+            min: -200,
+            max: 200,
+            step: 1,
+            allowDeviceControl: true,
+            unit: 'px',
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'arrowOffsetX',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-testimonials`,
+                    'properties': [
+                        {
+                            'name': '--guten-testimonial-arrow-offset-x',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'arrowOffsetY',
+            show: showArrow && (
+                arrowLayout === 'grouped' ||
+                arrowLayout === 'split'
+            ),
+            label: __('Vertical Offset', 'gutenverse'),
+            component: RangeControl,
+            min: -200,
+            max: 200,
+            step: 1,
+            allowDeviceControl: true,
+            unit: 'px',
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'arrowOffsetY',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-testimonials`,
+                    'properties': [
+                        {
+                            'name': '--guten-testimonial-arrow-offset-y',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'arrowGap',
+            show: showArrow && arrowLayout === 'grouped',
+            label: __('Arrow Gap', 'gutenverse'),
+            component: RangeControl,
+            min: 0,
+            max: 100,
+            step: 1,
+            allowDeviceControl: true,
+            unit: 'px',
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'arrowGap',
+                    'responsive': true,
+                    'selector': `.${elementId}.guten-testimonials`,
+                    'properties': [
+                        {
+                            'name': '--guten-testimonial-arrow-gap',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
         {
             id: 'arrowFontSize',
             label: __('Arrow Size', 'gutenverse'),

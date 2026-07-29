@@ -69,7 +69,15 @@ class Post_Featured_Image extends Block_Abstract {
 	 */
 	public function render_frontend() {
 		$post_id = ! empty( $this->context['postId'] ) ? esc_html( $this->context['postId'] ) : get_the_ID();
+		$anchor  = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
 
-		return $this->render_content( $post_id );
+		$content = $this->render_content( $post_id );
+
+		if ( ! empty( $id_attr ) ) {
+			$content = preg_replace( '/^<(a|div)/', '<$1' . $id_attr, $content, 1 );
+		}
+
+		return $content;
 	}
 }

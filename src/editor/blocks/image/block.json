@@ -1,11 +1,15 @@
 {
 	"apiVersion": 3,
 	"name": "gutenverse/image",
+	"class_callback": "\\Gutenverse\\Block\\Image",
 	"title": "Image",
 	"description": "Edit, crop, and showcase your image.",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -311,5 +315,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-image-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

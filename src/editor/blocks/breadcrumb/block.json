@@ -7,6 +7,9 @@
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
             "type": "string"
         },
@@ -178,5 +181,8 @@
 		"animation",
 		"text"
 	],
-	"style": ["gutenverse-frontend-breadcrumb-style"]
+	"style": ["gutenverse-frontend-breadcrumb-style"],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	]
 }

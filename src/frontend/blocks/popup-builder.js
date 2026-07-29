@@ -57,7 +57,7 @@ class GutenversePopupElement {
                 const iframeId = iframe?.id;
                 const iframeSrc = iframe?.src.toLowerCase();
 
-                if (window.YT && (iframeSrc.includes('youtube.com') || iframeSrc.includes('youtube.be'))) {
+                if (window.YT && (iframeSrc.includes('youtube.com') || iframeSrc.includes('youtube.be') || iframeSrc.includes('youtube-nocookie.com'))) {
                     player = window.YT.get(iframeId);
                 }
             }, 500);
@@ -102,7 +102,7 @@ class GutenversePopupElement {
         this.content.removeClass('exit');
         this.popup.addClass('load');
         this.content.attr('class', this.contentClass);
-        if (this.videoPauseOnClose === 'true') {
+        if (this.videoPauseOnClose === '1' || this.videoPauseOnClose === 'true') {
             this.player()?.pauseVideo();
         }
     }
@@ -117,7 +117,7 @@ class GutenversePopupElement {
         this.popup.addClass('show');
         this.playAnimation(this.content);
         if (this.videoContainer) {
-            if (this.videoResetOnClose === 'true') {
+            if (this.videoResetOnClose === 'true' || this.videoResetOnClose === '1') {
                 this.player()?.seekTo(this.videoStart ? this.videoStart : 0);
             }
             if (this.videoPlayOn === 'first' && this.firstPlaying) {
@@ -147,7 +147,7 @@ class GutenversePopupElement {
             this._closePopup();
         });
 
-        if (this.closeOverlay === 'true') {
+        if (this.closeOverlay === 'true' || this.closeOverlay === '1') {
             this.overlay.on('click', (e) => {
                 e.stopPropagation();
                 this._closePopup();

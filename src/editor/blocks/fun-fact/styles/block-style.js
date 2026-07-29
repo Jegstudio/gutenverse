@@ -6,6 +6,49 @@ const getBlockStyle = (elementId, attributes) => {
     data = backgroundStyle({ attributes, data, elementId });
 
     /**Panel Content Style */
+    isNotEmpty(attributes['iconPosition']) && data.push(
+        {
+            'type': 'plain',
+            'id': 'iconPosition',
+            'responsive': true,
+            'selector': `.${elementId}.guten-fun-fact .fun-fact-inner`,
+            'properties': [
+                {
+                    'name': 'flex-direction',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'left' || value === 'right') {
+                            return 'row';
+                        }
+                        return 'column';
+                    }
+                }
+            ]
+        },
+        {
+            'type': 'plain',
+            'id': 'iconPosition',
+            'responsive': true,
+            'selector': `.${elementId}.guten-fun-fact .fun-fact-inner .icon-box`,
+            'properties': [
+                {
+                    'name': 'order',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'left' || value === 'top') {
+                            return '0';
+                        }
+                        if (value === 'right' || value === 'bottom') {
+                            return '2';
+                        }
+                        return undefined; // Skip it
+                    }
+                }
+            ]
+        },
+    );
+
+    /**Panel Content Style */
     isNotEmpty(attributes['prefixColor']) && data.push({
         'type': 'color',
         'id': 'prefixColor',
@@ -153,18 +196,62 @@ const getBlockStyle = (elementId, attributes) => {
     });
 
     /**Panel General */
-    isNotEmpty(attributes['alignButtons']) && data.push({
-        'type': 'plain',
-        'id': 'alignButtons',
-        'responsive': true,
-        'selector': `.${elementId}.guten-fun-fact`,
-        'properties': [
-            {
-                'name': 'text-align',
-                'valueType': 'direct',
-            }
-        ]
-    });
+    isNotEmpty(attributes['alignButtons']) && data.push(
+        {
+            'type': 'plain',
+            'id': 'alignButtons',
+            'responsive': true,
+            'selector': `.${elementId}.guten-fun-fact`,
+            'properties': [
+                {
+                    'name': 'text-align',
+                    'valueType': 'direct',
+                }
+            ]
+        },
+        {
+            'type': 'plain',
+            'id': 'alignButtons',
+            'responsive': true,
+            'selector': `.${elementId}.guten-fun-fact .fun-fact-inner`,
+            'properties': [
+                {
+                    'name': 'justify-content',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'left') {
+                            return 'start';
+                        }
+                        if (value === 'right') {
+                            return 'end';
+                        }
+                        return value;
+                    }
+                }
+            ]
+        },
+        {
+            'type': 'plain',
+            'id': 'alignButtons',
+            'responsive': true,
+            'selector': `.${elementId}.guten-fun-fact .fun-fact-inner`,
+            'properties': [
+                {
+                    'name': 'align-items',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value === 'left') {
+                            return 'start';
+                        }
+                        if (value === 'right') {
+                            return 'end';
+                        }
+                        return value;
+                    }
+                }
+            ]
+        },
+    );
 
     isNotEmpty(attributes['hoverBottomColor']) && attributes['hoverBottom'] && data.push({
         'type': 'color',

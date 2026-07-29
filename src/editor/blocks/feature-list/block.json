@@ -6,6 +6,9 @@
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -342,5 +345,9 @@
 	],
 	"style": [
 		"gutenverse-frontend-feature-list-style"
-	]
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	],
+	"class_callback": "\\Gutenverse\\Block\\Feature_List"
 }

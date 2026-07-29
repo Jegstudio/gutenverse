@@ -3,9 +3,13 @@
 	"name": "gutenverse/image-box",
 	"title": "Image Box",
 	"description": "Add an information section with image box.",
+	"class_callback": "\\Gutenverse\\Block\\Image_Box",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -41,16 +45,10 @@
 			"default": true
 		},
 		"linkTarget": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "target"
+			"type": "string"
 		},
 		"rel": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "rel"
+			"type": "string"
 		},
 		"openDynamic": {
 			"type": "string"
@@ -482,5 +480,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-image-box-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

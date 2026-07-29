@@ -4,6 +4,7 @@
 	"title": "Popup Container",
 	"description": "Build Popup using gutenverse popup container.",
 	"category": "gutenverse-structure",
+	"class_callback": "\\Gutenverse\\Block\\Popup_Container",
 	"parent": ["gutenverse/popup-builder"],
 	"attributes": {
 		"elementId": {

@@ -6,6 +6,9 @@
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -370,5 +373,9 @@
 	],
 	"style": [
 		"gutenverse-frontend-portfolio-gallery-style"
-	]
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	],
+	"class_callback": "\\Gutenverse\\Block\\Portfolio_Gallery"
 }

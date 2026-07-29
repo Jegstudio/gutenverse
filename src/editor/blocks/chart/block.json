@@ -7,6 +7,9 @@
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -414,5 +417,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-chart-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

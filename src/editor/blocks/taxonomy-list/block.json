@@ -347,5 +347,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-taxonomy-list-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

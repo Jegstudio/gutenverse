@@ -6,6 +6,9 @@
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -182,7 +185,6 @@
 		{
 			"name": "buttons-horizontal",
 			"title": "Horizontal",
-			"isDefault": true,
 			"descriptions": "Arrange buttons in horizontal position",
 			"attributes": {
 				"orientation": "horizontal"
@@ -217,5 +219,9 @@
 	],
 	"style": [
 		"gutenverse-frontend-buttons-style"
-	]
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
+	],
+	"class_callback": "\\Gutenverse\\Block\\Buttons"
 }

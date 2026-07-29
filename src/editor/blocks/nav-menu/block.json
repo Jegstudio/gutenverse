@@ -7,6 +7,9 @@
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -634,5 +637,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-nav-menu-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

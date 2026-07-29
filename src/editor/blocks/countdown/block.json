@@ -5,7 +5,11 @@
 	"description": "Create a countdown block",
 	"category": "gutenverse-element",
 	"allowCopyStyle": true,
+	"class_callback": "\\Gutenverse\\Block\\Countdown",
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -588,5 +592,8 @@
 	],
 	"style": [
 		"gutenverse-frontend-countdown-style"
+	],
+	"usesContext": [
+		"gutenverse/flexDirection"
 	]
 }

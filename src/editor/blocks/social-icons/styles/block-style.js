@@ -135,7 +135,7 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'positioning',
             'id': 'positioningType',
-            'selector': `.${elementId}.guten-element`,
+            'selector': `.${elementId}.guten-element, .${elementId}.guten-element.horizontal > div`,
             'skipDeviceType': 'first',
             'attributeType': 'type',
             'multiAttr': {
@@ -148,7 +148,7 @@ const getBlockStyle = (elementId, attributes) => {
         {
             'type': 'positioning',
             'id': 'positioningType',
-            'selector': `.${elementId}.guten-element`,
+            'selector': `.${elementId}.guten-element, .${elementId}.guten-element.horizontal > div`,
             'skipDeviceType': 'second',
             'attributeType': 'type',
             'multiAttr': {
@@ -170,30 +170,32 @@ const getBlockStyle = (elementId, attributes) => {
             'inBlock': attributes['inBlock']
         }
     });
-    isNotEmpty(attributes['positioningAlign']) && data.push({
-        'type': 'plain',
-        'id': 'positioningAlign',
-        'responsive': true,
-        'properties': [
-            {
-                'name': 'align-self',
-                'valueType': 'direct'
-            }
-        ],
-        'selector': `.${elementId}.guten-element`,
-    },
-    {
-        'type': 'positioning',
-        'id': 'positioningAlign',
-        'properties': [
-            {
-                'name': 'vertical-align',
-                'valueType': 'direct'
-            }
-        ],
-        'attributeType': 'align',
-        'selector': `.${elementId}.guten-element`,
-    });
+    isNotEmpty(attributes['positioningAlign']) && data.push(
+        {
+            'type': 'plain',
+            'id': 'positioningAlign',
+            'responsive': true,
+            'properties': [
+                {
+                    'name': 'align-self',
+                    'valueType': 'direct'
+                }
+            ],
+            'selector': `.${elementId}.guten-element`,
+        },
+        {
+            'type': 'positioning',
+            'id': 'positioningAlign',
+            'properties': [
+                {
+                    'name': 'vertical-align',
+                    'valueType': 'direct'
+                }
+            ],
+            'attributeType': 'align',
+            'selector': `.${elementId}.guten-element`,
+        }
+    );
     isNotEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
         'type': 'plain',
         'id': 'positioningLocation',

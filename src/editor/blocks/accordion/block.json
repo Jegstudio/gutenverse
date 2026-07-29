@@ -5,14 +5,16 @@
 	"description": "Create content inside an accordion element.",
 	"category": "gutenverse-element",
 	"parent": ["gutenverse/accordions"],
+	"class_callback": "\\Gutenverse\\Block\\Accordion",
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
 		"title": {
 			"type": "string",
-			"source": "html",
-			"selector": ".accordion-heading .accordion-text",
 			"default": ""
 		},
 		"titleChilds": {

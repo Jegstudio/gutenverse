@@ -7,6 +7,9 @@
 	"category": "gutenverse-post",
 	"allowCopyStyle": true,
 	"attributes": {
+		"anchor": {
+			"type": "string"
+		},
 		"elementId": {
 			"type": "string"
 		},
@@ -254,7 +257,8 @@
 	"usesContext": [
 		"postId",
 		"postType",
-		"queryId"
+		"queryId",
+		"gutenverse/flexDirection"
 	],
 	"supports": {
 		"className": false,

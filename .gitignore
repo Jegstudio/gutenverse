@@ -1,5 +1,9 @@
 # Folders to ignore
+claude
+.claude
 .idea
+.claude
+.serena
 build
 release
 node_modules
@@ -12,3 +16,4 @@ gutenverse/lib/dependencies
 package-lock.json
 pnpm-lock.yaml
 gutenverse.pot
+CLAUDE.md

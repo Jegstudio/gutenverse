@@ -44,10 +44,13 @@ class Search_Result_Title extends Block_Abstract {
 	 */
 	public function render_frontend() {
 		$element_id      = $this->get_element_id();
+		$anchor          = isset( $this->attributes['anchor'] ) ? $this->attributes['anchor'] : '';
 		$display_classes = $this->set_display_classes();
 		$animation_class = $this->set_animation_classes();
 		$custom_classes  = $this->get_custom_classes();
 
-		return '<div class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-search-result-title guten-element">' . $this->render_content() . '</div>';
+		$id_attr = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
+
+		return '<div' . $id_attr . ' class="' . $element_id . $display_classes . $animation_class . $custom_classes . ' guten-search-result-title guten-element">' . $this->render_content() . '</div>';
 	}
 }

@@ -7,7 +7,7 @@ import { panelList } from './panels/panel-list';
 import WPSwiper from '../../components/swiper/wp-swiper';
 import ContentItem from './components/content-item';
 import { swiperSettings } from '../../components/swiper/helper';
-import { useRef } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 import { useAnimationEditor } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { dispatch } from '@wordpress/data';
@@ -50,7 +50,29 @@ const TestimonialsBlock = compose(
         iconRatingFullType,
         iconRatingFullSVG,
         starPosition,
+        initialSlide,
+        spacing,
+        itemShowed,
+        loop,
+        showNav,
+        showArrow,
+        arrowLayout,
+        arrowPosition,
+        arrowGroupPosition,
+        autoplay,
+        autoplayTimeout
     } = attributes;
+
+    const [liveAttr, setLiveAttr] = useState({
+        initialSlide,
+        spacing,
+        itemShowed,
+        loop,
+        showNav,
+        showArrow,
+        autoplay,
+        autoplayTimeout
+    });
 
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
@@ -66,6 +88,9 @@ const TestimonialsBlock = compose(
             displayClass,
             `style-${contentType}`,
             'quote-override',
+            `arrow-layout-${arrowLayout || 'split'}`,
+            `arrow-position-${arrowPosition || 'default'}`,
+            `arrow-group-position-${arrowGroupPosition || 'bottom-center'}`,
         ),
         ref: elementRef
     });
@@ -74,19 +99,38 @@ const TestimonialsBlock = compose(
         selectBlock(clientId);
     };
 
+    useEffect(() => {
+        setLiveAttr({
+            ...liveAttr,
+            loop,
+            showNav,
+            showArrow,
+            initialSlide,
+            autoplay,
+            autoplayTimeout
+        });
+    }, [
+        loop,
+        showNav,
+        showArrow,
+        initialSlide,
+        autoplay,
+        autoplayTimeout
+    ]);
+
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
     return <>
         <CopyElementToolbar {...props} />
-        <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
+        <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} setLiveAttr={setLiveAttr} liveAttr={liveAttr} />
         <div {...blockProps}>
             <div className="testimonials-list" onClick={focusBlock}>
                 <WPSwiper
-                    {...swiperSettings(attributes)}
+                    {...swiperSettings(liveAttr)}
                     shouldSwiperUpdate={true}
                     rebuildOnUpdate={true}>
-                    {testimonialData.map((data, index) => <div key={index} >
+                    {testimonialData?.map((data, index) => <div key={index} >
                         <ContentItem {...data}
                             contentType={contentType}
                             showQuote={showQuote}

@@ -8,6 +8,7 @@ import saveV2 from './deprecated/v2/save';
 import saveV3 from './deprecated/v3/save';
 import saveV4 from './deprecated/v4/save';
 import saveV5 from './deprecated/v5/save';
+import saveV6 from './deprecated/v6/save';
 import { IconTestimonialSVG } from '../../../assets/icon/index';
 
 const { name, attributes, supports } = metadata;
@@ -23,22 +24,7 @@ export const settings = {
         {
             attributes,
             supports,
-            save: saveV1
-        },
-        {
-            attributes,
-            supports,
-            save: saveV2
-        },
-        {
-            attributes,
-            supports,
-            save: saveV3
-        },
-        {
-            attributes,
-            supports,
-            save: saveV4
+            save: saveV6
         },
         {
             attributes: {
@@ -66,6 +52,26 @@ export const settings = {
                 };
             },
             save: saveV5,
+        },
+        {
+            attributes,
+            supports,
+            save: saveV4
+        },
+        {
+            attributes,
+            supports,
+            save: saveV3
+        },
+        {
+            attributes,
+            supports,
+            save: saveV2
+        },
+        {
+            attributes,
+            supports,
+            save: saveV1
         },
     ]
 };

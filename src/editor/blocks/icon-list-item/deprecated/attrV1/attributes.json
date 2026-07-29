@@ -1,0 +1,111 @@
+{
+    "icon": {
+        "type": "string",
+        "source": "attribute",
+        "selector": "i",
+        "attribute": "class",
+        "default": ""
+    },
+    "url": {
+        "type": "string",
+        "source": "attribute",
+        "selector": "a",
+        "attribute": "href"
+    },
+    "linkTarget": {
+        "type": "string",
+        "source": "attribute",
+        "selector": "a",
+        "attribute": "target"
+    },
+    "rel": {
+        "type": "string",
+        "source": "attribute",
+        "selector": "a",
+        "attribute": "rel"
+    },
+    "text": {
+        "type": "string",
+        "source": "html",
+        "selector": "span",
+        "default": "List item"
+    },
+    "elementId": {
+        "type": "string"
+    },
+    "dynamicUrl": {
+        "type": "object",
+        "default": {}
+    },
+    "isDynamic": {
+        "type": "boolean",
+        "default": false
+    },
+    "dynamicTextContent": {
+        "type": "array",
+        "copyStyle": true
+    },
+    "dynamicUrlContent": {
+        "type": "array",
+        "copyStyle": true
+    },
+    "hasGlobalLink": {
+        "type": "boolean",
+        "default": false
+    },
+    "dynamicDataList": {
+        "type": "array",
+        "default": []
+    },
+    "openDynamic": {
+        "type": "string"
+    },
+    "ariaLabel": {
+        "type": "string",
+        "copyStyle": true
+    },
+    "iconType": {
+        "type": "string",
+        "default": "icon"
+    },
+    "iconSVG": {
+        "type": "string"
+    },
+    "hideIcon": {
+        "type": "boolean",
+        "default": false,
+        "copyStyle": true
+    },
+    "textChilds": {
+        "type": "array",
+        "default": []
+    },
+    "margin": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "padding": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "zIndex": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "transform": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "mask": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "iconLineHeight": {
+        "type": "object",
+        "copyStyle": true
+    },
+    "condition": {
+        "type": "object",
+        "default": {}
+    }
+}

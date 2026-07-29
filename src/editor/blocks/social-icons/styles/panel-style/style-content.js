@@ -5,10 +5,22 @@ const contentStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'alignment',
         'responsive': true,
-        'selector': `.${elementId}`,
+        'selector': `.${elementId}.horizontal`,
         'properties': [
             {
                 'name': 'justify-content',
+                'valueType': 'direct',
+            }
+        ],
+    });
+    isNotEmpty(attributes['alignment']) && data.push({
+        'type': 'plain',
+        'id': 'alignment',
+        'responsive': true,
+        'selector': `.${elementId}.vertical`,
+        'properties': [
+            {
+                'name': 'align-items',
                 'valueType': 'direct',
             }
         ],
@@ -22,14 +34,14 @@ const contentStyle = (elementId, attributes, data) => {
             {
                 'name': 'text-align',
                 'valueType': 'function',
-                'functionName' : 'handleAlign'
+                'functionName': 'handleAlign'
             }
         ],
     });
     isNotEmpty(attributes['iconSize']) && data.push({
         'type': 'unitPoint',
         'id': 'iconSize',
-        'responsive' : true,
+        'responsive': true,
         'properties': [
             {
                 'name': 'font-size',
@@ -42,7 +54,7 @@ const contentStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['iconSize']) && data.push({
         'type': 'unitPoint',
         'id': 'iconSize',
-        'responsive' : true,
+        'responsive': true,
         'properties': [
             {
                 'name': 'font-size',

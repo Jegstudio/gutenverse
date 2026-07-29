@@ -3,12 +3,20 @@
   flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
-  
-  &.horizontal > div:not(:first-child) {
+
+  &.vertical>div {
+    width: fit-content;
+
+    a {
+      width: fit-content;
+    }
+  }
+
+  &.horizontal>div:not(:first-child) {
     margin-left: 10px;
   }
 
-  &.vertical > div:not(:first-child) {
+  &.vertical>div:not(:first-child) {
     margin-top: 10px;
   }
 
@@ -817,4 +825,3 @@
     }
   }
 }
-

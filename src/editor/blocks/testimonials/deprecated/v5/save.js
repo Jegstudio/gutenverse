@@ -1,6 +1,5 @@
 
 import { classnames } from 'gutenverse-core/components';
-import { useBlockProps } from '@wordpress/block-editor';
 import ContentItem from './components/content-item';
 import { swiperData } from 'gutenverse-core/helper';
 import { useAnimationFrontend } from 'gutenverse-core/hooks';
@@ -60,7 +59,7 @@ const save = compose(
             <div className="testimonials-list">
                 <div id={elementId} className="swiper-container" {...swiperData(attributes)}>
                     <div className="swiper-wrapper">
-                        {testimonialData.map((data, index) => <div key={index} className="swiper-slide">
+                        {testimonialData?.map((data, index) => <div key={index} className="swiper-slide">
                             <ContentItem {...data}
                                 contentType={contentType}
                                 showQuote={showQuote}

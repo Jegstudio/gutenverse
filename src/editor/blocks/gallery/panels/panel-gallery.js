@@ -113,6 +113,35 @@ export const galleryPanel = () => {
                     show: value => !value.disableLink,
                     label: __('Link', 'gutenverse'),
                     component: TextControl
+                },
+                {
+                    id: 'imageAlt',
+                    label: __('Alt Type', 'gutenverse'),
+                    component: SelectControl,
+                    options: [
+                        {
+                            value: '',
+                            label: __('Default', 'gutenverse'),
+                        },
+                        {
+                            value: 'none',
+                            label: __('None', 'gutenverse'),
+                        },
+                        {
+                            value: 'original',
+                            label: __('Alt from Image', 'gutenverse'),
+                        },
+                        {
+                            value: 'custom',
+                            label: __('Custom Alt', 'gutenverse')
+                        }
+                    ],
+                },
+                {
+                    id: 'imageCustomAlt',
+                    label: __('Custom Alt', 'gutenverse'),
+                    component: TextControl,
+                    show: value => value?.imageAlt === 'custom',
                 }
             ],
         },
