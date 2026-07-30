@@ -189,12 +189,16 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
-= 4.0.0-performance =
+= 4.0.0 =
 
 New and improved:
 * Improve Icon SVG loading
 * Improve Speed Performance Frontend
 
+= 3.8.2 =
+
+Bug fixes:
+* Fix issue with font slug name
 
 = 3.8.1 =
 
@@ -203,7 +207,6 @@ New and improved:
 * Add background fallback for video background type.
 * Add image fallback for background slider.
 * Improved icon list icon line height.
-
 
 Bug fixes:
 
