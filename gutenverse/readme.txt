@@ -195,6 +195,9 @@ New and improved:
 * Improve Icon SVG loading
 * Improve Speed Performance Frontend
 
+Bug fixes:
+* Move frontend styling into inline, not using file anymore
+
 = 3.8.2 =
 
 Bug fixes:
