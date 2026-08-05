@@ -37,9 +37,6 @@ export const ContentV400 = () => {
 
             <h4>{__('Better Icon Loading', 'gutenverse')}</h4>
             <p>{__('Icons can now be converted to optimized SVG output, reducing dependency on frontend icon font loading.', 'gutenverse')}</p>
-
-            <h4>{__('Cleaner Rendering And Dashboard Updates', 'gutenverse')}</h4>
-            <p>{__('This release also improves featured image background rendering, post query handling, dashboard plugin notices, and several editor controls.', 'gutenverse')}</p>
         </div>
     );
 };
