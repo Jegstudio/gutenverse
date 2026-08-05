@@ -192,11 +192,13 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 = 4.0.0 =
 
 New and improved:
-* Improve Icon SVG loading
-* Improve Speed Performance Frontend
+* Improved frontend performance, asset loading, and cache handling
+* Moved featured image background rendering from JavaScript to PHP
+* Added on-demand nonce generation and automatic icon-to-SVG conversion
+* Improved dashboard ecosystem, plugin dependency notices, and editor/backend controls
 
 Bug fixes:
-* Move frontend styling into inline, not using file anymore
+* Fixed inherited query handling for post blocks
 
 = 3.8.2 =
 
