@@ -5,7 +5,7 @@ export const HeaderV400 = () => {
 
     return (
         <div className="custom-notice-header">
-            <img src={`${assetURL}/img/upgrade-notice-3.2.0-bg-hero-notice.webp`} alt="Header Background" />
+            <img src={`${assetURL}/img/upgrade-notice-bg-hero-notice.webp`} alt="Header Background" />
             <h3 className="upgrade-notice-title">
                 {__('Gutenverse', 'gutenverse')}
                 &nbsp;
@@ -30,13 +30,23 @@ export const HeaderV400 = () => {
 };
 
 export const ContentV400 = () => {
+    const { gutenverseAssetURL: assetURL } = window['GutenverseDashboard'];
+
     return (
         <div className="inner-content">
-            <h4>{__('Faster Frontend Experience', 'gutenverse')}</h4>
+            <h4>
+                <img src={`${assetURL}/img/update-notice-4.0.0-icon-fast-performance.png`} alt="" />
+                {__('Faster Frontend Experience', 'gutenverse')}
+            </h4>
             <p>{__('Gutenverse 4.0.0 improves asset loading, frontend cache handling, and mobile background behavior to help pages load more efficiently.', 'gutenverse')}</p>
+            <img src={`${assetURL}/img/update-notice-4.0.0-graphic-faster-frontend-experience.png`} alt={__('Faster Frontend Experience', 'gutenverse')} />
 
-            <h4>{__('Better Icon Loading', 'gutenverse')}</h4>
-            <p>{__('Icons can now be converted to optimized SVG output, reducing dependency on frontend icon font loading.', 'gutenverse')}</p>
+            <h4>
+                <img src={`${assetURL}/img/update-notice-4.0.0-icon-convert-svg.png`} alt="" />
+                {__('Better Icon Loading', 'gutenverse')}
+            </h4>
+            <p>{__('Icon can now be converted to optimized SVG output, reducing dependency on frontend icon font loading.', 'gutenverse')}</p>
+            <img src={`${assetURL}/img/update-notice-4.0.0-graphic-better-icon-loading.png`} alt={__('Better Icon Loading', 'gutenverse')} />
         </div>
     );
 };
