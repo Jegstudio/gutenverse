@@ -199,6 +199,7 @@ New and improved:
 
 Bug fixes:
 * Fixed inherited query handling for post blocks
+* Fixed responsive breakpoints for hide display option
 
 = 3.8.2 =
 
