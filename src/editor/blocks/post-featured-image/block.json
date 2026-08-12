@@ -252,6 +252,151 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"galleryImageFit": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryImageRatio": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryOverride": {
+			"type": "boolean",
+			"default": false
+		},
+		"videoOverride": {
+			"type": "boolean",
+			"default": false
+		},
+		"videoRatio": {
+			"type": "string",
+			"copyStyle": true
+		},
+		"galleryHideNav": {
+			"type": "boolean"
+		},
+		"galleryNavAlwaysShow": {
+			"type": "boolean"
+		},
+		"galleryHideDots": {
+			"type": "boolean"
+		},
+		"galleryNextButtonIcon": {
+			"type": "string",
+			"default": "fas fa-chevron-right"
+		},
+		"galleryNextButtonIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"galleryNextButtonIconSVG": {
+			"type": "string",
+			"default": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgRnJlZSA2LjUuMSBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIChJY29uczogQ0MgQlkgNC4wLCBGb250czogU0lMIE9GTCAxLjEsIENvZGU6IE1JVCBMaWNlbnNlKSBDb3B5cmlnaHQgMjAyMyBGb250aWNvbnMsIEluYy4gLS0+PHBhdGggZD0iTTI3OC42IDIzMy40YzEyLjUgMTIuNSAxMi41IDMyLjggMCA0NS4zbC0xNjAgMTYwYy0xMi41IDEyLjUtMzIuOCAxMi41LTQ1LjMgMHMtMTIuNS0zMi44IDAtNDUuM0wyMTAuNyAyNTYgNzMuNCAxMTguNmMtMTIuNS0xMi41LTEyLjUtMzIuOCAwLTQ1LjNzMzIuOC0xMi41IDQ1LjMgMGwxNjAgMTYweiIvPjwvc3ZnPg=="
+		},
+		"galleryPrevButtonIcon": {
+			"type": "string",
+			"default": "fas fa-chevron-left"
+		},
+		"galleryPrevButtonIconType": {
+			"type": "string",
+			"default": "icon"
+		},
+		"galleryPrevButtonIconSVG": {
+			"type": "string",
+			"default": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgRnJlZSA2LjUuMSBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIChJY29uczogQ0MgQlkgNC4wLCBGb250czogU0lMIE9GTCAxLjEsIENvZGU6IE1JVCBMaWNlbnNlKSBDb3B5cmlnaHQgMjAyMyBGb250aWNvbnMsIEluYy4gLS0+PHBhdGggZD0iTTQxLjQgMjMzLjRjLTEyLjUgMTIuNS0xMi41IDMyLjggMCA0NS4zbDE2MCAxNjBjMTIuNSAxMi41IDMyLjggMTIuNSA0NS4zIDBzMTIuNS0zMi44IDAtNDUuM0wxMDkuMyAyNTYgMjQ2LjYgMTE4LjZjMTIuNS0xMi41IDEyLjUtMzIuOCAwLTQ1LjNzLTMyLjgtMTIuNS00NS4zIDBsLTE2MCAxNjB6Ii8+PC9zdmc+"
+		},
+		"buttonHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonIconSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonPosition": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonIconColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonIconColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBgColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBgColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBorder": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBorderHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotGap": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotNormalColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotBorderNormalColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotNormalSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotHoverColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotBorderHoverColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotHoverSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotActiveColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotBorderActiveColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryDotActiveSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"galleryButtonBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"usesContext": [

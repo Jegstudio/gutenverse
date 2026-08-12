@@ -3,10 +3,9 @@ import { useCallback, useState } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { BlockControls, InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
-import { BlockPanelController } from 'gutenverse-core/controls';
+import { BlockPanelController, IconLibrary, convertIconToSvg } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { createPortal } from 'react-dom';
-import { IconLibrary } from 'gutenverse-core/controls';
 import { getSocialType, gutenverseRoot, renderIcon } from 'gutenverse-core/helper';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { displayShortcut } from '@wordpress/keycodes';
@@ -16,7 +15,7 @@ import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
 import { withAnimationAdvanceV2, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
 import { SelectParent } from 'gutenverse-core/components';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -105,6 +104,15 @@ const SocialIcon = compose(
         section: 1,
     };
 
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
+
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
@@ -121,6 +129,27 @@ const SocialIcon = compose(
         }
     }, [elementRef]);
 
+    const onSelectIcon = async (value, options = {}) => {
+        setAttributes({
+            icon: value,
+            iconType: 'icon',
+            iconSVG: ''
+        });
+
+        if (options.convertToSvg) {
+            const svgContent = await convertIconToSvg(value);
+            if (svgContent) {
+                setAttributes({
+                    icon: value,
+                    iconType: 'svg',
+                    iconSVG: svgContent
+                });
+            } else {
+                alert(__('Cannot Fetch Related SVG', 'gutenverse'));
+            }
+        }
+    };
+
     return <>
         <CopyElementToolbar {...props}/>
         <InspectorControls>
@@ -132,7 +161,8 @@ const SocialIcon = compose(
         {openIconLibrary && createPortal(<IconLibrary
             closeLibrary={() => setOpenIconLibrary(false)}
             value={icon}
-            onChange={value => setAttributes({ icon: value })}
+            onChange={onSelectIcon}
+            allowConvertToSvg={true}
         />, gutenverseRoot)}
         <BlockControls>
             <ToolbarGroup>

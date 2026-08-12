@@ -22,6 +22,22 @@ class Frontend_Assets {
 		add_filter( 'gutenverse_include_frontend', array( $this, 'load_conditional_scripts' ) );
 		add_filter( 'gutenverse_include_frontend', array( $this, 'load_conditional_styles' ) );
 		add_filter( 'gutenverse_conditional_script_attributes', array( $this, 'font_icon_conditional_load' ), null, 3 );
+		add_action( 'gutenverse_loop_blocks', array( $this, 'enqueue_frontend_style' ), 10, 3 );
+	}
+
+	/**
+	 * Queue the base frontend style when Gutenverse blocks exist so WordPress can inline it.
+	 *
+	 * @param array  $block Parsed block data.
+	 * @param string $style Generated style.
+	 * @param mixed  $generator Frontend generator instance.
+	 */
+	public function enqueue_frontend_style( $block, $style = null, $generator = null ) {
+		if ( isset( $block['blockName'] ) && 0 === strpos( $block['blockName'], 'gutenverse/' ) ) {
+			wp_enqueue_style( 'gutenverse-frontend' );
+
+			$generator->add_script( array( 'style' => 'gutenverse-frontend' ) );
+		}
 	}
 
 	/**
@@ -78,9 +94,9 @@ class Frontend_Assets {
 	/**
 	 * Load the font icon
 	 *
-	 * @param mixed  $conditions The value from the attributes array.
-	 * @param string $attrs The comparison operator (e.g., '===', '!==').
-	 * @param mixed  $block_name The value to compare against.
+	 * @param array $conditions Value of data need to be loaded.
+	 * @param array $attrs The value from the attributes array.
+	 * @param mixed $block_name The value to compare against.
 	 *
 	 * @since 3.3.0
 	 */
@@ -291,7 +307,10 @@ class Frontend_Assets {
 				GUTENVERSE_URL . '/assets/js/frontend/' . $block . '.js',
 				$include,
 				GUTENVERSE_VERSION,
-				true
+				array(
+					'in_footer' => true,
+					'strategy'  => 'defer',
+				)
 			);
 		}
 	}
@@ -365,12 +384,26 @@ class Frontend_Assets {
 			GUTENVERSE_VERSION
 		);
 
+		wp_style_add_data(
+			'gutenverse-frontend',
+			'path',
+			GUTENVERSE_DIR . '/assets/css/frontend.css'
+		);
+
 		foreach ( $blocks as $block ) {
+			$handle = 'gutenverse-frontend-' . $block . '-style';
+
 			wp_register_style(
-				'gutenverse-frontend-' . $block . '-style',
+				$handle,
 				GUTENVERSE_URL . '/assets/css/frontend/' . $block . '.css',
 				array( 'gutenverse-frontend' ),
 				GUTENVERSE_VERSION
+			);
+
+			wp_style_add_data(
+				$handle,
+				'path',
+				GUTENVERSE_DIR . '/assets/css/frontend/' . $block . '.css'
 			);
 		}
 	}

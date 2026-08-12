@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 3.8.2
+Stable tag: 4.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -189,6 +189,18 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
+= 4.0.0 =
+
+New and improved:
+* Improved frontend performance, asset loading, and cache handling
+* Moved featured image background rendering from JavaScript to PHP
+* Added on-demand nonce generation and automatic icon-to-SVG conversion
+* Improved dashboard ecosystem, plugin dependency notices, and editor/backend controls
+
+Bug fixes:
+* Fixed inherited query handling for post blocks
+* Fixed responsive breakpoints for hide display option
+
 = 3.8.2 =
 
 Bug fixes:
@@ -201,7 +213,6 @@ New and improved:
 * Add background fallback for video background type.
 * Add image fallback for background slider.
 * Improved icon list icon line height.
-
 
 Bug fixes:
 

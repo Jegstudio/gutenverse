@@ -2,6 +2,30 @@ GUTENVERSE FULL CHANGELOGS
 
 == Changelogs ==
 
+= 3.6.1 =
+##### New & Improvements
+* add option to be able to add global color/font through panel
+* add option to adjust slider arrow position in testimonial block
+
+##### Bug Fixes
+* fix issue with heading block recovery
+* fix issue with icon svg on frontend
+* fix issue with global font when there is no font weight or line height
+* fix multi buttons alignment and variation bug
+* fix taxonomy list horizontal layout frontend and editor different
+
+= 3.6.0 =
+##### New & Improvements
+* update block rendering mechanism
+
+##### Bug Fixes
+* fix gallery image size different when zoomed in on frontend vs editor
+* fix global style select when the data is empty
+* fix issue with container block content cannot be clicked
+* fix issue with container setting UI
+* fix issue with post block pagination
+* fix vulnerability issue. credit: Wordfence.
+
 = 3.5.3 =
 ##### New & Improvements
 * add aria label to post list block

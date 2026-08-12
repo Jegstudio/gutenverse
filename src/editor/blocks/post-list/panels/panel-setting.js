@@ -1,11 +1,14 @@
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
-import { NumberControl, RangeControl, SelectSearchControl, SelectControl, CheckboxControl, TextControl } from 'gutenverse-core/controls';
+import { NumberControl, RangeControl, SelectSearchControl, SelectControl, CheckboxControl, TextControl, AlertControl } from 'gutenverse-core/controls';
 import { addQueryArgs } from '@wordpress/url';
 import { searchAuthor, searchCategory, searchTag } from 'gutenverse-core/requests';
 import { isOnEditor } from 'gutenverse-core/helper';
 
-export const settingPanel = ({postType}) => {
+export const settingPanel = ({ postType, inheritQuery }) => {
+    const isInheritQueryEnabled = true === inheritQuery || 'true' === inheritQuery;
+    const showPostFilters = !isInheritQueryEnabled;
+
     const path = () => {
         switch (postType) {
             case 'page':
@@ -68,13 +71,23 @@ export const settingPanel = ({postType}) => {
         {
             id: 'inheritQuery',
             label: __('Inherit Query from Template', 'gutenverse'),
-            description: __('In Frontend, this will automatically show list of post depend on the current template such as : Archive, Search, etc.'),
+            description: __('Frontend will follow the current archive, search, or author template query.', 'gutenverse'),
             component: CheckboxControl,
+        },
+        {
+            id: 'inherit-query-notice',
+            component: AlertControl,
+            type: 'warning',
+            show: isInheritQueryEnabled,
+            children: <>
+                <span>{__('When this block is used inside a Query Template, such as an Archive, Search, or Category template, the post filters are ignored.', 'gutenverse')}</span>
+            </>
         },
         {
             id: 'postType',
             label: __('Include Post Type', 'gutenverse'),
             component: SelectControl,
+            show: showPostFilters,
             options: [
                 {
                     label: __('Page'),
@@ -95,6 +108,7 @@ export const settingPanel = ({postType}) => {
             id: 'numberPost',
             label: __('Number of Post initially showed', 'gutenverse'),
             component: RangeControl,
+            show: showPostFilters,
             min: 1,
             max: 30,
             step: 1,
@@ -104,12 +118,14 @@ export const settingPanel = ({postType}) => {
             id: 'postOffset',
             label: __('Post Offset', 'gutenverse'),
             component: NumberControl,
+            show: showPostFilters,
             forceType: 'string'
         },
         {
             id: 'includePost',
             label: __('Include Post', 'gutenverse'),
             component: SelectSearchControl,
+            show: showPostFilters,
             isMulti: true,
             onSearch: searchPosts
         },
@@ -117,6 +133,7 @@ export const settingPanel = ({postType}) => {
             id: 'excludePost',
             label: __('Exclude Post', 'gutenverse'),
             component: SelectSearchControl,
+            show: showPostFilters,
             isMulti: true,
             onSearch: searchPosts
         },
@@ -124,6 +141,7 @@ export const settingPanel = ({postType}) => {
             id: 'includeCategory',
             label: __('Include Category', 'gutenverse'),
             component: SelectSearchControl,
+            show: showPostFilters,
             isMulti: true,
             onSearch: newSearchCategory
         },
@@ -131,6 +149,7 @@ export const settingPanel = ({postType}) => {
             id: 'excludeCategory',
             label: __('Exclude Category', 'gutenverse'),
             component: SelectSearchControl,
+            show: showPostFilters,
             isMulti: true,
             onSearch: newSearchCategory
         },
@@ -138,6 +157,7 @@ export const settingPanel = ({postType}) => {
             id: 'includeAuthor',
             label: __('Include Author', 'gutenverse'),
             component: SelectSearchControl,
+            show: showPostFilters,
             isMulti: true,
             onSearch: newSearchAuthor
         },
@@ -145,6 +165,7 @@ export const settingPanel = ({postType}) => {
             id: 'includeTag',
             label: __('Include Tag', 'gutenverse'),
             component: SelectSearchControl,
+            show: showPostFilters,
             isMulti: true,
             onSearch: newSearchTag
         },
@@ -152,6 +173,7 @@ export const settingPanel = ({postType}) => {
             id: 'excludeTag',
             label: __('Exclude Tag', 'gutenverse'),
             component: SelectSearchControl,
+            show: showPostFilters,
             isMulti: true,
             onSearch: newSearchTag
         },
@@ -159,6 +181,7 @@ export const settingPanel = ({postType}) => {
             id: 'sortBy',
             label: __('Sort By', 'gutenverse'),
             component: SelectControl,
+            show: showPostFilters,
             options: [
                 {
                     value: 'latest',
