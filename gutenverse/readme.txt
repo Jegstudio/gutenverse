@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 4.0.0
+Stable tag: 4.0.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -188,6 +188,12 @@ Terms of Service: https://policies.google.com/terms
 If you use social sharing blocks, visitors may open external social sharing URLs when they click a share button.
 
 == Changelog ==
+
+= 4.0.2 =
+
+Bug fixes:
+* Fix issue with background featured image
+
 
 = 4.0.0 =
 
