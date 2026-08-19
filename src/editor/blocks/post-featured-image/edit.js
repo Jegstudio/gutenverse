@@ -17,7 +17,7 @@ import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 
-const { gvnewsEssentials = false } = window['GutenverseConfig'] || {};
+const jnewsBlocksPro = window.GutenverseConfig?.jnewsBlocksPro === '1';
 
 const PostFeaturedImageBlock = compose(
     withPartialRender
@@ -49,7 +49,7 @@ const PostFeaturedImageBlock = compose(
     const [block, setBlock] = useState(<StandardFormat attributes={attributes} postId={postId} postType={postType} />);
 
     useEffect(() => {
-        if (!gvnewsEssentials) {
+        if (!jnewsBlocksPro) {
             return;
         }
         if ((undefined === postId && gutenversePreviewBlock === 'featuredGallery') || (galleryOverride && 'gallery' === postFormat)) {
