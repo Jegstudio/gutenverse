@@ -171,8 +171,8 @@ const GalleryContent = ({ attributes, block, postId, postType }) => {
 
 const VideoContent = () => {
     return (
-        <div className="gvnews_featured featured_video">
-            <div className="gvnews_featured_video_preview">
+        <div className="jnews_featured featured_video">
+            <div className="jnews_featured_video_preview">
                 <img src={imagePlaceholder} />
             </div>
         </div>
