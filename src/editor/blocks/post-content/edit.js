@@ -246,7 +246,7 @@ const PostContentBlock = compose(
         </style>}
         <div {...blockProps}>
             <RecursionProvider uniqueId={contextPostId}>
-                {contextPostId && contextPostType ? (
+                {contextPostId && contextPostType === 'post' ? (
                     <Content
                         context={context}
                         parentLayout={parentLayout}
