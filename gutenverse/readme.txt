@@ -2,7 +2,7 @@
 Contributors: Jegstudio
 Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.0
 Stable tag: 4.0.5
 License: GPLv3
