@@ -193,6 +193,7 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 Bug fixes:
 * Fixed issue with block element ID
+* Fixed styling handler id
 
 = 4.0.3 =
 
