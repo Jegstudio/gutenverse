@@ -25,7 +25,7 @@ class Chart extends Block_Abstract {
 	 */
 	public function render_content() {
 		$element_id         = $this->get_element_id();
-		$title_tag          = isset( $this->attributes['titleTag'] ) ? $this->attributes['titleTag'] : 'h2';
+		$title_tag          = $this->check_tag( $this->attributes['titleTag'] ?? 'h2', 'h2' );
 		$icon               = isset( $this->attributes['icon'] ) ? $this->attributes['icon'] : 'fas fa-chart-pie';
 		$icon_type          = isset( $this->attributes['iconType'] ) ? $this->attributes['iconType'] : 'icon';
 		$icon_svg           = isset( $this->attributes['iconSVG'] ) ? $this->attributes['iconSVG'] : '';
@@ -77,9 +77,9 @@ class Chart extends Block_Abstract {
 		?>
 		<div class="guten-chart-wrapper">
 			<div class="chart-content content-card">
-				<<?php echo esc_attr( $title_tag ); ?> class="chart-title">
+				<<?php echo $title_tag; ?> class="chart-title">
 					<?php echo wp_kses_post( $title ); ?>
-				</<?php echo esc_attr( $title_tag ); ?>>
+				</<?php echo $title_tag; ?>>
 				<?php echo wp_kses_post( ( 'doughnut' !== $chart_type && 'none' !== $chart_content ) ? $inside_chart : '' ); ?>
 				<p class="chart-description"><?php echo wp_kses_post( $description ); ?></p>
 			</div>
