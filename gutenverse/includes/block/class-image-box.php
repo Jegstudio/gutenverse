@@ -19,6 +19,47 @@ use Gutenverse\Framework\Block\Block_Abstract;
 class Image_Box extends Block_Abstract {
 
 	/**
+	 * Render placeholder image HTML.
+	 *
+	 * @param string $lazy_attr Loading attribute.
+	 * @param string $alt_text  Image alt text.
+	 * @return string
+	 */
+	private function render_placeholder_image( $lazy_attr, $alt_text ) {
+		return '<img class="gutenverse-image-box-empty" src="' . esc_url( GUTENVERSE_FRAMEWORK_URL_PATH . '/assets/img/img-placeholder.jpg' ) . '" width="900" height="497"' . $lazy_attr . ' alt="' . esc_attr( $alt_text ) . '" />';
+	}
+
+	/**
+	 * Get an inline aspect ratio variable for the image header.
+	 *
+	 * @return string
+	 */
+	private function get_image_ratio_style() {
+		$image = isset( $this->attributes['image'] ) ? $this->attributes['image'] : array();
+		$media = isset( $image['media'] ) ? $image['media'] : array();
+		$size  = isset( $image['size'] ) ? $image['size'] : 'full';
+		$sizes = isset( $media['sizes'] ) ? $media['sizes'] : array();
+
+		if ( empty( $sizes ) ) {
+			return '';
+		}
+
+		$image_src = isset( $sizes[ $size ] ) ? $sizes[ $size ] : array();
+		if ( empty( $image_src ) ) {
+			$image_src = isset( $sizes['full'] ) ? $sizes['full'] : array();
+		}
+
+		$height = isset( $image_src['height'] ) ? (float) $image_src['height'] : 0;
+		$width  = isset( $image_src['width'] ) ? (float) $image_src['width'] : 0;
+
+		if ( $height > 0 && $width > 0 ) {
+			return ' style="--guten-image-box-ratio:' . esc_attr( $width . ' / ' . $height ) . ';"';
+		}
+
+		return '';
+	}
+
+	/**
 	 * Render the image figure HTML.
 	 *
 	 * @return string
@@ -42,7 +83,7 @@ class Image_Box extends Block_Abstract {
 		$sizes    = isset( $media['sizes'] ) ? $media['sizes'] : array();
 
 		if ( empty( $sizes ) ) {
-			return '<img class="gutenverse-image-box-empty" src=""' . $lazy_attr . ' alt="' . esc_attr( $alt_text ) . '" />';
+			return $this->render_placeholder_image( $lazy_attr, $alt_text );
 		}
 
 		$image_src = isset( $sizes[ $size ] ) ? $sizes[ $size ] : array();
@@ -59,7 +100,7 @@ class Image_Box extends Block_Abstract {
 			return '<img class="gutenverse-image-box-filled" src="' . esc_url( $url ) . '"' . $height_attr . $width_attr . ' alt="' . esc_attr( $alt_text ) . '"' . $lazy_attr . ' />';
 		}
 
-		return '<img class="gutenverse-image-box-empty" src=""' . $lazy_attr . ' alt="' . esc_attr( $alt_text ) . '" />';
+		return $this->render_placeholder_image( $lazy_attr, $alt_text );
 	}
 
 	/**
@@ -104,14 +145,14 @@ class Image_Box extends Block_Abstract {
 		$title_icon_svg      = isset( $this->attributes['titleIconSVG'] ) ? $this->attributes['titleIconSVG'] : '';
 		$title_icon_position = isset( $this->attributes['titleIconPosition'] ) ? $this->attributes['titleIconPosition'] : 'before';
 
-		if ( $title_icon_position !== $position || empty( $title_icon ) ) {
+		if ( $title_icon_position !== $position || ( empty( $title_icon ) && empty( $title_icon_svg ) ) ) {
 			return '';
 		}
 
 		$pos_class = 'icon-position-' . $position;
 
 		if ( 'svg' === $title_icon_type && ! empty( $title_icon_svg ) ) {
-			return '<span class="image-box-icon ' . esc_attr( $pos_class ) . '">' . $title_icon_svg . '</span>';
+			return '<span class="image-box-icon ' . esc_attr( $pos_class ) . '">' . $this->render_icon( $title_icon_type, $title_icon, $title_icon_svg ) . '</span>';
 		}
 
 		return '<span class="image-box-icon ' . esc_attr( $pos_class ) . '"><i class="' . esc_attr( $title_icon ) . '"></i></span>';
@@ -125,16 +166,17 @@ class Image_Box extends Block_Abstract {
 	public function render_content() {
 		$title               = isset( $this->attributes['title'] ) ? $this->attributes['title'] : '';
 		$description         = isset( $this->attributes['description'] ) ? $this->attributes['description'] : '';
-		$title_tag           = isset( $this->attributes['titleTag'] ) ? $this->attributes['titleTag'] : 'h3';
+		$title_tag           = $this->check_tag( $this->attributes['titleTag'] ?? 'h3', 'h3' );
 		$title_icon_position = isset( $this->attributes['titleIconPosition'] ) ? $this->attributes['titleIconPosition'] : 'before';
 		$hover_bottom        = isset( $this->attributes['hoverBottom'] ) && $this->attributes['hoverBottom'];
 		$hover_direction     = isset( $this->attributes['hoverBottomDirection'] ) ? $this->attributes['hoverBottomDirection'] : 'left';
 		$include_button      = isset( $this->attributes['includeButton'] ) && $this->attributes['includeButton'];
 
-		$figure_html = $this->render_figure();
+		$figure_html        = $this->render_figure();
+		$image_ratio_style  = $this->get_image_ratio_style();
 
 		$output  = '<div class="inner-container">';
-		$output .= '<div class="image-box-header">';
+		$output .= '<div class="image-box-header"' . $image_ratio_style . '>';
 		$output .= $this->wrap_href( $figure_html );
 		$output .= '</div>';
 
@@ -152,7 +194,7 @@ class Image_Box extends Block_Abstract {
 			$title_inner  = $this->render_title_icon( 'before' );
 			$title_inner .= '<span>' . wp_kses_post( $title ) . '</span>';
 			$title_inner .= $this->render_title_icon( 'after' );
-			$title_html   = '<' . esc_attr( $title_tag ) . ' class="' . esc_attr( $title_class ) . '">' . $title_inner . '</' . esc_attr( $title_tag ) . '>';
+			$title_html   = '<' . $title_tag . ' class="' . esc_attr( $title_class ) . '">' . $title_inner . '</' . $title_tag . '>';
 			$output      .= $this->wrap_href( $title_html );
 		}
 

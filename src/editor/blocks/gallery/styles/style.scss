@@ -89,6 +89,7 @@
     }
     &[data-grid="masonry"] {
         .gallery-items .gallery-item-wrap .grid-item .thumbnail-wrap {
+            aspect-ratio: var(--guten-gallery-thumbnail-ratio, 4 / 3);
             height: auto;
         }
     }

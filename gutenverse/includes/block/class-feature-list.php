@@ -41,7 +41,7 @@ class Feature_List extends Block_Abstract {
 					break;
 				case 'image':
 					$image        = isset( $item['image'] ) ? $item['image'] : array();
-					$image_url    = isset( $image['url'] ) ? $image['url'] : '';
+					$image_url    = isset( $image['url'] ) ? $image['url'] : ( isset( $image['image'] ) ? $image['image'] : '' );
 					$image_alt    = isset( $item['title'] ) ? $item['title'] : '';
 					$width        = isset( $image['width'] ) ? $image['width'] : '';
 					$height       = isset( $image['height'] ) ? $image['height'] : '';
