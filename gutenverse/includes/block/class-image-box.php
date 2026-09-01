@@ -166,7 +166,7 @@ class Image_Box extends Block_Abstract {
 	public function render_content() {
 		$title               = isset( $this->attributes['title'] ) ? $this->attributes['title'] : '';
 		$description         = isset( $this->attributes['description'] ) ? $this->attributes['description'] : '';
-		$title_tag           = isset( $this->attributes['titleTag'] ) ? $this->attributes['titleTag'] : 'h3';
+		$title_tag           = $this->check_tag( $this->attributes['titleTag'] ?? 'h3', 'h3' );
 		$title_icon_position = isset( $this->attributes['titleIconPosition'] ) ? $this->attributes['titleIconPosition'] : 'before';
 		$hover_bottom        = isset( $this->attributes['hoverBottom'] ) && $this->attributes['hoverBottom'];
 		$hover_direction     = isset( $this->attributes['hoverBottomDirection'] ) ? $this->attributes['hoverBottomDirection'] : 'left';
@@ -194,7 +194,7 @@ class Image_Box extends Block_Abstract {
 			$title_inner  = $this->render_title_icon( 'before' );
 			$title_inner .= '<span>' . wp_kses_post( $title ) . '</span>';
 			$title_inner .= $this->render_title_icon( 'after' );
-			$title_html   = '<' . esc_attr( $title_tag ) . ' class="' . esc_attr( $title_class ) . '">' . $title_inner . '</' . esc_attr( $title_tag ) . '>';
+			$title_html   = '<' . $title_tag . ' class="' . esc_attr( $title_class ) . '">' . $title_inner . '</' . $title_tag . '>';
 			$output      .= $this->wrap_href( $title_html );
 		}
 
