@@ -145,7 +145,7 @@
 
 
 	&.break-point-tablet {
-		@media screen and (max-width: 780px) {
+		@media screen and (max-width: 1024px) {
 			.gutenverse-hamburger-menu {
 				display: block;
 			}
@@ -270,7 +270,7 @@
 			}
 		}
 
-		@media screen and (min-width: 781px) {
+		@media screen and (min-width: 1025px) {
 			.gutenverse-menu-wrapper .gutenverse-menu-container {
 				height: auto;
 			}
@@ -278,7 +278,7 @@
 	}
 
 	&.break-point-mobile {
-		@media screen and (max-width: 425px) {
+		@media screen and (max-width: 767px) {
 			.gutenverse-hamburger-menu {
 				display: block;
 			}
@@ -402,7 +402,7 @@
 			}
 		}
 
-		@media screen and (min-width: 425px) {
+		@media screen and (min-width: 768px) {
 			.gutenverse-menu-wrapper .gutenverse-menu-container {
 				height: auto;
 			}
