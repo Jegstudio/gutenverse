@@ -69,7 +69,7 @@ const socialStyle = (elementId, attributes, data) => {
             {
                 'name': 'flex',
                 'valueType': 'function',
-                'valueFunc': () => '1 1 0 !important',
+                'valueFunc': () => '1 1 320px !important',
             },
             {
                 'name': 'max-width',
@@ -137,7 +137,7 @@ const socialStyle = (elementId, attributes, data) => {
         ],
     });
 
-    isNotEmpty(attributes['gap']) && data.push({
+    isNotEmpty(attributes['gap']) && !isHorizontalStretch && data.push({
         'type': 'plain',
         'id': 'gap',
         'responsive' : true,
@@ -156,7 +156,7 @@ const socialStyle = (elementId, attributes, data) => {
         'selector': `.editor-styles-wrapper .${elementId}.horizontal > div:not(:first-of-type), .editor-styles-wrapper .${elementId}.horizontal > .gutenverse-share-more-toggle`,
     });
 
-    isNotEmpty(attributes['gap']) && attributes['enableMoreButton'] && data.push({
+    isNotEmpty(attributes['gap']) && !isHorizontalStretch && attributes['enableMoreButton'] && data.push({
         'type': 'plain',
         'id': 'gap',
         'responsive' : true,
@@ -173,6 +173,25 @@ const socialStyle = (elementId, attributes, data) => {
             }
         ],
         'selector': `.editor-styles-wrapper .${elementId}.has-more-toggle.horizontal`,
+    });
+
+    isNotEmpty(attributes['gap']) && isHorizontalStretch && data.push({
+        'type': 'plain',
+        'id': 'gap',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'gap',
+                'valueType': 'pattern',
+                'pattern' : '{value}px',
+                'patternValues' : {
+                    'value' : {
+                        'type' : 'direct'
+                    }
+                }
+            }
+        ],
+        'selector': `.editor-styles-wrapper .${elementId}.stretch-layout.horizontal`,
     });
 
     isNotEmpty(attributes['gap']) && data.push({

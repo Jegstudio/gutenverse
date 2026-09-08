@@ -36,6 +36,12 @@
   &.stretch-layout.horizontal {
     width: 100%;
     align-items: stretch;
+    gap: 10px;
+
+    & > div:not(:first-of-type),
+    & > .gutenverse-share-more-toggle {
+      margin-left: 0;
+    }
 
     & > div {
       display: flex;

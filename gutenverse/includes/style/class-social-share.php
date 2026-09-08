@@ -93,7 +93,7 @@ class Social_Share extends Style_Abstract {
 				array(
 					'selector'       => ".{$this->element_id}.stretch-layout.horizontal > div:nth-of-type(-n+{$primary_button_count})",
 					'property'       => function ( $value ) {
-						return 'flex: 1 1 0 !important; min-width: 0; width: auto !important;';
+						return 'flex: 1 1 320px !important; min-width: 0; width: auto !important;';
 					},
 					'value'          => $this->attrs['layoutMode'],
 					'device_control' => false,
@@ -298,28 +298,41 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['gap'] ) ) {
-			$this->inject_style(
-				array(
-					'selector'       => ".{$this->element_id}.horizontal > div:not(:first-child), .{$this->element_id}.horizontal > .gutenverse-share-more-toggle",
-					'property'       => function ( $value ) {
-						return "margin-left: {$value}px;";
-					},
-					'value'          => $this->attrs['gap'],
-					'device_control' => true,
-				)
-			);
-
-			if ( ! empty( $this->attrs['enableMoreButton'] ) ) {
+			if ( $is_horizontal_stretch ) {
 				$this->inject_style(
 					array(
-						'selector'       => ".{$this->element_id}.has-more-toggle.horizontal",
+						'selector'       => ".{$this->element_id}.stretch-layout.horizontal",
 						'property'       => function ( $value ) {
-							return "row-gap: {$value}px;";
+							return "gap: {$value}px;";
 						},
 						'value'          => $this->attrs['gap'],
 						'device_control' => true,
 					)
 				);
+			} else {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id}.horizontal > div:not(:first-child), .{$this->element_id}.horizontal > .gutenverse-share-more-toggle",
+						'property'       => function ( $value ) {
+							return "margin-left: {$value}px;";
+						},
+						'value'          => $this->attrs['gap'],
+						'device_control' => true,
+					)
+				);
+
+				if ( ! empty( $this->attrs['enableMoreButton'] ) ) {
+					$this->inject_style(
+						array(
+							'selector'       => ".{$this->element_id}.has-more-toggle.horizontal",
+							'property'       => function ( $value ) {
+								return "row-gap: {$value}px;";
+							},
+							'value'          => $this->attrs['gap'],
+							'device_control' => true,
+						)
+					);
+				}
 			}
 
 			$this->inject_style(
