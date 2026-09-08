@@ -27,6 +27,8 @@ const SocialShare = compose(
     const {
         elementId,
         orientation = 'horizontal',
+        layoutMode = 'default',
+        buttonLayout = 'split',
         shape,
         color,
         showText,
@@ -44,6 +46,10 @@ const SocialShare = compose(
             elementId,
             shape,
             orientation,
+            {
+                'stretch-layout': layoutMode === 'stretch',
+                'button-layout-solid': buttonLayout === 'solid',
+            },
             color,
             animationClass,
             displayClass,

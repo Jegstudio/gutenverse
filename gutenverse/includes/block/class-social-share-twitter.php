@@ -26,7 +26,7 @@ class Social_Share_Twitter extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $text, $selected ) {
-		$share_text = $this->attributes['showText'] ? "<div class='gutenverse-share-text'>{$text}</div>" : '';
+		$share_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? "<div class='gutenverse-share-text'>{$text}</div>" : '';
 
 		if ( 'twitter' === $selected ) {
 			$content = '<div class="gutenverse-share-icon">
@@ -56,8 +56,9 @@ class Social_Share_Twitter extends Block_Abstract {
 		$text     = esc_html( $this->attributes['text'] );
 		$selected = isset( $this->attributes['selectedIcon'] ) ? esc_html( $this->attributes['selectedIcon'] ) : 'twitter';
 		$content  = $this->render_content( $text, $selected );
+		$has_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? ' has-text' : '';
 
-		return "<div class='gutenverse-share-twitter gutenverse-share-item {$selected}' id='{$this->get_element_id()}'>
+		return "<div class='gutenverse-share-twitter gutenverse-share-item{$has_text} {$selected}' id='{$this->get_element_id()}'>
 			<a  aria-label='{$text}'>
 				{$content}
 			</a>
@@ -75,8 +76,9 @@ class Social_Share_Twitter extends Block_Abstract {
 		$text             = esc_html( $this->attributes['text'] );
 		$selected         = isset( $this->attributes['selectedIcon'] ) ? esc_html( $this->attributes['selectedIcon'] ) : 'twitter';
 		$content          = $this->render_content( $text, $selected );
+		$has_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? ' has-text' : '';
 
-		return "<div class='gutenverse-share-twitter gutenverse-share-item {$selected}' id='{$this->get_element_id()}'>
+		return "<div class='gutenverse-share-twitter gutenverse-share-item{$has_text} {$selected}' id='{$this->get_element_id()}'>
 			<a target='_blank' href='{$share_url}' aria-label='{$text}'>
 				{$content}
 			</a>

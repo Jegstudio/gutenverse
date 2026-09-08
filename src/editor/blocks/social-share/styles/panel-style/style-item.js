@@ -1,6 +1,130 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const itemStyle = (elementId, attributes, data) => {
+    const primaryButtonCount = parseInt(attributes['primaryButtonCount'], 10);
+    const hasPrimaryButtonCount = !isNaN(primaryButtonCount) && primaryButtonCount > 0;
+    const isSolidButton = attributes['buttonLayout'] === 'solid';
+    const orderedItemSelectors = hasPrimaryButtonCount ? Array.from({ length: primaryButtonCount }, (value, index) => `.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-${index + 1}`) : [`.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-0`];
+    const orderedShareItemSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
+    const orderedShareItemAnchorSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
+    const orderedShareItemTextSelector = orderedItemSelectors.map(selector => selector.replace(`.editor-styles-wrapper .${elementId}`, `.editor-styles-wrapper .${elementId}:not(.button-layout-solid)`) + ' .gutenverse-share-text').join(', ');
+
+    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && data.push({
+        'type': 'unitPoint',
+        'id': 'primaryButtonWidth',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'width',
+                'valueType': 'direct'
+            }
+        ],
+        'selector': orderedShareItemSelector,
+    });
+
+    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && data.push({
+        'type': 'plain',
+        'id': 'primaryButtonWidth',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'width',
+                'valueType': 'function',
+                'valueFunc': () => '100%',
+            }
+        ],
+        'selector': orderedShareItemAnchorSelector,
+    });
+
+    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && !isSolidButton && data.push({
+        'type': 'plain',
+        'id': 'primaryButtonWidth',
+        'responsive' : true,
+        'properties': [
+            {
+                'name': 'flex',
+                'valueType': 'function',
+                'valueFunc': () => '1 1 auto',
+            }
+        ],
+        'selector': orderedShareItemTextSelector,
+    });
+
+    isNotEmpty(attributes['buttonHeight']) && data.push({
+        'type': 'plain',
+        'id': 'buttonHeight',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+        'properties': [
+            {
+                'name': 'height',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['buttonContentAlign']) && isSolidButton && data.push({
+        'type': 'plain',
+        'id': 'buttonContentAlign',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+        'properties': [
+            {
+                'name': 'justify-content',
+                'valueType': 'direct'
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['buttonIconGap']) && isSolidButton && data.push({
+        'type': 'plain',
+        'id': 'buttonIconGap',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item.has-text .gutenverse-share-icon`,
+        'properties': [
+            {
+                'name': 'margin-right',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['buttonBackgroundColor']) && isSolidButton && data.push({
+        'type': 'color',
+        'id': 'buttonBackgroundColor',
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+        'properties' : [
+            {
+                'name' : 'background-color',
+                'valueType' : 'direct'
+            }
+        ]
+    });
+
+    isNotEmpty(attributes['buttonBackgroundColorHover']) && isSolidButton && data.push({
+        'type': 'color',
+        'id': 'buttonBackgroundColorHover',
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover a`,
+        'properties' : [
+            {
+                'name' : 'background-color',
+                'valueType' : 'direct'
+            }
+        ]
+    });
+
     isNotEmpty(attributes['typography']) && data.push({
         'type': 'typography',
         'id': 'typography',
@@ -36,7 +160,7 @@ const itemStyle = (elementId, attributes, data) => {
         ]
     });
 
-    isNotEmpty(attributes['iconBackgroundColor']) && data.push({
+    isNotEmpty(attributes['iconBackgroundColor']) && !isSolidButton && data.push({
         'type': 'color',
         'id': 'iconBackgroundColor',
         'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon`,
@@ -48,7 +172,7 @@ const itemStyle = (elementId, attributes, data) => {
         ]
     });
 
-    isNotEmpty(attributes['backgroundColor']) && data.push({
+    isNotEmpty(attributes['backgroundColor']) && !isSolidButton && data.push({
         'type': 'color',
         'id': 'backgroundColor',
         'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-text`,
@@ -96,7 +220,7 @@ const itemStyle = (elementId, attributes, data) => {
         ]
     });
 
-    isNotEmpty(attributes['iconBackgroundColorHover']) && data.push({
+    isNotEmpty(attributes['iconBackgroundColorHover']) && !isSolidButton && data.push({
         'type': 'color',
         'id': 'iconBackgroundColorHover',
         'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon`,
@@ -108,7 +232,7 @@ const itemStyle = (elementId, attributes, data) => {
         ]
     });
 
-    isNotEmpty(attributes['backgroundColorHover']) && data.push({
+    isNotEmpty(attributes['backgroundColorHover']) && !isSolidButton && data.push({
         'type': 'color',
         'id': 'backgroundColorHover',
         'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-text`,

@@ -13,5 +13,14 @@ export const panelSettings = () => {
                 { value: 'vertical', label: __('Vertical', 'gutenverse') },
             ],
         },
+        {
+            id: 'layoutMode',
+            label: __('Layout Mode', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                { value: 'default', label: __('Default', 'gutenverse') },
+                { value: 'stretch', label: __('Stretch Bar', 'gutenverse') },
+            ],
+        },
     ];
 };

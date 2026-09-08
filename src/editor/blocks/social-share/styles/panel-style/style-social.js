@@ -1,6 +1,24 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const socialStyle = (elementId, attributes, data) => {
+    isNotEmpty(attributes['layoutMode']) && attributes['layoutMode'] === 'stretch' && data.push({
+        'type': 'plain',
+        'id': 'layoutMode',
+        'selector': `.editor-styles-wrapper .${elementId}.guten-social-share`,
+        'properties': [
+            {
+                'name': 'width',
+                'valueType': 'function',
+                'valueFunc': () => '100%',
+            },
+            {
+                'name': 'align-items',
+                'valueType': 'function',
+                'valueFunc': () => 'stretch',
+            }
+        ],
+    });
+
     isNotEmpty(attributes['alignment']) && data.push({
         'type': 'plain',
         'id': 'alignment',

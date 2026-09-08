@@ -28,6 +28,48 @@
 			"default": "horizontal",
 			"copyStyle": true
 		},
+		"layoutMode": {
+			"type": "string",
+			"default": "default",
+			"copyStyle": true
+		},
+		"buttonLayout": {
+			"type": "string",
+			"default": "split",
+			"copyStyle": true
+		},
+		"buttonHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"primaryButtonWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"primaryButtonCount": {
+			"type": "number",
+			"default": 2,
+			"copyStyle": true
+		},
+		"buttonContentAlign": {
+			"type": "object",
+			"default": {
+				"Desktop": "center"
+			},
+			"copyStyle": true
+		},
+		"buttonIconGap": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"buttonBackgroundColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"buttonBackgroundColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"iconPading": {
 			"type": "object",
 			"copyStyle": true
@@ -300,6 +342,9 @@
 	"style": [
 		"gutenverse-frontend-social-share-style"
 	],
+	"providesContext": {
+		"gutenverse/socialShareButtonLayout": "buttonLayout"
+	},
 	"usesContext": [
 		"gutenverse/flexDirection"
 	]

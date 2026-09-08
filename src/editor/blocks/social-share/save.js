@@ -12,6 +12,8 @@ const SaveSocialShare = compose(
     const {
         elementId,
         orientation = 'horizontal',
+        layoutMode = 'default',
+        buttonLayout = 'split',
     } = attributes;
 
     const animationClass = useAnimationFrontend(attributes);
@@ -22,6 +24,10 @@ const SaveSocialShare = compose(
         'guten-social-share',
         elementId,
         orientation,
+        {
+            'stretch-layout': layoutMode === 'stretch',
+            'button-layout-solid': buttonLayout === 'solid',
+        },
         animationClass,
         displayClass,
     );

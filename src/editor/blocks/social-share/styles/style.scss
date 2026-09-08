@@ -20,6 +20,15 @@
     }
   }
 
+  &.stretch-layout {
+    width: 100%;
+    align-items: stretch;
+
+    &.horizontal > div {
+      display: flex;
+    }
+  }
+
   &.vertical {
     flex-direction: column;
 
@@ -32,6 +41,14 @@
     width: fit-content;
     a {
       color: #fff;
+    }
+  }
+
+  .guten-social-share-item-wrapper {
+    display: flex;
+
+    .gutenverse-share-item {
+      width: 100%;
     }
   }
 }
