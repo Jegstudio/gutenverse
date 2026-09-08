@@ -3,20 +3,19 @@ import { isNotEmpty } from 'gutenverse-core/helper';
 const socialStyle = (elementId, attributes, data) => {
     const isHorizontalStretch = attributes['orientation'] !== 'vertical' && attributes['layoutMode'] === 'stretch';
     const visibleButtonCount = parseInt(attributes['visibleButtonCount'], 10) || 2;
+    const hiddenStartIndex = visibleButtonCount + 1;
     const parsedPrimaryButtonCount = parseInt(attributes['primaryButtonCount'], 10);
     const primaryButtonCount = Math.max(isNaN(parsedPrimaryButtonCount) ? 2 : parsedPrimaryButtonCount, 2);
-    const hiddenPreviewSelectors = attributes['enableMoreButton'] ? Array.from({ length: 20 }, (value, index) => index + 1)
-        .filter(index => index > visibleButtonCount)
-        .map(index => `.editor-styles-wrapper .${elementId}.has-more-toggle .guten-social-share-item-wrapper.guten-social-share-item-order-${index}`) : [];
+    const hiddenPreviewSelector = `.editor-styles-wrapper .${elementId}.has-more-toggle > .guten-social-share-item-wrapper:nth-of-type(n+${hiddenStartIndex})`;
     const stretchItemSelectors = Array.from({ length: primaryButtonCount }, (value, index) => `.editor-styles-wrapper .${elementId}.stretch-layout.horizontal .guten-social-share-item-wrapper.guten-social-share-item-order-${index + 1}`);
     const stretchInnerWrapperSelector = stretchItemSelectors.map(selector => `${selector} > div`).join(', ');
     const stretchShareItemSelector = stretchItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
     const stretchShareItemAnchorSelector = stretchItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
 
-    hiddenPreviewSelectors.length && data.push({
+    attributes['enableMoreButton'] && data.push({
         'type': 'plain',
         'id': 'enableMoreButton',
-        'selector': hiddenPreviewSelectors.join(', '),
+        'selector': hiddenPreviewSelector,
         'properties': [
             {
                 'name': 'opacity',

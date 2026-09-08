@@ -19,9 +19,8 @@ class GutenverseSocialShare extends Default {
         const shareItems = Array.from(element.children).filter(child => {
             return child.classList.contains('gutenverse-share-item') || child.classList.contains('guten-social-share-item-wrapper');
         });
-        const hiddenItems = shareItems.slice(visibleButtonCount);
 
-        if (!hiddenItems.length) {
+        if (shareItems.length <= visibleButtonCount) {
             moreButton.style.display = 'none';
             return;
         }

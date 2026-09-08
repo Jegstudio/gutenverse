@@ -33,11 +33,11 @@
     }
   }
 
-  &.stretch-layout {
+  &.stretch-layout.horizontal {
     width: 100%;
     align-items: stretch;
 
-    &.horizontal > div {
+    & > div {
       display: flex;
     }
   }
