@@ -35,6 +35,7 @@ const SocialShare = compose(
         color,
         showText,
     } = attributes;
+    const isHorizontalStretch = orientation !== 'vertical' && layoutMode === 'stretch';
 
     const elementRef = useRef();
     const animationClass = useAnimationEditor(attributes);
@@ -49,7 +50,7 @@ const SocialShare = compose(
             shape,
             orientation,
             {
-                'stretch-layout': layoutMode === 'stretch',
+                'stretch-layout': isHorizontalStretch,
                 'button-layout-solid': buttonLayout === 'solid',
                 'has-more-toggle': enableMoreButton,
             },

@@ -3,8 +3,11 @@ import { CheckboxControl, NumberControl, SelectControl } from 'gutenverse-core/c
 
 export const panelSettings = (props) => {
     const {
-        enableMoreButton
+        enableMoreButton,
+        orientation = 'horizontal'
     } = props;
+
+    const isHorizontal = orientation !== 'vertical';
 
     return [
         {
@@ -18,6 +21,7 @@ export const panelSettings = (props) => {
         },
         {
             id: 'layoutMode',
+            show: isHorizontal,
             label: __('Layout Mode', 'gutenverse'),
             component: SelectControl,
             options: [

@@ -17,6 +17,7 @@ const SaveSocialShare = compose(
         enableMoreButton = false,
         visibleButtonCount = 2,
     } = attributes;
+    const isHorizontalStretch = orientation !== 'vertical' && layoutMode === 'stretch';
 
     const animationClass = useAnimationFrontend(attributes);
     const displayClass = useDisplayFrontend(attributes);
@@ -27,7 +28,7 @@ const SaveSocialShare = compose(
         elementId,
         orientation,
         {
-            'stretch-layout': layoutMode === 'stretch',
+            'stretch-layout': isHorizontalStretch,
             'button-layout-solid': buttonLayout === 'solid',
             'has-more-toggle': enableMoreButton,
         },

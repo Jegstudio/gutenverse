@@ -1,15 +1,17 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const itemStyle = (elementId, attributes, data) => {
-    const primaryButtonCount = parseInt(attributes['primaryButtonCount'], 10);
-    const hasPrimaryButtonCount = !isNaN(primaryButtonCount) && primaryButtonCount > 0;
+    const parsedPrimaryButtonCount = parseInt(attributes['primaryButtonCount'], 10);
+    const primaryButtonCount = Math.max(isNaN(parsedPrimaryButtonCount) ? 2 : parsedPrimaryButtonCount, 0);
+    const hasPrimaryButtonCount = primaryButtonCount > 0;
     const isSolidButton = attributes['buttonLayout'] === 'solid';
+    const isHorizontalStretch = attributes['orientation'] !== 'vertical' && attributes['layoutMode'] === 'stretch';
     const orderedItemSelectors = hasPrimaryButtonCount ? Array.from({ length: primaryButtonCount }, (value, index) => `.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-${index + 1}`) : [`.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-0`];
     const orderedShareItemSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
     const orderedShareItemAnchorSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
     const orderedShareItemTextSelector = orderedItemSelectors.map(selector => selector.replace(`.editor-styles-wrapper .${elementId}`, `.editor-styles-wrapper .${elementId}:not(.button-layout-solid)`) + ' .gutenverse-share-text').join(', ');
 
-    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && data.push({
+    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && !isHorizontalStretch && data.push({
         'type': 'unitPoint',
         'id': 'primaryButtonWidth',
         'responsive' : true,
@@ -22,7 +24,7 @@ const itemStyle = (elementId, attributes, data) => {
         'selector': orderedShareItemSelector,
     });
 
-    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && data.push({
+    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && !isHorizontalStretch && data.push({
         'type': 'plain',
         'id': 'primaryButtonWidth',
         'responsive' : true,
@@ -36,7 +38,7 @@ const itemStyle = (elementId, attributes, data) => {
         'selector': orderedShareItemAnchorSelector,
     });
 
-    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && !isSolidButton && data.push({
+    isNotEmpty(attributes['primaryButtonWidth']) && hasPrimaryButtonCount && !isSolidButton && !isHorizontalStretch && data.push({
         'type': 'plain',
         'id': 'primaryButtonWidth',
         'responsive' : true,
@@ -58,6 +60,25 @@ const itemStyle = (elementId, attributes, data) => {
         'properties': [
             {
                 'name': 'height',
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ],
+    });
+
+    isNotEmpty(attributes['buttonHeight']) && data.push({
+        'type': 'plain',
+        'id': 'buttonHeight',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
+        'properties': [
+            {
+                'name': 'width',
                 'valueType': 'pattern',
                 'pattern': '{value}px',
                 'patternValues': {

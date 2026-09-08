@@ -21,8 +21,6 @@ class GutenverseSocialShare extends Default {
         });
         const hiddenItems = shareItems.slice(visibleButtonCount);
 
-        hiddenItems.forEach(item => item.classList.add('is-more-hidden'));
-
         if (!hiddenItems.length) {
             moreButton.style.display = 'none';
             return;

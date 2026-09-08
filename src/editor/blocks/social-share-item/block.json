@@ -126,6 +126,8 @@
 	},
 	"keywords": ["social", "share"],
 	"usesContext": [
+		"gutenverse/socialShareOrientation",
+		"gutenverse/socialShareLayoutMode",
 		"gutenverse/socialShareButtonLayout"
 	],
 	"style": ["gutenverse-frontend-social-share-item-style"]

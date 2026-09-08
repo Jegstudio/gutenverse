@@ -106,11 +106,6 @@
     }
   }
 
-  &.has-more-toggle:not(.is-expanded) > .gutenverse-share-item.is-more-hidden,
-  &.has-more-toggle:not(.is-expanded) > .guten-social-share-item-wrapper.is-more-hidden {
-    display: none;
-  }
-
   &.has-more-toggle.is-expanded > .gutenverse-share-more-toggle svg {
     transform: rotate(180deg);
   }

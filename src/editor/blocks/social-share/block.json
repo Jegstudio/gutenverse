@@ -354,6 +354,8 @@
 		"gutenverse-frontend-social-share-script"
 	],
 	"providesContext": {
+		"gutenverse/socialShareOrientation": "orientation",
+		"gutenverse/socialShareLayoutMode": "layoutMode",
 		"gutenverse/socialShareButtonLayout": "buttonLayout"
 	},
 	"usesContext": [

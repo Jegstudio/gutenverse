@@ -23,17 +23,21 @@ export const panelStyle = props => {
 
     const device = getDeviceType();
     const buttonLayout = context['gutenverse/socialShareButtonLayout'] || 'split';
+    const parentOrientation = context['gutenverse/socialShareOrientation'] || 'horizontal';
+    const parentLayoutMode = context['gutenverse/socialShareLayoutMode'] || 'default';
+    const isHorizontalStretch = parentOrientation !== 'vertical' && parentLayoutMode === 'stretch';
 
     return [
         {
             id: 'itemGrow',
+            show: !isHorizontalStretch,
             label: __('Grow Item', 'gutenverse'),
             description: __('Allow this share item to fill available horizontal space.', 'gutenverse'),
             component: CheckboxControl,
         },
         {
             id: 'itemWidth',
-            show: !itemGrow,
+            show: !itemGrow && !isHorizontalStretch,
             label: __('Item Width', 'gutenverse'),
             component: SizeControl,
             allowDeviceControl: true,

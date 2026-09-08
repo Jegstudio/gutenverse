@@ -18,6 +18,8 @@ import { isNotEmpty } from 'gutenverse-core/helper';
 export const panelItemStyle = props => {
     const {
         elementId,
+        orientation = 'horizontal',
+        layoutMode = 'default',
         buttonLayout,
         primaryButtonWidth,
         primaryButtonCount,
@@ -26,8 +28,10 @@ export const panelItemStyle = props => {
     } = props;
 
     const device = getDeviceType();
-    const buttonCount = parseInt(primaryButtonCount, 10);
-    const hasButtonCount = !isNaN(buttonCount) && buttonCount > 0;
+    const isHorizontalStretch = orientation !== 'vertical' && layoutMode === 'stretch';
+    const parsedButtonCount = parseInt(primaryButtonCount, 10);
+    const buttonCount = Math.max(isNaN(parsedButtonCount) ? 2 : parsedButtonCount, 0);
+    const hasButtonCount = buttonCount > 0;
     const orderedItemSelectors = hasButtonCount ? Array.from({ length: buttonCount }, (value, index) => `.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-${index + 1}`) : [`.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-0`];
     const orderedShareItemSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
     const orderedShareItemAnchorSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
@@ -51,6 +55,7 @@ export const panelItemStyle = props => {
         },
         {
             id: 'primaryButtonWidth',
+            show: !isHorizontalStretch,
             label: __('Primary Button Width', 'gutenverse'),
             component: SizeControl,
             allowDeviceControl: true,
@@ -111,7 +116,7 @@ export const panelItemStyle = props => {
         },
         {
             id: 'primaryButtonCount',
-            show: isNotEmpty(primaryButtonWidth),
+            show: isNotEmpty(primaryButtonWidth) && !isHorizontalStretch,
             label: __('Apply Width to First Buttons', 'gutenverse'),
             component: NumberControl,
             min: 0,
@@ -144,6 +149,24 @@ export const panelItemStyle = props => {
                         }
                     ],
                     'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'buttonHeight',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'width',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
                 }
             ],
         },

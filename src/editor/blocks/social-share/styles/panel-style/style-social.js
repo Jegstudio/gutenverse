@@ -1,10 +1,17 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const socialStyle = (elementId, attributes, data) => {
+    const isHorizontalStretch = attributes['orientation'] !== 'vertical' && attributes['layoutMode'] === 'stretch';
     const visibleButtonCount = parseInt(attributes['visibleButtonCount'], 10) || 2;
+    const parsedPrimaryButtonCount = parseInt(attributes['primaryButtonCount'], 10);
+    const primaryButtonCount = Math.max(isNaN(parsedPrimaryButtonCount) ? 2 : parsedPrimaryButtonCount, 2);
     const hiddenPreviewSelectors = attributes['enableMoreButton'] ? Array.from({ length: 20 }, (value, index) => index + 1)
         .filter(index => index > visibleButtonCount)
         .map(index => `.editor-styles-wrapper .${elementId}.has-more-toggle .guten-social-share-item-wrapper.guten-social-share-item-order-${index}`) : [];
+    const stretchItemSelectors = Array.from({ length: primaryButtonCount }, (value, index) => `.editor-styles-wrapper .${elementId}.stretch-layout.horizontal .guten-social-share-item-wrapper.guten-social-share-item-order-${index + 1}`);
+    const stretchInnerWrapperSelector = stretchItemSelectors.map(selector => `${selector} > div`).join(', ');
+    const stretchShareItemSelector = stretchItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
+    const stretchShareItemAnchorSelector = stretchItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
 
     hiddenPreviewSelectors.length && data.push({
         'type': 'plain',
@@ -37,7 +44,7 @@ const socialStyle = (elementId, attributes, data) => {
         ],
     });
 
-    isNotEmpty(attributes['layoutMode']) && attributes['layoutMode'] === 'stretch' && data.push({
+    isHorizontalStretch && data.push({
         'type': 'plain',
         'id': 'layoutMode',
         'selector': `.editor-styles-wrapper .${elementId}.guten-social-share`,
@@ -51,6 +58,52 @@ const socialStyle = (elementId, attributes, data) => {
                 'name': 'align-items',
                 'valueType': 'function',
                 'valueFunc': () => 'stretch',
+            }
+        ],
+    });
+
+    isHorizontalStretch && data.push({
+        'type': 'plain',
+        'id': 'layoutMode',
+        'selector': stretchItemSelectors.join(', '),
+        'properties': [
+            {
+                'name': 'flex',
+                'valueType': 'function',
+                'valueFunc': () => '1 1 0 !important',
+            },
+            {
+                'name': 'max-width',
+                'valueType': 'function',
+                'valueFunc': () => 'none !important',
+            },
+            {
+                'name': 'min-width',
+                'valueType': 'function',
+                'valueFunc': () => '0',
+            },
+            {
+                'name': 'width',
+                'valueType': 'function',
+                'valueFunc': () => 'auto !important',
+            }
+        ],
+    });
+
+    isHorizontalStretch && data.push({
+        'type': 'plain',
+        'id': 'layoutMode',
+        'selector': `${stretchInnerWrapperSelector}, ${stretchShareItemSelector}, ${stretchShareItemAnchorSelector}`,
+        'properties': [
+            {
+                'name': 'display',
+                'valueType': 'function',
+                'valueFunc': () => 'flex',
+            },
+            {
+                'name': 'width',
+                'valueType': 'function',
+                'valueFunc': () => '100% !important',
             }
         ],
     });
@@ -84,6 +137,7 @@ const socialStyle = (elementId, attributes, data) => {
             }
         ],
     });
+
     isNotEmpty(attributes['gap']) && data.push({
         'type': 'plain',
         'id': 'gap',
