@@ -57,6 +57,22 @@ class Social_Share extends Style_Abstract {
 	public function generate() {
 		$is_solid_button = isset( $this->attrs['buttonLayout'] ) && 'solid' === $this->attrs['buttonLayout'];
 
+		if ( ! empty( $this->attrs['enableMoreButton'] ) ) {
+			$visible_button_count = ! empty( $this->attrs['visibleButtonCount'] ) ? absint( $this->attrs['visibleButtonCount'] ) : 2;
+			$hidden_start_index   = $visible_button_count + 1;
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.has-more-toggle:not(.is-expanded) > div.gutenverse-share-item:nth-of-type(n+{$hidden_start_index}), .{$this->element_id}.has-more-toggle:not(.is-expanded) > div.guten-social-share-item-wrapper:nth-of-type(n+{$hidden_start_index})",
+					'property'       => function ( $value ) {
+						return 'display: none;';
+					},
+					'value'          => $this->attrs['enableMoreButton'],
+					'device_control' => false,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['layoutMode'] ) && 'stretch' === $this->attrs['layoutMode'] ) {
 			$this->inject_style(
 				array(
@@ -140,7 +156,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['buttonHeight'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item a",
+					'selector'       => ".{$this->element_id} .gutenverse-share-item a, .{$this->element_id} .gutenverse-share-more-toggle",
 					'property'       => function ( $value ) {
 						return "height: {$value}px;";
 					},
@@ -247,7 +263,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['gap'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}.horizontal > div:not(:first-child)",
+					'selector'       => ".{$this->element_id}.horizontal > div:not(:first-child), .{$this->element_id}.horizontal > .gutenverse-share-more-toggle",
 					'property'       => function ( $value ) {
 						return "margin-left: {$value}px;";
 					},
@@ -256,9 +272,22 @@ class Social_Share extends Style_Abstract {
 				)
 			);
 
+			if ( ! empty( $this->attrs['enableMoreButton'] ) ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id}.has-more-toggle.horizontal",
+						'property'       => function ( $value ) {
+							return "row-gap: {$value}px;";
+						},
+						'value'          => $this->attrs['gap'],
+						'device_control' => true,
+					)
+				);
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id}.vertical > div:not(:first-child)",
+					'selector'       => ".{$this->element_id}.vertical > div:not(:first-child), .{$this->element_id}.vertical > .gutenverse-share-more-toggle",
 					'property'       => function ( $value ) {
 						return "margin-top: {$value}px;";
 					},
@@ -321,13 +350,13 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['borderType'] ) ) {
-			$this->handle_border( 'borderType', ".{$this->element_id} .gutenverse-share-item" );
+			$this->handle_border( 'borderType', ".{$this->element_id} .gutenverse-share-item, .{$this->element_id} .gutenverse-share-more-toggle" );
 		}
 
 		if ( isset( $this->attrs['borderTypeResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item",
+					'selector'       => ".{$this->element_id} .gutenverse-share-item, .{$this->element_id} .gutenverse-share-more-toggle",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},
@@ -393,13 +422,13 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['borderTypeHover'] ) ) {
-			$this->handle_border( 'borderTypeHover', ".{$this->element_id} .gutenverse-share-item:hover" );
+			$this->handle_border( 'borderTypeHover', ".{$this->element_id} .gutenverse-share-item:hover, .{$this->element_id} .gutenverse-share-more-toggle:hover" );
 		}
 
 		if ( isset( $this->attrs['borderTypeHoverResponsive'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item:hover",
+					'selector'       => ".{$this->element_id} .gutenverse-share-item:hover, .{$this->element_id} .gutenverse-share-more-toggle:hover",
 					'property'       => function ( $value ) {
 						return $this->handle_border_responsive( $value );
 					},

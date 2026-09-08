@@ -57,7 +57,25 @@ export const contentStyle = (props) => {
                             }
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId}.horizontal > div:not(:first-of-type)`,
+                    'selector': `.editor-styles-wrapper .${elementId}.horizontal > div:not(:first-of-type), .editor-styles-wrapper .${elementId}.horizontal > .gutenverse-share-more-toggle`,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'gap',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'row-gap',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .${elementId}.has-more-toggle.horizontal`,
                 },
                 {
                     'type': 'plain',
@@ -75,7 +93,7 @@ export const contentStyle = (props) => {
                             }
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId}.vertical > div:not(:first-of-type)`,
+                    'selector': `.editor-styles-wrapper .${elementId}.vertical > div:not(:first-of-type), .editor-styles-wrapper .${elementId}.vertical > .gutenverse-share-more-toggle`,
                 }
             ]
         },

@@ -143,7 +143,7 @@ export const panelItemStyle = props => {
                             }
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
                 }
             ],
         },
@@ -378,7 +378,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'border',
                     'id': 'borderType',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
                 }
             ]
         },
@@ -392,7 +392,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'borderResponsive',
                     'id': 'borderTypeResponsive',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
                 }
             ]
         },
@@ -500,7 +500,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'border',
                     'id': 'borderTypeHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle:hover`,
                 }
             ]
         },
@@ -514,7 +514,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'borderResponsive',
                     'id': 'borderTypeHoverResponsive',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle:hover`,
                 }
             ]
         },

@@ -54,7 +54,7 @@ const itemStyle = (elementId, attributes, data) => {
         'type': 'plain',
         'id': 'buttonHeight',
         'responsive': true,
-        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
         'properties': [
             {
                 'name': 'height',
@@ -199,13 +199,13 @@ const itemStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['borderType']) && data.push({
         'type': 'border',
         'id': 'borderType',
-        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item`,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
     });
 
     isNotEmpty(attributes['borderTypeResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'borderTypeResponsive',
-        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item`,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
     });
 
     isNotEmpty(attributes['iconColorHover']) && data.push({
@@ -259,13 +259,13 @@ const itemStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['borderTypeHover']) && data.push({
         'type': 'border',
         'id': 'borderTypeHover',
-        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover`,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle:hover`,
     });
 
     isNotEmpty(attributes['borderTypeHoverResponsive']) && data.push({
         'type': 'borderResponsive',
         'id': 'borderTypeHoverResponsive',
-        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover`,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle:hover`,
     });
     return data;
 };

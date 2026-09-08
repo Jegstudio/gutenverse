@@ -1,7 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import { SelectControl } from 'gutenverse-core/controls';
+import { CheckboxControl, NumberControl, SelectControl } from 'gutenverse-core/controls';
 
-export const panelSettings = () => {
+export const panelSettings = (props) => {
+    const {
+        enableMoreButton
+    } = props;
 
     return [
         {
@@ -21,6 +24,19 @@ export const panelSettings = () => {
                 { value: 'default', label: __('Default', 'gutenverse') },
                 { value: 'stretch', label: __('Stretch Bar', 'gutenverse') },
             ],
+        },
+        {
+            id: 'enableMoreButton',
+            label: __('Enable More Button', 'gutenverse'),
+            component: CheckboxControl,
+        },
+        {
+            id: 'visibleButtonCount',
+            show: enableMoreButton,
+            label: __('Visible Buttons Before More', 'gutenverse'),
+            component: NumberControl,
+            min: 1,
+            max: 20,
         },
     ];
 };

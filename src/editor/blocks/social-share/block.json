@@ -70,6 +70,14 @@
 			"type": "object",
 			"copyStyle": true
 		},
+		"enableMoreButton": {
+			"type": "boolean",
+			"default": false
+		},
+		"visibleButtonCount": {
+			"type": "number",
+			"default": 2
+		},
 		"iconPading": {
 			"type": "object",
 			"copyStyle": true
@@ -341,6 +349,9 @@
 	],
 	"style": [
 		"gutenverse-frontend-social-share-style"
+	],
+	"viewScript": [
+		"gutenverse-frontend-social-share-script"
 	],
 	"providesContext": {
 		"gutenverse/socialShareButtonLayout": "buttonLayout"

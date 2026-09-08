@@ -29,6 +29,8 @@ const SocialShare = compose(
         orientation = 'horizontal',
         layoutMode = 'default',
         buttonLayout = 'split',
+        enableMoreButton = false,
+        visibleButtonCount = 2,
         shape,
         color,
         showText,
@@ -49,6 +51,7 @@ const SocialShare = compose(
             {
                 'stretch-layout': layoutMode === 'stretch',
                 'button-layout-solid': buttonLayout === 'solid',
+                'has-more-toggle': enableMoreButton,
             },
             color,
             animationClass,
@@ -85,10 +88,29 @@ const SocialShare = compose(
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
 
+    const moreButton = enableMoreButton && (
+        <button
+            className="gutenverse-share-more-toggle gutenverse-share-more-toggle-editor"
+            type="button"
+            aria-hidden="true"
+            tabIndex={-1}
+            data-visible-button-count={visibleButtonCount}
+        >
+            <span className="gutenverse-share-more-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M14 8V4l8 8-8 8v-4.1c-5.1.4-8.6 2.2-12 6.1.9-6.5 4.6-12.6 12-14Z" />
+                </svg>
+            </span>
+        </button>
+    );
+
     return <>
         <CopyElementToolbar {...props}/>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
-        <div {...innerBlocksProps} />
+        <div {...innerBlocksProps}>
+            {innerBlocksProps.children}
+            {moreButton}
+        </div>
     </>;
 });
 
