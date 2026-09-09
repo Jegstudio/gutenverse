@@ -93,7 +93,7 @@ class Social_Share extends Style_Abstract {
 				array(
 					'selector'       => ".{$this->element_id}.stretch-layout.horizontal > div:nth-of-type(-n+{$primary_button_count})",
 					'property'       => function ( $value ) {
-						return 'flex: 1 1 320px !important; min-width: 0; width: auto !important;';
+						return 'flex: 1 1 0 !important; min-width: 0; width: auto !important;';
 					},
 					'value'          => $this->attrs['layoutMode'],
 					'device_control' => false,
@@ -110,6 +110,19 @@ class Social_Share extends Style_Abstract {
 					'device_control' => false,
 				)
 			);
+
+			if ( ! $is_solid_button ) {
+				$this->inject_style(
+					array(
+						'selector'       => ".{$this->element_id}.stretch-layout.horizontal:not(.button-layout-solid) > div:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-text, .{$this->element_id}.stretch-layout.horizontal:not(.button-layout-solid) > div.gutenverse-share-item:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-text",
+						'property'       => function ( $value ) {
+							return 'flex: 1 1 auto;';
+						},
+						'value'          => $this->attrs['layoutMode'],
+						'device_control' => false,
+					)
+				);
+			}
 		}
 
 		if ( isset( $this->attrs['alignment'] ) ) {

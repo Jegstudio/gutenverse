@@ -46,6 +46,12 @@
     & > div {
       display: flex;
     }
+
+    &:not(.button-layout-solid) {
+      .gutenverse-share-text {
+        flex: 1 1 auto;
+      }
+    }
   }
 
   &.vertical {
