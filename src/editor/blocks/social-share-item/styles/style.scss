@@ -182,6 +182,26 @@
       background: #7d280e;
     }
   }
+
+  &.gutenverse-share-chatgpt {
+    .gutenverse-share-icon {
+      background: #202123;
+    }
+
+    .gutenverse-share-text {
+      background: #202123;
+    }
+  }
+
+  &.gutenverse-share-perflexity {
+    .gutenverse-share-icon {
+      background: #20808d;
+    }
+
+    .gutenverse-share-text {
+      background: #20808d;
+    }
+  }
 }
 
 .guten-social-share.button-layout-solid {
@@ -259,6 +279,14 @@
 
     &.gutenverse-share-email a {
       background: #a53310;
+    }
+
+    &.gutenverse-share-chatgpt a {
+      background: #10a37f;
+    }
+
+    &.gutenverse-share-perflexity a {
+      background: #20808d;
     }
   }
 }

@@ -25,7 +25,8 @@ const SingleSocialShare = (props) => {
         showText,
         text,
         type,
-        selectedIcon
+        selectedIcon,
+        additionalAIPrompt
     } = attributes;
 
     const elementRef = useRef();
@@ -68,7 +69,8 @@ const SingleSocialShare = (props) => {
                     showText,
                     text,
                     type,
-                    selectedIcon
+                    selectedIcon,
+                    additionalAIPrompt
                 }}
                 EmptyResponsePlaceholder={EmptySocialShare}
             /> : <div className={`gutenverse-share-${shareType} gutenverse-share-item${hasText ? ' has-text' : ''}`} id={elementId}>

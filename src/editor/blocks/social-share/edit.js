@@ -81,6 +81,8 @@ const SocialShare = compose(
             'gutenverse/social-share-wechat',
             'gutenverse/social-share-line',
             'gutenverse/social-share-email',
+            'gutenverse/social-share-chatgpt',
+            'gutenverse/social-share-perflexity',
         ],
         orientation,
         __experimentalAppenderTagName: 'div',

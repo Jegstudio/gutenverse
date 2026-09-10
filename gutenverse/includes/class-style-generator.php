@@ -271,6 +271,8 @@ class Style_Generator {
 			case 'gutenverse/social-share-wechat':
 			case 'gutenverse/social-share-line':
 			case 'gutenverse/social-share-email':
+			case 'gutenverse/social-share-chatgpt':
+			case 'gutenverse/social-share-perflexity':
 				$instance = new Social_Share_Item( $attrs );
 				break;
 		}

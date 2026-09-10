@@ -155,6 +155,8 @@ class Blocks {
 			'wechat',
 			'line',
 			'email',
+			'chatgpt',
+			'perflexity',
 		);
 
 		foreach ( $socials as $social ) {
@@ -177,6 +179,9 @@ class Blocks {
 							'type' => array(
 								'type'    => 'string',
 								'default' => '' . ucfirst( $social ),
+							),
+							'additionalAIPrompt' => array(
+								'type' => 'string',
 							),
 						)
 					),

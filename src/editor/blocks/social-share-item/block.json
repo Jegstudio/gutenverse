@@ -39,6 +39,9 @@
 			"type": "boolean",
 			"default": true
 		},
+		"additionalAIPrompt": {
+			"type": "string"
+		},
 		"iconColor": {
 			"type": "object",
 			"copyStyle": true
