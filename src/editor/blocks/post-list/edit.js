@@ -8,7 +8,7 @@ import { panelList } from './panels/panel-list';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 import { useRef } from '@wordpress/element';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { isOnEditor, dummyText } from 'gutenverse-core/helper';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -84,6 +84,20 @@ const PostListBlock = compose(
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const elementRef = useRef();
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+            { type: 'metaDateIconType', svg: 'metaDateIconSVG' },
+            { type: 'metaCategoryIconType', svg: 'metaCategoryIconSVG' },
+            { type: 'paginationIconType', svg: 'paginationIconSVG' },
+            { type: 'paginationPrevIconType', svg: 'paginationPrevIconSVG' },
+            { type: 'paginationNextIconType', svg: 'paginationNextIconSVG' },
+        ],
+    });
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);

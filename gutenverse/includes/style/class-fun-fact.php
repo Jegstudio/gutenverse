@@ -56,12 +56,76 @@ class Fun_Fact extends Style_Abstract {
 	 * Generate style base on attribute.
 	 */
 	public function generate() {
+		if ( isset( $this->attrs['iconPosition'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-fun-fact .fun-fact-inner",
+					'property'       => function ( $value ) {
+						if ( 'left' === $value || 'right' === $value ) {
+							return 'flex-direction: row;';
+						}
+						return 'flex-direction: column;';
+					},
+					'value'          => $this->attrs['iconPosition'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id}.guten-fun-fact .icon-box",
+					'property'       => function ( $value ) {
+						if ( 'left' === $value || 'top' === $value ) {
+							return 'order: 0;';
+						}
+						if ( 'right' === $value || 'bottom' === $value ) {
+							return 'order: 2;';
+						}
+						return '';
+					},
+					'value'          => $this->attrs['iconPosition'],
+					'device_control' => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['alignButtons'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id}",
 					'property'       => function ( $value ) {
 						return "text-align: {$value};";
+					},
+					'value'          => $this->attrs['alignButtons'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .fun-fact-inner",
+					'property'       => function ( $value ) {
+						if ( 'left' === $value ) {
+							return 'justify-content: start;';
+						}
+						if ( 'right' === $value ) {
+							return 'justify-content: end;';
+						}
+						return "justify-content: {$value};";
+					},
+					'value'          => $this->attrs['alignButtons'],
+					'device_control' => true,
+				)
+			);
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} .fun-fact-inner",
+					'property'       => function ( $value ) {
+						if ( 'left' === $value ) {
+							return 'align-items: start;';
+						}
+						if ( 'right' === $value ) {
+							return 'align-items: end;';
+						}
+						return "align-items: {$value};";
 					},
 					'value'          => $this->attrs['alignButtons'],
 					'device_control' => true,

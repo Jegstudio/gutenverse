@@ -2,17 +2,16 @@ import { useCallback, useState, useEffect, useRef } from '@wordpress/element';
 import { BlockControls, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { RichTextComponent, classnames } from 'gutenverse-core/components';
 import { __ } from '@wordpress/i18n';
-import { BlockPanelController } from 'gutenverse-core/controls';
+import { BlockPanelController, IconLibrary, convertIconToSvg } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
 import { displayShortcut } from '@wordpress/keycodes';
 import { createPortal } from 'react-dom';
-import { IconLibrary } from 'gutenverse-core/controls';
 import { HighLightToolbar, URLToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
 import { gutenverseRoot, renderIcon } from 'gutenverse-core/helper';
 import { LogoCircleColor24SVG } from 'gutenverse-core/icons';
 import { SelectParent } from 'gutenverse-core/components';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -57,6 +56,15 @@ const IconListItemBlock = (props) => {
     const displayClass = useDisplayEditor(attributes);
     const { dynamicHref } = useDynamicUrl(dynamicUrl);
     const isGlobalLinkSet = url !== undefined && url !== '';
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconType', svg: 'iconSVG' },
+        ],
+    });
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -110,6 +118,27 @@ const IconListItemBlock = (props) => {
         } else { setAttributes({ url: url }); }
     }, [dynamicHref]);
 
+    const onSelectIcon = async (value, options = {}) => {
+        setAttributes({
+            icon: value,
+            iconType: 'icon',
+            iconSVG: ''
+        });
+
+        if (options.convertToSvg) {
+            const svgContent = await convertIconToSvg(value);
+            if (svgContent) {
+                setAttributes({
+                    icon: value,
+                    iconType: 'svg',
+                    iconSVG: svgContent
+                });
+            } else {
+                alert(__('Cannot Fetch Related SVG', 'gutenverse'));
+            }
+        }
+    };
+
     return <>
         <CopyElementToolbar {...props}/>
         <InspectorControls>
@@ -121,7 +150,8 @@ const IconListItemBlock = (props) => {
         {openIconLibrary && createPortal(<IconLibrary
             closeLibrary={() => setOpenIconLibrary(false)}
             value={icon}
-            onChange={value => setAttributes({ icon: value })}
+            onChange={onSelectIcon}
+            allowConvertToSvg={true}
         />, gutenverseRoot)}
         <BlockControls>
             <ToolbarGroup>

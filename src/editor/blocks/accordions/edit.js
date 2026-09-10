@@ -5,7 +5,7 @@ import { panelList } from './panels/panel-list';
 import { useInnerBlocksProps, useBlockProps, InspectorControls, BlockControls } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
 import { BlockPanelController } from 'gutenverse-core/controls';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { dispatch, useSelect } from '@wordpress/data';
 import { Button, ToolbarButton, ToolbarGroup } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -36,6 +36,7 @@ const Accordions = compose(
 
     const {
         attributes,
+        setAttributes,
         clientId,
         setBlockRef
     } = props;
@@ -53,6 +54,16 @@ const Accordions = compose(
     } = attributes;
 
     const elementRef = useRef(null);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'iconOpenType', svg: 'iconOpenSVG' },
+            { type: 'iconClosedType', svg: 'iconClosedSVG' },
+        ],
+    });
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);

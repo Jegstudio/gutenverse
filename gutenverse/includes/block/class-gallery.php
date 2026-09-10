@@ -59,6 +59,23 @@ class Gallery extends Block_Abstract {
 	}
 
 	/**
+	 * Get an inline aspect ratio variable for gallery thumbnails.
+	 *
+	 * @param array $image Image data.
+	 * @return string
+	 */
+	private function get_thumbnail_ratio_style( $image ) {
+		$height = isset( $image['src']['height'] ) ? (float) $image['src']['height'] : 0;
+		$width  = isset( $image['src']['width'] ) ? (float) $image['src']['width'] : 0;
+
+		if ( $height > 0 && $width > 0 ) {
+			return ' style="--guten-gallery-thumbnail-ratio:' . esc_attr( $width . ' / ' . $height ) . ';"';
+		}
+
+		return '';
+	}
+
+	/**
 	 * Render Rating Items
 	 *
 	 * @param float $rating Rating value.
@@ -115,10 +132,11 @@ class Gallery extends Block_Abstract {
 			$hover_class = "animated $hover";
 		}
 
-		$image_html = $this->image_condition( $item );
+		$image_html            = $this->image_condition( $item );
+		$thumbnail_ratio_style = $this->get_thumbnail_ratio_style( $item );
 
 		$output  = '<div class="grid-item">';
-		$output .= '<div class="thumbnail-wrap">';
+		$output .= '<div class="thumbnail-wrap"' . $thumbnail_ratio_style . '>';
 		$output .= $image_html;
 
 		$caption_class = ( 'overlay' === $layout ) ? 'caption-wrap style-overlay overlay-overlay ' . $hover_class : 'caption-wrap search-hover-bg style-overlay ' . $hover_class;
@@ -159,7 +177,7 @@ class Gallery extends Block_Abstract {
 					$link_url        = isset( $item['link'] ) ? $item['link'] : '';
 					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					/* translators: %s: Item title */
-					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), $item['title'] ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
+					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), isset( $item['title'] ) ? $item['title'] : '' ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
 					if ( $link_text_set ) {
 						$output .= '<p class="item-icon-text link-text">' . esc_html( $link_text ) . '</p>';
 					}
@@ -236,7 +254,7 @@ class Gallery extends Block_Abstract {
 					$link_url        = isset( $item['link'] ) ? $item['link'] : '';
 					$zoom_text_class = ( 'none' !== $zoom_text ) ? 'with-text' : '';
 					/* translators: %s: Item title */
-					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), $item['title'] ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
+					$output .= '<a aria-label="' . esc_attr( sprintf( __( 'Link to %s', 'gutenverse' ), isset( $item['title'] ) ? $item['title'] : '' ) ) . '" href="' . esc_url( $link_url ) . '" class="gallery-link link ' . esc_attr( $zoom_text_class ) . '">';
 					if ( $link_text_set ) {
 						$output .= '<p class="item-icon-text link-text">' . esc_html( $link_text ) . '</p>';
 					}
@@ -329,7 +347,7 @@ class Gallery extends Block_Abstract {
 										<?php echo $this->image_condition( $image ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 										<?php if ( ! empty( $image['lightboxDescription'] ) ) : ?>
 											<div class="content-description-wrapper">
-												<<?php echo esc_attr( $title_tag ); ?> class="content-title"><?php echo esc_html( $image['title'] ); ?></<?php echo esc_attr( $title_tag ); ?>>
+												<<?php echo esc_attr( $title_tag ); ?> class="content-title"><?php echo esc_html( isset( $image['title'] ) ? $image['title'] : '' ); ?></<?php echo esc_attr( $title_tag ); ?>>
 												<div class="content-description">
 													<p><?php echo wp_kses_post( isset( $image['content'] ) ? $image['content'] : '' ); ?></p>
 												</div>

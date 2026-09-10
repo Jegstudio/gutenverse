@@ -70,7 +70,7 @@ class Dashboard {
 			'name'           => GUTENVERSE_NAME,
 			'version'        => GUTENVERSE_VERSION,
 			'currentNotice'  => GUTENVERSE_NOTICE_VERSION,
-			'noticeVersions' => array( '3.2.0' ),
+			'noticeVersions' => array( '4.0.0' ),
 		);
 
 		$upgrader     = new Upgrader();

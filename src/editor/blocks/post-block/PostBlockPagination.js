@@ -44,7 +44,7 @@ const PostBlockPagination = (props) => {
         return (
             <div className="guten_block_nav additional_class" data-page={currentPage}>
                 <a
-                    href="#"
+                    href="javascript:void(0);"
                     data-href="#"
                     className={`btn-pagination prev ${currentPage === 1 ? 'disabled' : ''}`}
                     title="Prev"
@@ -53,7 +53,7 @@ const PostBlockPagination = (props) => {
                     {paginationPrevNextText ? paginationPrevText : ''}
                 </a>
                 <a
-                    href="#"
+                    href="javascript:void(0);"
                     data-href="#"
                     className={`btn-pagination next ${currentPage >= totalPages ? 'disabled' : ''}`}
                     title="Next"
@@ -75,7 +75,7 @@ const PostBlockPagination = (props) => {
             pages.push(
                 <a
                     key="page-1"
-                    href="#"
+                    href="javascript:void(0);"
                     data-href="#"
                     className="btn-pagination"
                     data-page="1"
@@ -100,7 +100,7 @@ const PostBlockPagination = (props) => {
                 pages.push(
                     <a
                         key={`page-${i}`}
-                        href="#"
+                        href="javascript:void(0);"
                         data-href="#"
                         className="btn-pagination"
                         data-page={i}
@@ -119,7 +119,7 @@ const PostBlockPagination = (props) => {
             pages.push(
                 <a
                     key={`page-${totalPages}`}
-                    href="#"
+                    href="javascript:void(0);"
                     data-href="#"
                     className="btn-pagination"
                     data-page={totalPages}
@@ -132,7 +132,7 @@ const PostBlockPagination = (props) => {
         return (
             <div className="guten_block_nav" data-page={currentPage}>
                 <a
-                    href="#"
+                    href="javascript:void(0);"
                     data-href="#"
                     className={`btn-pagination prev ${currentPage === 1 ? 'disabled' : ''}`}
                     title="Prev"
@@ -142,7 +142,7 @@ const PostBlockPagination = (props) => {
                 </a>
                 {pages}
                 <a
-                    href="#"
+                    href="javascript:void(0);"
                     data-href="#"
                     className={`btn-pagination next ${currentPage >= totalPages ? 'disabled' : ''}`}
                     title="Next"

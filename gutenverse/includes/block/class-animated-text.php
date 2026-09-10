@@ -25,11 +25,11 @@ class Animated_Text extends Block_Abstract {
 	 */
 	public function render_content() {
 		$text                 = isset( $this->attributes['text'] ) ? $this->attributes['text'] : 'Placeholder Text';
-		$title_tag            = isset( $this->attributes['titleTag'] ) ? $this->attributes['titleTag'] : 'h2';
+		$title_tag            = $this->check_tag( $this->attributes['titleTag'] ?? 'h2', 'h2' );
 		$before_text_animated = isset( $this->attributes['beforeTextAnimated'] ) ? $this->attributes['beforeTextAnimated'] : 'Before ';
 		$after_text_animated  = isset( $this->attributes['afterTextAnimated'] ) ? $this->attributes['afterTextAnimated'] : ' After';
 
-		$output  = '<' . esc_attr( $title_tag ) . '>';
+		$output  = '<' . $title_tag . '>';
 		$output .= '<span class="non-animated-text before-text">' . wp_kses_post( $before_text_animated ) . '</span>';
 		$output .= '<span class="text-content">';
 		$output .= '<span class="text-wrapper">';
@@ -38,7 +38,7 @@ class Animated_Text extends Block_Abstract {
 		$output .= '<span class="highlighted"></span>';
 		$output .= '</span>';
 		$output .= '<span class="non-animated-text after-text">' . wp_kses_post( $after_text_animated ) . '</span>';
-		$output .= '</' . esc_attr( $title_tag ) . '>';
+		$output .= '</' . $title_tag . '>';
 
 		return $output;
 	}
@@ -70,7 +70,10 @@ class Animated_Text extends Block_Abstract {
 			'textType'           => $text_type,
 			'text'               => $text,
 			'elementId'          => $this->get_element_id(),
-			'rotationTexts'      => $rotation_texts,
+			'rotationTexts'      => array_map( function ( $item ) {
+				$item['rotationText'] = sanitize_text_field( $item['rotationText'] ?? '' );
+				return $item;
+			}, $rotation_texts ),
 			'highlightedStyle'   => $highlighted_style,
 			'highlightGradient'  => $highlight_gradient,
 			'highlightColorType' => $highlight_color_type,
@@ -108,7 +111,7 @@ class Animated_Text extends Block_Abstract {
 		}
 
 		$id_attr        = ! empty( $anchor ) ? ' id="' . esc_attr( $anchor ) . '"' : '';
-		$data_animation = ' data-animation=\'' . wp_json_encode( $this->get_animation_props() ) . '\'';
+		$data_animation = ' data-animation="' . htmlspecialchars( wp_json_encode( $this->get_animation_props() ), ENT_QUOTES, 'UTF-8' ) . '"';
 		$content        = '<div' . $id_attr . ' class="' . esc_attr( trim( $class_name ) ) . '"' . $data_animation . '>' . $this->render_content() . '</div>';
 		$content        = apply_filters( 'gutenverse_cursor_move_effect_script', $content, $this->attributes, $element_id );
 

@@ -261,16 +261,30 @@ class Api {
 	 * @param WP_REST_Request $request .
 	 */
 	public function post_block_data( $request ) {
-		$attributes = $request->get_param( 'attributes' );
-		$post_data  = new Post_Block();
+		$attributes    = $request->get_param( 'attributes' );
+		$post_data     = new Post_Block();
+		$switched_blog = false;
 
 		if ( is_array( $attributes ) ) {
 			$attributes['fromPagination'] = true;
+
+			if ( is_multisite() && ! empty( $attributes['currentBlogId'] ) ) {
+				$current_blog_id = absint( $attributes['currentBlogId'] );
+
+				if ( $current_blog_id && get_current_blog_id() !== $current_blog_id ) {
+					switch_to_blog( $current_blog_id );
+					$switched_blog = true;
+				}
+			}
 		}
 
 		$post_data->set_attributes( $attributes );
 
 		$render = $post_data->render_frontend( false );
+
+		if ( $switched_blog ) {
+			restore_current_blog();
+		}
 
 		return new WP_REST_Response(
 			array(
@@ -642,7 +656,15 @@ class Api {
 				$primary_category = null;
 				$categories       = get_the_category( $post_id );
 				if ( ! empty( $categories ) ) {
-					$category         = $categories[0];
+					$category    = $categories[0];
+					$category_id = $category->term_id;
+				}
+
+				$primary_id = apply_filters( 'gutenverse_primary_category', $category_id, $post_id );
+				$category   = get_term( $primary_id );
+
+				$primary_category = null;
+				if ( $category instanceof \WP_Term ) {
 					$primary_category = array(
 						'name' => $category->name,
 						'slug' => $category->slug,

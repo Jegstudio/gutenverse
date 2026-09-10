@@ -115,6 +115,7 @@ class Image extends Block_Abstract {
 		$src    = '';
 		$width  = '';
 		$height = '';
+		$style  = '';
 
 		if ( ! empty( $sizes ) ) {
 			$image_src = isset( $sizes[ $size ] ) ? $sizes[ $size ] : ( isset( $sizes['full'] ) ? $sizes['full'] : array() );
@@ -124,6 +125,10 @@ class Image extends Block_Abstract {
 				$width  = isset( $image_src['width'] ) ? $image_src['width'] : '';
 				$height = isset( $image_src['height'] ) ? $image_src['height'] : '';
 			}
+		}
+
+		if ( ! empty( $width ) && ! empty( $height ) ) {
+			$style = '--guten-image-ratio: ' . absint( $width ) . ' / ' . absint( $height ) . ';';
 		}
 
 		$img_attr = array(
@@ -141,6 +146,9 @@ class Image extends Block_Abstract {
 		if ( ! empty( $height ) ) {
 			$img_attr['height'] = $height;
 		}
+		if ( ! empty( $style ) ) {
+			$img_attr['style'] = $style;
+		}
 
 		if ( $fetch_priority_high ) {
 			$img_attr['fetchpriority'] = 'high';
@@ -151,8 +159,11 @@ class Image extends Block_Abstract {
 		}
 
 		if ( empty( $src ) ) {
-			$img_attr['src']   = GUTENVERSE_FRAMEWORK_URL_PATH . '/assets/img/img-placeholder.jpg';
-			$img_attr['class'] = 'gutenverse-image-box-empty';
+			$img_attr['src']    = GUTENVERSE_FRAMEWORK_URL_PATH . '/assets/img/img-placeholder.jpg';
+			$img_attr['class']  = 'gutenverse-image-box-empty';
+			$img_attr['width']  = 900;
+			$img_attr['height'] = 497;
+			$img_attr['style']  = '--guten-image-ratio: 900 / 497;';
 		}
 
 		$img_attr_str = '';

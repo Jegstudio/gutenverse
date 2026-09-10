@@ -5,6 +5,17 @@ import isEmpty from 'lodash/isEmpty';
 class GutenversePostblock extends Default {
     /* static attributes */
     static lazy_observer = null;
+
+    _getRestUrl() {
+        const restRoot = window?.GutenverseConfig?.wpjson_url
+            || window?.GutenverseData?.wpjson_url
+            || (window?.GutenverseData?.homeUrl ? `${window.GutenverseData.homeUrl.replace(/\/$/, '')}/wp-json/` : null)
+            || (window.wpApiSettings && window.wpApiSettings.root)
+            || '/wp-json/';
+
+        return `${restRoot.replace(/\/?$/, '/') }gutenverse-client/v1/postblock/data`;
+    }
+
     /* public */
     init() {
         this._elements.map(element => {
@@ -108,6 +119,7 @@ class GutenversePostblock extends Default {
             hideDesktop,
             hideTablet,
             hideMobile,
+            currentBlogId,
             breakpoint,
             noContentText,
             backgroundHover,
@@ -125,9 +137,7 @@ class GutenversePostblock extends Default {
         }
 
         element.find('.guten-block-loadmore').html(`<span>${paginationLoadingText}</span>`);
-        const restUrl = (window.wpApiSettings && window.wpApiSettings.root)
-            ? window.wpApiSettings.root + 'gutenverse-client/v1/postblock/data'
-            : '/wp-json/gutenverse-client/v1/postblock/data';
+        const restUrl = this._getRestUrl();
         setTimeout(() => {
             fetch(restUrl, {
                 method: 'POST',
@@ -144,6 +154,7 @@ class GutenversePostblock extends Default {
                         hideDesktop,
                         hideTablet,
                         hideMobile,
+                        currentBlogId,
                         breakpoint,
                         noContentText,
                         backgroundHover,
@@ -265,9 +276,7 @@ class GutenversePostblock extends Default {
             qApi = true;
         }
 
-        const restUrl = (window.wpApiSettings && window.wpApiSettings.root)
-            ? window.wpApiSettings.root + 'gutenverse-client/v1/postblock/data'
-            : '/wp-json/gutenverse-client/v1/postblock/data';
+        const restUrl = this._getRestUrl();
 
         fetch(restUrl, {
             method: 'POST',

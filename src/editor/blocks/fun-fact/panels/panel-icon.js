@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { IconSVGControl, ImageControl, RangeControl, SelectControl, TextControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { getDefaultImageLoad } from "../../../helper";
+import { getDefaultImageLoad } from '../../../helper';
 
 export const iconPanel = ({ elementId, iconType, imageLoad, lazyLoad }) => {
     const device = getDeviceType();

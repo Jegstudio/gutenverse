@@ -2,9 +2,9 @@
 Contributors: Jegstudio
 Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 3.7.1
+Stable tag: 4.0.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -188,6 +188,73 @@ Terms of Service: https://policies.google.com/terms
 If you use social sharing blocks, visitors may open external social sharing URLs when they click a share button.
 
 == Changelog ==
+
+= 4.0.7 =
+Bug fixes:
+- Fix event banner
+
+= 4.0.6 =
+Bug fixes:
+- Fix nav menu responsive
+- Fix feature list icon type image not show up on frontend
+
+= 4.0.5 =
+
+Bug fixes:
+* Fixed issue with block element ID
+* Fixed styling handler id
+
+= 4.0.3 =
+
+Bug fixes:
+* Fixed vulnerability issues. credit: Wordfence.
+
+= 4.0.2 =
+
+Bug fixes:
+* Fix issue with background featured image
+
+
+= 4.0.0 =
+
+New and improved:
+* Improved frontend performance, asset loading, and cache handling
+* Moved featured image background rendering from JavaScript to PHP
+* Added on-demand nonce generation and automatic icon-to-SVG conversion
+* Improved dashboard ecosystem, plugin dependency notices, and editor/backend controls
+
+Bug fixes:
+* Fixed inherited query handling for post blocks
+* Fixed responsive breakpoints for hide display option
+
+= 3.8.2 =
+
+Bug fixes:
+* Fix issue with font slug name
+
+= 3.8.1 =
+
+New and improved:
+
+* Add background fallback for video background type.
+* Add image fallback for background slider.
+* Improved icon list icon line height.
+
+Bug fixes:
+
+* Fixed WP 7.0 video editor issue.
+* Fixed image fetch priority remaining high when normal load is set with fetch priority high disabled.
+* Fixed font global vulnerability.
+* Fixed section slider not working when the page has multiple section sliders.
+* Fixed fun fact block icon type image not showing on frontend.
+* Fixed funfact icon position on responsive.
+* Fixed post block nesting redirect to its own editor when clicked in editor.
+* Fixed taxonomy list warning array Tablet when exporting theme and installing on local.
+
+= 3.8.0 =
+
+New and improved:
+* Add LemonSqueezy payment gateway integration.
 
 = 3.7.1 =
 
