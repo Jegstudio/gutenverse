@@ -79,7 +79,7 @@ class Social_Share_Twitter extends Block_Abstract {
 		$has_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? ' has-text' : '';
 
 		return "<div class='gutenverse-share-twitter gutenverse-share-item{$has_text} {$selected}' id='{$this->get_element_id()}'>
-			<a target='_blank' href='{$share_url}' aria-label='{$text}'>
+			<a target='_blank' rel='noopener' href='{$share_url}' aria-label='{$text}'>
 				{$content}
 			</a>
 		</div>";

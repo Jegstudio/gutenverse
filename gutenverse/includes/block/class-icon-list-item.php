@@ -64,12 +64,18 @@ class Icon_List_Item extends Block_Abstract {
 
 		$text_class = 'list-text' . ( $hide_icon ? ' no-icon' : '' );
 
-		$target_attr     = ! empty( $link_target ) ? ' target="' . esc_attr( $link_target ) . '"' : '';
-		$rel_attr        = ! empty( $rel ) ? ' rel="' . esc_attr( $rel ) . '"' : '';
-		$aria_label_attr = ! empty( $aria_label ) ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
+		$link_attrs = gutenverse_get_link_attributes(
+			array(
+				'id'         => $element_id,
+				'href'       => $href,
+				'target'     => $link_target,
+				'rel'        => $rel,
+				'aria-label' => $aria_label,
+			)
+		);
 
 		$content  = '<div class="list-divider"></div>';
-		$content .= '<a id="' . esc_attr( $element_id ) . '" href="' . esc_url( $href ) . '"' . $target_attr . $rel_attr . $aria_label_attr . '>';
+		$content .= '<a' . $link_attrs . '>';
 		$content .= $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		$content .= '<span class="' . esc_attr( $text_class ) . '">' . $text . '</span>';
 		$content .= '</a>';

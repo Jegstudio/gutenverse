@@ -125,9 +125,17 @@ class Image_Box extends Block_Abstract {
 				$this->get_element_id()
 			);
 
-			$aria_attr = ! empty( $aria_label ) ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
+			$link_attrs = gutenverse_get_link_attributes(
+				array(
+					'class'      => $css_class,
+					'href'       => $href,
+					'target'     => $link_target,
+					'rel'        => $rel,
+					'aria-label' => $aria_label,
+				)
+			);
 
-			return '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( (string) $href ) . '" target="' . esc_attr( $link_target ) . '"' . $aria_attr . ' rel="' . esc_attr( $rel ) . '">' . $content . '</a>';
+			return '<a' . $link_attrs . '>' . $content . '</a>';
 		}
 
 		return $content;
