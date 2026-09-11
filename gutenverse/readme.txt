@@ -193,6 +193,10 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 New and improved:
 - Add more styling option for social share block
 - Add rel options for anchor tags in block
+- Improve php load time
+
+Bug fixes:
+- Fix loadmore in Select Search component
 
 = 4.0.8 =
 New and improved:
