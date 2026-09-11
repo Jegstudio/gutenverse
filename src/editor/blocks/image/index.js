@@ -10,6 +10,21 @@ import example from './data/example';
 
 
 const { name, attributes } = metadata;
+const deprecatedAttributes = {
+    ...attributes,
+    linkTarget: {
+        ...attributes.linkTarget,
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'target'
+    },
+    rel: {
+        ...attributes.rel,
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'rel'
+    }
+};
 
 export { metadata, name };
 
@@ -20,15 +35,15 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes,
+            attributes: deprecatedAttributes,
             save: saveV3
         },
         {
-            attributes,
+            attributes: deprecatedAttributes,
             save: saveV2
         },
         {
-            attributes,
+            attributes: deprecatedAttributes,
             save: saveV1
         }
     ]

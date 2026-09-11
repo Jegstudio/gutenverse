@@ -1,5 +1,5 @@
 import { compose } from '@wordpress/compose';
-import { useRef, useState, useCallback, useEffect } from '@wordpress/element';
+import { useRef, useState, useEffect } from '@wordpress/element';
 import { withPartialRender, withPassRef, withAnimationAdvanceV2, withMouseMoveEffect } from 'gutenverse-core/hoc';
 import { useBlockProps, RichText, BlockControls } from '@wordpress/block-editor';
 import { classnames, link } from 'gutenverse-core/components';
@@ -16,8 +16,6 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { useRichTextParameter } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { renderIcon } from './render-icon';
-
-const NEW_TAB_REL = 'noreferrer noopener';
 
 const ButtonBlock = compose(
     withPartialRender,
@@ -172,25 +170,6 @@ const ButtonBlock = compose(
         }
     }, [elementRef]);
 
-    const onToggleOpenInNewTab = useCallback(
-        (value) => {
-            const newLinkTarget = value ? '_blank' : undefined;
-
-            let updatedRel = rel;
-            if (newLinkTarget && !rel) {
-                updatedRel = NEW_TAB_REL;
-            } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-                updatedRel = undefined;
-            }
-
-            setAttributes({
-                linkTarget: newLinkTarget,
-                rel: updatedRel,
-            });
-        },
-        [rel, setAttributes]
-    );
-
     const buttonPanelState = {
         panel: 'setting',
         section: 1,
@@ -214,10 +193,10 @@ const ButtonBlock = compose(
     const ButtonURLToolbar = () => {
         return allowLink && role === 'link' && <URLToolbar
             url={url}
+            rel={rel}
             setAttributes={setAttributes}
             isSelected={isSelected}
             opensInNewTab={linkTarget === '_blank'}
-            onToggleOpenInNewTab={onToggleOpenInNewTab}
             anchorRef={blockProps.ref}
             usingDynamic={true}
             setPanelState={setPanelState}

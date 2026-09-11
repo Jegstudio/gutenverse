@@ -292,6 +292,7 @@ class Frontend_Assets {
 			'postlist',
 			'progress-bar',
 			'search',
+			'social-share',
 			'tab',
 			'team',
 			'testimonials',

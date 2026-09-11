@@ -3,22 +3,242 @@ import {
     BorderControl,
     BorderResponsiveControl,
     ColorControl,
+    IconRadioControl,
+    NumberControl,
+    RangeControl,
+    SelectControl,
     SizeControl,
     SwitchControl,
     TypographyControl
 } from 'gutenverse-core/controls';
+import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
+import { isNotEmpty } from 'gutenverse-core/helper';
 
 export const panelItemStyle = props => {
     const {
         elementId,
+        orientation = 'horizontal',
+        layoutMode = 'default',
+        buttonLayout,
+        primaryButtonWidth,
+        primaryButtonCount,
         switcher,
         setSwitcher
     } = props;
 
     const device = getDeviceType();
+    const isHorizontalStretch = orientation !== 'vertical' && layoutMode === 'stretch';
+    const parsedButtonCount = parseInt(primaryButtonCount, 10);
+    const buttonCount = Math.max(isNaN(parsedButtonCount) ? 2 : parsedButtonCount, 0);
+    const hasButtonCount = buttonCount > 0;
+    const orderedItemSelectors = hasButtonCount ? Array.from({ length: buttonCount }, (value, index) => `.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-${index + 1}`) : [`.editor-styles-wrapper .${elementId} .guten-social-share-item-wrapper.guten-social-share-item-order-0`];
+    const orderedShareItemSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
+    const orderedShareItemAnchorSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
+    const orderedShareItemTextSelector = orderedItemSelectors.map(selector => selector.replace(`.editor-styles-wrapper .${elementId}`, `.editor-styles-wrapper .${elementId}:not(.button-layout-solid)`) + ' .gutenverse-share-text').join(', ');
 
     return [
+        {
+            id: 'buttonLayout',
+            label: __('Button Layout', 'gutenverse'),
+            component: SelectControl,
+            options: [
+                {
+                    label: __('Split Icon & Text', 'gutenverse'),
+                    value: 'split'
+                },
+                {
+                    label: __('Solid Button', 'gutenverse'),
+                    value: 'solid'
+                },
+            ],
+        },
+        {
+            id: 'primaryButtonWidth',
+            show: !isHorizontalStretch,
+            label: __('Primary Button Width', 'gutenverse'),
+            component: SizeControl,
+            allowDeviceControl: true,
+            units: {
+                px: {
+                    text: 'px',
+                    min: 1,
+                    max: 1200,
+                    step: 1
+                },
+                '%': {
+                    text: '%',
+                    min: 1,
+                    max: 100,
+                    step: 1
+                },
+            },
+            liveStyle: [
+                {
+                    'type': 'unitPoint',
+                    'id': 'primaryButtonWidth',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'width',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': orderedShareItemSelector,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'primaryButtonWidth',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'width',
+                            'valueType': 'function',
+                            'valueFunc': () => '100%'
+                        }
+                    ],
+                    'selector': orderedShareItemAnchorSelector,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'primaryButtonWidth',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'flex',
+                            'valueType': 'function',
+                            'valueFunc': () => '1 1 auto'
+                        }
+                    ],
+                    'selector': orderedShareItemTextSelector,
+                }
+            ],
+        },
+        {
+            id: 'primaryButtonCount',
+            show: isNotEmpty(primaryButtonWidth) && !isHorizontalStretch,
+            label: __('Apply Width to First Buttons', 'gutenverse'),
+            component: NumberControl,
+            min: 0,
+            max: 20,
+        },
+        {
+            id: 'buttonHeight',
+            label: __('Button Height', 'gutenverse'),
+            component: RangeControl,
+            allowDeviceControl: true,
+            unit: 'px',
+            min: 1,
+            max: 200,
+            step: 1,
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'buttonHeight',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'height',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'buttonHeight',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'width',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
+                }
+            ],
+        },
+        {
+            id: 'buttonContentAlign',
+            show: buttonLayout === 'solid',
+            label: __('Button Content Alignment', 'gutenverse'),
+            component: IconRadioControl,
+            allowDeviceControl: true,
+            options: [
+                {
+                    label: __('Align Left', 'gutenverse'),
+                    value: 'flex-start',
+                    icon: <AlignLeft />,
+                },
+                {
+                    label: __('Align Center', 'gutenverse'),
+                    value: 'center',
+                    icon: <AlignCenter />,
+                },
+                {
+                    label: __('Align Right', 'gutenverse'),
+                    value: 'flex-end',
+                    icon: <AlignRight />,
+                },
+            ],
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'buttonContentAlign',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'justify-content',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+                }
+            ],
+        },
+        {
+            id: 'buttonIconGap',
+            show: buttonLayout === 'solid',
+            label: __('Icon Text Gap', 'gutenverse'),
+            component: RangeControl,
+            allowDeviceControl: true,
+            unit: 'px',
+            min: 0,
+            max: 100,
+            step: 1,
+            liveStyle: [
+                {
+                    'type': 'plain',
+                    'id': 'buttonIconGap',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'margin-right',
+                            'valueType': 'pattern',
+                            'pattern': '{value}px',
+                            'patternValues': {
+                                'value': {
+                                    'type': 'direct'
+                                }
+                            }
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item.has-text .gutenverse-share-icon`,
+                }
+            ],
+        },
         {
             id: 'typography',
             label: __('Typography', 'gutenverse'),
@@ -58,7 +278,7 @@ export const panelItemStyle = props => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item i`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item i, .editor-styles-wrapper .${elementId} .gutenverse-share-item svg`,
                 }
             ]
         },
@@ -86,7 +306,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon i`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon svg`,
                     'properties': [
                         {
                             'name': 'color',
@@ -97,8 +317,27 @@ export const panelItemStyle = props => {
             ]
         },
         {
+            id: 'buttonBackgroundColor',
+            show: buttonLayout === 'solid' && (!switcher.socialHover || switcher.socialHover === 'normal'),
+            label: __('Button Background Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'buttonBackgroundColor',
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+                    'properties': [
+                        {
+                            'name': 'background-color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'iconBackgroundColor',
-            show: !switcher.socialHover || switcher.socialHover === 'normal',
+            show: buttonLayout === 'split' && (!switcher.socialHover || switcher.socialHover === 'normal'),
             label: __('Icon Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -117,7 +356,7 @@ export const panelItemStyle = props => {
         },
         {
             id: 'backgroundColor',
-            show: !switcher.socialHover || switcher.socialHover === 'normal',
+            show: buttonLayout === 'split' && (!switcher.socialHover || switcher.socialHover === 'normal'),
             label: __('Text Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -162,7 +401,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'border',
                     'id': 'borderType',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
                 }
             ]
         },
@@ -176,7 +415,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'borderResponsive',
                     'id': 'borderTypeResponsive',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
                 }
             ]
         },
@@ -189,7 +428,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon i`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon svg`,
                     'properties': [
                         {
                             'name': 'color',
@@ -200,8 +439,27 @@ export const panelItemStyle = props => {
             ]
         },
         {
+            id: 'buttonBackgroundColorHover',
+            show: buttonLayout === 'solid' && switcher.socialHover === 'hover',
+            label: __('Button Background Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'buttonBackgroundColorHover',
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover a`,
+                    'properties': [
+                        {
+                            'name': 'background-color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'iconBackgroundColorHover',
-            show: switcher.socialHover === 'hover',
+            show: buttonLayout === 'split' && switcher.socialHover === 'hover',
             label: __('Icon Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -220,7 +478,7 @@ export const panelItemStyle = props => {
         },
         {
             id: 'backgroundColorHover',
-            show: switcher.socialHover === 'hover',
+            show: buttonLayout === 'split' && switcher.socialHover === 'hover',
             label: __('Text Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -265,7 +523,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'border',
                     'id': 'borderTypeHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle:hover`,
                 }
             ]
         },
@@ -279,7 +537,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'borderResponsive',
                     'id': 'borderTypeHoverResponsive',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle:hover`,
                 }
             ]
         },

@@ -6,19 +6,16 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { ToolbarGroup } from '@wordpress/components';
 import { URLToolbar } from 'gutenverse-core/toolbars';
-import { useCallback } from '@wordpress/element';
 import { renderIcon } from 'gutenverse-core/helper';
 import { useRef } from '@wordpress/element';
 import { useEffect } from '@wordpress/element';
-import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef, withTooltip } from 'gutenverse-core/hoc';
+import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
 import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { applyFilters } from '@wordpress/hooks';
 import getBlockStyle from './styles/block-style';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import { useRichTextParameter } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
-
-const NEW_TAB_REL = 'noreferrer noopener';
 
 const IconBlock = compose(
     withPartialRender,
@@ -80,25 +77,6 @@ const IconBlock = compose(
         )
     };
 
-    const onToggleOpenInNewTab = useCallback(
-        (value) => {
-            const newLinkTarget = value ? '_blank' : undefined;
-
-            let updatedRel = rel;
-            if (newLinkTarget && !rel) {
-                updatedRel = NEW_TAB_REL;
-            } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-                updatedRel = undefined;
-            }
-
-            setAttributes({
-                linkTarget: newLinkTarget,
-                rel: updatedRel,
-            });
-        },
-        [rel, setAttributes]
-    );
-
     const iconPanelState = {
         panel: 'setting',
         section: 2,
@@ -137,10 +115,10 @@ const IconBlock = compose(
                 {applyFilters('gutenverse.button.url-toolbar',
                     <URLToolbar
                         url={url}
+                        rel={rel}
                         setAttributes={setAttributes}
                         isSelected={isSelected}
                         opensInNewTab={linkTarget === '_blank'}
-                        onToggleOpenInNewTab={onToggleOpenInNewTab}
                         anchorRef={blockProps.ref}
                         usingDynamic={true}
                         setPanelState={setPanelState}

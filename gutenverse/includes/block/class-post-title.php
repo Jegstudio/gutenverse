@@ -28,12 +28,18 @@ class Post_Title extends Block_Abstract {
 		$html_tag    = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'h2' ) );
 		$post_link   = ! empty( $this->attributes['postLink'] ) ? $this->attributes['postLink'] : false;
 		$link_target = ! empty( $this->attributes['postLinkTarget'] ) ? '_blank' : '_self';
-		$link_rel    = ! empty( $this->attributes['postLinkRel'] ) ? esc_attr( $this->attributes['postLinkRel'] ) : 'noreferrer';
+		$link_rel    = ! empty( $this->attributes['postLinkRel'] ) ? $this->attributes['postLinkRel'] : 'noreferrer';
 		$post_title  = $post_id ? esc_html( get_the_title( $post_id ) ) : esc_html__( 'Post Title', 'gutenverse' );
 
 		if ( $post_link ) {
-			$post_url   = esc_url( get_permalink( $post_id ) );
-			$post_title = "<a href='{$post_url}' target='{$link_target}' rel='{$link_rel}'>{$post_title}</a>";
+			$link_attrs = gutenverse_get_link_attributes(
+				array(
+					'href'   => get_permalink( $post_id ),
+					'target' => $link_target,
+					'rel'    => $link_rel,
+				)
+			);
+			$post_title = "<a{$link_attrs}>{$post_title}</a>";
 		}
 
 		return "<{$html_tag}>{$post_title}</{$html_tag}>";
