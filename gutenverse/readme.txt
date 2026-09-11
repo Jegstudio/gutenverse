@@ -194,6 +194,7 @@ New and improved:
 - Add more styling option for social share block
 - Add rel options for anchor tags in block
 - Improve php load time
+- Improve plugin version check
 
 Bug fixes:
 - Fix loadmore in Select Search component
