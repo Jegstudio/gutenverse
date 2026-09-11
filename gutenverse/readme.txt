@@ -195,6 +195,7 @@ New and improved:
 - Add rel options for anchor tags in block
 - Improve php load time
 - Improve plugin version check
+- Improve banner event experience
 
 Bug fixes:
 - Fix loadmore in Select Search component
