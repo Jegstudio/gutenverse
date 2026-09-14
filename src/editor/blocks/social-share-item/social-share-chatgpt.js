@@ -23,13 +23,13 @@ const name = 'gutenverse/social-share-chatgpt';
 
 const metadata = {
     ...jsondata,
-    title: __('Gutenverse Social Share ChatGPT', 'gutenverse'),
-    description: __('Gutenverse Social Share ChatGPT', 'gutenverse'),
+    title: __('Summarize on ChatGPT', 'gutenverse'),
+    description: __('Summarize on ChatGPT', 'gutenverse'),
     attributes: {
         ...jsondata.attributes,
         text: {
             type: 'string',
-            default: __('Share on ChatGPT', 'gutenverse')
+            default: __('Summarize on ChatGPT', 'gutenverse')
         },
         type: {
             type: 'string',

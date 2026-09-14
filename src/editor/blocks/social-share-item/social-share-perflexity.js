@@ -23,13 +23,13 @@ const name = 'gutenverse/social-share-perflexity';
 
 const metadata = {
     ...jsondata,
-    title: __('Gutenverse Social Share Perflexity', 'gutenverse'),
-    description: __('Gutenverse Social Share Perflexity', 'gutenverse'),
+    title: __('Summarize on Perflexity', 'gutenverse'),
+    description: __('Summarize on Perflexity', 'gutenverse'),
     attributes: {
         ...jsondata.attributes,
         text: {
             type: 'string',
-            default: __('Share on Perflexity', 'gutenverse')
+            default: __('Summarize on Perflexity', 'gutenverse')
         },
         type: {
             type: 'string',
