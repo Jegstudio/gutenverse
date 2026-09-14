@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useCallback, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { BlockControls, InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import { classnames } from 'gutenverse-core/components';
@@ -22,8 +22,6 @@ import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenve
 import getBlockStyle from './styles/block-style';
 import { useRichTextParameter } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
-
-const NEW_TAB_REL = 'noreferrer noopener';
 
 const SocialIcon = compose(
     withPartialRender,
@@ -79,25 +77,6 @@ const SocialIcon = compose(
         ),
         ref: elementRef
     });
-
-    const onToggleOpenInNewTab = useCallback(
-        (value) => {
-            const newLinkTarget = value ? '_blank' : undefined;
-
-            let updatedRel = rel;
-            if (newLinkTarget && !rel) {
-                updatedRel = NEW_TAB_REL;
-            } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-                updatedRel = undefined;
-            }
-
-            setAttributes({
-                linkTarget: newLinkTarget,
-                rel: updatedRel,
-            });
-        },
-        [rel, setAttributes]
-    );
 
     const socialIconPanelState = {
         panel: 'setting',
@@ -169,10 +148,10 @@ const SocialIcon = compose(
                 {applyFilters('gutenverse.button.url-toolbar',
                     <URLToolbar
                         url={url}
+                        rel={rel}
                         setAttributes={setAttributes}
                         isSelected={isSelected}
                         opensInNewTab={linkTarget === '_blank'}
-                        onToggleOpenInNewTab={onToggleOpenInNewTab}
                         anchorRef={blockProps.ref}
                         usingDynamic={true}
                         setPanelState={setPanelState}

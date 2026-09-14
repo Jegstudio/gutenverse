@@ -79,11 +79,17 @@ class Button extends Block_Abstract {
 		}
 
 		if ( 'link' === $role ) {
-			$target_attr     = $link_target ? ' target="' . esc_attr( $link_target ) . '"' : '';
-			$aria_label_attr = $aria_label ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
-			$rel_attr        = $rel ? ' rel="' . esc_attr( $rel ) . '"' : '';
+			$link_attrs = gutenverse_get_link_attributes(
+				array(
+					'class'      => $button_class,
+					'href'       => $href,
+					'target'     => $link_target,
+					'aria-label' => $aria_label,
+					'rel'        => $rel,
+				)
+			);
 
-			return '<a class="' . esc_attr( $button_class ) . '" href="' . esc_url( $href ) . '"' . $target_attr . $aria_label_attr . $rel_attr . '>' . $inner_html . '</a>';
+			return '<a' . $link_attrs . '>' . $inner_html . '</a>';
 		} else {
 			$aria_label_attr = $aria_label ? ' aria-label="' . esc_attr( $aria_label ) . '"' : '';
 

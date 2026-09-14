@@ -58,7 +58,14 @@ class Portfolio_Gallery extends Block_Abstract {
 			if ( $show_link && ! empty( $link ) ) {
 				$icon_html = $this->render_icon( $link_icon_type, $link_icon, $link_icon_svg );
 				$row_item .= '<div class="row-link-wrapper">';
-				$row_item .= '<a href="' . esc_url( $link ) . '" aria-label="' . esc_attr( $title ) . '" target="_blank" rel="noreferrer">';
+				$link_attrs = gutenverse_get_link_attributes(
+					array(
+						'href'       => $link,
+						'aria-label' => $title,
+						'target'     => '_blank',
+					)
+				);
+				$row_item .= '<a' . $link_attrs . '>';
 				$row_item .= esc_html( $link_text );
 				$row_item .= $icon_html;
 				$row_item .= '</a>';

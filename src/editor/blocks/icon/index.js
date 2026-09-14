@@ -8,6 +8,21 @@ import saveV1 from './deprecated/v1/save';
 import saveV2 from './deprecated/v2/save';
 
 const { name, attributes, supports } = metadata;
+const deprecatedAttributes = {
+    ...attributes,
+    linkTarget: {
+        ...attributes.linkTarget,
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'target'
+    },
+    rel: {
+        ...attributes.rel,
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'rel'
+    }
+};
 
 export { metadata, name };
 
@@ -18,12 +33,12 @@ export const settings = {
     save,
     deprecated: [
         {
-            attributes,
+            attributes: deprecatedAttributes,
             supports,
             save: saveV2
         },
         {
-            attributes,
+            attributes: deprecatedAttributes,
             supports,
             save: saveV1
         }

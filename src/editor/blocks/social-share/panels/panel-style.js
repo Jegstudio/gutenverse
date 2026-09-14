@@ -5,7 +5,35 @@ import { AlignCenter, AlignLeft, AlignRight } from 'gutenverse-core/components';
 export const contentStyle = (props) => {
     const {
         elementId,
+        orientation = 'horizontal',
+        layoutMode = 'default',
     } = props;
+    const isHorizontalStretch = orientation !== 'vertical' && layoutMode === 'stretch';
+    const gapStyle = (property, selector) => ({
+        'type': 'plain',
+        'id': 'gap',
+        'responsive': true,
+        'properties': [
+            {
+                'name': property,
+                'valueType': 'pattern',
+                'pattern': '{value}px',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct'
+                    }
+                }
+            }
+        ],
+        'selector': selector,
+    });
+    const gapLiveStyle = isHorizontalStretch ? [
+        gapStyle('gap', `.editor-styles-wrapper .${elementId}.stretch-layout.horizontal`),
+    ] : [
+        gapStyle('margin-left', `.editor-styles-wrapper .${elementId}.horizontal > div:not(:first-of-type), .editor-styles-wrapper .${elementId}.horizontal > .gutenverse-share-more-toggle`),
+        gapStyle('row-gap', `.editor-styles-wrapper .${elementId}.has-more-toggle.horizontal`),
+        gapStyle('margin-top', `.editor-styles-wrapper .${elementId}.vertical > div:not(:first-of-type), .editor-styles-wrapper .${elementId}.vertical > .gutenverse-share-more-toggle`),
+    ];
 
     return [
         {
@@ -40,44 +68,7 @@ export const contentStyle = (props) => {
             max: 100,
             allowDeviceControl: true,
             unit: 'px',
-            liveStyle: [
-                {
-                    'type': 'plain',
-                    'id': 'gap',
-                    'responsive': true,
-                    'properties': [
-                        {
-                            'name': 'margin-left',
-                            'valueType': 'pattern',
-                            'pattern': '{value}px',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        }
-                    ],
-                    'selector': `.editor-styles-wrapper .${elementId}.horizontal > div:not(:first-of-type)`,
-                },
-                {
-                    'type': 'plain',
-                    'id': 'gap',
-                    'responsive': true,
-                    'properties': [
-                        {
-                            'name': 'margin-top',
-                            'valueType': 'pattern',
-                            'pattern': '{value}px',
-                            'patternValues': {
-                                'value': {
-                                    'type': 'direct'
-                                }
-                            }
-                        }
-                    ],
-                    'selector': `.editor-styles-wrapper .${elementId}.vertical > div:not(:first-of-type)`,
-                }
-            ]
+            liveStyle: gapLiveStyle
         },
     ];
 };
