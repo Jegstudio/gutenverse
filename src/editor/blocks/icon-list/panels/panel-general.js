@@ -320,7 +320,7 @@ export const panelGeneral = (props) => {
                             }
                         }
                     ],
-                    'selector': `.${elementId} .guten-icon-list-item i:before`,
+                    'selector': `.${elementId} .guten-icon-list-item i:before, .${elementId} .guten-icon-list-item .gutenverse-icon-svg`,
                 },
             ]
         },
