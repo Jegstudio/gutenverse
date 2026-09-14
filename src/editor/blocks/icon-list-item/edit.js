@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useRef } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import { BlockControls, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { RichTextComponent, classnames } from 'gutenverse-core/components';
 import { __ } from '@wordpress/i18n';
@@ -18,8 +18,6 @@ import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { useRichTextParameter } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
-
-const NEW_TAB_REL = 'noreferrer noopener';
 
 const IconListItemBlock = (props) => {
     const [openIconLibrary, setOpenIconLibrary] = useState(false);
@@ -85,25 +83,6 @@ const IconListItemBlock = (props) => {
         ),
         ref: elementRef
     });
-    const onToggleOpenInNewTab = useCallback(
-        (value) => {
-            const newLinkTarget = value ? '_blank' : undefined;
-
-            let updatedRel = rel;
-            if (newLinkTarget && !rel) {
-                updatedRel = NEW_TAB_REL;
-            } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-                updatedRel = undefined;
-            }
-
-            setAttributes({
-                linkTarget: newLinkTarget,
-                rel: updatedRel,
-            });
-        },
-        [rel, setAttributes]
-    );
-
     FilterDynamic(props);
     HighLightToolbar(props);
 
@@ -158,10 +137,10 @@ const IconListItemBlock = (props) => {
                 {applyFilters('gutenverse.button.url-toolbar',
                     <URLToolbar
                         url={url}
+                        rel={rel}
                         setAttributes={setAttributes}
                         isSelected={isSelected}
                         opensInNewTab={linkTarget === '_blank'}
-                        onToggleOpenInNewTab={onToggleOpenInNewTab}
                         anchorRef={blockProps.ref}
                         usingDynamic={true}
                         setPanelState={setPanelState}

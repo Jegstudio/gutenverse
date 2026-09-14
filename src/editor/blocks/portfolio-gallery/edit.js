@@ -112,7 +112,7 @@ const PortfolioGalleryBlock = compose(
                                 </div>
                                 {
                                     showLink && el.link && <div className="row-link-wrapper">
-                                        <a href={el.link} aria-label={el.title} target="_blank" rel="noreferrer">
+                                        <a href={el.link} aria-label={el.title} target="_blank" rel="noopener noreferrer">
                                             {linkText}
                                             {renderIcon(linkIcon, linkIconType, linkIconSVG)}
                                         </a>

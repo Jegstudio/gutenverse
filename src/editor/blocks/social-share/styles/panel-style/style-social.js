@@ -1,6 +1,7 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const socialStyle = (elementId, attributes, data) => {
+    const isSolidButton = attributes['buttonLayout'] === 'solid';
     const isHorizontalStretch = attributes['orientation'] !== 'vertical' && attributes['layoutMode'] === 'stretch';
     const visibleButtonCount = parseInt(attributes['visibleButtonCount'], 10) || 2;
     const hiddenStartIndex = visibleButtonCount + 1;
@@ -11,6 +12,7 @@ const socialStyle = (elementId, attributes, data) => {
     const stretchInnerWrapperSelector = stretchItemSelectors.map(selector => `${selector} > div`).join(', ');
     const stretchShareItemSelector = stretchItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
     const stretchShareItemAnchorSelector = stretchItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
+    const stretchShareItemTextSelector = stretchItemSelectors.map(selector => selector.replace(`.editor-styles-wrapper .${elementId}`, `.editor-styles-wrapper .${elementId}:not(.button-layout-solid)`) + ' .gutenverse-share-text').join(', ');
 
     attributes['enableMoreButton'] && data.push({
         'type': 'plain',
@@ -69,7 +71,7 @@ const socialStyle = (elementId, attributes, data) => {
             {
                 'name': 'flex',
                 'valueType': 'function',
-                'valueFunc': () => '1 1 320px !important',
+                'valueFunc': () => '1 1 0 !important',
             },
             {
                 'name': 'max-width',
@@ -103,6 +105,19 @@ const socialStyle = (elementId, attributes, data) => {
                 'name': 'width',
                 'valueType': 'function',
                 'valueFunc': () => '100% !important',
+            }
+        ],
+    });
+
+    isHorizontalStretch && !isSolidButton && data.push({
+        'type': 'plain',
+        'id': 'layoutMode',
+        'selector': stretchShareItemTextSelector,
+        'properties': [
+            {
+                'name': 'flex',
+                'valueType': 'function',
+                'valueFunc': () => '1 1 auto',
             }
         ],
     });
