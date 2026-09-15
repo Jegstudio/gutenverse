@@ -1,6 +1,11 @@
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl, TextareaControl, TextControl, SelectControl } from 'gutenverse-core/controls';
 
+const AiPrompDescroption = {
+    'chatgpt': __('Add an extra prompt after the summary when sharing your article to ChatGPT.', 'gutenverse'),
+    'perflexity': __('Add an extra prompt after the summary when sharing your article to Perplexity.', 'gutenverse'),
+};
+
 export const panelContent = (props) => {
     const {
         showText,
@@ -41,7 +46,7 @@ export const panelContent = (props) => {
             id: 'additionalAIPrompt',
             show: isAIShare,
             label: __('Additional AI Prompt', 'gutenverse'),
-            description: __('Add an extra prompt after the summary when sharing your article to ChatGPT or Perplexity.', 'gutenverse'),
+            description: AiPrompDescroption[type],
             component: TextareaControl,
         },
     ];
