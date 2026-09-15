@@ -11,6 +11,22 @@
 			"type": "string",
 			"copyStyle": true
 		},
+		"itemWidth": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"itemGrow": {
+			"type": "boolean",
+			"copyStyle": true
+		},
+		"buttonBackgroundColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"buttonBackgroundColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"iconPading": {
 			"type": "object",
 			"copyStyle": true
@@ -109,5 +125,10 @@
 		}
 	},
 	"keywords": ["social", "share"],
+	"usesContext": [
+		"gutenverse/socialShareOrientation",
+		"gutenverse/socialShareLayoutMode",
+		"gutenverse/socialShareButtonLayout"
+	],
 	"style": ["gutenverse-frontend-social-share-item-style"]
 }

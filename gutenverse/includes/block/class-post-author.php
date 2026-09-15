@@ -137,13 +137,19 @@ class Post_Author extends Block_Abstract {
 		$author_link = ! empty( $this->attributes['authorLink'] ) ? $this->attributes['authorLink'] : false;
 		$html_tag    = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'p' ) );
 		$link_target = ! empty( $this->attributes['authorLinkTarget'] ) ? '_blank' : '_self';
-		$link_rel    = ! empty( $this->attributes['authorLinkRel'] ) ? esc_attr( $this->attributes['authorLinkRel'] ) : 'noreferrer';
+		$link_rel    = ! empty( $this->attributes['authorLinkRel'] ) ? $this->attributes['authorLinkRel'] : 'noreferrer';
 		$author_bio  = isset( $this->attributes['authorBio'] ) ? $this->attributes['authorBio'] : false;
 		$class_name  = '"author-name"';
 
 		if ( $author_link ) {
-			$author_url  = get_author_posts_url( $post->post_author );
-			$author_name = "<a href='{$author_url}' target='{$link_target}' rel='{$link_rel}'>{$author_name}</a>";
+			$link_attrs = gutenverse_get_link_attributes(
+				array(
+					'href'   => get_author_posts_url( $post->post_author ),
+					'target' => $link_target,
+					'rel'    => $link_rel,
+				)
+			);
+			$author_name = "<a{$link_attrs}>{$author_name}</a>";
 		}
 
 		$component  = '<div class="right-content">';
