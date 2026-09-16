@@ -71,20 +71,16 @@ class Icon extends Block_Abstract {
 		}
 
 		if ( ! empty( $url ) ) {
-			$link_attr     = array(
-				'class'      => $wrapper_class,
-				'href'       => $href,
-				'target'     => $link_target,
-				'rel'        => $rel,
-				'aria-label' => $aria_label,
+			$link_attr     = gutenverse_get_link_attributes(
+				array(
+					'class'      => $wrapper_class,
+					'href'       => $href,
+					'target'     => $link_target,
+					'rel'        => $rel,
+					'aria-label' => $aria_label,
+				)
 			);
-			$link_attr_str = '';
-			foreach ( $link_attr as $key => $val ) {
-				if ( ! empty( $val ) ) {
-					$link_attr_str .= ' ' . esc_attr( $key ) . '="' . esc_attr( $val ) . '"';
-				}
-			}
-			$icon_wrapper = '<a' . $link_attr_str . '>' . $icon_html . '</a>';
+			$icon_wrapper = '<a' . $link_attr . '>' . $icon_html . '</a>';
 		} else {
 			$icon_wrapper = '<span class="' . esc_attr( $wrapper_class ) . '">' . $icon_html . '</span>';
 		}

@@ -9,14 +9,48 @@
     margin-left: 10px;
   }
 
+  &.horizontal > .gutenverse-share-more-toggle {
+    margin-left: 10px;
+  }
+
   &.vertical>div:not(:first-of-type) {
+    margin-top: 10px;
+  }
+
+  &.vertical > .gutenverse-share-more-toggle {
     margin-top: 10px;
   }
 
   &.horizontal {
     flex-direction: row;
+
+    &.has-more-toggle {
+      row-gap: 10px;
+    }
+
     &> div {
       display: inline-flex;
+    }
+  }
+
+  &.stretch-layout.horizontal {
+    width: 100%;
+    align-items: stretch;
+    gap: 10px;
+
+    & > div:not(:first-of-type),
+    & > .gutenverse-share-more-toggle {
+      margin-left: 0;
+    }
+
+    & > div {
+      display: flex;
+    }
+
+    &:not(.button-layout-solid) {
+      .gutenverse-share-text {
+        flex: 1 1 auto;
+      }
     }
   }
 
@@ -33,5 +67,58 @@
     a {
       color: #fff;
     }
+  }
+
+  .guten-social-share-item-wrapper {
+    display: flex;
+
+    .gutenverse-share-item {
+      width: 100%;
+    }
+  }
+
+  .gutenverse-share-more-toggle {
+    align-items: center;
+    appearance: none;
+    aspect-ratio: 1 / 1;
+    background: #b9babf;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    line-height: 1;
+    min-height: 37px;
+    min-width: 37px;
+    padding: 0;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background: #a8aab0;
+      color: #fff;
+    }
+
+    svg {
+      display: block;
+      fill: currentColor;
+      height: 20px;
+      transition: transform 0.2s ease;
+      width: 20px;
+    }
+
+    &.gutenverse-share-more-toggle-editor {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  &.has-more-toggle.is-expanded > .gutenverse-share-more-toggle svg {
+    transform: rotate(180deg);
   }
 }

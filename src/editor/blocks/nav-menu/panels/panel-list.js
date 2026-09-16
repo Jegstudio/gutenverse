@@ -115,7 +115,7 @@ export const panelList = () => {
             tabRole: TabStyle
         },
         {
-            title: __('Mobile Menu Logo', 'gutenverse'),
+            title: __('Mobile Menu Style', 'gutenverse'),
             panelArray: mobileMenuStyle,
             initialOpen: false,
             tabRole: TabStyle
