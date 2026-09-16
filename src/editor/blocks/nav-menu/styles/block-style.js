@@ -1016,7 +1016,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['alignMobileItems']) && data.push({
         'type': 'plain',
         'id': 'alignMobileItems',
-        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu-container .gutenverse-menu`,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper.active .gutenverse-menu-container .gutenverse-menu`,
         'properties': [
             {
                 'name': 'justify-content',
@@ -1035,7 +1035,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['alignMobileItems']) && data.push({
         'type': 'plain',
         'id': 'alignMobileItems',
-        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu-container`,
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper.active .gutenverse-menu-container`,
         'properties': [
             {
                 'name': 'height',

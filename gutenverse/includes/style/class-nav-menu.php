@@ -1367,7 +1367,7 @@ class Nav_Menu extends Style_Abstract {
 		if ( isset( $this->attrs['alignMobileItems'] ) ) {
 			$this->inject_style(
 				array(
-					'selector' => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu-container",
+					'selector' => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper.active .gutenverse-menu-container",
 					'property' => function ( $value ) {
 						return 'height: stretch;';
 					},
@@ -1377,7 +1377,7 @@ class Nav_Menu extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper .gutenverse-menu-container .gutenverse-menu",
+					'selector'       => "#{$this->element_id}.guten-nav-menu .gutenverse-menu-wrapper.active .gutenverse-menu-container .gutenverse-menu",
 					'property'       => function ( $value ) {
 						return "justify-content: {$value}; height: stretch; display: flex; flex-direction: column";
 					},
