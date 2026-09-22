@@ -29,7 +29,7 @@ addFilter(
                 icon: <IconMegaMenuSVG />,
                 pro: true,
                 locked: true,
-                tier: ['professional', 'personal'],
+                tier: ['professional', 'personal', 'jnews'],
                 min_tier: 'professional'
             },
             {
