@@ -24,6 +24,7 @@ export const panelList = () => {
             title: __('Gallery Setting', 'gutenverse'),
             tabRole: TabSetting,
             pro: true,
+            additionalClass: 'jnews-blocks-pro',
             panelArray: (props) => {
                 return applyFilters(
                     'gutenverse.post-featured-image.gallery-setting',
@@ -39,6 +40,7 @@ export const panelList = () => {
             title: __('Video Setting', 'gutenverse'),
             tabRole: TabSetting,
             pro: true,
+            additionalClass: 'jnews-blocks-pro',
             panelArray: (props) => {
                 return applyFilters(
                     'gutenverse.post-featured-image.video-setting',
@@ -60,6 +62,7 @@ export const panelList = () => {
             title: __('Gallery Navigation Style', 'gutenverse'),
             tabRole: TabStyle,
             pro: true,
+            additionalClass: 'jnews-blocks-pro',
             panelArray: (props) => {
                 return applyFilters(
                     'gutenverse.post-featured-image.gallery-nav-style',
@@ -75,6 +78,7 @@ export const panelList = () => {
             title: __('Gallery Dots Style', 'gutenverse'),
             tabRole: TabStyle,
             pro: true,
+            additionalClass: 'jnews-blocks-pro',
             panelArray: (props) => {
                 return applyFilters(
                     'gutenverse.post-featured-image.gallery-dots-style',
