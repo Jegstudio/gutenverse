@@ -155,7 +155,7 @@ export const stylePanel = (props) => {
                 {
                     'type': 'color',
                     'id': 'colorItemHover',
-                    'selector': `.${elementId} h1.term-item:hover, .${elementId} h2.term-item:hover, .${elementId} h3.term-item:hover, .${elementId} h4.term-item:hover, .${elementId} h5.term-item:hover, .${elementId} h6.term-item:hover, .${elementId} span.term-item:hover, .${elementId} a.term-item:hover, .${elementId} .term-list:hover`,
+                    'selector': `.${elementId} .term-item:hover, .${elementId} .term-item:hover *, .${elementId} .term-list:hover, .${elementId} .term-list:hover *`,
                     'properties': [
                         {
                             'name': 'color',
@@ -186,4 +186,3 @@ export const stylePanel = (props) => {
         }
     ];
 };
-
