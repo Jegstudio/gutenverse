@@ -51,6 +51,8 @@ import IconShareTwitter from './icon-share-twitter.svg';
 import IconShareVk from './icon-share-vk.svg';
 import IconShareWechat from './icon-share-wechat.svg';
 import IconShareWhatsapp from './icon-share-whatsapp.svg';
+import IconShareChatGPT from './icon-share-chatgpt.svg';
+import IconSharePerplexity from './icon-share-perplexity.svg';
 
 /* Gutenverse Post Icons */
 import IconPostAuthor from './icon-post-author.svg';
@@ -277,6 +279,15 @@ export const IconShareWhatsappSVG = () => {
     return <IconShareWhatsapp />;
 };
 
+export const IconShareChatGPTSVG = () => {
+    return <IconShareChatGPT />;
+};
+
+export const IconSharePerplexitySVG = () => {
+    return <IconSharePerplexity />;
+};
+
+
 export const IconPostAuthorSVG = () => {
     return <IconPostAuthor />;
 };
@@ -366,5 +377,5 @@ export const IconPostCarouselSVG = () => {
 };
 
 export const IconBreadcrumbSVG = () => {
-    return <IconBreadcrumb/>;
+    return <IconBreadcrumb />;
 };

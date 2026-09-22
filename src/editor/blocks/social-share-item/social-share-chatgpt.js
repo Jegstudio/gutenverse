@@ -4,7 +4,7 @@ import { compose } from '@wordpress/compose';
 import { withCustomStyle, withPartialRender } from 'gutenverse-core/hoc';
 import SingleSocialShare from './single-social-share';
 import jsondata from './block.json';
-import { IconShareSVG } from '../../../assets/icon/index';
+import { IconShareChatGPTSVG } from '../../../assets/icon/index';
 
 const SocialShareChatGPT = compose(
     withPartialRender,
@@ -46,6 +46,6 @@ const metadata = {
 export { metadata, name };
 
 export const settings = {
-    icon: <IconShareSVG />,
+    icon: <IconShareChatGPTSVG />,
     edit: SocialShareChatGPT,
 };

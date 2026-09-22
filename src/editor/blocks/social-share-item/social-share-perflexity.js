@@ -4,7 +4,7 @@ import { compose } from '@wordpress/compose';
 import { withCustomStyle, withPartialRender } from 'gutenverse-core/hoc';
 import SingleSocialShare from './single-social-share';
 import jsondata from './block.json';
-import { IconShareSVG } from '../../../assets/icon/index';
+import { IconSharePerplexitySVG } from '../../../assets/icon/index';
 
 const SocialSharePerflexity = compose(
     withPartialRender,
@@ -47,6 +47,6 @@ const metadata = {
 export { metadata, name };
 
 export const settings = {
-    icon: <IconShareSVG />,
+    icon: <IconSharePerplexitySVG />,
     edit: SocialSharePerflexity,
 };
