@@ -196,6 +196,7 @@ New and improved:
 Bug fixes:
 - Fix issue with line height
 - Fix icon list vertical alignment
+- Fix post term block’s text hover
 
 = 4.0.8 =
 New and improved:
