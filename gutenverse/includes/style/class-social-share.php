@@ -55,8 +55,10 @@ class Social_Share extends Style_Abstract {
 	 * Generate style base on attribute.
 	 */
 	public function generate() {
-		$is_solid_button = isset( $this->attrs['buttonLayout'] ) && 'solid' === $this->attrs['buttonLayout'];
-		$is_horizontal_stretch = isset( $this->attrs['layoutMode'] ) && 'stretch' === $this->attrs['layoutMode'] && ( ! isset( $this->attrs['orientation'] ) || 'vertical' !== $this->attrs['orientation'] );
+		$is_solid_button           = isset( $this->attrs['buttonLayout'] ) && 'solid' === $this->attrs['buttonLayout'];
+		$is_horizontal_stretch     = isset( $this->attrs['layoutMode'] ) && 'stretch' === $this->attrs['layoutMode'] && ( ! isset( $this->attrs['orientation'] ) || 'vertical' !== $this->attrs['orientation'] );
+		$more_button_selector      = ".{$this->element_id} .gutenverse-share-more-toggle";
+		$more_button_icon_selector = "{$more_button_selector} .gutenverse-share-more-icon svg";
 
 		if ( ! empty( $this->attrs['enableMoreButton'] ) ) {
 			$visible_button_count = ! empty( $this->attrs['visibleButtonCount'] ) ? absint( $this->attrs['visibleButtonCount'] ) : 2;
@@ -65,7 +67,7 @@ class Social_Share extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id}.has-more-toggle:not(.is-expanded) > .gutenverse-share-item:nth-of-type(n+{$hidden_start_index}), .{$this->element_id}.has-more-toggle:not(.is-expanded) > .guten-social-share-item-wrapper:nth-of-type(n+{$hidden_start_index})",
-					'property'       => function ( $value ) {
+					'property'       => function () {
 						return 'display: none;';
 					},
 					'value'          => $this->attrs['enableMoreButton'],
@@ -81,7 +83,7 @@ class Social_Share extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id}.guten-social-share",
-					'property'       => function ( $value ) {
+					'property'       => function () {
 						return 'width: 100%; align-items: stretch;';
 					},
 					'value'          => $this->attrs['layoutMode'],
@@ -92,7 +94,7 @@ class Social_Share extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id}.stretch-layout.horizontal > div:nth-of-type(-n+{$primary_button_count})",
-					'property'       => function ( $value ) {
+					'property'       => function () {
 						return 'flex: 1 1 0 !important; min-width: 0; width: auto !important;';
 					},
 					'value'          => $this->attrs['layoutMode'],
@@ -103,7 +105,7 @@ class Social_Share extends Style_Abstract {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id}.stretch-layout.horizontal > div:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-item, .{$this->element_id}.stretch-layout.horizontal > div.gutenverse-share-item:nth-of-type(-n+{$primary_button_count}), .{$this->element_id}.stretch-layout.horizontal > div:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-item a, .{$this->element_id}.stretch-layout.horizontal > div.gutenverse-share-item:nth-of-type(-n+{$primary_button_count}) a",
-					'property'       => function ( $value ) {
+					'property'       => function () {
 						return 'width: 100% !important;';
 					},
 					'value'          => $this->attrs['layoutMode'],
@@ -115,7 +117,7 @@ class Social_Share extends Style_Abstract {
 				$this->inject_style(
 					array(
 						'selector'       => ".{$this->element_id}.stretch-layout.horizontal:not(.button-layout-solid) > div:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-text, .{$this->element_id}.stretch-layout.horizontal:not(.button-layout-solid) > div.gutenverse-share-item:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-text",
-						'property'       => function ( $value ) {
+						'property'       => function () {
 							return 'flex: 1 1 auto;';
 						},
 						'value'          => $this->attrs['layoutMode'],
@@ -234,7 +236,7 @@ class Social_Share extends Style_Abstract {
 				$this->inject_style(
 					array(
 						'selector'       => ".{$this->element_id} > div:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-item a, .{$this->element_id} > div.gutenverse-share-item:nth-of-type(-n+{$primary_button_count}) a",
-						'property'       => function ( $value ) {
+						'property'       => function () {
 							return 'width: 100%;';
 						},
 						'value'          => $this->attrs['primaryButtonWidth'],
@@ -246,7 +248,7 @@ class Social_Share extends Style_Abstract {
 					$this->inject_style(
 						array(
 							'selector'       => ".{$this->element_id}:not(.button-layout-solid) > div:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-text, .{$this->element_id}:not(.button-layout-solid) > div.gutenverse-share-item:nth-of-type(-n+{$primary_button_count}) .gutenverse-share-text",
-							'property'       => function ( $value ) {
+							'property'       => function () {
 								return 'flex: 1 1 auto;';
 							},
 							'value'          => $this->attrs['primaryButtonWidth'],
@@ -254,14 +256,13 @@ class Social_Share extends Style_Abstract {
 						)
 					);
 				}
-
 			}
 		}
 
 		if ( isset( $this->attrs['buttonContentAlign'] ) && $is_solid_button ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item a",
+					'selector'       => ".{$this->element_id} .gutenverse-share-item a, {$more_button_selector}",
 					'property'       => function ( $value ) {
 						return "justify-content: {$value};";
 					},
@@ -285,9 +286,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['buttonBackgroundColor'] ) && $is_solid_button ) {
+			$solid_button_selector = ".{$this->element_id}.guten-social-share.button-layout-solid .gutenverse-share-item[class*='gutenverse-share-'] a";
+			if ( empty( $this->attrs['moreButtonBackgroundColor'] ) ) {
+				$solid_button_selector .= ", {$more_button_selector}";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item a",
+					'selector'       => $solid_button_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -298,9 +304,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['buttonBackgroundColorHover'] ) && $is_solid_button ) {
+			$solid_button_hover_selector = ".{$this->element_id}.guten-social-share.button-layout-solid .gutenverse-share-item[class*='gutenverse-share-']:hover a";
+			if ( empty( $this->attrs['moreButtonBackgroundColorHover'] ) ) {
+				$solid_button_hover_selector .= ", {$more_button_selector}:hover";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item:hover a",
+					'selector'       => $solid_button_hover_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -361,9 +372,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['iconColor'] ) ) {
+			$icon_color_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item .gutenverse-share-icon svg";
+			if ( empty( $this->attrs['moreButtonIconColor'] ) ) {
+				$icon_color_selector .= ", .guten-element.guten-social-share.{$this->element_id} .gutenverse-share-more-toggle .gutenverse-share-more-icon svg";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item .gutenverse-share-icon svg",
+					'selector'       => $icon_color_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -374,9 +390,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['iconBackgroundColor'] ) && ! $is_solid_button ) {
+			$icon_background_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item .gutenverse-share-icon";
+			if ( empty( $this->attrs['moreButtonBackgroundColor'] ) ) {
+				$icon_background_selector .= ", {$more_button_selector}";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item .gutenverse-share-icon",
+					'selector'       => $icon_background_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -433,9 +454,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['iconColorHover'] ) ) {
+			$icon_color_hover_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item:hover .gutenverse-share-icon svg";
+			if ( empty( $this->attrs['moreButtonIconColorHover'] ) ) {
+				$icon_color_hover_selector .= ", .guten-element.guten-social-share.{$this->element_id} .gutenverse-share-more-toggle:hover .gutenverse-share-more-icon svg";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item:hover .gutenverse-share-icon svg",
+					'selector'       => $icon_color_hover_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -446,9 +472,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['iconBackgroundColorHover'] ) && ! $is_solid_button ) {
+			$icon_background_hover_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item:hover .gutenverse-share-icon";
+			if ( empty( $this->attrs['moreButtonBackgroundColorHover'] ) ) {
+				$icon_background_hover_selector .= ", {$more_button_selector}:hover";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item:hover .gutenverse-share-icon",
+					'selector'       => $icon_background_hover_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -508,7 +539,7 @@ class Social_Share extends Style_Abstract {
 			$this->inject_typography(
 				array(
 					'selector'       => ".{$this->element_id} .gutenverse-share-item .gutenverse-share-text",
-					'property'       => function ( $value ) {},
+					'property'       => function () {},
 					'value'          => $this->attrs['typography'],
 					'device_control' => false,
 				)
@@ -516,9 +547,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['iconSize'] ) ) {
+			$icon_size_selector = ".{$this->element_id} .gutenverse-share-item svg";
+			if ( empty( $this->attrs['moreButtonIconSize'] ) ) {
+				$icon_size_selector .= ", {$more_button_icon_selector}";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item svg",
+					'selector'       => $icon_size_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_unit_point( $value, 'font-size' );
 					},
@@ -529,9 +565,9 @@ class Social_Share extends Style_Abstract {
 
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item svg",
+					'selector'       => $icon_size_selector,
 					'property'       => function ( $value ) {
-						return $this->handle_unit_point( $value, 'width' );
+						return $this->handle_unit_point( $value, 'width' ) . $this->handle_unit_point( $value, 'height' );
 					},
 					'value'          => $this->attrs['iconSize'],
 					'device_control' => true,
@@ -540,9 +576,14 @@ class Social_Share extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['iconPading'] ) ) {
+			$icon_padding_selector = ".{$this->element_id} .gutenverse-share-item .gutenverse-share-icon";
+			if ( empty( $this->attrs['moreButtonPadding'] ) ) {
+				$icon_padding_selector .= ", {$more_button_selector}";
+			}
+
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .gutenverse-share-item .gutenverse-share-icon",
+					'selector'       => $icon_padding_selector,
 					'property'       => function ( $value ) {
 						return $this->handle_dimension( $value, 'padding' );
 					},
@@ -561,6 +602,137 @@ class Social_Share extends Style_Abstract {
 					},
 					'value'          => $this->attrs['textPading'],
 					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonSize'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => $more_button_selector,
+					'property'       => function ( $value ) {
+						return "width: {$value}px; height: {$value}px; min-width: 0; min-height: 0;";
+					},
+					'value'          => $this->attrs['moreButtonSize'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonIconSize'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$more_button_selector} .gutenverse-share-more-icon svg",
+					'property'       => function ( $value ) {
+						$size = absint( $value );
+						return "width: {$size}px; height: {$size}px;";
+					},
+					'value'          => $this->attrs['moreButtonIconSize'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonIconColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => $more_button_icon_selector,
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['moreButtonIconColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonIconColorHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$more_button_selector}:hover .gutenverse-share-more-icon svg",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'color' );
+					},
+					'value'          => $this->attrs['moreButtonIconColorHover'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonBackgroundColor'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => $more_button_selector,
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'background-color' );
+					},
+					'value'          => $this->attrs['moreButtonBackgroundColor'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonBackgroundColorHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$more_button_selector}:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_color( $value, 'background-color' );
+					},
+					'value'          => $this->attrs['moreButtonBackgroundColorHover'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonPadding'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => $more_button_selector,
+					'property'       => function ( $value ) {
+						return $this->handle_dimension( $value, 'padding' );
+					},
+					'value'          => $this->attrs['moreButtonPadding'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonBorderRadius'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => $more_button_selector,
+					'property'       => function ( $value ) {
+						return "border-radius: {$value}px;";
+					},
+					'value'          => $this->attrs['moreButtonBorderRadius'],
+					'device_control' => true,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonBoxShadow'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => $more_button_selector,
+					'property'       => function ( $value ) {
+						return $this->handle_box_shadow( $value );
+					},
+					'value'          => $this->attrs['moreButtonBoxShadow'],
+					'device_control' => false,
+				)
+			);
+		}
+
+		if ( isset( $this->attrs['moreButtonBoxShadowHover'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "{$more_button_selector}:hover",
+					'property'       => function ( $value ) {
+						return $this->handle_box_shadow( $value );
+					},
+					'value'          => $this->attrs['moreButtonBoxShadowHover'],
+					'device_control' => false,
 				)
 			);
 		}
