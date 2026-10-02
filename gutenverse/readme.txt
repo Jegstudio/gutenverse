@@ -190,8 +190,12 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 == Changelog ==
 
 = 4.0.10 =
+New and improved:
+- Improve mechanism to check Installed Google Fonts
+
 Bug fixes:
 - Fix social share: apply styles ot the load more button and fix solid button background color
+- Fix post list; background color
 
 = 4.0.9 =
 New and improved:
