@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 4.0.9
+Stable tag: 4.0.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -189,6 +189,10 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
+= 4.0.10 =
+Bug fixes:
+- Fix social share: apply styles ot the load more button and fix solid button background color
+
 = 4.0.9 =
 New and improved:
 - Add more options for nav menu sidebar
@@ -197,6 +201,7 @@ Bug fixes:
 - Fix issue with line height
 - Fix icon list vertical alignment
 - Fix post term block’s text hover
+- Fixed vulnerability issues. credit: Wordfence.
 
 = 4.0.8 =
 New and improved:

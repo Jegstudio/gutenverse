@@ -16,6 +16,7 @@ import {
 } from 'gutenverse-core/controls';
 import { TabSetting, TabStyle } from 'gutenverse-core/controls';
 import { panelSettings } from './panel-settings';
+import { moreButtonStylePanel } from './panel-more-button-style';
 
 export const panelList = () => {
     return [
@@ -40,6 +41,12 @@ export const panelList = () => {
         {
             title: __('Item Spacing', 'gutenverse'),
             panelArray: panelItemSpacing,
+            initialOpen: false,
+            tabRole: TabStyle
+        },
+        {
+            title: __('More Button Style', 'gutenverse'),
+            panelArray: (props) => props.enableMoreButton ? moreButtonStylePanel(props) : [],
             initialOpen: false,
             tabRole: TabStyle
         },
