@@ -2,6 +2,7 @@ import { isNotEmpty } from 'gutenverse-core/helper';
 import { applyFilters } from '@wordpress/hooks';
 import itemStyle from './panel-style/style-item';
 import socialStyle from './panel-style/style-social';
+import moreButtonStyle from './panel-style/style-more-button';
 import spacingStyle from './panel-style/style-spacing';
 import { backgroundStyle } from 'gutenverse-core/controls';
 
@@ -10,6 +11,7 @@ const getBlockStyle = (elementId, attributes) => {
 
     data = itemStyle(elementId, attributes, data);
     data = socialStyle(elementId, attributes, data);
+    data = moreButtonStyle(elementId, attributes, data);
     data = spacingStyle(elementId, attributes, data);
     data = backgroundStyle({ attributes, data, elementId });
 

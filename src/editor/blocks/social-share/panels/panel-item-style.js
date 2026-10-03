@@ -36,6 +36,11 @@ export const panelItemStyle = props => {
     const orderedShareItemSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
     const orderedShareItemAnchorSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
     const orderedShareItemTextSelector = orderedItemSelectors.map(selector => selector.replace(`.editor-styles-wrapper .${elementId}`, `.editor-styles-wrapper .${elementId}:not(.button-layout-solid)`) + ' .gutenverse-share-text').join(', ');
+    const moreButtonSelector = `.editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`;
+    const moreButtonIconSelector = `${moreButtonSelector} .gutenverse-share-more-icon svg`;
+    const solidShareItemSelector = `.editor-styles-wrapper .${elementId}.guten-social-share.button-layout-solid .gutenverse-share-item[class*="gutenverse-share-"]`;
+    const globalSolidButtonBackgroundSelector = `${solidShareItemSelector} a${isNotEmpty(props.moreButtonBackgroundColor) ? '' : `, ${moreButtonSelector}`}`;
+    const globalSolidButtonBackgroundHoverSelector = `${solidShareItemSelector}:hover a${isNotEmpty(props.moreButtonBackgroundColorHover) ? '' : `, ${moreButtonSelector}:hover`}`;
 
     return [
         {
@@ -204,7 +209,7 @@ export const panelItemStyle = props => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a, ${moreButtonSelector}`,
                 }
             ],
         },
@@ -278,7 +283,7 @@ export const panelItemStyle = props => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item i, .editor-styles-wrapper .${elementId} .gutenverse-share-item svg`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item i, .editor-styles-wrapper .${elementId} .gutenverse-share-item svg${isNotEmpty(props.moreButtonIconSize) ? '' : `, ${moreButtonIconSelector}`}`,
                 }
             ]
         },
@@ -306,7 +311,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon svg`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon svg${isNotEmpty(props.moreButtonIconColor) ? '' : `, ${moreButtonIconSelector}`}`,
                     'properties': [
                         {
                             'name': 'color',
@@ -325,7 +330,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'buttonBackgroundColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+                    'selector': globalSolidButtonBackgroundSelector,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -344,7 +349,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconBackgroundColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon${isNotEmpty(props.moreButtonBackgroundColor) ? '' : `, ${moreButtonSelector}`}`,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -428,7 +433,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon svg`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon svg${isNotEmpty(props.moreButtonIconColorHover) ? '' : `, ${moreButtonSelector}:hover .gutenverse-share-more-icon svg`}`,
                     'properties': [
                         {
                             'name': 'color',
@@ -447,7 +452,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'buttonBackgroundColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover a`,
+                    'selector': globalSolidButtonBackgroundHoverSelector,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -466,7 +471,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconBackgroundColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon${isNotEmpty(props.moreButtonBackgroundColorHover) ? '' : `, ${moreButtonSelector}:hover`}`,
                     'properties': [
                         {
                             'name': 'background-color',
