@@ -25,7 +25,7 @@ class Social_Share_Email extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $text ) {
-		$share_text = $this->attributes['showText'] ? "<div class='gutenverse-share-text'>{$text}</div>" : '';
+		$share_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? "<div class='gutenverse-share-text'>{$text}</div>" : '';
 
 		return '<div class="gutenverse-share-icon">
 				<div class="gutenverse-icon-svg">
@@ -42,8 +42,9 @@ class Social_Share_Email extends Block_Abstract {
 	public function render_gutenberg() {
 		$text    = esc_html( $this->attributes['text'] );
 		$content = $this->render_content( $text );
+		$has_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? ' has-text' : '';
 
-		return "<div class='gutenverse-share-email gutenverse-share-item' id='{$this->get_element_id()}'>
+		return "<div class='gutenverse-share-email gutenverse-share-item{$has_text}' id='{$this->get_element_id()}'>
 			<a aria-label='{$text}'>
 				{$content}
 			</a>
@@ -60,9 +61,10 @@ class Social_Share_Email extends Block_Abstract {
 		$share_url        = 'mailto:?subject=' . $title . '&amp;body=' . $encoded_post_url;
 		$text             = esc_html( $this->attributes['text'] );
 		$content          = $this->render_content( $text );
+		$has_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? ' has-text' : '';
 
-		return "<div class='gutenverse-share-email gutenverse-share-item' id='{$this->get_element_id()}'>
-			<a target='_blank' href='{$share_url}' aria-label='{$text}'>
+		return "<div class='gutenverse-share-email gutenverse-share-item{$has_text}' id='{$this->get_element_id()}'>
+			<a target='_blank' rel='noopener' href='{$share_url}' aria-label='{$text}'>
 				{$content}
 			</a>
 		</div>";

@@ -6,7 +6,7 @@ import { RichText, useBlockProps, useInnerBlocksProps } from '@wordpress/block-e
 import { Button, classnames } from 'gutenverse-core/components';
 import { __ } from '@wordpress/i18n';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
-import { useAnimationEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { useDisplayEditor } from 'gutenverse-core/hooks';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
@@ -53,6 +53,15 @@ const PopupBuilder = (props) => {
     const deviceType = getDeviceType();
 
     const videoRef = useRef();
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'closeIconType', svg: 'closeIconSVG' },
+        ],
+    });
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);

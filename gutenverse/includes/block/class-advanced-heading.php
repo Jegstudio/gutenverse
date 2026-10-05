@@ -24,8 +24,8 @@ class Advanced_Heading extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content() {
-		$title_tag  = isset( $this->attributes['titleTag'] ) ? $this->attributes['titleTag'] : 'h2';
-		$sub_tag    = isset( $this->attributes['subTag'] ) ? $this->attributes['subTag'] : 'span';
+		$title_tag  = $this->check_tag( $this->attributes['titleTag'] ?? 'h2', 'h2' );
+		$sub_tag    = $this->check_tag( $this->attributes['subTag'] ?? 'span', 'span' );
 		$text       = isset( $this->attributes['text'] ) ? $this->attributes['text'] : 'Heading ';
 		$focus_text = isset( $this->attributes['focusText'] ) ? $this->attributes['focusText'] : 'Focused';
 		$sub_text   = isset( $this->attributes['subText'] ) ? $this->attributes['subText'] : '';
@@ -47,7 +47,7 @@ class Advanced_Heading extends Block_Abstract {
 			$sub_text_dynamic_list
 		);
 		if ( 'top' === $show_sub ) {
-			$output .= '<' . esc_attr( $sub_tag ) . ' class="heading-subtitle">' . $sub_text . '</' . esc_attr( $sub_tag ) . '>';
+			$output .= '<' . $sub_tag . ' class="heading-subtitle">' . $sub_text . '</' . $sub_tag . '>';
 		}
 
 		if ( 'top' === $show_sub && 'between' === $show_line ) {
@@ -64,7 +64,7 @@ class Advanced_Heading extends Block_Abstract {
 			$output .= '<div class="heading-line before"></div>';
 		}
 
-		$output .= '<' . esc_attr( $title_tag ) . ' class="heading-title">';
+		$output .= '<' . $title_tag . ' class="heading-title">';
 
 		$text              = wp_kses_post( $text );
 		$text_dynamic_list = isset( $this->attributes['textDynamicList'] ) ? $this->attributes['textDynamicList'] : array();
@@ -86,7 +86,7 @@ class Advanced_Heading extends Block_Abstract {
 
 		$output .= '<span class="heading-title">' . $text . '</span>';
 		$output .= '<span class="heading-focus">' . $focus_text . '</span>';
-		$output .= '</' . esc_attr( $title_tag ) . '>';
+		$output .= '</' . $title_tag . '>';
 
 		if ( 'after' === $show_line ) {
 			$output .= '<div class="heading-line after"></div>';
@@ -98,7 +98,7 @@ class Advanced_Heading extends Block_Abstract {
 		}
 
 		if ( 'bottom' === $show_sub ) {
-			$output .= '<' . esc_attr( $sub_tag ) . ' class="heading-subtitle">' . $sub_text . '</' . esc_attr( $sub_tag ) . '>';
+			$output .= '<' . $sub_tag . ' class="heading-subtitle">' . $sub_text . '</' . $sub_tag . '>';
 		}
 
 		if ( 'bottom' === $show_line ) {

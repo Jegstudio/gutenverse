@@ -25,7 +25,7 @@ class Accordion extends Block_Abstract {
 	 */
 	public function render_content() {
 		$title            = isset( $this->attributes['title'] ) ? $this->attributes['title'] : '';
-		$title_tag        = isset( $this->attributes['titleTag'] ) ? $this->attributes['titleTag'] : 'span';
+		$title_tag        = $this->check_tag( $this->attributes['titleTag'] ?? 'span', 'span' );
 		$icon_position    = isset( $this->attributes['iconPosition'] ) ? $this->attributes['iconPosition'] : 'left';
 		$icon_open        = isset( $this->attributes['iconOpen'] ) ? $this->attributes['iconOpen'] : 'fas fa-minus';
 		$icon_open_type   = isset( $this->attributes['iconOpenType'] ) ? $this->attributes['iconOpenType'] : 'icon';
@@ -57,9 +57,9 @@ class Accordion extends Block_Abstract {
 			$output .= $icon_html;
 		}
 
-		$output .= '<' . esc_attr( $title_tag ) . ' class="accordion-text">';
+		$output .= '<' . $title_tag . ' class="accordion-text">';
 		$output .= $title;
-		$output .= '</' . esc_attr( $title_tag ) . '>';
+		$output .= '</' . $title_tag . '>';
 
 		if ( 'right' === $icon_position ) {
 			$output .= $icon_html;

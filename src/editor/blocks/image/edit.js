@@ -1,4 +1,3 @@
-import { useCallback } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 import { Image } from 'gutenverse-core/components';
@@ -20,8 +19,6 @@ import getBlockStyle from './styles/block-style';
 import { useRichTextParameter, isEmpty } from 'gutenverse-core/helper';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { getImageLoadValue } from '../../helper';
-
-const NEW_TAB_REL = 'noreferrer noopener';
 
 export const ImageBoxFigure = attributes => {
     const { imgSrc, altType, altOriginal, altCustom, imageLoad, lazyLoad, fetchPriorityHigh = false } = attributes;
@@ -177,25 +174,6 @@ const ImageBlock = compose(
         ref: elementRef
     });
 
-    const onToggleOpenInNewTab = useCallback(
-        (value) => {
-            const newLinkTarget = value ? '_blank' : undefined;
-
-            let updatedRel = rel;
-            if (newLinkTarget && !rel) {
-                updatedRel = NEW_TAB_REL;
-            } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-                updatedRel = undefined;
-            }
-
-            setAttributes({
-                linkTarget: newLinkTarget,
-                rel: updatedRel,
-            });
-        },
-        [rel, setAttributes]
-    );
-
     const caption = () => {
         switch (captionType) {
             case 'original':
@@ -241,10 +219,10 @@ const ImageBlock = compose(
         return applyFilters('gutenverse.button.url-toolbar',
             <URLToolbar
                 url={url}
+                rel={rel}
                 setAttributes={setAttributes}
                 isSelected={isSelected}
                 opensInNewTab={linkTarget === '_blank'}
-                onToggleOpenInNewTab={onToggleOpenInNewTab}
                 anchorRef={blockProps.ref}
                 usingDynamic={true}
                 setPanelState={setPanelState}

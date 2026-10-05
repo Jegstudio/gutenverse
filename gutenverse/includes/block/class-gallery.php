@@ -59,6 +59,23 @@ class Gallery extends Block_Abstract {
 	}
 
 	/**
+	 * Get an inline aspect ratio variable for gallery thumbnails.
+	 *
+	 * @param array $image Image data.
+	 * @return string
+	 */
+	private function get_thumbnail_ratio_style( $image ) {
+		$height = isset( $image['src']['height'] ) ? (float) $image['src']['height'] : 0;
+		$width  = isset( $image['src']['width'] ) ? (float) $image['src']['width'] : 0;
+
+		if ( $height > 0 && $width > 0 ) {
+			return ' style="--guten-gallery-thumbnail-ratio:' . esc_attr( $width . ' / ' . $height ) . ';"';
+		}
+
+		return '';
+	}
+
+	/**
 	 * Render Rating Items
 	 *
 	 * @param float $rating Rating value.
@@ -115,10 +132,11 @@ class Gallery extends Block_Abstract {
 			$hover_class = "animated $hover";
 		}
 
-		$image_html = $this->image_condition( $item );
+		$image_html            = $this->image_condition( $item );
+		$thumbnail_ratio_style = $this->get_thumbnail_ratio_style( $item );
 
 		$output  = '<div class="grid-item">';
-		$output .= '<div class="thumbnail-wrap">';
+		$output .= '<div class="thumbnail-wrap"' . $thumbnail_ratio_style . '>';
 		$output .= $image_html;
 
 		$caption_class = ( 'overlay' === $layout ) ? 'caption-wrap style-overlay overlay-overlay ' . $hover_class : 'caption-wrap search-hover-bg style-overlay ' . $hover_class;

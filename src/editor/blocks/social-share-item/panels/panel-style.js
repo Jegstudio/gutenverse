@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import {
+    CheckboxControl,
     ColorControl,
     SizeControl,
     SwitchControl,
@@ -13,14 +14,88 @@ import { getDeviceType } from 'gutenverse-core/editor-helper';
 export const panelStyle = props => {
     const {
         elementId,
+        itemGrow,
         showText,
         switcher,
-        setSwitcher
+        setSwitcher,
+        context = {}
     } = props;
 
     const device = getDeviceType();
+    const buttonLayout = context['gutenverse/socialShareButtonLayout'] || 'split';
+    const parentOrientation = context['gutenverse/socialShareOrientation'] || 'horizontal';
+    const parentLayoutMode = context['gutenverse/socialShareLayoutMode'] || 'default';
+    const isHorizontalStretch = parentOrientation !== 'vertical' && parentLayoutMode === 'stretch';
 
     return [
+        {
+            id: 'itemGrow',
+            show: !isHorizontalStretch,
+            label: __('Grow Item', 'gutenverse'),
+            description: __('Allow this share item to fill available horizontal space.', 'gutenverse'),
+            component: CheckboxControl,
+        },
+        {
+            id: 'itemWidth',
+            show: !itemGrow && !isHorizontalStretch,
+            label: __('Item Width', 'gutenverse'),
+            component: SizeControl,
+            allowDeviceControl: true,
+            units: {
+                px: {
+                    text: 'px',
+                    min: 1,
+                    max: 1000,
+                    step: 1
+                },
+                '%': {
+                    text: '%',
+                    min: 1,
+                    max: 100,
+                    step: 1
+                },
+            },
+            liveStyle: [
+                {
+                    'type': 'unitPoint',
+                    'id': 'itemWidth',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'width',
+                            'valueType': 'direct'
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item`,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'itemWidth',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'width',
+                            'valueType': 'function',
+                            'valueFunc': () => '100%'
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .guten-social-share.button-layout-solid #${elementId}.gutenverse-share-item a`,
+                },
+                {
+                    'type': 'plain',
+                    'id': 'itemWidth',
+                    'responsive': true,
+                    'properties': [
+                        {
+                            'name': 'flex',
+                            'valueType': 'function',
+                            'valueFunc': () => '1 1 auto'
+                        }
+                    ],
+                    'selector': `.editor-styles-wrapper .guten-social-share:not(.button-layout-solid) #${elementId}.gutenverse-share-item .gutenverse-share-text`,
+                }
+            ]
+        },
         {
             id: 'typography',
             label: __('Typography', 'gutenverse'),
@@ -61,7 +136,7 @@ export const panelStyle = props => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item i`,
+                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item i, .editor-styles-wrapper #${elementId}.gutenverse-share-item svg`,
                 }
             ]
         },
@@ -89,7 +164,7 @@ export const panelStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
-                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item .gutenverse-share-icon i`,
+                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item .gutenverse-share-icon i, .editor-styles-wrapper #${elementId}.gutenverse-share-item .gutenverse-share-icon svg`,
                     'properties': [
                         {
                             'name': 'color',
@@ -100,8 +175,27 @@ export const panelStyle = props => {
             ]
         },
         {
+            id: 'buttonBackgroundColor',
+            show: buttonLayout === 'solid' && (!switcher.socialHover || switcher.socialHover === 'normal'),
+            label: __('Button Background Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'buttonBackgroundColor',
+                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item a`,
+                    'properties': [
+                        {
+                            'name': 'background-color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'iconBackgroundColor',
-            show: !switcher.socialHover || switcher.socialHover === 'normal',
+            show: buttonLayout === 'split' && (!switcher.socialHover || switcher.socialHover === 'normal'),
             label: __('Icon Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -120,7 +214,7 @@ export const panelStyle = props => {
         },
         {
             id: 'backgroundColor',
-            show: !switcher.socialHover || switcher.socialHover === 'normal',
+            show: buttonLayout === 'split' && (!switcher.socialHover || switcher.socialHover === 'normal'),
             label: __('Text Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -192,7 +286,7 @@ export const panelStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColorHover',
-                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item:hover .gutenverse-share-icon i`,
+                    'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item:hover .gutenverse-share-icon i, .editor-styles-wrapper #${elementId}.gutenverse-share-item:hover .gutenverse-share-icon svg`,
                     'properties': [
                         {
                             'name': 'color',
@@ -203,8 +297,27 @@ export const panelStyle = props => {
             ]
         },
         {
+            id: 'buttonBackgroundColorHover',
+            show: buttonLayout === 'solid' && switcher.socialHover === 'hover',
+            label: __('Button Background Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'buttonBackgroundColorHover',
+                    'selector': `.editor-styles-wrapper .guten-social-share.button-layout-solid #${elementId}.gutenverse-share-item:hover a`,
+                    'properties': [
+                        {
+                            'name': 'background-color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'iconBackgroundColorHover',
-            show: switcher.socialHover === 'hover',
+            show: buttonLayout === 'split' && switcher.socialHover === 'hover',
             label: __('Icon Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [
@@ -223,7 +336,7 @@ export const panelStyle = props => {
         },
         {
             id: 'backgroundColorHover',
-            show: switcher.socialHover === 'hover',
+            show: buttonLayout === 'split' && switcher.socialHover === 'hover',
             label: __('Text Background Color', 'gutenverse'),
             component: ColorControl,
             liveStyle: [

@@ -203,5 +203,6 @@ class Post_Featured_Image extends Style_Abstract {
 				)
 			);
 		}
+		do_action( 'gutenverse_style_post_featured_image', $this );
 	}
 }

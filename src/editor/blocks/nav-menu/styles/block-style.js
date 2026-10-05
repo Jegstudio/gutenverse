@@ -1013,6 +1013,43 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper .gutenverse-nav-identity-panel .gutenverse-nav-site-title .gutenverse-nav-logo`,
     });
 
+    isNotEmpty(attributes['alignMobileItems']) && data.push({
+        'type': 'plain',
+        'id': 'alignMobileItems',
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper.active .gutenverse-menu-container .gutenverse-menu`,
+        'properties': [
+            {
+                'name': 'justify-content',
+                'valueType': 'pattern',
+                'pattern': '{value}; height: stretch; display: flex; flex-direction: column',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+
+                }
+            },
+        ],
+    });
+
+    isNotEmpty(attributes['alignMobileItems']) && data.push({
+        'type': 'plain',
+        'id': 'alignMobileItems',
+        'selector': `.${elementId}.guten-element.wp-block-gutenverse-nav-menu .guten-nav-menu .gutenverse-menu-wrapper.active .gutenverse-menu-container`,
+        'properties': [
+            {
+                'name': 'height',
+                'valueType': 'pattern',
+                'pattern': 'stretch; ruby-position: {value};',
+                'patternValues': {
+                    'value': {
+                        'type': 'direct',
+                    },
+                }
+            }
+        ],
+    });
+
     //panel overlay
     isNotEmpty(attributes['overlayBackground']) && data.push({
         'type': 'background',

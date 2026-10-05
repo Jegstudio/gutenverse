@@ -3,7 +3,7 @@ import { classnames } from 'gutenverse-core/components';
 import { useBlockProps } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { panelList } from './panels/panel-list';
 import { getImageSrc } from 'gutenverse-core/editor-helper';
 import { BlockPanelController } from 'gutenverse-core/controls';
@@ -41,6 +41,15 @@ const PortfolioGalleryBlock = compose(
     const elementRef = useRef();
     const animationClass = useAnimationEditor(attributes);
     const displayClass = useDisplayEditor(attributes);
+
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'linkIconType', svg: 'linkIconSVG' },
+        ],
+    });
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -103,7 +112,7 @@ const PortfolioGalleryBlock = compose(
                                 </div>
                                 {
                                     showLink && el.link && <div className="row-link-wrapper">
-                                        <a href={el.link} aria-label={el.title} target="_blank" rel="noreferrer">
+                                        <a href={el.link} aria-label={el.title} target="_blank" rel="noopener noreferrer">
                                             {linkText}
                                             {renderIcon(linkIcon, linkIconType, linkIconSVG)}
                                         </a>

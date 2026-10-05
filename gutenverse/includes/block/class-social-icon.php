@@ -88,16 +88,15 @@ class Social_Icon extends Block_Abstract {
 
 		$icon_html = $this->render_icon( $icon_type, $icon, $icon_svg );
 
-		$link_attr_str = ' id="' . esc_attr( $element_id ) . '" href="' . esc_url( (string) $href ) . '"';
-		if ( ! empty( $link_target ) ) {
-			$link_attr_str .= ' target="' . esc_attr( $link_target ) . '"';
-		}
-		if ( ! empty( $rel ) ) {
-			$link_attr_str .= ' rel="' . esc_attr( $rel ) . '"';
-		}
-		if ( ! empty( $aria_label ) ) {
-			$link_attr_str .= ' aria-label="' . esc_attr( $aria_label ) . '"';
-		}
+		$link_attr_str = gutenverse_get_link_attributes(
+			array(
+				'id'         => $element_id,
+				'href'       => $href,
+				'target'     => $link_target,
+				'rel'        => $rel,
+				'aria-label' => $aria_label,
+			)
+		);
 		$output  = '<a' . $link_attr_str . '>';
 		$output .= $icon_html;
 

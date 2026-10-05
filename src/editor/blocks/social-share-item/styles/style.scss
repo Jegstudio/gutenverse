@@ -183,3 +183,82 @@
     }
   }
 }
+
+.guten-social-share.button-layout-solid {
+  .gutenverse-share-item {
+    .gutenverse-share-icon,
+    .gutenverse-share-text {
+      background: transparent;
+    }
+
+    a {
+      align-items: center;
+    }
+
+    &.has-text {
+      .gutenverse-share-icon {
+        padding-right: 4px;
+      }
+
+      .gutenverse-share-text {
+        padding-left: 4px;
+      }
+    }
+
+    &.gutenverse-share-facebook a {
+      background: #3b5998;
+    }
+
+    &.gutenverse-share-twitter a {
+      background: #1090e0;
+    }
+
+    &.gutenverse-share-twitter.x-twitter a {
+      background: #14171A;
+    }
+
+    &.gutenverse-share-pinterest a {
+      background: #bd081c;
+    }
+
+    &.gutenverse-share-stumbleupon a {
+      background: #EB4924;
+    }
+
+    &.gutenverse-share-linkedin a {
+      background: #0077b5;
+    }
+
+    &.gutenverse-share-reddit a {
+      background: #ff4500;
+    }
+
+    &.gutenverse-share-tumblr a {
+      background: #35465c;
+    }
+
+    &.gutenverse-share-vk a {
+      background: #45668e;
+    }
+
+    &.gutenverse-share-whatsapp a {
+      background: #17a74d;
+    }
+
+    &.gutenverse-share-telegram a {
+      background: #2CA5E0;
+    }
+
+    &.gutenverse-share-wechat a {
+      background: #5cc928;
+    }
+
+    &.gutenverse-share-line a {
+      background: #00B900;
+    }
+
+    &.gutenverse-share-email a {
+      background: #a53310;
+    }
+  }
+}

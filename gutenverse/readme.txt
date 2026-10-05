@@ -2,9 +2,9 @@
 Contributors: Jegstudio
 Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 3.8.1
+Stable tag: 4.0.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -189,6 +189,83 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
+= 4.0.10 =
+New and improved:
+- Improve mechanism to check Installed Google Fonts
+
+Bug fixes:
+- Fix social share: apply styles ot the load more button and fix solid button background color
+- Fix post list; background color
+
+= 4.0.9 =
+New and improved:
+- Add more options for nav menu sidebar
+
+Bug fixes:
+- Fix issue with line height
+- Fix icon list vertical alignment
+- Fix post term block’s text hover
+- Fixed vulnerability issues. credit: Wordfence.
+
+= 4.0.8 =
+New and improved:
+- Add more styling option for social share block
+- Add rel options for anchor tags in block
+- Improve php load time
+- Improve plugin version check
+- Improve banner event experience
+
+Bug fixes:
+- Fix loadmore in Select Search component
+
+= 4.0.8 =
+New and improved:
+- Add more styling option for social share block
+- Add rel options for anchor tags in blocks
+
+= 4.0.7 =
+Bug fixes:
+- Fix event banner
+
+= 4.0.6 =
+Bug fixes:
+- Fix nav menu responsive
+- Fix feature list icon type image not show up on frontend
+
+= 4.0.5 =
+
+Bug fixes:
+* Fixed issue with block element ID
+* Fixed styling handler id
+
+= 4.0.3 =
+
+Bug fixes:
+* Fixed vulnerability issues. credit: Wordfence.
+
+= 4.0.2 =
+
+Bug fixes:
+* Fix issue with background featured image
+
+
+= 4.0.0 =
+
+New and improved:
+* Improved frontend performance, asset loading, and cache handling
+* Moved featured image background rendering from JavaScript to PHP
+* Added on-demand nonce generation and automatic icon-to-SVG conversion
+* Improved dashboard ecosystem, plugin dependency notices, and editor/backend controls
+
+Bug fixes:
+* Fixed inherited query handling for post blocks
+* Fixed responsive breakpoints for hide display option
+
+= 3.8.2 =
+
+Bug fixes:
+* Fix issue with font slug name
+
 = 3.8.1 =
 
 New and improved:
@@ -196,7 +273,6 @@ New and improved:
 * Add background fallback for video background type.
 * Add image fallback for background slider.
 * Improved icon list icon line height.
-
 
 Bug fixes:
 

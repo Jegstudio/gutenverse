@@ -431,15 +431,19 @@ class Gutenverse {
 	 * Initialize Instance
 	 */
 	public function init_instance() {
-		$this->dashboard       = new Dashboard();
 		$this->blocks          = new Blocks();
-		$this->frontend_assets = new Frontend_Assets();
-		$this->editor_assets   = new Editor_Assets();
 		$this->style_generator = new Style_Generator();
-		$this->banner          = new Banner();
-		$this->upgrader        = new Upgrader();
 		$this->meta_option     = new Meta_Option();
-		$this->upgrade_wizard  = new Upgrade_Wizard();
+
+		if ( is_admin() ) {
+			$this->dashboard      = new Dashboard();
+			$this->editor_assets  = new Editor_Assets();
+			$this->banner         = new Banner();
+			$this->upgrader       = new Upgrader();
+			$this->upgrade_wizard = new Upgrade_Wizard();
+		} else {
+			$this->frontend_assets = new Frontend_Assets();
+		}
 
 		$active_plugins    = get_option( 'active_plugins' );
 		$multisite_plugins = get_site_option( 'active_sitewide_plugins' );

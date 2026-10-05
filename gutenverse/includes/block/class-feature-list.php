@@ -41,7 +41,7 @@ class Feature_List extends Block_Abstract {
 					break;
 				case 'image':
 					$image        = isset( $item['image'] ) ? $item['image'] : array();
-					$image_url    = isset( $image['url'] ) ? $image['url'] : '';
+					$image_url    = isset( $image['url'] ) ? $image['url'] : ( isset( $image['image'] ) ? $image['image'] : '' );
 					$image_alt    = isset( $item['title'] ) ? $item['title'] : '';
 					$width        = isset( $image['width'] ) ? $image['width'] : '';
 					$height       = isset( $image['height'] ) ? $image['height'] : '';
@@ -75,7 +75,14 @@ class Feature_List extends Block_Abstract {
 
 			$title_html = isset( $item['title'] ) ? $item['title'] : '';
 			if ( isset( $item['link'] ) && ! empty( $item['link'] ) ) {
-				$title_html = '<a href="' . esc_url( $item['link'] ) . '" target="_blank" rel="noreferrer" aria-label="' . esc_attr( $item['title'] ) . '"><h2 class="feature-list-title">' . wp_kses_post( $item['title'] ) . '</h2></a>';
+				$link_attrs = gutenverse_get_link_attributes(
+					array(
+						'href'       => $item['link'],
+						'target'     => '_blank',
+						'aria-label' => $item['title'],
+					)
+				);
+				$title_html = '<a' . $link_attrs . '><h2 class="feature-list-title">' . wp_kses_post( $item['title'] ) . '</h2></a>';
 			} else {
 				$title_html = '<h2 class="feature-list-title">' . wp_kses_post( $title_html ) . '</h2>';
 			}

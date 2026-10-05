@@ -7,12 +7,11 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
 import { HighLightToolbar, URLToolbar, FilterDynamic } from 'gutenverse-core/toolbars';
-import { useCallback } from '@wordpress/element';
 import { Image } from 'gutenverse-core/components';
 import { imagePlaceholder } from 'gutenverse-core/config';
 import { useRef } from '@wordpress/element';
 import { withAnimationAdvanceV2, withMouseMoveEffect, withPartialRender, withPassRef } from 'gutenverse-core/hoc';
-import { useAnimationEditor, useDisplayEditor, useDynamicUrl } from 'gutenverse-core/hooks';
+import { useAnimationEditor, useDisplayEditor, useDynamicUrl, useInitializeIconToSvg } from 'gutenverse-core/hooks';
 import { dispatch, useSelect } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import { useDynamicScript, useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -21,8 +20,6 @@ import { useRichTextParameter, isEmpty, renderIcon } from 'gutenverse-core/helpe
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { getImageLoadValue } from '../../helper';
 
-
-const NEW_TAB_REL = 'noreferrer noopener';
 
 export const ImageBoxFigure = attributes => {
     const { image, imageAlt, altType, altOriginal, imageLoad } = attributes;
@@ -277,6 +274,15 @@ const ImageBoxBlock = compose(
         'gutenverse.pro.dynamic.toolbar',
     );
 
+    useInitializeIconToSvg({
+        elementId,
+        attributes,
+        setAttributes,
+        icons: [
+            { type: 'titleIconType', svg: 'titleIconSVG' },
+        ],
+    });
+
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
     useDynamicScript(elementRef);
@@ -293,25 +299,6 @@ const ImageBoxBlock = compose(
         ),
         ref: elementRef
     });
-
-    const onToggleOpenInNewTab = useCallback(
-        (value) => {
-            const newLinkTarget = value ? '_blank' : undefined;
-
-            let updatedRel = rel;
-            if (newLinkTarget && !rel) {
-                updatedRel = NEW_TAB_REL;
-            } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-                updatedRel = undefined;
-            }
-
-            setAttributes({
-                linkTarget: newLinkTarget,
-                rel: updatedRel,
-            });
-        },
-        [rel, setAttributes]
-    );
 
     const imageBoxPanelState = {
         panel: 'setting',
@@ -337,10 +324,10 @@ const ImageBoxBlock = compose(
                 {applyFilters('gutenverse.button.url-toolbar',
                     <URLToolbar
                         url={url}
+                        rel={rel}
                         setAttributes={setAttributes}
                         isSelected={isSelected}
                         opensInNewTab={linkTarget === '_blank'}
-                        onToggleOpenInNewTab={onToggleOpenInNewTab}
                         anchorRef={blockProps.ref}
                         usingDynamic={true}
                         setPanelState={setPanelState}

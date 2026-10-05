@@ -140,7 +140,7 @@ const FeatureListBlock = compose(
                             {showConnector && index != featureList.length - 1 && <span className={`connector-bottom icon-position-${iconPosition}`}></span>}
                             {iconContent(el, index)}
                             <div className="feature-list-content">
-                                {el.link ? <a href={el.link} target="_blank" rel="noreferrer" aria-label={el.title}><h2 className="feature-list-title">{el.title}</h2></a> : <h2 className="feature-list-title">{el.title}</h2>}
+                                {el.link ? <a href={el.link} target="_blank" rel="noopener noreferrer" aria-label={el.title}><h2 className="feature-list-title">{el.title}</h2></a> : <h2 className="feature-list-title">{el.title}</h2>}
                                 <p className="feature-list-desc">{el.content}</p>
                             </div>
                         </div>;

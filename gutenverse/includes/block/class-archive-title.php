@@ -29,12 +29,19 @@ class Archive_Title extends Block_Abstract {
 	public function render_content( $archive_title, $category_url ) {
 		$html_tag     = esc_html( $this->check_tag( $this->attributes['htmlTag'], 'h2' ) );
 		$link_target  = ! empty( $this->attributes['archiveLinkTarget'] ) ? '_blank' : '_self';
-		$link_rel     = ! empty( $this->attributes['archiveLinkRel'] ) ? esc_attr( $this->attributes['archiveLinkRel'] ) : 'noreferrer';
+		$link_rel     = ! empty( $this->attributes['archiveLinkRel'] ) ? $this->attributes['archiveLinkRel'] : 'noreferrer';
 
 		$archive_title = esc_html( $archive_title );
 
 		if ( $category_url ) {
-			$archive_title = "<a href='" . esc_url( $category_url ) . "' target='{$link_target}' rel='{$link_rel}'>{$archive_title}</a>";
+			$link_attrs    = gutenverse_get_link_attributes(
+				array(
+					'href'   => $category_url,
+					'target' => $link_target,
+					'rel'    => $link_rel,
+				)
+			);
+			$archive_title = "<a{$link_attrs}>{$archive_title}</a>";
 		}
 
 		return "<{$html_tag}>{$archive_title}</{$html_tag}>";

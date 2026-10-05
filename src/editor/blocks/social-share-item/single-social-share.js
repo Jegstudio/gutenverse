@@ -10,6 +10,7 @@ import { isOnEditor } from 'gutenverse-core/helper';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
+import { useSelect } from '@wordpress/data';
 
 const SingleSocialShare = (props) => {
     const {
@@ -28,6 +29,15 @@ const SingleSocialShare = (props) => {
     } = attributes;
 
     const elementRef = useRef();
+    const hasText = showText !== false;
+    const itemOrderClass = useSelect(select => {
+        const { getBlockOrder, getBlockRootClientId } = select('core/block-editor');
+        const parentClientId = getBlockRootClientId(clientId);
+        const blockOrder = parentClientId ? getBlockOrder(parentClientId) : [];
+        const blockIndex = blockOrder.indexOf(clientId);
+
+        return blockIndex >= 0 ? `guten-social-share-item-order-${blockIndex + 1}` : '';
+    }, [clientId]);
 
     useGenerateElementId(clientId, elementId, elementRef);
     useDynamicStyle(elementId, attributes, getBlockStyle, elementRef);
@@ -35,7 +45,9 @@ const SingleSocialShare = (props) => {
     const blockProps = useBlockProps({
         className: classnames(
             'guten-social-share-item-wrapper',
-            selectedIcon
+            elementId,
+            selectedIcon,
+            itemOrderClass
         ),
         ref: elementRef
     });
@@ -59,12 +71,12 @@ const SingleSocialShare = (props) => {
                     selectedIcon
                 }}
                 EmptyResponsePlaceholder={EmptySocialShare}
-            /> : <div className={`gutenverse-share-${shareType} gutenverse-share-item`} id={elementId}>
+            /> : <div className={`gutenverse-share-${shareType} gutenverse-share-item${hasText ? ' has-text' : ''}`} id={elementId}>
                 <a href="#">
                     <div className="gutenverse-share-icon">
                         <i className={`fab fa-${shareType}`}></i>
                     </div>
-                    {showText ? <div className="gutenverse-share-text">{__('Share on', 'gutenverse')}{shareType}</div> : ''}
+                    {hasText ? <div className="gutenverse-share-text">{__('Share on', 'gutenverse')}{shareType}</div> : ''}
                 </a>
             </div>}
         </div>

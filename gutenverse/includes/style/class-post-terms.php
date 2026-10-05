@@ -134,7 +134,7 @@ class Post_Terms extends Style_Abstract {
 		if ( isset( $this->attrs['colorItemHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} h1.term-item:hover, .{$this->element_id} h2.term-item:hover, .{$this->element_id} h3.term-item:hover, .{$this->element_id} h4.term-item:hover, .{$this->element_id} h5.term-item:hover, .{$this->element_id} h6.term-item:hover, .{$this->element_id} span.term-item:hover, .{$this->element_id} p.term-item:hover, .{$this->element_id} a.term-item:hover, .{$this->element_id} .term-list:hover, .{$this->element_id} .term-list:hover *",
+					'selector'       => ".{$this->element_id} .term-item:hover, .{$this->element_id} .term-item:hover *, .{$this->element_id} .term-list:hover, .{$this->element_id} .term-list:hover *",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},

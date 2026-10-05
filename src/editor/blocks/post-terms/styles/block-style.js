@@ -39,9 +39,9 @@ const getBlockStyle = (elementId, attributes) => {
         'selector': `.${elementId} .post-term-block .term-item`,
     });
 
-    isNotEmpty(attributes['termBackground']) && data.push({
+    isNotEmpty(attributes['termBackgroundHover']) && data.push({
         'type': 'background',
-        'id': 'termBackground',
+        'id': 'termBackgroundHover',
         'selector': `.${elementId} .post-term-block .term-item:hover`,
     });
 
@@ -164,7 +164,7 @@ const getBlockStyle = (elementId, attributes) => {
     isNotEmpty(attributes['colorItemHover']) && data.push({
         'type': 'color',
         'id': 'colorItemHover',
-        'selector': `.${elementId} h1.term-item:hover, .${elementId} h2.term-item:hover, .${elementId} h3.term-item:hover, .${elementId} h4.term-item:hover, .${elementId} h5.term-item:hover, .${elementId} h6.term-item:hover, .${elementId} span.term-item:hover, .${elementId} p.term-item:hover, .${elementId} a.term-item:hover, .${elementId} .term-list:hover, .${elementId} .term-list:hover *`,
+        'selector': `.${elementId} .term-item:hover, .${elementId} .term-item:hover *, .${elementId} .term-list:hover, .${elementId} .term-list:hover *`,
         'properties': [
             {
                 'name': 'color',
