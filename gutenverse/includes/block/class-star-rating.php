@@ -90,22 +90,81 @@ class Star_Rating extends Block_Abstract {
 	}
 
 	/**
+	 * Render a single rating icon with support for fractional fills.
+	 *
+	 * @param string $star_icon Icon type.
+	 * @param float  $fill      Fill value between 0 and 1.
+	 * @return string
+	 */
+	private function render_rating_icon( $star_icon, $fill ) {
+		$fill   = max( 0, min( 1, floatval( $fill ) ) );
+		$output = '<span class="rating-icon">';
+		$output .= '<span class="icon-layer icon-layer-empty">' . $this->get_fa_icon( $star_icon, false ) . '</span>';
+
+		if ( $fill > 0 ) {
+			$output .= '<span class="icon-layer icon-layer-full" style="width:' . esc_attr( $fill * 100 ) . '%;">' . $this->get_fa_icon( $star_icon, true ) . '</span>';
+		}
+
+		$output .= '</span>';
+
+		return $output;
+	}
+
+	/**
+	 * Normalize a numeric attribute, including comma decimals.
+	 *
+	 * @param mixed $value Raw attribute value.
+	 * @return float
+	 */
+	private function normalize_numeric_attribute( $value ) {
+		if ( is_string( $value ) ) {
+			$value = str_replace( ',', '.', $value );
+		}
+
+		return floatval( $value );
+	}
+
+	/**
+	 * Split a rating into full stars and partial width based on first decimal digit.
+	 *
+	 * @param mixed $rating Raw rating value.
+	 * @param int   $total  Total available icons.
+	 * @return array
+	 */
+	private function get_rating_parts( $rating, $total ) {
+		$rating_string = str_replace( ',', '.', strval( $rating ) );
+		$parts         = explode( '.', $rating_string, 2 );
+		$full_stars    = isset( $parts[0] ) ? intval( $parts[0] ) : 0;
+		$decimal_digit = isset( $parts[1][0] ) ? intval( $parts[1][0] ) : 0;
+
+		$full_stars    = min( max( 0, $full_stars ), $total );
+		$partial_width = $full_stars < $total ? min( max( 0, $decimal_digit * 10 ), 100 ) : 0;
+
+		return array(
+			'full_stars'    => $full_stars,
+			'partial_width' => $partial_width,
+		);
+	}
+
+	/**
 	 * Render rating icons
 	 *
 	 * @return string
 	 */
 	protected function render_rating_icons() {
 		$star_icon = isset( $this->attributes['starIcon'] ) ? $this->attributes['starIcon'] : 'default';
-		$rating    = isset( $this->attributes['rating'] ) ? floatval( $this->attributes['rating'] ) : 7;
-		$total     = isset( $this->attributes['total'] ) ? floatval( $this->attributes['total'] ) : 10;
+		$rating    = isset( $this->attributes['rating'] ) ? $this->attributes['rating'] : 7;
+		$total     = isset( $this->attributes['total'] ) ? $this->normalize_numeric_attribute( $this->attributes['total'] ) : 10;
 
 		// Security: Cap total stars to prevent DoS.
-		$total = min( 100, max( 0, $total ) );
+		$total        = min( 100, max( 0, intval( floor( $total ) ) ) );
+		$rating_parts = $this->get_rating_parts( $rating, $total );
 
 		$output = '<div class="rating-icons">';
 
 		for ( $i = 0; $i < $total; $i++ ) {
-			$output .= $this->get_fa_icon( $star_icon, $i < $rating );
+			$fill = $i < $rating_parts['full_stars'] ? 1 : ( $i === $rating_parts['full_stars'] ? $rating_parts['partial_width'] / 100 : 0 );
+			$output .= $this->render_rating_icon( $star_icon, $fill );
 		}
 
 		$output .= '</div>';

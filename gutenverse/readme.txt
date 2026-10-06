@@ -196,6 +196,7 @@ New and improved:
 Bug fixes:
 - Fix social share: apply styles ot the load more button and fix solid button background color
 - Fix post list; background color
+- Fix star rating; add decimal option
 
 = 4.0.9 =
 New and improved:

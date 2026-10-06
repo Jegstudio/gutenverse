@@ -39,7 +39,26 @@
     .rating-icons {
         display: flex;
 
-        .gutenverse-icon-svg {
+        .rating-icon {
+            position: relative;
+            display: inline-flex;
+            flex: 0 0 auto;
+        }
+
+        .icon-layer {
+            display: inline-flex;
+        }
+
+        .icon-layer-full {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .gutenverse-icon-svg,
+        i {
             padding: 1px;
         }
 
