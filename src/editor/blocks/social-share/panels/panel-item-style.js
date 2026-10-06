@@ -303,6 +303,25 @@ export const panelItemStyle = props => {
             onChange: ({ __socialHover }) => setSwitcher({ ...switcher, socialHover: __socialHover })
         },
         {
+            id: 'textColor',
+            show: !switcher.socialHover || switcher.socialHover === 'normal',
+            label: __('Text Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'textColor',
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-text`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'iconColor',
             show: !switcher.socialHover || switcher.socialHover === 'normal',
             label: __('Icon Color', 'gutenverse'),
@@ -379,25 +398,6 @@ export const panelItemStyle = props => {
             ]
         },
         {
-            id: 'textColor',
-            show: !switcher.socialHover || switcher.socialHover === 'normal',
-            label: __('Text Color', 'gutenverse'),
-            component: ColorControl,
-            liveStyle: [
-                {
-                    'type': 'color',
-                    'id': 'textColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-text`,
-                    'properties': [
-                        {
-                            'name': 'color',
-                            'valueType': 'direct'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             id: 'borderType',
             show: (!switcher.socialHover || switcher.socialHover === 'normal') && device === 'Desktop',
             label: __('Border', 'gutenverse'),
@@ -421,6 +421,25 @@ export const panelItemStyle = props => {
                     'type': 'borderResponsive',
                     'id': 'borderTypeResponsive',
                     'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item, .editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`,
+                }
+            ]
+        },
+        {
+            id: 'textColorHover',
+            show: switcher.socialHover === 'hover',
+            label: __('Text Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'textColorHover',
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-text`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
                 }
             ]
         },
@@ -494,25 +513,6 @@ export const panelItemStyle = props => {
                     'properties': [
                         {
                             'name': 'background-color',
-                            'valueType': 'direct'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'textColorHover',
-            show: switcher.socialHover === 'hover',
-            label: __('Text Color', 'gutenverse'),
-            component: ColorControl,
-            liveStyle: [
-                {
-                    'type': 'color',
-                    'id': 'textColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-text`,
-                    'properties': [
-                        {
-                            'name': 'color',
                             'valueType': 'direct'
                         }
                     ]
