@@ -102,7 +102,7 @@ export const moreButtonStylePanel = (props) => {
                 {
                     type: 'color',
                     id: 'moreButtonIconColorHover',
-                    selector: `${buttonSelector}:hover .gutenverse-share-more-icon svg`,
+                    selector: `${buttonSelector}:hover .gutenverse-share-more-icon svg, ${buttonSelector}:focus .gutenverse-share-more-icon svg`,
                     properties: [{ name: 'color', valueType: 'direct' }]
                 }
             ]
@@ -115,7 +115,7 @@ export const moreButtonStylePanel = (props) => {
                 {
                     type: 'color',
                     id: 'moreButtonBackgroundColor',
-                    selector: buttonSelector,
+                    selector: `${buttonSelector}, ${buttonSelector}:focus`,
                     properties: [{ name: 'background-color', valueType: 'direct' }]
                 }
             ]
@@ -128,7 +128,7 @@ export const moreButtonStylePanel = (props) => {
                 {
                     type: 'color',
                     id: 'moreButtonBackgroundColorHover',
-                    selector: `${buttonSelector}:hover`,
+                    selector: `${buttonSelector}:hover, ${buttonSelector}:focus`,
                     properties: [{ name: 'background-color', valueType: 'direct' }]
                 }
             ]

@@ -58,6 +58,7 @@ class Social_Share extends Style_Abstract {
 		$is_solid_button           = isset( $this->attrs['buttonLayout'] ) && 'solid' === $this->attrs['buttonLayout'];
 		$is_horizontal_stretch     = isset( $this->attrs['layoutMode'] ) && 'stretch' === $this->attrs['layoutMode'] && ( ! isset( $this->attrs['orientation'] ) || 'vertical' !== $this->attrs['orientation'] );
 		$more_button_selector      = ".{$this->element_id} .gutenverse-share-more-toggle";
+		$more_button_focus_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-more-toggle:focus";
 		$more_button_icon_selector = "{$more_button_selector} .gutenverse-share-more-icon svg";
 
 		if ( ! empty( $this->attrs['enableMoreButton'] ) ) {
@@ -288,7 +289,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['buttonBackgroundColor'] ) && $is_solid_button ) {
 			$solid_button_selector = ".{$this->element_id}.guten-social-share.button-layout-solid .gutenverse-share-item[class*='gutenverse-share-'] a";
 			if ( empty( $this->attrs['moreButtonBackgroundColor'] ) ) {
-				$solid_button_selector .= ", {$more_button_selector}";
+				$solid_button_selector .= ", {$more_button_selector}, {$more_button_focus_selector}";
 			}
 
 			$this->inject_style(
@@ -306,7 +307,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['buttonBackgroundColorHover'] ) && $is_solid_button ) {
 			$solid_button_hover_selector = ".{$this->element_id}.guten-social-share.button-layout-solid .gutenverse-share-item[class*='gutenverse-share-']:hover a";
 			if ( empty( $this->attrs['moreButtonBackgroundColorHover'] ) ) {
-				$solid_button_hover_selector .= ", {$more_button_selector}:hover";
+				$solid_button_hover_selector .= ", {$more_button_selector}:hover, {$more_button_focus_selector}";
 			}
 
 			$this->inject_style(
@@ -392,7 +393,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['iconBackgroundColor'] ) && ! $is_solid_button ) {
 			$icon_background_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item .gutenverse-share-icon";
 			if ( empty( $this->attrs['moreButtonBackgroundColor'] ) ) {
-				$icon_background_selector .= ", {$more_button_selector}";
+				$icon_background_selector .= ", {$more_button_selector}, {$more_button_focus_selector}";
 			}
 
 			$this->inject_style(
@@ -456,7 +457,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['iconColorHover'] ) ) {
 			$icon_color_hover_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item:hover .gutenverse-share-icon svg";
 			if ( empty( $this->attrs['moreButtonIconColorHover'] ) ) {
-				$icon_color_hover_selector .= ", .guten-element.guten-social-share.{$this->element_id} .gutenverse-share-more-toggle:hover .gutenverse-share-more-icon svg";
+				$icon_color_hover_selector .= ", .guten-element.guten-social-share.{$this->element_id} .gutenverse-share-more-toggle:hover .gutenverse-share-more-icon svg, .guten-element.guten-social-share.{$this->element_id} .gutenverse-share-more-toggle:focus .gutenverse-share-more-icon svg";
 			}
 
 			$this->inject_style(
@@ -474,7 +475,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['iconBackgroundColorHover'] ) && ! $is_solid_button ) {
 			$icon_background_hover_selector = ".guten-element.guten-social-share.{$this->element_id} .gutenverse-share-item:hover .gutenverse-share-icon";
 			if ( empty( $this->attrs['moreButtonBackgroundColorHover'] ) ) {
-				$icon_background_hover_selector .= ", {$more_button_selector}:hover";
+				$icon_background_hover_selector .= ", {$more_button_selector}:hover, {$more_button_focus_selector}";
 			}
 
 			$this->inject_style(
@@ -539,7 +540,6 @@ class Social_Share extends Style_Abstract {
 			$this->inject_typography(
 				array(
 					'selector'       => ".{$this->element_id} .gutenverse-share-item .gutenverse-share-text",
-					'property'       => function () {},
 					'value'          => $this->attrs['typography'],
 					'device_control' => false,
 				)
@@ -649,7 +649,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['moreButtonIconColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "{$more_button_selector}:hover .gutenverse-share-more-icon svg",
+					'selector'       => "{$more_button_selector}:hover .gutenverse-share-more-icon svg, {$more_button_focus_selector} .gutenverse-share-more-icon svg",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'color' );
 					},
@@ -662,7 +662,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['moreButtonBackgroundColor'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => $more_button_selector,
+					'selector'       => "{$more_button_selector}, {$more_button_focus_selector}",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
@@ -675,7 +675,7 @@ class Social_Share extends Style_Abstract {
 		if ( isset( $this->attrs['moreButtonBackgroundColorHover'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => "{$more_button_selector}:hover",
+					'selector'       => "{$more_button_selector}:hover, {$more_button_focus_selector}",
 					'property'       => function ( $value ) {
 						return $this->handle_color( $value, 'background-color' );
 					},
