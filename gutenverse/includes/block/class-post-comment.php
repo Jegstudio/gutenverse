@@ -47,25 +47,28 @@ class Post_Comment extends Block_Abstract {
 				$comments
 			);
 
-			$show_suffix          = $this->attributes['enableSuffix'];
-			$suffix_main          = $this->attributes['suffixMain'];
-			$suffix_reply         = $this->attributes['suffixReply'];
-			$text_title           = $this->attributes['titleText'];
+			$enable_comment_title = ! empty( $this->attributes['enableCommentTitle'] );
 			$enable_comment_count = $this->attributes['enableCommentCount'];
 			$enable_post_title    = $this->attributes['enablePostTitle'];
-			$post_title           = $enable_post_title ? '"' . get_the_title( $post_id ) . '"' : '';
-			$comments_count       = $enable_comment_count ? count( $comments ) : '';
-			$comment_title        = '';
+			$show_form            = ! empty( $this->attributes['showForm'] );
+			$text_title           = esc_html( $this->attributes['titleText'] );
 
+			$post_title     = $enable_post_title ? '"' . esc_html( get_the_title( $post_id ) ) . '"' : '';
+			$comments_count = $enable_comment_count ? count( $comments ) : '';
+
+			$show_suffix   = $this->attributes['enableSuffix'];
+			$suffix_main   = $this->attributes['suffixMain'];
+			$suffix_reply  = $this->attributes['suffixReply'];
 			$data_settings = array(
 				'enableSuffix' => "{$show_suffix}",
 				'suffixMain'   => "{$suffix_main}",
 				'suffixReply'  => "{$suffix_reply}",
 			);
 
-			$json_data = wp_json_encode( $data_settings );
+			$json_data     = esc_attr( wp_json_encode( $data_settings ) );
+			$comment_title = '';
 
-			if ( ! empty( $this->attributes['enableCommentTitle'] ) ) {
+			if ( $enable_comment_title ) {
 				$comment_title .= "
 				<div class='guten-post-comment-title comment-title'>
 					<p class='title-text'>
@@ -80,7 +83,7 @@ class Post_Comment extends Block_Abstract {
 				$comment_list = $comment_title . "<ol class='commentlist' data-settings='{$json_data}' >" . $comment_list . '</ol>';
 			}
 
-			if ( ! empty( $this->attributes['showForm'] ) ) {
+			if ( $show_form ) {
 				ob_start();
 				comment_form( array(), $post_id );
 				$content = ob_get_clean();

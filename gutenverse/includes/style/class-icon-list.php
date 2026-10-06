@@ -253,7 +253,7 @@ class Icon_List extends Style_Abstract {
 		if ( isset( $this->attrs['adjustVerticalAlign'] ) ) {
 			$this->inject_style(
 				array(
-					'selector'       => ".{$this->element_id} .guten-icon-list-item i:before",
+					'selector'       => ".{$this->element_id} .guten-icon-list-item i:before, .{$this->element_id} .guten-icon-list-item .gutenverse-icon-svg",
 					'property'       => function ( $value ) {
 						return "margin-top: {$value}px";
 					},
@@ -312,7 +312,7 @@ class Icon_List extends Style_Abstract {
 				);
 			}
 		}
-		
+
 		if ( isset( $this->attrs['isDivider'] ) ) {
 			if ( $this->attrs['isDivider'] ) {
 				$this->inject_style(

@@ -77,7 +77,7 @@ export const panelRating = () => {
             liveUpdate: true,
             min: 0,
             max: 10,
-            step: 1,
+            step: 0.1,
         },
         {
             id: 'total',

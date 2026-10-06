@@ -1,6 +1,8 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 
 const spacingStyle = (elementId, attributes, data) => {
+    const moreButtonSelector = `.editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`;
+
     isNotEmpty(attributes['iconPading']) && data.push({
         'type': 'dimension',
         'id': 'iconPading',
@@ -11,7 +13,7 @@ const spacingStyle = (elementId, attributes, data) => {
                 'valueType': 'direct'
             }
         ],
-        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon`,
+        'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon${isNotEmpty(attributes['moreButtonPadding']) ? '' : `, ${moreButtonSelector}`}`,
     });
     isNotEmpty(attributes['textPading']) && data.push({
         'type': 'dimension',
