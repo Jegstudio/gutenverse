@@ -155,6 +155,37 @@ class Post_Featured_Image extends Style_Abstract {
 			);
 		}
 
+		if ( ! empty( $this->attrs['imageHeight'] ) ) {
+			$image_height = array();
+			$values       = array(
+				'imageFixedHeight' => false,
+				'imageFit'         => null,
+				'imageHeight'      => null,
+			);
+
+			foreach ( array( 'Desktop', 'Tablet', 'Mobile' ) as $device ) {
+				foreach ( array_keys( $values ) as $attribute ) {
+					if ( isset( $this->attrs[ $attribute ][ $device ] ) && '' !== $this->attrs[ $attribute ][ $device ] ) {
+						$values[ $attribute ] = $this->attrs[ $attribute ][ $device ];
+					}
+				}
+
+				$image_height[ $device ] = $values['imageFixedHeight'] && 'cover' === $values['imageFit'] && null !== $values['imageHeight']
+					? $values['imageHeight'] . 'px' : 'auto';
+			}
+
+			$this->inject_style(
+				array(
+					'selector'       => ".{$this->element_id} img",
+					'property'       => function ( $value ) {
+						return "height: {$value};";
+					},
+					'device_control' => true,
+					'value'          => $image_height,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['imagePosition'] ) ) {
 			$this->inject_style(
 				array(

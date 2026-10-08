@@ -397,6 +397,14 @@
 		"galleryButtonBoxShadowHover": {
 			"type": "object",
 			"copyStyle": true
+		},
+		"imageFixedHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageHeight": {
+			"type": "object",
+			"copyStyle": true
 		}
 	},
 	"usesContext": [
