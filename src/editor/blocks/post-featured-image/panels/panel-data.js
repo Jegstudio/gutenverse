@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { RangeControl, SelectControl, SelectSearchControl } from 'gutenverse-core/controls';
+import { CheckboxControl, RangeControl, SelectControl, SelectSearchControl } from 'gutenverse-core/controls';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 import { isNotEmpty, isOnEditor } from 'gutenverse-core/helper';
 import { fetchImageSizes } from 'gutenverse-core/requests';
@@ -7,18 +7,20 @@ import { fetchImageSizes } from 'gutenverse-core/requests';
 export const dataPanel = (props) => {
     const {
         elementId,
-        imageRatio
+        imageRatio,
+        imageFixedHeight,
+        imageFit,
     } = props;
 
-    const getFallbackImageRatio = () => {
+    const getFallback = (attribute) => {
         const device = getDeviceType();
-        if (isNotEmpty(imageRatio?.['Mobile']) && 'Mobile' === device) {
-            return imageRatio?.['Mobile'];
+        if (isNotEmpty(attribute?.['Mobile']) && 'Mobile' === device) {
+            return attribute?.['Mobile'];
         }
-        if (isNotEmpty(imageRatio?.['Tablet']) && ('Tablet' === device || 'Mobile' === device)) {
-            return imageRatio?.['Tablet'];
+        if (isNotEmpty(attribute?.['Tablet']) && ('Tablet' === device || 'Mobile' === device)) {
+            return attribute?.['Tablet'];
         }
-        return imageRatio?.['Desktop'];
+        return attribute?.['Desktop'];
     };
 
     const imageSize = isOnEditor() ? fetchImageSizes :
@@ -57,10 +59,32 @@ export const dataPanel = (props) => {
             ],
         },
         {
+            id: 'imageFixedHeight',
+            label: __('Use Fixed Height', 'gutenverse'),
+            component: CheckboxControl,
+            allowDeviceControl: true,
+            deviceValues: imageFixedHeight,
+            usePreviousDeviceValue: true,
+            usePreviousDevice: true,
+            show: getFallback(imageFit) === 'cover',
+        },
+        {
+            id: 'imageHeight',
+            label: __('Height', 'gutenverse'),
+            component: RangeControl,
+            min: 0,
+            max: 999,
+            step: 1,
+            unit: 'px',
+            allowDeviceControl: true,
+            show: getFallback(imageFixedHeight) === true && getFallback(imageFit) === 'cover',
+        },
+        {
             id: 'imageRatio',
             label: __('Image Ratio', 'gutenverse'),
             component: SelectControl,
             allowDeviceControl: true,
+            show: ! getFallback(imageFixedHeight) || getFallback(imageFit) !== 'cover',
             options: [
                 {
                     value: 'auto',
@@ -89,7 +113,7 @@ export const dataPanel = (props) => {
             label: __('Custom Image Ratio', 'gutenverse'),
             component: RangeControl,
             allowDeviceControl: true,
-            show: getFallbackImageRatio() === 'custom',
+            show: getFallback(imageRatio) === 'custom' && (! getFallback(imageFixedHeight) || getFallback(imageFit) !== 'cover'),
             min: 0,
             max: 5,
             step: 0.1,
