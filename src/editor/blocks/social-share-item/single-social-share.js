@@ -9,6 +9,7 @@ import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { useSelect } from '@wordpress/data';
+import GetIcon from './get-icon';
 
 const SingleSocialShare = (props) => {
     const {
@@ -56,10 +57,10 @@ const SingleSocialShare = (props) => {
         </InspectorControls>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div {...blockProps}>
-            <div className={`gutenverse-share-${shareType} gutenverse-share-item${hasText ? ' has-text' : ''}`} id={elementId}>
+            <div className={classnames(`gutenverse-share-${shareType}`, 'gutenverse-share-item', { 'has-text': hasText }, shareType === 'twitter' && (selectedIcon || 'twitter'))} id={elementId}>
                 <a href="javascript:void(0);">
                     <div className="gutenverse-share-icon">
-                        <i className={`fab fa-${shareType}`}></i>
+                        <GetIcon shareType={shareType} selectedIcon={selectedIcon} />
                     </div>
                     {hasText ? <div className="gutenverse-share-text">{__('Share on', 'gutenverse')}{shareType}</div> : ''}
                 </a>
