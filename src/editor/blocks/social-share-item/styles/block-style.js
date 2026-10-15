@@ -1,4 +1,5 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
+import { deviceStyleValue } from 'gutenverse-core/styling';
 import { applyFilters } from '@wordpress/hooks';
 import itemStyle from './panel-style/item-style';
 import spacingStyle from './panel-style/spacing-style';
@@ -9,7 +10,7 @@ const getBlockStyle = (elementId, attributes) => {
     data = itemStyle(elementId, attributes, data);
     data = spacingStyle(elementId, attributes, data);
 
-    isNotEmpty(attributes['hideText']) && data.push({
+    attributes['showText'] && isNotEmpty(attributes['hideText']) && data.push({
         'type': 'plain',
         'id': 'hideText',
         'responsive': true,
@@ -24,7 +25,7 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
-    isNotEmpty(attributes['hideText']) && data.push({
+    attributes['showText'] && isNotEmpty(attributes['hideText']) && data.push({
         'type': 'plain',
         'id': 'hideText',
         'responsive': true,
@@ -35,6 +36,32 @@ const getBlockStyle = (elementId, attributes) => {
                 'valueType': 'function',
                 'functionName': 'handleSimpleCondition',
                 'valueFunc': (value) => value === undefined ? undefined : value ? '1' : '0',
+            }
+        ],
+    });
+
+    attributes['showText'] && data.push({
+        'type': 'plain',
+        'id': 'hideText',
+        'multiAttr': { hideText: { Desktop: false, ...attributes['hideText'] } },
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .guten-social-share.button-layout-solid #${elementId}.gutenverse-share-item.has-text .gutenverse-share-icon`,
+        'properties': [
+            {
+                'name': 'padding-right',
+                'valueType': 'function',
+                'functionName': 'handleSimpleCondition',
+                'valueFunc': (value, device) => {
+                    if (!deviceStyleValue(device, attributes['hideText'] || {})) return '4px';
+                    const rightPadding = {};
+                    Object.entries(attributes['iconPading'] || {}).forEach(([paddingDevice, padding]) => {
+                        const right = padding?.dimension?.right;
+                        if (right !== undefined && right !== null && right !== '') {
+                            rightPadding[paddingDevice] = `${right}${padding.unit || 'px'}`;
+                        }
+                    });
+                    return deviceStyleValue(device, rightPadding) || '12px';
+                },
             }
         ],
     });

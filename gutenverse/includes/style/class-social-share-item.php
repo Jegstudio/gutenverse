@@ -51,7 +51,7 @@ class Social_Share_Item extends Style_Abstract {
 	 * Generate style base on attribute.
 	 */
 	public function generate() {
-		if ( isset( $this->attrs['hideText'] ) ) {
+		if ( ! empty( $this->attrs['showText'] ) && isset( $this->attrs['hideText'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => "#{$this->element_id}.gutenverse-share-item .gutenverse-share-text",
@@ -76,6 +76,32 @@ class Social_Share_Item extends Style_Abstract {
 						return $value ? 'flex-grow: 1;' : 'flex-grow: 0;';
 					},
 					'value'          => $this->attrs['hideText'],
+					'device_control' => true,
+					'ignore_empty'   => true,
+				)
+			);
+		}
+
+		if ( ! empty( $this->attrs['showText'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => ".guten-social-share.button-layout-solid #{$this->element_id}.gutenverse-share-item.has-text .gutenverse-share-icon",
+					'property'       => function ( $value, $device ) {
+						$hidden = $this->get_inherit_value( $this->attrs['hideText'] ?? array(), $device, false );
+						if ( ! $hidden ) {
+							return 'padding-right: 4px;';
+						}
+						$right_padding = array();
+						foreach ( $this->attrs['iconPading'] ?? array() as $padding_device => $padding ) {
+							$right = $padding['dimension']['right'] ?? null;
+							if ( null !== $right && '' !== $right ) {
+								$right_padding[ $padding_device ] = $right . ( $padding['unit'] ?? 'px' );
+							}
+						}
+						$padding_right = $this->get_inherit_value( $right_padding, $device, '12px' );
+						return 'padding-right: ' . sanitize_text_field( $padding_right ) . ';';
+					},
+					'value'          => $this->attrs['hideText'] ?? array(),
 					'device_control' => true,
 					'ignore_empty'   => true,
 				)
