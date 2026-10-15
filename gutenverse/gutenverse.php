@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: Gutenverse
+ * Requires PHP: 7.4
  * Description: Collection of easy to use and customizable blocks for WordPress Block Editor. Build a great website using block provided with Gutenverse.
  * Plugin URI: https://gutenverse.com/
  * Author: Jegstudio
