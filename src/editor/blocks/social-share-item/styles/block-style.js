@@ -24,6 +24,21 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
+    isNotEmpty(attributes['hideText']) && data.push({
+        'type': 'plain',
+        'id': 'hideText',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .guten-social-share.horizontal.stretch-layout #${elementId}.gutenverse-share-item .gutenverse-share-icon`,
+        'properties': [
+            {
+                'name': 'flex-grow',
+                'valueType': 'function',
+                'functionName': 'handleSimpleCondition',
+                'valueFunc': (value) => value === undefined ? undefined : value ? '1' : '0',
+            }
+        ],
+    });
+
     /**Panel List */
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
@@ -192,18 +207,18 @@ const getBlockStyle = (elementId, attributes) => {
         ],
         'selector': `.${elementId}.guten-element`,
     },
-    {
-        'type': 'positioning',
-        'id': 'positioningAlign',
-        'properties': [
-            {
-                'name': 'vertical-align',
-                'valueType': 'direct'
-            }
-        ],
-        'attributeType': 'align',
-        'selector': `.${elementId}.guten-element`,
-    });
+        {
+            'type': 'positioning',
+            'id': 'positioningAlign',
+            'properties': [
+                {
+                    'name': 'vertical-align',
+                    'valueType': 'direct'
+                }
+            ],
+            'attributeType': 'align',
+            'selector': `.${elementId}.guten-element`,
+        });
     isNotEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
         'type': 'plain',
         'id': 'positioningLocation',

@@ -66,6 +66,20 @@ class Social_Share_Item extends Style_Abstract {
 					'ignore_empty'   => true,
 				)
 			);
+			$this->inject_style(
+				array(
+					'selector'       => ".guten-social-share.horizontal.stretch-layout #{$this->element_id}.gutenverse-share-item .gutenverse-share-icon",
+					'property'       => function ( $value, $device ) {
+						if ( ! isset( $this->attrs['hideText'][ $device ] ) ) {
+							return '';
+						}
+						return $value ? 'flex-grow: 1;' : 'flex-grow: 0;';
+					},
+					'value'          => $this->attrs['hideText'],
+					'device_control' => true,
+					'ignore_empty'   => true,
+				)
+			);
 		}
 
 		if ( isset( $this->attrs['itemGrow'] ) && $this->attrs['itemGrow'] ) {
