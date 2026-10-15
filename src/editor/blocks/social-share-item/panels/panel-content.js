@@ -21,10 +21,12 @@ export const panelContent = (props) => {
             component: CheckboxControl,
         },
         {
-            id: 'hideTextOnMobile',
-            label: __('Hide Share Text on Mobile', 'gutenverse'),
-            description: __('Hide custom text beside icon on mobile devices', 'gutenverse'),
+            id: 'hideText',
+            show: showText,
+            label: __('Hide Share Text', 'gutenverse'),
+            description: __('Hide custom text beside icon on the selected device', 'gutenverse'),
             component: CheckboxControl,
+            allowDeviceControl: true,
         },
         {
             id: 'text',

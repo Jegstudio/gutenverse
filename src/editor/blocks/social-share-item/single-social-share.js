@@ -21,7 +21,6 @@ const SingleSocialShare = (props) => {
         elementId,
         showText,
         selectedIcon,
-        hideTextOnMobile,
     } = attributes;
 
     const elementRef = useRef();
@@ -62,7 +61,7 @@ const SingleSocialShare = (props) => {
                     <div className="gutenverse-share-icon">
                         <i className={`fab fa-${shareType}`}></i>
                     </div>
-                    {hasText ? <div className={`gutenverse-share-text ${hideTextOnMobile ? 'hide-on-mobile' : ''}`}>{__('Share on', 'gutenverse')}{shareType}</div> : ''}
+                    {hasText ? <div className="gutenverse-share-text">{__('Share on', 'gutenverse')}{shareType}</div> : ''}
                 </a>
             </div>
         </div>

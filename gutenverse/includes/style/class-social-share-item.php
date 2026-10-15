@@ -51,6 +51,23 @@ class Social_Share_Item extends Style_Abstract {
 	 * Generate style base on attribute.
 	 */
 	public function generate() {
+		if ( isset( $this->attrs['hideText'] ) ) {
+			$this->inject_style(
+				array(
+					'selector'       => "#{$this->element_id}.gutenverse-share-item .gutenverse-share-text",
+					'property'       => function ( $value, $device ) {
+						if ( ! isset( $this->attrs['hideText'][ $device ] ) ) {
+							return '';
+						}
+						return $value ? 'display: none;' : 'display: flex;';
+					},
+					'value'          => $this->attrs['hideText'],
+					'device_control' => true,
+					'ignore_empty'   => true,
+				)
+			);
+		}
+
 		if ( isset( $this->attrs['itemGrow'] ) && $this->attrs['itemGrow'] ) {
 			$this->inject_style(
 				array(

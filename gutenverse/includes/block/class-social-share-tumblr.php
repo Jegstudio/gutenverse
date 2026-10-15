@@ -25,8 +25,7 @@ class Social_Share_Tumblr extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $text ) {
-		$hide_on_mobile = isset( $this->attributes['hideTextOnMobile'] ) && $this->attributes['hideTextOnMobile'];
-		$share_text     = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? "<div class='gutenverse-share-text " . ( $hide_on_mobile ? 'hide-on-mobile' : '' ) . "'>{$text}</div>" : '';
+		$share_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? "<div class='gutenverse-share-text'>{$text}</div>" : '';
 
 		return '<div class="gutenverse-share-icon">
 			<div class="gutenverse-icon-svg">

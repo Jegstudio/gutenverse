@@ -9,6 +9,21 @@ const getBlockStyle = (elementId, attributes) => {
     data = itemStyle(elementId, attributes, data);
     data = spacingStyle(elementId, attributes, data);
 
+    isNotEmpty(attributes['hideText']) && data.push({
+        'type': 'plain',
+        'id': 'hideText',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item .gutenverse-share-text`,
+        'properties': [
+            {
+                'name': 'display',
+                'valueType': 'function',
+                'functionName': 'handleSimpleCondition',
+                'valueFunc': (value) => value === undefined ? undefined : value ? 'none' : 'flex',
+            }
+        ],
+    });
+
     /**Panel List */
     isNotEmpty(attributes['border']) && data.push({
         'type': 'border',
