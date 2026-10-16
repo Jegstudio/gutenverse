@@ -189,6 +189,17 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
+= 4.1.0 [DEV] =
+New and Improved:
+- Integrate the Post Featured Image block with JNews Blocks' additional post formats
+- Integrate Gutenverse Primary Category with JNews Blocks
+- Add Share to ChatGPT and Perplexity options to the Social Share block
+- Add an option to hide share text on specific devices in the Social Share block
+
+Bug Fixes:
+- Fix deprecated server-side rendering in the Social Share block editor
+
+
 = 4.0.12 =
 New and improved:
 - Add fixed height option to post featured image
