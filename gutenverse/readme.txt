@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.0.12
+Stable tag: 4.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -188,6 +188,17 @@ Terms of Service: https://policies.google.com/terms
 If you use social sharing blocks, visitors may open external social sharing URLs when they click a share button.
 
 == Changelog ==
+
+= 4.1.0 =
+Compatibility:
+- Update minimum PHP version required to 7.4
+
+New and improved:
+- Add option to load CSS as file in the Dashboard Frontend settings
+
+Bug fixes:
+- Fix search block: close button showing on first render
+- Fix social share block: share to twitter not working properly if there is special character
 
 = 4.0.12 =
 New and improved:
