@@ -189,7 +189,7 @@ If you use social sharing blocks, visitors may open external social sharing URLs
 
 == Changelog ==
 
-= 4.1.0 [DEV] =
+= 4.2.0 [DEV] =
 New and Improved:
 - Integrate the Post Featured Image block with JNews Blocks' additional post formats
 - Integrate Gutenverse Primary Category with JNews Blocks
