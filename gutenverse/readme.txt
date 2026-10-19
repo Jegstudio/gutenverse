@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.0.12
+Stable tag: 4.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,6 +199,17 @@ New and Improved:
 Bug Fixes:
 - Fix deprecated server-side rendering in the Social Share block editor
 
+
+= 4.1.0 =
+Compatibility:
+- Update minimum PHP version required to 7.4
+
+New and improved:
+- Add option to load CSS as file in the Dashboard Frontend settings
+
+Bug fixes:
+- Fix search block: close button showing on first render
+- Fix social share block: share to twitter not working properly if there is special character
 
 = 4.0.12 =
 New and improved:
