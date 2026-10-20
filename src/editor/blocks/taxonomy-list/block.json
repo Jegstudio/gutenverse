@@ -132,7 +132,9 @@
 		"itemWidth": {
 			"type": "object",
 			"default": {
-				"Desktop": "fit-content"
+				"Desktop": "fit-content",
+				"Tablet": "fit-content",
+				"Mobile": "fit-content"
 			},
 			"copyStyle": true
 		},
