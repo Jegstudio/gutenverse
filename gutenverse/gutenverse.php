@@ -1,10 +1,11 @@
 <?php
 /**
  * Plugin Name: Gutenverse
+ * Requires PHP: 7.4
  * Description: Collection of easy to use and customizable blocks for WordPress Block Editor. Build a great website using block provided with Gutenverse.
  * Plugin URI: https://gutenverse.com/
  * Author: Jegstudio
- * Version: 4.0.12
+ * Version: 4.1.0
  * Author URI: https://jegtheme.com/
  * License: GPLv3
  * Text Domain: gutenverse
@@ -15,7 +16,7 @@
 use Gutenverse\Gutenverse;
 
 defined( 'GUTENVERSE' ) || define( 'GUTENVERSE', 'gutenverse' );
-defined( 'GUTENVERSE_VERSION' ) || define( 'GUTENVERSE_VERSION', '4.0.12' );
+defined( 'GUTENVERSE_VERSION' ) || define( 'GUTENVERSE_VERSION', '4.1.0' );
 defined( 'GUTENVERSE_NOTICE_VERSION' ) || define( 'GUTENVERSE_NOTICE_VERSION', '4.0.0' );
 defined( 'GUTENVERSE_NAME' ) || define( 'GUTENVERSE_NAME', 'Gutenverse' );
 defined( 'GUTENVERSE_URL' ) || define( 'GUTENVERSE_URL', plugins_url( GUTENVERSE ) );
