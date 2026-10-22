@@ -3,10 +3,10 @@
  * Plugin Name: Gutenverse
  * Requires PHP: 7.4
  * Description: Collection of easy to use and customizable blocks for WordPress Block Editor. Build a great website using block provided with Gutenverse.
- * Plugin URI: https://gutenverse.com/
+ * Plugin URI: https://gutenverse.com/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash
  * Author: Jegstudio
  * Version: 4.1.0
- * Author URI: https://jegtheme.com/
+ * Author URI: https://jegtheme.com/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash
  * License: GPLv3
  * Text Domain: gutenverse
  *
