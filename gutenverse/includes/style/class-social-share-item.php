@@ -330,7 +330,7 @@ class Social_Share_Item extends Style_Abstract {
 				array(
 					'selector'       => "#{$this->element_id}.gutenverse-share-item svg",
 					'property'       => function ( $value ) {
-						return $this->handle_unit_point( $value, 'width' );
+						return $this->handle_unit_point( $value, 'width' ) . $this->handle_unit_point( $value, 'height' );
 					},
 					'value'          => $this->attrs['iconSize'],
 					'device_control' => true,

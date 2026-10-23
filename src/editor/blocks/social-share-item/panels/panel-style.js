@@ -134,7 +134,7 @@ export const panelStyle = props => {
                         {
                             'name': 'width',
                             'valueType': 'direct'
-                        }
+                        },
                     ],
                     'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item i, .editor-styles-wrapper #${elementId}.gutenverse-share-item svg`,
                 }
