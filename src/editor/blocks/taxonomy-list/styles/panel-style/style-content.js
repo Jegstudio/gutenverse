@@ -1,9 +1,79 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
 import { getDeviceType } from 'gutenverse-core/editor-helper';
 
+const getResponsiveValue = (values, device = getDeviceType()) => {
+    if (!values || typeof values !== 'object') {
+        return undefined;
+    }
+
+    const devices = ['Desktop', 'Tablet', 'Mobile'];
+
+    // Inherit empty values from the next larger breakpoint.
+    for (let index = devices.indexOf(device); index >= 0; index--) {
+        const breakpoint = devices[index];
+        const value = values[breakpoint];
+
+        if (Object.prototype.hasOwnProperty.call(values, breakpoint) && value !== '' && value !== null && value !== undefined) {
+            return value;
+        }
+    }
+
+    return undefined;
+};
+
 const contentStyle = (elementId, attributes, data) => {
 
     const deviceType = getDeviceType();
+
+    isNotEmpty(attributes['columnCount']) && attributes['layout'] === 'column' && data.push({
+        'type': 'plain',
+        'id': 'columnCount',
+        'selector': `.${elementId} .taxonomy-list-wrapper`,
+        'responsive': true,
+        'properties': [
+            {
+                'name': 'display',
+                'valueType': 'function',
+                'valueFunc': (value) => {
+                    if (value !== '1' && value !== 1) {
+                        return 'grid';
+                    }
+                    return 'flex';
+                }
+            },
+            {
+                'name': 'grid-template-columns',
+                'valueType': 'function',
+                'valueFunc': (value) => {
+                    if (value !== '1' && value !== 1) {
+                        return `repeat(${value}, 1fr)`;
+                    }
+                    return undefined;
+                }
+            },
+        ],
+    });
+
+    if (isNotEmpty(attributes['columnCount']) && (isNotEmpty(attributes['typeDivider']) && attributes['showDivider']) && attributes['layout'] === 'column') {
+        const max = getResponsiveValue(attributes?.['columnCount']) || 1;
+
+        data.push({
+            'type': 'plain',
+            'id': 'columnCount',
+            'selector': `.${elementId} .taxonomy-list-item:nth-child(-n + ${max})`,
+            'responsive': true,
+            'properties': [{
+                'name': 'border-top-style',
+                'valueType': 'function',
+                'valueFunc': (value) => {
+                    if (value !== '1' && value !== 1) {
+                        return 'none !important';
+                    }
+                    return undefined;
+                }
+            }],
+        });
+    }
 
     isNotEmpty(attributes['contentAlignment']) && data.push({
         'type': 'plain',
@@ -74,6 +144,48 @@ const contentStyle = (elementId, attributes, data) => {
                     }
                 }
             ],
+        });
+
+        if (isNotEmpty(attributes['columnCount']) && isNotEmpty(attributes['contentSpacing'])) {
+            const max = getResponsiveValue(attributes?.['columnCount']) || 1;
+
+            data.push({
+                'type': 'plain',
+                'id': 'columnCount',
+                'selector': `.${elementId} .taxonomy-list-item:nth-child(-n + ${max})`,
+                'responsive': true,
+                'properties': [{
+                    'name': 'padding-top',
+                    'valueType': 'function',
+                    'valueFunc': (value) => {
+                        if (value !== '1' && value !== 1) {
+                            return '0 !important';
+                        }
+                        return undefined;
+                    }
+                }],
+            });
+        }
+    }
+
+    if (isNotEmpty(attributes['columnCount']) && attributes['layout'] === 'column' && isNotEmpty(attributes['contentSpacingHorizontal'])) {
+        data.push({
+            'type': 'plain',
+            'id': 'contentSpacingHorizontal',
+            'selector': `.${elementId} .taxonomy-list-wrapper`,
+            'responsive': true,
+            'properties': [{
+                'name': 'column-gap',
+                'valueType': 'function',
+                'valueFunc': (value) => {
+                    const max = getResponsiveValue(attributes?.['columnCount']) || 1;
+
+                    if (max && max !== 1 && max !== '1') {
+                        return `${value?.['point']}${value?.['unit']}`;
+                    }
+                    return undefined;
+                }
+            }],
         });
     }
 

@@ -5,7 +5,7 @@ import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 import { isOnEditor } from 'gutenverse-core/helper';
 
-export const settingPanel = ({showCount}) => {
+export const settingPanel = ({showCount, layout}) => {
     const searchCategory =  isOnEditor() ? input => new Promise(resolve => {
         apiFetch({
             path: addQueryArgs('/wp/v2/categories', {
@@ -125,6 +125,16 @@ export const settingPanel = ({showCount}) => {
                     value: 'row'
                 },
             ],
+        },
+        {
+            id: 'columnCount',
+            show: layout === 'column',
+            label: __('Column', 'gutenverse'),
+            component: RangeControl,
+            min: 1,
+            max: 10,
+            step: 1,
+            allowDeviceControl: true,
         },
         {
             id: 'showIcon',
