@@ -203,7 +203,7 @@ class Taxonomy_List extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
-		} else {
+		} else if ( isset( $this->attrs['contentSpacing'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .taxonomy-list-wrapper",
