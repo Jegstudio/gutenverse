@@ -30,16 +30,16 @@
     }
 }
 
-.guten-postblock {
+.guten-post-block {
     &.tablet,
     &.mobile {
-        &.postblock-type-1 {
+        .postblock-type-1 {
             &.break-point-tablet {
                 @include postBlock1();
             }
         }
 
-        &.postblock-type-4 {
+        .postblock-type-4 {
             &.break-point-tablet {
                 @include postBlock4();
             }
@@ -47,13 +47,13 @@
     }
 
     &.mobile {
-        &.postblock-type-1 {
+        .postblock-type-1 {
             &.break-point-mobile {
                 @include postBlock1();
             }
         }
 
-        &.postblock-type-4 {
+        .postblock-type-4 {
             &.break-point-mobile {
                 @include postBlock4();
             }
