@@ -205,9 +205,15 @@ New and Improved:
 - Integrate Gutenverse Primary Category with JNews Blocks
 - Add Share to ChatGPT and Perplexity options to the Social Share block
 - Add an option to hide share text on specific devices in the Social Share block
+- Add responsive column options to the Taxonomy List block
 
 Bug Fixes:
 - Fix deprecated server-side rendering in the Social Share block editor
+- Fix Taxonomy List item widths and horizontal layouts on tablet and mobile devices
+- Fix undefined array keys in the Taxonomy List block
+- Fix Post Block responsive breakpoints in the editor
+- Fix the login popup closing when opening the password reset popup
+- Fix frontend background colors not updating when switching from global to custom colors
 
 
 = 4.1.0 =
