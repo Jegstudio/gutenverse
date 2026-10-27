@@ -18,6 +18,10 @@
 			"type": "array",
 			"default": []
 		},
+		"includedTags": {
+			"type": "array",
+			"default": []
+		},
 		"sortType": {
 			"type": "string",
 			"default": "ASC"

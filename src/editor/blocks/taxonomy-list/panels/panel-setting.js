@@ -5,10 +5,34 @@ import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 import { isOnEditor } from 'gutenverse-core/helper';
 
-export const settingPanel = ({showCount, layout}) => {
+export const settingPanel = ({showCount, layout, taxonomyType}) => {
     const searchCategory =  isOnEditor() ? input => new Promise(resolve => {
         apiFetch({
             path: addQueryArgs('/wp/v2/categories', {
+                search: input,
+            }),
+        }).then(data => {
+            const promiseOptions = data.map(item => {
+                return {
+                    label: item.name,
+                    value: item.id
+                };
+            });
+
+            resolve(promiseOptions);
+        }).catch(() => {
+            resolve([]);
+        });
+    }) : () => {
+        return {
+            label: '',
+            value: ''
+        };
+    };
+
+    const searchTags =  isOnEditor() ? input => new Promise(resolve => {
+        apiFetch({
+            path: addQueryArgs('/wp/v2/tags', {
                 search: input,
             }),
         }).then(data => {
@@ -63,7 +87,7 @@ export const settingPanel = ({showCount, layout}) => {
         },
         {
             id: 'qty',
-            label: __('Number of Category', 'gutenverse'),
+            label: __('Number of Taxonomy List', 'gutenverse'),
             component : RangeControl,
             min: 1,
             max: 100,
@@ -101,15 +125,25 @@ export const settingPanel = ({showCount, layout}) => {
         },
         {
             id: 'hideEmpty',
-            label: __('Hide Empty Category', 'gutenverse'),
+            label: __('Hide Empty', 'gutenverse'),
+            description: __('When enabled, categories or tags with no posts will not be displayed in the list.', 'gutenverse'),
             component: CheckboxControl,
         },
         {
             id: 'includedCategory',
+            show: taxonomyType?.value === 'category',
             label: __('Included Categories', 'gutenverse'),
             component: SelectSearchControl,
             isMulti: true,
             onSearch: searchCategory
+        },
+        {
+            id: 'includedTags',
+            show: taxonomyType?.value === 'post_tag',
+            label: __('Included Tags', 'gutenverse'),
+            component: SelectSearchControl,
+            isMulti: true,
+            onSearch: searchTags
         },
         {
             id: 'layout',

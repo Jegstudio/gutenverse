@@ -29,6 +29,10 @@ class Taxonomy_List extends Block_Abstract {
 	 * @return string
 	 */
 	public function render_content( $category_qty = 0, $included_category = array(), $sort = 'ASC', $hide_empty = false, $orderby = 'count' ) {
+		if ( 'post_tag' === $this->attributes['taxonomyType']['value'] ) {
+			$included_category = isset( $this->attributes['includedTags'] ) ? $this->attributes['includedTags'] : array();
+		}
+
 		$included = array();
 		foreach ( $included_category as $value ) {
 			$included[] = $value['value'];

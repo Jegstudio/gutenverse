@@ -28,6 +28,7 @@ const IconListBlock = compose(
     const {
         elementId,
         includedCategory,
+        includedTags,
         sortBy,
         qty,
         icon,
@@ -73,6 +74,7 @@ const IconListBlock = compose(
                         sortBy,
                         sortType,
                         includedCategory,
+                        includedTags,
                         qty,
                         icon,
                         iconType,
@@ -125,6 +127,7 @@ const IconListBlock = compose(
         sortBy,
         sortType,
         includedCategory,
+        includedTags,
         qty,
         icon,
         iconType,
