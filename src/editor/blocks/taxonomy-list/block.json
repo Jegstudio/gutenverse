@@ -337,6 +337,13 @@
 			"type": "object",
 			"default": {},
 			"copyStyle": true
+		},
+		"columnCount": {
+			"type": "object",
+			"default": {
+				"Desktop": "1"
+			},
+			"copyStyle": true
 		}
 	},
 	"supports": {

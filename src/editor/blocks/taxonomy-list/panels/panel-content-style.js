@@ -14,6 +14,7 @@ import {
 } from 'gutenverse-core/controls';
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'gutenverse-core/components';
 import { theDeviceType } from 'gutenverse-core/helper';
+import { getResponsiveValue } from 'gutenverse-core/editor-helper';
 
 export const contentStylePanel = (props) => {
     const {
@@ -23,8 +24,11 @@ export const contentStylePanel = (props) => {
         switcher,
         setSwitcher,
         showCount,
-        countJustify
+        countJustify,
+        columnCount,
     } = props;
+
+    const columnCountResponsive = getResponsiveValue(columnCount) || 1;
 
     const deviceType = theDeviceType();
 
@@ -142,7 +146,7 @@ export const contentStylePanel = (props) => {
         },
         {
             id: 'contentSpacingHorizontal',
-            show: layout !== 'column',
+            show: layout !== 'column' || (columnCountResponsive !== '1' && columnCountResponsive !== 1 && columnCountResponsive),
             label: __('Content Spacing Horizontal', 'gutenverse'),
             component: SizeControl,
             allowDeviceControl: true,
