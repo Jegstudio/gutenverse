@@ -155,7 +155,8 @@ class GutenversePopupElement {
 
             this.wrapper.on('click', (e) => {
                 e.stopPropagation();
-                if (!this.content.first().contains(e.target)) {
+                // The clicked node may have been removed by an earlier handler.
+                if (!e.composedPath().includes(this.content.first())) {
                     this._closePopup();
                 }
             });

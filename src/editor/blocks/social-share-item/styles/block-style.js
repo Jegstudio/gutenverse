@@ -1,4 +1,5 @@
 import { isNotEmpty } from 'gutenverse-core/helper';
+import { deviceStyleValue } from 'gutenverse-core/styling';
 import { applyFilters } from '@wordpress/hooks';
 import itemStyle from './panel-style/item-style';
 import spacingStyle from './panel-style/spacing-style';
@@ -8,6 +9,62 @@ const getBlockStyle = (elementId, attributes) => {
 
     data = itemStyle(elementId, attributes, data);
     data = spacingStyle(elementId, attributes, data);
+
+    attributes['showText'] && isNotEmpty(attributes['hideText']) && data.push({
+        'type': 'plain',
+        'id': 'hideText',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item .gutenverse-share-text`,
+        'properties': [
+            {
+                'name': 'display',
+                'valueType': 'function',
+                'functionName': 'handleSimpleCondition',
+                'valueFunc': (value) => value === undefined ? undefined : value ? 'none' : 'flex',
+            }
+        ],
+    });
+
+    attributes['showText'] && isNotEmpty(attributes['hideText']) && data.push({
+        'type': 'plain',
+        'id': 'hideText',
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .guten-social-share.horizontal.stretch-layout #${elementId}.gutenverse-share-item .gutenverse-share-icon`,
+        'properties': [
+            {
+                'name': 'flex-grow',
+                'valueType': 'function',
+                'functionName': 'handleSimpleCondition',
+                'valueFunc': (value) => value === undefined ? undefined : value ? '1' : '0',
+            }
+        ],
+    });
+
+    attributes['showText'] && data.push({
+        'type': 'plain',
+        'id': 'hideText',
+        'multiAttr': { hideText: { Desktop: false, ...attributes['hideText'] } },
+        'responsive': true,
+        'selector': `.editor-styles-wrapper .guten-social-share.button-layout-solid #${elementId}.gutenverse-share-item.has-text .gutenverse-share-icon`,
+        'properties': [
+            {
+                'name': 'padding-right',
+                'valueType': 'function',
+                'functionName': 'handleSimpleCondition',
+                'valueFunc': (value, device) => {
+                    if (!deviceStyleValue(device, attributes['hideText'] || {})) return '4px';
+                    const rightPadding = {};
+                    Object.entries(attributes['iconPading'] || {}).forEach(([paddingDevice, padding]) => {
+                        const right = padding?.dimension?.right;
+                        if (right !== undefined && right !== null && right !== '') {
+                            rightPadding[paddingDevice] = `${right}${padding.unit || 'px'}`;
+                        }
+                    });
+                    return deviceStyleValue(device, rightPadding) || '12px';
+                },
+            }
+        ],
+    });
 
     /**Panel List */
     isNotEmpty(attributes['border']) && data.push({
@@ -177,18 +234,18 @@ const getBlockStyle = (elementId, attributes) => {
         ],
         'selector': `.${elementId}.guten-element`,
     },
-    {
-        'type': 'positioning',
-        'id': 'positioningAlign',
-        'properties': [
-            {
-                'name': 'vertical-align',
-                'valueType': 'direct'
-            }
-        ],
-        'attributeType': 'align',
-        'selector': `.${elementId}.guten-element`,
-    });
+        {
+            'type': 'positioning',
+            'id': 'positioningAlign',
+            'properties': [
+                {
+                    'name': 'vertical-align',
+                    'valueType': 'direct'
+                }
+            ],
+            'attributeType': 'align',
+            'selector': `.${elementId}.guten-element`,
+        });
     isNotEmpty(attributes['positioningLocation']) && attributes['positioningLocation'] !== 'default' && data.push({
         'type': 'plain',
         'id': 'positioningLocation',

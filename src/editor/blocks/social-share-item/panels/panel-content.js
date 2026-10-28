@@ -9,6 +9,7 @@ const AiPrompDescroption = {
 export const panelContent = (props) => {
     const {
         showText,
+        hideText,
         type
     } = props;
     const isAIShare = ['chatgpt', 'perflexity'].includes(type);
@@ -19,6 +20,17 @@ export const panelContent = (props) => {
             label: __('Show Share Text', 'gutenverse'),
             description: __('Display custom text beside icon', 'gutenverse'),
             component: CheckboxControl,
+        },
+        {
+            id: 'hideText',
+            show: showText,
+            label: __('Hide Share Text', 'gutenverse'),
+            description: __('Hide custom text beside icon on the selected device', 'gutenverse'),
+            component: CheckboxControl,
+            allowDeviceControl: true,
+            deviceValues: hideText,
+            usePreviousDeviceValue: true,
+            usePreviousDevice: true,
         },
         {
             id: 'text',

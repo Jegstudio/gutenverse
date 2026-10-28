@@ -203,7 +203,7 @@ class Taxonomy_List extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
-		} else {
+		} else if ( isset( $this->attrs['contentSpacing'] ) ) {
 			$this->inject_style(
 				array(
 					'selector'       => ".{$this->element_id} .taxonomy-list-wrapper",
@@ -256,6 +256,8 @@ class Taxonomy_List extends Style_Abstract {
 				)
 			);
 		}
+
+		$this->column_style();
 
 		if ( isset( $this->attrs['itemWidth'] ) ) {
 			if ( 'row' === $this->attrs['layout'] ) {
@@ -472,6 +474,113 @@ class Taxonomy_List extends Style_Abstract {
 					'device_control' => true,
 				)
 			);
+		}
+	}
+
+	/**
+	 * Resolve a content value, inheriting from larger breakpoints when empty.
+	 *
+	 * @param array  $values Responsive values.
+	 * @param string $device Device name.
+	 * @return mixed
+	 */
+	private function get_content_responsive_value( $values, $device ) {
+		if ( ! is_array( $values ) ) {
+			return null;
+		}
+
+		$devices = array( 'Desktop', 'Tablet', 'Mobile' );
+		$index   = array_search( $device, $devices, true );
+
+		if ( false === $index ) {
+			return null;
+		}
+
+		for ( ; $index >= 0; $index-- ) {
+			$value = $values[ $devices[ $index ] ] ?? null;
+			if ( null !== $value && '' !== $value ) {
+				return $value;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Responsive column layout, spacing and first-row dividers.
+	 */
+	private function column_style() {
+		if ( 'column' !== ( $this->attrs['layout'] ?? '' ) || empty( $this->attrs['columnCount'] ) ) {
+			return;
+		}
+
+		foreach ( array( 'Desktop', 'Tablet', 'Mobile' ) as $device ) {
+			$count = $this->get_content_responsive_value( $this->attrs['columnCount'], $device );
+			$count = is_numeric( $count ) ? max( 1, (int) $count ) : 1;
+
+			$this->inject_style(
+				array(
+					'selector'        => ".{$this->element_id} .taxonomy-list-wrapper",
+					'property'        => function ( $value ) {
+						return 1 === (int) $value ? 'display: flex; grid-template-columns: none;' : "display: grid; grid-template-columns: repeat({$value}, 1fr);";
+					},
+					'value'           => $count,
+					'device_control'  => false,
+					'specific_device' => $device,
+				)
+			);
+
+			$reset     = '';
+			$first_row = '';
+			if ( ! empty( $this->attrs['showDivider'] ) && ! empty( $this->attrs['typeDivider'] ) ) {
+				$divider    = $this->attrs['typeDivider'];
+				$divider    = $this->sanitize_value( $divider );
+				$reset     .= "border-top-style: {$divider} !important;";
+				$first_row .= 'border-top-style: none !important;';
+			}
+
+			$spacing = $this->get_content_responsive_value( $this->attrs['contentSpacing'] ?? null, $device );
+			if ( isset( $spacing['point'] ) && is_numeric( $spacing['point'] ) ) {
+				$point      = $spacing['point'];
+				$unit       = $spacing['unit'] ?? '';
+				$unit       = $this->sanitize_value( $unit );
+				$reset     .= "padding-top: calc({$point}{$unit} / 2) !important;";
+				$first_row .= 'padding-top: 0 !important;';
+			}
+
+			// Restore later rows before overriding the current first row at each breakpoint.
+			foreach ( array( 'n + 2' => $reset, "-n + {$count}" => $first_row ) as $range => $property ) {
+				if ( '' === $property ) {
+					continue;
+				}
+
+				$this->inject_style(
+					array(
+						'selector'        => ".{$this->element_id} .taxonomy-list-item:nth-child({$range})",
+						'property'        => function ( $value ) {
+							return $value;
+						},
+						'value'           => $property,
+						'device_control'  => false,
+						'specific_device' => $device,
+					)
+				);
+			}
+
+			$gap = $this->get_content_responsive_value( $this->attrs['contentSpacingHorizontal'] ?? null, $device );
+			if ( isset( $gap['point'] ) && is_numeric( $gap['point'] ) ) {
+				$this->inject_style(
+					array(
+						'selector'        => ".{$this->element_id} .taxonomy-list-wrapper",
+						'property'        => function ( $value ) use ( $count ) {
+							return 1 === $count ? 'column-gap: normal;' : $this->handle_unit_point( $value, 'column-gap' );
+						},
+						'value'           => $gap,
+						'device_control'  => false,
+						'specific_device' => $device,
+					)
+				);
+			}
 		}
 	}
 

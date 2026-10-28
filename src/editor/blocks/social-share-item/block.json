@@ -39,6 +39,9 @@
 			"type": "boolean",
 			"default": true
 		},
+		"hideText": {
+			"type": "object"
+		},
 		"additionalAIPrompt": {
 			"type": "string"
 		},
