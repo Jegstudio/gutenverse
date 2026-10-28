@@ -199,7 +199,7 @@ After some updates, WordPress may show an "Attempt Block Recovery" button for bl
 
 == Changelog ==
 
-= 4.2.0 [DEV] =
+= 4.2.0 =
 New and Improved:
 - Add integration with Gutenverse Optimizer
 - Integrate the Post Featured Image block with JNews Blocks' additional post formats
@@ -215,7 +215,6 @@ Bug Fixes:
 - Fix Post Block responsive breakpoints in the editor
 - Fix the login popup closing when opening the password reset popup
 - Fix frontend background colors not updating when switching from global to custom colors
-
 
 = 4.1.0 =
 Compatibility:
