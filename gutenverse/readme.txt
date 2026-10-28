@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.1.0
+Stable tag: 4.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -201,6 +201,7 @@ After some updates, WordPress may show an "Attempt Block Recovery" button for bl
 
 = 4.2.0 [DEV] =
 New and Improved:
+- Add integration with Gutenverse Optimizer
 - Integrate the Post Featured Image block with JNews Blocks' additional post formats
 - Integrate Gutenverse Primary Category with JNews Blocks
 - Add Share to ChatGPT and Perplexity options to the Social Share block
