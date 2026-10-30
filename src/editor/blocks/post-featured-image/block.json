@@ -254,11 +254,11 @@
 			"copyStyle": true
 		},
 		"galleryImageFit": {
-			"type": "object",
+			"type": "string",
 			"copyStyle": true
 		},
 		"galleryImageRatio": {
-			"type": "object",
+			"type": "string",
 			"copyStyle": true
 		},
 		"galleryOverride": {
@@ -274,13 +274,17 @@
 			"copyStyle": true
 		},
 		"galleryHideNav": {
-			"type": "boolean"
+			"type": "boolean",
+			"copyStyle": true
+
 		},
 		"galleryNavAlwaysShow": {
-			"type": "boolean"
+			"type": "boolean",
+			"copyStyle": true
 		},
 		"galleryHideDots": {
-			"type": "boolean"
+			"type": "boolean",
+			"copyStyle": true
 		},
 		"galleryNextButtonIcon": {
 			"type": "string",
@@ -395,6 +399,14 @@
 			"copyStyle": true
 		},
 		"galleryButtonBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageFixedHeight": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"imageHeight": {
 			"type": "object",
 			"copyStyle": true
 		}

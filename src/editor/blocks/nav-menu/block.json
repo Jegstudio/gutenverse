@@ -391,6 +391,10 @@
 			},
 			"copyStyle": true
 		},
+		"alignMobileItems": {
+			"type": "string",
+			"copyStyle": true
+		},
 		"closeAriaLabel": {
 			"type": "string",
 			"copyStyle": true

@@ -18,6 +18,10 @@
 			"type": "array",
 			"default": []
 		},
+		"includedTags": {
+			"type": "array",
+			"default": []
+		},
 		"sortType": {
 			"type": "string",
 			"default": "ASC"
@@ -132,7 +136,9 @@
 		"itemWidth": {
 			"type": "object",
 			"default": {
-				"Desktop": "fit-content"
+				"Desktop": "fit-content",
+				"Tablet": "fit-content",
+				"Mobile": "fit-content"
 			},
 			"copyStyle": true
 		},
@@ -334,6 +340,13 @@
 		"flexSizeShrink": {
 			"type": "object",
 			"default": {},
+			"copyStyle": true
+		},
+		"columnCount": {
+			"type": "object",
+			"default": {
+				"Desktop": "1"
+			},
 			"copyStyle": true
 		}
 	},

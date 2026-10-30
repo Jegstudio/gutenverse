@@ -36,6 +36,11 @@ export const panelItemStyle = props => {
     const orderedShareItemSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item`).join(', ');
     const orderedShareItemAnchorSelector = orderedItemSelectors.map(selector => `${selector} .gutenverse-share-item a`).join(', ');
     const orderedShareItemTextSelector = orderedItemSelectors.map(selector => selector.replace(`.editor-styles-wrapper .${elementId}`, `.editor-styles-wrapper .${elementId}:not(.button-layout-solid)`) + ' .gutenverse-share-text').join(', ');
+    const moreButtonSelector = `.editor-styles-wrapper .${elementId} .gutenverse-share-more-toggle`;
+    const moreButtonIconSelector = `${moreButtonSelector} .gutenverse-share-more-icon svg`;
+    const solidShareItemSelector = `.editor-styles-wrapper .${elementId}.guten-social-share.button-layout-solid .gutenverse-share-item[class*="gutenverse-share-"]`;
+    const globalSolidButtonBackgroundSelector = `${solidShareItemSelector} a${isNotEmpty(props.moreButtonBackgroundColor) ? '' : `, ${moreButtonSelector}, ${moreButtonSelector}:focus`}`;
+    const globalSolidButtonBackgroundHoverSelector = `${solidShareItemSelector}:hover a${isNotEmpty(props.moreButtonBackgroundColorHover) ? '' : `, ${moreButtonSelector}:hover, ${moreButtonSelector}:focus`}`;
 
     return [
         {
@@ -204,7 +209,7 @@ export const panelItemStyle = props => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a, ${moreButtonSelector}`,
                 }
             ],
         },
@@ -278,7 +283,7 @@ export const panelItemStyle = props => {
                             'valueType': 'direct'
                         }
                     ],
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item i, .editor-styles-wrapper .${elementId} .gutenverse-share-item svg`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item i, .editor-styles-wrapper .${elementId} .gutenverse-share-item svg${isNotEmpty(props.moreButtonIconSize) ? '' : `, ${moreButtonIconSelector}`}`,
                 }
             ]
         },
@@ -298,6 +303,25 @@ export const panelItemStyle = props => {
             onChange: ({ __socialHover }) => setSwitcher({ ...switcher, socialHover: __socialHover })
         },
         {
+            id: 'textColor',
+            show: !switcher.socialHover || switcher.socialHover === 'normal',
+            label: __('Text Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'textColor',
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-text`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'iconColor',
             show: !switcher.socialHover || switcher.socialHover === 'normal',
             label: __('Icon Color', 'gutenverse'),
@@ -306,7 +330,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon svg`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon svg${isNotEmpty(props.moreButtonIconColor) ? '' : `, ${moreButtonIconSelector}`}`,
                     'properties': [
                         {
                             'name': 'color',
@@ -325,7 +349,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'buttonBackgroundColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item a`,
+                    'selector': globalSolidButtonBackgroundSelector,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -344,7 +368,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconBackgroundColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-icon${isNotEmpty(props.moreButtonBackgroundColor) ? '' : `, ${moreButtonSelector}, ${moreButtonSelector}:focus`}`,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -367,25 +391,6 @@ export const panelItemStyle = props => {
                     'properties': [
                         {
                             'name': 'background-color',
-                            'valueType': 'direct'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'textColor',
-            show: !switcher.socialHover || switcher.socialHover === 'normal',
-            label: __('Text Color', 'gutenverse'),
-            component: ColorControl,
-            liveStyle: [
-                {
-                    'type': 'color',
-                    'id': 'textColor',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item .gutenverse-share-text`,
-                    'properties': [
-                        {
-                            'name': 'color',
                             'valueType': 'direct'
                         }
                     ]
@@ -420,6 +425,25 @@ export const panelItemStyle = props => {
             ]
         },
         {
+            id: 'textColorHover',
+            show: switcher.socialHover === 'hover',
+            label: __('Text Color', 'gutenverse'),
+            component: ColorControl,
+            liveStyle: [
+                {
+                    'type': 'color',
+                    'id': 'textColorHover',
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-text`,
+                    'properties': [
+                        {
+                            'name': 'color',
+                            'valueType': 'direct'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'iconColorHover',
             show: switcher.socialHover === 'hover',
             label: __('Icon Color', 'gutenverse'),
@@ -428,7 +452,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon svg`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon i, .editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon svg${isNotEmpty(props.moreButtonIconColorHover) ? '' : `, ${moreButtonSelector}:hover .gutenverse-share-more-icon svg, ${moreButtonSelector}:focus .gutenverse-share-more-icon svg`}`,
                     'properties': [
                         {
                             'name': 'color',
@@ -447,7 +471,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'buttonBackgroundColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover a`,
+                    'selector': globalSolidButtonBackgroundHoverSelector,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -466,7 +490,7 @@ export const panelItemStyle = props => {
                 {
                     'type': 'color',
                     'id': 'iconBackgroundColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon`,
+                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-icon${isNotEmpty(props.moreButtonBackgroundColorHover) ? '' : `, ${moreButtonSelector}:hover, ${moreButtonSelector}:focus`}`,
                     'properties': [
                         {
                             'name': 'background-color',
@@ -489,25 +513,6 @@ export const panelItemStyle = props => {
                     'properties': [
                         {
                             'name': 'background-color',
-                            'valueType': 'direct'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'textColorHover',
-            show: switcher.socialHover === 'hover',
-            label: __('Text Color', 'gutenverse'),
-            component: ColorControl,
-            liveStyle: [
-                {
-                    'type': 'color',
-                    'id': 'textColorHover',
-                    'selector': `.editor-styles-wrapper .${elementId} .gutenverse-share-item:hover .gutenverse-share-text`,
-                    'properties': [
-                        {
-                            'name': 'color',
                             'valueType': 'direct'
                         }
                     ]

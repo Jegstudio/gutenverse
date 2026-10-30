@@ -78,6 +78,46 @@
 			"type": "number",
 			"default": 2
 		},
+		"moreButtonSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonIconSize": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonIconColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonIconColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonBackgroundColor": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonBackgroundColorHover": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonPadding": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonBorderRadius": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonBoxShadow": {
+			"type": "object",
+			"copyStyle": true
+		},
+		"moreButtonBoxShadowHover": {
+			"type": "object",
+			"copyStyle": true
+		},
 		"iconPading": {
 			"type": "object",
 			"copyStyle": true

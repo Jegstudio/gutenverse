@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { DimensionControl, RangeControl, SelectControl } from 'gutenverse-core/controls';
+import { DimensionControl, RangeControl, SelectControl, HeadingControl, SVGRadioControl } from 'gutenverse-core/controls';
+import { IconAlignItemsCenter, IconAlignItemsEnd, IconAlignItemsStart, IconAlignItemsStretch} from 'gutenverse-core/icons';
 
 export const mobileMenuStyle = (props) => {
     const {
@@ -138,6 +139,38 @@ export const mobileMenuStyle = (props) => {
                     unit: '%'
                 },
             },
+        },
+        {
+            id: 'closeIconHeading',
+            component: HeadingControl,
+            label: __('Menu Items', 'gutenverse')
+        },
+        {
+            id: 'alignMobileItems',
+            label: __('Align Items', 'gutenverse'),
+            component: SVGRadioControl,
+            options: [
+                {
+                    tooltips: __('Start', '--gctd--'),
+                    value: 'flex-start',
+                    svg: <IconAlignItemsStart />
+                },
+                {
+                    tooltips: __('Center', '--gctd--'),
+                    value: 'center',
+                    svg: <IconAlignItemsCenter />
+                },
+                {
+                    tooltips: __('End', '--gctd--'),
+                    value: 'flex-end',
+                    svg: <IconAlignItemsEnd />
+                },
+                {
+                    tooltips: __('Stretch', '--gctd--'),
+                    value: 'space-around',
+                    svg: <IconAlignItemsStretch />
+                },
+            ],
         },
     ];
 };

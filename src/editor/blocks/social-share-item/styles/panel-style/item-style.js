@@ -115,7 +115,11 @@ const itemStyle = (elementId, attributes, data) => {
             {
                 'name': 'width',
                 'valueType': 'direct'
-            }
+            },
+            {
+                'name': 'height',
+                'valueType': 'direct'
+            },
         ],
         'selector': `.editor-styles-wrapper #${elementId}.gutenverse-share-item svg`,
     });

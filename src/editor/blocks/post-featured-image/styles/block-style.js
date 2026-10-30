@@ -115,6 +115,40 @@ const getBlockStyle = (elementId, attributes) => {
         ],
     });
 
+    if (isNotEmpty(attributes['imageHeight'])) {
+        const devices = ['Desktop', 'Tablet', 'Mobile'];
+        const getDeviceValue = (attribute, device) => {
+            const index = devices.indexOf(device);
+            for (let i = index; i >= 0; i--) {
+                const value = attribute?.[devices[i]];
+                if (value !== undefined && value !== null && value !== '') {
+                    return value;
+                }
+            }
+        };
+        const imageHeight = {};
+        devices.forEach(device => {
+            const fixedHeight = getDeviceValue(attributes['imageFixedHeight'], device);
+            const imageFit = getDeviceValue(attributes['imageFit'], device);
+            const height = getDeviceValue(attributes['imageHeight'], device);
+            imageHeight[device] = fixedHeight && imageFit === 'cover' && height !== undefined ? `${height}px` : 'auto';
+        });
+
+        data.push({
+            'type': 'plain',
+            'id': 'imageHeight',
+            'selector': `.${elementId} img`,
+            'responsive': true,
+            'multiAttr': { imageHeight },
+            'properties': [
+                {
+                    'name': 'height',
+                    'valueType': 'direct'
+                }
+            ],
+        });
+    }
+
     isNotEmpty(attributes['imagePosition']) && data.push({
         'type': 'plain',
         'id': 'imagePosition',

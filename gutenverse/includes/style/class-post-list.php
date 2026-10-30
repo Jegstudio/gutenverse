@@ -144,11 +144,11 @@ class Post_List extends Style_Abstract {
 		}
 
 		if ( isset( $this->attrs['contentBackground'] ) ) {
-			$this->handle_background( ".{$this->element_id} .guten-post", $this->attrs['contentBackground'] );
+			$this->handle_background( ".{$this->element_id} .guten-post a", $this->attrs['contentBackground'] );
 		}
 
 		if ( isset( $this->attrs['contentHoverBackground'] ) ) {
-			$this->handle_background( ".{$this->element_id} .guten-post:hover", $this->attrs['contentHoverBackground'] );
+			$this->handle_background( ".{$this->element_id} .guten-post:hover a", $this->attrs['contentHoverBackground'] );
 		}
 
 		if ( isset( $this->attrs['contentBorder'] ) ) {

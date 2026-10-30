@@ -8,7 +8,7 @@ import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
 import { useEffect, useState, useRef, RawHTML } from '@wordpress/element';
 import { useDisplayEditor, useAnimationEditor, useInitializeIconToSvg } from 'gutenverse-core/hooks';
-import { dummyText, isOnEditor, renderIcon, svgAtob } from 'gutenverse-core/helper';
+import { dummyText, isOnEditor, renderIcon } from 'gutenverse-core/helper';
 import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
@@ -28,6 +28,7 @@ const IconListBlock = compose(
     const {
         elementId,
         includedCategory,
+        includedTags,
         sortBy,
         qty,
         icon,
@@ -73,6 +74,7 @@ const IconListBlock = compose(
                         sortBy,
                         sortType,
                         includedCategory,
+                        includedTags,
                         qty,
                         icon,
                         iconType,
@@ -125,6 +127,7 @@ const IconListBlock = compose(
         sortBy,
         sortType,
         includedCategory,
+        includedTags,
         qty,
         icon,
         iconType,

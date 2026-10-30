@@ -3,8 +3,8 @@ Contributors: Jegstudio
 Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 7.1
-Requires PHP: 7.0
-Stable tag: 4.0.8
+Requires PHP: 7.4
+Stable tag: 4.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -95,6 +95,46 @@ Gutenverse Pro adds advanced blocks, templates, form builder tools, popup option
 
 For more help, read the [Gutenverse installation guide](https://gutenverse.com/docs/plugin-installation/).
 
+== Use of 3rd-Party Services ==
+
+Gutenverse may connect to the following third-party services when you enable or use related features.
+
+= Gutenverse.com =
+
+The Gutenverse dashboard may show optional links, template/library access, theme data, documentation, support, banners, license checks, or newsletter subscription features from gutenverse.com. Newsletter data is sent only when you manually submit your email address.
+
+Website: https://gutenverse.com/
+Terms: https://gutenverse.com/terms-and-conditions/
+
+= Google Maps =
+
+If you add the Google Maps block, the map may load content from Google Maps.
+
+Service endpoint: https://maps.google.com/maps
+Privacy Policy: https://policies.google.com/privacy
+Terms of Service: https://policies.google.com/terms
+
+= Google Fonts =
+
+Some Gutenverse dashboard screens may load Google Fonts for dashboard typography.
+
+Service endpoint: https://fonts.googleapis.com/
+Privacy Policy: https://policies.google.com/privacy
+Terms of Service: https://policies.google.com/terms
+
+= Social Share Links =
+
+If you use social sharing blocks, visitors may open external social sharing URLs when they click a share button.
+
+== Discover More From Jegstudio ==
+
+Explore more products from the team behind Gutenverse.
+
+* **JNews** - Launch Your News or Magazine Website with a [WordPress News Theme](https://jnews.io/?utm_source=wporg&utm_medium=readme).
+* **JegKit** - Build Your Website with [Elementor Addons & Template Kits](https://jegkit.com/?utm_source=wporg&utm_medium=readme).
+* **Gutenverse Form** - Create Contact, Booking, and Payment Forms with a [WordPress Form Builder](https://gutenverse.com/features/form/?utm_source=wporg&utm_medium=readme).
+* **Gutenverse Themes** - Start Your Next Website with Ready-to-Use [WordPress Block Themes](https://gutenverse.com/themes/?utm_source=wporg&utm_medium=readme).
+
 == Frequently Asked Questions ==
 
 = Is Gutenverse a WordPress page builder? =
@@ -156,38 +196,63 @@ After some updates, WordPress may show an "Attempt Block Recovery" button for bl
 11. Tabs - Organize content with Gutenverse tab blocks.
 12. Template Library - Import prebuilt templates, layouts, and sections.
 
-== Use of 3rd-Party Services ==
-
-Gutenverse may connect to the following third-party services when you enable or use related features.
-
-= Gutenverse.com =
-
-The Gutenverse dashboard may show optional links, template/library access, theme data, documentation, support, banners, license checks, or newsletter subscription features from gutenverse.com. Newsletter data is sent only when you manually submit your email address.
-
-Website: https://gutenverse.com/
-Terms: https://gutenverse.com/terms-and-conditions/
-
-= Google Maps =
-
-If you add the Google Maps block, the map may load content from Google Maps.
-
-Service endpoint: https://maps.google.com/maps
-Privacy Policy: https://policies.google.com/privacy
-Terms of Service: https://policies.google.com/terms
-
-= Google Fonts =
-
-Some Gutenverse dashboard screens may load Google Fonts for dashboard typography.
-
-Service endpoint: https://fonts.googleapis.com/
-Privacy Policy: https://policies.google.com/privacy
-Terms of Service: https://policies.google.com/terms
-
-= Social Share Links =
-
-If you use social sharing blocks, visitors may open external social sharing URLs when they click a share button.
 
 == Changelog ==
+
+= 4.2.0 =
+New and Improved:
+- Add integration with Gutenverse Optimizer
+- Integrate the Post Featured Image block with JNews Blocks' additional post formats
+- Integrate Gutenverse Primary Category with JNews Blocks
+- Add Share to ChatGPT and Perplexity options to the Social Share block
+- Add an option to hide share text on specific devices in the Social Share block
+- Add responsive column options to the Taxonomy List block
+
+Bug Fixes:
+- Fix deprecated server-side rendering in the Social Share block editor
+- Fix Taxonomy List item widths and horizontal layouts on tablet and mobile devices
+- Fix undefined array keys in the Taxonomy List block
+- Fix Post Block responsive breakpoints in the editor
+- Fix the login popup closing when opening the password reset popup
+- Fix frontend background colors not updating when switching from global to custom colors
+
+= 4.1.0 =
+Compatibility:
+- Update minimum PHP version required to 7.4
+
+New and improved:
+- Add option to load CSS as file in the Dashboard Frontend settings
+
+Bug fixes:
+- Fix search block: close button showing on first render
+- Fix social share block: share to twitter not working properly if there is special character
+
+= 4.0.12 =
+New and improved:
+- Add fixed height option to post featured image
+
+Bug fixes:
+- Fix legacy form fallback
+- Check if SVG value is empty
+
+= 4.0.10 =
+New and improved:
+- Improve mechanism to check Installed Google Fonts
+
+Bug fixes:
+- Fix social share: apply styles ot the load more button and fix solid button background color
+- Fix post list; background color
+- Fix star rating; add decimal option
+
+= 4.0.9 =
+New and improved:
+- Add more options for nav menu sidebar
+
+Bug fixes:
+- Fix issue with line height
+- Fix icon list vertical alignment
+- Fix post term block’s text hover
+- Fixed vulnerability issues. credit: Wordfence.
 
 = 4.0.8 =
 New and improved:

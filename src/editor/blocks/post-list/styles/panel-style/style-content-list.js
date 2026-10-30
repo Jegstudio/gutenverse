@@ -56,13 +56,13 @@ const contentListStyle = (elementId, attributes, data) => {
     isNotEmpty(attributes['contentBackground']) && data.push({
         'type': 'background',
         'id': 'contentBackground',
-        'selector': `.${elementId} .guten-postlist .guten-post`,
+        'selector': `.${elementId} .guten-postlist .guten-post a`,
     });
 
     isNotEmpty(attributes['contentHoverBackground']) && data.push({
         'type': 'background',
         'id': 'contentHoverBackground',
-        'selector': `.${elementId} .guten-postlist .guten-post:hover`,
+        'selector': `.${elementId} .guten-postlist .guten-post:hover a`,
     });
 
     isNotEmpty(attributes['contentBorder']) && data.push({

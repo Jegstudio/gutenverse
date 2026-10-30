@@ -145,7 +145,7 @@ export const contentListPanel = (props) => {
                 {
                     'type': 'background',
                     'id': 'contentBackground',
-                    'selector': `.${elementId} .guten-postlist .guten-post`,
+                    'selector': `.${elementId} .guten-postlist .guten-post a`,
                 }
             ]
         },
@@ -160,7 +160,7 @@ export const contentListPanel = (props) => {
                 {
                     'type': 'background',
                     'id': 'contentHoverBackground',
-                    'selector': `.${elementId} .guten-postlist .guten-post:hover`,
+                    'selector': `.${elementId} .guten-postlist .guten-post:hover a`,
                 }
             ]
         },

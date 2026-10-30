@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, responsivePanel, transformPanel } from 'gutenverse-core/controls';
+import { advancePanel, animationPanel, backgroundPanel, borderPanel, conditionPanel, maskPanel, positioningPanel, responsivePanel, transformPanel } from 'gutenverse-core/controls';
 import { avatarPanel } from './panel-avatar';
 import { buttonPanel } from './panel-button';
 import { inputPanel } from './panel-input';
@@ -99,6 +99,12 @@ export const panelList = () => {
             title: __('Display', 'gutenverse'),
             initialOpen: false,
             panelArray: responsivePanel,
+            tabRole: TabSetting
+        },
+        {
+            title: __('Positioning', 'gutenverse'),
+            initialOpen: false,
+            panelArray: positioningPanel,
             tabRole: TabSetting
         },
         {

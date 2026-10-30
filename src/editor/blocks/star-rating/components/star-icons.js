@@ -1,6 +1,11 @@
 const StarIcons = ({ starIcon, rating, total }) => {
-    rating = parseFloat(rating);
-    total = parseFloat(total);
+    const ratingString = `${rating ?? 0}`.replace(',', '.');
+    const totalValue = typeof total === 'string' ? parseFloat(total.replace(',', '.')) : parseFloat(total);
+    const normalizedTotal = Number.isFinite(totalValue) ? Math.max(0, Math.floor(totalValue)) : 0;
+    const [wholePart = '0', decimalPart = '0'] = ratingString.split('.');
+    const normalizedWhole = Math.max(0, parseInt(wholePart, 10) || 0);
+    const partialWidth = Math.max(0, Math.min(100, (parseInt(decimalPart.charAt(0) || '0', 10) || 0) * 10));
+    const fullStars = Math.min(normalizedWhole, normalizedTotal);
 
     const faIcon = (active = false) => {
         switch (starIcon) {
@@ -78,13 +83,28 @@ const StarIcons = ({ starIcon, rating, total }) => {
 
     const icons = [];
 
-    for (let i = 0; i < total; i++) {
-        const fa = i < rating ? faIcon(true) : faIcon();
-        icons.push(fa);
+    for (let i = 0; i < normalizedTotal; i++) {
+        const fill = i < fullStars ? 100 : i === fullStars ? partialWidth : 0;
+
+        icons.push(
+            <span className="rating-icon" key={i}>
+                <span className="icon-layer icon-layer-empty">
+                    {faIcon()}
+                </span>
+                {fill > 0 && (
+                    <span
+                        className="icon-layer icon-layer-full"
+                        style={{ width: `${fill}%` }}
+                    >
+                        {faIcon(true)}
+                    </span>
+                )}
+            </span>
+        );
     }
 
     return <div className="rating-icons">
-        {icons.map(icon => icon)}
+        {icons}
     </div>;
 };
 

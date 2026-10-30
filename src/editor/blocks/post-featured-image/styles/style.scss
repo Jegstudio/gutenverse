@@ -9,7 +9,7 @@
     }
 
     .featured_video {
-        .gvnews_video_container {
+        .jnews_video_container {
             &:not(.ratio-auto) {
                 position: relative;
                 width: 100%;
@@ -30,13 +30,13 @@
 
         }
 
-        .gvnews_featured_video_preview img {
+        .jnews_featured_video_preview img {
             aspect-ratio: 16/9;
         }
     }
 }
 
-.featured-gallery.gvnews_owlslider {
+.featured-gallery.jnews_owlslider {
 
     .tns-nav {
         align-items: end;

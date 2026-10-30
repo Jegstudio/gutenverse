@@ -3,19 +3,17 @@ import { classnames } from 'gutenverse-core/components';
 import { useRef } from '@wordpress/element';
 import { BlockPanelController } from 'gutenverse-core/controls';
 import { panelList } from './panels/panel-list';
-import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
 import { SelectParent } from 'gutenverse-core/components';
-import { isOnEditor } from 'gutenverse-core/helper';
 import { useDynamicStyle, useGenerateElementId } from 'gutenverse-core/styling';
 import getBlockStyle from './styles/block-style';
 import { CopyElementToolbar } from 'gutenverse-core/components';
 import { useSelect } from '@wordpress/data';
+import GetIcon from './get-icon';
 
 const SingleSocialShare = (props) => {
     const {
         attributes,
-        serverPath,
         shareType,
         clientId
     } = props;
@@ -23,9 +21,7 @@ const SingleSocialShare = (props) => {
     const {
         elementId,
         showText,
-        text,
-        type,
-        selectedIcon
+        selectedIcon,
     } = attributes;
 
     const elementRef = useRef();
@@ -53,7 +49,7 @@ const SingleSocialShare = (props) => {
     });
 
     return <>
-        <CopyElementToolbar {...props}/>
+        <CopyElementToolbar {...props} />
         <InspectorControls>
             <SelectParent {...props}>
                 {__('Modify Share Group', 'gutenverse')}
@@ -61,36 +57,16 @@ const SingleSocialShare = (props) => {
         </InspectorControls>
         <BlockPanelController panelList={panelList} props={props} elementRef={elementRef} />
         <div {...blockProps}>
-            {isOnEditor() ? <ServerSideRender
-                block={serverPath}
-                attributes={{
-                    elementId,
-                    showText,
-                    text,
-                    type,
-                    selectedIcon
-                }}
-                EmptyResponsePlaceholder={EmptySocialShare}
-            /> : <div className={`gutenverse-share-${shareType} gutenverse-share-item${hasText ? ' has-text' : ''}`} id={elementId}>
-                <a href="#">
+            <div className={classnames(`gutenverse-share-${shareType}`, 'gutenverse-share-item', { 'has-text': hasText }, shareType === 'twitter' && (selectedIcon || 'twitter'))} id={elementId}>
+                <a href="javascript:void(0);">
                     <div className="gutenverse-share-icon">
-                        <i className={`fab fa-${shareType}`}></i>
+                        <GetIcon shareType={shareType} selectedIcon={selectedIcon} />
                     </div>
                     {hasText ? <div className="gutenverse-share-text">{__('Share on', 'gutenverse')}{shareType}</div> : ''}
                 </a>
-            </div>}
+            </div>
         </div>
     </>;
-};
-
-const EmptySocialShare = () => {
-    return <div className="gutenverse-share gutenverse-share-item">
-        <a href="#" aria-label="#">
-            <div className="gutenverse-share-icon">
-                <i className="fas fa-share-alt-square"></i>
-            </div><div className="gutenverse-share-text">{__('Loading Share Button...', 'gutenverse')}</div>
-        </a>
-    </div>;
 };
 
 export default SingleSocialShare;
