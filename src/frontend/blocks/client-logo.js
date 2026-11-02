@@ -56,5 +56,5 @@ class GutenverseClientLogo extends Default {
 const selected = u('.guten-client-logo');
 
 if (selected) {
-    new GutenverseClientLogo(selected);
+    new GutenverseClientLogo(selected, '.guten-client-logo');
 }

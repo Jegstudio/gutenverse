@@ -170,7 +170,7 @@ class GutenverseNavMenu extends Default {
 const selected = u('.guten-nav-menu');
 
 if (selected) {
-    new GutenverseNavMenu(selected);
+    new GutenverseNavMenu(selected, '.guten-nav-menu');
 }
 
 export default GutenverseNavMenu;

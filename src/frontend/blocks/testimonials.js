@@ -56,7 +56,7 @@ class GutenverseTestimonials extends Default {
 const selected = u('.guten-testimonials');
 
 if (selected) {
-    new GutenverseTestimonials(selected);
+    new GutenverseTestimonials(selected, '.guten-testimonials');
 }
 
 const elementPlaceholder = u('[data-image-placeholder]');

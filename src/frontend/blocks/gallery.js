@@ -313,5 +313,5 @@ class GutenverseGallery extends Default {
 const selected = u('.guten-gallery');
 
 if (selected) {
-    new GutenverseGallery(selected);
+    new GutenverseGallery(selected, '.guten-gallery');
 }

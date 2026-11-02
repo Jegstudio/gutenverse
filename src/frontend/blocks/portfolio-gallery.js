@@ -56,5 +56,5 @@ class GutenversePortfolioGallery extends Default {
 const selected = u('.guten-portfolio-gallery');
 
 if (selected) {
-    new GutenversePortfolioGallery(selected);
+    new GutenversePortfolioGallery(selected, '.guten-portfolio-gallery');
 }

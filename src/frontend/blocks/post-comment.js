@@ -34,5 +34,5 @@ class GutenversePostComment extends Default {
 const selected = u('.guten-post-comment');
 
 if (selected) {
-    new GutenversePostComment(selected);
+    new GutenversePostComment(selected, '.guten-post-comment');
 }

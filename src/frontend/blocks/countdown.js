@@ -107,5 +107,5 @@ class GutenverseCountdown extends Default {
 const selected = u('.guten-countdown');
 
 if (selected) {
-    new GutenverseCountdown(selected);
+    new GutenverseCountdown(selected, '.guten-countdown');
 }

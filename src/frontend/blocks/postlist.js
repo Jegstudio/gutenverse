@@ -252,6 +252,6 @@ class GutenversePostlist extends Default {
 const selected = u('.guten-post-list');
 
 if (selected) {
-    new GutenversePostlist(selected);
+    new GutenversePostlist(selected, '.guten-post-list');
 }
 export default GutenversePostlist;

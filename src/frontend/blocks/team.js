@@ -86,5 +86,5 @@ class GutenverseTeam extends Default {
 const selected = u('.guten-team');
 
 if (selected) {
-    new GutenverseTeam(selected);
+    new GutenverseTeam(selected, '.guten-team');
 }

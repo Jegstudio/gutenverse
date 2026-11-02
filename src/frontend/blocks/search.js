@@ -46,5 +46,5 @@ class GutenverseSearch extends Default {
 const selected = u('.guten-search');
 
 if (selected) {
-    new GutenverseSearch(selected);
+    new GutenverseSearch(selected, '.guten-search');
 }

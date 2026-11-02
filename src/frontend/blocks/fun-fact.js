@@ -61,5 +61,5 @@ class GutenverseFunFact extends Default {
 const selected = u('.guten-fun-fact');
 
 if (selected) {
-    new GutenverseFunFact(selected);
+    new GutenverseFunFact(selected, '.guten-fun-fact');
 }
