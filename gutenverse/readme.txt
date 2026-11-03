@@ -199,6 +199,8 @@ After some updates, WordPress may show an "Attempt Block Recovery" button for bl
 
 == Changelog ==
 
+Fix block scripts not working when loaded via JNews Blocks Post Autoload
+
 = 4.2.1 =
 Bug fixes:
 - fix issue with popup pricing
