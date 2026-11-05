@@ -4,7 +4,7 @@ Tags: blocks, page builder, website builder, block editor, site editor
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.2.1
+Stable tag: 4.2.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,7 +199,9 @@ After some updates, WordPress may show an "Attempt Block Recovery" button for bl
 
 == Changelog ==
 
-Fix block scripts not working when loaded via JNews Blocks Post Autoload
+= 4.2.2 =
+Bug fixes:
+- Fix block scripts not working when loaded via JNews Blocks Post Autoload
 
 = 4.2.1 =
 Bug fixes:
