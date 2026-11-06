@@ -269,6 +269,14 @@
 			"type": "boolean",
 			"default": false
 		},
+		"videoLockedType": {
+			"type": "string",
+			"default": "featured_image"
+		},
+		"videoLockedBanner": {
+			"type": "object",
+			"default": {}
+		},
 		"videoRatio": {
 			"type": "string",
 			"copyStyle": true
