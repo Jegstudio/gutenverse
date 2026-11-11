@@ -85,5 +85,5 @@ class GutenverseAccordion extends Default {
 const selected = u('.guten-accordions');
 
 if (selected) {
-    new GutenverseAccordion(selected);
+    new GutenverseAccordion(selected, '.guten-accordions');
 }

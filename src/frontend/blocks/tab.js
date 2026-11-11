@@ -92,5 +92,5 @@ class GutenverseTabs extends Default {
 const selected = u('.guten-tabs');
 
 if (selected) {
-    new GutenverseTabs(selected);
+    new GutenverseTabs(selected, '.guten-tabs');
 }

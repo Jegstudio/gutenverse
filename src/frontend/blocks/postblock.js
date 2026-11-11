@@ -363,5 +363,5 @@ class GutenversePostblock extends Default {
 const selected = u('.guten-post-block');
 
 if (selected) {
-    new GutenversePostblock(selected);
+    new GutenversePostblock(selected, '.guten-post-block');
 }

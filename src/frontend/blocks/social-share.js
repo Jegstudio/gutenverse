@@ -42,5 +42,5 @@ class GutenverseSocialShare extends Default {
 const selected = u('.guten-social-share.has-more-toggle');
 
 if (selected) {
-    new GutenverseSocialShare(selected);
+    new GutenverseSocialShare(selected, '.guten-social-share.has-more-toggle');
 }

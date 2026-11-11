@@ -36,5 +36,5 @@ class GutenverseAnimatedText extends Default {
 const selected = u('.guten-animated-text');
 
 if (selected) {
-    new GutenverseAnimatedText(selected);
+    new GutenverseAnimatedText(selected, '.guten-animated-text');
 }

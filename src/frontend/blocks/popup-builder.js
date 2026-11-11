@@ -286,5 +286,5 @@ class GutenversePopupElement {
 const selected = u('.guten-popup-builder');
 
 if (selected) {
-    new GutenversePopupBuilder(selected);
+    new GutenversePopupBuilder(selected, '.guten-popup-builder');
 }

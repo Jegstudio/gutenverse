@@ -58,5 +58,5 @@ class GutenverseProgressBar extends Default {
 const selected = u('.guten-progress-bar');
 
 if (selected) {
-    new GutenverseProgressBar(selected);
+    new GutenverseProgressBar(selected, '.guten-progress-bar');
 }

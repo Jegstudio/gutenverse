@@ -142,5 +142,5 @@ class GutenverseVideo extends Default {
 const selected = u('.guten-video-wrapper');
 
 if (selected) {
-    new GutenverseVideo(selected);
+    new GutenverseVideo(selected, '.guten-video-wrapper');
 }

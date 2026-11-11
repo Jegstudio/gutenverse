@@ -753,5 +753,5 @@ class GutenverseChart extends Default {
 const selected = u('.guten-chart');
 
 if (selected) {
-    new GutenverseChart(selected);
+    new GutenverseChart(selected, '.guten-chart');
 }

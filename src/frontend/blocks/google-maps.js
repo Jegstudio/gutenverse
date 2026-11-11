@@ -24,5 +24,5 @@ class GutenverseMaps extends Default {
 const selected = u('.guten-maps');
 
 if (selected) {
-    new GutenverseMaps(selected);
+    new GutenverseMaps(selected, '.guten-maps');
 }
