@@ -202,6 +202,7 @@ After some updates, WordPress may show an "Attempt Block Recovery" button for bl
 = 4.2.3 =
 Bug fixes:
 - fix vulnaribility issue. credit: Darius Sveikauskas, Patchstack
+- fix nav menu not rendered on editor when url too long
 
 = 4.2.2 =
 Bug fixes:
