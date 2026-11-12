@@ -108,6 +108,9 @@ class Post_List extends Post_Abstract {
 			'paginationNextText',
 			'paginationPrevIcon',
 			'paginationNextIcon',
+			'layout',
+			'lazyLoad',
+			'imageLoad'
 		);
 	}
 
