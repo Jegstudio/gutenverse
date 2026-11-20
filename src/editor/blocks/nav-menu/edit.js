@@ -358,6 +358,7 @@ const NavMenuBlock = compose(
         <ResponsiveStyles />
         <div {...blockProps}>
             {loading ? <NavSkeleton /> : error ? <p role="alert">{__('Unable to load the menu.', 'gutenverse')}</p> : <NavMenuPreview
+                clientId={clientId}
                 attributes={attributes}
                 menu={menu}
                 animationClass={animationClass}

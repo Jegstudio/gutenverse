@@ -1,8 +1,12 @@
-import { renderToString, useEffect, useRef, useState } from '@wordpress/element';
+import { createPortal, renderToString, useEffect, useRef, useState } from '@wordpress/element';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { classnames } from 'gutenverse-core/components';
 import { renderIcon } from 'gutenverse-core/helper';
 
-const NavMenuPreview = ({ attributes, menu, animationClass, displayClass, deviceType }) => {
+const NavMenuPreview = ({ clientId, attributes, menu, animationClass, displayClass, deviceType }) => {
+    const { selectBlock } = useDispatch(blockEditorStore);
+    const { getSelectedBlockClientId } = useSelect(blockEditorStore);
     const {
         elementId,
         menuId,
@@ -24,10 +28,32 @@ const NavMenuPreview = ({ attributes, menu, animationClass, displayClass, device
         className,
     } = attributes;
     const elementRef = useRef();
+    const hamburgerRef = useRef();
     const menuRef = useRef();
+    const lastPortalTarget = useRef(null);
+    const [portalTarget, setPortalTarget] = useState(null);
     const [open, setOpen] = useState(false);
     const [exiting, setExiting] = useState(false);
     const logo = mobileMenuLogo?.media?.sizes?.[mobileMenuLogo?.size];
+    const navClasses = classnames('guten-element', 'guten-nav-menu', 'nav-menu', `break-point-${breakpoint}`, mobileSubmenuClick ? 'submenu-click-title' : 'submenu-click-icon', className);
+
+    useEffect(() => {
+        const hamburger = hamburgerRef.current;
+        const canvas = hamburger?.ownerDocument;
+        const view = canvas?.defaultView;
+        if (!view) return;
+
+        // Use the same responsive CSS as the preview, including custom breakpoints.
+        const observer = new view.ResizeObserver(() => {
+            const target = hamburger.getClientRects().length ? canvas.body : null;
+            if (lastPortalTarget.current === target) return;
+
+            lastPortalTarget.current = target;
+            setPortalTarget(target);
+        });
+        observer.observe(hamburger);
+        return () => observer.disconnect();
+    }, []);
 
     // As on the frontend, add the selected indicator after WordPress renders the items.
     useEffect(() => {
@@ -36,19 +62,21 @@ const NavMenuPreview = ({ attributes, menu, animationClass, displayClass, device
             link.querySelectorAll('i, svg, .gutenverse-icon-svg').forEach(node => node.remove());
             link.insertAdjacentHTML('beforeend', icon);
         });
-    }, [menu, submenuItemIndicator, submenuItemIndicatorType, submenuItemIndicatorSVG]);
+    }, [menu, submenuItemIndicator, submenuItemIndicatorType, submenuItemIndicatorSVG, portalTarget]);
 
     useEffect(() => {
         setOpen(false);
         setExiting(false);
-    }, [menuId, breakpoint, deviceType]);
+    }, [menuId, breakpoint, deviceType, portalTarget]);
 
     useEffect(() => {
+        if (portalTarget) return;
+
         const element = elementRef.current;
         const view = element?.ownerDocument.defaultView;
         if (!view) return;
 
-        element.querySelectorAll('li.menu-item-has-children .sub-menu').forEach(submenu => {
+        menuRef.current?.querySelectorAll('li.menu-item-has-children .sub-menu').forEach(submenu => {
             submenu.style.removeProperty('left');
             submenu.style.removeProperty('right');
             if (submenu.getBoundingClientRect().right > view.innerWidth) {
@@ -60,7 +88,7 @@ const NavMenuPreview = ({ attributes, menu, animationClass, displayClass, device
                 }
             }
         });
-    }, [menu, deviceType, breakpoint, open]);
+    }, [menu, deviceType, breakpoint, portalTarget]);
 
     const closeMenu = () => {
         setOpen(false);
@@ -68,6 +96,11 @@ const NavMenuPreview = ({ attributes, menu, animationClass, displayClass, device
     };
 
     const handleClick = event => {
+        // Portal clicks bubble here without passing through the block's DOM.
+        if (getSelectedBlockClientId() !== clientId) {
+            selectBlock(clientId, null);
+        }
+
         const target = event.target;
         const anchor = target.closest('a');
         if (anchor) event.preventDefault();
@@ -93,22 +126,7 @@ const NavMenuPreview = ({ attributes, menu, animationClass, displayClass, device
         }
     };
 
-    // Keep the frontend layout and classes for the editor preview.
-    return <div
-        ref={elementRef}
-        id={elementId}
-        className={classnames('guten-element', 'guten-nav-menu', 'nav-menu', `break-point-${breakpoint}`, mobileSubmenuClick ? 'submenu-click-title' : 'submenu-click-icon', displayClass, animationClass, className)}
-        data-item-indicator={submenuItemIndicator}
-        data-item-indicator-type={submenuItemIndicatorType || 'icon'}
-        data-item-indicator-svg={submenuItemIndicatorSVG || ''}
-        data-close-on-click={mobileCloseOnClick ? '1' : ''}
-        onClick={handleClick}
-    >
-        <div className="gutenverse-hamburger-wrapper">
-            <button className="gutenverse-hamburger-menu">
-                {renderIcon(mobileIcon, mobileIconType, mobileIconSVG, true)}
-            </button>
-        </div>
+    const drawer = <>
         {mobileEnableOverlay && <div className={classnames('guten-nav-overlay', { active: open, exiting })} />}
         <div className={classnames('gutenverse-menu-wrapper', { active: open })}>
             <div
@@ -134,6 +152,32 @@ const NavMenuPreview = ({ attributes, menu, animationClass, displayClass, device
                 </div>
             </div>
         </div>
+    </>;
+
+    return <div
+        ref={elementRef}
+        id={elementId}
+        className={classnames(navClasses, displayClass, animationClass)}
+        data-item-indicator={submenuItemIndicator}
+        data-item-indicator-type={submenuItemIndicatorType || 'icon'}
+        data-item-indicator-svg={submenuItemIndicatorSVG || ''}
+        data-close-on-click={mobileCloseOnClick ? '1' : ''}
+        onClick={handleClick}
+    >
+        <div className="gutenverse-hamburger-wrapper">
+            <button ref={hamburgerRef} className="gutenverse-hamburger-menu">
+                {renderIcon(mobileIcon, mobileIconType, mobileIconSVG, true)}
+            </button>
+        </div>
+        {portalTarget ? createPortal(
+            // Keep per-block style selectors working outside the transformed Section.
+            <div className={classnames(elementId, 'guten-element', 'wp-block-gutenverse-nav-menu', deviceType?.toLowerCase(), `${breakpoint}-breakpoint`)} style={{ display: 'contents' }}>
+                <div className={navClasses} style={{ display: 'contents' }}>
+                    {drawer}
+                </div>
+            </div>,
+            portalTarget
+        ) : drawer}
     </div>;
 };
 
