@@ -1,5 +1,7 @@
 import { Default, u } from 'gutenverse-core-frontend';
 
+const initializedMenus = new WeakSet();
+
 class GutenverseNavMenu extends Default {
     /* public */
     init() {
@@ -10,6 +12,9 @@ class GutenverseNavMenu extends Default {
 
     /* private */
     _init(element) {
+        if (initializedMenus.has(element)) return;
+        initializedMenus.add(element);
+
         const wrapper = u(element);
         const item = {
             wrapper: wrapper,
@@ -29,6 +34,41 @@ class GutenverseNavMenu extends Default {
         this._addBodyClass();
         this._addDropdownIcon(item);
         this._toggleMenu(item);
+        this._setupDrawerLayer(item);
+    }
+
+    _setupDrawerLayer(item) {
+        const trigger = item.openToggle.first();
+        const panel = item.container.first();
+        const overlay = item.overlay.first();
+        if (!trigger || !panel) return;
+
+        const canvas = panel.ownerDocument;
+        const layer = canvas.createElement('div');
+        if (typeof layer.showPopover !== 'function') return;
+
+        layer.className = 'guten-nav-menu-layer';
+        layer.popover = 'manual';
+
+        // Keep the drawer under the Nav Menu in the DOM for its per-block CSS.
+        // The top layer gives it a viewport-sized containing block during Sticky animations.
+        const observer = new canvas.defaultView.ResizeObserver(() => {
+            if (!trigger.isConnected) return;
+
+            if (trigger.getClientRects().length) {
+                if (!layer.parentElement) {
+                    panel.before(layer);
+                    if (overlay) layer.append(overlay);
+                    layer.append(panel);
+                }
+                if (!layer.matches(':popover-open')) layer.showPopover();
+            } else if (layer.parentElement) {
+                panel.classList.remove('active');
+                if (overlay) overlay.classList.remove('active', 'exiting');
+                layer.replaceWith(...layer.childNodes);
+            }
+        });
+        observer.observe(trigger);
     }
 
     _addBodyClass() {
