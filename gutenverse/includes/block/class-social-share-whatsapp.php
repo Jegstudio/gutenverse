@@ -57,8 +57,8 @@ class Social_Share_Whatsapp extends Block_Abstract {
 	public function render_frontend() {
 		$post_id          = get_the_ID();
 		$encoded_post_url = gutenverse_encode_url( $post_id );
-		$title            = get_the_title( $post_id );
-		$share_url        = esc_url( '//api.whatsapp.com/send?text=' . $title . '%0A' . $encoded_post_url );
+		$title            = html_entity_decode( get_the_title( $post_id ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+		$share_url        = esc_url( '//api.whatsapp.com/send?text=' . rawurlencode( $title . ' ' ) . $encoded_post_url );
 		$text             = esc_html( $this->attributes['text'] );
 		$content          = $this->render_content( $text );
 		$has_text = ! isset( $this->attributes['showText'] ) || $this->attributes['showText'] ? ' has-text' : '';

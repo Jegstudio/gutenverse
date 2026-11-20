@@ -70,7 +70,7 @@ class Social_Share_Twitter extends Block_Abstract {
 	 */
 	public function render_frontend() {
 		$post_id          = get_the_ID();
-		$title            = get_the_title( $post_id );
+		$title            = html_entity_decode( get_the_title( $post_id ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 		$encoded_post_url = gutenverse_encode_url( $post_id );
 		$share_url        = esc_url( 'https://twitter.com/intent/tweet?text=' . rawurlencode( $title ) . '&url=' . $encoded_post_url );
 		$text             = esc_html( $this->attributes['text'] );
